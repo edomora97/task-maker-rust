@@ -92,7 +92,7 @@ pub struct Opt {
     #[structopt(long = "min-cache", default_value = "2048")]
     pub min_cache: u64,
 
-    /// The number of CPU cores to use
+    /// The number of CPU cores to use. Ignored for workers.
     #[structopt(long = "num-cores")]
     pub num_cores: Option<usize>,
 
@@ -174,6 +174,8 @@ pub struct ServerOptions {
 pub struct WorkerOptions {
     /// Address to use to connect to a remote server
     pub server_addr: String,
+    /// ID of the worker (to differentiate between multiple workers on the same machine).
+    pub worker_id: Option<u32>,
 }
 
 /// Returns the long-help for the "skip sanity checks" option.
