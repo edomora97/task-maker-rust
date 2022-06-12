@@ -194,6 +194,11 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 <span class="kw">use</span> <span class="ident">std::num::NonZeroUsize</span>;
 <span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
@@ -287,6 +292,11 @@
         }
         <span class="ident">result</span> <span class="op">+</span><span class="op">=</span> <span class="string">&quot;\n&quot;</span>;
         <span class="ident">result</span>
+    }
+
+    <span class="doccomment">/// Get the 1-based line number of this span.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">line_number</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
+        <span class="self">self</span>.<span class="ident">line_number</span>.<span class="ident">get</span>()
     }
 }
 

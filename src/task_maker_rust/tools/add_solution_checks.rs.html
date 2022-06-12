@@ -252,9 +252,43 @@
 <span id="247">247</span>
 <span id="248">248</span>
 <span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
 <span class="kw">use</span> <span class="ident">std::fs::File</span>;
-<span class="kw">use</span> <span class="ident">std::io</span>::{<span class="ident">Read</span>, <span class="ident">Write</span>};
+<span class="kw">use</span> <span class="ident">std::io::Read</span>;
 <span class="kw">use</span> <span class="ident">std::path::Path</span>;
 <span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
 
@@ -264,7 +298,9 @@
 
 <span class="kw">use</span> <span class="ident">task_maker_format::ioi::UIState</span>;
 <span class="kw">use</span> <span class="ident">task_maker_format::ui</span>::{<span class="ident">StdoutPrinter</span>, <span class="ident">UIStateT</span>, <span class="ident">BLUE</span>, <span class="ident">BOLD</span>, <span class="ident">YELLOW</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">cwrite</span>, <span class="ident">cwriteln</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">SolutionCheckResult</span>, <span class="ident">TaskFormat</span>};
+<span class="kw">use</span> <span class="ident">task_maker_format</span>::{
+    <span class="ident">cwrite</span>, <span class="ident">cwriteln</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">SolutionCheck</span>, <span class="ident">SolutionCheckResult</span>, <span class="ident">TaskFormat</span>,
+};
 <span class="kw">use</span> <span class="ident">task_maker_lang::LanguageManager</span>;
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::context::RuntimeContext</span>;
@@ -292,6 +328,12 @@
     <span class="doccomment">/// Warning: while this is generally safe, make sure to have a way of reverting the changes.</span>
     <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">short</span>)]</span>
     <span class="kw">pub</span> <span class="ident">in_place</span>: <span class="ident">bool</span>,
+
+    <span class="doccomment">/// Overwrite existing @check rules.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Warning: this will remove the existing lines containing the @check rules.</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">short</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">overwrite</span>: <span class="ident">bool</span>,
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_add_solution_checks</span>(
@@ -357,11 +399,22 @@
         <span class="kw">if</span> <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">is_symlink</span>() {
             <span class="kw">continue</span>;
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">solution</span>.<span class="ident">checks</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">opt</span>.<span class="ident">overwrite</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">solution</span>.<span class="ident">checks</span>.<span class="ident">is_empty</span>() {
             <span class="ident">skipped</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">name</span>);
             <span class="kw">continue</span>;
         }
-        <span class="kw">let</span> <span class="ident">has_changes</span> <span class="op">=</span> <span class="ident">process_solution</span>(<span class="kw-2">&amp;</span><span class="ident">ui_state</span>, <span class="ident">solution_name</span>, <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>, <span class="ident">opt</span>.<span class="ident">in_place</span>);
+        <span class="kw">let</span> <span class="ident">checks_to_remove</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">opt</span>.<span class="ident">overwrite</span> {
+            <span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">checks</span>[..]
+        } <span class="kw">else</span> {
+            <span class="kw-2">&amp;</span>[]
+        };
+        <span class="kw">let</span> <span class="ident">has_changes</span> <span class="op">=</span> <span class="ident">process_solution</span>(
+            <span class="kw-2">&amp;</span><span class="ident">ui_state</span>,
+            <span class="ident">solution_name</span>,
+            <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>,
+            <span class="ident">opt</span>.<span class="ident">in_place</span>,
+            <span class="ident">checks_to_remove</span>,
+        );
         <span class="kw">if</span> <span class="ident">has_changes</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">opt</span>.<span class="ident">in_place</span> {
             <span class="ident">changes_to_write</span> <span class="op">=</span> <span class="bool-val">true</span>;
         }
@@ -389,6 +442,7 @@
     <span class="ident">solution_name</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
     <span class="ident">printer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">StdoutPrinter</span>,
     <span class="ident">in_place</span>: <span class="ident">bool</span>,
+    <span class="ident">checks_to_remove</span>: <span class="kw-2">&amp;</span>[<span class="ident">SolutionCheck</span>],
 ) -&gt; <span class="ident">bool</span> {
     <span class="kw">let</span> <span class="ident">solution</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">state</span>.<span class="ident">solutions</span>[<span class="ident">solution_name</span>];
     <span class="kw">let</span> <span class="ident">language</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="ident">solution_name</span>);
@@ -457,12 +511,14 @@
         .<span class="ident">collect_vec</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">written</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>;
     <span class="kw">if</span> <span class="ident">in_place</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">comments</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">write_comments_to_file</span>(<span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">comments</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-            <span class="macro">format!</span>(
-                <span class="string">&quot;Failed to write @check comments to &#39;{}&#39;&quot;</span>,
-                <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">display</span>()
-            )
-        }) {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">write_comments_to_file</span>(<span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">comments</span>, <span class="ident">checks_to_remove</span>)
+            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                <span class="macro">format!</span>(
+                    <span class="string">&quot;Failed to write @check comments to &#39;{}&#39;&quot;</span>,
+                    <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">display</span>()
+                )
+            })
+        {
             <span class="macro">eprintln!</span>(<span class="string">&quot;Error: {:?}&quot;</span>, <span class="ident">e</span>);
         } <span class="kw">else</span> {
             <span class="ident">written</span> <span class="op">=</span> <span class="string">&quot; (written!)&quot;</span>;
@@ -474,7 +530,11 @@
     <span class="op">!</span><span class="ident">comments</span>.<span class="ident">is_empty</span>()
 }
 
-<span class="kw">fn</span> <span class="ident">write_comments_to_file</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">comments</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_comments_to_file</span>(
+    <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
+    <span class="ident">comments</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>],
+    <span class="ident">checks_to_remove</span>: <span class="kw-2">&amp;</span>[<span class="ident">SolutionCheck</span>],
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span>
         <span class="ident">File::open</span>(<span class="ident">path</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to open &#39;{}&#39;&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">content</span> <span class="op">=</span> <span class="ident">String::new</span>();
@@ -482,23 +542,31 @@
         .<span class="ident">context</span>(<span class="string">&quot;Failed to read solution content&quot;</span>)<span class="question-mark">?</span>;
     <span class="ident">drop</span>(<span class="ident">file</span>);
 
+    <span class="comment">// Remove existing @check rules.</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lines</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">content</span>.<span class="ident">lines</span>().<span class="ident">collect</span>();
+    <span class="kw">let</span> <span class="ident">lines_to_remove</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">checks_to_remove</span>
+        .<span class="ident">iter</span>()
+        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">code_span</span>.<span class="ident">line_number</span>() <span class="op">-</span> <span class="number">1</span>)
+        .<span class="ident">collect</span>();
+    <span class="kw">let</span> <span class="ident">lines_to_remove</span> <span class="op">=</span> <span class="ident">lines_to_remove</span>.<span class="ident">iter</span>().<span class="ident">sorted</span>().<span class="ident">rev</span>();
+    <span class="kw">for</span> <span class="ident">line</span> <span class="kw">in</span> <span class="ident">lines_to_remove</span> {
+        <span class="ident">lines</span>.<span class="ident">remove</span>(<span class="kw-2">*</span><span class="ident">line</span>);
+    }
+
     <span class="comment">// If the source file starts with the shebang, we cannot simply add the comments at the</span>
     <span class="comment">// beginning.</span>
-    <span class="kw">let</span> <span class="ident">insert_position</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">content</span>.<span class="ident">starts_with</span>(<span class="string">&quot;#!&quot;</span>) {
-        <span class="ident">content</span>.<span class="ident">find</span>(<span class="string">&#39;\n&#39;</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>)
-    } <span class="kw">else</span> {
-        <span class="number">0</span>
-    };
+    <span class="kw">let</span> <span class="ident">insert_position</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">content</span>.<span class="ident">starts_with</span>(<span class="string">&quot;#!&quot;</span>) { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> };
+    <span class="kw">let</span> <span class="ident">comments</span> <span class="op">=</span> <span class="ident">comments</span>.<span class="ident">iter</span>().<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>);
+    <span class="ident">lines</span>.<span class="ident">insert</span>(<span class="ident">insert_position</span>, <span class="kw-2">&amp;</span><span class="ident">comments</span>);
 
-    <span class="kw">let</span> <span class="ident">comments</span> <span class="op">=</span> <span class="ident">comments</span>.<span class="ident">iter</span>().<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>) <span class="op">+</span> <span class="string">&quot;\n&quot;</span>;
-    <span class="ident">content</span>.<span class="ident">insert_str</span>(<span class="ident">insert_position</span>, <span class="kw-2">&amp;</span><span class="ident">comments</span>);
+    <span class="kw">let</span> <span class="ident">new_content</span> <span class="op">=</span> <span class="ident">lines</span>.<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>) <span class="op">+</span> <span class="string">&quot;\n&quot;</span>;
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::options</span>()
-        .<span class="ident">write</span>(<span class="bool-val">true</span>)
-        .<span class="ident">open</span>(<span class="ident">path</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to open &#39;{}&#39; for writing&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-    <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="ident">content</span>.<span class="ident">as_bytes</span>())
-        .<span class="ident">context</span>(<span class="string">&quot;Failed to write the source file content&quot;</span>)<span class="question-mark">?</span>;
+    <span class="ident">std::fs::write</span>(<span class="ident">path</span>, <span class="ident">new_content</span>.<span class="ident">as_bytes</span>()).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="macro">format!</span>(
+            <span class="string">&quot;Failed to write the source file content to {}&quot;</span>,
+            <span class="ident">path</span>.<span class="ident">display</span>()
+        )
+    })<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
