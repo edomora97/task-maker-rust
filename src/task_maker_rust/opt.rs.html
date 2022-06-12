@@ -290,11 +290,10 @@
 <span id="285">285</span>
 <span id="286">286</span>
 <span id="287">287</span>
-<span id="288">288</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">clap</span>::{<span class="ident">Parser</span>, <span class="ident">ValueHint</span>};
+<span class="kw">use</span> <span class="ident">clap::Parser</span>;
 <span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
 
 <span class="kw">use</span> <span class="ident">task_maker_dag::DagPriority</span>;
@@ -357,7 +356,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FindTaskOpt</span> {
     <span class="doccomment">/// Directory of the task</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;task-dir&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>, <span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::DirPath</span>)]</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;task-dir&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">task_dir</span>: <span class="ident">PathBuf</span>,
 
     <span class="doccomment">/// Look at most for this number of parents for searching the task</span>
@@ -410,7 +409,7 @@
     <span class="kw">pub</span> <span class="ident">num_cores</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Run the evaluation on a remote server instead of locally</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;evaluate-on&quot;</span>, <span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::Url</span>)]</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;evaluate-on&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">evaluate_on</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// The name to use for the client in remote executions</span>
@@ -426,7 +425,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StorageOpt</span> {
     <span class="doccomment">/// Where to store the storage files, including the cache</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;store-dir&quot;</span>, <span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::DirPath</span>)]</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;store-dir&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">store_dir</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Maximum size of the storage directory, in MiB</span>
@@ -444,13 +443,12 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that just the file name is checked (e.g. sol.cpp is the same as sol/sol.cpp). Without</span>
     <span class="doccomment">/// specifying anything all the solutions are executed.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::FilePath</span>)]</span>
     <span class="kw">pub</span> <span class="ident">filter</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Evaluate only the solution with the specified path</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The solution can reside anywhere in the filesystem.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">short</span>, <span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::FilePath</span>)]</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">short</span>)]</span>
     <span class="kw">pub</span> <span class="ident">solution</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
 }
 

@@ -64,13 +64,13 @@
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">clap</span>::{<span class="ident">Command</span>, <span class="ident">CommandFactory</span>, <span class="ident">Parser</span>, <span class="ident">ValueHint</span>};
+<span class="kw">use</span> <span class="ident">clap</span>::{<span class="ident">Command</span>, <span class="ident">CommandFactory</span>, <span class="ident">Parser</span>};
 <span class="kw">use</span> <span class="ident">clap_complete</span>::{<span class="ident">Generator</span>, <span class="ident">Shell</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GenAutocompletionOpt</span> {
     <span class="doccomment">/// Where to write the autocompletion files</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;target&quot;</span>, <span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::DirPath</span>)]</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;target&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">target</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
 }
 
