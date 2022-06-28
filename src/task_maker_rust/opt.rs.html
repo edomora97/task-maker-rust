@@ -290,6 +290,10 @@
 <span id="285">285</span>
 <span id="286">286</span>
 <span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
@@ -391,6 +395,10 @@
     <span class="doccomment">/// Give to the solution some extra time before being killed</span>
     <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;extra-time&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">extra_time</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// Give to the solution some extra memory before being killed</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;extra-memory&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">extra_memory</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Copy the executables to the bin/ folder</span>
     <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;copy-exe&quot;</span>)]</span>

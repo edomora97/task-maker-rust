@@ -607,6 +607,15 @@
 <span id="602">602</span>
 <span id="603">603</span>
 <span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
 <span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 
@@ -643,6 +652,8 @@
     <span class="kw">pub</span> <span class="ident">cache_mode</span>: <span class="ident">CacheMode</span>,
     <span class="doccomment">/// Extra time to give to the sandbox before killing the process, in seconds.</span>
     <span class="kw">pub</span> <span class="ident">extra_time</span>: <span class="ident">f64</span>,
+    <span class="doccomment">/// Extra memory to give to the sandbox before killing the process, in KiB.</span>
+    <span class="kw">pub</span> <span class="ident">extra_memory</span>: <span class="ident">u64</span>,
     <span class="doccomment">/// Whether to copy the executables of the compilation inside their default destinations.</span>
     <span class="kw">pub</span> <span class="ident">copy_exe</span>: <span class="ident">bool</span>,
     <span class="doccomment">/// Whether to copy the log files of some interesting executions.</span>
@@ -921,6 +932,7 @@
             <span class="ident">dry_run</span>: <span class="bool-val">false</span>,
             <span class="ident">cache_mode</span>: <span class="ident">CacheMode::Everything</span>,
             <span class="ident">extra_time</span>: <span class="number">0.5</span>,
+            <span class="ident">extra_memory</span>: <span class="number">8</span> <span class="op">*</span> <span class="number">1024</span>, <span class="comment">// 8 MiB</span>
             <span class="ident">copy_exe</span>: <span class="bool-val">false</span>,
             <span class="ident">copy_logs</span>: <span class="bool-val">false</span>,
             <span class="ident">priority</span>: <span class="number">0</span>,
@@ -949,6 +961,12 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extra_time</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">extra_time</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
         <span class="macro">assert!</span>(<span class="ident">extra_time</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0.0</span>);
         <span class="self">self</span>.<span class="ident">extra_time</span> <span class="op">=</span> <span class="ident">extra_time</span>;
+        <span class="self">self</span>
+    }
+
+    <span class="doccomment">/// Set the extra memory to give to the executions before being killed by the sandbox.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extra_memory</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">extra_memory</span>: <span class="ident">u64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">extra_memory</span> <span class="op">=</span> <span class="ident">extra_memory</span>;
         <span class="self">self</span>
     }
 
