@@ -451,6 +451,7 @@
 <span id="446">446</span>
 <span id="447">447</span>
 <span id="448">448</span>
+<span id="449">449</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The UI functionality for the task formats.</span>
 
 <span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
@@ -491,7 +492,7 @@
 
 <span class="macro">lazy_static!</span> {
     <span class="doccomment">/// Whether the terminal supports ANSI 256 colors.</span>
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HAS_256</span>: <span class="ident">bool</span> <span class="op">=</span> {
+    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HAS_ANSI256</span>: <span class="ident">bool</span> <span class="op">=</span> {
         <span class="kw">if</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TM_ANSI256&quot;</span>).<span class="ident">as_deref</span>() <span class="op">==</span> <span class="prelude-val">Ok</span>(<span class="string">&quot;true&quot;</span>) {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">support</span>) <span class="op">=</span> <span class="ident">supports_color::on</span>(<span class="ident">supports_color::Stream::Stdout</span>) {
                 <span class="ident">support</span>.<span class="ident">has_256</span>
@@ -502,65 +503,66 @@
             <span class="bool-val">false</span>
         }
     };
+    <span class="doccomment">/// Whetner the terminal supports 24-bit Truecolor.</span>
+    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HAS_TRUECOLOR</span>: <span class="ident">bool</span> <span class="op">=</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">support</span>) <span class="op">=</span> <span class="ident">supports_color::on</span>(<span class="ident">supports_color::Stream::Stdout</span>) {
+            <span class="ident">support</span>.<span class="ident">has_16m</span>
+        } <span class="kw">else</span> {
+            <span class="bool-val">false</span>
+        }
+    };
+}
+
+<span class="macro">macro_rules!</span> <span class="ident">define_color_inner</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>,) =&gt; {};
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">ansi</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ansi</span>:<span class="ident">expr</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
+        <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_ANSI256</span> {
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="ident">Color::Ansi256</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ansi</span>)));
+        }
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">rgb</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">g</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>:<span class="ident">expr</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
+        <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_TRUECOLOR</span> {
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="ident">Color::Rgb</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">g</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>)));
+        }
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">basic</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">basic</span>:<span class="ident">ident</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="ident">Color</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">basic</span>));
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">intense</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_intense</span>(<span class="bool-val">true</span>);
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">bold</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    };
+}
+<span class="macro">macro_rules!</span> <span class="ident">define_color</span> {
+    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {{
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
+        <span class="macro">define_color_inner!</span>(<span class="ident">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>,);
+        <span class="ident">color</span>
+    }};
+}
+
+<span class="macro">lazy_static!</span> {
     <span class="doccomment">/// The RED color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">RED</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>
-            .<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_256</span> { <span class="ident">Color::Ansi256</span>(<span class="number">196</span>) } <span class="kw">else</span> { <span class="ident">Color::Red</span> }))
-            .<span class="ident">set_intense</span>(<span class="bool-val">true</span>)
-            .<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">RED</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Red</span>), <span class="ident">ansi</span>(<span class="number">196</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
     <span class="doccomment">/// The RED color to use with `cwrite!` and `cwriteln!`, without bold.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SOFT_RED</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>
-            .<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_256</span> { <span class="ident">Color::Ansi256</span>(<span class="number">196</span>) } <span class="kw">else</span> { <span class="ident">Color::Red</span> }))
-            .<span class="ident">set_intense</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SOFT_RED</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Red</span>), <span class="ident">ansi</span>(<span class="number">196</span>), <span class="ident">intense</span>);
     <span class="doccomment">/// The GREEN color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">GREEN</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>
-            .<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_256</span> { <span class="ident">Color::Ansi256</span>(<span class="number">118</span>) } <span class="kw">else</span> { <span class="ident">Color::Green</span> }))
-            .<span class="ident">set_intense</span>(<span class="bool-val">true</span>)
-            .<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">GREEN</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Green</span>), <span class="ident">ansi</span>(<span class="number">118</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
     <span class="doccomment">/// The YELLOW color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">YELLOW</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>
-            .<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_256</span> { <span class="ident">Color::Ansi256</span>(<span class="number">226</span>) } <span class="kw">else</span> { <span class="ident">Color::Yellow</span> }))
-            .<span class="ident">set_intense</span>(<span class="bool-val">true</span>)
-            .<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">YELLOW</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Yellow</span>), <span class="ident">ansi</span>(<span class="number">226</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
     <span class="doccomment">/// The ORANGE color to use with `cwrite!` and `cwriteln!`.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ORANGE</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>
-            .<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_256</span> { <span class="ident">Color::Ansi256</span>(<span class="number">214</span>) } <span class="kw">else</span> { <span class="ident">Color::Rgb</span>(<span class="number">255</span>, <span class="number">165</span>, <span class="number">0</span>) }))
-            .<span class="ident">set_intense</span>(<span class="bool-val">true</span>)
-            .<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ORANGE</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Yellow</span>), <span class="ident">ansi</span>(<span class="number">214</span>), <span class="ident">rgb</span>(<span class="number">255</span>, <span class="number">165</span>, <span class="number">0</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
     <span class="doccomment">/// The BLUE color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BLUE</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>
-            .<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_256</span> { <span class="ident">Color::Ansi256</span>(<span class="number">33</span>) } <span class="kw">else</span> { <span class="ident">Color::Blue</span> }))
-            .<span class="ident">set_intense</span>(<span class="bool-val">true</span>)
-            .<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BLUE</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Blue</span>), <span class="ident">ansi</span>(<span class="number">33</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
     <span class="doccomment">/// The bold style to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BOLD</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="ident">color</span>.<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="ident">color</span>
-    };
+    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BOLD</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">bold</span>);
 }
 
 <span class="doccomment">/// The status of an execution.</span>
