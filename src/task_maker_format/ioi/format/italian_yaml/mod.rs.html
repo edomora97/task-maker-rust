@@ -754,12 +754,6 @@
 <span id="749">749</span>
 <span id="750">750</span>
 <span id="751">751</span>
-<span id="752">752</span>
-<span id="753">753</span>
-<span id="754">754</span>
-<span id="755">755</span>
-<span id="756">756</span>
-<span id="757">757</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)</span>
 <span class="doccomment">//! and it&#39;s the most used format in the Italian Olympiads.</span>
 <span class="doccomment">//!</span>
@@ -1373,10 +1367,7 @@
             <span class="ident">c</span>.<span class="ident">copy_exe</span>();
 
             <span class="comment">// Link the checker statically. This makes sure that it will work also outside this machine.</span>
-            <span class="comment">// Doesn&#39;t work on MacOS, see https://github.com/edomora97/task-maker-rust/pull/29</span>
-            <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)) {
-                <span class="ident">c</span>.<span class="ident">link_static</span>();
-            }
+            <span class="ident">c</span>.<span class="ident">link_static</span>();
 
             <span class="ident">Checker::Custom</span>(<span class="ident">Arc::new</span>(<span class="ident">c</span>))
         })
@@ -1420,10 +1411,7 @@
     <span class="ident">manager</span>.<span class="ident">copy_exe</span>();
 
     <span class="comment">// Link the manager statically. This makes sure that it will work also outside this machine.</span>
-    <span class="comment">// Doesn&#39;t work on MacOS, see https://github.com/edomora97/task-maker-rust/pull/29</span>
-    <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)) {
-        <span class="ident">manager</span>.<span class="ident">link_static</span>();
-    }
+    <span class="ident">manager</span>.<span class="ident">link_static</span>();
 
     <span class="kw">let</span> <span class="ident">user_io</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">yaml</span>.<span class="ident">user_io</span>.<span class="ident">as_deref</span>() {
         <span class="prelude-val">None</span> =&gt; <span class="ident">UserIo::FifoIo</span>,

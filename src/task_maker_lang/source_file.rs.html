@@ -390,6 +390,9 @@
 <span id="385">385</span>
 <span id="386">386</span>
 <span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 <span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
 
@@ -586,7 +589,10 @@
 
     <span class="doccomment">/// Compile the source file to a statically-linked binary.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link_static</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">link_static</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="comment">// MacOS doesn&#39;t support statically linked binaries</span>
+        <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)) {
+            <span class="self">self</span>.<span class="ident">link_static</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        }
     }
 
     <span class="doccomment">/// Prepare the source file if needed and return the executable file. If the compilation step</span>
