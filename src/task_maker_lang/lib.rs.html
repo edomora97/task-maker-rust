@@ -181,6 +181,8 @@
 <span id="176">176</span>
 <span id="177">177</span>
 <span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Crate for managing programming languages and source files.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This crate will expose some utility functions for making a DAG with the execution of commands</span>
@@ -267,6 +269,8 @@
                 <span class="ident">Arc::new</span>(<span class="ident">shell::LanguageShell::new</span>()),
                 <span class="ident">Arc::new</span>(<span class="ident">pascal::LanguagePascal::new</span>()),
                 <span class="ident">Arc::new</span>(<span class="ident">rust::LanguageRust::new</span>()),
+                <span class="ident">Arc::new</span>(<span class="ident">csharp::LanguageCSharp::new</span>()),
+                <span class="ident">Arc::new</span>(<span class="ident">javascript::LanguageJS::new</span>()),
             ],
         }
     }
