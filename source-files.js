@@ -1,4 +1,4 @@
-var N = null;var sourcesIndex = {};
+var sourcesIndex = {};
 sourcesIndex["task_maker"] = {"name":"","files":["main.rs"]};
 sourcesIndex["task_maker_cache"] = {"name":"","files":["entry.rs","key.rs","lib.rs","storage.rs"]};
 sourcesIndex["task_maker_dag"] = {"name":"","files":["dag.rs","execution.rs","execution_group.rs","file.rs","lib.rs"]};
