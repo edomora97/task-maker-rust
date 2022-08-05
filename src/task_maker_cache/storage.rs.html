@@ -137,21 +137,13 @@
 <span id="132">132</span>
 <span id="133">133</span>
 <span id="134">134</span>
-<span id="135">135</span>
-<span id="136">136</span>
-<span id="137">137</span>
-<span id="138">138</span>
-<span id="139">139</span>
-<span id="140">140</span>
-<span id="141">141</span>
-<span id="142">142</span>
-<span id="143">143</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::hash_map::Entry</span>;
 <span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
 <span class="kw">use</span> <span class="ident">std::io</span>::{<span class="ident">Read</span>, <span class="ident">Write</span>};
 <span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use</span> <span class="ident">const_format::formatcp</span>;
 <span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 
@@ -160,13 +152,11 @@
 
 <span class="doccomment">/// Magic string that is prepended to the cache file to avoid accidental loading of invalid cache</span>
 <span class="doccomment">/// files.</span>
-<span class="kw">const</span> <span class="ident">MAGIC</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;task-maker-cache&quot;</span>;
-<span class="doccomment">/// Current version of task-maker, to avoid any problem with serialization/deserialization, changing</span>
-<span class="doccomment">/// version will cause a complete cache invalidation. Therefore any breaking change to the cache</span>
-<span class="doccomment">/// file format has to go through a version update.</span>
-<span class="kw">const</span> <span class="ident">VERSION</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
-<span class="doccomment">/// Maximum number of characters of the version string.</span>
-<span class="kw">const</span> <span class="ident">VERSION_MAX_LEN</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">16</span>;
+<span class="doccomment">///</span>
+<span class="doccomment">/// The newline at the end of the string is required. For example, let&#39;s say there are 2 versions:</span>
+<span class="doccomment">/// v0.1 and v0.11; running v0.11 first, and then v0.1, without the newline the magic of the old</span>
+<span class="doccomment">/// version is a prefix of the magic of the new version.</span>
+<span class="kw">const</span> <span class="ident">MAGIC</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">formatcp!</span>(<span class="string">&quot;task-maker-cache v{}\n&quot;</span>, <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>)).<span class="ident">as_bytes</span>();
 
 <span class="doccomment">/// A cache file.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
@@ -178,8 +168,6 @@
     <span class="doccomment">/// Whether this file should be flushed.</span>
     <span class="ident">dirty</span>: <span class="ident">bool</span>,
 }
-
-<span class="macro">static_assertions::const_assert!</span>(<span class="ident">VERSION</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">VERSION_MAX_LEN</span>);
 
 <span class="kw">impl</span> <span class="ident">CacheFile</span> {
     <span class="doccomment">/// Read the cache file, check the magic string and deserialize all the entries in it.</span>
@@ -193,22 +181,21 @@
         }
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::File::open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)
             .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Cannot open cache file at {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">magic</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="ident">MAGIC</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">VERSION_MAX_LEN</span>];
-        <span class="ident">file</span>.<span class="ident">read_exact</span>(<span class="kw-2">&amp;mut</span> <span class="ident">magic</span>)
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to read magic number&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="ident">magic</span>[..<span class="ident">MAGIC</span>.<span class="ident">len</span>()] <span class="op">!</span><span class="op">=</span> <span class="ident">MAGIC</span> {
-            <span class="macro">bail!</span>(
-                <span class="string">&quot;Cache magic mismatch:\nExpected: {:?}\nFound: {:?}&quot;</span>,
-                <span class="ident">MAGIC</span>,
-                <span class="kw-2">&amp;</span><span class="ident">magic</span>[..<span class="ident">MAGIC</span>.<span class="ident">len</span>()]
-            );
-        }
-        <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="ident">magic</span>[<span class="ident">MAGIC</span>.<span class="ident">len</span>()..<span class="ident">MAGIC</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">VERSION</span>.<span class="ident">len</span>()] <span class="op">!</span><span class="op">=</span> <span class="ident">VERSION</span>.<span class="ident">as_bytes</span>() {
-            <span class="macro">bail!</span>(
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">magic</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="ident">MAGIC</span>.<span class="ident">len</span>()];
+
+        <span class="kw">if</span> <span class="ident">file</span>
+            .<span class="ident">read_exact</span>(<span class="kw-2">&amp;mut</span> <span class="ident">magic</span>)
+            .<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">magic</span> <span class="op">!</span><span class="op">=</span> <span class="ident">MAGIC</span>)
+        {
+            <span class="macro">info!</span>(
                 <span class="string">&quot;Cache version mismatch:\nExpected: {:?}\nFound: {:?}&quot;</span>,
-                <span class="ident">VERSION</span>.<span class="ident">as_bytes</span>(),
-                <span class="kw-2">&amp;</span><span class="ident">magic</span>[<span class="ident">MAGIC</span>.<span class="ident">len</span>()..<span class="ident">MAGIC</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">VERSION</span>.<span class="ident">len</span>()]
+                <span class="ident">MAGIC</span>, <span class="ident">magic</span>
             );
+            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
+                <span class="ident">entries</span>: <span class="ident">Default::default</span>(),
+                <span class="ident">path</span>,
+                <span class="ident">dirty</span>: <span class="bool-val">false</span>,
+            });
         }
 
         <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">bincode::deserialize_from</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">CacheKey</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CacheEntry</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">file</span>)
@@ -234,12 +221,7 @@
         <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">with_extension</span>(<span class="string">&quot;tmp&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::File::create</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to create cache file&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">magic</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="ident">MAGIC</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">VERSION_MAX_LEN</span>];
-        <span class="ident">magic</span>[..<span class="ident">MAGIC</span>.<span class="ident">len</span>()].<span class="ident">clone_from_slice</span>(<span class="ident">MAGIC</span>);
-        <span class="ident">magic</span>[<span class="ident">MAGIC</span>.<span class="ident">len</span>()..<span class="ident">MAGIC</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">VERSION</span>.<span class="ident">as_bytes</span>().<span class="ident">len</span>()]
-            .<span class="ident">clone_from_slice</span>(<span class="ident">VERSION</span>.<span class="ident">as_bytes</span>());
-
-        <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span><span class="ident">magic</span>)
+        <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="ident">MAGIC</span>)
             .<span class="ident">context</span>(<span class="string">&quot;Failed to write cache magic number&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="ident">bincode::serialize_into</span>(<span class="ident">file</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">entries</span>.<span class="ident">iter</span>().<span class="ident">collect_vec</span>())
