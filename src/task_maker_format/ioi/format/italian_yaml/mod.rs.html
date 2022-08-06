@@ -1020,7 +1020,8 @@
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
-<span class="kw">use</span> <span class="ident">unic_ucd_category::GeneralCategory</span>;
+<span class="kw">use</span> <span class="ident">unic::normal::StrNormalForm</span>;
+<span class="kw">use</span> <span class="ident">unic::ucd::category::GeneralCategory</span>;
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">cases_gen</span>::{<span class="ident">is_gen_gen_deletable</span>, <span class="ident">TM_ALLOW_DELETE_COOKIE</span>};
 <span class="kw">use</span> <span class="ident">task_maker_lang::GraderMap</span>;
@@ -1478,7 +1479,6 @@
     <span class="kw">let</span> <span class="ident">fail</span> <span class="op">=</span> <span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="prelude-val">Err</span>(<span class="macro">anyhow!</span>(<span class="string">&quot;&#39;{}&#39; is not a valid identifier: {}&quot;</span>, <span class="ident">id</span>, <span class="ident">err</span>));
 
     <span class="comment">// Normalize the identifier to avoid similar but different characters.</span>
-    <span class="kw">use</span> <span class="ident">unicode_normalization::UnicodeNormalization</span>;
     <span class="kw">let</span> <span class="ident">normalized</span> <span class="op">=</span> <span class="ident">id</span>.<span class="ident">nfkc</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
 
     <span class="kw">if</span> <span class="ident">normalized</span>.<span class="ident">is_empty</span>() {

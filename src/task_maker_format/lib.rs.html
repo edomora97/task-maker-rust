@@ -769,7 +769,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_list_files</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="ident">std::fs::create_dir_all</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/bar&quot;</span>)).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::create_dir_all</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/baz&quot;</span>)).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
@@ -788,7 +788,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_source_file</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="ident">std::fs::create_dir_all</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/bar&quot;</span>)).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/bar/zzz.py&quot;</span>), <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
@@ -806,7 +806,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_source_file_multiple</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="ident">std::fs::create_dir_all</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo&quot;</span>)).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/zzz.py&quot;</span>), <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
@@ -816,7 +816,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_source_file_not_found</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="ident">std::fs::create_dir_all</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/bar&quot;</span>)).<span class="ident">unwrap</span>();
         <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">find_source_file</span>(

@@ -432,13 +432,13 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="ident">std::fs::write</span>;
 
-    <span class="kw">use</span> <span class="ident">spectral::prelude</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">tempdir::TempDir</span>;
+    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
 
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="kw">fn</span> <span class="ident">setup</span>() -&gt; <span class="ident">TempDir</span> {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.cpp&quot;</span>);
         <span class="ident">std::fs::write</span>(<span class="ident">foo</span>, <span class="string">&quot;int main() {}&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">tempdir</span>
@@ -459,10 +459,10 @@
         <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.cpp&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.cpp&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -481,10 +481,10 @@
         <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;./-foo.cpp&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;./-foo.cpp&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -506,10 +506,10 @@
         <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.cpp&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="macro">assert_that!</span>(<span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.cpp&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -524,8 +524,8 @@
         <span class="kw">let</span> <span class="ident">imports</span> <span class="op">=</span> <span class="ident">extract_includes</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
         <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">import</span>) <span class="kw">in</span> <span class="macro">vec!</span>[<span class="string">&quot;iostream&quot;</span>, <span class="string">&quot;test.hpp&quot;</span>].<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
             <span class="kw">let</span> <span class="ident">import</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">import</span>);
-            <span class="macro">assert_that!</span>(<span class="ident">imports</span>[<span class="ident">i</span>].<span class="number">0</span>).<span class="ident">is_equal_to</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">import</span>));
-            <span class="macro">assert_that!</span>(<span class="ident">imports</span>[<span class="ident">i</span>].<span class="number">1</span>).<span class="ident">is_equal_to</span>(<span class="kw-2">&amp;</span><span class="ident">import</span>);
+            <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">imports</span>[<span class="ident">i</span>].<span class="number">0</span>).<span class="ident">is_equal_to</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">import</span>));
+            <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">imports</span>[<span class="ident">i</span>].<span class="number">1</span>).<span class="ident">is_equal_to</span>(<span class="kw-2">&amp;</span><span class="ident">import</span>);
         }
     }
 
@@ -539,11 +539,11 @@
         <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">foo_path</span>, <span class="string">&quot;#include &lt;bar.hpp&gt;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">bar_path</span>, <span class="string">&quot;#include &lt;iostream&gt;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_cpp_deps</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">2</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.hpp&quot;</span>));
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">bar_path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;bar.hpp&quot;</span>));
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">2</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.hpp&quot;</span>));
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">bar_path</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;bar.hpp&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -560,9 +560,9 @@
         <span class="ident">std::os::unix::fs::symlink</span>(<span class="kw-2">&amp;</span><span class="ident">orig_path</span>, <span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
         <span class="comment">// file.cpp includes ./dep.hpp and ./inside.hpp (so it shouldn&#39;t find ./utils/inside.hpp)</span>
         <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_cpp_deps</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">dep_path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;dep.hpp&quot;</span>));
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">dep_path</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;dep.hpp&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -574,9 +574,9 @@
         <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">file_path</span>, <span class="string">&quot;#include &lt;file.cpp&gt;\n#include&lt;foo.hpp&gt;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">foo_path</span>, <span class="string">&quot;#include\&quot;file.cpp\&quot;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_cpp_deps</span>(<span class="kw-2">&amp;</span><span class="ident">file_path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.hpp&quot;</span>));
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.hpp&quot;</span>));
     }
 }
 </code></pre></div>

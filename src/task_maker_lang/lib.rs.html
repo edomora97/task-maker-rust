@@ -324,7 +324,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">spectral::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
 
     <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::languages::cpp</span>::{<span class="ident">LanguageCpp</span>, <span class="ident">LanguageCppConfiguration</span>};
 
@@ -334,33 +334,33 @@
     <span class="kw">fn</span> <span class="ident">test_detect_language</span>() {
         <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="string">&quot;foo.cpp&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration::from_env</span>()).<span class="ident">name</span>();
-        <span class="macro">assert_that!</span>(<span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_detect_language_uppercase</span>() {
         <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="string">&quot;foo.CPP&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration::from_env</span>()).<span class="ident">name</span>();
-        <span class="macro">assert_that!</span>(<span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_detect_language_unknown</span>() {
         <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="string">&quot;foo.blah&quot;</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">lang</span>).<span class="ident">is_none</span>();
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>).<span class="ident">is_none</span>();
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_from_name</span>() {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration::from_env</span>()).<span class="ident">name</span>();
         <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::from_name</span>(<span class="ident">name</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_that!</span>(<span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_from_name_unknown</span>() {
         <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::from_name</span>(<span class="string">&quot;Nope, this is not a language&quot;</span>);
-        <span class="macro">assert_that!</span>(<span class="ident">lang</span>).<span class="ident">is_none</span>();
+        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>).<span class="ident">is_none</span>();
     }
 }
 </code></pre></div>

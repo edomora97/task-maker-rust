@@ -228,16 +228,10 @@
 <span id="223">223</span>
 <span id="224">224</span>
 <span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">rand::distributions::Distribution</span>;
-<span class="kw">use</span> <span class="ident">rand::distributions::Uniform</span>;
 
 <span class="kw">use</span> <span class="ident">task_maker_format::ioi</span>::{
     <span class="ident">InputGenerator</span>, <span class="ident">SubtaskInfo</span>, <span class="ident">TestcaseId</span>, <span class="ident">TestcaseInfo</span>, <span class="ident">GENERATION_PRIORITY</span>,
@@ -276,10 +270,6 @@
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Batch</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">batch</span> <span class="op">=</span> <span class="ident">Batch::default</span>();
 
-    <span class="comment">// [0, i32::MAX] is a safe range for the seeds, since it is compatible with `stoi` in c++.</span>
-    <span class="kw">let</span> <span class="ident">seed_distribution</span> <span class="op">=</span> <span class="ident">Uniform::new_inclusive</span>(<span class="number">0</span>, <span class="ident">i32::MAX</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
-
     <span class="kw">match</span> <span class="ident">task</span> {
         <span class="ident">TaskFormat::IOI</span>(<span class="ident">task</span>) =&gt; {
             <span class="comment">// A template testcase for selecting the generator and validator.</span>
@@ -298,7 +288,9 @@
             <span class="kw">for</span> <span class="ident">testcase_index</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">batch_size</span> {
                 <span class="kw">let</span> <span class="ident">testcase_id</span> <span class="op">=</span> (<span class="ident">batch_index</span> <span class="op">*</span> <span class="ident">batch_size</span> <span class="op">+</span> <span class="ident">testcase_index</span>) <span class="kw">as</span> <span class="ident">TestcaseId</span>;
 
-                <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="ident">seed_distribution</span>.<span class="ident">sample</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>);
+                <span class="comment">// [0, i32::MAX] is a safe range for the seeds, since it is compatible with `stoi` in c++.</span>
+                <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="ident">fastrand::i32</span>(<span class="number">0</span>..<span class="ident">i32::MAX</span>);
+
                 <span class="kw">let</span> <span class="ident">generator_args</span> <span class="op">=</span> <span class="ident">generator_args_for_testcase</span>(<span class="ident">generator_args</span>, <span class="ident">seed</span>);
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">input_generator</span> <span class="op">=</span> <span class="ident">testcase_template</span>.<span class="ident">input_generator</span>.<span class="ident">clone</span>();
                 <span class="kw">match</span> <span class="kw-2">&amp;mut</span> <span class="ident">input_generator</span> {

@@ -574,12 +574,12 @@
 
     <span class="kw">use</span> <span class="ident">pretty_assertions</span>::{<span class="ident">assert_eq</span>, <span class="ident">assert_ne</span>};
     <span class="kw">use</span> <span class="ident">std::time::Duration</span>;
-    <span class="kw">use</span> <span class="ident">tempdir::TempDir</span>;
+    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
 
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">FileStore</span>, <span class="ident">FileStoreHandle</span>, <span class="ident">FileStoreKey</span>, <span class="ident">ReadFileIterator</span>};
 
     <span class="kw">fn</span> <span class="ident">get_cwd</span>() -&gt; <span class="ident">TempDir</span> {
-        <span class="ident">TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>()
+        <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>()
     }
 
     <span class="kw">fn</span> <span class="ident">fake_file</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>, <span class="ident">content</span>: <span class="ident">u8</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="ident">FileStoreKey</span> {

@@ -414,7 +414,7 @@
         <span class="ident">dry_run</span>: <span class="bool-val">false</span>,
     };
     <span class="kw">let</span> <span class="ident">working_directory</span> <span class="op">=</span>
-        <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;find-bad-case&quot;</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to create working directory&quot;</span>)<span class="question-mark">?</span>;
+        <span class="ident">tempfile::TempDir::new</span>().<span class="ident">context</span>(<span class="string">&quot;Failed to create working directory&quot;</span>)<span class="question-mark">?</span>;
 
     <span class="comment">// A reference to the current executor, used for sending messages to it.</span>
     <span class="kw">let</span> <span class="ident">current_executor_sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="prelude-val">None</span>));

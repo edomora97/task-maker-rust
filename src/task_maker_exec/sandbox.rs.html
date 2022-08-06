@@ -699,7 +699,7 @@
 <span class="kw">use</span> <span class="ident">tabox::configuration::SandboxConfiguration</span>;
 <span class="kw">use</span> <span class="ident">tabox::result::SandboxExecutionResult</span>;
 <span class="kw">use</span> <span class="ident">tabox::syscall_filter::SyscallFilter</span>;
-<span class="kw">use</span> <span class="ident">tempdir::TempDir</span>;
+<span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
 
 <span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">task_maker_store</span>::<span class="kw-2">*</span>;
@@ -794,7 +794,7 @@
                 <span class="ident">sandboxes_dir</span>.<span class="ident">display</span>()
             )
         })<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">boxdir</span> <span class="op">=</span> <span class="ident">TempDir::new_in</span>(<span class="ident">sandboxes_dir</span>, <span class="string">&quot;box&quot;</span>)
+        <span class="kw">let</span> <span class="ident">boxdir</span> <span class="op">=</span> <span class="ident">TempDir::new_in</span>(<span class="ident">sandboxes_dir</span>)
             .<span class="ident">context</span>(<span class="string">&quot;Failed to create sandbox temporary directory&quot;</span>)<span class="question-mark">?</span>;
         <span class="ident">Sandbox::setup</span>(<span class="ident">boxdir</span>.<span class="ident">path</span>(), <span class="ident">execution</span>, <span class="ident">dep_keys</span>).<span class="ident">context</span>(<span class="string">&quot;Sandbox setup failed&quot;</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">Sandbox</span> {
@@ -1295,7 +1295,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_remove_sandbox_on_drop</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;test&quot;</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;true&quot;</span>));
         <span class="ident">exec</span>.<span class="ident">output</span>(<span class="string">&quot;fooo&quot;</span>);
         <span class="ident">exec</span>.<span class="ident">limits_mut</span>().<span class="ident">read_only</span>(<span class="bool-val">true</span>);
@@ -1315,7 +1315,7 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_command_args</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;test&quot;</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;/bin/sh&quot;</span>));
         <span class="ident">exec</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
         <span class="ident">exec</span>.<span class="ident">limits_mut</span>()

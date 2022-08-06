@@ -743,7 +743,7 @@
 
     <span class="kw">use</span> <span class="ident">anyhow::Error</span>;
     <span class="kw">use</span> <span class="ident">pretty_assertions::assert_eq</span>;
-    <span class="kw">use</span> <span class="ident">tempdir::TempDir</span>;
+    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
 
     <span class="kw">use</span> <span class="ident">TaskInputEntry</span>::<span class="kw-2">*</span>;
 
@@ -753,7 +753,7 @@
     <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::SourceFile</span>;
 
     <span class="kw">fn</span> <span class="ident">make_task</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">gen_gen</span>: <span class="ident">S</span>) -&gt; <span class="ident">TempDir</span> {
-        <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
         <span class="ident">fs::write</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;task.yaml&quot;</span>), <span class="string">&quot;name: foo\ntitle: foo bar\n&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">fs::create_dir</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>)).<span class="ident">unwrap</span>();
         <span class="ident">fs::create_dir</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;sol&quot;</span>)).<span class="ident">unwrap</span>();

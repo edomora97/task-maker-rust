@@ -493,14 +493,14 @@
     <span class="doccomment">/// use std::path::PathBuf;</span>
     <span class="doccomment">/// use task_maker_cache::Cache;</span>
     <span class="doccomment">/// use ductile::new_local_channel;</span>
-    <span class="doccomment">/// # use tempdir::TempDir;</span>
+    <span class="doccomment">/// # use tempfile::TempDir;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// // make a new, empty, DAG</span>
     <span class="doccomment">/// let dag = ExecutionDAG::new();</span>
     <span class="doccomment">/// // setup the communication channels</span>
     <span class="doccomment">/// let (tx, rx_remote) = new_local_channel();</span>
     <span class="doccomment">/// let (tx_remote, rx) = new_local_channel();</span>
-    <span class="doccomment">/// # let tmpdir = TempDir::new(&quot;tm-test&quot;).unwrap();</span>
+    <span class="doccomment">/// # let tmpdir = TempDir::new().unwrap();</span>
     <span class="doccomment">/// # let path = tmpdir.path().to_owned();</span>
     <span class="doccomment">/// # let sandbox_runner = ErrorSandboxRunner::default();</span>
     <span class="doccomment">/// let file_store = Arc::new(FileStore::new(&amp;path, 1000, 1000).expect(&quot;Cannot create the file store&quot;));</span>

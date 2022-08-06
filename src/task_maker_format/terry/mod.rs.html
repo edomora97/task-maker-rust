@@ -266,8 +266,6 @@
 <span id="261">261</span>
 <span id="262">262</span>
 <span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The Terry task format.</span>
 <span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
@@ -275,7 +273,6 @@
 
 <span class="kw">use</span> <span class="ident">anyhow::Error</span>;
 <span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">rand::Rng</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 <span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
 
@@ -451,12 +448,11 @@
         })<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">solutions</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">solutions</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
         <span class="kw">for</span> <span class="ident">solution</span> <span class="kw">in</span> <span class="ident">solutions</span> {
             <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">seed</span>) <span class="op">=</span> <span class="ident">config</span>.<span class="ident">seed</span> {
                 <span class="ident">seed</span>
             } <span class="kw">else</span> {
-                <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0</span>, <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">31</span>)
+                <span class="ident">fastrand::u64</span>(<span class="number">0</span>..(<span class="ident">i32::MAX</span> <span class="kw">as</span> <span class="ident">u64</span>))
             };
             <span class="kw">let</span> <span class="ident">input_file</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">generator</span>.<span class="ident">generate_and_bind</span>(
                 <span class="ident">eval</span>,

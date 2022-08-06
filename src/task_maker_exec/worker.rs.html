@@ -695,7 +695,7 @@
 
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
 <span class="kw">use</span> <span class="ident">ductile</span>::{<span class="ident">new_local_channel</span>, <span class="ident">ChannelReceiver</span>, <span class="ident">ChannelSender</span>};
-<span class="kw">use</span> <span class="ident">tempdir::TempDir</span>;
+<span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
 <span class="kw">use</span> <span class="ident">uuid::Uuid</span>;
 
 <span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
@@ -1007,7 +1007,7 @@
         <span class="kw">let</span> <span class="ident">fifo_dir</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">group</span>.<span class="ident">fifo</span>.<span class="ident">is_empty</span>() {
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">fifo_dir</span> <span class="op">=</span> <span class="ident">TempDir::new_in</span>(<span class="ident">sandbox_path</span>, <span class="string">&quot;pipes&quot;</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+            <span class="kw">let</span> <span class="ident">fifo_dir</span> <span class="op">=</span> <span class="ident">TempDir::new_in</span>(<span class="ident">sandbox_path</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
                 <span class="macro">format!</span>(
                     <span class="string">&quot;Failed to create temporary directory in {}&quot;</span>,
                     <span class="ident">sandbox_path</span>.<span class="ident">display</span>()

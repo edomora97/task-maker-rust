@@ -284,14 +284,14 @@
 <span class="doccomment">//! # Example</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
-<span class="doccomment">//! use tempdir::TempDir;</span>
+<span class="doccomment">//! use tempfile::TempDir;</span>
 <span class="doccomment">//! use task_maker_cache::{Cache, CacheResult};</span>
 <span class="doccomment">//! use std::collections::HashMap;</span>
 <span class="doccomment">//! use task_maker_dag::{Execution, ExecutionCommand, ExecutionResult, ExecutionStatus, ExecutionResourcesUsage, File};</span>
 <span class="doccomment">//! use task_maker_store::{FileStore, FileStoreKey, ReadFileIterator};</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // make a new store and a new cache in a testing environment</span>
-<span class="doccomment">//! let dir = TempDir::new(&quot;tm-test&quot;).unwrap();</span>
+<span class="doccomment">//! let dir = TempDir::new().unwrap();</span>
 <span class="doccomment">//! let mut cache = Cache::new(dir.path()).expect(&quot;Cannot create the cache&quot;);</span>
 <span class="doccomment">//! let mut store = FileStore::new(dir.path(), 1000, 1000).expect(&quot;Cannot create the store&quot;);</span>
 <span class="doccomment">//!</span>

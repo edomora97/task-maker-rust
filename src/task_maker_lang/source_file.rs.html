@@ -494,10 +494,10 @@
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use task_maker_dag::ExecutionDAG;</span>
     <span class="doccomment">/// use task_maker_lang::SourceFile;</span>
-    <span class="doccomment">/// # use tempdir::TempDir;</span>
+    <span class="doccomment">/// # use tempfile::TempDir;</span>
     <span class="doccomment">/// # use std::path::PathBuf;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// # let tempdir = TempDir::new(&quot;tm-tests&quot;).unwrap();</span>
+    <span class="doccomment">/// # let tempdir = TempDir::new().unwrap();</span>
     <span class="doccomment">/// # std::fs::write(tempdir.path().join(&quot;test.cpp&quot;), &quot;foobar.cpp&quot;).unwrap();</span>
     <span class="doccomment">/// # let path = tempdir.path().join(&quot;test.cpp&quot;);</span>
     <span class="doccomment">/// let mut dag = ExecutionDAG::new();</span>
@@ -518,10 +518,10 @@
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use task_maker_dag::ExecutionDAG;</span>
     <span class="doccomment">/// use task_maker_lang::SourceFile;</span>
-    <span class="doccomment">/// # use tempdir::TempDir;</span>
+    <span class="doccomment">/// # use tempfile::TempDir;</span>
     <span class="doccomment">/// # use std::path::PathBuf;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// # let tempdir = TempDir::new(&quot;tm-tests&quot;).unwrap();</span>
+    <span class="doccomment">/// # let tempdir = TempDir::new().unwrap();</span>
     <span class="doccomment">/// # std::fs::write(tempdir.path().join(&quot;test.py&quot;), &quot;foobar.cpp&quot;).unwrap();</span>
     <span class="doccomment">/// # let path = tempdir.path().join(&quot;test.py&quot;);</span>
     <span class="doccomment">/// let mut dag = ExecutionDAG::new();</span>
@@ -724,7 +724,7 @@
     <span class="kw">use</span> <span class="ident">std::sync::atomic</span>::{<span class="ident">AtomicBool</span>, <span class="ident">Ordering</span>};
     <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
 
-    <span class="kw">use</span> <span class="ident">tempdir::TempDir</span>;
+    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
 
     <span class="kw">use</span> <span class="ident">task_maker_exec</span>::{<span class="ident">eval_dag_locally</span>, <span class="ident">SuccessSandboxRunner</span>};
 
@@ -732,7 +732,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_source_file_cpp</span>() {
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">TempDir::new</span>(<span class="string">&quot;tm-test&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
         <span class="ident">dag</span>.<span class="ident">config_mut</span>().<span class="ident">copy_exe</span>(<span class="bool-val">true</span>);
