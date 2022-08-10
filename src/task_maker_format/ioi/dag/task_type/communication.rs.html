@@ -296,6 +296,49 @@
 <span id="291">291</span>
 <span id="292">292</span>
 <span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 <span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
 
@@ -343,8 +386,13 @@
     <span class="ident">path</span>: <span class="ident">PathBuf</span>,
     <span class="doccomment">/// The score manager to use for sending the score.</span>
     <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Whether the score has already been sent. This avoids sending the score more than once.</span>
-    <span class="ident">done</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// The number of missing calls to `send` or to `skip`.</span>
+    <span class="ident">missing_answers</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// The score to send to the [`ScoreManager`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This will be sent only then the `missing_answers` counter reaches zero, and if multiple</span>
+    <span class="doccomment">/// answers are received, the smallest one will be sent.</span>
+    <span class="ident">answer</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">String</span>)<span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// Utility structure for sending the score only once. Since there are many points where the score</span>
@@ -406,6 +454,7 @@
         <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>(),
         <span class="ident">path</span>.<span class="ident">clone</span>(),
         <span class="ident">score_manager</span>,
+        <span class="ident">num_processes</span> <span class="op">+</span> <span class="number">1</span>, <span class="comment">// num_processes + the manager</span>
     );
     <span class="kw">for</span> <span class="ident">process_index</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">num_processes</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">data</span>.<span class="ident">user_io</span> {
@@ -418,7 +467,7 @@
         <span class="kw">if</span> <span class="ident">num_processes</span> <span class="op">&gt;</span> <span class="number">1</span> {
             <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">process_index</span>.<span class="ident">to_string</span>());
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">source_file</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sol_exec</span> <span class="op">=</span> <span class="ident">source_file</span>
             .<span class="ident">execute</span>(
                 <span class="ident">eval</span>,
                 <span class="macro">format!</span>(
@@ -433,12 +482,12 @@
             )
             .<span class="ident">context</span>(<span class="string">&quot;Failed to execute solution source file&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">user_io</span> <span class="op">==</span> <span class="ident">UserIo::StdIo</span> {
-            <span class="ident">exec</span>.<span class="ident">stdin_redirect_path</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_man2sol</span>[<span class="ident">process_index</span>]);
-            <span class="ident">exec</span>.<span class="ident">stdout_redirect_path</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_sol2man</span>[<span class="ident">process_index</span>]);
+            <span class="ident">sol_exec</span>.<span class="ident">stdin_redirect_path</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_man2sol</span>[<span class="ident">process_index</span>]);
+            <span class="ident">sol_exec</span>.<span class="ident">stdout_redirect_path</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_sol2man</span>[<span class="ident">process_index</span>]);
         }
-        <span class="ident">exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>());
-        <span class="ident">exec</span>.<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>);
-        <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">limits_mut</span>();
+        <span class="ident">sol_exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>());
+        <span class="ident">sol_exec</span>.<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>);
+        <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">sol_exec</span>.<span class="ident">limits_mut</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">time_limit</span> {
             <span class="ident">limits</span>.<span class="ident">cpu_time</span>(<span class="ident">time_limit</span>);
             <span class="ident">limits</span>.<span class="ident">wall_time</span>(<span class="ident">time_limit</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">+</span> <span class="number">1.0</span>); <span class="comment">// some margin</span>
@@ -448,7 +497,7 @@
         }
         <span class="macro">bind_exec_callbacks!</span>(
             <span class="ident">eval</span>,
-            <span class="ident">exec</span>.<span class="ident">uuid</span>,
+            <span class="ident">sol_exec</span>.<span class="ident">uuid</span>,
             <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::IOIEvaluation</span> {
                 <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
                 <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
@@ -460,13 +509,16 @@
             <span class="ident">path</span>
         )<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">score_sender</span> <span class="op">=</span> <span class="ident">score_sender</span>.<span class="ident">clone</span>();
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
+        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">sol_exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
             <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
                 <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="number">0.0</span>, <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">result</span>.<span class="ident">status</span>))<span class="question-mark">?</span>;
+            } <span class="kw">else</span> {
+                <span class="comment">// We cannot compute the score here, we should wait for the manager.</span>
+                <span class="ident">score_sender</span>.<span class="ident">skip</span>()<span class="question-mark">?</span>;
             }
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
+        <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">sol_exec</span>);
     }
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
@@ -474,7 +526,7 @@
         <span class="ident">args</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_sol2man</span>[<span class="ident">process_index</span>]);
         <span class="ident">args</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_man2sol</span>[<span class="ident">process_index</span>]);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">data</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">manager_exec</span> <span class="op">=</span> <span class="ident">data</span>
         .<span class="ident">manager</span>
         .<span class="ident">execute</span>(
             <span class="ident">eval</span>,
@@ -487,12 +539,13 @@
             <span class="ident">args</span>,
         )
         .<span class="ident">context</span>(<span class="string">&quot;Failed to execute manager source file&quot;</span>)<span class="question-mark">?</span>;
-    <span class="ident">exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>())
+    <span class="ident">manager_exec</span>
+        .<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>())
         .<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>)
         .<span class="ident">capture_stdout</span>(<span class="number">128</span>)
         .<span class="ident">capture_stderr</span>(<span class="number">1024</span>);
-    <span class="macro">bind_exec_io!</span>(<span class="ident">exec</span>, <span class="ident">task</span>, <span class="ident">input</span>, <span class="ident">validation_handle</span>);
-    <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">limits_mut</span>();
+    <span class="macro">bind_exec_io!</span>(<span class="ident">manager_exec</span>, <span class="ident">task</span>, <span class="ident">input</span>, <span class="ident">validation_handle</span>);
+    <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">manager_exec</span>.<span class="ident">limits_mut</span>();
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">time_limit</span> {
         <span class="kw">let</span> <span class="ident">cpu_time</span> <span class="op">=</span> (<span class="ident">time_limit</span> <span class="op">+</span> <span class="number">1.0</span>) <span class="op">*</span> <span class="ident">num_processes</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">wall_time</span> <span class="op">=</span> <span class="ident">cpu_time</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">+</span> <span class="number">1.0</span>; <span class="comment">// some margin</span>
@@ -504,7 +557,7 @@
     }
     <span class="macro">bind_exec_callbacks!</span>(
         <span class="ident">eval</span>,
-        <span class="ident">exec</span>.<span class="ident">uuid</span>,
+        <span class="ident">manager_exec</span>.<span class="ident">uuid</span>,
         <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::IOIChecker</span> {
             <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
             <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
@@ -513,30 +566,26 @@
         },
         <span class="ident">path</span>
     )<span class="question-mark">?</span>;
-    <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-            <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="number">0.0</span>, <span class="string">&quot;Checker failed&quot;</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>;
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
-        }
-        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">result</span>
-            .<span class="ident">stdout</span>
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">result</span>
-            .<span class="ident">stderr</span>
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>);
-        <span class="kw">let</span> <span class="ident">score</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">score</span>.<span class="ident">trim</span>().<span class="ident">parse</span>().<span class="ident">context</span>(<span class="string">&quot;Invalid score from checker&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>).<span class="ident">trim</span>().<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">Checker::translate_checker_message</span>(<span class="ident">message</span>);
-        <span class="comment">// FIXME: this, combined with the send from the exec of the solution (in case of failures),</span>
-        <span class="comment">//        cause a race condition. If the manager exits first with an outcome (let&#39;s say AC),</span>
-        <span class="comment">//        but the solution afterwards got stuck (or just is slow at exiting, or crashes) the</span>
-        <span class="comment">//        failure is not registered in the score, but the exit status is. The result is that</span>
-        <span class="comment">//        a solution can get the points for a testcase even if it crashes.</span>
-        <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="ident">score</span>, <span class="ident">message</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(())
-    });
-    <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
+    <span class="ident">eval</span>.<span class="ident">dag</span>
+        .<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">manager_exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
+            <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
+                <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="number">0.0</span>, <span class="string">&quot;Checker failed&quot;</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>;
+                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+            }
+            <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">result</span>
+                .<span class="ident">stdout</span>
+                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">result</span>
+                .<span class="ident">stderr</span>
+                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>);
+            <span class="kw">let</span> <span class="ident">score</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">score</span>.<span class="ident">trim</span>().<span class="ident">parse</span>().<span class="ident">context</span>(<span class="string">&quot;Invalid score from checker&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>).<span class="ident">trim</span>().<span class="ident">to_string</span>();
+            <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">Checker::translate_checker_message</span>(<span class="ident">message</span>);
+            <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="ident">score</span>, <span class="ident">message</span>)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(())
+        });
+    <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">manager_exec</span>);
     <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution_group</span>(<span class="ident">group</span>);
     <span class="prelude-val">Ok</span>(())
 }
@@ -549,6 +598,7 @@
         <span class="ident">sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">UIMessageSender</span><span class="op">&gt;</span><span class="op">&gt;</span>,
         <span class="ident">path</span>: <span class="ident">PathBuf</span>,
         <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">num_answers</span>: <span class="ident">usize</span>,
     ) -&gt; <span class="ident">ScoreSender</span> {
         <span class="ident">ScoreSender</span> {
             <span class="ident">data</span>: <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="ident">ScoreSenderData</span> {
@@ -557,35 +607,71 @@
                 <span class="ident">sender</span>,
                 <span class="ident">path</span>,
                 <span class="ident">score_manager</span>,
-                <span class="ident">done</span>: <span class="bool-val">false</span>,
+                <span class="ident">missing_answers</span>: <span class="ident">num_answers</span>,
+                <span class="ident">answer</span>: <span class="prelude-val">None</span>,
             })),
         }
     }
 
-    <span class="doccomment">/// Send the score to the `ScoreManager`, if not already sent.</span>
+    <span class="doccomment">/// Set the score and message for a testcase. Note that this may be overridden by a call with a</span>
+    <span class="doccomment">/// smaller score.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The score will be sent to the [`ScoreManager`] only if this is the last missing call.</span>
     <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">score</span>: <span class="ident">f64</span>, <span class="ident">message</span>: <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-        <span class="comment">// do not send the score twice</span>
-        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">done</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
+        <span class="macro">assert!</span>(
+            <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">&gt;</span> <span class="number">0</span>,
+            <span class="string">&quot;send() called with missing_answers = 0&quot;</span>
+        );
+        <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+
+        <span class="kw">let</span> <span class="ident">answer</span> <span class="op">=</span> (<span class="ident">score</span>, <span class="ident">message</span>);
+        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">answer</span>.<span class="ident">is_none</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">data</span>.<span class="ident">answer</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="number">0</span> <span class="op">&gt;</span> <span class="ident">score</span> {
+            <span class="ident">data</span>.<span class="ident">answer</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">answer</span>);
+        }
+
+        <span class="ident"><span class="self">Self</span>::maybe_flush</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>)
+    }
+
+    <span class="doccomment">/// Decrease the number of missing calls by one, but without setting a score/message.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The score will be sent to the [`ScoreManager`] only if this is the last missing call.</span>
+    <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
+        <span class="macro">assert!</span>(
+            <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">&gt;</span> <span class="number">0</span>,
+            <span class="string">&quot;skip() called with missing_answers = 0&quot;</span>
+        );
+        <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+
+        <span class="ident"><span class="self">Self</span>::maybe_flush</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>)
+    }
+
+    <span class="doccomment">/// Check if all the answers have been received, and if so send to the [`ScoreManager`] the score</span>
+    <span class="doccomment">/// and message.</span>
+    <span class="kw">fn</span> <span class="ident">maybe_flush</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">ScoreSenderData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">&gt;</span> <span class="number">0</span> {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
         }
-        <span class="ident">data</span>.<span class="ident">score_manager</span>
-            .<span class="ident">lock</span>()
-            .<span class="ident">unwrap</span>()
-            .<span class="ident">score</span>(
-                <span class="ident">data</span>.<span class="ident">subtask_id</span>,
-                <span class="ident">data</span>.<span class="ident">testcase_id</span>,
-                <span class="ident">score</span>,
-                <span class="ident">message</span>.<span class="ident">clone</span>(),
-                <span class="ident">data</span>.<span class="ident">sender</span>.<span class="ident">clone</span>(),
-                <span class="ident">data</span>.<span class="ident">path</span>.<span class="ident">clone</span>(),
-            )
-            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                <span class="macro">format!</span>(
-                    <span class="string">&quot;Failed to store testcase score (score: {}, message: {})&quot;</span>,
-                    <span class="ident">score</span>, <span class="ident">message</span>
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">score</span>, <span class="ident">message</span>)) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">data</span>.<span class="ident">answer</span> {
+            <span class="ident">data</span>.<span class="ident">score_manager</span>
+                .<span class="ident">lock</span>()
+                .<span class="ident">unwrap</span>()
+                .<span class="ident">score</span>(
+                    <span class="ident">data</span>.<span class="ident">subtask_id</span>,
+                    <span class="ident">data</span>.<span class="ident">testcase_id</span>,
+                    <span class="kw-2">*</span><span class="ident">score</span>,
+                    <span class="ident">message</span>.<span class="ident">clone</span>(),
+                    <span class="ident">data</span>.<span class="ident">sender</span>.<span class="ident">clone</span>(),
+                    <span class="ident">data</span>.<span class="ident">path</span>.<span class="ident">clone</span>(),
                 )
-            })<span class="question-mark">?</span>;
+                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                    <span class="macro">format!</span>(
+                        <span class="string">&quot;Failed to store testcase score (score: {}, message: {})&quot;</span>,
+                        <span class="ident">score</span>, <span class="ident">message</span>
+                    )
+                })<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 }
