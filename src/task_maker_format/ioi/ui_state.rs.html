@@ -797,7 +797,7 @@
         <span class="kw">match</span> <span class="ident">status</span> {
             <span class="ident">TestcaseEvaluationStatus::Accepted</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::Accepted</span>),
             <span class="ident">TestcaseEvaluationStatus::Partial</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">TestcaseEvaluationStatus::WrongAnswer</span>(<span class="kw">_</span>) =&gt; {
-                <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::WrongAnswer</span>)
+                <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::PartialScore</span>)
             }
             <span class="ident">TestcaseEvaluationStatus::TimeLimitExceeded</span> =&gt; {
                 <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::TimeLimitExceeded</span>)

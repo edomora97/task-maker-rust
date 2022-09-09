@@ -346,6 +346,21 @@
 <span id="340">340</span>
 <span id="341">341</span>
 <span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fs::File</span>;
 <span class="kw">use</span> <span class="ident">std::io::Read</span>;
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
@@ -448,6 +463,8 @@
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SolutionCheckResult</span> {
     <span class="doccomment">/// The solution should get &quot;Accepted&quot; on all the testcases of the subtask.</span>
     <span class="ident">Accepted</span>,
+    <span class="doccomment">/// The solution should get &quot;Partial Score&quot; on at least one testcase and &quot;Accepted&quot; on the others.</span>
+    <span class="ident">PartialScore</span>,
     <span class="doccomment">/// The solution should get &quot;Wrong Answer&quot; on at least one testcase of the subtask.</span>
     <span class="ident">WrongAnswer</span>,
     <span class="doccomment">/// The solution should get &quot;Time Limit Exceeded&quot; on at least one testcase of the subtask.</span>
@@ -464,6 +481,7 @@
     <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
             <span class="string">&quot;accepted&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Accepted</span>),
+            <span class="string">&quot;partial-score&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::PartialScore</span>),
             <span class="string">&quot;wrong-answer&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::WrongAnswer</span>),
             <span class="string">&quot;time-limit-exceeded&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::TimeLimitExceeded</span>),
             <span class="string">&quot;memory-limit-exceeded&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::MemoryLimitExceeded</span>),
@@ -478,6 +496,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">SolutionCheckResult::Accepted</span> =&gt; <span class="string">&quot;accepted&quot;</span>,
+            <span class="ident">SolutionCheckResult::PartialScore</span> =&gt; <span class="string">&quot;partial-score&quot;</span>,
             <span class="ident">SolutionCheckResult::WrongAnswer</span> =&gt; <span class="string">&quot;wrong-answer&quot;</span>,
             <span class="ident">SolutionCheckResult::TimeLimitExceeded</span> =&gt; <span class="string">&quot;time-limit-exceeded&quot;</span>,
             <span class="ident">SolutionCheckResult::MemoryLimitExceeded</span> =&gt; <span class="string">&quot;memory-limit-exceeded&quot;</span>,
@@ -491,6 +510,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_compact_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">SolutionCheckResult::Accepted</span> =&gt; <span class="string">&quot;AC&quot;</span>,
+            <span class="ident">SolutionCheckResult::PartialScore</span> =&gt; <span class="string">&quot;PS&quot;</span>,
             <span class="ident">SolutionCheckResult::WrongAnswer</span> =&gt; <span class="string">&quot;WA&quot;</span>,
             <span class="ident">SolutionCheckResult::TimeLimitExceeded</span> =&gt; <span class="string">&quot;TLE&quot;</span>,
             <span class="ident">SolutionCheckResult::MemoryLimitExceeded</span> =&gt; <span class="string">&quot;MLE&quot;</span>,
@@ -502,6 +522,12 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">outcomes</span>: <span class="kw-2">&amp;</span>[<span class="ident">SolutionCheckResult</span>]) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">SolutionCheckResult::Accepted</span> =&gt; <span class="ident">outcomes</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span> <span class="op">==</span> <span class="self">self</span>),
+            <span class="ident">SolutionCheckResult::PartialScore</span> =&gt; {
+                <span class="ident">outcomes</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span> <span class="op">==</span> <span class="self">self</span>)
+                    <span class="op">&amp;&amp;</span> <span class="ident">outcomes</span>
+                        .<span class="ident">iter</span>()
+                        .<span class="ident">all</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span> <span class="op">==</span> <span class="self">self</span> <span class="op">|</span><span class="op">|</span> <span class="ident">o</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="ident">SolutionCheckResult::Accepted</span>)
+            }
             <span class="kw">_</span> =&gt; <span class="ident">outcomes</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span> <span class="op">==</span> <span class="self">self</span>),
         }
     }
@@ -518,7 +544,7 @@
             <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">EXTRACT_CHECKS</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(
                 <span class="string">r&quot;(?x)
             @check-     # signal the start of a check
-            (?P&lt;result&gt;accepted|wrong-answer|time-limit-exceeded|memory-limit-exceeded|runtime-error)
+            (?P&lt;result&gt;accepted|partial-score|wrong-answer|time-limit-exceeded|memory-limit-exceeded|runtime-error)
             :
             (?P&lt;subtasks&gt;
               (?:
@@ -609,6 +635,7 @@
             <span class="string">r&quot;
            /*
             * @check-accepted: st1 st2 st3*
+            * @check-partial-score: asd
             * @check-wrong-answer: asd
             * @check-wrong-answer:
             * @check-time-limit-exceeded: asd
@@ -636,24 +663,27 @@
             <span class="ident">checks</span>[<span class="number">2</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(),
             <span class="string">&quot;@check-accepted: st1 st2 st3*&quot;</span>
         );
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">3</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::WrongAnswer</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">3</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::PartialScore</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">3</span>].<span class="ident">subtask_name_pattern</span>, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">3</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(), <span class="string">&quot;@check-wrong-answer: asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">4</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::TimeLimitExceeded</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">3</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(), <span class="string">&quot;@check-partial-score: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">4</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::WrongAnswer</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">4</span>].<span class="ident">subtask_name_pattern</span>, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">checks</span>[<span class="number">4</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(),
-            <span class="string">&quot;@check-time-limit-exceeded: asd&quot;</span>
-        );
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">5</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::MemoryLimitExceeded</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">4</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(), <span class="string">&quot;@check-wrong-answer: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">5</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::TimeLimitExceeded</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">5</span>].<span class="ident">subtask_name_pattern</span>, <span class="string">&quot;asd&quot;</span>);
         <span class="macro">assert_eq!</span>(
             <span class="ident">checks</span>[<span class="number">5</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(),
+            <span class="string">&quot;@check-time-limit-exceeded: asd&quot;</span>
+        );
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">6</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::MemoryLimitExceeded</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">6</span>].<span class="ident">subtask_name_pattern</span>, <span class="string">&quot;asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(
+            <span class="ident">checks</span>[<span class="number">6</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(),
             <span class="string">&quot;@check-memory-limit-exceeded: asd&quot;</span>
         );
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">6</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::RuntimeError</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">6</span>].<span class="ident">subtask_name_pattern</span>, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">6</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(), <span class="string">&quot;@check-runtime-error: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">7</span>].<span class="ident">result</span>, <span class="ident">SolutionCheckResult::RuntimeError</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">7</span>].<span class="ident">subtask_name_pattern</span>, <span class="string">&quot;asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">checks</span>[<span class="number">7</span>].<span class="ident">code_span</span>.<span class="ident">as_str</span>(), <span class="string">&quot;@check-runtime-error: asd&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
