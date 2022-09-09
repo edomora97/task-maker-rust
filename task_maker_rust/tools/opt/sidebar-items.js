@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Tool",""]],"struct":[["Opt",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["Tool",""]],"struct":[["Opt",""]]};

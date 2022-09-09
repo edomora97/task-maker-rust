@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["main_add_solution_checks",""]],"struct":[["AddSolutionChecksOpt",""]]});
+window.SIDEBAR_ITEMS = {"fn":[["main_add_solution_checks",""]],"struct":[["AddSolutionChecksOpt",""]]};

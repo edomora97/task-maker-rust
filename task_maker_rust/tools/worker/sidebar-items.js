@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["main_worker","Entry point for the worker."]],"struct":[["WorkerOpt",""]]});
+window.SIDEBAR_ITEMS = {"fn":[["main_worker","Entry point for the worker."]],"struct":[["WorkerOpt",""]]};

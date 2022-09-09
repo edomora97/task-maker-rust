@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["main_sandbox",""]],"struct":[["SandboxOpt",""]]});
+window.SIDEBAR_ITEMS = {"fn":[["main_sandbox",""]],"struct":[["SandboxOpt",""]]};

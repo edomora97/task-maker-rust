@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["main_sandbox","Run the sandbox for an execution."]],"struct":[["ToolsSandboxRunner","Run the sandbox integrated in the task-maker-tools binary."]]});
+window.SIDEBAR_ITEMS = {"fn":[["main_sandbox","Run the sandbox for an execution."]],"struct":[["ToolsSandboxRunner","Run the sandbox integrated in the task-maker-tools binary."]]};
