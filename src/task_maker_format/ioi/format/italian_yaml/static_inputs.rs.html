@@ -177,7 +177,7 @@
 <span class="doccomment">/// generator.</span>
 <span class="kw">struct</span> <span class="ident">StaticInputIter</span><span class="op">&lt;</span><span class="ident">V</span>, <span class="ident">O</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span>,
+    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span>,
     <span class="ident">O</span>: <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span>,
 {
     <span class="doccomment">/// The path to the input files directory.</span>
@@ -192,7 +192,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">V</span>, <span class="ident">O</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">StaticInputIter</span><span class="op">&lt;</span><span class="ident">V</span>, <span class="ident">O</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span>,
+    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span>,
     <span class="ident">O</span>: <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span>,
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">TaskInputEntry</span>;
@@ -217,7 +217,7 @@
             <span class="prelude-val">Some</span>(<span class="ident">TaskInputEntry::Testcase</span>(<span class="ident">TestcaseInfo</span> {
                 <span class="ident">id</span>,
                 <span class="ident">input_generator</span>: <span class="ident">InputGenerator::StaticFile</span>(<span class="ident">path</span>),
-                <span class="ident">input_validator</span>: (<span class="self">self</span>.<span class="ident">get_validator</span>)(<span class="number">0</span>),
+                <span class="ident">input_validator</span>: (<span class="self">self</span>.<span class="ident">get_validator</span>)(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
                 <span class="ident">output_generator</span>: (<span class="self">self</span>.<span class="ident">get_output_gen</span>)(<span class="ident">id</span>),
             }))
         } <span class="kw">else</span> {
@@ -237,7 +237,7 @@
     <span class="ident">get_output_gen</span>: <span class="ident">O</span>,
 ) -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">TaskInputEntry</span><span class="op">&gt;</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     <span class="ident">O</span>: <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
 {
     <span class="ident">Box::new</span>(<span class="ident">StaticInputIter</span> {
@@ -261,7 +261,7 @@
 
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">get_validator</span>(<span class="ident">_subtask</span>: <span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span> {
+    <span class="kw">fn</span> <span class="ident">get_validator</span>(<span class="ident">_subtask</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span> {
         <span class="ident">InputValidator::AssumeValid</span>
     }
 

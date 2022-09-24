@@ -579,7 +579,7 @@
     <span class="ident">get_output_gen</span>: <span class="ident">O</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInputEntry</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span>,
+    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span>,
     <span class="ident">O</span>: <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span>,
 {
     <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">as_ref</span>();
@@ -694,7 +694,7 @@
                         <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Testcase</span>(<span class="ident">TestcaseInfo</span> {
                             <span class="ident">id</span>: <span class="ident">testcase_count</span>,
                             <span class="ident">input_generator</span>: <span class="ident">InputGenerator::StaticFile</span>(<span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="ident">what</span>)),
-                            <span class="ident">input_validator</span>: <span class="ident">get_validator</span>(<span class="ident">subtask_id</span> <span class="op">-</span> <span class="number">1</span>),
+                            <span class="ident">input_validator</span>: <span class="ident">get_validator</span>(<span class="prelude-val">Some</span>(<span class="ident">subtask_id</span> <span class="op">-</span> <span class="number">1</span>)),
                             <span class="ident">output_generator</span>: <span class="ident">get_output_gen</span>(<span class="ident">testcase_count</span>),
                         }));
                         <span class="ident">testcase_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
@@ -713,7 +713,7 @@
                         <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Testcase</span>(<span class="ident">TestcaseInfo</span> {
                             <span class="ident">id</span>: <span class="ident">testcase_count</span>,
                             <span class="ident">input_generator</span>: <span class="ident">InputGenerator::Custom</span>(<span class="ident">generator</span>.<span class="ident">clone</span>(), <span class="ident">cmd</span>),
-                            <span class="ident">input_validator</span>: <span class="ident">get_validator</span>(<span class="ident">subtask_id</span> <span class="op">-</span> <span class="number">1</span>),
+                            <span class="ident">input_validator</span>: <span class="ident">get_validator</span>(<span class="prelude-val">Some</span>(<span class="ident">subtask_id</span> <span class="op">-</span> <span class="number">1</span>)),
                             <span class="ident">output_generator</span>,
                         }));
                         <span class="ident">testcase_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
@@ -766,7 +766,7 @@
         <span class="ident">dir</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">get_validator</span>(<span class="ident">_subtask</span>: <span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span> {
+    <span class="kw">fn</span> <span class="ident">get_validator</span>(<span class="ident">_subtask</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span> {
         <span class="ident">InputValidator::AssumeValid</span>
     }
 

@@ -749,6 +749,12 @@
 <span id="749">749</span>
 <span id="750">750</span>
 <span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)</span>
 <span class="doccomment">//! and it&#39;s the most used format in the Italian Olympiads.</span>
 <span class="doccomment">//!</span>
@@ -1022,12 +1028,12 @@
 <span class="kw">use</span> <span class="ident">task_maker_lang::GraderMap</span>;
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::sanity_checks::get_sanity_checks</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::TM_VALIDATION_FILE_NAME</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{
     <span class="ident">make_task_booklets</span>, <span class="ident">Checker</span>, <span class="ident">IOITask</span>, <span class="ident">InputValidator</span>, <span class="ident">OutputGenerator</span>, <span class="ident">SubtaskId</span>, <span class="ident">SubtaskInfo</span>,
     <span class="ident">TaskType</span>, <span class="ident">TestcaseId</span>, <span class="ident">TestcaseInfo</span>, <span class="ident">TestcaseScoreAggregator</span>,
 };
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">BatchTypeData</span>, <span class="ident">CommunicationTypeData</span>, <span class="ident">UserIo</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">InputValidatorGenerator</span>, <span class="ident">TM_VALIDATION_FILE_NAME</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">find_source_file</span>, <span class="ident">list_files</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">WriteBinTo</span>};
 
 <span class="kw">mod</span> <span class="ident">cases_gen</span>;
@@ -1259,8 +1265,9 @@
         <span class="ident">difficulty</span>: <span class="ident">yaml</span>.<span class="ident">difficulty</span>,
         <span class="ident">syllabus_level</span>: <span class="ident">yaml</span>.<span class="ident">syllabuslevel</span>,
         <span class="ident">sanity_checks</span>: <span class="ident">Arc::new</span>(<span class="ident">get_sanity_checks</span>(<span class="kw-2">&amp;</span><span class="ident">eval_config</span>.<span class="ident">disabled_sanity_checks</span>)),
-        <span class="ident">input_validator</span>: <span class="ident">detect_validator</span>(<span class="ident">task_dir</span>.<span class="ident">to_path_buf</span>())
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>(<span class="number">0</span>),
+        <span class="ident">input_validator_generator</span>: <span class="ident">InputValidatorGenerator::new</span>(
+            <span class="ident">detect_validator</span>(<span class="ident">task_dir</span>.<span class="ident">to_path_buf</span>()).<span class="ident">context</span>(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
+        ),
     };
     <span class="comment">// split the creation of the task because make_booklets need an instance of Task</span>
     <span class="kw">if</span> <span class="op">!</span><span class="ident">eval_config</span>.<span class="ident">no_statement</span> {
@@ -1273,7 +1280,9 @@
 <span class="doccomment">/// Search for a valid input validator inside the task directory. Will return a function that, given</span>
 <span class="doccomment">/// a subtask id, returns an `InputValidator` using that validator. If no validator is found,</span>
 <span class="doccomment">/// `InputValidator::AssumeValid` is used.</span>
-<span class="kw">fn</span> <span class="ident">detect_validator</span>(<span class="ident">task_dir</span>: <span class="ident">PathBuf</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">SubtaskId</span>) -&gt; <span class="ident">InputValidator</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">detect_validator</span>(
+    <span class="ident">task_dir</span>: <span class="ident">PathBuf</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">validators</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
         <span class="kw-2">&amp;</span><span class="ident">task_dir</span>,
         <span class="macro">vec!</span>[
@@ -1292,12 +1301,15 @@
     }
     <span class="kw">let</span> <span class="ident">validator</span> <span class="op">=</span> <span class="ident">validators</span>.<span class="ident">pop</span>().<span class="ident">map</span>(<span class="ident">Arc::new</span>);
     <span class="macro">debug!</span>(<span class="string">&quot;Detected input validator: {:?}&quot;</span>, <span class="ident">validator</span>);
-    <span class="prelude-val">Ok</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">st</span>: <span class="ident">SubtaskId</span><span class="op">|</span> -&gt; <span class="ident">InputValidator</span> {
+    <span class="prelude-val">Ok</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">st</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span><span class="op">|</span> -&gt; <span class="ident">InputValidator</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">validator</span>) <span class="op">=</span> <span class="ident">validator</span>.<span class="ident">as_ref</span>() {
             <span class="ident">InputValidator::Custom</span>(
                 <span class="ident">validator</span>.<span class="ident">clone</span>(),
                 <span class="comment">// for legacy support reasons the subtask is passed 1-based</span>
-                <span class="macro">vec!</span>[<span class="ident">TM_VALIDATION_FILE_NAME</span>.<span class="ident">to_string</span>(), (<span class="ident">st</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">to_string</span>()],
+                <span class="macro">vec!</span>[
+                    <span class="ident">TM_VALIDATION_FILE_NAME</span>.<span class="ident">to_string</span>(),
+                    <span class="ident">st</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>).<span class="ident">to_string</span>(),
+                ],
             )
         } <span class="kw">else</span> {
             <span class="ident">InputValidator::AssumeValid</span>
