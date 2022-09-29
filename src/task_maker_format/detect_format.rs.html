@@ -80,12 +80,12 @@
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ioi</span>, <span class="ident">terry</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">TaskFormat</span>};
 
 <span class="doccomment">/// Search for a valid task directory, starting from base and going _at most_ `max_depth` times up.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_task</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-    <span class="ident">base</span>: <span class="ident">P</span>,
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_task</span>(
+    <span class="ident">base</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
     <span class="ident">max_depth</span>: <span class="ident">u32</span>,
     <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TaskFormat</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">into</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">unwrap_or_else</span>(<span class="ident">getcwd</span>);
     <span class="kw">if</span> <span class="op">!</span><span class="ident">base</span>.<span class="ident">is_absolute</span>() {
         <span class="ident">base</span> <span class="op">=</span> <span class="ident">getcwd</span>().<span class="ident">join</span>(<span class="ident">base</span>);
     }

@@ -390,7 +390,7 @@
     <span class="kw">pub</span> <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
 
     <span class="doccomment">/// Arguments to pass to the generator. The value &#39;{}&#39; will be replaced with a random seed.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">multiple_values</span> <span class="op">=</span> <span class="bool-val">true</span>)]</span>
+    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">num_args</span> <span class="op">=</span> <span class="number">0</span>..)]</span>
     <span class="kw">pub</span> <span class="ident">generator_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 }
 
