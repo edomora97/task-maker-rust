@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/sanity_checks.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sanity_checks.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_format/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/sanity_checks.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sanity_checks.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_format/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -106,84 +106,84 @@
 <span id="106">106</span>
 <span id="107">107</span>
 <span id="108">108</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
-<span class="kw">use</span> <span class="ident">std::sync::Mutex</span>;
+</span><span class="kw">use </span>std::sync::Mutex;
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::EvaluationData</span>;
+<span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
 
-<span class="doccomment">/// Trait that describes the behavior of a sanity check.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">std::fmt::Debug</span> {
-    <span class="doccomment">/// The name of the sanity check.</span>
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>;
+<span class="doccomment">/// Trait that describes the behavior of a sanity check.
+</span><span class="kw">pub trait </span>SanityCheck&lt;Task&gt;: Send + Sync + std::fmt::Debug {
+    <span class="doccomment">/// The name of the sanity check.
+    </span><span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str;
 
-    <span class="doccomment">/// This function will be called before the actual execution of the DAG. It can add new</span>
-    <span class="doccomment">/// executions to the DAG.</span>
-    <span class="kw">fn</span> <span class="ident">pre_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_task</span>: <span class="kw-2">&amp;</span><span class="ident">Task</span>, <span class="ident">_eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// This function will be called before the actual execution of the DAG. It can add new
+    /// executions to the DAG.
+    </span><span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span>Task, _eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// This function will be called after the execution of the DAG completes.</span>
-    <span class="kw">fn</span> <span class="ident">post_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_task</span>: <span class="kw-2">&amp;</span><span class="ident">Task</span>, <span class="ident">_eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// This function will be called after the execution of the DAG completes.
+    </span><span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span>Task, _eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="doccomment">/// Internal state of the sanity checks.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SanityChecksState</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The list of enabled sanity checks.</span>
-    <span class="ident">sanity_checks</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Internal state of the sanity checks.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">struct </span>SanityChecksState&lt;Task&gt; {
+    <span class="doccomment">/// The list of enabled sanity checks.
+    </span>sanity_checks: Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;Task&gt;&gt;&gt;,
 }
 
-<span class="doccomment">/// Sanity checks for a IOI task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SanityChecks</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// The internal state of the sanity checks. Mutex to allow interior mutability and Send+Sync</span>
-    <span class="doccomment">/// support.</span>
-    <span class="ident">state</span>: <span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">SanityChecksState</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Sanity checks for a IOI task.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>SanityChecks&lt;Task&gt; {
+    <span class="doccomment">/// The internal state of the sanity checks. Mutex to allow interior mutability and Send+Sync
+    /// support.
+    </span>state: Mutex&lt;SanityChecksState&lt;Task&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> <span class="ident">SanityChecks</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">checks</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="ident">SanityChecks</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-        <span class="ident">SanityChecks</span> {
-            <span class="ident">state</span>: <span class="ident">Mutex::new</span>(<span class="ident">SanityChecksState</span> {
-                <span class="ident">sanity_checks</span>: <span class="ident">checks</span>,
+<span class="kw">impl</span>&lt;Task&gt; SanityChecks&lt;Task&gt; {
+    <span class="kw">pub fn </span>new(checks: Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;Task&gt;&gt;&gt;) -&gt; SanityChecks&lt;Task&gt; {
+        SanityChecks {
+            state: Mutex::new(SanityChecksState {
+                sanity_checks: checks,
             }),
         }
     }
 
-    <span class="doccomment">/// Function called for the first pass of sanity checks of the task. This will check all the</span>
-    <span class="doccomment">/// statically checkable properties of the task and may add some executions for checking dynamic</span>
-    <span class="doccomment">/// properties of the task.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_hook</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Task</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-        <span class="kw">for</span> <span class="ident">check</span> <span class="kw">in</span> <span class="ident">state</span>.<span class="ident">sanity_checks</span>.<span class="ident">iter_mut</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">check</span>.<span class="ident">pre_hook</span>(<span class="ident">task</span>, <span class="ident">eval</span>) {
-                <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">Diagnostic::warning</span>(<span class="macro">format!</span>(
+    <span class="doccomment">/// Function called for the first pass of sanity checks of the task. This will check all the
+    /// statically checkable properties of the task and may add some executions for checking dynamic
+    /// properties of the task.
+    </span><span class="kw">pub fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>Task, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>state = <span class="self">self</span>.state.lock().unwrap();
+        <span class="kw">for </span>check <span class="kw">in </span>state.sanity_checks.iter_mut() {
+            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = check.pre_hook(task, eval) {
+                eval.add_diagnostic(Diagnostic::warning(<span class="macro">format!</span>(
                     <span class="string">&quot;Sanity check {} failed: {}&quot;</span>,
-                    <span class="ident">check</span>.<span class="ident">name</span>(),
-                    <span class="ident">e</span>
+                    check.name(),
+                    e
                 )))<span class="question-mark">?</span>;
             }
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Function called after the evaluation completes. This will check that the produced assets are</span>
-    <span class="doccomment">/// valid and the executions added by the pre_hook produced the correct results.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">post_hook</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">Task</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-        <span class="kw">for</span> <span class="ident">check</span> <span class="kw">in</span> <span class="ident">state</span>.<span class="ident">sanity_checks</span>.<span class="ident">iter_mut</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">check</span>.<span class="ident">post_hook</span>(<span class="ident">task</span>, <span class="ident">eval</span>) {
-                <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">Diagnostic::warning</span>(<span class="macro">format!</span>(
+    <span class="doccomment">/// Function called after the evaluation completes. This will check that the produced assets are
+    /// valid and the executions added by the pre_hook produced the correct results.
+    </span><span class="kw">pub fn </span>post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>Task, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>state = <span class="self">self</span>.state.lock().unwrap();
+        <span class="kw">for </span>check <span class="kw">in </span>state.sanity_checks.iter_mut() {
+            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = check.post_hook(task, eval) {
+                eval.add_diagnostic(Diagnostic::warning(<span class="macro">format!</span>(
                     <span class="string">&quot;Sanity check {} failed: {}&quot;</span>,
-                    <span class="ident">check</span>.<span class="ident">name</span>(),
-                    <span class="ident">e</span>
+                    check.name(),
+                    e
                 )))<span class="question-mark">?</span>;
             }
         }
@@ -191,28 +191,28 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SanityChecks</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="ident">SanityChecks</span><span class="op">&lt;</span><span class="ident">Task</span><span class="op">&gt;</span> {
-        <span class="ident">SanityChecks</span> {
-            <span class="ident">state</span>: <span class="ident">Mutex::new</span>(<span class="ident">SanityChecksState</span> {
-                <span class="ident">sanity_checks</span>: <span class="macro">vec!</span>[],
+<span class="kw">impl</span>&lt;Task&gt; Default <span class="kw">for </span>SanityChecks&lt;Task&gt; {
+    <span class="kw">fn </span>default() -&gt; SanityChecks&lt;Task&gt; {
+        SanityChecks {
+            state: Mutex::new(SanityChecksState {
+                sanity_checks: <span class="macro">vec!</span>[],
             }),
         }
     }
 }
 
-<span class="doccomment">/// Return a list of all the sanity check names.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_sanity_check_list</span>() -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="ident"><span class="kw">crate</span>::ioi::sanity_checks::get_sanity_check_names</span>()
-        .<span class="ident">iter</span>()
-        .<span class="ident">chain</span>(<span class="ident"><span class="kw">crate</span>::terry::sanity_checks::get_sanity_check_names</span>().<span class="ident">iter</span>())
-        .<span class="ident">map</span>(<span class="ident">ToString::to_string</span>)
-        .<span class="ident">collect</span>()
+<span class="doccomment">/// Return a list of all the sanity check names.
+</span><span class="kw">pub fn </span>get_sanity_check_list() -&gt; Vec&lt;String&gt; {
+    <span class="kw">crate</span>::ioi::sanity_checks::get_sanity_check_names()
+        .iter()
+        .chain(<span class="kw">crate</span>::terry::sanity_checks::get_sanity_check_names().iter())
+        .map(ToString::to_string)
+        .collect()
 }
 
-<span class="doccomment">/// Return a comma separated list of the names of all the sanity checks.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_sanity_check_names</span>() -&gt; <span class="ident">String</span> {
-    <span class="ident">get_sanity_check_list</span>().<span class="ident">into_iter</span>().<span class="ident">join</span>(<span class="string">&quot;, &quot;</span>)
+<span class="doccomment">/// Return a comma separated list of the names of all the sanity checks.
+</span><span class="kw">pub fn </span>get_sanity_check_names() -&gt; String {
+    get_sanity_check_list().into_iter().join(<span class="string">&quot;, &quot;</span>)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

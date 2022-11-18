@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/context.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>context.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_rust/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/context.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>context.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_rust/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -309,316 +309,316 @@
 <span id="309">309</span>
 <span id="310">310</span>
 <span id="311">311</span>
-</pre><pre class="rust"><code><span class="doccomment">//! This mod exposes an interface for setting up and running an execution.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The structs here follow a multi-step builder pattern, moving from a struct to the next adding</span>
-<span class="doccomment">//! more and more context.</span>
-<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
-<span class="kw">use</span> <span class="ident">std::thread::JoinHandle</span>;
+</pre><pre class="rust"><code><span class="doccomment">//! This mod exposes an interface for setting up and running an execution.
+//!
+//! The structs here follow a multi-step builder pattern, moving from a struct to the next adding
+//! more and more context.
+</span><span class="kw">use </span>std::sync::{Arc, Mutex};
+<span class="kw">use </span>std::thread::JoinHandle;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
 
-<span class="kw">use</span> <span class="ident">task_maker_cache::Cache</span>;
-<span class="kw">use</span> <span class="ident">task_maker_dag::CacheMode</span>;
-<span class="kw">use</span> <span class="ident">task_maker_exec::ductile</span>::{<span class="ident">new_local_channel</span>, <span class="ident">ChannelReceiver</span>, <span class="ident">ChannelSender</span>};
-<span class="kw">use</span> <span class="ident">task_maker_exec::executors</span>::{<span class="ident">LocalExecutor</span>, <span class="ident">RemoteEntityMessage</span>, <span class="ident">RemoteEntityMessageResponse</span>};
-<span class="kw">use</span> <span class="ident">task_maker_exec::proto</span>::{<span class="ident">ExecutorClientMessage</span>, <span class="ident">ExecutorServerMessage</span>};
-<span class="kw">use</span> <span class="ident">task_maker_exec::ExecutorClient</span>;
-<span class="kw">use</span> <span class="ident">task_maker_format::ui</span>::{<span class="ident">UIChannelReceiver</span>, <span class="ident">UIMessage</span>, <span class="ident">UIType</span>, <span class="ident">UI</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">EvaluationData</span>, <span class="ident">TaskFormat</span>, <span class="ident">UISender</span>, <span class="ident">VALID_TAGS</span>};
-<span class="kw">use</span> <span class="ident">task_maker_store::FileStore</span>;
+<span class="kw">use </span>task_maker_cache::Cache;
+<span class="kw">use </span>task_maker_dag::CacheMode;
+<span class="kw">use </span>task_maker_exec::ductile::{new_local_channel, ChannelReceiver, ChannelSender};
+<span class="kw">use </span>task_maker_exec::executors::{LocalExecutor, RemoteEntityMessage, RemoteEntityMessageResponse};
+<span class="kw">use </span>task_maker_exec::proto::{ExecutorClientMessage, ExecutorServerMessage};
+<span class="kw">use </span>task_maker_exec::ExecutorClient;
+<span class="kw">use </span>task_maker_format::ui::{UIChannelReceiver, UIMessage, UIType, UI};
+<span class="kw">use </span>task_maker_format::{EvaluationData, TaskFormat, UISender, VALID_TAGS};
+<span class="kw">use </span>task_maker_store::FileStore;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::remote::connect_to_remote_server</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">render_dag</span>, <span class="ident">ExecutionOpt</span>, <span class="ident">StorageOpt</span>, <span class="ident">ToolsSandboxRunner</span>};
+<span class="kw">use </span><span class="kw">crate</span>::remote::connect_to_remote_server;
+<span class="kw">use crate</span>::{render_dag, ExecutionOpt, StorageOpt, ToolsSandboxRunner};
 
-<span class="doccomment">/// Version of task-maker.</span>
-<span class="kw">const</span> <span class="ident">VERSION</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
+<span class="doccomment">/// Version of task-maker.
+</span><span class="kw">const </span>VERSION: <span class="kw-2">&amp;</span>str = <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
 
-<span class="doccomment">/// First step of the execution: take a task and build the Execution DAG. This needs setting the</span>
-<span class="doccomment">/// first configurations of the environment.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuntimeContext</span> {
-    <span class="kw">pub</span> <span class="ident">task</span>: <span class="ident">TaskFormat</span>,
-    <span class="kw">pub</span> <span class="ident">eval</span>: <span class="ident">EvaluationData</span>,
-    <span class="kw">pub</span> <span class="ident">ui_receiver</span>: <span class="ident">UIChannelReceiver</span>,
-    <span class="kw">pub</span> <span class="ident">sandbox_runner</span>: <span class="ident">ToolsSandboxRunner</span>,
+<span class="doccomment">/// First step of the execution: take a task and build the Execution DAG. This needs setting the
+/// first configurations of the environment.
+</span><span class="kw">pub struct </span>RuntimeContext {
+    <span class="kw">pub </span>task: TaskFormat,
+    <span class="kw">pub </span>eval: EvaluationData,
+    <span class="kw">pub </span>ui_receiver: UIChannelReceiver,
+    <span class="kw">pub </span>sandbox_runner: ToolsSandboxRunner,
 }
 
-<span class="doccomment">/// Second step: connect to an executor (either local or remote). This opens the local store and</span>
-<span class="doccomment">/// setups the local executor if necessary.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ConnectedExecutor</span> {
-    <span class="comment">// fields from RuntimeContext</span>
-    <span class="kw">pub</span> <span class="ident">task</span>: <span class="ident">TaskFormat</span>,
-    <span class="kw">pub</span> <span class="ident">eval</span>: <span class="ident">EvaluationData</span>,
-    <span class="kw">pub</span> <span class="ident">ui_receiver</span>: <span class="ident">UIChannelReceiver</span>,
+<span class="doccomment">/// Second step: connect to an executor (either local or remote). This opens the local store and
+/// setups the local executor if necessary.
+</span><span class="kw">pub struct </span>ConnectedExecutor {
+    <span class="comment">// fields from RuntimeContext
+    </span><span class="kw">pub </span>task: TaskFormat,
+    <span class="kw">pub </span>eval: EvaluationData,
+    <span class="kw">pub </span>ui_receiver: UIChannelReceiver,
 
-    <span class="comment">// new fields</span>
-    <span class="kw">pub</span> <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">tx</span>: <span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">rx</span>: <span class="ident">ChannelReceiver</span><span class="op">&lt;</span><span class="ident">ExecutorServerMessage</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">local_executor</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">JoinHandle</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="comment">// new fields
+    </span><span class="kw">pub </span>file_store: Arc&lt;FileStore&gt;,
+    <span class="kw">pub </span>tx: ChannelSender&lt;ExecutorClientMessage&gt;,
+    <span class="kw">pub </span>rx: ChannelReceiver&lt;ExecutorServerMessage&gt;,
+    <span class="kw">pub </span>local_executor: <span class="prelude-ty">Option</span>&lt;JoinHandle&lt;<span class="prelude-ty">Result</span>&lt;(), Error&gt;&gt;&gt;,
 }
 
-<span class="doccomment">/// Third step: start the UI thread.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ConnectedExecutorWithUI</span> {
-    <span class="comment">// fields from ConnectedExecutor</span>
-    <span class="kw">pub</span> <span class="ident">task</span>: <span class="ident">TaskFormat</span>,
-    <span class="kw">pub</span> <span class="ident">eval</span>: <span class="ident">EvaluationData</span>,
-    <span class="kw">pub</span> <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">tx</span>: <span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">rx</span>: <span class="ident">ChannelReceiver</span><span class="op">&lt;</span><span class="ident">ExecutorServerMessage</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">local_executor</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">JoinHandle</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Third step: start the UI thread.
+</span><span class="kw">pub struct </span>ConnectedExecutorWithUI {
+    <span class="comment">// fields from ConnectedExecutor
+    </span><span class="kw">pub </span>task: TaskFormat,
+    <span class="kw">pub </span>eval: EvaluationData,
+    <span class="kw">pub </span>file_store: Arc&lt;FileStore&gt;,
+    <span class="kw">pub </span>tx: ChannelSender&lt;ExecutorClientMessage&gt;,
+    <span class="kw">pub </span>rx: ChannelReceiver&lt;ExecutorServerMessage&gt;,
+    <span class="kw">pub </span>local_executor: <span class="prelude-ty">Option</span>&lt;JoinHandle&lt;<span class="prelude-ty">Result</span>&lt;(), Error&gt;&gt;&gt;,
 
-    <span class="comment">// new fields</span>
-    <span class="kw">pub</span> <span class="ident">ui_thread</span>: <span class="ident">JoinHandle</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">client_sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="comment">// new fields
+    </span><span class="kw">pub </span>ui_thread: JoinHandle&lt;()&gt;,
+    <span class="kw">pub </span>client_sender: Arc&lt;Mutex&lt;<span class="prelude-ty">Option</span>&lt;ChannelSender&lt;ExecutorClientMessage&gt;&gt;&gt;&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">RuntimeContext</span> {
-    <span class="doccomment">/// Create a [`RuntimeContext`] for the given task. In the provided closure you should build the</span>
-    <span class="doccomment">/// execution DAG for the execution. The closure is given a reference to the given task and a</span>
-    <span class="doccomment">/// reference to the evaluation data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">BuildDag</span><span class="op">&gt;</span>(
-        <span class="ident">task</span>: <span class="ident">TaskFormat</span>,
-        <span class="ident">opt</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionOpt</span>,
-        <span class="ident">build_dag</span>: <span class="ident">BuildDag</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">BuildDag</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="ident">TaskFormat</span>, <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>,
+<span class="kw">impl </span>RuntimeContext {
+    <span class="doccomment">/// Create a [`RuntimeContext`] for the given task. In the provided closure you should build the
+    /// execution DAG for the execution. The closure is given a reference to the given task and a
+    /// reference to the evaluation data.
+    </span><span class="kw">pub fn </span>new&lt;BuildDag&gt;(
+        task: TaskFormat,
+        opt: <span class="kw-2">&amp;</span>ExecutionOpt,
+        build_dag: BuildDag,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt;
+    <span class="kw">where
+        </span>BuildDag: FnOnce(<span class="kw-2">&amp;</span>TaskFormat, <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;,
     {
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">eval</span>, <span class="ident">ui_receiver</span>) <span class="op">=</span> <span class="ident">EvaluationData::new</span>(<span class="ident">task</span>.<span class="ident">path</span>());
+        <span class="kw">let </span>(<span class="kw-2">mut </span>eval, ui_receiver) = EvaluationData::new(task.path());
 
-        <span class="comment">// extract the configuration from the command line arguments</span>
-        <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">config_mut</span>();
-        <span class="ident">config</span>
-            .<span class="ident">keep_sandboxes</span>(<span class="ident">opt</span>.<span class="ident">keep_sandboxes</span>)
-            .<span class="ident">dry_run</span>(<span class="ident">opt</span>.<span class="ident">dry_run</span>)
-            .<span class="ident">cache_mode</span>(
-                <span class="ident">CacheMode::try_from</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">no_cache</span>, <span class="kw-2">&amp;</span><span class="ident">VALID_TAGS</span>).<span class="ident">context</span>(<span class="string">&quot;Invalid cache mode&quot;</span>)<span class="question-mark">?</span>,
+        <span class="comment">// extract the configuration from the command line arguments
+        </span><span class="kw">let </span>config = eval.dag.config_mut();
+        config
+            .keep_sandboxes(opt.keep_sandboxes)
+            .dry_run(opt.dry_run)
+            .cache_mode(
+                CacheMode::try_from(<span class="kw-2">&amp;</span>opt.no_cache, <span class="kw-2">&amp;</span>VALID_TAGS).context(<span class="string">&quot;Invalid cache mode&quot;</span>)<span class="question-mark">?</span>,
             )
-            .<span class="ident">copy_exe</span>(<span class="ident">opt</span>.<span class="ident">copy_exe</span>)
-            .<span class="ident">copy_logs</span>(<span class="ident">opt</span>.<span class="ident">copy_logs</span>)
-            .<span class="ident">priority</span>(<span class="ident">opt</span>.<span class="ident">priority</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">extra_time</span>) <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">extra_time</span> {
-            <span class="kw">if</span> <span class="ident">extra_time</span> <span class="op">&lt;</span> <span class="number">0.0</span> {
-                <span class="macro">bail!</span>(<span class="string">&quot;The extra time ({}) cannot be negative!&quot;</span>, <span class="ident">extra_time</span>);
+            .copy_exe(opt.copy_exe)
+            .copy_logs(opt.copy_logs)
+            .priority(opt.priority);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(extra_time) = opt.extra_time {
+            <span class="kw">if </span>extra_time &lt; <span class="number">0.0 </span>{
+                <span class="macro">bail!</span>(<span class="string">&quot;The extra time ({}) cannot be negative!&quot;</span>, extra_time);
             }
-            <span class="ident">config</span>.<span class="ident">extra_time</span>(<span class="ident">extra_time</span>);
+            config.extra_time(extra_time);
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">extra_memory</span>) <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">extra_memory</span> {
-            <span class="ident">config</span>.<span class="ident">extra_memory</span>(<span class="ident">extra_memory</span>);
-        }
-
-        <span class="comment">// build the execution dag</span>
-        <span class="ident">build_dag</span>(<span class="kw-2">&amp;</span><span class="ident">task</span>, <span class="kw-2">&amp;mut</span> <span class="ident">eval</span>)<span class="question-mark">?</span>;
-
-        <span class="macro">trace!</span>(<span class="string">&quot;The DAG is: {:#?}&quot;</span>, <span class="ident">eval</span>.<span class="ident">dag</span>);
-        <span class="kw">if</span> <span class="ident">opt</span>.<span class="ident">copy_dag</span> {
-            <span class="kw">let</span> <span class="ident">dot</span> <span class="op">=</span> <span class="ident">render_dag</span>(<span class="kw-2">&amp;</span><span class="ident">eval</span>.<span class="ident">dag</span>);
-            <span class="kw">let</span> <span class="ident">bin</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bin&quot;</span>);
-            <span class="ident">std::fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">bin</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to create bin/ directory&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">std::fs::write</span>(<span class="ident">bin</span>.<span class="ident">join</span>(<span class="string">&quot;DAG.dot&quot;</span>), <span class="kw-2">&amp;</span><span class="ident">dot</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to write bin/DAG.dot&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(extra_memory) = opt.extra_memory {
+            config.extra_memory(extra_memory);
         }
 
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
-            <span class="ident">task</span>,
-            <span class="ident">eval</span>,
-            <span class="ident">ui_receiver</span>,
-            <span class="ident">sandbox_runner</span>: <span class="ident">ToolsSandboxRunner::default</span>(),
+        <span class="comment">// build the execution dag
+        </span>build_dag(<span class="kw-2">&amp;</span>task, <span class="kw-2">&amp;mut </span>eval)<span class="question-mark">?</span>;
+
+        <span class="macro">trace!</span>(<span class="string">&quot;The DAG is: {:#?}&quot;</span>, eval.dag);
+        <span class="kw">if </span>opt.copy_dag {
+            <span class="kw">let </span>dot = render_dag(<span class="kw-2">&amp;</span>eval.dag);
+            <span class="kw">let </span>bin = task.path().join(<span class="string">&quot;bin&quot;</span>);
+            std::fs::create_dir_all(<span class="kw-2">&amp;</span>bin).context(<span class="string">&quot;Failed to create bin/ directory&quot;</span>)<span class="question-mark">?</span>;
+            std::fs::write(bin.join(<span class="string">&quot;DAG.dot&quot;</span>), <span class="kw-2">&amp;</span>dot).context(<span class="string">&quot;Failed to write bin/DAG.dot&quot;</span>)<span class="question-mark">?</span>;
+        }
+
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            task,
+            eval,
+            ui_receiver,
+            sandbox_runner: ToolsSandboxRunner::default(),
         })
     }
 
-    <span class="doccomment">/// Change the default sandbox runner for the local executor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sandbox_runner</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">sandbox_runner</span>: <span class="ident">ToolsSandboxRunner</span>) {
-        <span class="self">self</span>.<span class="ident">sandbox_runner</span> <span class="op">=</span> <span class="ident">sandbox_runner</span>;
+    <span class="doccomment">/// Change the default sandbox runner for the local executor.
+    </span><span class="kw">pub fn </span>sandbox_runner(<span class="kw-2">&amp;mut </span><span class="self">self</span>, sandbox_runner: ToolsSandboxRunner) {
+        <span class="self">self</span>.sandbox_runner = sandbox_runner;
     }
 
-    <span class="doccomment">/// Start the local executor or connect to a remote one.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect_executor</span>(
+    <span class="doccomment">/// Start the local executor or connect to a remote one.
+    </span><span class="kw">pub fn </span>connect_executor(
         <span class="self">self</span>,
-        <span class="ident">opt</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionOpt</span>,
-        <span class="ident">storage_opt</span>: <span class="kw-2">&amp;</span><span class="ident">StorageOpt</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ConnectedExecutor</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="comment">// setup the file store</span>
-        <span class="kw">let</span> <span class="ident">store_path</span> <span class="op">=</span> <span class="ident">storage_opt</span>.<span class="ident">store_dir</span>();
-        <span class="kw">let</span> <span class="ident">file_store</span> <span class="op">=</span> <span class="ident">Arc::new</span>(
-            <span class="ident">FileStore::new</span>(
-                <span class="ident">store_path</span>.<span class="ident">join</span>(<span class="string">&quot;store&quot;</span>),
-                <span class="ident">storage_opt</span>.<span class="ident">max_cache</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>,
-                <span class="ident">storage_opt</span>.<span class="ident">min_cache</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>,
+        opt: <span class="kw-2">&amp;</span>ExecutionOpt,
+        storage_opt: <span class="kw-2">&amp;</span>StorageOpt,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;ConnectedExecutor, Error&gt; {
+        <span class="comment">// setup the file store
+        </span><span class="kw">let </span>store_path = storage_opt.store_dir();
+        <span class="kw">let </span>file_store = Arc::new(
+            FileStore::new(
+                store_path.join(<span class="string">&quot;store&quot;</span>),
+                storage_opt.max_cache * <span class="number">1024 </span>* <span class="number">1024</span>,
+                storage_opt.min_cache * <span class="number">1024 </span>* <span class="number">1024</span>,
             )
-            .<span class="ident">context</span>(
+            .context(
                 <span class="string">&quot;Cannot create the file store (You can try wiping it with task-maker-tools reset)&quot;</span>,
             )<span class="question-mark">?</span>,
         );
 
-        <span class="comment">// connect either to the remote executor or spawn a local one</span>
-        <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>, <span class="ident">local_executor</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">evaluate_on</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">evaluate_on</span> {
-            <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">connect_to_remote_server</span>(<span class="kw-2">&amp;</span><span class="ident">evaluate_on</span>, <span class="number">27182</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Cannot connect to the remote server&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">opt</span>
-                .<span class="ident">name</span>
-                .<span class="ident">clone</span>()
-                .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{}@{}&quot;</span>, <span class="ident">whoami::username</span>(), <span class="ident">whoami::hostname</span>()));
-            <span class="ident">tx</span>.<span class="ident">send</span>(<span class="ident">RemoteEntityMessage::Welcome</span> {
-                <span class="ident">name</span>,
-                <span class="ident">version</span>: <span class="ident">VERSION</span>.<span class="ident">into</span>(),
+        <span class="comment">// connect either to the remote executor or spawn a local one
+        </span><span class="kw">let </span>(tx, rx, local_executor) = <span class="kw">if let </span><span class="prelude-val">Some</span>(evaluate_on) = <span class="kw-2">&amp;</span>opt.evaluate_on {
+            <span class="kw">let </span>(tx, rx) = connect_to_remote_server(<span class="kw-2">&amp;</span>evaluate_on, <span class="number">27182</span>)
+                .context(<span class="string">&quot;Cannot connect to the remote server&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>name = opt
+                .name
+                .clone()
+                .unwrap_or_else(|| <span class="macro">format!</span>(<span class="string">&quot;{}@{}&quot;</span>, whoami::username(), whoami::hostname()));
+            tx.send(RemoteEntityMessage::Welcome {
+                name,
+                version: VERSION.into(),
             })
-            .<span class="ident">context</span>(<span class="string">&quot;Cannot send welcome to the server&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">RemoteEntityMessageResponse::Rejected</span>(<span class="ident">err</span>) <span class="op">=</span>
-                <span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">context</span>(<span class="string">&quot;Failed to receive welcome response&quot;</span>)<span class="question-mark">?</span>
-            {
-                <span class="macro">bail!</span>(<span class="string">&quot;The server rejected the client connection: {}&quot;</span>, <span class="ident">err</span>);
+            .context(<span class="string">&quot;Cannot send welcome to the server&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">if let </span>RemoteEntityMessageResponse::Rejected(err) =
+                rx.recv().context(<span class="string">&quot;Failed to receive welcome response&quot;</span>)<span class="question-mark">?
+            </span>{
+                <span class="macro">bail!</span>(<span class="string">&quot;The server rejected the client connection: {}&quot;</span>, err);
             }
-            (<span class="ident">tx</span>.<span class="ident">change_type</span>(), <span class="ident">rx</span>.<span class="ident">change_type</span>(), <span class="prelude-val">None</span>)
-        } <span class="kw">else</span> {
-            <span class="comment">// start the server and the client</span>
-            <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx_remote</span>) <span class="op">=</span> <span class="ident">new_local_channel</span>();
-            <span class="kw">let</span> (<span class="ident">tx_remote</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">new_local_channel</span>();
+            (tx.change_type(), rx.change_type(), <span class="prelude-val">None</span>)
+        } <span class="kw">else </span>{
+            <span class="comment">// start the server and the client
+            </span><span class="kw">let </span>(tx, rx_remote) = new_local_channel();
+            <span class="kw">let </span>(tx_remote, rx) = new_local_channel();
 
-            <span class="comment">// setup the local cache</span>
-            <span class="kw">let</span> <span class="ident">cache_path</span> <span class="op">=</span> <span class="ident">store_path</span>.<span class="ident">join</span>(<span class="string">&quot;cache&quot;</span>);
-            <span class="kw">let</span> <span class="ident">cache</span> <span class="op">=</span> <span class="ident">Cache::new</span>(<span class="ident">cache_path</span>).<span class="ident">context</span>(<span class="string">&quot;Cannot create the cache&quot;</span>)<span class="question-mark">?</span>;
+            <span class="comment">// setup the local cache
+            </span><span class="kw">let </span>cache_path = store_path.join(<span class="string">&quot;cache&quot;</span>);
+            <span class="kw">let </span>cache = Cache::new(cache_path).context(<span class="string">&quot;Cannot create the cache&quot;</span>)<span class="question-mark">?</span>;
 
-            <span class="comment">// setup the local executor</span>
-            <span class="kw">let</span> <span class="ident">num_cores</span> <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">num_cores</span>.<span class="ident">unwrap_or_else</span>(<span class="ident">num_cpus::get</span>);
-            <span class="kw">let</span> <span class="ident">sandbox_path</span> <span class="op">=</span> <span class="ident">storage_opt</span>.<span class="ident">store_dir</span>().<span class="ident">join</span>(<span class="string">&quot;sandboxes&quot;</span>);
-            <span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">LocalExecutor::new</span>(<span class="ident">file_store</span>.<span class="ident">clone</span>(), <span class="ident">num_cores</span>, <span class="ident">sandbox_path</span>);
-            <span class="kw">let</span> <span class="ident">sandbox_runner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sandbox_runner</span>;
-            <span class="kw">let</span> <span class="ident">local_executor</span> <span class="op">=</span> <span class="ident">std::thread::Builder::new</span>()
-                .<span class="ident">name</span>(<span class="string">&quot;Executor thread&quot;</span>.<span class="ident">into</span>())
-                .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> <span class="ident">executor</span>.<span class="ident">evaluate</span>(<span class="ident">tx_remote</span>, <span class="ident">rx_remote</span>, <span class="ident">cache</span>, <span class="ident">sandbox_runner</span>))
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to spawn the executor thread&quot;</span>)<span class="question-mark">?</span>;
-            (<span class="ident">tx</span>, <span class="ident">rx</span>, <span class="prelude-val">Some</span>(<span class="ident">local_executor</span>))
+            <span class="comment">// setup the local executor
+            </span><span class="kw">let </span>num_cores = opt.num_cores.unwrap_or_else(num_cpus::get);
+            <span class="kw">let </span>sandbox_path = storage_opt.store_dir().join(<span class="string">&quot;sandboxes&quot;</span>);
+            <span class="kw">let </span>executor = LocalExecutor::new(file_store.clone(), num_cores, sandbox_path);
+            <span class="kw">let </span>sandbox_runner = <span class="self">self</span>.sandbox_runner;
+            <span class="kw">let </span>local_executor = std::thread::Builder::new()
+                .name(<span class="string">&quot;Executor thread&quot;</span>.into())
+                .spawn(<span class="kw">move </span>|| executor.evaluate(tx_remote, rx_remote, cache, sandbox_runner))
+                .context(<span class="string">&quot;Failed to spawn the executor thread&quot;</span>)<span class="question-mark">?</span>;
+            (tx, rx, <span class="prelude-val">Some</span>(local_executor))
         };
 
-        <span class="prelude-val">Ok</span>(<span class="ident">ConnectedExecutor</span> {
-            <span class="ident">task</span>: <span class="self">self</span>.<span class="ident">task</span>,
-            <span class="ident">eval</span>: <span class="self">self</span>.<span class="ident">eval</span>,
-            <span class="ident">ui_receiver</span>: <span class="self">self</span>.<span class="ident">ui_receiver</span>,
+        <span class="prelude-val">Ok</span>(ConnectedExecutor {
+            task: <span class="self">self</span>.task,
+            eval: <span class="self">self</span>.eval,
+            ui_receiver: <span class="self">self</span>.ui_receiver,
 
-            <span class="ident">file_store</span>,
-            <span class="ident">tx</span>,
-            <span class="ident">rx</span>,
-            <span class="ident">local_executor</span>,
+            file_store,
+            tx,
+            rx,
+            local_executor,
         })
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ConnectedExecutor</span> {
-    <span class="doccomment">/// Now that we are connected to an executor, we can start the UI thread in background. This</span>
-    <span class="doccomment">/// thread will run until the execution is completed or until it is stopped.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The callback takes 2 parameters, a reference to the current UI and the message produced.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_ui</span><span class="op">&lt;</span><span class="ident">OnMessage</span><span class="op">&gt;</span>(
-        <span class="kw-2">mut</span> <span class="self">self</span>,
-        <span class="ident">ui_type</span>: <span class="kw-2">&amp;</span><span class="ident">UIType</span>,
-        <span class="kw-2">mut</span> <span class="ident">on_message</span>: <span class="ident">OnMessage</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ConnectedExecutorWithUI</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">OnMessage</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="kw">dyn</span> <span class="ident">UI</span>, <span class="ident">UIMessage</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="kw">impl </span>ConnectedExecutor {
+    <span class="doccomment">/// Now that we are connected to an executor, we can start the UI thread in background. This
+    /// thread will run until the execution is completed or until it is stopped.
+    ///
+    /// The callback takes 2 parameters, a reference to the current UI and the message produced.
+    </span><span class="kw">pub fn </span>start_ui&lt;OnMessage&gt;(
+        <span class="kw-2">mut </span><span class="self">self</span>,
+        ui_type: <span class="kw-2">&amp;</span>UIType,
+        <span class="kw-2">mut </span>on_message: OnMessage,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;ConnectedExecutorWithUI, Error&gt;
+    <span class="kw">where
+        </span>OnMessage: FnMut(<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>UI, UIMessage) + Send + <span class="lifetime">&#39;static</span>,
     {
-        <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">config_mut</span>().<span class="ident">clone</span>();
-        <span class="comment">// setup the UI thread</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ui</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">task</span>
-            .<span class="ident">ui</span>(<span class="ident">ui_type</span>, <span class="ident">config</span>)
-            .<span class="ident">context</span>(<span class="string">&quot;This UI is not supported on this task type&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">ui_receiver</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ui_receiver</span>;
-        <span class="kw">let</span> <span class="ident">ui_thread</span> <span class="op">=</span> <span class="ident">std::thread::Builder::new</span>()
-            .<span class="ident">name</span>(<span class="string">&quot;UI&quot;</span>.<span class="ident">to_owned</span>())
-            .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="ident">ui_receiver</span>.<span class="ident">recv</span>() {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">UIMessage::StopUI</span> <span class="op">=</span> <span class="ident">message</span> {
+        <span class="kw">let </span>config = <span class="self">self</span>.eval.dag.config_mut().clone();
+        <span class="comment">// setup the UI thread
+        </span><span class="kw">let </span><span class="kw-2">mut </span>ui = <span class="self">self
+            </span>.task
+            .ui(ui_type, config)
+            .context(<span class="string">&quot;This UI is not supported on this task type&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>ui_receiver = <span class="self">self</span>.ui_receiver;
+        <span class="kw">let </span>ui_thread = std::thread::Builder::new()
+            .name(<span class="string">&quot;UI&quot;</span>.to_owned())
+            .spawn(<span class="kw">move </span>|| {
+                <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = ui_receiver.recv() {
+                    <span class="kw">if let </span>UIMessage::StopUI = message {
                         <span class="kw">break</span>;
                     }
-                    <span class="ident">on_message</span>(<span class="ident">ui</span>.<span class="ident">as_mut</span>(), <span class="ident">message</span>);
+                    on_message(ui.as_mut(), message);
                 }
-                <span class="ident">ui</span>.<span class="ident">finish</span>();
+                ui.finish();
             })
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to spawn UI thread&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">&quot;Failed to spawn UI thread&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="comment">// a shared sender for the ctrl-c handler, it has to be wrapped in Arc-Mutex-Option to be freed</span>
-        <span class="comment">// at the end of the computation to allow the client to exit.</span>
-        <span class="kw">let</span> <span class="ident">client_sender</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">tx</span>.<span class="ident">clone</span>())));
-        <span class="comment">// `ctrlc` crate doesn&#39;t allow multiple calls of set_handler, and the tests may call this</span>
-        <span class="comment">// function multiple times, so in the tests ^C handler is disabled.</span>
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">test</span>))]</span>
-        {
-            <span class="kw">let</span> <span class="ident">client_sender</span> <span class="op">=</span> <span class="ident">client_sender</span>.<span class="ident">clone</span>();
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">ctrlc::set_handler</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">client_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sender</span>) <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">as_ref</span>() {
-                    <span class="kw">if</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Stop</span>).<span class="ident">is_err</span>() {
+        <span class="comment">// a shared sender for the ctrl-c handler, it has to be wrapped in Arc-Mutex-Option to be freed
+        // at the end of the computation to allow the client to exit.
+        </span><span class="kw">let </span>client_sender = Arc::new(Mutex::new(<span class="prelude-val">Some</span>(<span class="self">self</span>.tx.clone())));
+        <span class="comment">// `ctrlc` crate doesn&#39;t allow multiple calls of set_handler, and the tests may call this
+        // function multiple times, so in the tests ^C handler is disabled.
+        </span><span class="attribute">#[cfg(not(test))]
+        </span>{
+            <span class="kw">let </span>client_sender = client_sender.clone();
+            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = ctrlc::set_handler(<span class="kw">move </span>|| {
+                <span class="kw">let </span>sender = client_sender.lock().unwrap();
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = sender.as_ref() {
+                    <span class="kw">if </span>sender.send(ExecutorClientMessage::Stop).is_err() {
                         <span class="macro">error!</span>(<span class="string">&quot;Cannot tell the server to stop&quot;</span>);
                     }
                 }
             }) {
-                <span class="macro">warn!</span>(<span class="string">&quot;Cannot bind control-C handler: {:?}&quot;</span>, <span class="ident">e</span>);
+                <span class="macro">warn!</span>(<span class="string">&quot;Cannot bind control-C handler: {:?}&quot;</span>, e);
             }
         }
 
-        <span class="prelude-val">Ok</span>(<span class="ident">ConnectedExecutorWithUI</span> {
-            <span class="ident">task</span>: <span class="self">self</span>.<span class="ident">task</span>,
-            <span class="ident">eval</span>: <span class="self">self</span>.<span class="ident">eval</span>,
-            <span class="ident">file_store</span>: <span class="self">self</span>.<span class="ident">file_store</span>,
-            <span class="ident">tx</span>: <span class="self">self</span>.<span class="ident">tx</span>,
-            <span class="ident">rx</span>: <span class="self">self</span>.<span class="ident">rx</span>,
-            <span class="ident">local_executor</span>: <span class="self">self</span>.<span class="ident">local_executor</span>,
+        <span class="prelude-val">Ok</span>(ConnectedExecutorWithUI {
+            task: <span class="self">self</span>.task,
+            eval: <span class="self">self</span>.eval,
+            file_store: <span class="self">self</span>.file_store,
+            tx: <span class="self">self</span>.tx,
+            rx: <span class="self">self</span>.rx,
+            local_executor: <span class="self">self</span>.local_executor,
 
-            <span class="ident">ui_thread</span>,
-            <span class="ident">client_sender</span>,
+            ui_thread,
+            client_sender,
         })
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ConnectedExecutorWithUI</span> {
-    <span class="doccomment">/// Finally, start the execution and wait until it ends or it is stopped.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">ui_sender</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-        <span class="comment">// Create a copy of the DAG, keeping the cloned object inside the EvaluationData, while the</span>
-        <span class="comment">// original is stored in `dag`. This because after cloning a ExecutionDAG the copies don&#39;t</span>
-        <span class="comment">// have access to the callbacks.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">clone</span>();
-        <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">dag</span>, <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">eval</span>.<span class="ident">dag</span>);
+<span class="kw">impl </span>ConnectedExecutorWithUI {
+    <span class="doccomment">/// Finally, start the execution and wait until it ends or it is stopped.
+    </span><span class="kw">pub fn </span>execute(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>ui_sender = <span class="self">self</span>.eval.sender.clone();
+        <span class="comment">// Create a copy of the DAG, keeping the cloned object inside the EvaluationData, while the
+        // original is stored in `dag`. This because after cloning a ExecutionDAG the copies don&#39;t
+        // have access to the callbacks.
+        </span><span class="kw">let </span><span class="kw-2">mut </span>dag = <span class="self">self</span>.eval.dag.clone();
+        std::mem::swap(<span class="kw-2">&amp;mut </span>dag, <span class="kw-2">&amp;mut </span><span class="self">self</span>.eval.dag);
 
-        <span class="kw">let</span> <span class="ident">local_executor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">local_executor</span>;
-        <span class="kw">let</span> <span class="ident">ui_thread</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ui_thread</span>;
-        <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-        <span class="macro">defer!</span> {
-            <span class="comment">// wait for the executor and the ui to exit</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">local_executor</span>) <span class="op">=</span> <span class="ident">local_executor</span> {
-                <span class="ident">local_executor</span>
-                    .<span class="ident">join</span>()
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Executor panicked: {:?}&quot;</span>, <span class="ident">e</span>))
-                    .<span class="ident">unwrap</span>()
-                    .<span class="ident">expect</span>(<span class="string">&quot;Local executor failed&quot;</span>);
+        <span class="kw">let </span>local_executor = <span class="self">self</span>.local_executor;
+        <span class="kw">let </span>ui_thread = <span class="self">self</span>.ui_thread;
+        <span class="kw">let </span>sender = <span class="self">self</span>.eval.sender.clone();
+        <span class="macro">defer! </span>{
+            <span class="comment">// wait for the executor and the ui to exit
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(local_executor) = local_executor {
+                local_executor
+                    .join()
+                    .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Executor panicked: {:?}&quot;</span>, e))
+                    .unwrap()
+                    .expect(<span class="string">&quot;Local executor failed&quot;</span>);
             }
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">UIMessage::StopUI</span>);
-            <span class="ident">ui_thread</span>
-                .<span class="ident">join</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;UI panicked: {:?}&quot;</span>, <span class="ident">e</span>))
-                .<span class="ident">unwrap</span>();
+            <span class="kw">let _ </span>= sender.send(UIMessage::StopUI);
+            ui_thread
+                .join()
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;UI panicked: {:?}&quot;</span>, e))
+                .unwrap();
         }
 
-        <span class="comment">// run the actual computation and block until it ends</span>
-        <span class="kw">let</span> <span class="ident">client_sender</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client_sender</span>;
-        <span class="ident">ExecutorClient::evaluate</span>(<span class="ident">dag</span>, <span class="self">self</span>.<span class="ident">tx</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rx</span>, <span class="self">self</span>.<span class="ident">file_store</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">status</span><span class="op">|</span> {
-            <span class="ident">ui_sender</span>.<span class="ident">send</span>(<span class="ident">UIMessage::ServerStatus</span> { <span class="ident">status</span> })
+        <span class="comment">// run the actual computation and block until it ends
+        </span><span class="kw">let </span>client_sender = <span class="self">self</span>.client_sender;
+        ExecutorClient::evaluate(dag, <span class="self">self</span>.tx, <span class="kw-2">&amp;</span><span class="self">self</span>.rx, <span class="self">self</span>.file_store, <span class="kw">move </span>|status| {
+            ui_sender.send(UIMessage::ServerStatus { status })
         })
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tx</span>) <span class="op">=</span> <span class="ident">client_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">as_ref</span>() {
-                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Stop</span>);
+        .with_context(|| {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(tx) = client_sender.lock().unwrap().as_ref() {
+                <span class="kw">let _ </span>= tx.send(ExecutorClientMessage::Stop);
             }
-            <span class="string">&quot;Client failed&quot;</span>
-        })<span class="question-mark">?</span>;
-        <span class="comment">// disable the ctrl-c handler dropping the owned clone of the sender, letting the client exit</span>
-        <span class="ident">client_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">take</span>();
+            <span class="string">&quot;Client failed&quot;
+        </span>})<span class="question-mark">?</span>;
+        <span class="comment">// disable the ctrl-c handler dropping the owned clone of the sender, letting the client exit
+        </span>client_sender.lock().unwrap().take();
 
-        <span class="self">self</span>.<span class="ident">task</span>
-            .<span class="ident">sanity_check_post_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">eval</span>)
-            .<span class="ident">context</span>(<span class="string">&quot;Sanity checks failed&quot;</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.task
+            .sanity_check_post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>.eval)
+            .context(<span class="string">&quot;Sanity checks failed&quot;</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

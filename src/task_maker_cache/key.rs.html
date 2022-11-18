@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-cache/src/key.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>key.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_cache/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_cache/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_cache/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-cache/src/key.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>key.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_cache/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_cache/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_cache/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -296,303 +296,303 @@
 <span id="296">296</span>
 <span id="297">297</span>
 <span id="298">298</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">Execution</span>, <span class="ident">ExecutionCommand</span>, <span class="ident">ExecutionGroup</span>, <span class="ident">FileUuid</span>};
-<span class="kw">use</span> <span class="ident">task_maker_store</span>::{<span class="ident">FileStoreHandle</span>, <span class="ident">FileStoreKey</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>task_maker_dag::{Execution, ExecutionCommand, ExecutionGroup, FileUuid};
+<span class="kw">use </span>task_maker_store::{FileStoreHandle, FileStoreKey};
 
-<span class="doccomment">/// The cache key of a single execution of a group.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">CacheKeyItem</span> {
-    <span class="doccomment">/// The command of the execution. Note that this assumes that the system commands are all the</span>
-    <span class="doccomment">/// same between the different workers.</span>
-    <span class="kw">pub</span> <span class="ident">command</span>: <span class="ident">ExecutionCommand</span>,
-    <span class="doccomment">/// The list of command line arguments.</span>
-    <span class="kw">pub</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The key (aka the hash) of the stdin, if any.</span>
-    <span class="kw">pub</span> <span class="ident">stdin</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileStoreKey</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The key (aka the hash) of the input files, and if they are executable. Note that because the</span>
-    <span class="doccomment">/// order matters here (it changes the final hash of the key) those values are sorted</span>
-    <span class="doccomment">/// lexicographically.</span>
-    <span class="kw">pub</span> <span class="ident">inputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="ident">FileStoreKey</span>, <span class="ident">bool</span>)<span class="op">&gt;</span>,
-    <span class="doccomment">/// The list of environment variables to set. Sorted by the variable name.</span>
-    <span class="kw">pub</span> <span class="ident">env</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident">String</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// The cache key of a single execution of a group.
+</span><span class="attribute">#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+</span><span class="kw">struct </span>CacheKeyItem {
+    <span class="doccomment">/// The command of the execution. Note that this assumes that the system commands are all the
+    /// same between the different workers.
+    </span><span class="kw">pub </span>command: ExecutionCommand,
+    <span class="doccomment">/// The list of command line arguments.
+    </span><span class="kw">pub </span>args: Vec&lt;String&gt;,
+    <span class="doccomment">/// The key (aka the hash) of the stdin, if any.
+    </span><span class="kw">pub </span>stdin: <span class="prelude-ty">Option</span>&lt;FileStoreKey&gt;,
+    <span class="doccomment">/// The key (aka the hash) of the input files, and if they are executable. Note that because the
+    /// order matters here (it changes the final hash of the key) those values are sorted
+    /// lexicographically.
+    </span><span class="kw">pub </span>inputs: Vec&lt;(PathBuf, FileStoreKey, bool)&gt;,
+    <span class="doccomment">/// The list of environment variables to set. Sorted by the variable name.
+    </span><span class="kw">pub </span>env: Vec&lt;(String, String)&gt;,
 }
 
-<span class="doccomment">/// The cache key used to address the cache entries. It is composed by a key item for each execution</span>
-<span class="doccomment">/// in the group, in the same order.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CacheKey</span> {
-    <span class="doccomment">/// The items of the cache key, one for each execution in the group.</span>
-    <span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CacheKeyItem</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The cache key used to address the cache entries. It is composed by a key item for each execution
+/// in the group, in the same order.
+</span><span class="attribute">#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>CacheKey {
+    <span class="doccomment">/// The items of the cache key, one for each execution in the group.
+    </span>items: Vec&lt;CacheKeyItem&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">CacheKeyItem</span> {
-    <span class="doccomment">/// Make a new `CacheKeyItem` based on an `Execution` and on the mapping of its input files,</span>
-    <span class="doccomment">/// from the UUIDs of the current DAG to the persisted `FileStoreKey`s.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_execution</span>(
-        <span class="ident">execution</span>: <span class="kw-2">&amp;</span><span class="ident">Execution</span>,
-        <span class="ident">file_keys</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
-        <span class="ident">group</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ExecutionGroup</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">CacheKeyItem</span> {
-        <span class="kw">let</span> <span class="ident">stdin</span> <span class="op">=</span> <span class="ident">execution</span>.<span class="ident">stdin</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">file_keys</span>[<span class="ident">f</span>].<span class="ident">key</span>().<span class="ident">clone</span>());
-        <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">execution</span>
-            .<span class="ident">inputs</span>
-            .<span class="ident">clone</span>()
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">p</span>, <span class="ident">f</span>)<span class="op">|</span> (<span class="ident">p</span>, <span class="ident">file_keys</span>[<span class="kw-2">&amp;</span><span class="ident">f</span>.<span class="ident">file</span>].<span class="ident">key</span>().<span class="ident">clone</span>(), <span class="ident">f</span>.<span class="ident">executable</span>))
-            .<span class="ident">sorted</span>()
-            .<span class="ident">collect_vec</span>();
-        <span class="kw">let</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">execution</span>.<span class="ident">env</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">sorted</span>().<span class="ident">collect_vec</span>();
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">group</span>) <span class="op">=</span> <span class="ident">group</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fifos</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-            <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">fifo</span>) <span class="kw">in</span> <span class="ident">group</span>.<span class="ident">fifo</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">fifo</span>.<span class="ident">sandbox_path</span>().<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>();
-                <span class="ident">fifos</span>.<span class="ident">insert</span>(<span class="ident">name</span>, <span class="macro">format!</span>(<span class="string">&quot;tm_fifo_{}&quot;</span>, <span class="ident">i</span>));
+<span class="kw">impl </span>CacheKeyItem {
+    <span class="doccomment">/// Make a new `CacheKeyItem` based on an `Execution` and on the mapping of its input files,
+    /// from the UUIDs of the current DAG to the persisted `FileStoreKey`s.
+    </span><span class="kw">pub fn </span>from_execution(
+        execution: <span class="kw-2">&amp;</span>Execution,
+        file_keys: <span class="kw-2">&amp;</span>HashMap&lt;FileUuid, FileStoreHandle&gt;,
+        group: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutionGroup&gt;,
+    ) -&gt; CacheKeyItem {
+        <span class="kw">let </span>stdin = execution.stdin.as_ref().map(|f| file_keys[f].key().clone());
+        <span class="kw">let </span>inputs = execution
+            .inputs
+            .clone()
+            .into_iter()
+            .map(|(p, f)| (p, file_keys[<span class="kw-2">&amp;</span>f.file].key().clone(), f.executable))
+            .sorted()
+            .collect_vec();
+        <span class="kw">let </span>env = execution.env.clone().into_iter().sorted().collect_vec();
+        <span class="kw">let </span>args = <span class="kw">if let </span><span class="prelude-val">Some</span>(group) = group {
+            <span class="kw">let </span><span class="kw-2">mut </span>fifos = HashMap::new();
+            <span class="kw">for </span>(i, fifo) <span class="kw">in </span>group.fifo.iter().enumerate() {
+                <span class="kw">let </span>name = fifo.sandbox_path().to_string_lossy().to_string();
+                fifos.insert(name, <span class="macro">format!</span>(<span class="string">&quot;tm_fifo_{}&quot;</span>, i));
             }
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">execution</span>.<span class="ident">args</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="ident">fifos</span>.<span class="ident">get</span>(<span class="ident">arg</span>) {
-                    <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">name</span>.<span class="ident">clone</span>());
-                } <span class="kw">else</span> {
-                    <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">arg</span>.<span class="ident">clone</span>());
+            <span class="kw">let </span><span class="kw-2">mut </span>args = Vec::new();
+            <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>execution.args {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = fifos.get(arg) {
+                    args.push(name.clone());
+                } <span class="kw">else </span>{
+                    args.push(arg.clone());
                 }
             }
-            <span class="ident">args</span>
-        } <span class="kw">else</span> {
-            <span class="ident">execution</span>.<span class="ident">args</span>.<span class="ident">clone</span>()
+            args
+        } <span class="kw">else </span>{
+            execution.args.clone()
         };
-        <span class="ident">CacheKeyItem</span> {
-            <span class="ident">command</span>: <span class="ident">execution</span>.<span class="ident">command</span>.<span class="ident">clone</span>(),
-            <span class="ident">args</span>,
-            <span class="ident">stdin</span>,
-            <span class="ident">inputs</span>,
-            <span class="ident">env</span>,
+        CacheKeyItem {
+            command: execution.command.clone(),
+            args,
+            stdin,
+            inputs,
+            env,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">CacheKey</span> {
-    <span class="doccomment">/// Make a new `CacheKey` based on an `Execution` and on the mapping of its input files, from</span>
-    <span class="doccomment">/// the UUIDs of the current DAG to the persisted `FileStoreKey`s.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_execution_group</span>(
-        <span class="ident">group</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionGroup</span>,
-        <span class="ident">file_keys</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">CacheKey</span> {
-        <span class="ident">CacheKey</span> {
-            <span class="ident">items</span>: <span class="ident">group</span>
-                .<span class="ident">executions</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="ident">e</span>, <span class="ident">file_keys</span>, <span class="prelude-val">Some</span>(<span class="ident">group</span>)))
-                .<span class="ident">collect</span>(),
+<span class="kw">impl </span>CacheKey {
+    <span class="doccomment">/// Make a new `CacheKey` based on an `Execution` and on the mapping of its input files, from
+    /// the UUIDs of the current DAG to the persisted `FileStoreKey`s.
+    </span><span class="kw">pub fn </span>from_execution_group(
+        group: <span class="kw-2">&amp;</span>ExecutionGroup,
+        file_keys: <span class="kw-2">&amp;</span>HashMap&lt;FileUuid, FileStoreHandle&gt;,
+    ) -&gt; CacheKey {
+        CacheKey {
+            items: group
+                .executions
+                .iter()
+                .map(|e| CacheKeyItem::from_execution(e, file_keys, <span class="prelude-val">Some</span>(group)))
+                .collect(),
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
-    <span class="kw">use</span> <span class="ident">std::collections::hash_map::DefaultHasher</span>;
-    <span class="kw">use</span> <span class="ident">std::fs::File</span>;
-    <span class="kw">use</span> <span class="ident">std::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-    <span class="kw">use</span> <span class="ident">std::io::Write</span>;
-    <span class="kw">use</span> <span class="ident">std::path::Path</span>;
-    <span class="kw">use</span> <span class="ident">task_maker_store</span>::{<span class="ident">FileStore</span>, <span class="ident">ReadFileIterator</span>};
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span>std::borrow::Cow;
+    <span class="kw">use </span>std::collections::hash_map::DefaultHasher;
+    <span class="kw">use </span>std::fs::File;
+    <span class="kw">use </span>std::hash::{Hash, Hasher};
+    <span class="kw">use </span>std::io::Write;
+    <span class="kw">use </span>std::path::Path;
+    <span class="kw">use </span>task_maker_store::{FileStore, ReadFileIterator};
 
-    <span class="kw">fn</span> <span class="ident">fake_file</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>, <span class="ident">content</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">FileStore</span>) -&gt; <span class="ident">FileStoreHandle</span> {
-        <span class="ident">File::create</span>(<span class="ident">path</span>.<span class="ident">as_ref</span>())
-            .<span class="ident">unwrap</span>()
-            .<span class="ident">write_all</span>(<span class="ident">content</span>.<span class="ident">as_bytes</span>())
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">FileStoreKey::from_file</span>(<span class="ident">path</span>.<span class="ident">as_ref</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">ReadFileIterator::new</span>(<span class="ident">path</span>).<span class="ident">unwrap</span>();
-        <span class="ident">store</span>.<span class="ident">store</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>, <span class="ident">iter</span>).<span class="ident">unwrap</span>()
+    <span class="kw">fn </span>fake_file&lt;P: AsRef&lt;Path&gt;&gt;(path: P, content: <span class="kw-2">&amp;</span>str, store: <span class="kw-2">&amp;</span>FileStore) -&gt; FileStoreHandle {
+        File::create(path.as_ref())
+            .unwrap()
+            .write_all(content.as_bytes())
+            .unwrap();
+        <span class="kw">let </span>key = FileStoreKey::from_file(path.as_ref()).unwrap();
+        <span class="kw">let </span>iter = ReadFileIterator::new(path).unwrap();
+        store.store(<span class="kw-2">&amp;</span>key, iter).unwrap()
     }
 
-    <span class="kw">fn</span> <span class="ident">hash</span>(<span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">CacheKeyItem</span>) -&gt; <span class="ident">u64</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hasher</span> <span class="op">=</span> <span class="ident">DefaultHasher::new</span>();
-        <span class="ident">key</span>.<span class="ident">hash</span>(<span class="kw-2">&amp;mut</span> <span class="ident">hasher</span>);
-        <span class="ident">hasher</span>.<span class="ident">finish</span>()
+    <span class="kw">fn </span>hash(key: <span class="kw-2">&amp;</span>CacheKeyItem) -&gt; u64 {
+        <span class="kw">let </span><span class="kw-2">mut </span>hasher = DefaultHasher::new();
+        key.hash(<span class="kw-2">&amp;mut </span>hasher);
+        hasher.finish()
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_command</span>() {
-        <span class="kw">let</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec2&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">exec3</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec3&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;bar&quot;</span>));
-        <span class="kw">let</span> <span class="ident">exec4</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec4&quot;</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec1</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key3</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key4</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec4</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key3</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key2</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key3</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key4</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_command() {
+        <span class="kw">let </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;bar&quot;</span>));
+        <span class="kw">let </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::system(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key4 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec4, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(key1, key2);
+        <span class="macro">assert_ne!</span>(key1, key3);
+        <span class="macro">assert_ne!</span>(key1, key4);
+        <span class="macro">assert_eq!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key2));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key3));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key4));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_args</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec1</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec2&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec2</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec3</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec3&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec3</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;bar&quot;</span>]);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec4</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec4&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec4</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;bar&quot;</span>]);
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec1</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key3</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key4</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec4</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key3</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key2</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key3</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key4</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_args() {
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec1.args(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec2.args(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec3.args(<span class="macro">vec!</span>[<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;bar&quot;</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec4.args(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;bar&quot;</span>]);
+        <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key4 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec4, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(key1, key2);
+        <span class="macro">assert_ne!</span>(key1, key3);
+        <span class="macro">assert_ne!</span>(key1, key4);
+        <span class="macro">assert_eq!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key2));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key3));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key4));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_stdin</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">FileStore::new</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>(), <span class="number">1000</span>, <span class="number">1000</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">handle1</span> <span class="op">=</span> <span class="ident">fake_file</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file1&quot;</span>), <span class="string">&quot;foo&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">store</span>);
-        <span class="kw">let</span> <span class="ident">handle2</span> <span class="op">=</span> <span class="ident">fake_file</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file2&quot;</span>), <span class="string">&quot;bar&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">store</span>);
-        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">task_maker_dag::File::new</span>(<span class="string">&quot;file1&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">task_maker_dag::File::new</span>(<span class="string">&quot;file1&quot;</span>);
-        <span class="kw">let</span> <span class="ident">map</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> [(<span class="ident">file1</span>.<span class="ident">uuid</span>, <span class="ident">handle1</span>), (<span class="ident">file2</span>.<span class="ident">uuid</span>, <span class="ident">handle2</span>)]
-            .<span class="ident">iter</span>()
-            .<span class="ident">cloned</span>()
-            .<span class="ident">collect</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec1</span>.<span class="ident">stdin</span>(<span class="ident">file1</span>.<span class="ident">uuid</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec2&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec2</span>.<span class="ident">stdin</span>(<span class="ident">file1</span>.<span class="ident">uuid</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec3</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec3&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec3</span>.<span class="ident">stdin</span>(<span class="ident">file2</span>.<span class="ident">uuid</span>);
-        <span class="kw">let</span> <span class="ident">exec4</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec4&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec1</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key3</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key4</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec4</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key3</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key2</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key3</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key4</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_stdin() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>store = FileStore::new(tmpdir.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
+        <span class="kw">let </span>handle1 = fake_file(tmpdir.path().join(<span class="string">&quot;file1&quot;</span>), <span class="string">&quot;foo&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle2 = fake_file(tmpdir.path().join(<span class="string">&quot;file2&quot;</span>), <span class="string">&quot;bar&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>file1 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
+        <span class="kw">let </span>file2 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
+        <span class="kw">let </span>map: HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; = [(file1.uuid, handle1), (file2.uuid, handle2)]
+            .iter()
+            .cloned()
+            .collect();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec1.stdin(file1.uuid);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec2.stdin(file1.uuid);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec3.stdin(file2.uuid);
+        <span class="kw">let </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key4 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec4, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(key1, key2);
+        <span class="macro">assert_ne!</span>(key1, key3);
+        <span class="macro">assert_ne!</span>(key1, key4);
+        <span class="macro">assert_eq!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key2));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key3));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key4));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_inputs</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">FileStore::new</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>(), <span class="number">1000</span>, <span class="number">1000</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">handle1</span> <span class="op">=</span> <span class="ident">fake_file</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file1&quot;</span>), <span class="string">&quot;foo&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">store</span>);
-        <span class="kw">let</span> <span class="ident">handle2</span> <span class="op">=</span> <span class="ident">fake_file</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file2&quot;</span>), <span class="string">&quot;bar&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">store</span>);
-        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">task_maker_dag::File::new</span>(<span class="string">&quot;file1&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">task_maker_dag::File::new</span>(<span class="string">&quot;file1&quot;</span>);
-        <span class="kw">let</span> <span class="ident">map</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> [(<span class="ident">file1</span>.<span class="ident">uuid</span>, <span class="ident">handle1</span>), (<span class="ident">file2</span>.<span class="ident">uuid</span>, <span class="ident">handle2</span>)]
-            .<span class="ident">iter</span>()
-            .<span class="ident">cloned</span>()
-            .<span class="ident">collect</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec1</span>.<span class="ident">input</span>(<span class="ident">file1</span>.<span class="ident">uuid</span>, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
-        <span class="ident">exec1</span>.<span class="ident">input</span>(<span class="ident">file2</span>.<span class="ident">uuid</span>, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec2&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec2</span>.<span class="ident">input</span>(<span class="ident">file2</span>.<span class="ident">uuid</span>, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
-        <span class="ident">exec2</span>.<span class="ident">input</span>(<span class="ident">file1</span>.<span class="ident">uuid</span>, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec3</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec3&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec3</span>.<span class="ident">input</span>(<span class="ident">file1</span>.<span class="ident">uuid</span>, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec4</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec4&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec4</span>.<span class="ident">input</span>(<span class="ident">file1</span>.<span class="ident">uuid</span>, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">exec4</span>.<span class="ident">input</span>(<span class="ident">file2</span>.<span class="ident">uuid</span>, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec1</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key3</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key4</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec4</span>, <span class="kw-2">&amp;</span><span class="ident">map</span>, <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key3</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key2</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key3</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key4</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_inputs() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>store = FileStore::new(tmpdir.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
+        <span class="kw">let </span>handle1 = fake_file(tmpdir.path().join(<span class="string">&quot;file1&quot;</span>), <span class="string">&quot;foo&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle2 = fake_file(tmpdir.path().join(<span class="string">&quot;file2&quot;</span>), <span class="string">&quot;bar&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>file1 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
+        <span class="kw">let </span>file2 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
+        <span class="kw">let </span>map: HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; = [(file1.uuid, handle1), (file2.uuid, handle2)]
+            .iter()
+            .cloned()
+            .collect();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec1.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
+        exec1.input(file2.uuid, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec2.input(file2.uuid, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
+        exec2.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec3.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec4.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">true</span>);
+        exec4.input(file2.uuid, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key4 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec4, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(key1, key2);
+        <span class="macro">assert_ne!</span>(key1, key3);
+        <span class="macro">assert_ne!</span>(key1, key4);
+        <span class="macro">assert_eq!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key2));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key3));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key4));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_env</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec1</span>.<span class="ident">env</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        <span class="ident">exec1</span>.<span class="ident">env</span>(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec2&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec2</span>.<span class="ident">env</span>(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>);
-        <span class="ident">exec2</span>.<span class="ident">env</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec3</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec3&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec3</span>.<span class="ident">env</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        <span class="ident">exec3</span>.<span class="ident">env</span>(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;bizarre&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec4</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec4&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec4</span>.<span class="ident">env</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec1</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key3</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">key4</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="kw-2">&amp;</span><span class="ident">exec4</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key3</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">key1</span>, <span class="ident">key4</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key2</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key3</span>));
-        <span class="macro">assert_ne!</span>(<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key1</span>), <span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="ident">key4</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_env() {
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec1.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
+        exec1.env(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec2.env(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>);
+        exec2.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec3.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
+        exec3.env(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;bizarre&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec4.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
+        <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="kw">let </span>key4 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec4, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(key1, key2);
+        <span class="macro">assert_ne!</span>(key1, key3);
+        <span class="macro">assert_ne!</span>(key1, key4);
+        <span class="macro">assert_eq!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key2));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key3));
+        <span class="macro">assert_ne!</span>(hash(<span class="kw-2">&amp;</span>key1), hash(<span class="kw-2">&amp;</span>key4));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_fifo_arg_replace</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">ExecutionGroup::new</span>(<span class="string">&quot;group&quot;</span>);
-        <span class="kw">let</span> <span class="ident">fifo</span> <span class="op">=</span> <span class="ident">group</span>.<span class="ident">new_fifo</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[
-            <span class="ident">fifo</span>.<span class="ident">sandbox_path</span>().<span class="ident">to_string_lossy</span>(),
-            <span class="ident">Cow::from</span>(<span class="string">&quot;lol&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_fifo_arg_replace() {
+        <span class="kw">let </span><span class="kw-2">mut </span>group = ExecutionGroup::new(<span class="string">&quot;group&quot;</span>);
+        <span class="kw">let </span>fifo = group.new_fifo();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec.args(<span class="macro">vec!</span>[
+            fifo.sandbox_path().to_string_lossy(),
+            Cow::from(<span class="string">&quot;lol&quot;</span>),
         ]);
-        <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span>[<span class="number">0</span>];
-        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="ident">exec</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">group</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">key</span>.<span class="ident">args</span>[<span class="number">0</span>], <span class="string">&quot;tm_fifo_0&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">key</span>.<span class="ident">args</span>[<span class="number">1</span>], <span class="string">&quot;lol&quot;</span>);
+        group.add_execution(exec);
+        <span class="kw">let </span>exec = <span class="kw-2">&amp;</span>group.executions[<span class="number">0</span>];
+        <span class="kw">let </span>key = CacheKeyItem::from_execution(exec, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>group));
+        <span class="macro">assert_eq!</span>(key.args[<span class="number">0</span>], <span class="string">&quot;tm_fifo_0&quot;</span>);
+        <span class="macro">assert_eq!</span>(key.args[<span class="number">1</span>], <span class="string">&quot;lol&quot;</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_fifo</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group1</span> <span class="op">=</span> <span class="ident">ExecutionGroup::new</span>(<span class="string">&quot;group&quot;</span>);
-        <span class="kw">let</span> <span class="ident">fifo1</span> <span class="op">=</span> <span class="ident">group1</span>.<span class="ident">new_fifo</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec1&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec1</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="ident">fifo1</span>.<span class="ident">sandbox_path</span>().<span class="ident">to_string_lossy</span>()]);
-        <span class="ident">group1</span>.<span class="ident">add_execution</span>(<span class="ident">exec1</span>);
-        <span class="kw">let</span> <span class="ident">exec1</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">group1</span>.<span class="ident">executions</span>[<span class="number">0</span>];
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="ident">exec1</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">group1</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_fifo() {
+        <span class="kw">let </span><span class="kw-2">mut </span>group1 = ExecutionGroup::new(<span class="string">&quot;group&quot;</span>);
+        <span class="kw">let </span>fifo1 = group1.new_fifo();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec1.args(<span class="macro">vec!</span>[fifo1.sandbox_path().to_string_lossy()]);
+        group1.add_execution(exec1);
+        <span class="kw">let </span>exec1 = <span class="kw-2">&amp;</span>group1.executions[<span class="number">0</span>];
+        <span class="kw">let </span>key1 = CacheKeyItem::from_execution(exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>group1));
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group2</span> <span class="op">=</span> <span class="ident">ExecutionGroup::new</span>(<span class="string">&quot;group 2&quot;</span>);
-        <span class="kw">let</span> <span class="ident">fifo2</span> <span class="op">=</span> <span class="ident">group2</span>.<span class="ident">new_fifo</span>();
-        <span class="comment">// extra unused fifo are ok</span>
-        <span class="ident">group2</span>.<span class="ident">new_fifo</span>();
-        <span class="ident">group2</span>.<span class="ident">new_fifo</span>();
-        <span class="ident">group2</span>.<span class="ident">new_fifo</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec2&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">exec2</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[<span class="ident">fifo2</span>.<span class="ident">sandbox_path</span>().<span class="ident">to_string_lossy</span>()]);
-        <span class="ident">group2</span>.<span class="ident">add_execution</span>(<span class="ident">exec2</span>);
-        <span class="kw">let</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">group2</span>.<span class="ident">executions</span>[<span class="number">0</span>];
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKeyItem::from_execution</span>(<span class="ident">exec2</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">group2</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>group2 = ExecutionGroup::new(<span class="string">&quot;group 2&quot;</span>);
+        <span class="kw">let </span>fifo2 = group2.new_fifo();
+        <span class="comment">// extra unused fifo are ok
+        </span>group2.new_fifo();
+        group2.new_fifo();
+        group2.new_fifo();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        exec2.args(<span class="macro">vec!</span>[fifo2.sandbox_path().to_string_lossy()]);
+        group2.add_execution(exec2);
+        <span class="kw">let </span>exec2 = <span class="kw-2">&amp;</span>group2.executions[<span class="number">0</span>];
+        <span class="kw">let </span>key2 = CacheKeyItem::from_execution(exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>group2));
 
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
+        <span class="macro">assert_eq!</span>(key1, key2);
 
-        <span class="kw">let</span> <span class="ident">key1</span> <span class="op">=</span> <span class="ident">CacheKey::from_execution_group</span>(<span class="kw-2">&amp;</span><span class="ident">group1</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>());
-        <span class="kw">let</span> <span class="ident">key2</span> <span class="op">=</span> <span class="ident">CacheKey::from_execution_group</span>(<span class="kw-2">&amp;</span><span class="ident">group2</span>, <span class="kw-2">&amp;</span><span class="ident">HashMap::new</span>());
-        <span class="macro">assert_eq!</span>(<span class="ident">key1</span>, <span class="ident">key2</span>);
+        <span class="kw">let </span>key1 = CacheKey::from_execution_group(<span class="kw-2">&amp;</span>group1, <span class="kw-2">&amp;</span>HashMap::new());
+        <span class="kw">let </span>key2 = CacheKey::from_execution_group(<span class="kw-2">&amp;</span>group2, <span class="kw-2">&amp;</span>HashMap::new());
+        <span class="macro">assert_eq!</span>(key1, key2);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_cache" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_cache" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

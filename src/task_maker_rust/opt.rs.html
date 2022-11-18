@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/opt.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>opt.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_rust/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/opt.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>opt.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_rust/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -290,297 +290,297 @@
 <span id="290">290</span>
 <span id="291">291</span>
 <span id="292">292</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">clap</span>::{<span class="ident">ArgAction</span>, <span class="ident">Parser</span>};
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
+<span class="kw">use </span>anyhow::{Context, Error};
+<span class="kw">use </span>clap::{ArgAction, Parser};
+<span class="kw">use </span>itertools::Itertools;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::DagPriority</span>;
-<span class="kw">use</span> <span class="ident">task_maker_format::terry::Seed</span>;
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">find_task</span>, <span class="ident">get_sanity_check_names</span>, <span class="ident">TaskFormat</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">EvaluationConfig</span>, <span class="ident">VALID_TAGS</span>};
+<span class="kw">use </span>task_maker_dag::DagPriority;
+<span class="kw">use </span>task_maker_format::terry::Seed;
+<span class="kw">use </span>task_maker_format::{find_task, get_sanity_check_names, TaskFormat};
+<span class="kw">use </span>task_maker_format::{EvaluationConfig, VALID_TAGS};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>)]</span>
-<span class="attribute">#[<span class="ident">clap</span>(
-    <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;task-maker&quot;</span>,
-    <span class="ident">version</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/version.txt&quot;</span>)),
-)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Opt</span> {
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;FILTER&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">filter</span>: <span class="ident">FilterOpt</span>,
+<span class="attribute">#[derive(Parser, Debug)]
+#[clap(
+    name = <span class="string">&quot;task-maker&quot;</span>,
+    version = <span class="macro">include_str!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/version.txt&quot;</span>)),
+)]
+</span><span class="kw">pub struct </span>Opt {
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;FILTER&quot;</span>))]
+    </span><span class="kw">pub </span>filter: FilterOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;TASK SEARCH&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">find_task</span>: <span class="ident">FindTaskOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;TASK SEARCH&quot;</span>))]
+    </span><span class="kw">pub </span>find_task: FindTaskOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;UI&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">ui</span>: <span class="ident">UIOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;UI&quot;</span>))]
+    </span><span class="kw">pub </span>ui: UIOpt,
 
-    <span class="doccomment">/// Do not run in parallel time critical executions on the same machine</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;exclusive&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">exclusive</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Do not run in parallel time critical executions on the same machine
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;exclusive&quot;</span>)]
+    </span><span class="kw">pub </span>exclusive: bool,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;TERRY&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">terry</span>: <span class="ident">TerryOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;TERRY&quot;</span>))]
+    </span><span class="kw">pub </span>terry: TerryOpt,
 
-    <span class="doccomment">/// Clear the task directory and exit</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Deprecated: Use `task-maker-tools clear`</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;clean&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">clean</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Clear the task directory and exit
+    ///
+    /// Deprecated: Use `task-maker-tools clear`
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;clean&quot;</span>)]
+    </span><span class="kw">pub </span>clean: bool,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;BOOKLET&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">booklet</span>: <span class="ident">BookletOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;BOOKLET&quot;</span>))]
+    </span><span class="kw">pub </span>booklet: BookletOpt,
 
-    <span class="doccomment">/// List of sanity checks to skip.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;W&#39;</span>, <span class="ident">long_help</span> <span class="op">=</span> <span class="ident">skip_sanity_checks_long_help</span>())]</span>
-    <span class="kw">pub</span> <span class="ident">skip_sanity_checks</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// List of sanity checks to skip.
+    </span><span class="attribute">#[clap(short = <span class="string">&#39;W&#39;</span>, long_help = skip_sanity_checks_long_help())]
+    </span><span class="kw">pub </span>skip_sanity_checks: Vec&lt;String&gt;,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">storage</span>: <span class="ident">StorageOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]
+    </span><span class="kw">pub </span>storage: StorageOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;EXECUTION&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">execution</span>: <span class="ident">ExecutionOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;EXECUTION&quot;</span>))]
+    </span><span class="kw">pub </span>execution: ExecutionOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;LOGGING&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">logger</span>: <span class="ident">LoggerOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;LOGGING&quot;</span>))]
+    </span><span class="kw">pub </span>logger: LoggerOpt,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LoggerOpt</span> {
-    <span class="doccomment">/// Verbose mode (-v, -vv, -vvv, etc.). Note that it does not play well with curses ui.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span>, <span class="ident">long</span>, <span class="ident">action</span> <span class="op">=</span> <span class="ident">ArgAction::Count</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">verbose</span>: <span class="ident">u8</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>LoggerOpt {
+    <span class="doccomment">/// Verbose mode (-v, -vv, -vvv, etc.). Note that it does not play well with curses ui.
+    </span><span class="attribute">#[clap(short, long, action = ArgAction::Count)]
+    </span><span class="kw">pub </span>verbose: u8,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FindTaskOpt</span> {
-    <span class="doccomment">/// Directory of the task</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;task-dir&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">task_dir</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>FindTaskOpt {
+    <span class="doccomment">/// Directory of the task
+    </span><span class="attribute">#[clap(short = <span class="string">&#39;t&#39;</span>, long = <span class="string">&quot;task-dir&quot;</span>)]
+    </span><span class="kw">pub </span>task_dir: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
 
-    <span class="doccomment">/// Look at most for this number of parents for searching the task</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;max-depth&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;3&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">max_depth</span>: <span class="ident">u32</span>,
+    <span class="doccomment">/// Look at most for this number of parents for searching the task
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;max-depth&quot;</span>, default_value = <span class="string">&quot;3&quot;</span>)]
+    </span><span class="kw">pub </span>max_depth: u32,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UIOpt</span> {
-    <span class="doccomment">/// Which UI to use, available UIs are: print, raw, curses, json.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Note that the JSON api is not stable yet.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;ui&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;curses&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">ui</span>: <span class="ident">task_maker_format::ui::UIType</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>UIOpt {
+    <span class="doccomment">/// Which UI to use, available UIs are: print, raw, curses, json.
+    ///
+    /// Note that the JSON api is not stable yet.
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;ui&quot;</span>, default_value = <span class="string">&quot;curses&quot;</span>)]
+    </span><span class="kw">pub </span>ui: task_maker_format::ui::UIType,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutionOpt</span> {
-    <span class="doccomment">/// Keep all the sandbox directories</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;keep-sandboxes&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">keep_sandboxes</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>ExecutionOpt {
+    <span class="doccomment">/// Keep all the sandbox directories
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;keep-sandboxes&quot;</span>)]
+    </span><span class="kw">pub </span>keep_sandboxes: bool,
 
-    <span class="doccomment">/// Do not write any file inside the task directory</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;dry-run&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">dry_run</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Do not write any file inside the task directory
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;dry-run&quot;</span>)]
+    </span><span class="kw">pub </span>dry_run: bool,
 
-    <span class="doccomment">/// Disable the cache for this comma separated list of tags</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;no-cache&quot;</span>, <span class="ident">long_help</span> <span class="op">=</span> <span class="ident">no_cache_long_help</span>(), <span class="ident">require_equals</span> <span class="op">=</span> <span class="bool-val">true</span>)]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::option_option</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">no_cache</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Disable the cache for this comma separated list of tags
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;no-cache&quot;</span>, long_help = no_cache_long_help(), require_equals = <span class="bool-val">true</span>)]
+    #[allow(clippy::option_option)]
+    </span><span class="kw">pub </span>no_cache: <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Option</span>&lt;String&gt;&gt;,
 
-    <span class="doccomment">/// Give to the solution some extra time before being killed</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;extra-time&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">extra_time</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Give to the solution some extra time before being killed
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;extra-time&quot;</span>)]
+    </span><span class="kw">pub </span>extra_time: <span class="prelude-ty">Option</span>&lt;f64&gt;,
 
-    <span class="doccomment">/// Give to the solution some extra memory before being killed</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;extra-memory&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">extra_memory</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Give to the solution some extra memory before being killed
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;extra-memory&quot;</span>)]
+    </span><span class="kw">pub </span>extra_memory: <span class="prelude-ty">Option</span>&lt;u64&gt;,
 
-    <span class="doccomment">/// Copy the executables to the bin/ folder</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;copy-exe&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">copy_exe</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Copy the executables to the bin/ folder
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;copy-exe&quot;</span>)]
+    </span><span class="kw">pub </span>copy_exe: bool,
 
-    <span class="doccomment">/// Copy the logs of some executions to the bin/logs/ folder</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;copy-logs&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">copy_logs</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Copy the logs of some executions to the bin/logs/ folder
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;copy-logs&quot;</span>)]
+    </span><span class="kw">pub </span>copy_logs: bool,
 
-    <span class="doccomment">/// Store the DAG in DOT format inside of bin/DAG.dot</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;copy-dag&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">copy_dag</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Store the DAG in DOT format inside of bin/DAG.dot
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;copy-dag&quot;</span>)]
+    </span><span class="kw">pub </span>copy_dag: bool,
 
-    <span class="doccomment">/// The number of CPU cores to use.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;num-cores&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">num_cores</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The number of CPU cores to use.
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;num-cores&quot;</span>)]
+    </span><span class="kw">pub </span>num_cores: <span class="prelude-ty">Option</span>&lt;usize&gt;,
 
-    <span class="doccomment">/// Run the evaluation on a remote server instead of locally</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;evaluate-on&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">evaluate_on</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Run the evaluation on a remote server instead of locally
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;evaluate-on&quot;</span>)]
+    </span><span class="kw">pub </span>evaluate_on: <span class="prelude-ty">Option</span>&lt;String&gt;,
 
-    <span class="doccomment">/// The name to use for the client in remote executions</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The name to use for the client in remote executions
+    </span><span class="attribute">#[clap(long)]
+    </span><span class="kw">pub </span>name: <span class="prelude-ty">Option</span>&lt;String&gt;,
 
-    <span class="doccomment">/// Priority of the evaluations spawned by this invocation of task-maker; no effect if running</span>
-    <span class="doccomment">/// locally.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;0&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">priority</span>: <span class="ident">DagPriority</span>,
+    <span class="doccomment">/// Priority of the evaluations spawned by this invocation of task-maker; no effect if running
+    /// locally.
+    </span><span class="attribute">#[clap(long, default_value = <span class="string">&quot;0&quot;</span>)]
+    </span><span class="kw">pub </span>priority: DagPriority,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StorageOpt</span> {
-    <span class="doccomment">/// Where to store the storage files, including the cache</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;store-dir&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">store_dir</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>StorageOpt {
+    <span class="doccomment">/// Where to store the storage files, including the cache
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;store-dir&quot;</span>)]
+    </span><span class="kw">pub </span>store_dir: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
 
-    <span class="doccomment">/// Maximum size of the storage directory, in MiB</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;max-cache&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;3072&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">max_cache</span>: <span class="ident">u64</span>,
+    <span class="doccomment">/// Maximum size of the storage directory, in MiB
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;max-cache&quot;</span>, default_value = <span class="string">&quot;3072&quot;</span>)]
+    </span><span class="kw">pub </span>max_cache: u64,
 
-    <span class="doccomment">/// When the storage is flushed, this is the new maximum size, in MiB.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;min-cache&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;2048&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">min_cache</span>: <span class="ident">u64</span>,
+    <span class="doccomment">/// When the storage is flushed, this is the new maximum size, in MiB.
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;min-cache&quot;</span>, default_value = <span class="string">&quot;2048&quot;</span>)]
+    </span><span class="kw">pub </span>min_cache: u64,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FilterOpt</span> {
-    <span class="doccomment">/// Execute only the solutions whose names start with the filter</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Note that just the file name is checked (e.g. sol.cpp is the same as sol/sol.cpp). Without</span>
-    <span class="doccomment">/// specifying anything all the solutions are executed.</span>
-    <span class="kw">pub</span> <span class="ident">filter</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>FilterOpt {
+    <span class="doccomment">/// Execute only the solutions whose names start with the filter
+    ///
+    /// Note that just the file name is checked (e.g. sol.cpp is the same as sol/sol.cpp). Without
+    /// specifying anything all the solutions are executed.
+    </span><span class="kw">pub </span>filter: Vec&lt;String&gt;,
 
-    <span class="doccomment">/// Evaluate only the solution with the specified path</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The solution can reside anywhere in the filesystem.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">short</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">solution</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Evaluate only the solution with the specified path
+    ///
+    /// The solution can reside anywhere in the filesystem.
+    </span><span class="attribute">#[clap(long, short)]
+    </span><span class="kw">pub </span>solution: Vec&lt;PathBuf&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TerryOpt</span> {
-    <span class="doccomment">/// Force this seed instead of a random one.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">seed</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Seed</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>TerryOpt {
+    <span class="doccomment">/// Force this seed instead of a random one.
+    </span><span class="attribute">#[clap(long)]
+    </span><span class="kw">pub </span>seed: <span class="prelude-ty">Option</span>&lt;Seed&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BookletOpt</span> {
-    <span class="doccomment">/// Include the solutions in the booklet</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;booklet-solutions&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">booklet_solutions</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>BookletOpt {
+    <span class="doccomment">/// Include the solutions in the booklet
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;booklet-solutions&quot;</span>)]
+    </span><span class="kw">pub </span>booklet_solutions: bool,
 
-    <span class="doccomment">/// Do not build the statement files and the booklets</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;no-statement&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">no_statement</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Do not build the statement files and the booklets
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;no-statement&quot;</span>)]
+    </span><span class="kw">pub </span>no_statement: bool,
 }
 
-<span class="doccomment">/// Returns the long-help for the &quot;skip sanity checks&quot; option.</span>
-<span class="kw">fn</span> <span class="ident">skip_sanity_checks_long_help</span>() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">DOC</span>: <span class="ident">String</span> <span class="op">=</span> <span class="macro">format!</span>(
+<span class="doccomment">/// Returns the long-help for the &quot;skip sanity checks&quot; option.
+</span><span class="kw">fn </span>skip_sanity_checks_long_help() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">pub static </span><span class="kw-2">ref </span>DOC: String = <span class="macro">format!</span>(
             <span class="string">&quot;List of sanity checks to skip.\n\nThe available checks are: {}.&quot;</span>,
-            <span class="ident">get_sanity_check_names</span>()
+            get_sanity_check_names()
         );
     }
-    <span class="kw-2">&amp;</span><span class="ident">DOC</span>
+    <span class="kw-2">&amp;</span>DOC
 }
 
-<span class="doccomment">/// Returns the long-help for the --no-cache option.</span>
-<span class="kw">fn</span> <span class="ident">no_cache_long_help</span>() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">DOC</span>: <span class="ident">String</span> <span class="op">=</span> <span class="macro">format!</span>(
+<span class="doccomment">/// Returns the long-help for the --no-cache option.
+</span><span class="kw">fn </span>no_cache_long_help() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">pub static </span><span class="kw-2">ref </span>DOC: String = <span class="macro">format!</span>(
             <span class="string">&quot;Disable the cache for this comma separated list of tags\n\nProviding an empty list will disable all the caches. The supported tags are: {}.&quot;</span>,
-            <span class="ident">VALID_TAGS</span>.<span class="ident">iter</span>().<span class="ident">join</span>(<span class="string">&quot;, &quot;</span>)
+            VALID_TAGS.iter().join(<span class="string">&quot;, &quot;</span>)
         );
     }
-    <span class="kw-2">&amp;</span><span class="ident">DOC</span>
+    <span class="kw-2">&amp;</span>DOC
 }
 
-<span class="kw">impl</span> <span class="ident">Opt</span> {
-    <span class="doccomment">/// Make an `EvaluationConfig` from this command line options.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_config</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">EvaluationConfig</span> {
-        <span class="ident">EvaluationConfig</span> {
-            <span class="ident">solution_filter</span>: <span class="self">self</span>.<span class="ident">filter</span>.<span class="ident">filter</span>.<span class="ident">clone</span>(),
-            <span class="ident">booklet_solutions</span>: <span class="self">self</span>.<span class="ident">booklet</span>.<span class="ident">booklet_solutions</span>,
-            <span class="ident">no_statement</span>: <span class="self">self</span>.<span class="ident">booklet</span>.<span class="ident">no_statement</span>,
-            <span class="ident">solution_paths</span>: <span class="self">self</span>.<span class="ident">filter</span>.<span class="ident">solution</span>.<span class="ident">clone</span>(),
-            <span class="ident">disabled_sanity_checks</span>: <span class="self">self</span>.<span class="ident">skip_sanity_checks</span>.<span class="ident">clone</span>(),
-            <span class="ident">seed</span>: <span class="self">self</span>.<span class="ident">terry</span>.<span class="ident">seed</span>,
-            <span class="ident">dry_run</span>: <span class="self">self</span>.<span class="ident">execution</span>.<span class="ident">dry_run</span>,
+<span class="kw">impl </span>Opt {
+    <span class="doccomment">/// Make an `EvaluationConfig` from this command line options.
+    </span><span class="kw">pub fn </span>to_config(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; EvaluationConfig {
+        EvaluationConfig {
+            solution_filter: <span class="self">self</span>.filter.filter.clone(),
+            booklet_solutions: <span class="self">self</span>.booklet.booklet_solutions,
+            no_statement: <span class="self">self</span>.booklet.no_statement,
+            solution_paths: <span class="self">self</span>.filter.solution.clone(),
+            disabled_sanity_checks: <span class="self">self</span>.skip_sanity_checks.clone(),
+            seed: <span class="self">self</span>.terry.seed,
+            dry_run: <span class="self">self</span>.execution.dry_run,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_log</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">logger</span>.<span class="ident">enable_log</span>();
-        <span class="self">self</span>.<span class="ident">ui</span>.<span class="ident">disable_if_needed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">logger</span>);
+    <span class="kw">pub fn </span>enable_log(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.logger.enable_log();
+        <span class="self">self</span>.ui.disable_if_needed(<span class="kw-2">&amp;</span><span class="self">self</span>.logger);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">UIOpt</span> {
-    <span class="doccomment">/// Disable the Curses UI and fallback to PrintUI if verbose output is enabled.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_if_needed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">logger</span>: <span class="kw-2">&amp;</span><span class="ident">LoggerOpt</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">show_warning</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="ident">logger</span>.<span class="ident">should_diable_curses</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">task_maker_format::ui::UIType::Curses</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ui</span> {
-                <span class="comment">// warning deferred to after the logger has been initialized</span>
-                <span class="ident">show_warning</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                <span class="self">self</span>.<span class="ident">ui</span> <span class="op">=</span> <span class="ident">task_maker_format::ui::UIType::Print</span>;
+<span class="kw">impl </span>UIOpt {
+    <span class="doccomment">/// Disable the Curses UI and fallback to PrintUI if verbose output is enabled.
+    </span><span class="kw">pub fn </span>disable_if_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, logger: <span class="kw-2">&amp;</span>LoggerOpt) {
+        <span class="kw">let </span><span class="kw-2">mut </span>show_warning = <span class="bool-val">false</span>;
+        <span class="kw">if </span>logger.should_diable_curses() {
+            <span class="kw">if let </span>task_maker_format::ui::UIType::Curses = <span class="self">self</span>.ui {
+                <span class="comment">// warning deferred to after the logger has been initialized
+                </span>show_warning = <span class="bool-val">true</span>;
+                <span class="self">self</span>.ui = task_maker_format::ui::UIType::Print;
             }
         }
-        <span class="kw">if</span> <span class="ident">show_warning</span> {
+        <span class="kw">if </span>show_warning {
             <span class="macro">warn!</span>(<span class="string">&quot;Do not combine -v with curses ui, bad things will happen! Fallback to print ui&quot;</span>);
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">StorageOpt</span> {
-    <span class="doccomment">/// Get the store directory of this configuration. If nothing is specified a cache directory is</span>
-    <span class="doccomment">/// used if available, otherwise a temporary directory.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">store_dir</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PathBuf</span> {
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">store_dir</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">dir</span>) =&gt; <span class="ident">dir</span>.<span class="ident">clone</span>(),
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">project</span> <span class="op">=</span> <span class="ident">directories::ProjectDirs::from</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;task-maker&quot;</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">project</span>) <span class="op">=</span> <span class="ident">project</span> {
-                    <span class="ident">project</span>.<span class="ident">cache_dir</span>().<span class="ident">to_owned</span>()
-                } <span class="kw">else</span> {
-                    <span class="ident">std::env::temp_dir</span>().<span class="ident">join</span>(<span class="string">&quot;task-maker&quot;</span>)
+<span class="kw">impl </span>StorageOpt {
+    <span class="doccomment">/// Get the store directory of this configuration. If nothing is specified a cache directory is
+    /// used if available, otherwise a temporary directory.
+    </span><span class="kw">pub fn </span>store_dir(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PathBuf {
+        <span class="kw">match </span><span class="kw-2">&amp;</span><span class="self">self</span>.store_dir {
+            <span class="prelude-val">Some</span>(dir) =&gt; dir.clone(),
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">let </span>project = directories::ProjectDirs::from(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;task-maker&quot;</span>);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(project) = project {
+                    project.cache_dir().to_owned()
+                } <span class="kw">else </span>{
+                    std::env::temp_dir().join(<span class="string">&quot;task-maker&quot;</span>)
                 }
             }
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">LoggerOpt</span> {
-    <span class="doccomment">/// Enable the logs according to the specified configuration.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_log</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">verbose</span> <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="ident">std::env::set_var</span>(<span class="string">&quot;RUST_BACKTRACE&quot;</span>, <span class="string">&quot;1&quot;</span>);
+<span class="kw">impl </span>LoggerOpt {
+    <span class="doccomment">/// Enable the logs according to the specified configuration.
+    </span><span class="kw">pub fn </span>enable_log(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">if </span><span class="self">self</span>.verbose &gt; <span class="number">0 </span>{
+            std::env::set_var(<span class="string">&quot;RUST_BACKTRACE&quot;</span>, <span class="string">&quot;1&quot;</span>);
         }
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">verbose</span> {
-            <span class="number">0</span> =&gt; <span class="ident">std::env::set_var</span>(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;warn,tabox=warn&quot;</span>),
-            <span class="number">1</span> =&gt; <span class="ident">std::env::set_var</span>(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;info,tabox=info&quot;</span>),
-            <span class="number">2</span> =&gt; <span class="ident">std::env::set_var</span>(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;debug,tabox=debug&quot;</span>),
-            <span class="kw">_</span> =&gt; <span class="ident">std::env::set_var</span>(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;trace,tabox=trace&quot;</span>),
+        <span class="kw">match </span><span class="self">self</span>.verbose {
+            <span class="number">0 </span>=&gt; std::env::set_var(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;warn,tabox=warn&quot;</span>),
+            <span class="number">1 </span>=&gt; std::env::set_var(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;info,tabox=info&quot;</span>),
+            <span class="number">2 </span>=&gt; std::env::set_var(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;debug,tabox=debug&quot;</span>),
+            <span class="kw">_ </span>=&gt; std::env::set_var(<span class="string">&quot;RUST_LOG&quot;</span>, <span class="string">&quot;trace,tabox=trace&quot;</span>),
         }
 
-        <span class="ident">env_logger::Builder::from_default_env</span>()
-            .<span class="ident">format_timestamp_nanos</span>()
-            .<span class="ident">init</span>();
-        <span class="ident">better_panic::install</span>();
+        env_logger::Builder::from_default_env()
+            .format_timestamp_nanos()
+            .init();
+        better_panic::install();
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">should_diable_curses</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">verbose</span> <span class="op">&gt;</span> <span class="number">0</span>
-    }
+    <span class="kw">pub fn </span>should_diable_curses(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.verbose &gt; <span class="number">0
+    </span>}
 }
 
-<span class="kw">impl</span> <span class="ident">FindTaskOpt</span> {
-    <span class="doccomment">/// Use the specified options to find a task.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_task</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TaskFormat</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">find_task</span>(<span class="self">self</span>.<span class="ident">task_dir</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">max_depth</span>, <span class="ident">eval_config</span>)
-            .<span class="ident">context</span>(<span class="string">&quot;Invalid task directory&quot;</span>)
+<span class="kw">impl </span>FindTaskOpt {
+    <span class="doccomment">/// Use the specified options to find a task.
+    </span><span class="kw">pub fn </span>find_task(<span class="kw-2">&amp;</span><span class="self">self</span>, eval_config: <span class="kw-2">&amp;</span>EvaluationConfig) -&gt; <span class="prelude-ty">Result</span>&lt;TaskFormat, Error&gt; {
+        find_task(<span class="self">self</span>.task_dir.clone(), <span class="self">self</span>.max_depth, eval_config)
+            .context(<span class="string">&quot;Invalid task directory&quot;</span>)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

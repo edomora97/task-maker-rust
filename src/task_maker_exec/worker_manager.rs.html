@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/worker_manager.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>worker_manager.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/worker_manager.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>worker_manager.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -242,244 +242,244 @@
 <span id="242">242</span>
 <span id="243">243</span>
 <span id="244">244</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::sync::mpsc</span>::{<span class="ident">Receiver</span>, <span class="ident">Sender</span>};
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">std::thread</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::sync::mpsc::{Receiver, Sender};
+<span class="kw">use </span>std::sync::Arc;
+<span class="kw">use </span>std::thread;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">ductile::ChannelSender</span>;
+<span class="kw">use </span>anyhow::{bail, Context, Error};
+<span class="kw">use </span>ductile::ChannelSender;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">ExecutionGroupUuid</span>, <span class="ident">WorkerUuid</span>};
-<span class="kw">use</span> <span class="ident">task_maker_store::FileStore</span>;
+<span class="kw">use </span>task_maker_dag::{ExecutionGroupUuid, WorkerUuid};
+<span class="kw">use </span>task_maker_store::FileStore;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::executor::WorkerJob</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::proto</span>::{
-    <span class="ident">ChannelFileIterator</span>, <span class="ident">ChannelFileSender</span>, <span class="ident">WorkerClientMessage</span>, <span class="ident">WorkerServerMessage</span>,
+<span class="kw">use </span><span class="kw">crate</span>::executor::WorkerJob;
+<span class="kw">use </span><span class="kw">crate</span>::proto::{
+    ChannelFileIterator, ChannelFileSender, WorkerClientMessage, WorkerServerMessage,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scheduler::SchedulerInMessage</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::WorkerConn</span>;
+<span class="kw">use </span><span class="kw">crate</span>::scheduler::SchedulerInMessage;
+<span class="kw">use </span><span class="kw">crate</span>::WorkerConn;
 
-<span class="doccomment">/// Message coming from the Scheduler or the Executor for the WorkerManager</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::large_enum_variant</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">WorkerManagerInMessage</span> {
-    <span class="doccomment">/// A new worker has connected. The WorkerManager will take care of it.</span>
-    <span class="ident">WorkerConnected</span> { <span class="ident">worker</span>: <span class="ident">WorkerConn</span> },
-    <span class="doccomment">/// A worker has disconnected. This message is sent by the WorkerManager itself, from a</span>
-    <span class="doccomment">/// different thread.</span>
-    <span class="ident">WorkerDisconnected</span> { <span class="ident">worker</span>: <span class="ident">WorkerUuid</span> },
-    <span class="doccomment">/// The scheduler sent a new job for a worker. The WorkerManager will forward the job to the</span>
-    <span class="doccomment">/// actual worker.</span>
-    <span class="ident">WorkerJob</span> { <span class="ident">worker</span>: <span class="ident">WorkerUuid</span>, <span class="ident">job</span>: <span class="ident">WorkerJob</span> },
-    <span class="doccomment">/// The scheduler is asking a worker to stop doing a job, if the worker is still working on</span>
-    <span class="doccomment">/// that.</span>
-    <span class="ident">StopWorkerJob</span> {
-        <span class="ident">worker</span>: <span class="ident">WorkerUuid</span>,
-        <span class="ident">job</span>: <span class="ident">ExecutionGroupUuid</span>,
+<span class="doccomment">/// Message coming from the Scheduler or the Executor for the WorkerManager
+</span><span class="attribute">#[allow(clippy::large_enum_variant)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum </span>WorkerManagerInMessage {
+    <span class="doccomment">/// A new worker has connected. The WorkerManager will take care of it.
+    </span>WorkerConnected { worker: WorkerConn },
+    <span class="doccomment">/// A worker has disconnected. This message is sent by the WorkerManager itself, from a
+    /// different thread.
+    </span>WorkerDisconnected { worker: WorkerUuid },
+    <span class="doccomment">/// The scheduler sent a new job for a worker. The WorkerManager will forward the job to the
+    /// actual worker.
+    </span>WorkerJob { worker: WorkerUuid, job: WorkerJob },
+    <span class="doccomment">/// The scheduler is asking a worker to stop doing a job, if the worker is still working on
+    /// that.
+    </span>StopWorkerJob {
+        worker: WorkerUuid,
+        job: ExecutionGroupUuid,
     },
-    <span class="doccomment">/// The WorkerManager is asked to exit and tell all the connected worker to exit too.</span>
-    <span class="ident">Exit</span>,
+    <span class="doccomment">/// The WorkerManager is asked to exit and tell all the connected worker to exit too.
+    </span>Exit,
 }
 
-<span class="doccomment">/// The entity that manages the connections with the workers, eventually writing files to disk and</span>
-<span class="doccomment">/// telling to the `Scheduler` the connection and disconnection of the workers.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">WorkerManager</span> {
-    <span class="doccomment">/// A reference to the file store.</span>
-    <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// A channel for sending the messages to the scheduler.</span>
-    <span class="ident">scheduler</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">SchedulerInMessage</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// A channel for sending the messages to the WorkerManager itself. It is used by the threads</span>
-    <span class="doccomment">/// that manage the actual workers for sending back the notification of disconnection.</span>
-    <span class="ident">sender</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The receiver of the messages for the worker manager.</span>
-    <span class="ident">receiver</span>: <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The entity that manages the connections with the workers, eventually writing files to disk and
+/// telling to the `Scheduler` the connection and disconnection of the workers.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>WorkerManager {
+    <span class="doccomment">/// A reference to the file store.
+    </span>file_store: Arc&lt;FileStore&gt;,
+    <span class="doccomment">/// A channel for sending the messages to the scheduler.
+    </span>scheduler: Sender&lt;SchedulerInMessage&gt;,
+    <span class="doccomment">/// A channel for sending the messages to the WorkerManager itself. It is used by the threads
+    /// that manage the actual workers for sending back the notification of disconnection.
+    </span>sender: Sender&lt;WorkerManagerInMessage&gt;,
+    <span class="doccomment">/// The receiver of the messages for the worker manager.
+    </span>receiver: Receiver&lt;WorkerManagerInMessage&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">WorkerManager</span> {
-    <span class="doccomment">/// Make a new `WorkerManager` based on the specified file store, talking to the specified</span>
-    <span class="doccomment">/// scheduler. `sender` is just a sender that sends messages to the `receiver`, this is needed</span>
-    <span class="doccomment">/// internally for sending back the disconnection notification from other threads.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-        <span class="ident">scheduler</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">SchedulerInMessage</span><span class="op">&gt;</span>,
-        <span class="ident">sender</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
-        <span class="ident">receiver</span>: <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">WorkerManager</span> {
-        <span class="ident">WorkerManager</span> {
-            <span class="ident">file_store</span>,
-            <span class="ident">scheduler</span>,
-            <span class="ident">sender</span>,
-            <span class="ident">receiver</span>,
+<span class="kw">impl </span>WorkerManager {
+    <span class="doccomment">/// Make a new `WorkerManager` based on the specified file store, talking to the specified
+    /// scheduler. `sender` is just a sender that sends messages to the `receiver`, this is needed
+    /// internally for sending back the disconnection notification from other threads.
+    </span><span class="kw">pub fn </span>new(
+        file_store: Arc&lt;FileStore&gt;,
+        scheduler: Sender&lt;SchedulerInMessage&gt;,
+        sender: Sender&lt;WorkerManagerInMessage&gt;,
+        receiver: Receiver&lt;WorkerManagerInMessage&gt;,
+    ) -&gt; WorkerManager {
+        WorkerManager {
+            file_store,
+            scheduler,
+            sender,
+            receiver,
         }
     }
 
-    <span class="doccomment">/// Run the worker manager blocking until an exit message is received. On exiting the connected</span>
-    <span class="doccomment">/// workers will stop.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">connected_workers</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">WorkerUuid</span>, <span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">WorkerServerMessage</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">HashMap::new</span>();
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">receiver</span>.<span class="ident">recv</span>() {
-            <span class="kw">match</span> <span class="ident">message</span> {
-                <span class="ident">WorkerManagerInMessage::WorkerConnected</span> { <span class="ident">worker</span> } =&gt; {
-                    <span class="kw">if</span> <span class="ident">connected_workers</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">worker</span>.<span class="ident">uuid</span>) {
+    <span class="doccomment">/// Run the worker manager blocking until an exit message is received. On exiting the connected
+    /// workers will stop.
+    </span><span class="kw">pub fn </span>run(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>connected_workers: HashMap&lt;WorkerUuid, ChannelSender&lt;WorkerServerMessage&gt;&gt; =
+            HashMap::new();
+        <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = <span class="self">self</span>.receiver.recv() {
+            <span class="kw">match </span>message {
+                WorkerManagerInMessage::WorkerConnected { worker } =&gt; {
+                    <span class="kw">if </span>connected_workers.contains_key(<span class="kw-2">&amp;</span>worker.uuid) {
                         <span class="macro">warn!</span>(<span class="string">&quot;Duplicate worker uuid&quot;</span>);
                         <span class="kw">continue</span>;
                     }
-                    <span class="ident">connected_workers</span>.<span class="ident">insert</span>(<span class="ident">worker</span>.<span class="ident">uuid</span>, <span class="ident">worker</span>.<span class="ident">sender</span>.<span class="ident">clone</span>());
-                    <span class="macro">info!</span>(<span class="string">&quot;Worker {} ({}) connected&quot;</span>, <span class="ident">worker</span>.<span class="ident">name</span>, <span class="ident">worker</span>.<span class="ident">uuid</span>);
-                    <span class="kw">let</span> <span class="ident">scheduler</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scheduler</span>.<span class="ident">clone</span>();
-                    <span class="kw">let</span> <span class="ident">file_store</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">file_store</span>.<span class="ident">clone</span>();
-                    <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-                    <span class="ident">thread::Builder::new</span>()
-                        .<span class="ident">name</span>(<span class="macro">format!</span>(
+                    connected_workers.insert(worker.uuid, worker.sender.clone());
+                    <span class="macro">info!</span>(<span class="string">&quot;Worker {} ({}) connected&quot;</span>, worker.name, worker.uuid);
+                    <span class="kw">let </span>scheduler = <span class="self">self</span>.scheduler.clone();
+                    <span class="kw">let </span>file_store = <span class="self">self</span>.file_store.clone();
+                    <span class="kw">let </span>sender = <span class="self">self</span>.sender.clone();
+                    thread::Builder::new()
+                        .name(<span class="macro">format!</span>(
                             <span class="string">&quot;Manager of worker {} ({})&quot;</span>,
-                            <span class="ident">worker</span>.<span class="ident">name</span>, <span class="ident">worker</span>.<span class="ident">uuid</span>
+                            worker.name, worker.uuid
                         ))
-                        .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span>
-                                <span class="ident">WorkerManager::worker_thread</span>(<span class="ident">worker</span>, <span class="ident">scheduler</span>, <span class="ident">sender</span>, <span class="ident">file_store</span>)
+                        .spawn(<span class="kw">move </span>|| {
+                            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) =
+                                WorkerManager::worker_thread(worker, scheduler, sender, file_store)
                             {
-                                <span class="macro">warn!</span>(<span class="string">&quot;The manager of a worker failed: {:?}&quot;</span>, <span class="ident">e</span>);
+                                <span class="macro">warn!</span>(<span class="string">&quot;The manager of a worker failed: {:?}&quot;</span>, e);
                             }
                         })
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to spawn manager for a worker&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">&quot;Failed to spawn manager for a worker&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">WorkerManagerInMessage::WorkerDisconnected</span> { <span class="ident">worker</span> } =&gt; {
-                    <span class="ident">connected_workers</span>
-                        .<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">worker</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Unknown worker disconnected&quot;</span>)<span class="question-mark">?</span>;
+                WorkerManagerInMessage::WorkerDisconnected { worker } =&gt; {
+                    connected_workers
+                        .remove(<span class="kw-2">&amp;</span>worker)
+                        .context(<span class="string">&quot;Unknown worker disconnected&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">WorkerManagerInMessage::WorkerJob</span> { <span class="ident">worker</span>, <span class="ident">job</span> } =&gt; {
-                    <span class="comment">// if the worker is not present, it means it has just disconnected. The</span>
-                    <span class="comment">// scheduler should be already informed and should have resheduled the job.</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sender</span>) <span class="op">=</span> <span class="ident">connected_workers</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">worker</span>) {
-                        <span class="ident">sender</span>
-                            .<span class="ident">send</span>(<span class="ident">WorkerServerMessage::Work</span>(<span class="ident">Box::new</span>(<span class="ident">job</span>)))
-                            .<span class="ident">context</span>(<span class="string">&quot;Failed to send Work to worker&quot;</span>)<span class="question-mark">?</span>;
+                WorkerManagerInMessage::WorkerJob { worker, job } =&gt; {
+                    <span class="comment">// if the worker is not present, it means it has just disconnected. The
+                    // scheduler should be already informed and should have resheduled the job.
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = connected_workers.get(<span class="kw-2">&amp;</span>worker) {
+                        sender
+                            .send(WorkerServerMessage::Work(Box::new(job)))
+                            .context(<span class="string">&quot;Failed to send Work to worker&quot;</span>)<span class="question-mark">?</span>;
                     }
                 }
-                <span class="ident">WorkerManagerInMessage::Exit</span> =&gt; {
+                WorkerManagerInMessage::Exit =&gt; {
                     <span class="macro">debug!</span>(<span class="string">&quot;Worker manager asked to exit&quot;</span>);
                     <span class="kw">break</span>;
                 }
-                <span class="ident">WorkerManagerInMessage::StopWorkerJob</span> { <span class="ident">worker</span>, <span class="ident">job</span> } =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sender</span>) <span class="op">=</span> <span class="ident">connected_workers</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">worker</span>) {
-                        <span class="ident">sender</span>
-                            .<span class="ident">send</span>(<span class="ident">WorkerServerMessage::KillJob</span>(<span class="ident">job</span>))
-                            .<span class="ident">context</span>(<span class="string">&quot;Failed to send KillJob to worker&quot;</span>)<span class="question-mark">?</span>;
+                WorkerManagerInMessage::StopWorkerJob { worker, job } =&gt; {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = connected_workers.get(<span class="kw-2">&amp;</span>worker) {
+                        sender
+                            .send(WorkerServerMessage::KillJob(job))
+                            .context(<span class="string">&quot;Failed to send KillJob to worker&quot;</span>)<span class="question-mark">?</span>;
                     }
                 }
             }
         }
         <span class="macro">debug!</span>(<span class="string">&quot;Worker manager exiting&quot;</span>);
-        <span class="kw">for</span> (<span class="ident">worker</span>, <span class="ident">sender</span>) <span class="kw">in</span> <span class="ident">connected_workers</span>.<span class="ident">iter</span>() {
-            <span class="kw">if</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">WorkerServerMessage::Exit</span>).<span class="ident">is_err</span>() {
-                <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell worker {} to exit&quot;</span>, <span class="ident">worker</span>);
+        <span class="kw">for </span>(worker, sender) <span class="kw">in </span>connected_workers.iter() {
+            <span class="kw">if </span>sender.send(WorkerServerMessage::Exit).is_err() {
+                <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell worker {} to exit&quot;</span>, worker);
             }
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Thread body that manages the actual connection with a worker. `worker_manager` will send</span>
-    <span class="doccomment">/// messages back to the `WorkerManager` main thread for the notification about the</span>
-    <span class="doccomment">/// disconnection of this worker.</span>
-    <span class="kw">fn</span> <span class="ident">worker_thread</span>(
-        <span class="ident">worker</span>: <span class="ident">WorkerConn</span>,
-        <span class="ident">scheduler</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">SchedulerInMessage</span><span class="op">&gt;</span>,
-        <span class="ident">worker_manager</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
-        <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="ident">worker</span>.<span class="ident">receiver</span>.<span class="ident">recv</span>() {
-            <span class="kw">match</span> <span class="ident">message</span> {
-                <span class="ident">WorkerClientMessage::GetWork</span> =&gt; {
-                    <span class="comment">// the worker is asking for more work to do</span>
-                    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">scheduler</span>.<span class="ident">send</span>(<span class="ident">SchedulerInMessage::WorkerConnected</span> {
-                        <span class="ident">uuid</span>: <span class="ident">worker</span>.<span class="ident">uuid</span>,
-                        <span class="ident">name</span>: <span class="ident">worker</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
+    <span class="doccomment">/// Thread body that manages the actual connection with a worker. `worker_manager` will send
+    /// messages back to the `WorkerManager` main thread for the notification about the
+    /// disconnection of this worker.
+    </span><span class="kw">fn </span>worker_thread(
+        worker: WorkerConn,
+        scheduler: Sender&lt;SchedulerInMessage&gt;,
+        worker_manager: Sender&lt;WorkerManagerInMessage&gt;,
+        file_store: Arc&lt;FileStore&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = worker.receiver.recv() {
+            <span class="kw">match </span>message {
+                WorkerClientMessage::GetWork =&gt; {
+                    <span class="comment">// the worker is asking for more work to do
+                    </span><span class="kw">let </span>res = scheduler.send(SchedulerInMessage::WorkerConnected {
+                        uuid: worker.uuid,
+                        name: worker.name.clone(),
                     });
-                    <span class="kw">if</span> <span class="ident">res</span>.<span class="ident">is_err</span>() {
-                        <span class="comment">// the scheduler is gone</span>
-                        <span class="kw">break</span>;
+                    <span class="kw">if </span>res.is_err() {
+                        <span class="comment">// the scheduler is gone
+                        </span><span class="kw">break</span>;
                     }
                 }
-                <span class="ident">WorkerClientMessage::AskFile</span>(<span class="ident">key</span>) =&gt; {
-                    <span class="comment">// the worker is asking for a file it doesn&#39;t have locally stored</span>
-                    <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">file_store</span>
-                        .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Worker is asking for an unknown file&quot;</span>)<span class="question-mark">?</span>;
-                    <span class="ident">worker</span>
-                        .<span class="ident">sender</span>
-                        .<span class="ident">send</span>(<span class="ident">WorkerServerMessage::ProvideFile</span>(<span class="ident">key</span>))
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to send ProvideFile to worker&quot;</span>)<span class="question-mark">?</span>;
-                    <span class="ident">ChannelFileSender::send</span>(<span class="ident">handle</span>.<span class="ident">path</span>(), <span class="kw-2">&amp;</span><span class="ident">worker</span>.<span class="ident">sender</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to send file to worker&quot;</span>)<span class="question-mark">?</span>;
+                WorkerClientMessage::AskFile(key) =&gt; {
+                    <span class="comment">// the worker is asking for a file it doesn&#39;t have locally stored
+                    </span><span class="kw">let </span>handle = file_store
+                        .get(<span class="kw-2">&amp;</span>key)
+                        .context(<span class="string">&quot;Worker is asking for an unknown file&quot;</span>)<span class="question-mark">?</span>;
+                    worker
+                        .sender
+                        .send(WorkerServerMessage::ProvideFile(key))
+                        .context(<span class="string">&quot;Failed to send ProvideFile to worker&quot;</span>)<span class="question-mark">?</span>;
+                    ChannelFileSender::send(handle.path(), <span class="kw-2">&amp;</span>worker.sender)
+                        .context(<span class="string">&quot;Failed to send file to worker&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">WorkerClientMessage::ProvideFile</span>(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; {
-                    <span class="comment">// the worker should not provide files unless just after a WorkerDone message is</span>
-                    <span class="comment">// received</span>
-                    <span class="macro">unreachable!</span>(<span class="string">&quot;Unexpected ProvideFile from worker&quot;</span>);
+                WorkerClientMessage::ProvideFile(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; {
+                    <span class="comment">// the worker should not provide files unless just after a WorkerDone message is
+                    // received
+                    </span><span class="macro">unreachable!</span>(<span class="string">&quot;Unexpected ProvideFile from worker&quot;</span>);
                 }
-                <span class="ident">WorkerClientMessage::WorkerDone</span>(<span class="ident">result</span>, <span class="ident">outputs</span>) =&gt; {
-                    <span class="comment">// the worker completed its job and will send the produced files</span>
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">output_handlers</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">missing_files</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                    <span class="kw">for</span> (<span class="ident">uuid</span>, <span class="ident">key</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">outputs</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="ident">file_store</span>.<span class="ident">get</span>(<span class="ident">key</span>) {
-                            <span class="ident">output_handlers</span>.<span class="ident">insert</span>(<span class="kw-2">*</span><span class="ident">uuid</span>, <span class="ident">handle</span>);
-                        } <span class="kw">else</span> {
-                            <span class="ident">missing_files</span>.<span class="ident">push</span>(<span class="kw-2">*</span><span class="ident">uuid</span>);
+                WorkerClientMessage::WorkerDone(result, outputs) =&gt; {
+                    <span class="comment">// the worker completed its job and will send the produced files
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>output_handlers = HashMap::new();
+                    <span class="kw">let </span><span class="kw-2">mut </span>missing_files = Vec::new();
+                    <span class="kw">for </span>(uuid, key) <span class="kw">in </span><span class="kw-2">&amp;</span>outputs {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(handle) = file_store.get(key) {
+                            output_handlers.insert(<span class="kw-2">*</span>uuid, handle);
+                        } <span class="kw">else </span>{
+                            missing_files.push(<span class="kw-2">*</span>uuid);
                         }
                     }
-                    <span class="kw">let</span> <span class="ident">num_missing</span> <span class="op">=</span> <span class="ident">missing_files</span>.<span class="ident">len</span>();
+                    <span class="kw">let </span>num_missing = missing_files.len();
                     <span class="macro">info!</span>(
                         <span class="string">&quot;Asking worker {} for {} missing files&quot;</span>,
-                        <span class="ident">worker</span>.<span class="ident">uuid</span>, <span class="ident">num_missing</span>
+                        worker.uuid, num_missing
                     );
-                    <span class="ident">worker</span>
-                        .<span class="ident">sender</span>
-                        .<span class="ident">send</span>(<span class="ident">WorkerServerMessage::AskFiles</span>(<span class="ident">missing_files</span>))
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to send AskFiles to worker&quot;</span>)<span class="question-mark">?</span>;
-                    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">num_missing</span> {
-                        <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">worker</span>
-                            .<span class="ident">receiver</span>
-                            .<span class="ident">recv</span>()
-                            .<span class="ident">context</span>(<span class="string">&quot;Failed to receive file from worker&quot;</span>)<span class="question-mark">?</span>;
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">WorkerClientMessage::ProvideFile</span>(<span class="ident">uuid</span>, <span class="ident">key</span>) <span class="op">=</span> <span class="ident">message</span> {
-                            <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">file_store</span>
-                                .<span class="ident">store</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>, <span class="ident">ChannelFileIterator::new</span>(<span class="kw-2">&amp;</span><span class="ident">worker</span>.<span class="ident">receiver</span>))
-                                .<span class="ident">context</span>(<span class="string">&quot;Failed to store worker-provided file&quot;</span>)<span class="question-mark">?</span>;
-                            <span class="ident">output_handlers</span>.<span class="ident">insert</span>(<span class="ident">uuid</span>, <span class="ident">handle</span>);
-                        } <span class="kw">else</span> {
-                            <span class="macro">bail!</span>(<span class="string">&quot;Unexpected message from worker: {:?}&quot;</span>, <span class="ident">message</span>);
+                    worker
+                        .sender
+                        .send(WorkerServerMessage::AskFiles(missing_files))
+                        .context(<span class="string">&quot;Failed to send AskFiles to worker&quot;</span>)<span class="question-mark">?</span>;
+                    <span class="kw">for _ in </span><span class="number">0</span>..num_missing {
+                        <span class="kw">let </span>message = worker
+                            .receiver
+                            .recv()
+                            .context(<span class="string">&quot;Failed to receive file from worker&quot;</span>)<span class="question-mark">?</span>;
+                        <span class="kw">if let </span>WorkerClientMessage::ProvideFile(uuid, key) = message {
+                            <span class="kw">let </span>handle = file_store
+                                .store(<span class="kw-2">&amp;</span>key, ChannelFileIterator::new(<span class="kw-2">&amp;</span>worker.receiver))
+                                .context(<span class="string">&quot;Failed to store worker-provided file&quot;</span>)<span class="question-mark">?</span>;
+                            output_handlers.insert(uuid, handle);
+                        } <span class="kw">else </span>{
+                            <span class="macro">bail!</span>(<span class="string">&quot;Unexpected message from worker: {:?}&quot;</span>, message);
                         }
                     }
-                    <span class="kw">let</span> <span class="ident">mex</span> <span class="op">=</span> <span class="ident">SchedulerInMessage::WorkerResult</span> {
-                        <span class="ident">worker</span>: <span class="ident">worker</span>.<span class="ident">uuid</span>,
-                        <span class="ident">result</span>,
-                        <span class="ident">outputs</span>: <span class="ident">output_handlers</span>,
+                    <span class="kw">let </span>mex = SchedulerInMessage::WorkerResult {
+                        worker: worker.uuid,
+                        result,
+                        outputs: output_handlers,
                     };
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">scheduler</span>.<span class="ident">send</span>(<span class="ident">mex</span>) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Failed to send message to scheduler: {:?}&quot;</span>, <span class="ident">e</span>);
+                    <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = scheduler.send(mex) {
+                        <span class="macro">warn!</span>(<span class="string">&quot;Failed to send message to scheduler: {:?}&quot;</span>, e);
                         <span class="kw">break</span>;
                     }
                 }
             }
         }
-        <span class="comment">// when the worker disconnects, tell the scheduler that the worker is no longer alive (thus</span>
-        <span class="comment">// rescheduling the job if needed).</span>
-        <span class="kw">if</span> <span class="ident">scheduler</span>
-            .<span class="ident">send</span>(<span class="ident">SchedulerInMessage::WorkerDisconnected</span> { <span class="ident">uuid</span>: <span class="ident">worker</span>.<span class="ident">uuid</span> })
-            .<span class="ident">is_err</span>()
+        <span class="comment">// when the worker disconnects, tell the scheduler that the worker is no longer alive (thus
+        // rescheduling the job if needed).
+        </span><span class="kw">if </span>scheduler
+            .send(SchedulerInMessage::WorkerDisconnected { uuid: worker.uuid })
+            .is_err()
         {
             <span class="macro">debug!</span>(<span class="string">&quot;Cannot tell the scheduler that a worker left, maybe it&#39;s gone&quot;</span>);
         }
-        <span class="comment">// send back to the WorkerManager a message, letting it know that the worker is no longer</span>
-        <span class="comment">// connected, thus removing it from the list.</span>
-        <span class="kw">if</span> <span class="ident">worker_manager</span>
-            .<span class="ident">send</span>(<span class="ident">WorkerManagerInMessage::WorkerDisconnected</span> {
-                <span class="ident">worker</span>: <span class="ident">worker</span>.<span class="ident">uuid</span>,
+        <span class="comment">// send back to the WorkerManager a message, letting it know that the worker is no longer
+        // connected, thus removing it from the list.
+        </span><span class="kw">if </span>worker_manager
+            .send(WorkerManagerInMessage::WorkerDisconnected {
+                worker: worker.uuid,
             })
-            .<span class="ident">is_err</span>()
+            .is_err()
         {
             <span class="macro">debug!</span>(<span class="string">&quot;Worker manager is gone&quot;</span>);
         }
@@ -487,4 +487,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

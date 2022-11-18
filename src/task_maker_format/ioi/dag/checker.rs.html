@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/checker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>checker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/checker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>checker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -193,200 +193,200 @@
 <span id="193">193</span>
 <span id="194">194</span>
 <span id="195">195</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">Execution</span>, <span class="ident">ExecutionCommand</span>, <span class="ident">ExecutionStatus</span>, <span class="ident">FileUuid</span>, <span class="ident">Priority</span>};
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
+<span class="kw">use </span>task_maker_dag::{Execution, ExecutionCommand, ExecutionStatus, FileUuid, Priority};
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>, <span class="ident">EVALUATION_PRIORITY</span>, <span class="ident">STDERR_CONTENT_LENGTH</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::UIMessage</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">UISender</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>, <span class="ident">Tag</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{SubtaskId, TestcaseId, EVALUATION_PRIORITY, STDERR_CONTENT_LENGTH};
+<span class="kw">use </span><span class="kw">crate</span>::ui::UIMessage;
+<span class="kw">use crate</span>::{bind_exec_callbacks, UISender};
+<span class="kw">use crate</span>::{EvaluationData, SourceFile, Tag};
 
-<span class="doccomment">/// Which tool to use to compute the score on a testcase given the input file, the _correct_ output</span>
-<span class="doccomment">/// file and the output file to evaluate.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Checker</span> {
-    <span class="doccomment">/// Use a built-in white diff checker that scores 1.0 if the two output files are identical</span>
-    <span class="doccomment">/// except for white spaces. It internally uses `diff --ignore-all-spaces`</span>
-    <span class="ident">WhiteDiff</span>,
-    <span class="doccomment">/// Use a custom checker based on an executable that can output a score (from 0.0 to 1.0) to</span>
-    <span class="doccomment">/// stdout as well as a custom message on stderr.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The arguments are the paths of (input, correct_output, test_output). The checker should</span>
-    <span class="doccomment">/// output to stdout the score and to stderr a message for the user.</span>
-    <span class="ident">Custom</span>(<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>),
+<span class="doccomment">/// Which tool to use to compute the score on a testcase given the input file, the _correct_ output
+/// file and the output file to evaluate.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub enum </span>Checker {
+    <span class="doccomment">/// Use a built-in white diff checker that scores 1.0 if the two output files are identical
+    /// except for white spaces. It internally uses `diff --ignore-all-spaces`
+    </span>WhiteDiff,
+    <span class="doccomment">/// Use a custom checker based on an executable that can output a score (from 0.0 to 1.0) to
+    /// stdout as well as a custom message on stderr.
+    ///
+    /// The arguments are the paths of (input, correct_output, test_output). The checker should
+    /// output to stdout the score and to stderr a message for the user.
+    </span>Custom(Arc&lt;SourceFile&gt;),
 }
 
-<span class="kw">impl</span> <span class="ident">Checker</span> {
-    <span class="doccomment">/// Build the execution of the checker for the specified files, the callback will be called when</span>
-    <span class="doccomment">/// the result is ready. The execution does not send UI messages yet and it&#39;s not added to the</span>
-    <span class="doccomment">/// DAG.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">check</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
+<span class="kw">impl </span>Checker {
+    <span class="doccomment">/// Build the execution of the checker for the specified files, the callback will be called when
+    /// the result is ready. The execution does not send UI messages yet and it&#39;s not added to the
+    /// DAG.
+    </span><span class="attribute">#[allow(clippy::too_many_arguments)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>check&lt;F&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-        <span class="ident">description</span>: <span class="ident">String</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">correct_output</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">test_output</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">callback</span>: <span class="ident">F</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Execution</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">f64</span>, <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        testcase_id: TestcaseId,
+        description: String,
+        input: FileUuid,
+        correct_output: FileUuid,
+        test_output: FileUuid,
+        callback: F,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Execution, Error&gt;
+    <span class="kw">where
+        </span>F: FnOnce(f64, String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
     {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Checker::WhiteDiff</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="ident">description</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;diff&quot;</span>));
-                <span class="ident">exec</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[
+        <span class="kw">match </span><span class="self">self </span>{
+            Checker::WhiteDiff =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(description, ExecutionCommand::system(<span class="string">&quot;diff&quot;</span>));
+                exec.args(<span class="macro">vec!</span>[
                     <span class="string">&quot;--ignore-blank-lines&quot;</span>,
                     <span class="string">&quot;--ignore-space-change&quot;</span>,
                     <span class="string">&quot;correct&quot;</span>,
                     <span class="string">&quot;test&quot;</span>,
                 ])
-                .<span class="ident">input</span>(<span class="ident">correct_output</span>, <span class="string">&quot;correct&quot;</span>, <span class="bool-val">false</span>)
-                .<span class="ident">input</span>(<span class="ident">test_output</span>, <span class="string">&quot;test&quot;</span>, <span class="bool-val">false</span>)
-                .<span class="ident">tag</span>(<span class="ident">Tag::Checking</span>.<span class="ident">into</span>())
-                .<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>);
+                .input(correct_output, <span class="string">&quot;correct&quot;</span>, <span class="bool-val">false</span>)
+                .input(test_output, <span class="string">&quot;test&quot;</span>, <span class="bool-val">false</span>)
+                .tag(Tag::Checking.into())
+                .priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority);
 
-                <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-                    <span class="kw">match</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                        <span class="comment">// diff exits with 0 if the files are equal</span>
-                        <span class="ident">ExecutionStatus::Success</span> =&gt; <span class="ident">callback</span>(<span class="number">1.0</span>, <span class="string">&quot;Output is correct&quot;</span>.<span class="ident">into</span>())
-                            .<span class="ident">context</span>(<span class="string">&quot;Checker callback failed&quot;</span>)<span class="question-mark">?</span>,
-                        <span class="comment">// return code 1 means the files are different</span>
-                        <span class="ident">ExecutionStatus::ReturnCode</span>(<span class="number">1</span>) =&gt; {
-                            <span class="ident">callback</span>(<span class="number">0.0</span>, <span class="string">&quot;Output is incorrect&quot;</span>.<span class="ident">into</span>())
-                                .<span class="ident">context</span>(<span class="string">&quot;Checker callback failed&quot;</span>)<span class="question-mark">?</span>
-                        }
-                        <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;diff died badly? {:?}&quot;</span>, <span class="ident">result</span>),
+                eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|result| {
+                    <span class="kw">match </span>result.status {
+                        <span class="comment">// diff exits with 0 if the files are equal
+                        </span>ExecutionStatus::Success =&gt; callback(<span class="number">1.0</span>, <span class="string">&quot;Output is correct&quot;</span>.into())
+                            .context(<span class="string">&quot;Checker callback failed&quot;</span>)<span class="question-mark">?</span>,
+                        <span class="comment">// return code 1 means the files are different
+                        </span>ExecutionStatus::ReturnCode(<span class="number">1</span>) =&gt; {
+                            callback(<span class="number">0.0</span>, <span class="string">&quot;Output is incorrect&quot;</span>.into())
+                                .context(<span class="string">&quot;Checker callback failed&quot;</span>)<span class="question-mark">?
+                        </span>}
+                        <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;diff died badly? {:?}&quot;</span>, result),
                     };
                     <span class="prelude-val">Ok</span>(())
                 });
-                <span class="prelude-val">Ok</span>(<span class="ident">exec</span>)
+                <span class="prelude-val">Ok</span>(exec)
             }
-            <span class="ident">Checker::Custom</span>(<span class="ident">source_file</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">source_file</span>
-                    .<span class="ident">execute</span>(
-                        <span class="ident">eval</span>,
-                        <span class="kw-2">&amp;</span><span class="ident">description</span>,
+            Checker::Custom(source_file) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>exec = source_file
+                    .execute(
+                        eval,
+                        <span class="kw-2">&amp;</span>description,
                         <span class="macro">vec!</span>[<span class="string">&quot;input&quot;</span>, <span class="string">&quot;correct_output&quot;</span>, <span class="string">&quot;test_output&quot;</span>],
                     )
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to execute checker source file&quot;</span>)<span class="question-mark">?</span>;
-                <span class="ident">exec</span>.<span class="ident">input</span>(<span class="ident">input</span>, <span class="string">&quot;input&quot;</span>, <span class="bool-val">false</span>)
-                    .<span class="ident">input</span>(<span class="ident">correct_output</span>, <span class="string">&quot;correct_output&quot;</span>, <span class="bool-val">false</span>)
-                    .<span class="ident">input</span>(<span class="ident">test_output</span>, <span class="string">&quot;test_output&quot;</span>, <span class="bool-val">false</span>)
-                    .<span class="ident">tag</span>(<span class="ident">Tag::Checking</span>.<span class="ident">into</span>())
-                    .<span class="ident">capture_stdout</span>(<span class="number">128</span>)
-                    .<span class="ident">capture_stderr</span>(<span class="ident">STDERR_CONTENT_LENGTH</span>)
-                    .<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>);
-                <span class="ident">exec</span>.<span class="ident">limits_mut</span>().<span class="ident">allow_multiprocess</span>();
-                <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-                <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">res</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">res</span>
-                        .<span class="ident">stdout</span>
-                        .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">res</span>
-                        .<span class="ident">stderr</span>
-                        .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>).<span class="ident">trim</span>().<span class="ident">to_string</span>();
-                    <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::translate_checker_message</span>(<span class="ident">message</span>);
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">res</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                        <span class="kw">let</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+                    .context(<span class="string">&quot;Failed to execute checker source file&quot;</span>)<span class="question-mark">?</span>;
+                exec.input(input, <span class="string">&quot;input&quot;</span>, <span class="bool-val">false</span>)
+                    .input(correct_output, <span class="string">&quot;correct_output&quot;</span>, <span class="bool-val">false</span>)
+                    .input(test_output, <span class="string">&quot;test_output&quot;</span>, <span class="bool-val">false</span>)
+                    .tag(Tag::Checking.into())
+                    .capture_stdout(<span class="number">128</span>)
+                    .capture_stderr(STDERR_CONTENT_LENGTH)
+                    .priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority);
+                exec.limits_mut().allow_multiprocess();
+                <span class="kw">let </span>sender = eval.sender.clone();
+                eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|res| {
+                    <span class="kw">let </span>stdout = res
+                        .stdout
+                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
+                    <span class="kw">let </span>stderr = res
+                        .stderr
+                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
+                    <span class="kw">let </span>message = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr).trim().to_string();
+                    <span class="kw">let </span>message = <span class="self">Self</span>::translate_checker_message(message);
+                    <span class="kw">if </span>!res.status.is_success() {
+                        <span class="kw">let </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
                             <span class="string">&quot;Checker failed while computing a score for testcase {}&quot;</span>,
-                            <span class="ident">testcase_id</span>
+                            testcase_id
                         ))
-                        .<span class="ident">with_note</span>(<span class="ident">description</span>)
-                        .<span class="ident">with_help</span>(<span class="macro">format!</span>(<span class="string">&quot;The checker crashed with: {:?}&quot;</span>, <span class="ident">res</span>.<span class="ident">status</span>))
-                        .<span class="ident">with_help_attachment</span>(<span class="ident">stderr</span>);
-                        <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
-                        <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                        .with_note(description)
+                        .with_help(<span class="macro">format!</span>(<span class="string">&quot;The checker crashed with: {:?}&quot;</span>, res.status))
+                        .with_help_attachment(stderr);
+                        sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
+                        <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                     }
-                    <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>);
-                    <span class="kw">let</span> <span class="ident">score</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">score</span>.<span class="ident">trim</span>().<span class="ident">parse</span>() {
-                        <span class="prelude-val">Ok</span>(<span class="ident">score</span>) =&gt; <span class="ident">score</span>,
-                        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                            <span class="kw">let</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+                    <span class="kw">let </span>score = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stdout);
+                    <span class="kw">let </span>score: f64 = <span class="kw">match </span>score.trim().parse() {
+                        <span class="prelude-val">Ok</span>(score) =&gt; score,
+                        <span class="prelude-val">Err</span>(e) =&gt; {
+                            <span class="kw">let </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
                                 <span class="string">&quot;Checker returned an invalid score ({:?}) for testcase {}&quot;</span>,
-                                <span class="ident">score</span>, <span class="ident">testcase_id</span>
+                                score, testcase_id
                             ))
-                            .<span class="ident">with_note</span>(<span class="ident">description</span>)
-                            .<span class="ident">with_help</span>(<span class="macro">format!</span>(<span class="string">&quot;The parse error is: {:?}&quot;</span>, <span class="ident">e</span>))
-                            .<span class="ident">with_help_attachment</span>(<span class="ident">stdout</span>);
-                            <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                            .with_note(description)
+                            .with_help(<span class="macro">format!</span>(<span class="string">&quot;The parse error is: {:?}&quot;</span>, e))
+                            .with_help_attachment(stdout);
+                            sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
+                            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                         }
                     };
-                    <span class="ident">callback</span>(<span class="ident">score</span>, <span class="ident">message</span>)
+                    callback(score, message)
                 });
-                <span class="prelude-val">Ok</span>(<span class="ident">exec</span>)
+                <span class="prelude-val">Ok</span>(exec)
             }
         }
     }
 
-    <span class="doccomment">/// Add the checking of the output file to the DAG, binding the callbacks for sending to the UI</span>
-    <span class="doccomment">/// the messages as well as calling `callback` with the outcome of the checker.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">check_and_bind</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="ident">F</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Add the checking of the output file to the DAG, binding the callbacks for sending to the UI
+    /// the messages as well as calling `callback` with the outcome of the checker.
+    </span><span class="attribute">#[allow(clippy::too_many_arguments)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>check_and_bind&lt;S: Into&lt;PathBuf&gt;, F&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-        <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-        <span class="ident">solution</span>: <span class="ident">S</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">correct_output</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">test_output</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">callback</span>: <span class="ident">F</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">f64</span>, <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        subtask_id: SubtaskId,
+        testcase_id: TestcaseId,
+        solution: S,
+        input: FileUuid,
+        correct_output: FileUuid,
+        test_output: FileUuid,
+        callback: F,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
+    <span class="kw">where
+        </span>F: FnOnce(f64, String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
     {
-        <span class="kw">let</span> <span class="ident">solution</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">check</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">testcase_id</span>,
+        <span class="kw">let </span>solution = solution.into();
+        <span class="kw">let </span>exec = <span class="self">self</span>.check(
+            eval,
+            testcase_id,
             <span class="macro">format!</span>(
                 <span class="string">&quot;Checking output of {:?} of testcase {}, subtask {}&quot;</span>,
-                <span class="ident">solution</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>(),
-                <span class="ident">testcase_id</span>,
-                <span class="ident">subtask_id</span>
+                solution.file_name().unwrap(),
+                testcase_id,
+                subtask_id
             ),
-            <span class="ident">input</span>,
-            <span class="ident">correct_output</span>,
-            <span class="ident">test_output</span>,
-            <span class="ident">callback</span>,
+            input,
+            correct_output,
+            test_output,
+            callback,
         )<span class="question-mark">?</span>;
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">exec</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::IOIChecker</span> {
-                <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
-                <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">status</span>
+            eval,
+            exec.uuid,
+            |status, solution| UIMessage::IOIChecker {
+                subtask: subtask_id,
+                testcase: testcase_id,
+                solution,
+                status
             },
-            <span class="ident">solution</span>
+            solution
         )<span class="question-mark">?</span>;
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
+        eval.dag.add_execution(exec);
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// The checker may return a message to be translated. This function maps the message</span>
-    <span class="doccomment">/// placeholders to actual messages.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translate_checker_message</span>(<span class="ident">message</span>: <span class="ident">String</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">match</span> <span class="ident">message</span>.<span class="ident">as_str</span>() {
-            <span class="string">&quot;translate:success&quot;</span> =&gt; <span class="string">&quot;Output is correct&quot;</span>.<span class="ident">into</span>(),
-            <span class="string">&quot;translate:partial&quot;</span> =&gt; <span class="string">&quot;Output is partially correct&quot;</span>.<span class="ident">into</span>(),
-            <span class="string">&quot;translate:wrong&quot;</span> =&gt; <span class="string">&quot;Output is incorrect&quot;</span>.<span class="ident">into</span>(),
-            <span class="kw">_</span> =&gt; <span class="ident">message</span>,
+    <span class="doccomment">/// The checker may return a message to be translated. This function maps the message
+    /// placeholders to actual messages.
+    </span><span class="kw">pub fn </span>translate_checker_message(message: String) -&gt; String {
+        <span class="kw">match </span>message.as_str() {
+            <span class="string">&quot;translate:success&quot; </span>=&gt; <span class="string">&quot;Output is correct&quot;</span>.into(),
+            <span class="string">&quot;translate:partial&quot; </span>=&gt; <span class="string">&quot;Output is partially correct&quot;</span>.into(),
+            <span class="string">&quot;translate:wrong&quot; </span>=&gt; <span class="string">&quot;Output is incorrect&quot;</span>.into(),
+            <span class="kw">_ </span>=&gt; message,
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

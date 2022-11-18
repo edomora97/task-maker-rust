@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/gen_autocompletion.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gen_autocompletion.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/gen_autocompletion.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gen_autocompletion.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -53,60 +53,60 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Tool that generates the autocompletion scripts inside the target/autocompletion directory.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Tool that generates the autocompletion scripts inside the target/autocompletion directory.
 
-<span class="kw">use</span> <span class="ident">std::fs::File</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</span><span class="kw">use </span>std::fs::File;
+<span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">clap</span>::{<span class="ident">Command</span>, <span class="ident">CommandFactory</span>, <span class="ident">Parser</span>};
-<span class="kw">use</span> <span class="ident">clap_complete</span>::{<span class="ident">Generator</span>, <span class="ident">Shell</span>};
+<span class="kw">use </span>anyhow::{Context, Error};
+<span class="kw">use </span>clap::{Command, CommandFactory, Parser};
+<span class="kw">use </span>clap_complete::{Generator, Shell};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GenAutocompletionOpt</span> {
-    <span class="doccomment">/// Where to write the autocompletion files</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;target&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">target</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Parser, Debug)]
+</span><span class="kw">pub struct </span>GenAutocompletionOpt {
+    <span class="doccomment">/// Where to write the autocompletion files
+    </span><span class="attribute">#[clap(short = <span class="string">&#39;t&#39;</span>, long = <span class="string">&quot;target&quot;</span>)]
+    </span><span class="kw">pub </span>target: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_get_autocompletion</span>(<span class="ident">opt</span>: <span class="ident">GenAutocompletionOpt</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">target</span>) <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">target</span> {
-        <span class="ident">target</span>
-    } <span class="kw">else</span> {
-        <span class="ident">Path::new</span>(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>)).<span class="ident">join</span>(<span class="string">&quot;target/autocompletion&quot;</span>)
+<span class="kw">pub fn </span>main_get_autocompletion(opt: GenAutocompletionOpt) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span>target = <span class="kw">if let </span><span class="prelude-val">Some</span>(target) = opt.target {
+        target
+    } <span class="kw">else </span>{
+        Path::new(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>)).join(<span class="string">&quot;target/autocompletion&quot;</span>)
     };
-    <span class="ident">std::fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">target</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to create target dir: {}&quot;</span>, <span class="ident">target</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-    <span class="kw">for</span> <span class="ident">shell</span> <span class="kw">in</span> [
-        <span class="ident">Shell::Bash</span>,
-        <span class="ident">Shell::Zsh</span>,
-        <span class="ident">Shell::Fish</span>,
-        <span class="ident">Shell::Elvish</span>,
-        <span class="ident">Shell::PowerShell</span>,
+    std::fs::create_dir_all(<span class="kw-2">&amp;</span>target)
+        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to create target dir: {}&quot;</span>, target.display()))<span class="question-mark">?</span>;
+    <span class="kw">for </span>shell <span class="kw">in </span>[
+        Shell::Bash,
+        Shell::Zsh,
+        Shell::Fish,
+        Shell::Elvish,
+        Shell::PowerShell,
     ] {
-        <span class="ident">generate</span>(<span class="ident">shell</span>, <span class="ident"><span class="kw">crate</span>::Opt::command</span>(), <span class="kw-2">&amp;</span><span class="ident">target</span>, <span class="string">&quot;task-maker-rust&quot;</span>)<span class="question-mark">?</span>;
-        <span class="ident">generate</span>(
-            <span class="ident">shell</span>,
-            <span class="ident"><span class="kw">crate</span>::tools::opt::Opt::command</span>(),
-            <span class="kw-2">&amp;</span><span class="ident">target</span>,
+        generate(shell, <span class="kw">crate</span>::Opt::command(), <span class="kw-2">&amp;</span>target, <span class="string">&quot;task-maker-rust&quot;</span>)<span class="question-mark">?</span>;
+        generate(
+            shell,
+            <span class="kw">crate</span>::tools::opt::Opt::command(),
+            <span class="kw-2">&amp;</span>target,
             <span class="string">&quot;task-maker-tools&quot;</span>,
         )<span class="question-mark">?</span>;
     }
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">generate</span>(<span class="ident">shell</span>: <span class="ident">Shell</span>, <span class="kw-2">mut</span> <span class="ident">command</span>: <span class="ident">Command</span>, <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">file_name</span> <span class="op">=</span> <span class="ident">shell</span>.<span class="ident">file_name</span>(<span class="ident">name</span>);
-    <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> <span class="ident">target</span>.<span class="ident">join</span>(<span class="ident">file_name</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::create</span>(<span class="kw-2">&amp;</span><span class="ident">target</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+<span class="kw">fn </span>generate(shell: Shell, <span class="kw-2">mut </span>command: Command, target: <span class="kw-2">&amp;</span>Path, name: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span>file_name = shell.file_name(name);
+    <span class="kw">let </span>target = target.join(file_name);
+    <span class="kw">let </span><span class="kw-2">mut </span>file = File::create(<span class="kw-2">&amp;</span>target).with_context(|| {
         <span class="macro">format!</span>(
             <span class="string">&quot;Failed to create completion for {} at {}&quot;</span>,
-            <span class="ident">shell</span>,
-            <span class="ident">target</span>.<span class="ident">display</span>()
+            shell,
+            target.display()
         )
     })<span class="question-mark">?</span>;
-    <span class="ident">clap_complete::generate</span>(<span class="ident">shell</span>, <span class="kw-2">&amp;mut</span> <span class="ident">command</span>, <span class="ident">name</span>, <span class="kw-2">&amp;mut</span> <span class="ident">file</span>);
+    clap_complete::generate(shell, <span class="kw-2">&amp;mut </span>command, name, <span class="kw-2">&amp;mut </span>file);
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

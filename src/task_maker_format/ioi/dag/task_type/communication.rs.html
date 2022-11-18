@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/task_type/communication.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>communication.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/task_type/communication.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>communication.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -334,336 +334,336 @@
 <span id="334">334</span>
 <span id="335">335</span>
 <span id="336">336</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::sync::{Arc, Mutex};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">ExecutionGroup</span>, <span class="ident">FileUuid</span>, <span class="ident">Priority</span>};
+<span class="kw">use </span>task_maker_dag::{ExecutionGroup, FileUuid, Priority};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">Checker</span>, <span class="ident">IOITask</span>, <span class="ident">ScoreManager</span>, <span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>, <span class="ident">EVALUATION_PRIORITY</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui</span>::{<span class="ident">UIMessage</span>, <span class="ident">UIMessageSender</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">bind_exec_io</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>, <span class="ident">Tag</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{Checker, IOITask, ScoreManager, SubtaskId, TestcaseId, EVALUATION_PRIORITY};
+<span class="kw">use </span><span class="kw">crate</span>::ui::{UIMessage, UIMessageSender};
+<span class="kw">use crate</span>::{bind_exec_callbacks, bind_exec_io};
+<span class="kw">use crate</span>::{EvaluationData, SourceFile, Tag};
 
-<span class="doccomment">/// The type of communication for the solution in a communication task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">UserIo</span> {
-    <span class="doccomment">/// Communication is achieved by using stdin/stdout.</span>
-    <span class="ident">StdIo</span>,
-    <span class="doccomment">/// Communication is achieved by using the pipes passed in argv.</span>
-    <span class="ident">FifoIo</span>,
+<span class="doccomment">/// The type of communication for the solution in a communication task.
+</span><span class="attribute">#[derive(Debug, Clone, Copy, Serialize, Deserialize, TypeScriptify, Eq, PartialEq)]
+</span><span class="kw">pub enum </span>UserIo {
+    <span class="doccomment">/// Communication is achieved by using stdin/stdout.
+    </span>StdIo,
+    <span class="doccomment">/// Communication is achieved by using the pipes passed in argv.
+    </span>FifoIo,
 }
 
-<span class="doccomment">/// The internal data of a task of type `Batch`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CommunicationTypeData</span> {
-    <span class="doccomment">/// The source file of the manager that communicates with the solutions.</span>
-    <span class="kw">pub</span> <span class="ident">manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Number of solution processes to spawn in parallel in a communication task.</span>
-    <span class="kw">pub</span> <span class="ident">num_processes</span>: <span class="ident">u8</span>,
-    <span class="doccomment">/// The type of communication for the solution in a communication task.</span>
-    <span class="kw">pub</span> <span class="ident">user_io</span>: <span class="ident">UserIo</span>,
+<span class="doccomment">/// The internal data of a task of type `Batch`.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>CommunicationTypeData {
+    <span class="doccomment">/// The source file of the manager that communicates with the solutions.
+    </span><span class="kw">pub </span>manager: Arc&lt;SourceFile&gt;,
+    <span class="doccomment">/// Number of solution processes to spawn in parallel in a communication task.
+    </span><span class="kw">pub </span>num_processes: u8,
+    <span class="doccomment">/// The type of communication for the solution in a communication task.
+    </span><span class="kw">pub </span>user_io: UserIo,
 }
 
-<span class="doccomment">/// Internal data of `ScoreSender`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">ScoreSenderData</span> {
-    <span class="doccomment">/// The id of the current subtask.</span>
-    <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-    <span class="doccomment">/// The id of the current testcase.</span>
-    <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-    <span class="doccomment">/// The sender to use for with the `ScoreManager`.</span>
-    <span class="ident">sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">UIMessageSender</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The path of the current solution.</span>
-    <span class="ident">path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The score manager to use for sending the score.</span>
-    <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The number of missing calls to `send` or to `skip`.</span>
-    <span class="ident">missing_answers</span>: <span class="ident">usize</span>,
-    <span class="doccomment">/// The score to send to the [`ScoreManager`].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This will be sent only then the `missing_answers` counter reaches zero, and if multiple</span>
-    <span class="doccomment">/// answers are received, the smallest one will be sent.</span>
-    <span class="ident">answer</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">String</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// Internal data of `ScoreSender`.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">struct </span>ScoreSenderData {
+    <span class="doccomment">/// The id of the current subtask.
+    </span>subtask_id: SubtaskId,
+    <span class="doccomment">/// The id of the current testcase.
+    </span>testcase_id: TestcaseId,
+    <span class="doccomment">/// The sender to use for with the `ScoreManager`.
+    </span>sender: Arc&lt;Mutex&lt;UIMessageSender&gt;&gt;,
+    <span class="doccomment">/// The path of the current solution.
+    </span>path: PathBuf,
+    <span class="doccomment">/// The score manager to use for sending the score.
+    </span>score_manager: Arc&lt;Mutex&lt;ScoreManager&gt;&gt;,
+    <span class="doccomment">/// The number of missing calls to `send` or to `skip`.
+    </span>missing_answers: usize,
+    <span class="doccomment">/// The score to send to the [`ScoreManager`].
+    ///
+    /// This will be sent only then the `missing_answers` counter reaches zero, and if multiple
+    /// answers are received, the smallest one will be sent.
+    </span>answer: <span class="prelude-ty">Option</span>&lt;(f64, String)&gt;,
 }
 
-<span class="doccomment">/// Utility structure for sending the score only once. Since there are many points where the score</span>
-<span class="doccomment">/// can be generated (the manager, but also each process if it fails), it&#39;s easier to centralize the</span>
-<span class="doccomment">/// control of the sending.</span>
-<span class="doccomment">/// It&#39;s important that, in case of a failure, the first process that fails is marked as the cause</span>
-<span class="doccomment">/// because it will stop the entire group, maybe letting the other executions fail.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">ScoreSender</span> {
-    <span class="doccomment">/// Interior mutability allowing this struct to be Clone, Send and Sync.</span>
-    <span class="ident">data</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreSenderData</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Utility structure for sending the score only once. Since there are many points where the score
+/// can be generated (the manager, but also each process if it fails), it&#39;s easier to centralize the
+/// control of the sending.
+/// It&#39;s important that, in case of a failure, the first process that fails is marked as the cause
+/// because it will stop the entire group, maybe letting the other executions fail.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">struct </span>ScoreSender {
+    <span class="doccomment">/// Interior mutability allowing this struct to be Clone, Send and Sync.
+    </span>data: Arc&lt;Mutex&lt;ScoreSenderData&gt;&gt;,
 }
 
-<span class="doccomment">/// Evaluate a solution in a task of Batch type.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">evaluate</span>(
-    <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>,
-    <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-    <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-    <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-    <span class="ident">source_file</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-    <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-    <span class="ident">validation_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-    <span class="ident">_correct_output</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-    <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">CommunicationTypeData</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">ExecutionGroup::new</span>(<span class="macro">format!</span>(
+<span class="doccomment">/// Evaluate a solution in a task of Batch type.
+</span><span class="attribute">#[allow(clippy::too_many_arguments)]
+</span><span class="kw">pub fn </span>evaluate(
+    task: <span class="kw-2">&amp;</span>IOITask,
+    eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+    subtask_id: SubtaskId,
+    testcase_id: TestcaseId,
+    source_file: <span class="kw-2">&amp;</span>SourceFile,
+    input: FileUuid,
+    validation_handle: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    _correct_output: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    score_manager: Arc&lt;Mutex&lt;ScoreManager&gt;&gt;,
+    data: <span class="kw-2">&amp;</span>CommunicationTypeData,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>group = ExecutionGroup::new(<span class="macro">format!</span>(
         <span class="string">&quot;Evaluation of {} on testcase {}, subtask {}&quot;</span>,
-        <span class="ident">source_file</span>.<span class="ident">name</span>(),
-        <span class="ident">testcase_id</span>,
-        <span class="ident">subtask_id</span>
+        source_file.name(),
+        testcase_id,
+        subtask_id
     ));
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fifo_man2sol</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fifo_sol2man</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">data</span>.<span class="ident">num_processes</span> {
-        <span class="kw">let</span> <span class="ident">fifo1</span> <span class="op">=</span> <span class="ident">group</span>.<span class="ident">new_fifo</span>().<span class="ident">sandbox_path</span>();
-        <span class="ident">fifo_man2sol</span>.<span class="ident">push</span>(
-            <span class="ident">fifo1</span>
-                .<span class="ident">to_str</span>()
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Non-UTF8 fifo path&quot;</span>))<span class="question-mark">?</span>
-                .<span class="ident">to_string</span>(),
+    <span class="kw">let </span><span class="kw-2">mut </span>fifo_man2sol = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>fifo_sol2man = Vec::new();
+    <span class="kw">for _ in </span><span class="number">0</span>..data.num_processes {
+        <span class="kw">let </span>fifo1 = group.new_fifo().sandbox_path();
+        fifo_man2sol.push(
+            fifo1
+                .to_str()
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Non-UTF8 fifo path&quot;</span>))<span class="question-mark">?
+                </span>.to_string(),
         );
-        <span class="kw">let</span> <span class="ident">fifo2</span> <span class="op">=</span> <span class="ident">group</span>.<span class="ident">new_fifo</span>().<span class="ident">sandbox_path</span>();
-        <span class="ident">fifo_sol2man</span>.<span class="ident">push</span>(
-            <span class="ident">fifo2</span>
-                .<span class="ident">to_str</span>()
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Non-UTF8 fifo path&quot;</span>))<span class="question-mark">?</span>
-                .<span class="ident">to_string</span>(),
+        <span class="kw">let </span>fifo2 = group.new_fifo().sandbox_path();
+        fifo_sol2man.push(
+            fifo2
+                .to_str()
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Non-UTF8 fifo path&quot;</span>))<span class="question-mark">?
+                </span>.to_string(),
         );
     }
 
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">source_file</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">num_processes</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">num_processes</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">score_sender</span> <span class="op">=</span> <span class="ident">ScoreSender::new</span>(
-        <span class="ident">subtask_id</span>,
-        <span class="ident">testcase_id</span>,
-        <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>(),
-        <span class="ident">path</span>.<span class="ident">clone</span>(),
-        <span class="ident">score_manager</span>,
-        <span class="ident">num_processes</span> <span class="op">+</span> <span class="number">1</span>, <span class="comment">// num_processes + the manager</span>
-    );
-    <span class="kw">for</span> <span class="ident">process_index</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">num_processes</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">data</span>.<span class="ident">user_io</span> {
-            <span class="ident">UserIo::FifoIo</span> =&gt; <span class="macro">vec!</span>[
-                <span class="ident">fifo_man2sol</span>[<span class="ident">process_index</span>].<span class="ident">clone</span>(),
-                <span class="ident">fifo_sol2man</span>[<span class="ident">process_index</span>].<span class="ident">clone</span>(),
+    <span class="kw">let </span>path = source_file.path.clone();
+    <span class="kw">let </span>num_processes = data.num_processes <span class="kw">as </span>usize;
+    <span class="kw">let </span>score_sender = ScoreSender::new(
+        subtask_id,
+        testcase_id,
+        eval.sender.clone(),
+        path.clone(),
+        score_manager,
+        num_processes + <span class="number">1</span>, <span class="comment">// num_processes + the manager
+    </span>);
+    <span class="kw">for </span>process_index <span class="kw">in </span><span class="number">0</span>..num_processes {
+        <span class="kw">let </span><span class="kw-2">mut </span>args = <span class="kw">match </span>data.user_io {
+            UserIo::FifoIo =&gt; <span class="macro">vec!</span>[
+                fifo_man2sol[process_index].clone(),
+                fifo_sol2man[process_index].clone(),
             ],
-            <span class="ident">UserIo::StdIo</span> =&gt; <span class="macro">vec!</span>[],
+            UserIo::StdIo =&gt; <span class="macro">vec!</span>[],
         };
-        <span class="kw">if</span> <span class="ident">num_processes</span> <span class="op">&gt;</span> <span class="number">1</span> {
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">process_index</span>.<span class="ident">to_string</span>());
+        <span class="kw">if </span>num_processes &gt; <span class="number">1 </span>{
+            args.push(process_index.to_string());
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sol_exec</span> <span class="op">=</span> <span class="ident">source_file</span>
-            .<span class="ident">execute</span>(
-                <span class="ident">eval</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>sol_exec = source_file
+            .execute(
+                eval,
                 <span class="macro">format!</span>(
                     <span class="string">&quot;Evaluation of {} (process {}/{}) on testcase {}, subtask {}&quot;</span>,
-                    <span class="ident">source_file</span>.<span class="ident">name</span>(),
-                    <span class="ident">process_index</span> <span class="op">+</span> <span class="number">1</span>,
-                    <span class="ident">num_processes</span>,
-                    <span class="ident">testcase_id</span>,
-                    <span class="ident">subtask_id</span>
+                    source_file.name(),
+                    process_index + <span class="number">1</span>,
+                    num_processes,
+                    testcase_id,
+                    subtask_id
                 ),
-                <span class="ident">args</span>,
+                args,
             )
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to execute solution source file&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">user_io</span> <span class="op">==</span> <span class="ident">UserIo::StdIo</span> {
-            <span class="ident">sol_exec</span>.<span class="ident">stdin_redirect_path</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_man2sol</span>[<span class="ident">process_index</span>]);
-            <span class="ident">sol_exec</span>.<span class="ident">stdout_redirect_path</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_sol2man</span>[<span class="ident">process_index</span>]);
+            .context(<span class="string">&quot;Failed to execute solution source file&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">if </span>data.user_io == UserIo::StdIo {
+            sol_exec.stdin_redirect_path(<span class="kw-2">&amp;</span>fifo_man2sol[process_index]);
+            sol_exec.stdout_redirect_path(<span class="kw-2">&amp;</span>fifo_sol2man[process_index]);
         }
-        <span class="ident">sol_exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>());
-        <span class="ident">sol_exec</span>.<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>);
-        <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">sol_exec</span>.<span class="ident">limits_mut</span>();
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">time_limit</span> {
-            <span class="ident">limits</span>.<span class="ident">cpu_time</span>(<span class="ident">time_limit</span>);
-            <span class="ident">limits</span>.<span class="ident">wall_time</span>(<span class="ident">time_limit</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">+</span> <span class="number">1.0</span>); <span class="comment">// some margin</span>
-        }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">memory_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">memory_limit</span> {
-            <span class="ident">limits</span>.<span class="ident">memory</span>(<span class="ident">memory_limit</span> <span class="op">*</span> <span class="number">1024</span>); <span class="comment">// MiB -&gt; KiB</span>
-        }
+        sol_exec.tag(Tag::Evaluation.into());
+        sol_exec.priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority);
+        <span class="kw">let </span>limits = sol_exec.limits_mut();
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(time_limit) = task.time_limit {
+            limits.cpu_time(time_limit);
+            limits.wall_time(time_limit * <span class="number">1.5 </span>+ <span class="number">1.0</span>); <span class="comment">// some margin
+        </span>}
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(memory_limit) = task.memory_limit {
+            limits.memory(memory_limit * <span class="number">1024</span>); <span class="comment">// MiB -&gt; KiB
+        </span>}
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">sol_exec</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::IOIEvaluation</span> {
-                <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
-                <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">status</span>,
-                <span class="ident">part</span>: <span class="ident">process_index</span>,
-                <span class="ident">num_parts</span>: <span class="ident">num_processes</span>,
+            eval,
+            sol_exec.uuid,
+            |status, solution| UIMessage::IOIEvaluation {
+                subtask: subtask_id,
+                testcase: testcase_id,
+                solution,
+                status,
+                part: process_index,
+                num_parts: num_processes,
             },
-            <span class="ident">path</span>
+            path
         )<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">score_sender</span> <span class="op">=</span> <span class="ident">score_sender</span>.<span class="ident">clone</span>();
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">sol_exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="number">0.0</span>, <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">result</span>.<span class="ident">status</span>))<span class="question-mark">?</span>;
-            } <span class="kw">else</span> {
-                <span class="comment">// We cannot compute the score here, we should wait for the manager.</span>
-                <span class="ident">score_sender</span>.<span class="ident">skip</span>()<span class="question-mark">?</span>;
+        <span class="kw">let </span>score_sender = score_sender.clone();
+        eval.dag.on_execution_done(<span class="kw-2">&amp;</span>sol_exec.uuid, <span class="kw">move </span>|result| {
+            <span class="kw">if </span>!result.status.is_success() {
+                score_sender.send(<span class="number">0.0</span>, <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, result.status))<span class="question-mark">?</span>;
+            } <span class="kw">else </span>{
+                <span class="comment">// We cannot compute the score here, we should wait for the manager.
+                </span>score_sender.skip()<span class="question-mark">?</span>;
             }
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">sol_exec</span>);
+        group.add_execution(sol_exec);
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">process_index</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">num_processes</span> {
-        <span class="ident">args</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_sol2man</span>[<span class="ident">process_index</span>]);
-        <span class="ident">args</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="ident">fifo_man2sol</span>[<span class="ident">process_index</span>]);
+    <span class="kw">let </span><span class="kw-2">mut </span>args = Vec::new();
+    <span class="kw">for </span>process_index <span class="kw">in </span><span class="number">0</span>..num_processes {
+        args.push(<span class="kw-2">&amp;</span>fifo_sol2man[process_index]);
+        args.push(<span class="kw-2">&amp;</span>fifo_man2sol[process_index]);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">manager_exec</span> <span class="op">=</span> <span class="ident">data</span>
-        .<span class="ident">manager</span>
-        .<span class="ident">execute</span>(
-            <span class="ident">eval</span>,
+    <span class="kw">let </span><span class="kw-2">mut </span>manager_exec = data
+        .manager
+        .execute(
+            eval,
             <span class="macro">format!</span>(
                 <span class="string">&quot;Manager of {} on testcase {}, subtask {}&quot;</span>,
-                <span class="ident">source_file</span>.<span class="ident">name</span>(),
-                <span class="ident">testcase_id</span>,
-                <span class="ident">subtask_id</span>
+                source_file.name(),
+                testcase_id,
+                subtask_id
             ),
-            <span class="ident">args</span>,
+            args,
         )
-        .<span class="ident">context</span>(<span class="string">&quot;Failed to execute manager source file&quot;</span>)<span class="question-mark">?</span>;
-    <span class="ident">manager_exec</span>
-        .<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>())
-        .<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>)
-        .<span class="ident">capture_stdout</span>(<span class="number">128</span>)
-        .<span class="ident">capture_stderr</span>(<span class="number">1024</span>);
-    <span class="macro">bind_exec_io!</span>(<span class="ident">manager_exec</span>, <span class="ident">task</span>, <span class="ident">input</span>, <span class="ident">validation_handle</span>);
-    <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">manager_exec</span>.<span class="ident">limits_mut</span>();
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">time_limit</span> {
-        <span class="kw">let</span> <span class="ident">cpu_time</span> <span class="op">=</span> (<span class="ident">time_limit</span> <span class="op">+</span> <span class="number">1.0</span>) <span class="op">*</span> <span class="ident">num_processes</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">wall_time</span> <span class="op">=</span> <span class="ident">cpu_time</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">+</span> <span class="number">1.0</span>; <span class="comment">// some margin</span>
-        <span class="ident">limits</span>.<span class="ident">cpu_time</span>(<span class="ident">cpu_time</span>);
-        <span class="ident">limits</span>.<span class="ident">wall_time</span>(<span class="ident">wall_time</span>);
+        .context(<span class="string">&quot;Failed to execute manager source file&quot;</span>)<span class="question-mark">?</span>;
+    manager_exec
+        .tag(Tag::Evaluation.into())
+        .priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority)
+        .capture_stdout(<span class="number">128</span>)
+        .capture_stderr(<span class="number">1024</span>);
+    <span class="macro">bind_exec_io!</span>(manager_exec, task, input, validation_handle);
+    <span class="kw">let </span>limits = manager_exec.limits_mut();
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(time_limit) = task.time_limit {
+        <span class="kw">let </span>cpu_time = (time_limit + <span class="number">1.0</span>) * num_processes <span class="kw">as </span>f64;
+        <span class="kw">let </span>wall_time = cpu_time * <span class="number">1.5 </span>+ <span class="number">1.0</span>; <span class="comment">// some margin
+        </span>limits.cpu_time(cpu_time);
+        limits.wall_time(wall_time);
     }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">memory_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">memory_limit</span> {
-        <span class="ident">limits</span>.<span class="ident">memory</span>(<span class="ident">memory_limit</span> <span class="op">*</span> <span class="number">1024</span>); <span class="comment">// MiB -&gt; KiB</span>
-    }
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(memory_limit) = task.memory_limit {
+        limits.memory(memory_limit * <span class="number">1024</span>); <span class="comment">// MiB -&gt; KiB
+    </span>}
     <span class="macro">bind_exec_callbacks!</span>(
-        <span class="ident">eval</span>,
-        <span class="ident">manager_exec</span>.<span class="ident">uuid</span>,
-        <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::IOIChecker</span> {
-            <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
-            <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
-            <span class="ident">solution</span>,
-            <span class="ident">status</span>,
+        eval,
+        manager_exec.uuid,
+        |status, solution| UIMessage::IOIChecker {
+            subtask: subtask_id,
+            testcase: testcase_id,
+            solution,
+            status,
         },
-        <span class="ident">path</span>
+        path
     )<span class="question-mark">?</span>;
-    <span class="ident">eval</span>.<span class="ident">dag</span>
-        .<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">manager_exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="number">0.0</span>, <span class="string">&quot;Checker failed&quot;</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>;
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    eval.dag
+        .on_execution_done(<span class="kw-2">&amp;</span>manager_exec.uuid, <span class="kw">move </span>|result| {
+            <span class="kw">if </span>!result.status.is_success() {
+                score_sender.send(<span class="number">0.0</span>, <span class="string">&quot;Checker failed&quot;</span>.to_string())<span class="question-mark">?</span>;
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
-            <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">result</span>
-                .<span class="ident">stdout</span>
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">result</span>
-                .<span class="ident">stderr</span>
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>);
-            <span class="kw">let</span> <span class="ident">score</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">score</span>.<span class="ident">trim</span>().<span class="ident">parse</span>().<span class="ident">context</span>(<span class="string">&quot;Invalid score from checker&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>).<span class="ident">trim</span>().<span class="ident">to_string</span>();
-            <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">Checker::translate_checker_message</span>(<span class="ident">message</span>);
-            <span class="ident">score_sender</span>.<span class="ident">send</span>(<span class="ident">score</span>, <span class="ident">message</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>stdout = result
+                .stdout
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
+            <span class="kw">let </span>stderr = result
+                .stderr
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
+            <span class="kw">let </span>score = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stdout);
+            <span class="kw">let </span>score: f64 = score.trim().parse().context(<span class="string">&quot;Invalid score from checker&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>message = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr).trim().to_string();
+            <span class="kw">let </span>message = Checker::translate_checker_message(message);
+            score_sender.send(score, message)<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(())
         });
-    <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">manager_exec</span>);
-    <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution_group</span>(<span class="ident">group</span>);
+    group.add_execution(manager_exec);
+    eval.dag.add_execution_group(group);
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">impl</span> <span class="ident">ScoreSender</span> {
-    <span class="doccomment">/// Make a new `ScoreSender` for a testcase of a solution.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-        <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-        <span class="ident">sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">UIMessageSender</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">path</span>: <span class="ident">PathBuf</span>,
-        <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">num_answers</span>: <span class="ident">usize</span>,
-    ) -&gt; <span class="ident">ScoreSender</span> {
-        <span class="ident">ScoreSender</span> {
-            <span class="ident">data</span>: <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="ident">ScoreSenderData</span> {
-                <span class="ident">subtask_id</span>,
-                <span class="ident">testcase_id</span>,
-                <span class="ident">sender</span>,
-                <span class="ident">path</span>,
-                <span class="ident">score_manager</span>,
-                <span class="ident">missing_answers</span>: <span class="ident">num_answers</span>,
-                <span class="ident">answer</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl </span>ScoreSender {
+    <span class="doccomment">/// Make a new `ScoreSender` for a testcase of a solution.
+    </span><span class="kw">fn </span>new(
+        subtask_id: SubtaskId,
+        testcase_id: TestcaseId,
+        sender: Arc&lt;Mutex&lt;UIMessageSender&gt;&gt;,
+        path: PathBuf,
+        score_manager: Arc&lt;Mutex&lt;ScoreManager&gt;&gt;,
+        num_answers: usize,
+    ) -&gt; ScoreSender {
+        ScoreSender {
+            data: Arc::new(Mutex::new(ScoreSenderData {
+                subtask_id,
+                testcase_id,
+                sender,
+                path,
+                score_manager,
+                missing_answers: num_answers,
+                answer: <span class="prelude-val">None</span>,
             })),
         }
     }
 
-    <span class="doccomment">/// Set the score and message for a testcase. Note that this may be overridden by a call with a</span>
-    <span class="doccomment">/// smaller score.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The score will be sent to the [`ScoreManager`] only if this is the last missing call.</span>
-    <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">score</span>: <span class="ident">f64</span>, <span class="ident">message</span>: <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
+    <span class="doccomment">/// Set the score and message for a testcase. Note that this may be overridden by a call with a
+    /// smaller score.
+    ///
+    /// The score will be sent to the [`ScoreManager`] only if this is the last missing call.
+    </span><span class="kw">fn </span>send(<span class="kw-2">&amp;</span><span class="self">self</span>, score: f64, message: String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock().unwrap();
         <span class="macro">assert!</span>(
-            <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">&gt;</span> <span class="number">0</span>,
-            <span class="string">&quot;send() called with missing_answers = 0&quot;</span>
-        );
-        <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+            data.missing_answers &gt; <span class="number">0</span>,
+            <span class="string">&quot;send() called with missing_answers = 0&quot;
+        </span>);
+        data.missing_answers -= <span class="number">1</span>;
 
-        <span class="kw">let</span> <span class="ident">answer</span> <span class="op">=</span> (<span class="ident">score</span>, <span class="ident">message</span>);
-        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">answer</span>.<span class="ident">is_none</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">data</span>.<span class="ident">answer</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="number">0</span> <span class="op">&gt;</span> <span class="ident">score</span> {
-            <span class="ident">data</span>.<span class="ident">answer</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">answer</span>);
+        <span class="kw">let </span>answer = (score, message);
+        <span class="kw">if </span>data.answer.is_none() || data.answer.as_ref().unwrap().<span class="number">0 </span>&gt; score {
+            data.answer = <span class="prelude-val">Some</span>(answer);
         }
 
-        <span class="ident"><span class="self">Self</span>::maybe_flush</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>)
+        <span class="self">Self</span>::maybe_flush(<span class="kw-2">&amp;</span>data)
     }
 
-    <span class="doccomment">/// Decrease the number of missing calls by one, but without setting a score/message.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The score will be sent to the [`ScoreManager`] only if this is the last missing call.</span>
-    <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
+    <span class="doccomment">/// Decrease the number of missing calls by one, but without setting a score/message.
+    ///
+    /// The score will be sent to the [`ScoreManager`] only if this is the last missing call.
+    </span><span class="kw">fn </span>skip(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock().unwrap();
         <span class="macro">assert!</span>(
-            <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">&gt;</span> <span class="number">0</span>,
-            <span class="string">&quot;skip() called with missing_answers = 0&quot;</span>
-        );
-        <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+            data.missing_answers &gt; <span class="number">0</span>,
+            <span class="string">&quot;skip() called with missing_answers = 0&quot;
+        </span>);
+        data.missing_answers -= <span class="number">1</span>;
 
-        <span class="ident"><span class="self">Self</span>::maybe_flush</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>)
+        <span class="self">Self</span>::maybe_flush(<span class="kw-2">&amp;</span>data)
     }
 
-    <span class="doccomment">/// Check if all the answers have been received, and if so send to the [`ScoreManager`] the score</span>
-    <span class="doccomment">/// and message.</span>
-    <span class="kw">fn</span> <span class="ident">maybe_flush</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">ScoreSenderData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">missing_answers</span> <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="doccomment">/// Check if all the answers have been received, and if so send to the [`ScoreManager`] the score
+    /// and message.
+    </span><span class="kw">fn </span>maybe_flush(data: <span class="kw-2">&amp;</span>ScoreSenderData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">if </span>data.missing_answers &gt; <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">score</span>, <span class="ident">message</span>)) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">data</span>.<span class="ident">answer</span> {
-            <span class="ident">data</span>.<span class="ident">score_manager</span>
-                .<span class="ident">lock</span>()
-                .<span class="ident">unwrap</span>()
-                .<span class="ident">score</span>(
-                    <span class="ident">data</span>.<span class="ident">subtask_id</span>,
-                    <span class="ident">data</span>.<span class="ident">testcase_id</span>,
-                    <span class="kw-2">*</span><span class="ident">score</span>,
-                    <span class="ident">message</span>.<span class="ident">clone</span>(),
-                    <span class="ident">data</span>.<span class="ident">sender</span>.<span class="ident">clone</span>(),
-                    <span class="ident">data</span>.<span class="ident">path</span>.<span class="ident">clone</span>(),
+        <span class="kw">if let </span><span class="prelude-val">Some</span>((score, message)) = <span class="kw-2">&amp;</span>data.answer {
+            data.score_manager
+                .lock()
+                .unwrap()
+                .score(
+                    data.subtask_id,
+                    data.testcase_id,
+                    <span class="kw-2">*</span>score,
+                    message.clone(),
+                    data.sender.clone(),
+                    data.path.clone(),
                 )
-                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                .with_context(|| {
                     <span class="macro">format!</span>(
                         <span class="string">&quot;Failed to store testcase score (score: {}, message: {})&quot;</span>,
-                        <span class="ident">score</span>, <span class="ident">message</span>
+                        score, message
                     )
                 })<span class="question-mark">?</span>;
         }
@@ -671,4 +671,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

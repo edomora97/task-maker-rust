@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/language.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>language.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_lang/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/language.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>language.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_lang/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -276,283 +276,283 @@
 <span id="276">276</span>
 <span id="277">277</span>
 <span id="278">278</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use </span>anyhow::{Context, Error};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">Execution</span>, <span class="ident">ExecutionCommand</span>, <span class="ident">ExecutionDAG</span>, <span class="ident">ExecutionLimits</span>, <span class="ident">File</span>};
+<span class="kw">use </span>task_maker_dag::{Execution, ExecutionCommand, ExecutionDAG, ExecutionLimits, File};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Dependency</span>, <span class="ident">GraderMap</span>};
+<span class="kw">use crate</span>::{Dependency, GraderMap};
 
-<span class="doccomment">/// Trait that defines the properties of the supported languages. Most of the methods have a safe</span>
-<span class="doccomment">/// blanket implementation, note that not all of them are _really_ optional: based on the value</span>
-<span class="doccomment">/// returned by `need_compilation` some of the methods become required.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A language can be either compiler or not-compiler.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// When a language is compiled the extra required implementations are:</span>
-<span class="doccomment">/// - `compilation_builder`</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Language</span>: <span class="ident">std::fmt::Debug</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
-    <span class="doccomment">/// Full name of the language. This must be unique between all the other languages.</span>
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>;
+<span class="doccomment">/// Trait that defines the properties of the supported languages. Most of the methods have a safe
+/// blanket implementation, note that not all of them are _really_ optional: based on the value
+/// returned by `need_compilation` some of the methods become required.
+///
+/// A language can be either compiler or not-compiler.
+///
+/// When a language is compiled the extra required implementations are:
+/// - `compilation_builder`
+</span><span class="kw">pub trait </span>Language: std::fmt::Debug + Send + Sync {
+    <span class="doccomment">/// Full name of the language. This must be unique between all the other languages.
+    </span><span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str;
 
-    <span class="doccomment">/// List of valid extensions for this language. A file is considered in this language if its</span>
-    <span class="doccomment">/// extension is inside this list.</span>
-    <span class="kw">fn</span> <span class="ident">extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// List of valid extensions for this language. A file is considered in this language if its
+    /// extension is inside this list.
+    </span><span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;;
 
-    <span class="doccomment">/// Whether this language needs a compilation step. Returning `true` here triggers many changes</span>
-    <span class="doccomment">/// in the behaviour of the execution. Of course the compilation step will be added, because of</span>
-    <span class="doccomment">/// that there is the need to know how to compile the source file, forcing the implementation of</span>
-    <span class="doccomment">/// some extra methods.</span>
-    <span class="kw">fn</span> <span class="ident">need_compilation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
+    <span class="doccomment">/// Whether this language needs a compilation step. Returning `true` here triggers many changes
+    /// in the behaviour of the execution. Of course the compilation step will be added, because of
+    /// that there is the need to know how to compile the source file, forcing the implementation of
+    /// some extra methods.
+    </span><span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
 
-    <span class="doccomment">/// The prefix to put at the start of a line to mark the whole line as a comment.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The return value should include a space character only if required by the language.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the language does not support inline comments, return `None`.</span>
-    <span class="kw">fn</span> <span class="ident">inline_comment_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// The prefix to put at the start of a line to mark the whole line as a comment.
+    ///
+    /// The return value should include a space character only if required by the language.
+    ///
+    /// If the language does not support inline comments, return `None`.
+    </span><span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;;
 
-    <span class="doccomment">/// Return the `CompiledLanguageBuilder` for compiling a source file with this language.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This method must return `Some` if and only if `need_compilation` returns `true`.</span>
-    <span class="kw">fn</span> <span class="ident">compilation_builder</span>(
+    <span class="doccomment">/// Return the `CompiledLanguageBuilder` for compiling a source file with this language.
+    ///
+    /// This method must return `Some` if and only if `need_compilation` returns `true`.
+    </span><span class="kw">fn </span>compilation_builder(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">_source</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">_settings</span>: <span class="ident">CompilationSettings</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CompiledLanguageBuilder</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="prelude-val">None</span>
+        _source: <span class="kw-2">&amp;</span>Path,
+        _settings: CompilationSettings,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">&#39;_</span>&gt;&gt; {
+        <span class="prelude-val">None
+    </span>}
+
+    <span class="doccomment">/// Command to use to run the program. It defaults to the executable name of the program.
+    /// Languages that need to run a separate program (e.g. a system-wise interpreter) may change
+    /// the return value of this method.
+    </span><span class="kw">fn </span>runtime_command(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>Path, write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;) -&gt; ExecutionCommand {
+        ExecutionCommand::local(<span class="self">self</span>.executable_name(path, write_to))
     }
 
-    <span class="doccomment">/// Command to use to run the program. It defaults to the executable name of the program.</span>
-    <span class="doccomment">/// Languages that need to run a separate program (e.g. a system-wise interpreter) may change</span>
-    <span class="doccomment">/// the return value of this method.</span>
-    <span class="kw">fn</span> <span class="ident">runtime_command</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">ExecutionCommand</span> {
-        <span class="ident">ExecutionCommand::local</span>(<span class="self">self</span>.<span class="ident">executable_name</span>(<span class="ident">path</span>, <span class="ident">write_to</span>))
-    }
-
-    <span class="doccomment">/// Arguments to pass to the executable to start the evaluation.</span>
-    <span class="kw">fn</span> <span class="ident">runtime_args</span>(
+    <span class="doccomment">/// Arguments to pass to the executable to start the evaluation.
+    </span><span class="kw">fn </span>runtime_args(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">_write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-        <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="ident">args</span>
+        _path: <span class="kw-2">&amp;</span>Path,
+        _write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;,
+        args: Vec&lt;String&gt;,
+    ) -&gt; Vec&lt;String&gt; {
+        args
     }
 
-    <span class="doccomment">/// Add a file to the runtime command if the language requires that. That file can be any run</span>
-    <span class="doccomment">/// time dependency and it&#39;s relative to the sandbox.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The new runtime arguments should be returned.</span>
-    <span class="kw">fn</span> <span class="ident">runtime_add_file</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">_file</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="ident">args</span>
+    <span class="doccomment">/// Add a file to the runtime command if the language requires that. That file can be any run
+    /// time dependency and it&#39;s relative to the sandbox.
+    ///
+    /// The new runtime arguments should be returned.
+    </span><span class="kw">fn </span>runtime_add_file(<span class="kw-2">&amp;</span><span class="self">self</span>, args: Vec&lt;String&gt;, _file: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;String&gt; {
+        args
     }
 
-    <span class="doccomment">/// The dependencies to put inside the execution sandbox. This does not include the executable.</span>
-    <span class="kw">fn</span> <span class="ident">runtime_dependencies</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// The dependencies to put inside the execution sandbox. This does not include the executable.
+    </span><span class="kw">fn </span>runtime_dependencies(<span class="kw-2">&amp;</span><span class="self">self</span>, _path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;Dependency&gt; {
         <span class="macro">vec!</span>[]
     }
 
-    <span class="doccomment">/// Update the limits for some language-specific requirements. For example the executable may</span>
-    <span class="doccomment">/// need to fork (hence use more processes).</span>
-    <span class="kw">fn</span> <span class="ident">custom_limits</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_limits</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionLimits</span>) {}
+    <span class="doccomment">/// Update the limits for some language-specific requirements. For example the executable may
+    /// need to fork (hence use more processes).
+    </span><span class="kw">fn </span>custom_limits(<span class="kw-2">&amp;</span><span class="self">self</span>, _limits: <span class="kw-2">&amp;mut </span>ExecutionLimits) {}
 
-    <span class="doccomment">/// The name of the executable inside the sandbox. If this binary will be written elsewhere in</span>
-    <span class="doccomment">/// the system, use the same name. Otherwise fallback to the original file name, without</span>
-    <span class="doccomment">/// extension.</span>
-    <span class="kw">fn</span> <span class="ident">executable_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">PathBuf</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">write_to</span>) <span class="op">=</span> <span class="ident">write_to</span> {
-            <span class="ident">PathBuf::from</span>(<span class="ident">write_to</span>.<span class="ident">file_name</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>))
-        } <span class="kw">else</span> {
-            <span class="ident">PathBuf::from</span>(<span class="ident">path</span>.<span class="ident">file_stem</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>))
+    <span class="doccomment">/// The name of the executable inside the sandbox. If this binary will be written elsewhere in
+    /// the system, use the same name. Otherwise fallback to the original file name, without
+    /// extension.
+    </span><span class="kw">fn </span>executable_name(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>Path, write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;) -&gt; PathBuf {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(write_to) = write_to {
+            PathBuf::from(write_to.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>))
+        } <span class="kw">else </span>{
+            PathBuf::from(path.file_stem().expect(<span class="string">&quot;Invalid file name&quot;</span>))
         }
     }
 }
 
-<span class="doccomment">/// The generic settings that are common between all the compiled languages.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CompilationSettings</span> {
-    <span class="doccomment">/// Where to write the compiled binary file.</span>
-    <span class="kw">pub</span> <span class="ident">write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Whether to write to `write_to` the compiled binary.</span>
-    <span class="kw">pub</span> <span class="ident">copy_exe</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// Whether to try to link statically the binary.</span>
-    <span class="kw">pub</span> <span class="ident">list_static</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// The generic settings that are common between all the compiled languages.
+</span><span class="attribute">#[derive(Clone, Debug, Default)]
+</span><span class="kw">pub struct </span>CompilationSettings {
+    <span class="doccomment">/// Where to write the compiled binary file.
+    </span><span class="kw">pub </span>write_to: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
+    <span class="doccomment">/// Whether to write to `write_to` the compiled binary.
+    </span><span class="kw">pub </span>copy_exe: bool,
+    <span class="doccomment">/// Whether to try to link statically the binary.
+    </span><span class="kw">pub </span>list_static: bool,
 }
 
-<span class="doccomment">/// This trait describes the API of a &quot;compiled language builder&quot;, a component that builds the DAG</span>
-<span class="doccomment">/// execution for the compilation.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CompiledLanguageBuilder</span> {
-    <span class="doccomment">/// If a grader map is present, provide it with this method.</span>
-    <span class="kw">fn</span> <span class="ident">use_grader</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">grader_map</span>: <span class="kw-2">&amp;</span><span class="ident">GraderMap</span>);
-    <span class="doccomment">/// Build the execution to be added to the DAG for compiling the source file.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This returns the execution to add and the file reference to the compiled binary file.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// After calling this method, the builder cannot be used anymore. This cannot be enforced by</span>
-    <span class="doccomment">/// taking self because otherwise this trait is no longer object-safe.</span>
-    <span class="kw">fn</span> <span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dag</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Execution</span>, <span class="ident">File</span>), <span class="ident">Error</span><span class="op">&gt;</span>;
+<span class="doccomment">/// This trait describes the API of a &quot;compiled language builder&quot;, a component that builds the DAG
+/// execution for the compilation.
+</span><span class="kw">pub trait </span>CompiledLanguageBuilder {
+    <span class="doccomment">/// If a grader map is present, provide it with this method.
+    </span><span class="kw">fn </span>use_grader(<span class="kw-2">&amp;mut </span><span class="self">self</span>, grader_map: <span class="kw-2">&amp;</span>GraderMap);
+    <span class="doccomment">/// Build the execution to be added to the DAG for compiling the source file.
+    ///
+    /// This returns the execution to add and the file reference to the compiled binary file.
+    ///
+    /// After calling this method, the builder cannot be used anymore. This cannot be enforced by
+    /// taking self because otherwise this trait is no longer object-safe.
+    </span><span class="kw">fn </span>finalize(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dag: <span class="kw-2">&amp;mut </span>ExecutionDAG) -&gt; <span class="prelude-ty">Result</span>&lt;(Execution, File), Error&gt;;
 }
 
-<span class="doccomment">/// A simple `CompiledLanguageBuilder` that is able to compile file in most of the languages.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// It supports customizing the compiler, the command line arguments, a grader, a custom list of</span>
-<span class="doccomment">/// additional dependencies, and also customizing the produced execution with a callback.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Some notes about the compilation:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// - `language` must return true from `need_compilation`.</span>
-<span class="doccomment">/// - `args` should not include the path to the source files (`finalize()` will add them)</span>
-<span class="doccomment">/// - The compiler must write the binary file in `binary_name`, you can change this after</span>
-<span class="doccomment">///   constructing the struct and before calling `finalize()`.</span>
-<span class="doccomment">/// - The callback is called just before `finalize()` returns, so all the compilation properties</span>
-<span class="doccomment">///   are already set.</span>
-<span class="doccomment">/// - The `grader` will be set by `use_grader`, so your changes may be overwritten.</span>
-<span class="doccomment">/// - After the first call to `finalize()` this struct cannot be used (see note on the definition</span>
-<span class="doccomment">///   of `finalize` in the trait).</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SimpleCompiledLanguageBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// A reference to the language that produced this builder.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This is used to select which grader to use.</span>
-    <span class="kw">pub</span> <span class="ident">language</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;l</span> <span class="kw">dyn</span> <span class="ident">Language</span>,
-    <span class="doccomment">/// The settings for this compilation.</span>
-    <span class="kw">pub</span> <span class="ident">settings</span>: <span class="ident">CompilationSettings</span>,
-    <span class="doccomment">/// The local path to the source file to compile.</span>
-    <span class="kw">pub</span> <span class="ident">source_path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The name of source file to compile.</span>
-    <span class="kw">pub</span> <span class="ident">source_name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The name of the compiled file in the sandbox.</span>
-    <span class="kw">pub</span> <span class="ident">binary_name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The compiler to use.</span>
-    <span class="kw">pub</span> <span class="ident">compiler</span>: <span class="ident">ExecutionCommand</span>,
-    <span class="doccomment">/// The list of arguments to pass to the compiler.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// To this list the paths to the source files are added automatically and should not be</span>
-    <span class="doccomment">/// present.</span>
-    <span class="kw">pub</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The grader to use.</span>
-    <span class="kw">pub</span> <span class="ident">grader</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The list of additional compilation dependencies.</span>
-    <span class="kw">pub</span> <span class="ident">dependencies</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Whether the compiler wants only the path to the grader file, or the paths to all the source</span>
-    <span class="doccomment">/// files to compile together.</span>
-    <span class="kw">pub</span> <span class="ident">grader_only</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The callback to call with the built `Execution` for additional customizations.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::type_complexity</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">callback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnOnce</span>(<span class="kw-2">&amp;mut</span> <span class="ident">Execution</span>) <span class="op">+</span> <span class="lifetime">&#39;c</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A simple `CompiledLanguageBuilder` that is able to compile file in most of the languages.
+///
+/// It supports customizing the compiler, the command line arguments, a grader, a custom list of
+/// additional dependencies, and also customizing the produced execution with a callback.
+///
+/// Some notes about the compilation:
+///
+/// - `language` must return true from `need_compilation`.
+/// - `args` should not include the path to the source files (`finalize()` will add them)
+/// - The compiler must write the binary file in `binary_name`, you can change this after
+///   constructing the struct and before calling `finalize()`.
+/// - The callback is called just before `finalize()` returns, so all the compilation properties
+///   are already set.
+/// - The `grader` will be set by `use_grader`, so your changes may be overwritten.
+/// - After the first call to `finalize()` this struct cannot be used (see note on the definition
+///   of `finalize` in the trait).
+</span><span class="kw">pub struct </span>SimpleCompiledLanguageBuilder&lt;<span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span>&gt; {
+    <span class="doccomment">/// A reference to the language that produced this builder.
+    ///
+    /// This is used to select which grader to use.
+    </span><span class="kw">pub </span>language: <span class="kw-2">&amp;</span><span class="lifetime">&#39;l </span><span class="kw">dyn </span>Language,
+    <span class="doccomment">/// The settings for this compilation.
+    </span><span class="kw">pub </span>settings: CompilationSettings,
+    <span class="doccomment">/// The local path to the source file to compile.
+    </span><span class="kw">pub </span>source_path: PathBuf,
+    <span class="doccomment">/// The name of source file to compile.
+    </span><span class="kw">pub </span>source_name: String,
+    <span class="doccomment">/// The name of the compiled file in the sandbox.
+    </span><span class="kw">pub </span>binary_name: String,
+    <span class="doccomment">/// The compiler to use.
+    </span><span class="kw">pub </span>compiler: ExecutionCommand,
+    <span class="doccomment">/// The list of arguments to pass to the compiler.
+    ///
+    /// To this list the paths to the source files are added automatically and should not be
+    /// present.
+    </span><span class="kw">pub </span>args: Vec&lt;String&gt;,
+    <span class="doccomment">/// The grader to use.
+    </span><span class="kw">pub </span>grader: <span class="prelude-ty">Option</span>&lt;Dependency&gt;,
+    <span class="doccomment">/// The list of additional compilation dependencies.
+    </span><span class="kw">pub </span>dependencies: Vec&lt;Dependency&gt;,
+    <span class="doccomment">/// Whether the compiler wants only the path to the grader file, or the paths to all the source
+    /// files to compile together.
+    </span><span class="kw">pub </span>grader_only: bool,
+    <span class="doccomment">/// The callback to call with the built `Execution` for additional customizations.
+    </span><span class="attribute">#[allow(clippy::type_complexity)]
+    </span><span class="kw">pub </span>callback: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>FnOnce(<span class="kw-2">&amp;mut </span>Execution) + <span class="lifetime">&#39;c</span>&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">SimpleCompiledLanguageBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Build a new `SimpleCompiledLanguageBuilder` for a source file in the given language.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-        <span class="ident">language</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;l</span> <span class="kw">dyn</span> <span class="ident">Language</span>,
-        <span class="ident">source_path</span>: <span class="ident">P</span>,
-        <span class="ident">settings</span>: <span class="ident">CompilationSettings</span>,
-        <span class="ident">compiler</span>: <span class="ident">ExecutionCommand</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">source_path</span> <span class="op">=</span> <span class="ident">source_path</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_path</span>
-            .<span class="ident">file_name</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>)
-            .<span class="ident">to_string_lossy</span>()
-            .<span class="ident">to_string</span>();
-        <span class="comment">// names starting with - can be interpreted as command line options</span>
-        <span class="kw">if</span> <span class="ident">source_name</span>.<span class="ident">starts_with</span>(<span class="string">&#39;-&#39;</span>) {
-            <span class="ident">source_name</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;./{}&quot;</span>, <span class="ident">source_name</span>);
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span>&gt; SimpleCompiledLanguageBuilder&lt;<span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span>&gt; {
+    <span class="doccomment">/// Build a new `SimpleCompiledLanguageBuilder` for a source file in the given language.
+    </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;&gt;(
+        language: <span class="kw-2">&amp;</span><span class="lifetime">&#39;l </span><span class="kw">dyn </span>Language,
+        source_path: P,
+        settings: CompilationSettings,
+        compiler: ExecutionCommand,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>source_path = source_path.into();
+        <span class="kw">let </span><span class="kw-2">mut </span>source_name = source_path
+            .file_name()
+            .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+            .to_string_lossy()
+            .to_string();
+        <span class="comment">// names starting with - can be interpreted as command line options
+        </span><span class="kw">if </span>source_name.starts_with(<span class="string">&#39;-&#39;</span>) {
+            source_name = <span class="macro">format!</span>(<span class="string">&quot;./{}&quot;</span>, source_name);
         }
-        <span class="self">Self</span> {
-            <span class="ident">language</span>,
-            <span class="ident">settings</span>,
-            <span class="ident">source_path</span>,
-            <span class="ident">source_name</span>,
-            <span class="ident">binary_name</span>: <span class="string">&quot;__compiled&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">compiler</span>,
-            <span class="ident">args</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">grader</span>: <span class="prelude-val">None</span>,
-            <span class="ident">dependencies</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">grader_only</span>: <span class="bool-val">false</span>,
-            <span class="ident">callback</span>: <span class="prelude-val">None</span>,
-        }
-    }
-
-    <span class="doccomment">/// Add a new argument to the list.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_arg</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">arg</span>: <span class="ident">S</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">arg</span>.<span class="ident">into</span>());
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// Add an additional dependency.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_dependency</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dependency</span>: <span class="ident">Dependency</span>) {
-        <span class="self">self</span>.<span class="ident">dependencies</span>.<span class="ident">push</span>(<span class="ident">dependency</span>);
-    }
-
-    <span class="doccomment">/// Pass only the path to the grader source file to the compiler, if the grader is present. If</span>
-    <span class="doccomment">/// no grader is present, pass just the path to the actual source file.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">grader_only</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">grader_only</span> <span class="op">=</span> <span class="bool-val">true</span>;
-    }
-
-    <span class="doccomment">/// Set the callback to call with the built execution.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">callback</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;mut</span> <span class="ident">Execution</span>) <span class="op">+</span> <span class="lifetime">&#39;c</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">callback</span>: <span class="ident">F</span>) {
-        <span class="self">self</span>.<span class="ident">callback</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">callback</span>));
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> <span class="ident">CompiledLanguageBuilder</span> <span class="kw">for</span> <span class="ident">SimpleCompiledLanguageBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">use_grader</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">grader_map</span>: <span class="kw-2">&amp;</span><span class="ident">GraderMap</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">grader</span>) <span class="op">=</span> <span class="ident">grader_map</span>.<span class="ident">get_compilation_deps</span>(<span class="self">self</span>.<span class="ident">language</span>) {
-            <span class="self">self</span>.<span class="ident">grader</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">grader</span>);
+        <span class="self">Self </span>{
+            language,
+            settings,
+            source_path,
+            source_name,
+            binary_name: <span class="string">&quot;__compiled&quot;</span>.into(),
+            compiler,
+            args: Default::default(),
+            grader: <span class="prelude-val">None</span>,
+            dependencies: Default::default(),
+            grader_only: <span class="bool-val">false</span>,
+            callback: <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dag</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Execution</span>, <span class="ident">File</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">source_path</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>().<span class="ident">to_string_lossy</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">comp</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="macro">format!</span>(<span class="string">&quot;Compilation of {}&quot;</span>, <span class="ident">name</span>), <span class="self">self</span>.<span class="ident">compiler</span>.<span class="ident">clone</span>());
-        <span class="ident">comp</span>.<span class="ident">args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">args</span>.<span class="ident">clone</span>();
+    <span class="doccomment">/// Add a new argument to the list.
+    </span><span class="kw">pub fn </span>add_arg&lt;S: Into&lt;String&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, arg: S) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.args.push(arg.into());
+        <span class="self">self
+    </span>}
 
-        <span class="comment">// compilation dependencies</span>
-        <span class="kw">for</span> <span class="ident">dep</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">dependencies</span>.<span class="ident">drain</span>(..) {
-            <span class="ident">comp</span>.<span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="ident">dep</span>.<span class="ident">file</span>, <span class="kw-2">&amp;</span><span class="ident">dep</span>.<span class="ident">sandbox_path</span>, <span class="ident">dep</span>.<span class="ident">executable</span>);
-            <span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">dep</span>.<span class="ident">file</span>, <span class="kw-2">&amp;</span><span class="ident">dep</span>.<span class="ident">local_path</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to provide compilation dependency&quot;</span>)<span class="question-mark">?</span>;
+    <span class="doccomment">/// Add an additional dependency.
+    </span><span class="kw">pub fn </span>add_dependency(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dependency: Dependency) {
+        <span class="self">self</span>.dependencies.push(dependency);
+    }
+
+    <span class="doccomment">/// Pass only the path to the grader source file to the compiler, if the grader is present. If
+    /// no grader is present, pass just the path to the actual source file.
+    </span><span class="kw">pub fn </span>grader_only(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.grader_only = <span class="bool-val">true</span>;
+    }
+
+    <span class="doccomment">/// Set the callback to call with the built execution.
+    </span><span class="kw">pub fn </span>callback&lt;F: FnOnce(<span class="kw-2">&amp;mut </span>Execution) + <span class="lifetime">&#39;c</span>&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, callback: F) {
+        <span class="self">self</span>.callback = <span class="prelude-val">Some</span>(Box::new(callback));
+    }
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span>&gt; CompiledLanguageBuilder <span class="kw">for </span>SimpleCompiledLanguageBuilder&lt;<span class="lifetime">&#39;l</span>, <span class="lifetime">&#39;c</span>&gt; {
+    <span class="kw">fn </span>use_grader(<span class="kw-2">&amp;mut </span><span class="self">self</span>, grader_map: <span class="kw-2">&amp;</span>GraderMap) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(grader) = grader_map.get_compilation_deps(<span class="self">self</span>.language) {
+            <span class="self">self</span>.grader = <span class="prelude-val">Some</span>(grader);
+        }
+    }
+
+    <span class="kw">fn </span>finalize(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dag: <span class="kw-2">&amp;mut </span>ExecutionDAG) -&gt; <span class="prelude-ty">Result</span>&lt;(Execution, File), Error&gt; {
+        <span class="kw">let </span>name = <span class="self">self</span>.source_path.file_name().unwrap().to_string_lossy();
+        <span class="kw">let </span><span class="kw-2">mut </span>comp = Execution::new(<span class="macro">format!</span>(<span class="string">&quot;Compilation of {}&quot;</span>, name), <span class="self">self</span>.compiler.clone());
+        comp.args = <span class="self">self</span>.args.clone();
+
+        <span class="comment">// compilation dependencies
+        </span><span class="kw">for </span>dep <span class="kw">in </span><span class="self">self</span>.dependencies.drain(..) {
+            comp.input(<span class="kw-2">&amp;</span>dep.file, <span class="kw-2">&amp;</span>dep.sandbox_path, dep.executable);
+            dag.provide_file(dep.file, <span class="kw-2">&amp;</span>dep.local_path)
+                .context(<span class="string">&quot;Failed to provide compilation dependency&quot;</span>)<span class="question-mark">?</span>;
         }
 
-        <span class="comment">// main source file</span>
-        <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="macro">format!</span>(<span class="string">&quot;Source file of {:?}&quot;</span>, <span class="self">self</span>.<span class="ident">source_path</span>));
-        <span class="ident">comp</span>.<span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="ident">source</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">source_name</span>, <span class="bool-val">false</span>);
-        <span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">source</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">source_path</span>)
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to provide source file&quot;</span>)<span class="question-mark">?</span>;
+        <span class="comment">// main source file
+        </span><span class="kw">let </span>source = File::new(<span class="macro">format!</span>(<span class="string">&quot;Source file of {:?}&quot;</span>, <span class="self">self</span>.source_path));
+        comp.input(<span class="kw-2">&amp;</span>source, <span class="kw-2">&amp;</span><span class="self">self</span>.source_name, <span class="bool-val">false</span>);
+        dag.provide_file(source, <span class="kw-2">&amp;</span><span class="self">self</span>.source_path)
+            .context(<span class="string">&quot;Failed to provide source file&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="comment">// grader and sources in args</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">grader</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">grader</span>.<span class="ident">take</span>() {
-            <span class="ident">comp</span>.<span class="ident">args</span>
-                .<span class="ident">push</span>(<span class="ident">grader</span>.<span class="ident">sandbox_path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
-            <span class="ident">comp</span>.<span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="ident">grader</span>.<span class="ident">file</span>, <span class="kw-2">&amp;</span><span class="ident">grader</span>.<span class="ident">sandbox_path</span>, <span class="ident">grader</span>.<span class="ident">executable</span>);
-            <span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">grader</span>.<span class="ident">file</span>, <span class="kw-2">&amp;</span><span class="ident">grader</span>.<span class="ident">local_path</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to provide grader dependency&quot;</span>)<span class="question-mark">?</span>;
+        <span class="comment">// grader and sources in args
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(grader) = <span class="self">self</span>.grader.take() {
+            comp.args
+                .push(grader.sandbox_path.to_string_lossy().to_string());
+            comp.input(<span class="kw-2">&amp;</span>grader.file, <span class="kw-2">&amp;</span>grader.sandbox_path, grader.executable);
+            dag.provide_file(grader.file, <span class="kw-2">&amp;</span>grader.local_path)
+                .context(<span class="string">&quot;Failed to provide grader dependency&quot;</span>)<span class="question-mark">?</span>;
 
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">grader_only</span> {
-                <span class="ident">comp</span>.<span class="ident">args</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">source_name</span>.<span class="ident">clone</span>());
+            <span class="kw">if </span>!<span class="self">self</span>.grader_only {
+                comp.args.push(<span class="self">self</span>.source_name.clone());
             }
-        } <span class="kw">else</span> {
-            <span class="ident">comp</span>.<span class="ident">args</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">source_name</span>.<span class="ident">clone</span>());
+        } <span class="kw">else </span>{
+            comp.args.push(<span class="self">self</span>.source_name.clone());
         }
 
-        <span class="comment">// compiled binary</span>
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">output</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">binary_name</span>);
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">settings</span>.<span class="ident">copy_exe</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">write_to</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">settings</span>.<span class="ident">write_to</span> {
-                <span class="ident">dag</span>.<span class="ident">write_file_to</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>, <span class="ident">write_to</span>, <span class="bool-val">true</span>);
+        <span class="comment">// compiled binary
+        </span><span class="kw">let </span>exec = comp.output(<span class="kw-2">&amp;</span><span class="self">self</span>.binary_name);
+        <span class="kw">if </span><span class="self">self</span>.settings.copy_exe {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(write_to) = <span class="kw-2">&amp;</span><span class="self">self</span>.settings.write_to {
+                dag.write_file_to(<span class="kw-2">&amp;</span>exec, write_to, <span class="bool-val">true</span>);
             }
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callback</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">callback</span>.<span class="ident">take</span>() {
-            <span class="ident">callback</span>(<span class="kw-2">&amp;mut</span> <span class="ident">comp</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(callback) = <span class="self">self</span>.callback.take() {
+            callback(<span class="kw-2">&amp;mut </span>comp);
         }
 
-        <span class="prelude-val">Ok</span>((<span class="ident">comp</span>, <span class="ident">exec</span>))
+        <span class="prelude-val">Ok</span>((comp, exec))
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

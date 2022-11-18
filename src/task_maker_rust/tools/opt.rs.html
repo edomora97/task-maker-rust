@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/opt.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>opt.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/opt.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>opt.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -58,65 +58,65 @@
 <span id="58">58</span>
 <span id="59">59</span>
 <span id="60">60</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">clap::Parser</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>clap::Parser;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::add_solution_checks::AddSolutionChecksOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::booklet::BookletOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::clear::ClearOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::find_bad_case::FindBadCaseOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::fuzz_checker::FuzzCheckerOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::gen_autocompletion::GenAutocompletionOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::reset::ResetOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::sandbox::SandboxOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::server::ServerOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::task_info::TaskInfoOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::worker::WorkerOpt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::LoggerOpt</span>;
+<span class="kw">use </span><span class="kw">crate</span>::tools::add_solution_checks::AddSolutionChecksOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::booklet::BookletOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::clear::ClearOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::find_bad_case::FindBadCaseOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::fuzz_checker::FuzzCheckerOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::gen_autocompletion::GenAutocompletionOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::reset::ResetOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::sandbox::SandboxOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::server::ServerOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::task_info::TaskInfoOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::worker::WorkerOpt;
+<span class="kw">use </span><span class="kw">crate</span>::LoggerOpt;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>)]</span>
-<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;task-maker-tools&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Opt</span> {
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;LOGGING&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">logger</span>: <span class="ident">LoggerOpt</span>,
+<span class="attribute">#[derive(Parser, Debug)]
+#[clap(name = <span class="string">&quot;task-maker-tools&quot;</span>)]
+</span><span class="kw">pub struct </span>Opt {
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;LOGGING&quot;</span>))]
+    </span><span class="kw">pub </span>logger: LoggerOpt,
 
-    <span class="doccomment">/// Which tool to use</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">subcommand</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">tool</span>: <span class="ident">Tool</span>,
+    <span class="doccomment">/// Which tool to use
+    </span><span class="attribute">#[clap(subcommand)]
+    </span><span class="kw">pub </span>tool: Tool,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Tool</span> {
-    <span class="doccomment">/// Clear a task directory</span>
-    <span class="ident">Clear</span>(<span class="ident">ClearOpt</span>),
-    <span class="doccomment">/// Generate the autocompletion files for the shell</span>
-    <span class="ident">GenAutocompletion</span>(<span class="ident">GenAutocompletionOpt</span>),
-    <span class="doccomment">/// Spawn an instance of the server</span>
-    <span class="ident">Server</span>(<span class="ident">ServerOpt</span>),
-    <span class="doccomment">/// Spawn an instance of a worker</span>
-    <span class="ident">Worker</span>(<span class="ident">WorkerOpt</span>),
-    <span class="doccomment">/// Print the TypeScript type definitions</span>
-    <span class="ident">Typescriptify</span>,
-    <span class="doccomment">/// Wipe the internal storage of task-maker</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Warning: no other instances of task-maker should be running when this flag is provided.</span>
-    <span class="ident">Reset</span>(<span class="ident">ResetOpt</span>),
-    <span class="doccomment">/// Run a command inside a sandbox similar to the one used by task-maker</span>
-    <span class="ident">Sandbox</span>(<span class="ident">SandboxOpt</span>),
-    <span class="doccomment">/// Obtain the information about a task.</span>
-    <span class="ident">TaskInfo</span>(<span class="ident">TaskInfoOpt</span>),
-    <span class="doccomment">/// Compile just the booklet for a task or a contest.</span>
-    <span class="ident">Booklet</span>(<span class="ident">BookletOpt</span>),
-    <span class="doccomment">/// Fuzz the checker of a task.</span>
-    <span class="ident">FuzzChecker</span>(<span class="ident">FuzzCheckerOpt</span>),
-    <span class="doccomment">/// Generate and search for an input file that make a solution fail.</span>
-    <span class="ident">FindBadCase</span>(<span class="ident">FindBadCaseOpt</span>),
-    <span class="doccomment">/// Add the @check comments to the solutions.</span>
-    <span class="ident">AddSolutionChecks</span>(<span class="ident">AddSolutionChecksOpt</span>),
-    <span class="doccomment">/// Run the sandbox instead of the normal task-maker.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This option is left as undocumented as it&#39;s not part of the public API.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">hide</span> <span class="op">=</span> <span class="bool-val">true</span>)]</span>
-    <span class="ident">InternalSandbox</span>,
+<span class="attribute">#[derive(Parser, Debug)]
+</span><span class="kw">pub enum </span>Tool {
+    <span class="doccomment">/// Clear a task directory
+    </span>Clear(ClearOpt),
+    <span class="doccomment">/// Generate the autocompletion files for the shell
+    </span>GenAutocompletion(GenAutocompletionOpt),
+    <span class="doccomment">/// Spawn an instance of the server
+    </span>Server(ServerOpt),
+    <span class="doccomment">/// Spawn an instance of a worker
+    </span>Worker(WorkerOpt),
+    <span class="doccomment">/// Print the TypeScript type definitions
+    </span>Typescriptify,
+    <span class="doccomment">/// Wipe the internal storage of task-maker
+    ///
+    /// Warning: no other instances of task-maker should be running when this flag is provided.
+    </span>Reset(ResetOpt),
+    <span class="doccomment">/// Run a command inside a sandbox similar to the one used by task-maker
+    </span>Sandbox(SandboxOpt),
+    <span class="doccomment">/// Obtain the information about a task.
+    </span>TaskInfo(TaskInfoOpt),
+    <span class="doccomment">/// Compile just the booklet for a task or a contest.
+    </span>Booklet(BookletOpt),
+    <span class="doccomment">/// Fuzz the checker of a task.
+    </span>FuzzChecker(FuzzCheckerOpt),
+    <span class="doccomment">/// Generate and search for an input file that make a solution fail.
+    </span>FindBadCase(FindBadCaseOpt),
+    <span class="doccomment">/// Add the @check comments to the solutions.
+    </span>AddSolutionChecks(AddSolutionChecksOpt),
+    <span class="doccomment">/// Run the sandbox instead of the normal task-maker.
+    ///
+    /// This option is left as undocumented as it&#39;s not part of the public API.
+    </span><span class="attribute">#[clap(hide = <span class="bool-val">true</span>)]
+    </span>InternalSandbox,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

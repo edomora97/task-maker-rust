@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/task_type/batch.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>batch.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/task_type/batch.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>batch.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -115,122 +115,122 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::sync::{Arc, Mutex};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">ExecutionStatus</span>, <span class="ident">FileUuid</span>, <span class="ident">Priority</span>};
+<span class="kw">use </span>task_maker_dag::{ExecutionStatus, FileUuid, Priority};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{
-    <span class="ident">Checker</span>, <span class="ident">IOITask</span>, <span class="ident">OutputGenerator</span>, <span class="ident">ScoreManager</span>, <span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>, <span class="ident">EVALUATION_PRIORITY</span>,
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{
+    Checker, IOITask, OutputGenerator, ScoreManager, SubtaskId, TestcaseId, EVALUATION_PRIORITY,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::UIMessage</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">bind_exec_io</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>, <span class="ident">Tag</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ui::UIMessage;
+<span class="kw">use crate</span>::{bind_exec_callbacks, bind_exec_io};
+<span class="kw">use crate</span>::{EvaluationData, SourceFile, Tag};
 
-<span class="doccomment">/// The internal data of a task of type `Batch`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BatchTypeData</span> {
-    <span class="doccomment">/// The default output generator for this task, if any.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">output_generator</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OutputGenerator</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The checker to use for this task.</span>
-    <span class="kw">pub</span> <span class="ident">checker</span>: <span class="ident">Checker</span>,
+<span class="doccomment">/// The internal data of a task of type `Batch`.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>BatchTypeData {
+    <span class="doccomment">/// The default output generator for this task, if any.
+    </span><span class="attribute">#[serde(skip_serializing)]
+    </span><span class="kw">pub </span>output_generator: <span class="prelude-ty">Option</span>&lt;OutputGenerator&gt;,
+    <span class="doccomment">/// The checker to use for this task.
+    </span><span class="kw">pub </span>checker: Checker,
 }
 
-<span class="doccomment">/// Evaluate a solution in a task of Batch type.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">evaluate</span>(
-    <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>,
-    <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-    <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-    <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-    <span class="ident">source_file</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-    <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-    <span class="ident">validation_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-    <span class="ident">correct_output</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-    <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">BatchTypeData</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">correct_output</span> <span class="op">=</span> <span class="ident">correct_output</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Missing official solution&quot;</span>))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">source_file</span>
-        .<span class="ident">execute</span>(
-            <span class="ident">eval</span>,
+<span class="doccomment">/// Evaluate a solution in a task of Batch type.
+</span><span class="attribute">#[allow(clippy::too_many_arguments)]
+</span><span class="kw">pub fn </span>evaluate(
+    task: <span class="kw-2">&amp;</span>IOITask,
+    eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+    subtask_id: SubtaskId,
+    testcase_id: TestcaseId,
+    source_file: <span class="kw-2">&amp;</span>SourceFile,
+    input: FileUuid,
+    validation_handle: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    correct_output: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    score_manager: Arc&lt;Mutex&lt;ScoreManager&gt;&gt;,
+    data: <span class="kw-2">&amp;</span>BatchTypeData,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span>correct_output = correct_output.ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Missing official solution&quot;</span>))<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>exec = source_file
+        .execute(
+            eval,
             <span class="macro">format!</span>(
                 <span class="string">&quot;Evaluation of {} on testcase {}, subtask {}&quot;</span>,
-                <span class="ident">source_file</span>.<span class="ident">name</span>(),
-                <span class="ident">testcase_id</span>,
-                <span class="ident">subtask_id</span>
+                source_file.name(),
+                testcase_id,
+                subtask_id
             ),
-            <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="ident">::new</span>(),
+            Vec::&lt;String&gt;::new(),
         )
-        .<span class="ident">context</span>(<span class="string">&quot;Failed to execute solution source file&quot;</span>)<span class="question-mark">?</span>;
-    <span class="ident">exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>());
-    <span class="ident">exec</span>.<span class="ident">priority</span>(<span class="ident">EVALUATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>);
-    <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">bind_exec_io!</span>(<span class="ident">exec</span>, <span class="ident">task</span>, <span class="ident">input</span>, <span class="ident">validation_handle</span>);
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">source_file</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">limits_mut</span>();
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">time_limit</span> {
-        <span class="ident">limits</span>.<span class="ident">cpu_time</span>(<span class="ident">time_limit</span>);
-        <span class="ident">limits</span>.<span class="ident">wall_time</span>(<span class="ident">time_limit</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">+</span> <span class="number">1.0</span>); <span class="comment">// some margin</span>
-    }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">memory_limit</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">memory_limit</span> {
-        <span class="ident">limits</span>.<span class="ident">memory</span>(<span class="ident">memory_limit</span> <span class="op">*</span> <span class="number">1024</span>); <span class="comment">// MiB -&gt; KiB</span>
-    }
+        .context(<span class="string">&quot;Failed to execute solution source file&quot;</span>)<span class="question-mark">?</span>;
+    exec.tag(Tag::Evaluation.into());
+    exec.priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority);
+    <span class="kw">let </span>output = <span class="macro">bind_exec_io!</span>(exec, task, input, validation_handle);
+    <span class="kw">let </span>path = source_file.path.clone();
+    <span class="kw">let </span>limits = exec.limits_mut();
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(time_limit) = task.time_limit {
+        limits.cpu_time(time_limit);
+        limits.wall_time(time_limit * <span class="number">1.5 </span>+ <span class="number">1.0</span>); <span class="comment">// some margin
+    </span>}
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(memory_limit) = task.memory_limit {
+        limits.memory(memory_limit * <span class="number">1024</span>); <span class="comment">// MiB -&gt; KiB
+    </span>}
     <span class="macro">bind_exec_callbacks!</span>(
-        <span class="ident">eval</span>,
-        <span class="ident">exec</span>.<span class="ident">uuid</span>,
-        <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::IOIEvaluation</span> {
-            <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
-            <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
-            <span class="ident">solution</span>,
-            <span class="ident">status</span>,
-            <span class="ident">part</span>: <span class="number">0</span>,
-            <span class="ident">num_parts</span>: <span class="number">1</span>,
+        eval,
+        exec.uuid,
+        |status, solution| UIMessage::IOIEvaluation {
+            subtask: subtask_id,
+            testcase: testcase_id,
+            solution,
+            status,
+            part: <span class="number">0</span>,
+            num_parts: <span class="number">1</span>,
         },
-        <span class="ident">path</span>
+        path
     )<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">source_file</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">score_manager_err</span> <span class="op">=</span> <span class="ident">score_manager</span>.<span class="ident">clone</span>();
-    <span class="ident">eval</span>.<span class="ident">dag</span>
-        .<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">result</span>.<span class="ident">status</span> {
-            <span class="ident">ExecutionStatus::Success</span> =&gt; <span class="prelude-val">Ok</span>(()),
-            <span class="kw">_</span> =&gt; <span class="ident">score_manager_err</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">score</span>(
-                <span class="ident">subtask_id</span>,
-                <span class="ident">testcase_id</span>,
+    <span class="kw">let </span>sender = eval.sender.clone();
+    <span class="kw">let </span>path = source_file.path.clone();
+    <span class="kw">let </span>score_manager_err = score_manager.clone();
+    eval.dag
+        .on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|result| <span class="kw">match </span>result.status {
+            ExecutionStatus::Success =&gt; <span class="prelude-val">Ok</span>(()),
+            <span class="kw">_ </span>=&gt; score_manager_err.lock().unwrap().score(
+                subtask_id,
+                testcase_id,
                 <span class="number">0.0</span>,
-                <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">result</span>.<span class="ident">status</span>),
-                <span class="ident">sender</span>,
-                <span class="ident">path</span>,
+                <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, result.status),
+                sender,
+                path,
             ),
         });
-    <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
+    eval.dag.add_execution(exec);
 
-    <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">source_file</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-    <span class="ident">data</span>.<span class="ident">checker</span>.<span class="ident">check_and_bind</span>(
-        <span class="ident">eval</span>,
-        <span class="ident">subtask_id</span>,
-        <span class="ident">testcase_id</span>,
-        <span class="ident">source_file</span>.<span class="ident">path</span>.<span class="ident">clone</span>(),
-        <span class="ident">input</span>,
-        <span class="ident">correct_output</span>,
-        <span class="ident">output</span>.<span class="ident">uuid</span>,
-        <span class="kw">move</span> <span class="op">|</span><span class="ident">score</span>, <span class="ident">message</span><span class="op">|</span> {
-            <span class="ident">score_manager</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">score</span>(
-                <span class="ident">subtask_id</span>,
-                <span class="ident">testcase_id</span>,
-                <span class="ident">score</span>,
-                <span class="ident">message</span>,
-                <span class="ident">sender</span>,
-                <span class="ident">path</span>,
+    <span class="kw">let </span>sender = eval.sender.clone();
+    <span class="kw">let </span>path = source_file.path.clone();
+    data.checker.check_and_bind(
+        eval,
+        subtask_id,
+        testcase_id,
+        source_file.path.clone(),
+        input,
+        correct_output,
+        output.uuid,
+        <span class="kw">move </span>|score, message| {
+            score_manager.lock().unwrap().score(
+                subtask_id,
+                testcase_id,
+                score,
+                message,
+                sender,
+                path,
             )
         },
     )<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

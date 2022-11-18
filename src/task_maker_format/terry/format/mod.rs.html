@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/format/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/format/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -77,84 +77,84 @@
 <span id="77">77</span>
 <span id="78">78</span>
 <span id="79">79</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fs</span>;
-<span class="kw">use</span> <span class="ident">std::path::Path</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::fs;
+<span class="kw">use </span>std::path::Path;
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">use </span>anyhow::{anyhow, bail, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::dag</span>::{<span class="ident">Checker</span>, <span class="ident">InputGenerator</span>, <span class="ident">InputValidator</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::sanity_checks::get_sanity_checks</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::TerryTask</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">find_source_file</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">SourceFile</span>, <span class="ident">WriteBinTo</span>};
+<span class="kw">use </span><span class="kw">crate</span>::terry::dag::{Checker, InputGenerator, InputValidator};
+<span class="kw">use </span><span class="kw">crate</span>::terry::sanity_checks::get_sanity_checks;
+<span class="kw">use </span><span class="kw">crate</span>::terry::TerryTask;
+<span class="kw">use crate</span>::{find_source_file, EvaluationConfig, SourceFile, WriteBinTo};
 
-<span class="macro">lazy_static!</span> {
-    <span class="doccomment">/// The extension suffix for the current platform.</span>
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">EXE_EXTENSION</span>: <span class="ident">String</span> <span class="op">=</span>
-        <span class="macro">format!</span>(<span class="string">&quot;{}.{}&quot;</span>, <span class="ident">std::env::consts::OS</span>, <span class="ident">std::env::consts::ARCH</span>);
+<span class="macro">lazy_static! </span>{
+    <span class="doccomment">/// The extension suffix for the current platform.
+    </span><span class="kw">static </span><span class="kw-2">ref </span>EXE_EXTENSION: String =
+        <span class="macro">format!</span>(<span class="string">&quot;{}.{}&quot;</span>, std::env::consts::OS, std::env::consts::ARCH);
 }
 
-<span class="doccomment">/// Deserialized data from the task.yaml of a IOI format task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">TaskYAML</span> {
-    <span class="doccomment">/// The name of the task (the short one).</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The title of the task (the long one).</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The maximum score for this task.</span>
-    <span class="kw">pub</span> <span class="ident">max_score</span>: <span class="ident">f64</span>,
+<span class="doccomment">/// Deserialized data from the task.yaml of a IOI format task.
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize)]
+</span><span class="kw">struct </span>TaskYAML {
+    <span class="doccomment">/// The name of the task (the short one).
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// The title of the task (the long one).
+    </span><span class="kw">pub </span>description: String,
+    <span class="doccomment">/// The maximum score for this task.
+    </span><span class="kw">pub </span>max_score: f64,
 }
 
-<span class="doccomment">/// Given a path to a task in the Terry format, try to parse the task inside of it.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_task</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-    <span class="ident">task_dir</span>: <span class="ident">P</span>,
-    <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TerryTask</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">task_dir</span> <span class="op">=</span> <span class="ident">task_dir</span>.<span class="ident">as_ref</span>();
-    <span class="kw">let</span> <span class="ident">yaml</span>: <span class="ident">TaskYAML</span> <span class="op">=</span> <span class="ident">serde_yaml::from_reader</span>(<span class="ident">fs::File::open</span>(<span class="kw-2">&amp;</span><span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="string">&quot;task.yaml&quot;</span>))<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+<span class="doccomment">/// Given a path to a task in the Terry format, try to parse the task inside of it.
+</span><span class="kw">pub fn </span>parse_task&lt;P: AsRef&lt;Path&gt;&gt;(
+    task_dir: P,
+    eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+) -&gt; <span class="prelude-ty">Result</span>&lt;TerryTask, Error&gt; {
+    <span class="kw">let </span>task_dir = task_dir.as_ref();
+    <span class="kw">let </span>yaml: TaskYAML = serde_yaml::from_reader(fs::File::open(<span class="kw-2">&amp;</span>task_dir.join(<span class="string">&quot;task.yaml&quot;</span>))<span class="question-mark">?</span>)<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="ident">generator</span> <span class="op">=</span> <span class="ident">get_manager</span>(<span class="ident">task_dir</span>, <span class="string">&quot;generator&quot;</span>)<span class="question-mark">?</span>
-        .<span class="ident">map</span>(<span class="ident">InputGenerator::new</span>)
-        .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;No generator found in managers/&quot;</span>))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">validator</span> <span class="op">=</span> <span class="ident">get_manager</span>(<span class="ident">task_dir</span>, <span class="string">&quot;validator&quot;</span>)<span class="question-mark">?</span>.<span class="ident">map</span>(<span class="ident">InputValidator::new</span>);
-    <span class="kw">let</span> <span class="ident">checker</span> <span class="op">=</span> <span class="ident">get_manager</span>(<span class="ident">task_dir</span>, <span class="string">&quot;checker&quot;</span>)<span class="question-mark">?</span>
-        .<span class="ident">map</span>(<span class="ident">Checker::new</span>)
-        .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;No checker found in managers/&quot;</span>))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">official_solution</span> <span class="op">=</span> <span class="ident">get_manager</span>(<span class="ident">task_dir</span>, <span class="string">&quot;solution&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>generator = get_manager(task_dir, <span class="string">&quot;generator&quot;</span>)<span class="question-mark">?
+        </span>.map(InputGenerator::new)
+        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;No generator found in managers/&quot;</span>))<span class="question-mark">?</span>;
+    <span class="kw">let </span>validator = get_manager(task_dir, <span class="string">&quot;validator&quot;</span>)<span class="question-mark">?</span>.map(InputValidator::new);
+    <span class="kw">let </span>checker = get_manager(task_dir, <span class="string">&quot;checker&quot;</span>)<span class="question-mark">?
+        </span>.map(Checker::new)
+        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;No checker found in managers/&quot;</span>))<span class="question-mark">?</span>;
+    <span class="kw">let </span>official_solution = get_manager(task_dir, <span class="string">&quot;solution&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="prelude-val">Ok</span>(<span class="ident">TerryTask</span> {
-        <span class="ident">path</span>: <span class="ident">task_dir</span>.<span class="ident">into</span>(),
-        <span class="ident">name</span>: <span class="ident">yaml</span>.<span class="ident">name</span>,
-        <span class="ident">description</span>: <span class="ident">yaml</span>.<span class="ident">description</span>,
-        <span class="ident">max_score</span>: <span class="ident">yaml</span>.<span class="ident">max_score</span>,
-        <span class="ident">generator</span>,
-        <span class="ident">validator</span>,
-        <span class="ident">checker</span>,
-        <span class="ident">official_solution</span>,
-        <span class="ident">sanity_checks</span>: <span class="ident">Arc::new</span>(<span class="ident">get_sanity_checks</span>(<span class="kw-2">&amp;</span><span class="ident">eval_config</span>.<span class="ident">disabled_sanity_checks</span>)),
+    <span class="prelude-val">Ok</span>(TerryTask {
+        path: task_dir.into(),
+        name: yaml.name,
+        description: yaml.description,
+        max_score: yaml.max_score,
+        generator,
+        validator,
+        checker,
+        official_solution,
+        sanity_checks: Arc::new(get_sanity_checks(<span class="kw-2">&amp;</span>eval_config.disabled_sanity_checks)),
     })
 }
 
-<span class="doccomment">/// Search the specified manager in the managers/ folder of the task, returning the `SourceFile` if</span>
-<span class="doccomment">/// found, `None` otherwise.</span>
-<span class="kw">fn</span> <span class="ident">get_manager</span>(<span class="ident">task_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">manager</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">managers</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
-        <span class="ident">task_dir</span>,
-        <span class="macro">vec!</span>[<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;managers/{}.*&quot;</span>, <span class="ident">manager</span>)],
-        <span class="ident">task_dir</span>,
+<span class="doccomment">/// Search the specified manager in the managers/ folder of the task, returning the `SourceFile` if
+/// found, `None` otherwise.
+</span><span class="kw">fn </span>get_manager(task_dir: <span class="kw-2">&amp;</span>Path, manager: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;, Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>managers = find_source_file(
+        task_dir,
+        <span class="macro">vec!</span>[<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;managers/{}.*&quot;</span>, manager)],
+        task_dir,
         <span class="prelude-val">None</span>,
-        <span class="ident">WriteBinTo::path</span>(<span class="macro">format!</span>(<span class="string">&quot;managers/{}.{}&quot;</span>, <span class="ident">manager</span>, <span class="kw-2">*</span><span class="ident">EXE_EXTENSION</span>)),
+        WriteBinTo::path(<span class="macro">format!</span>(<span class="string">&quot;managers/{}.{}&quot;</span>, manager, <span class="kw-2">*</span>EXE_EXTENSION)),
     );
-    <span class="kw">if</span> <span class="ident">managers</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="ident">managers</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">name</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">bail!</span>(<span class="string">&quot;Multiple managers found: {:?}&quot;</span>, <span class="ident">paths</span>);
+    <span class="kw">if </span>managers.len() &gt; <span class="number">1 </span>{
+        <span class="kw">let </span>paths = managers.iter().map(|s| s.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="macro">bail!</span>(<span class="string">&quot;Multiple managers found: {:?}&quot;</span>, paths);
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">managers</span>.<span class="ident">pop</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">s</span><span class="op">|</span> {
-        <span class="ident">s</span>.<span class="ident">copy_exe</span>(); <span class="comment">// The managers are always copied.</span>
-        <span class="ident">s</span>.<span class="ident">link_static</span>(); <span class="comment">// Make sure the managers are statically linked.</span>
-        <span class="ident">Arc::new</span>(<span class="ident">s</span>)
+    <span class="prelude-val">Ok</span>(managers.pop().map(|<span class="kw-2">mut </span>s| {
+        s.copy_exe(); <span class="comment">// The managers are always copied.
+        </span>s.link_static(); <span class="comment">// Make sure the managers are statically linked.
+        </span>Arc::new(s)
     }))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

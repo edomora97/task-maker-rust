@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -345,352 +345,352 @@
 <span id="345">345</span>
 <span id="346">346</span>
 <span id="347">347</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>std::sync::{Arc, Mutex};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">clap</span>::{<span class="ident">Parser</span>, <span class="ident">ValueHint</span>};
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
+<span class="kw">use </span>clap::{Parser, ValueHint};
 
-<span class="kw">use</span> <span class="ident">task_maker_exec::ductile::ChannelSender</span>;
-<span class="kw">use</span> <span class="ident">task_maker_exec::proto::ExecutorClientMessage</span>;
-<span class="kw">use</span> <span class="ident">task_maker_exec::ExecutorClient</span>;
-<span class="kw">use</span> <span class="ident">task_maker_format::ui</span>::{<span class="ident">CursesUI</span>, <span class="ident">StdoutPrinter</span>, <span class="ident">UIMessage</span>, <span class="ident">BLUE</span>, <span class="ident">BOLD</span>, <span class="ident">RED</span>, <span class="ident">UI</span>, <span class="ident">YELLOW</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">cwrite</span>, <span class="ident">cwriteln</span>, <span class="ident">get_sanity_check_list</span>, <span class="ident">EvaluationConfig</span>};
+<span class="kw">use </span>task_maker_exec::ductile::ChannelSender;
+<span class="kw">use </span>task_maker_exec::proto::ExecutorClientMessage;
+<span class="kw">use </span>task_maker_exec::ExecutorClient;
+<span class="kw">use </span>task_maker_format::ui::{CursesUI, StdoutPrinter, UIMessage, BLUE, BOLD, RED, UI, YELLOW};
+<span class="kw">use </span>task_maker_format::{cwrite, cwriteln, get_sanity_check_list, EvaluationConfig};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::context::RuntimeContext</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::find_bad_case::dag</span>::{<span class="ident">patch_dag</span>, <span class="ident">patch_task_for_batch</span>, <span class="ident">TestcaseData</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::find_bad_case::state</span>::{<span class="ident">SharedUIState</span>, <span class="ident">UIState</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ExecutionOpt</span>, <span class="ident">FindTaskOpt</span>, <span class="ident">StorageOpt</span>};
+<span class="kw">use </span><span class="kw">crate</span>::context::RuntimeContext;
+<span class="kw">use </span><span class="kw">crate</span>::tools::find_bad_case::dag::{patch_dag, patch_task_for_batch, TestcaseData};
+<span class="kw">use </span><span class="kw">crate</span>::tools::find_bad_case::state::{SharedUIState, UIState};
+<span class="kw">use crate</span>::{ExecutionOpt, FindTaskOpt, StorageOpt};
 
-<span class="kw">mod</span> <span class="ident">curses_ui</span>;
-<span class="kw">mod</span> <span class="ident">dag</span>;
-<span class="kw">mod</span> <span class="ident">finish_ui</span>;
-<span class="kw">mod</span> <span class="ident">state</span>;
+<span class="kw">mod </span>curses_ui;
+<span class="kw">mod </span>dag;
+<span class="kw">mod </span>finish_ui;
+<span class="kw">mod </span>state;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">trailing_var_arg</span> <span class="op">=</span> <span class="bool-val">true</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FindBadCaseOpt</span> {
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;TASK SEARCH&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">find_task</span>: <span class="ident">FindTaskOpt</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+#[clap(trailing_var_arg = <span class="bool-val">true</span>)]
+</span><span class="kw">pub struct </span>FindBadCaseOpt {
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;TASK SEARCH&quot;</span>))]
+    </span><span class="kw">pub </span>find_task: FindTaskOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;EXECUTION&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">execution</span>: <span class="ident">ExecutionOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;EXECUTION&quot;</span>))]
+    </span><span class="kw">pub </span>execution: ExecutionOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">storage</span>: <span class="ident">StorageOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]
+    </span><span class="kw">pub </span>storage: StorageOpt,
 
-    <span class="doccomment">/// Number of input files to generate for each batch.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Setting this to a small value may reduce the speed of this tool.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>, <span class="ident">short</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;100&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">batch_size</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// Number of input files to generate for each batch.
+    ///
+    /// Setting this to a small value may reduce the speed of this tool.
+    </span><span class="attribute">#[clap(long, short, default_value = <span class="string">&quot;100&quot;</span>)]
+    </span><span class="kw">pub </span>batch_size: usize,
 
-    <span class="doccomment">/// Path to the solution to check against the official solution of the task.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">value_hint</span> <span class="op">=</span> <span class="ident">ValueHint::FilePath</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
+    <span class="doccomment">/// Path to the solution to check against the official solution of the task.
+    </span><span class="attribute">#[clap(value_hint = ValueHint::FilePath)]
+    </span><span class="kw">pub </span>solution: PathBuf,
 
-    <span class="doccomment">/// Arguments to pass to the generator. The value &#39;{}&#39; will be replaced with a random seed.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">num_args</span> <span class="op">=</span> <span class="number">0</span>..)]</span>
-    <span class="kw">pub</span> <span class="ident">generator_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Arguments to pass to the generator. The value &#39;{}&#39; will be replaced with a random seed.
+    </span><span class="attribute">#[clap(num_args = <span class="number">0</span>..)]
+    </span><span class="kw">pub </span>generator_args: Vec&lt;String&gt;,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_find_bad_case</span>(<span class="ident">opt</span>: <span class="ident">FindBadCaseOpt</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">opt</span>.<span class="ident">solution</span>.<span class="ident">exists</span>() {
-        <span class="macro">bail!</span>(<span class="string">&quot;Cannot find solution at {}&quot;</span>, <span class="ident">opt</span>.<span class="ident">solution</span>.<span class="ident">display</span>());
+<span class="kw">pub fn </span>main_find_bad_case(opt: FindBadCaseOpt) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">if </span>!opt.solution.exists() {
+        <span class="macro">bail!</span>(<span class="string">&quot;Cannot find solution at {}&quot;</span>, opt.solution.display());
     }
 
-    <span class="kw">let</span> <span class="ident">eval_config</span> <span class="op">=</span> <span class="ident">EvaluationConfig</span> {
-        <span class="ident">solution_filter</span>: <span class="macro">vec!</span>[],
-        <span class="ident">booklet_solutions</span>: <span class="bool-val">false</span>,
-        <span class="ident">no_statement</span>: <span class="bool-val">true</span>,
-        <span class="ident">solution_paths</span>: <span class="macro">vec!</span>[<span class="ident">opt</span>.<span class="ident">solution</span>.<span class="ident">clone</span>()],
-        <span class="ident">disabled_sanity_checks</span>: <span class="ident">get_sanity_check_list</span>(),
-        <span class="ident">seed</span>: <span class="prelude-val">None</span>,
-        <span class="ident">dry_run</span>: <span class="bool-val">false</span>,
+    <span class="kw">let </span>eval_config = EvaluationConfig {
+        solution_filter: <span class="macro">vec!</span>[],
+        booklet_solutions: <span class="bool-val">false</span>,
+        no_statement: <span class="bool-val">true</span>,
+        solution_paths: <span class="macro">vec!</span>[opt.solution.clone()],
+        disabled_sanity_checks: get_sanity_check_list(),
+        seed: <span class="prelude-val">None</span>,
+        dry_run: <span class="bool-val">false</span>,
     };
-    <span class="kw">let</span> <span class="ident">working_directory</span> <span class="op">=</span>
-        <span class="ident">tempfile::TempDir::new</span>().<span class="ident">context</span>(<span class="string">&quot;Failed to create working directory&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>working_directory =
+        tempfile::TempDir::new().context(<span class="string">&quot;Failed to create working directory&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="comment">// A reference to the current executor, used for sending messages to it.</span>
-    <span class="kw">let</span> <span class="ident">current_executor_sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="prelude-val">None</span>));
-    <span class="kw">let</span> <span class="ident">stop_evaluation</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">current_executor_sender</span> <span class="op">=</span> <span class="ident">current_executor_sender</span>.<span class="ident">clone</span>();
-        <span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">current_executor_sender</span> <span class="op">=</span> <span class="ident">current_executor_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sender</span>) <span class="op">=</span> <span class="ident">current_executor_sender</span>.<span class="ident">as_ref</span>() {
-                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Stop</span>);
+    <span class="comment">// A reference to the current executor, used for sending messages to it.
+    </span><span class="kw">let </span>current_executor_sender: Arc&lt;Mutex&lt;<span class="prelude-ty">Option</span>&lt;ChannelSender&lt;<span class="kw">_</span>&gt;&gt;&gt;&gt; = Arc::new(Mutex::new(<span class="prelude-val">None</span>));
+    <span class="kw">let </span>stop_evaluation = {
+        <span class="kw">let </span>current_executor_sender = current_executor_sender.clone();
+        <span class="kw">move </span>|| {
+            <span class="kw">let </span>current_executor_sender = current_executor_sender.lock().unwrap();
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = current_executor_sender.as_ref() {
+                <span class="kw">let _ </span>= sender.send(ExecutorClientMessage::Stop);
             }
         }
     };
 
-    <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">find_task</span>.<span class="ident">find_task</span>(<span class="kw-2">&amp;</span><span class="ident">eval_config</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">task_path</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path</span>().<span class="ident">to_path_buf</span>();
+    <span class="kw">let </span>task = opt.find_task.find_task(<span class="kw-2">&amp;</span>eval_config)<span class="question-mark">?</span>;
+    <span class="kw">let </span>task_path = task.path().to_path_buf();
 
-    <span class="comment">// Create a single UI for all the batches.</span>
-    <span class="kw">let</span> <span class="ident">ui_state</span> <span class="op">=</span> <span class="ident">UIState::new</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>, <span class="ident">stop_evaluation</span>);
-    <span class="kw">let</span> <span class="ident">shared_state</span> <span class="op">=</span> <span class="ident">ui_state</span>.<span class="ident">shared</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ui</span> <span class="op">=</span> <span class="ident">CursesUI</span>::<span class="op">&lt;</span><span class="ident">UIState</span>, <span class="ident">curses_ui::CursesUI</span>, <span class="ident">finish_ui::FinishUI</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">ui_state</span>)
-        .<span class="ident">context</span>(<span class="string">&quot;Failed to start Curses UI&quot;</span>)<span class="question-mark">?</span>;
+    <span class="comment">// Create a single UI for all the batches.
+    </span><span class="kw">let </span>ui_state = UIState::new(<span class="kw-2">&amp;</span>opt, stop_evaluation);
+    <span class="kw">let </span>shared_state = ui_state.shared.clone();
+    <span class="kw">let </span><span class="kw-2">mut </span>ui = CursesUI::&lt;UIState, curses_ui::CursesUI, finish_ui::FinishUI&gt;::new(ui_state)
+        .context(<span class="string">&quot;Failed to start Curses UI&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="comment">// Start the global UI where all the messages will be sent.</span>
-    <span class="kw">let</span> (<span class="ident">sender</span>, <span class="ident">receiver</span>) <span class="op">=</span> <span class="ident">std::sync::mpsc::channel</span>();
-    <span class="kw">let</span> <span class="ident">global_ui_join_handle</span> <span class="op">=</span> <span class="ident">std::thread::Builder::new</span>()
-        .<span class="ident">name</span>(<span class="string">&quot;Global UI&quot;</span>.<span class="ident">into</span>())
-        .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">message</span>)) <span class="op">=</span> <span class="ident">receiver</span>.<span class="ident">recv</span>() {
-                <span class="ident">ui</span>.<span class="ident">on_message</span>(<span class="ident">message</span>);
+    <span class="comment">// Start the global UI where all the messages will be sent.
+    </span><span class="kw">let </span>(sender, receiver) = std::sync::mpsc::channel();
+    <span class="kw">let </span>global_ui_join_handle = std::thread::Builder::new()
+        .name(<span class="string">&quot;Global UI&quot;</span>.into())
+        .spawn(<span class="kw">move </span>|| {
+            <span class="kw">while let </span><span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(message)) = receiver.recv() {
+                ui.on_message(message);
             }
-            <span class="ident">ui</span>.<span class="ident">finish</span>();
+            ui.finish();
         })
-        .<span class="ident">expect</span>(<span class="string">&quot;Failed to start UI thread&quot;</span>);
+        .expect(<span class="string">&quot;Failed to start UI thread&quot;</span>);
 
-    <span class="comment">// Bind the ctrl-c handler that will make the UI and the executor stop.</span>
-    <span class="ident">ctrlc::set_handler</span>({
-        <span class="kw">let</span> <span class="ident">shared_state</span> <span class="op">=</span> <span class="ident">shared_state</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">current_executor_sender</span> <span class="op">=</span> <span class="ident">current_executor_sender</span>.<span class="ident">clone</span>();
-        <span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="ident">shared_state</span>.<span class="ident">write</span>().<span class="ident">unwrap</span>().<span class="ident">should_stop</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="kw">let</span> <span class="ident">current_executor_sender</span> <span class="op">=</span> <span class="ident">current_executor_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sender</span>) <span class="op">=</span> <span class="ident">current_executor_sender</span>.<span class="ident">as_ref</span>() {
-                <span class="kw">if</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Stop</span>).<span class="ident">is_err</span>() {
+    <span class="comment">// Bind the ctrl-c handler that will make the UI and the executor stop.
+    </span>ctrlc::set_handler({
+        <span class="kw">let </span>shared_state = shared_state.clone();
+        <span class="kw">let </span>current_executor_sender = current_executor_sender.clone();
+        <span class="kw">move </span>|| {
+            shared_state.write().unwrap().should_stop = <span class="bool-val">true</span>;
+            <span class="kw">let </span>current_executor_sender = current_executor_sender.lock().unwrap();
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = current_executor_sender.as_ref() {
+                <span class="kw">if </span>sender.send(ExecutorClientMessage::Stop).is_err() {
                     <span class="macro">error!</span>(<span class="string">&quot;Cannot tell the server to stop&quot;</span>);
                 }
             }
         }
     })
-    .<span class="ident">context</span>(<span class="string">&quot;Failed to set ctrl-c handler&quot;</span>)<span class="question-mark">?</span>;
+    .context(<span class="string">&quot;Failed to set ctrl-c handler&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="kw">for</span> <span class="ident">batch_index</span> <span class="kw">in</span> <span class="number">0</span>.. {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">find_task</span>.<span class="ident">find_task</span>(<span class="kw-2">&amp;</span><span class="ident">eval_config</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">batch</span> <span class="op">=</span> <span class="ident">patch_task_for_batch</span>(
-            <span class="kw-2">&amp;mut</span> <span class="ident">task</span>,
-            <span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">generator_args</span>,
-            <span class="ident">opt</span>.<span class="ident">batch_size</span>,
-            <span class="ident">batch_index</span>,
-            <span class="ident">working_directory</span>.<span class="ident">path</span>(),
+    <span class="kw">for </span>batch_index <span class="kw">in </span><span class="number">0</span>.. {
+        <span class="kw">let </span><span class="kw-2">mut </span>task = opt.find_task.find_task(<span class="kw-2">&amp;</span>eval_config)<span class="question-mark">?</span>;
+        <span class="kw">let </span>batch = patch_task_for_batch(
+            <span class="kw-2">&amp;mut </span>task,
+            <span class="kw-2">&amp;</span>opt.generator_args,
+            opt.batch_size,
+            batch_index,
+            working_directory.path(),
         )<span class="question-mark">?</span>;
 
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shared_state</span> <span class="op">=</span> <span class="ident">shared_state</span>.<span class="ident">write</span>().<span class="ident">unwrap</span>();
-            <span class="ident">shared_state</span>.<span class="ident">last_batch</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">batch</span>.<span class="ident">clone</span>());
-            <span class="ident">shared_state</span>.<span class="ident">batch_index</span> <span class="op">=</span> <span class="ident">batch_index</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>shared_state = shared_state.write().unwrap();
+            shared_state.last_batch = <span class="prelude-val">Some</span>(batch.clone());
+            shared_state.batch_index = batch_index;
         }
 
-        <span class="comment">// Setup the configuration and the evaluation metadata.</span>
-        <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">RuntimeContext::new</span>(<span class="ident">task</span>, <span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">execution</span>, <span class="op">|</span><span class="ident">task</span>, <span class="ident">eval</span><span class="op">|</span> {
-            <span class="ident">task</span>.<span class="ident">build_dag</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;</span><span class="ident">eval_config</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Cannot build the task DAG&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">patch_dag</span>(<span class="ident">eval</span>, <span class="ident">opt</span>.<span class="ident">batch_size</span>, <span class="kw-2">&amp;</span><span class="ident">batch</span>).<span class="ident">context</span>(<span class="string">&quot;Cannot patch the DAG&quot;</span>)
+        <span class="comment">// Setup the configuration and the evaluation metadata.
+        </span><span class="kw">let </span>context = RuntimeContext::new(task, <span class="kw-2">&amp;</span>opt.execution, |task, eval| {
+            task.build_dag(eval, <span class="kw-2">&amp;</span>eval_config)
+                .context(<span class="string">&quot;Cannot build the task DAG&quot;</span>)<span class="question-mark">?</span>;
+            patch_dag(eval, opt.batch_size, <span class="kw-2">&amp;</span>batch).context(<span class="string">&quot;Cannot patch the DAG&quot;</span>)
         })<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">connect_executor</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">execution</span>, <span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">storage</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>executor = context.connect_executor(<span class="kw-2">&amp;</span>opt.execution, <span class="kw-2">&amp;</span>opt.storage)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">ui_receiver</span> <span class="op">=</span> <span class="ident">executor</span>.<span class="ident">ui_receiver</span>;
-        <span class="kw">let</span> <span class="ident">ui_thread</span> <span class="op">=</span> <span class="ident">std::thread::Builder::new</span>()
-            .<span class="ident">name</span>(<span class="string">&quot;UI&quot;</span>.<span class="ident">to_owned</span>())
-            .<span class="ident">spawn</span>({
-                <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">clone</span>();
-                <span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                    <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="ident">ui_receiver</span>.<span class="ident">recv</span>() {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">UIMessage::StopUI</span> <span class="op">=</span> <span class="ident">message</span> {
+        <span class="kw">let </span>ui_receiver = executor.ui_receiver;
+        <span class="kw">let </span>ui_thread = std::thread::Builder::new()
+            .name(<span class="string">&quot;UI&quot;</span>.to_owned())
+            .spawn({
+                <span class="kw">let </span>sender = sender.clone();
+                <span class="kw">move </span>|| {
+                    <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = ui_receiver.recv() {
+                        <span class="kw">if let </span>UIMessage::StopUI = message {
                             <span class="kw">break</span>;
                         }
-                        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="prelude-val">Some</span>(<span class="ident">message</span>));
+                        <span class="kw">let _ </span>= sender.send(<span class="prelude-val">Some</span>(message));
                     }
                 }
             })
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to spawn UI thread&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">&quot;Failed to spawn UI thread&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">executor</span>.<span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">clone</span>();
-        <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">dag</span>, <span class="kw-2">&amp;mut</span> <span class="ident">executor</span>.<span class="ident">eval</span>.<span class="ident">dag</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = executor.eval.dag.clone();
+        std::mem::swap(<span class="kw-2">&amp;mut </span>dag, <span class="kw-2">&amp;mut </span>executor.eval.dag);
 
-        <span class="comment">// Run the actual computation and block until it ends.</span>
-        <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">clone</span>();
-        <span class="kw-2">*</span><span class="ident">current_executor_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>() <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">executor</span>.<span class="ident">tx</span>.<span class="ident">clone</span>());
-        <span class="ident">ExecutorClient::evaluate</span>(
-            <span class="ident">dag</span>,
-            <span class="ident">executor</span>.<span class="ident">tx</span>,
-            <span class="kw-2">&amp;</span><span class="ident">executor</span>.<span class="ident">rx</span>,
-            <span class="ident">executor</span>.<span class="ident">file_store</span>,
-            <span class="kw">move</span> <span class="op">|</span><span class="ident">status</span><span class="op">|</span> {
-                <span class="ident">sender</span>
-                    .<span class="ident">send</span>(<span class="prelude-val">Some</span>(<span class="ident">UIMessage::ServerStatus</span> { <span class="ident">status</span> }))
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">e</span>))
+        <span class="comment">// Run the actual computation and block until it ends.
+        </span><span class="kw">let </span>sender = sender.clone();
+        <span class="kw-2">*</span>current_executor_sender.lock().unwrap() = <span class="prelude-val">Some</span>(executor.tx.clone());
+        ExecutorClient::evaluate(
+            dag,
+            executor.tx,
+            <span class="kw-2">&amp;</span>executor.rx,
+            executor.file_store,
+            <span class="kw">move </span>|status| {
+                sender
+                    .send(<span class="prelude-val">Some</span>(UIMessage::ServerStatus { status }))
+                    .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;{:?}&quot;</span>, e))
             },
         )
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-            <span class="ident">shared_state</span>.<span class="ident">write</span>().<span class="ident">unwrap</span>().<span class="ident">should_stop</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="string">&quot;Client failed&quot;</span>
-        })<span class="question-mark">?</span>;
+        .with_context(|| {
+            shared_state.write().unwrap().should_stop = <span class="bool-val">true</span>;
+            <span class="string">&quot;Client failed&quot;
+        </span>})<span class="question-mark">?</span>;
 
-        <span class="comment">// Disable the ctrl-c handler dropping the owned clone of the sender, letting the client exit.</span>
-        <span class="ident">current_executor_sender</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">take</span>();
+        <span class="comment">// Disable the ctrl-c handler dropping the owned clone of the sender, letting the client exit.
+        </span>current_executor_sender.lock().unwrap().take();
 
-        <span class="ident">drop</span>(<span class="ident">executor</span>.<span class="ident">eval</span>);
-        <span class="ident">drop</span>(<span class="ident">executor</span>.<span class="ident">task</span>);
-        <span class="ident">drop</span>(<span class="ident">executor</span>.<span class="ident">rx</span>);
+        drop(executor.eval);
+        drop(executor.task);
+        drop(executor.rx);
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">local_executor</span>) <span class="op">=</span> <span class="ident">executor</span>.<span class="ident">local_executor</span> {
-            <span class="ident">local_executor</span>
-                .<span class="ident">join</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Executor panicked: {:?}&quot;</span>, <span class="ident">e</span>))
-                .<span class="ident">unwrap</span>()
-                .<span class="ident">expect</span>(<span class="string">&quot;Local executor failed&quot;</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(local_executor) = executor.local_executor {
+            local_executor
+                .join()
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Executor panicked: {:?}&quot;</span>, e))
+                .unwrap()
+                .expect(<span class="string">&quot;Local executor failed&quot;</span>);
         }
-        <span class="ident">ui_thread</span>
-            .<span class="ident">join</span>()
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;UI panicked: {:?}&quot;</span>, <span class="ident">e</span>))
-            .<span class="ident">unwrap</span>();
+        ui_thread
+            .join()
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;UI panicked: {:?}&quot;</span>, e))
+            .unwrap();
 
-        <span class="kw">if</span> <span class="ident">shared_state</span>.<span class="ident">read</span>().<span class="ident">unwrap</span>().<span class="ident">should_stop</span> {
+        <span class="kw">if </span>shared_state.read().unwrap().should_stop {
             <span class="kw">break</span>;
         }
     }
 
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="prelude-val">None</span>);
-    <span class="ident">global_ui_join_handle</span>
-        .<span class="ident">join</span>()
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">e</span>))
-        .<span class="ident">context</span>(<span class="string">&quot;Global UI thread failed&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let _ </span>= sender.send(<span class="prelude-val">None</span>);
+    global_ui_join_handle
+        .join()
+        .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;{:?}&quot;</span>, e))
+        .context(<span class="string">&quot;Global UI thread failed&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">printer</span> <span class="op">=</span> <span class="ident">StdoutPrinter::default</span>();
+    <span class="kw">let </span><span class="kw-2">mut </span>printer = StdoutPrinter::default();
 
-    <span class="kw">let</span> <span class="ident">shared_state</span> <span class="op">=</span> <span class="ident">shared_state</span>.<span class="ident">read</span>().<span class="ident">unwrap</span>();
-    <span class="kw">let</span> (<span class="ident">testcase</span>, <span class="ident">message</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">shared_state</span>.<span class="ident">failing_testcase</span>.<span class="ident">clone</span>() {
-        <span class="prelude-val">Some</span>(<span class="ident">testcase</span>) =&gt; <span class="ident">testcase</span>,
-        <span class="prelude-val">None</span> =&gt; {
-            <span class="macro">cwriteln!</span>(<span class="ident">printer</span>, <span class="ident">YELLOW</span>, <span class="string">&quot;No bad case found&quot;</span>);
-            <span class="ident">print_failures</span>(<span class="kw-2">&amp;</span><span class="ident">shared_state</span>, <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>);
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="kw">let </span>shared_state = shared_state.read().unwrap();
+    <span class="kw">let </span>(testcase, message) = <span class="kw">match </span>shared_state.failing_testcase.clone() {
+        <span class="prelude-val">Some</span>(testcase) =&gt; testcase,
+        <span class="prelude-val">None </span>=&gt; {
+            <span class="macro">cwriteln!</span>(printer, YELLOW, <span class="string">&quot;No bad case found&quot;</span>);
+            print_failures(<span class="kw-2">&amp;</span>shared_state, <span class="kw-2">&amp;mut </span>printer);
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
     };
-    <span class="kw">let</span> (<span class="ident">input_path</span>, <span class="ident">correct_output_path</span>, <span class="ident">failing_output_path</span>) <span class="op">=</span>
-        <span class="ident">copy_testcase</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>, <span class="kw-2">&amp;</span><span class="ident">task_path</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>(input_path, correct_output_path, failing_output_path) =
+        copy_testcase(<span class="kw-2">&amp;</span>testcase, <span class="kw-2">&amp;</span>task_path)<span class="question-mark">?</span>;
 
-    <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Solution:           &quot;</span>);
-    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">opt</span>.<span class="ident">solution</span>.<span class="ident">display</span>());
-    <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Batch size:         &quot;</span>);
-    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">opt</span>.<span class="ident">batch_size</span>);
+    <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;Solution:           &quot;</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, opt.solution.display());
+    <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;Batch size:         &quot;</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, opt.batch_size);
 
-    <span class="macro">cwriteln!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Failed testcase:&quot;</span>);
-    <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;    Generator args: &quot;</span>);
-    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">testcase</span>.<span class="ident">generator_args</span>.<span class="ident">join</span>(<span class="string">&quot; &quot;</span>));
-    <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;    Seed:           &quot;</span>);
-    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">testcase</span>.<span class="ident">seed</span>);
-    <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;    Message:        &quot;</span>);
-    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">message</span>);
+    <span class="macro">cwriteln!</span>(printer, BOLD, <span class="string">&quot;Failed testcase:&quot;</span>);
+    <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;    Generator args: &quot;</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, testcase.generator_args.join(<span class="string">&quot; &quot;</span>));
+    <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;    Seed:           &quot;</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, testcase.seed);
+    <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;    Message:        &quot;</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, message);
     <span class="macro">println!</span>();
-    <span class="ident">print_file</span>(<span class="string">&quot;Input file&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">task_path</span>, <span class="kw-2">&amp;</span><span class="ident">input_path</span>, <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">correct_output_path</span>) <span class="op">=</span> <span class="ident">correct_output_path</span> {
-        <span class="ident">print_file</span>(
+    print_file(<span class="string">&quot;Input file&quot;</span>, <span class="kw-2">&amp;</span>task_path, <span class="kw-2">&amp;</span>input_path, <span class="kw-2">&amp;mut </span>printer)<span class="question-mark">?</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(correct_output_path) = correct_output_path {
+        print_file(
             <span class="string">&quot;Correct output file&quot;</span>,
-            <span class="kw-2">&amp;</span><span class="ident">task_path</span>,
-            <span class="kw-2">&amp;</span><span class="ident">correct_output_path</span>,
-            <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>,
+            <span class="kw-2">&amp;</span>task_path,
+            <span class="kw-2">&amp;</span>correct_output_path,
+            <span class="kw-2">&amp;mut </span>printer,
         )<span class="question-mark">?</span>;
     }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">failing_output_path</span>) <span class="op">=</span> <span class="ident">failing_output_path</span> {
-        <span class="ident">print_file</span>(
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(failing_output_path) = failing_output_path {
+        print_file(
             <span class="string">&quot;Failing output file&quot;</span>,
-            <span class="kw-2">&amp;</span><span class="ident">task_path</span>,
-            <span class="kw-2">&amp;</span><span class="ident">failing_output_path</span>,
-            <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>,
+            <span class="kw-2">&amp;</span>task_path,
+            <span class="kw-2">&amp;</span>failing_output_path,
+            <span class="kw-2">&amp;mut </span>printer,
         )<span class="question-mark">?</span>;
     }
 
-    <span class="ident">print_failures</span>(<span class="kw-2">&amp;</span><span class="ident">shared_state</span>, <span class="kw-2">&amp;mut</span> <span class="ident">printer</span>);
+    print_failures(<span class="kw-2">&amp;</span>shared_state, <span class="kw-2">&amp;mut </span>printer);
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">copy_testcase</span>(
-    <span class="ident">testcase</span>: <span class="kw-2">&amp;</span><span class="ident">TestcaseData</span>,
-    <span class="ident">task_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">target_dir</span> <span class="op">=</span> <span class="ident">task_path</span>.<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;fuzz/bad-cases/seed-{}&quot;</span>, <span class="ident">testcase</span>.<span class="ident">seed</span>));
-    <span class="ident">std::fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">target_dir</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to create {}&quot;</span>, <span class="ident">target_dir</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
+<span class="kw">fn </span>copy_testcase(
+    testcase: <span class="kw-2">&amp;</span>TestcaseData,
+    task_path: <span class="kw-2">&amp;</span>Path,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(PathBuf, <span class="prelude-ty">Option</span>&lt;PathBuf&gt;, <span class="prelude-ty">Option</span>&lt;PathBuf&gt;), Error&gt; {
+    <span class="kw">let </span>target_dir = task_path.join(<span class="macro">format!</span>(<span class="string">&quot;fuzz/bad-cases/seed-{}&quot;</span>, testcase.seed));
+    std::fs::create_dir_all(<span class="kw-2">&amp;</span>target_dir)
+        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to create {}&quot;</span>, target_dir.display()))<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="ident">input_target</span> <span class="op">=</span> <span class="ident">target_dir</span>.<span class="ident">join</span>(<span class="string">&quot;input.txt&quot;</span>);
-    <span class="kw">let</span> <span class="ident">correct_output_target</span> <span class="op">=</span> <span class="ident">target_dir</span>.<span class="ident">join</span>(<span class="string">&quot;correct-output.txt&quot;</span>);
-    <span class="kw">let</span> <span class="ident">failing_output_target</span> <span class="op">=</span> <span class="ident">target_dir</span>.<span class="ident">join</span>(<span class="string">&quot;failing-output.txt&quot;</span>);
+    <span class="kw">let </span>input_target = target_dir.join(<span class="string">&quot;input.txt&quot;</span>);
+    <span class="kw">let </span>correct_output_target = target_dir.join(<span class="string">&quot;correct-output.txt&quot;</span>);
+    <span class="kw">let </span>failing_output_target = target_dir.join(<span class="string">&quot;failing-output.txt&quot;</span>);
 
-    <span class="ident">std::fs::copy</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_path</span>, <span class="kw-2">&amp;</span><span class="ident">input_target</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+    std::fs::copy(<span class="kw-2">&amp;</span>testcase.input_path, <span class="kw-2">&amp;</span>input_target).with_context(|| {
         <span class="macro">format!</span>(
             <span class="string">&quot;Failed to copy {} -&gt; {}&quot;</span>,
-            <span class="ident">testcase</span>.<span class="ident">input_path</span>.<span class="ident">display</span>(),
-            <span class="ident">input_target</span>.<span class="ident">display</span>()
+            testcase.input_path.display(),
+            input_target.display()
         )
     })<span class="question-mark">?</span>;
-    <span class="comment">// FIXME: the output files may not be produced, or not be present in the write_to because we</span>
-    <span class="comment">//        stop the execution before it ends normally. This means that some executions may be</span>
-    <span class="comment">//        skipped and their output not produced.</span>
-    <span class="kw">let</span> <span class="ident">correct_output_target</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">testcase</span>.<span class="ident">correct_output_path</span>.<span class="ident">exists</span>() {
-        <span class="ident">std::fs::copy</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">correct_output_path</span>, <span class="kw-2">&amp;</span><span class="ident">correct_output_target</span>).<span class="ident">with_context</span>(
-            <span class="op">|</span><span class="op">|</span> {
+    <span class="comment">// FIXME: the output files may not be produced, or not be present in the write_to because we
+    //        stop the execution before it ends normally. This means that some executions may be
+    //        skipped and their output not produced.
+    </span><span class="kw">let </span>correct_output_target = <span class="kw">if </span>testcase.correct_output_path.exists() {
+        std::fs::copy(<span class="kw-2">&amp;</span>testcase.correct_output_path, <span class="kw-2">&amp;</span>correct_output_target).with_context(
+            || {
                 <span class="macro">format!</span>(
                     <span class="string">&quot;Failed to copy {} -&gt; {}&quot;</span>,
-                    <span class="ident">testcase</span>.<span class="ident">correct_output_path</span>.<span class="ident">display</span>(),
-                    <span class="ident">correct_output_target</span>.<span class="ident">display</span>()
+                    testcase.correct_output_path.display(),
+                    correct_output_target.display()
                 )
             },
         )<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">correct_output_target</span>)
-    } <span class="kw">else</span> {
-        <span class="prelude-val">None</span>
-    };
-    <span class="kw">let</span> <span class="ident">failing_output_target</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">testcase</span>.<span class="ident">output_path</span>.<span class="ident">exists</span>() {
-        <span class="ident">std::fs::copy</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">output_path</span>, <span class="kw-2">&amp;</span><span class="ident">failing_output_target</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="prelude-val">Some</span>(correct_output_target)
+    } <span class="kw">else </span>{
+        <span class="prelude-val">None
+    </span>};
+    <span class="kw">let </span>failing_output_target = <span class="kw">if </span>testcase.output_path.exists() {
+        std::fs::copy(<span class="kw-2">&amp;</span>testcase.output_path, <span class="kw-2">&amp;</span>failing_output_target).with_context(|| {
             <span class="macro">format!</span>(
                 <span class="string">&quot;Failed to copy {} -&gt; {}&quot;</span>,
-                <span class="ident">testcase</span>.<span class="ident">output_path</span>.<span class="ident">display</span>(),
-                <span class="ident">failing_output_target</span>.<span class="ident">display</span>()
+                testcase.output_path.display(),
+                failing_output_target.display()
             )
         })<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">failing_output_target</span>)
-    } <span class="kw">else</span> {
+        <span class="prelude-val">Some</span>(failing_output_target)
+    } <span class="kw">else </span>{
         <span class="macro">warn!</span>(<span class="string">&quot;Output file not found, maybe the solution was killed&quot;</span>);
-        <span class="prelude-val">None</span>
-    };
+        <span class="prelude-val">None
+    </span>};
 
-    <span class="prelude-val">Ok</span>((<span class="ident">input_target</span>, <span class="ident">correct_output_target</span>, <span class="ident">failing_output_target</span>))
+    <span class="prelude-val">Ok</span>((input_target, correct_output_target, failing_output_target))
 }
 
-<span class="kw">fn</span> <span class="ident">print_file</span>(
-    <span class="ident">title</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">base_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-    <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-    <span class="ident">printer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">StdoutPrinter</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BLUE</span>, <span class="string">&quot;{} &quot;</span>, <span class="ident">title</span>);
+<span class="kw">fn </span>print_file(
+    title: <span class="kw-2">&amp;</span>str,
+    base_path: <span class="kw-2">&amp;</span>Path,
+    path: <span class="kw-2">&amp;</span>Path,
+    printer: <span class="kw-2">&amp;mut </span>StdoutPrinter,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="macro">cwrite!</span>(printer, BLUE, <span class="string">&quot;{} &quot;</span>, title);
     <span class="macro">println!</span>(
         <span class="string">&quot;(at {})&quot;</span>,
-        <span class="ident">path</span>.<span class="ident">strip_prefix</span>(<span class="ident">base_path</span>).<span class="ident">unwrap_or</span>(<span class="ident">path</span>).<span class="ident">display</span>()
+        path.strip_prefix(base_path).unwrap_or(path).display()
     );
-    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::read</span>(<span class="ident">path</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to read {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">content</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>);
-    <span class="kw">const</span> <span class="ident">MAX_CONTENT_LEN</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">256</span>;
-    <span class="kw">if</span> <span class="ident">content</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">MAX_CONTENT_LEN</span> {
-        <span class="macro">println!</span>(<span class="string">&quot;{}...\n&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">content</span>[..<span class="ident">MAX_CONTENT_LEN</span>].<span class="ident">trim_end</span>());
-    } <span class="kw">else</span> {
-        <span class="macro">println!</span>(<span class="string">&quot;{}\n&quot;</span>, <span class="ident">content</span>.<span class="ident">trim_end</span>());
+    <span class="kw">let </span>file = std::fs::read(path).with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+    <span class="kw">let </span>content = String::from_utf8_lossy(<span class="kw-2">&amp;</span>file);
+    <span class="kw">const </span>MAX_CONTENT_LEN: usize = <span class="number">256</span>;
+    <span class="kw">if </span>content.len() &gt; MAX_CONTENT_LEN {
+        <span class="macro">println!</span>(<span class="string">&quot;{}...\n&quot;</span>, <span class="kw-2">&amp;</span>content[..MAX_CONTENT_LEN].trim_end());
+    } <span class="kw">else </span>{
+        <span class="macro">println!</span>(<span class="string">&quot;{}\n&quot;</span>, content.trim_end());
     }
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">print_failures</span>(<span class="ident">shared</span>: <span class="kw-2">&amp;</span><span class="ident">SharedUIState</span>, <span class="ident">printer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">StdoutPrinter</span>) {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">testcase</span>, <span class="ident">message</span>, <span class="ident">result</span>)) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">shared</span>.<span class="ident">errored_testcase</span> {
+<span class="kw">fn </span>print_failures(shared: <span class="kw-2">&amp;</span>SharedUIState, printer: <span class="kw-2">&amp;mut </span>StdoutPrinter) {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>((testcase, message, result)) = <span class="kw-2">&amp;</span>shared.errored_testcase {
         <span class="macro">println!</span>();
-        <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">RED</span>, <span class="string">&quot;Error: &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">message</span>);
-        <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Generator args: &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">testcase</span>.<span class="ident">generator_args</span>.<span class="ident">join</span>(<span class="string">&quot; &quot;</span>));
-        <span class="macro">cwrite!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Result:         &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">result</span>.<span class="ident">status</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">result</span>.<span class="ident">stderr</span> {
-            <span class="macro">cwriteln!</span>(<span class="ident">printer</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Stderr:&quot;</span>);
-            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">String::from_utf8_lossy</span>(<span class="ident">stderr</span>));
+        <span class="macro">cwrite!</span>(printer, RED, <span class="string">&quot;Error: &quot;</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, message);
+        <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;Generator args: &quot;</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, testcase.generator_args.join(<span class="string">&quot; &quot;</span>));
+        <span class="macro">cwrite!</span>(printer, BOLD, <span class="string">&quot;Result:         &quot;</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, result.status);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = <span class="kw-2">&amp;</span>result.stderr {
+            <span class="macro">cwriteln!</span>(printer, BOLD, <span class="string">&quot;Stderr:&quot;</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, String::from_utf8_lossy(stderr));
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

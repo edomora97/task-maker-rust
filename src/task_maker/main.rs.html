@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/main.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>main.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/main.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>main.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -196,203 +196,203 @@
 <span id="196">196</span>
 <span id="197">197</span>
 <span id="198">198</span>
-</pre><pre class="rust"><code><span class="doccomment">//! The new cmsMake!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! [![asciicast](https://asciinema.org/a/301849.svg)](https://asciinema.org/a/301849)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Installation</span>
-<span class="doccomment">//! For **Ubuntu** and **Debian** users you can find the `.deb` file in the [Releases](https://github.com/edomora97/task-maker-rust/releases) page.</span>
-<span class="doccomment">//! Install the package using `sudo dpkg -i the_file.deb` and it&#39;s dependencies (if you need to) with `sudo apt install -f`.</span>
-<span class="doccomment">//! There is a good chance that you have already all the dependencies already installed.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For **Ubuntu** it&#39;s also possible to install task-maker-rust using a PPA:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! sudo add-apt-repository ppa:dariop1/task-maker-rust</span>
-<span class="doccomment">//! sudo apt update</span>
-<span class="doccomment">//! sudo apt install task-maker-rust</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For **ArchLinux** users you can find the packages in the AUR: [`task-maker-rust`](https://aur.archlinux.org/packages/task-maker-rust) (the stable release)</span>
-<span class="doccomment">//! and [`task-maker-rust-git`](https://aur.archlinux.org/packages/task-maker-rust-git) (the version based on `master`).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For **MacOS** users you can install the package using Homebrew: `brew install bortoz/bortoz/task-maker-rust`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For the other operating systems the recommended way to use task-maker-rust is the following:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - Install the latest stable rust version (and cargo). For example using [rustup](https://rustup.rs/)</span>
-<span class="doccomment">//! - Install the system dependencies: `libseccomp` or `libseccomp-dev` on Ubuntu</span>
-<span class="doccomment">//! - Clone this repo: `git clone https://github.com/edomora97/task-maker-rust`</span>
-<span class="doccomment">//! - Build task-maker: `cargo build --release`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The executable should be located at `target/release/task-maker`.</span>
-<span class="doccomment">//! Due to limitations of cargo (the build system), `cargo install` should not be used since it</span>
-<span class="doccomment">//! doesn&#39;t copy some required files. For the same reason you should not delete or move the cloned</span>
-<span class="doccomment">//! repository after the build. If you need a package for your operating system/distro open an issue</span>
-<span class="doccomment">//! please!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The supported operating systems are Linux (with libseccomp support), OSX and Windows under WSL2.</span>
-<span class="doccomment">//! It should be possible to build task-maker using musl but it may be hard to link libseccomp!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Usage</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Simple local usage&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Run `task-maker-rust` in the task folder to compile and run everything.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Specifying no option all the caches are active, the next executions will be very fast, actually doing only what&#39;s needed.</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Disable cache&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If you really want to repeat the execution of something provide the `--no-cache` option:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-rust --no-cache</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Without any options `--no-cache` won&#39;t use any caches.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If you want, for example, just redo the evaluations (maybe for retrying the timings), use</span>
-<span class="doccomment">//! `--no-cache=evaluation`. The available options for `--no-cache` can be found with `--help`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Test only a subset of solutions&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Sometimes you only want to test only some solutions, speeding up the compilation and cleaning a</span>
-<span class="doccomment">//! bit the output:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-rust sol1.cpp sol2.py</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Note that you may or may not specify the folder of the solution (sol/ or solution/). You can</span>
-<span class="doccomment">//! also specify only the prefix of the name of the solutions you want to check.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Using different task directory&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! By default the task in the current directory is executed, if you want to change the task without</span>
-<span class="doccomment">//! `cd`-ing away:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-rust --task-dir ~/tasks/poldo</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Extracting executable files&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! All the compiled files are kept in an internal folder but if you want to use them, for example</span>
-<span class="doccomment">//! to debug a solution, passing `--copy-exe` all the useful files are copied to the `bin/` folder</span>
-<span class="doccomment">//! inside the task directory.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-rust --copy-exe</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Statement&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If you don&#39;t want to build the statement files (and the booklet) just pass `--no-statement`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-rust --no-statement</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If you want just to build the statement you can use:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-tools booklet</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This tool can also be used to build the contest&#39;s booklet.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt; Clean the task directory&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If you want to clean everything, for example after the contest, simply run:</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-tools clear</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This will remove the files that can be regenerated from the task directory. Note that the</span>
-<span class="doccomment">//! internal cache is not pruned by this command.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;details&gt;</span>
-<span class="doccomment">//! &lt;summary&gt;Remote evaluation&lt;/summary&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! On a server (a machine accessible from clients and workers) run</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-tools server</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This will start `task-maker` in server mode, listening for connections from clients and workers</span>
-<span class="doccomment">//! respectively on port 27182 and 27183.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Then on the worker machines start a worker with</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-tools worker server_addr num</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This will start a worker on that machine (**using a single core**), connecting to the server</span>
-<span class="doccomment">//! and executing the jobs the server assigns. The `num` parameter can be used to distinguish</span>
-<span class="doccomment">//! between multiple workers in the same machine.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For running a remote computation on your machine just add the `--evaluate-on` option, like:</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! task-maker-rust --evaluate-on server_addr</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! &lt;/details&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Using docker</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! You can easily spawn a task-maker server and a set of workers in your local machine without having to install all the compilers.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```bash</span>
-<span class="doccomment">//! docker run --rm -it \</span>
-<span class="doccomment">//!     --name task-maker \</span>
-<span class="doccomment">//!     -p 27183:27183 \</span>
-<span class="doccomment">//!     -p 27182:27182 \</span>
-<span class="doccomment">//!     --privileged \</span>
-<span class="doccomment">//!     edomora97/task-maker-rust:latest</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Then you can use task-maker locally adding `--evaluate-on localhost`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `--privileged` is required to run the worker sandboxes.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! The new cmsMake!
+//!
+//! [![asciicast](https://asciinema.org/a/301849.svg)](https://asciinema.org/a/301849)
+//!
+//! # Installation
+//! For **Ubuntu** and **Debian** users you can find the `.deb` file in the [Releases](https://github.com/edomora97/task-maker-rust/releases) page.
+//! Install the package using `sudo dpkg -i the_file.deb` and it&#39;s dependencies (if you need to) with `sudo apt install -f`.
+//! There is a good chance that you have already all the dependencies already installed.
+//!
+//! For **Ubuntu** it&#39;s also possible to install task-maker-rust using a PPA:
+//!
+//! ```bash
+//! sudo add-apt-repository ppa:dariop1/task-maker-rust
+//! sudo apt update
+//! sudo apt install task-maker-rust
+//! ```
+//!
+//! For **ArchLinux** users you can find the packages in the AUR: [`task-maker-rust`](https://aur.archlinux.org/packages/task-maker-rust) (the stable release)
+//! and [`task-maker-rust-git`](https://aur.archlinux.org/packages/task-maker-rust-git) (the version based on `master`).
+//!
+//! For **MacOS** users you can install the package using Homebrew: `brew install bortoz/bortoz/task-maker-rust`.
+//!
+//! For the other operating systems the recommended way to use task-maker-rust is the following:
+//!
+//! - Install the latest stable rust version (and cargo). For example using [rustup](https://rustup.rs/)
+//! - Install the system dependencies: `libseccomp` or `libseccomp-dev` on Ubuntu
+//! - Clone this repo: `git clone https://github.com/edomora97/task-maker-rust`
+//! - Build task-maker: `cargo build --release`
+//!
+//! The executable should be located at `target/release/task-maker`.
+//! Due to limitations of cargo (the build system), `cargo install` should not be used since it
+//! doesn&#39;t copy some required files. For the same reason you should not delete or move the cloned
+//! repository after the build. If you need a package for your operating system/distro open an issue
+//! please!
+//!
+//! The supported operating systems are Linux (with libseccomp support), OSX and Windows under WSL2.
+//! It should be possible to build task-maker using musl but it may be hard to link libseccomp!
+//!
+//! # Usage
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Simple local usage&lt;/summary&gt;
+//!
+//! Run `task-maker-rust` in the task folder to compile and run everything.
+//!
+//! Specifying no option all the caches are active, the next executions will be very fast, actually doing only what&#39;s needed.
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Disable cache&lt;/summary&gt;
+//!
+//! If you really want to repeat the execution of something provide the `--no-cache` option:
+//!
+//! ```bash
+//! task-maker-rust --no-cache
+//! ```
+//!
+//! Without any options `--no-cache` won&#39;t use any caches.
+//!
+//! If you want, for example, just redo the evaluations (maybe for retrying the timings), use
+//! `--no-cache=evaluation`. The available options for `--no-cache` can be found with `--help`.
+//!
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Test only a subset of solutions&lt;/summary&gt;
+//!
+//! Sometimes you only want to test only some solutions, speeding up the compilation and cleaning a
+//! bit the output:
+//!
+//! ```bash
+//! task-maker-rust sol1.cpp sol2.py
+//! ```
+//!
+//! Note that you may or may not specify the folder of the solution (sol/ or solution/). You can
+//! also specify only the prefix of the name of the solutions you want to check.
+//!
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Using different task directory&lt;/summary&gt;
+//!
+//! By default the task in the current directory is executed, if you want to change the task without
+//! `cd`-ing away:
+//!
+//! ```bash
+//! task-maker-rust --task-dir ~/tasks/poldo
+//! ```
+//!
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Extracting executable files&lt;/summary&gt;
+//!
+//! All the compiled files are kept in an internal folder but if you want to use them, for example
+//! to debug a solution, passing `--copy-exe` all the useful files are copied to the `bin/` folder
+//! inside the task directory.
+//!
+//! ```bash
+//! task-maker-rust --copy-exe
+//! ```
+//!
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Statement&lt;/summary&gt;
+//!
+//! If you don&#39;t want to build the statement files (and the booklet) just pass `--no-statement`.
+//!
+//! ```bash
+//! task-maker-rust --no-statement
+//! ```
+//!
+//! If you want just to build the statement you can use:
+//!
+//! ```bash
+//! task-maker-tools booklet
+//! ```
+//!
+//! This tool can also be used to build the contest&#39;s booklet.
+//!
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt; Clean the task directory&lt;/summary&gt;
+//!
+//! If you want to clean everything, for example after the contest, simply run:
+//! ```bash
+//! task-maker-tools clear
+//! ```
+//!
+//! This will remove the files that can be regenerated from the task directory. Note that the
+//! internal cache is not pruned by this command.
+//!
+//! &lt;/details&gt;
+//!
+//! &lt;details&gt;
+//! &lt;summary&gt;Remote evaluation&lt;/summary&gt;
+//!
+//! On a server (a machine accessible from clients and workers) run
+//!
+//! ```bash
+//! task-maker-tools server
+//! ```
+//!
+//! This will start `task-maker` in server mode, listening for connections from clients and workers
+//! respectively on port 27182 and 27183.
+//!
+//! Then on the worker machines start a worker with
+//! ```bash
+//! task-maker-tools worker server_addr num
+//! ```
+//!
+//! This will start a worker on that machine (**using a single core**), connecting to the server
+//! and executing the jobs the server assigns. The `num` parameter can be used to distinguish
+//! between multiple workers in the same machine.
+//!
+//! For running a remote computation on your machine just add the `--evaluate-on` option, like:
+//! ```bash
+//! task-maker-rust --evaluate-on server_addr
+//! ```
+//!
+//! &lt;/details&gt;
+//!
+//! ### Using docker
+//!
+//! You can easily spawn a task-maker server and a set of workers in your local machine without having to install all the compilers.
+//!
+//! ```bash
+//! docker run --rm -it \
+//!     --name task-maker \
+//!     -p 27183:27183 \
+//!     -p 27182:27182 \
+//!     --privileged \
+//!     edomora97/task-maker-rust:latest
+//! ```
+//!
+//! Then you can use task-maker locally adding `--evaluate-on localhost`.
+//!
+//! `--privileged` is required to run the worker sandboxes.
 
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::borrowed_box</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::new_without_default</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::module_inception</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::cognitive_complexity</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::type_complexity</span>)]</span>
+</span><span class="attribute">#![allow(clippy::borrowed_box)]
+#![allow(clippy::new_without_default)]
+#![allow(clippy::module_inception)]
+#![allow(clippy::cognitive_complexity)]
+#![allow(clippy::too_many_arguments)]
+#![allow(clippy::type_complexity)]
 
-<span class="kw">use</span> <span class="ident">clap::Parser</span>;
+</span><span class="kw">use </span>clap::Parser;
 
-<span class="kw">use</span> <span class="ident">task_maker_rust::main_local</span>;
-<span class="kw">use</span> <span class="ident">task_maker_rust::opt</span>;
+<span class="kw">use </span>task_maker_rust::main_local;
+<span class="kw">use </span>task_maker_rust::opt;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opt</span> <span class="op">=</span> <span class="ident">opt::Opt::parse</span>();
-    <span class="ident">opt</span>.<span class="ident">enable_log</span>();
-    <span class="ident">main_local</span>(<span class="ident">opt</span>);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span><span class="kw-2">mut </span>opt = opt::Opt::parse();
+    opt.enable_log();
+    main_local(opt);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

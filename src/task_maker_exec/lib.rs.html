@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -245,252 +245,252 @@
 <span id="245">245</span>
 <span id="246">246</span>
 <span id="247">247</span>
-</pre><pre class="rust"><code><span class="doccomment">//! DAG execution dispatching the tasks to the workers.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This crate is able to setup a distributed execution environment by creating an `Executor` which</span>
-<span class="doccomment">//! spawns some workers, and a client which, talking to the executor, is able to schedule the</span>
-<span class="doccomment">//! execution of a DAG.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! A [`FileStore`](../task_maker_store/struct.FileStore.html) is used to store the files of the DAG</span>
-<span class="doccomment">//! and [`std::sync::mpsc::channel`](https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html) is</span>
-<span class="doccomment">//! used for the internal communication.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! A simple `Scheduler` is used to dispatch the jobs when all their dependencies are ready. When an</span>
-<span class="doccomment">//! execution is not successful (i.e. does not return with zero) all the depending jobs are</span>
-<span class="doccomment">//! cancelled.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! All the tasks are run inside a [`Sandbox`](struct.Sandbox.html) provided by</span>
-<span class="doccomment">//! [`tabox`](https://crates.io/crates/tabox).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Implementation details</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! In order to support both local and remote evaluation, sharing the same code and logic we need a</span>
-<span class="doccomment">//! layer of abstraction over the execution.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The components of the execution are:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - [`ExecutorClient`](struct.ExecutorClient.html) (from now `Client`) is the component that runs</span>
-<span class="doccomment">//!   on the process that wants to execute the DAG, it asks to its executor to run it and gets the</span>
-<span class="doccomment">//!   results eventually processing them.</span>
-<span class="doccomment">//! - [`LocalExecutor`](executors/struct.LocalExecutor.html) the component to which the `Client`</span>
-<span class="doccomment">//!   connects to for executing a DAG locally, it internally uses an `Executor` for actually running</span>
-<span class="doccomment">//!   the DAG, but also spawns local workers.</span>
-<span class="doccomment">//! - [`RemoteExecutor`](executors/struct.RemoteExecutor.html) the component to which the `Client`</span>
-<span class="doccomment">//!   connects to for executing a DAG remotely. This usually runs on a remote machine w.r.t the</span>
-<span class="doccomment">//!   client&#39;s one. It internally uses an `Executor` for running the DAG but doesn&#39;t spawn the</span>
-<span class="doccomment">//!   workers since they are remote too. This component is also responsible for listening to the</span>
-<span class="doccomment">//!   sockets for the connections of the clients and the workers.</span>
-<span class="doccomment">//! - `Executor` the component that abstracts the connection of workers and clients and handles the</span>
-<span class="doccomment">//!   actual communication between the scheduler and the clients. This component is also responsible</span>
-<span class="doccomment">//!   for spawning the scheduler and keeping it working.</span>
-<span class="doccomment">//! - `Scheduler` the component that, given DAGs and notification about the status of the workers</span>
-<span class="doccomment">//!   (i.e. worker connection/disconnection/job completion) schedules the execution of the ready</span>
-<span class="doccomment">//!   jobs and sends to the clients the notification about their status.</span>
-<span class="doccomment">//! - `WorkerManager` the component that handles the connections with the workers and notifies the</span>
-<span class="doccomment">//!   scheduler about worker events.</span>
-<span class="doccomment">//! - `Worker` the component that actively asks for work to do, waiting a response from the</span>
-<span class="doccomment">//!   scheduler, and eventually receive and execute it. After the execution completes, the worker</span>
-<span class="doccomment">//!   asks for another job to do.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Local execution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ![Local execution diagram](https://www.lucidchart.com/publicSegments/view/f0ad0719-2dd4-4c60-9da0-ca0614fd37a1/image.png)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Running locally all the components are spawn in the current process, but different threads.</span>
-<span class="doccomment">//! The communication between them is done using in memory channels, including the one from the</span>
-<span class="doccomment">//! `Client` to the `LocalExecutor`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `Client` connects to the `LocalExecutor`, specifying also the number of workers to spawn.</span>
-<span class="doccomment">//! The local executor spawns an actual executor, a worker manager and that number of workers.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Remote execution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ![Local execution diagram](https://www.lucidchart.com/publicSegments/view/86167d8f-b231-4698-a8ac-a26ed995fd19/image.png)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! In a remote environment the `Client` connects to the `RemoteExecutor` via a TCP socket, the</span>
-<span class="doccomment">//! remote executor listens for client and worker connections. The workers then connect to the</span>
-<span class="doccomment">//! `RemoteExecutor` and they are handled by the `WorkerManager`.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! DAG execution dispatching the tasks to the workers.
+//!
+//! This crate is able to setup a distributed execution environment by creating an `Executor` which
+//! spawns some workers, and a client which, talking to the executor, is able to schedule the
+//! execution of a DAG.
+//!
+//! A [`FileStore`](../task_maker_store/struct.FileStore.html) is used to store the files of the DAG
+//! and [`std::sync::mpsc::channel`](https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html) is
+//! used for the internal communication.
+//!
+//! A simple `Scheduler` is used to dispatch the jobs when all their dependencies are ready. When an
+//! execution is not successful (i.e. does not return with zero) all the depending jobs are
+//! cancelled.
+//!
+//! All the tasks are run inside a [`Sandbox`](struct.Sandbox.html) provided by
+//! [`tabox`](https://crates.io/crates/tabox).
+//!
+//! ## Implementation details
+//!
+//! In order to support both local and remote evaluation, sharing the same code and logic we need a
+//! layer of abstraction over the execution.
+//!
+//! The components of the execution are:
+//!
+//! - [`ExecutorClient`](struct.ExecutorClient.html) (from now `Client`) is the component that runs
+//!   on the process that wants to execute the DAG, it asks to its executor to run it and gets the
+//!   results eventually processing them.
+//! - [`LocalExecutor`](executors/struct.LocalExecutor.html) the component to which the `Client`
+//!   connects to for executing a DAG locally, it internally uses an `Executor` for actually running
+//!   the DAG, but also spawns local workers.
+//! - [`RemoteExecutor`](executors/struct.RemoteExecutor.html) the component to which the `Client`
+//!   connects to for executing a DAG remotely. This usually runs on a remote machine w.r.t the
+//!   client&#39;s one. It internally uses an `Executor` for running the DAG but doesn&#39;t spawn the
+//!   workers since they are remote too. This component is also responsible for listening to the
+//!   sockets for the connections of the clients and the workers.
+//! - `Executor` the component that abstracts the connection of workers and clients and handles the
+//!   actual communication between the scheduler and the clients. This component is also responsible
+//!   for spawning the scheduler and keeping it working.
+//! - `Scheduler` the component that, given DAGs and notification about the status of the workers
+//!   (i.e. worker connection/disconnection/job completion) schedules the execution of the ready
+//!   jobs and sends to the clients the notification about their status.
+//! - `WorkerManager` the component that handles the connections with the workers and notifies the
+//!   scheduler about worker events.
+//! - `Worker` the component that actively asks for work to do, waiting a response from the
+//!   scheduler, and eventually receive and execute it. After the execution completes, the worker
+//!   asks for another job to do.
+//!
+//! ### Local execution
+//!
+//! ![Local execution diagram](https://www.lucidchart.com/publicSegments/view/f0ad0719-2dd4-4c60-9da0-ca0614fd37a1/image.png)
+//!
+//! Running locally all the components are spawn in the current process, but different threads.
+//! The communication between them is done using in memory channels, including the one from the
+//! `Client` to the `LocalExecutor`.
+//!
+//! The `Client` connects to the `LocalExecutor`, specifying also the number of workers to spawn.
+//! The local executor spawns an actual executor, a worker manager and that number of workers.
+//!
+//! ### Remote execution
+//!
+//! ![Local execution diagram](https://www.lucidchart.com/publicSegments/view/86167d8f-b231-4698-a8ac-a26ed995fd19/image.png)
+//!
+//! In a remote environment the `Client` connects to the `RemoteExecutor` via a TCP socket, the
+//! remote executor listens for client and worker connections. The workers then connect to the
+//! `RemoteExecutor` and they are handled by the `WorkerManager`.
 
-<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::upper_case_acronyms</span>)]</span>
+</span><span class="attribute">#![deny(missing_docs)]
+#![allow(clippy::upper_case_acronyms)]
 
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">log</span>;
-<span class="attribute">#[<span class="ident">macro_use</span>(<span class="ident">defer</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">scopeguard</span>;
+#[macro_use]
+</span><span class="kw">extern crate </span>log;
+<span class="attribute">#[macro_use(defer)]
+</span><span class="kw">extern crate </span>scopeguard;
 
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">std::thread</span>;
+<span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::sync::Arc;
+<span class="kw">use </span>std::thread;
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="doccomment">/// Re-export `ductile` since it&#39;s sensible to any version change</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ductile</span>;
-<span class="kw">use</span> <span class="ident">ductile::new_local_channel</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="doccomment">/// Re-export `ductile` since it&#39;s sensible to any version change
+</span><span class="kw">pub use </span>ductile;
+<span class="kw">use </span>ductile::new_local_channel;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">client::ExecutorClient</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">executor</span>::{<span class="ident">ExecutorStatus</span>, <span class="ident">ExecutorWorkerStatus</span>, <span class="ident">WorkerCurrentJobStatus</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sandbox::RawSandboxResult</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sandbox_runner</span>::{<span class="ident">ErrorSandboxRunner</span>, <span class="ident">SandboxRunner</span>, <span class="ident">SuccessSandboxRunner</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">scheduler::ClientInfo</span>;
-<span class="kw">use</span> <span class="ident">task_maker_cache::Cache</span>;
-<span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionDAG</span>;
-<span class="kw">use</span> <span class="ident">task_maker_store::FileStore</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">worker</span>::{<span class="ident">Worker</span>, <span class="ident">WorkerConn</span>};
+<span class="kw">pub use </span>client::ExecutorClient;
+<span class="kw">pub use </span>executor::{ExecutorStatus, ExecutorWorkerStatus, WorkerCurrentJobStatus};
+<span class="kw">pub use </span>sandbox::RawSandboxResult;
+<span class="kw">pub use </span>sandbox_runner::{ErrorSandboxRunner, SandboxRunner, SuccessSandboxRunner};
+<span class="kw">pub use </span>scheduler::ClientInfo;
+<span class="kw">use </span>task_maker_cache::Cache;
+<span class="kw">use </span>task_maker_dag::ExecutionDAG;
+<span class="kw">use </span>task_maker_store::FileStore;
+<span class="kw">pub use </span>worker::{Worker, WorkerConn};
 
-<span class="kw">mod</span> <span class="ident">check_dag</span>;
-<span class="kw">mod</span> <span class="ident">client</span>;
-<span class="kw">mod</span> <span class="ident">detect_exe</span>;
-<span class="kw">mod</span> <span class="ident">executor</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">executors</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">find_tools</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">proto</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">sandbox</span>;
-<span class="kw">mod</span> <span class="ident">sandbox_runner</span>;
-<span class="kw">mod</span> <span class="ident">scheduler</span>;
-<span class="kw">mod</span> <span class="ident">worker</span>;
-<span class="kw">mod</span> <span class="ident">worker_manager</span>;
+<span class="kw">mod </span>check_dag;
+<span class="kw">mod </span>client;
+<span class="kw">mod </span>detect_exe;
+<span class="kw">mod </span>executor;
+<span class="kw">pub mod </span>executors;
+<span class="kw">pub mod </span>find_tools;
+<span class="kw">pub mod </span>proto;
+<span class="kw">pub mod </span>sandbox;
+<span class="kw">mod </span>sandbox_runner;
+<span class="kw">mod </span>scheduler;
+<span class="kw">mod </span>worker;
+<span class="kw">mod </span>worker_manager;
 
-<span class="kw">const</span> <span class="ident">KEY_MATERIAL</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;task-maker-rust 99e4e7117fbf4ed6f8f1850c6acb61b6&quot;</span>;
+<span class="kw">const </span>KEY_MATERIAL: <span class="kw-2">&amp;</span>str = <span class="string">&quot;task-maker-rust 99e4e7117fbf4ed6f8f1850c6acb61b6&quot;</span>;
 
-<span class="doccomment">/// Derive the encryption key from a password string.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">derive_key_from_password</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">password</span>: <span class="ident">S</span>) -&gt; [<span class="ident">u8</span>; <span class="number">32</span>] {
-    <span class="ident">blake3::derive_key</span>(<span class="ident">password</span>.<span class="ident">as_ref</span>(), <span class="ident">KEY_MATERIAL</span>.<span class="ident">as_bytes</span>())
+<span class="doccomment">/// Derive the encryption key from a password string.
+</span><span class="kw">pub fn </span>derive_key_from_password&lt;S: AsRef&lt;str&gt;&gt;(password: S) -&gt; [u8; <span class="number">32</span>] {
+    blake3::derive_key(password.as_ref(), KEY_MATERIAL.as_bytes())
 }
 
-<span class="doccomment">/// Evaluate a DAG locally spawning a new [`LocalExecutor`](executors/struct.LocalExecutor.html)</span>
-<span class="doccomment">/// with the specified number of workers.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eval_dag_locally</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="ident">P2</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="ident">R</span><span class="op">&gt;</span>(
-    <span class="ident">dag</span>: <span class="ident">ExecutionDAG</span>,
-    <span class="ident">store_dir</span>: <span class="ident">P</span>,
-    <span class="ident">num_cores</span>: <span class="ident">usize</span>,
-    <span class="ident">sandbox_path</span>: <span class="ident">P2</span>,
-    <span class="ident">max_cache</span>: <span class="ident">u64</span>,
-    <span class="ident">min_cache</span>: <span class="ident">u64</span>,
-    <span class="ident">sandbox_runner</span>: <span class="ident">R</span>,
-) <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">SandboxRunner</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="doccomment">/// Evaluate a DAG locally spawning a new [`LocalExecutor`](executors/struct.LocalExecutor.html)
+/// with the specified number of workers.
+</span><span class="kw">pub fn </span>eval_dag_locally&lt;P: Into&lt;PathBuf&gt;, P2: Into&lt;PathBuf&gt;, R&gt;(
+    dag: ExecutionDAG,
+    store_dir: P,
+    num_cores: usize,
+    sandbox_path: P2,
+    max_cache: u64,
+    min_cache: u64,
+    sandbox_runner: R,
+) <span class="kw">where
+    </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
 {
-    <span class="comment">// FIXME: this function may return Result&lt;(), Error&gt;</span>
-    <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx_remote</span>) <span class="op">=</span> <span class="ident">new_local_channel</span>();
-    <span class="kw">let</span> (<span class="ident">tx_remote</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">new_local_channel</span>();
-    <span class="kw">let</span> <span class="ident">store_dir</span> <span class="op">=</span> <span class="ident">store_dir</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">sandbox_path</span> <span class="op">=</span> <span class="ident">sandbox_path</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">file_store</span> <span class="op">=</span> <span class="ident">Arc::new</span>(
-        <span class="ident">FileStore::new</span>(<span class="kw-2">&amp;</span><span class="ident">store_dir</span>, <span class="ident">max_cache</span>, <span class="ident">min_cache</span>).<span class="ident">expect</span>(<span class="string">&quot;Cannot create the file store&quot;</span>),
+    <span class="comment">// FIXME: this function may return Result&lt;(), Error&gt;
+    </span><span class="kw">let </span>(tx, rx_remote) = new_local_channel();
+    <span class="kw">let </span>(tx_remote, rx) = new_local_channel();
+    <span class="kw">let </span>store_dir = store_dir.into();
+    <span class="kw">let </span>sandbox_path = sandbox_path.into();
+    <span class="kw">let </span>file_store = Arc::new(
+        FileStore::new(<span class="kw-2">&amp;</span>store_dir, max_cache, min_cache).expect(<span class="string">&quot;Cannot create the file store&quot;</span>),
     );
-    <span class="kw">let</span> <span class="ident">server_file_store</span> <span class="op">=</span> <span class="ident">file_store</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">server</span> <span class="op">=</span> <span class="ident">thread::Builder::new</span>()
-        .<span class="ident">name</span>(<span class="string">&quot;Local executor&quot;</span>.<span class="ident">into</span>())
-        .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">cache</span> <span class="op">=</span> <span class="ident">Cache::new</span>(<span class="ident">store_dir</span>).<span class="ident">expect</span>(<span class="string">&quot;Cannot create the cache&quot;</span>);
-            <span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span>
-                <span class="ident">executors::LocalExecutor::new</span>(<span class="ident">server_file_store</span>, <span class="ident">num_cores</span>, <span class="ident">sandbox_path</span>);
-            <span class="ident">executor</span>
-                .<span class="ident">evaluate</span>(<span class="ident">tx_remote</span>, <span class="ident">rx_remote</span>, <span class="ident">cache</span>, <span class="ident">sandbox_runner</span>)
-                .<span class="ident">expect</span>(<span class="string">&quot;Executor failed&quot;</span>);
+    <span class="kw">let </span>server_file_store = file_store.clone();
+    <span class="kw">let </span>server = thread::Builder::new()
+        .name(<span class="string">&quot;Local executor&quot;</span>.into())
+        .spawn(<span class="kw">move </span>|| {
+            <span class="kw">let </span>cache = Cache::new(store_dir).expect(<span class="string">&quot;Cannot create the cache&quot;</span>);
+            <span class="kw">let </span>executor =
+                executors::LocalExecutor::new(server_file_store, num_cores, sandbox_path);
+            executor
+                .evaluate(tx_remote, rx_remote, cache, sandbox_runner)
+                .expect(<span class="string">&quot;Executor failed&quot;</span>);
         })
-        .<span class="ident">expect</span>(<span class="string">&quot;Failed to spawn local executor thread&quot;</span>);
-    <span class="ident">ExecutorClient::evaluate</span>(<span class="ident">dag</span>, <span class="ident">tx</span>, <span class="kw-2">&amp;</span><span class="ident">rx</span>, <span class="ident">file_store</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(())).<span class="ident">expect</span>(<span class="string">&quot;Client failed&quot;</span>);
-    <span class="ident">server</span>.<span class="ident">join</span>().<span class="ident">expect</span>(<span class="string">&quot;Server panicked&quot;</span>);
+        .expect(<span class="string">&quot;Failed to spawn local executor thread&quot;</span>);
+    ExecutorClient::evaluate(dag, tx, <span class="kw-2">&amp;</span>rx, file_store, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(())).expect(<span class="string">&quot;Client failed&quot;</span>);
+    server.join().expect(<span class="string">&quot;Server panicked&quot;</span>);
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">pretty_assertions</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">extern crate </span>pretty_assertions;
 
-    <span class="kw">use</span> <span class="ident">std::path::Path</span>;
-    <span class="kw">use</span> <span class="ident">std::sync::atomic</span>::{<span class="ident">AtomicBool</span>, <span class="ident">Ordering</span>};
-    <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+    <span class="kw">use </span>std::path::Path;
+    <span class="kw">use </span>std::sync::atomic::{AtomicBool, Ordering};
+    <span class="kw">use </span>std::sync::Arc;
 
-    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
+    <span class="kw">use </span>tempfile::TempDir;
 
-    <span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span>task_maker_dag::<span class="kw-2">*</span>;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sandbox_runner::UnsafeSandboxRunner</span>;
+    <span class="kw">use </span><span class="kw">crate</span>::sandbox_runner::UnsafeSandboxRunner;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_local_evaluation</span>() {
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_local_evaluation() {
+        <span class="kw">let </span>cwd = TempDir::new().unwrap();
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
 
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;Input file&quot;</span>);
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;Input file&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;An execution&quot;</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;true&quot;</span>));
-        <span class="ident">exec</span>.<span class="ident">stdin</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>);
-        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">stdout</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;An execution&quot;</span>, ExecutionCommand::system(<span class="string">&quot;true&quot;</span>));
+        exec.stdin(<span class="kw-2">&amp;</span>file);
+        <span class="kw">let </span>stdout = exec.stdout();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec2</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;Nope!&quot;</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;false&quot;</span>));
-        <span class="ident">exec2</span>.<span class="ident">stdin</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>);
-        <span class="kw">let</span> <span class="ident">stdout2</span> <span class="op">=</span> <span class="ident">exec2</span>.<span class="ident">stdout</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;Nope!&quot;</span>, ExecutionCommand::system(<span class="string">&quot;false&quot;</span>));
+        exec2.stdin(<span class="kw-2">&amp;</span>stdout);
+        <span class="kw">let </span>stdout2 = exec2.stdout();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec3</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;Skippp&quot;</span>, <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;true&quot;</span>));
-        <span class="ident">exec3</span>.<span class="ident">stdin</span>(<span class="kw-2">&amp;</span><span class="ident">stdout2</span>);
-        <span class="kw">let</span> <span class="ident">output3</span> <span class="op">=</span> <span class="ident">exec3</span>.<span class="ident">output</span>(<span class="ident">Path::new</span>(<span class="string">&quot;test&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;Skippp&quot;</span>, ExecutionCommand::system(<span class="string">&quot;true&quot;</span>));
+        exec3.stdin(<span class="kw-2">&amp;</span>stdout2);
+        <span class="kw">let </span>output3 = exec3.output(Path::new(<span class="string">&quot;test&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">exec_done</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="ident">exec_done2</span> <span class="op">=</span> <span class="ident">exec_done</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">exec_start</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="ident">exec_start2</span> <span class="op">=</span> <span class="ident">exec_start</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">exec2_done</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="ident">exec2_done2</span> <span class="op">=</span> <span class="ident">exec2_done</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">exec2_start</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="ident">exec2_start2</span> <span class="op">=</span> <span class="ident">exec2_start</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">exec3_skipped</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="ident">exec3_skipped2</span> <span class="op">=</span> <span class="ident">exec3_skipped</span>.<span class="ident">clone</span>();
-        <span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">file</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/dev/null&quot;</span>)).<span class="ident">unwrap</span>();
-        <span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">_res</span><span class="op">|</span> {
-            <span class="ident">exec_done</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
+        <span class="kw">let </span>exec_done = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>exec_done2 = exec_done.clone();
+        <span class="kw">let </span>exec_start = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>exec_start2 = exec_start.clone();
+        <span class="kw">let </span>exec2_done = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>exec2_done2 = exec2_done.clone();
+        <span class="kw">let </span>exec2_start = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>exec2_start2 = exec2_start.clone();
+        <span class="kw">let </span>exec3_skipped = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>exec3_skipped2 = exec3_skipped.clone();
+        dag.provide_file(file, Path::new(<span class="string">&quot;/dev/null&quot;</span>)).unwrap();
+        dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|_res| {
+            exec_done.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">dag</span>.<span class="ident">on_execution_skip</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;exec has been skipped&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">on_execution_start</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">_w</span><span class="op">|</span> {
-            <span class="ident">exec_start</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
+        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec.uuid, || <span class="macro">panic!</span>(<span class="string">&quot;exec has been skipped&quot;</span>));
+        dag.on_execution_start(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|_w| {
+            exec_start.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
-        <span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">_res</span><span class="op">|</span> {
-            <span class="ident">exec2_done</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
+        dag.add_execution(exec);
+        dag.on_execution_done(<span class="kw-2">&amp;</span>exec2.uuid, <span class="kw">move </span>|_res| {
+            exec2_done.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">dag</span>.<span class="ident">on_execution_skip</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;exec2 has been skipped&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">on_execution_start</span>(<span class="kw-2">&amp;</span><span class="ident">exec2</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">_w</span><span class="op">|</span> {
-            <span class="ident">exec2_start</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
+        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec2.uuid, || <span class="macro">panic!</span>(<span class="string">&quot;exec2 has been skipped&quot;</span>));
+        dag.on_execution_start(<span class="kw-2">&amp;</span>exec2.uuid, <span class="kw">move </span>|_w| {
+            exec2_start.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec2</span>);
-        <span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="ident">_res</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;exec3 has not been skipped&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">on_execution_skip</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="ident">exec3_skipped</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
+        dag.add_execution(exec2);
+        dag.on_execution_done(<span class="kw-2">&amp;</span>exec3.uuid, |_res| <span class="macro">panic!</span>(<span class="string">&quot;exec3 has not been skipped&quot;</span>));
+        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec3.uuid, <span class="kw">move </span>|| {
+            exec3_skipped.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">dag</span>.<span class="ident">on_execution_start</span>(<span class="kw-2">&amp;</span><span class="ident">exec3</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="ident">_w</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;exec3 has not been skipped&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec3</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;stdout&quot;</span>), <span class="bool-val">false</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to</span>(<span class="kw-2">&amp;</span><span class="ident">stdout2</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;stdout2&quot;</span>), <span class="bool-val">false</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to</span>(<span class="kw-2">&amp;</span><span class="ident">output3</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;output3&quot;</span>), <span class="bool-val">false</span>);
+        dag.on_execution_start(<span class="kw-2">&amp;</span>exec3.uuid, |_w| <span class="macro">panic!</span>(<span class="string">&quot;exec3 has not been skipped&quot;</span>));
+        dag.add_execution(exec3);
+        dag.write_file_to(<span class="kw-2">&amp;</span>stdout, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;stdout&quot;</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>stdout2, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;stdout2&quot;</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>output3, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;output3&quot;</span>), <span class="bool-val">false</span>);
 
-        <span class="ident">eval_dag_locally</span>(
-            <span class="ident">dag</span>,
-            <span class="ident">cwd</span>.<span class="ident">path</span>(),
+        eval_dag_locally(
+            dag,
+            cwd.path(),
             <span class="number">2</span>,
-            <span class="ident">cwd</span>.<span class="ident">path</span>(),
+            cwd.path(),
             <span class="number">1000</span>,
             <span class="number">1000</span>,
-            <span class="ident">UnsafeSandboxRunner::default</span>(),
+            UnsafeSandboxRunner::default(),
         );
 
-        <span class="macro">assert!</span>(<span class="ident">exec_done2</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>));
-        <span class="macro">assert!</span>(<span class="ident">exec_start2</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>));
-        <span class="macro">assert!</span>(<span class="ident">exec2_done2</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>));
-        <span class="macro">assert!</span>(<span class="ident">exec2_start2</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>));
-        <span class="macro">assert!</span>(<span class="ident">exec3_skipped2</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>));
-        <span class="macro">assert!</span>(<span class="ident">cwd</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;stdout&quot;</span>).<span class="ident">exists</span>());
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">cwd</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;stdout2&quot;</span>).<span class="ident">exists</span>());
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">cwd</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;output3&quot;</span>).<span class="ident">exists</span>());
+        <span class="macro">assert!</span>(exec_done2.load(Ordering::Relaxed));
+        <span class="macro">assert!</span>(exec_start2.load(Ordering::Relaxed));
+        <span class="macro">assert!</span>(exec2_done2.load(Ordering::Relaxed));
+        <span class="macro">assert!</span>(exec2_start2.load(Ordering::Relaxed));
+        <span class="macro">assert!</span>(exec3_skipped2.load(Ordering::Relaxed));
+        <span class="macro">assert!</span>(cwd.path().join(<span class="string">&quot;stdout&quot;</span>).exists());
+        <span class="macro">assert!</span>(!cwd.path().join(<span class="string">&quot;stdout2&quot;</span>).exists());
+        <span class="macro">assert!</span>(!cwd.path().join(<span class="string">&quot;output3&quot;</span>).exists());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

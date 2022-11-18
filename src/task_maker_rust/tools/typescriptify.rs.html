@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/typescriptify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>typescriptify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/typescriptify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>typescriptify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -102,50 +102,50 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
-</pre><pre class="rust"><code><span class="comment">// These warnings show up in release mode, but they are not important</span>
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">debug_assertions</span>), <span class="ident">allow</span>(<span class="ident">dead_code</span>, <span class="ident">unused_macros</span>, <span class="ident">unused_imports</span>))]</span>
+</pre><pre class="rust"><code><span class="comment">// These warnings show up in release mode, but they are not important
+</span><span class="attribute">#![cfg_attr(not(debug_assertions), allow(dead_code, unused_macros, unused_imports))]
 
-<span class="kw">use</span> <span class="ident">std::time::SystemTime</span>;
+</span><span class="kw">use </span>std::time::SystemTime;
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">regex::Regex</span>;
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptifyTrait</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>regex::Regex;
+<span class="kw">use </span>typescript_definitions::TypeScriptifyTrait;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">ExecutionResourcesUsage</span>, <span class="ident">ExecutionResult</span>, <span class="ident">ExecutionStatus</span>, <span class="ident">File</span>};
-<span class="kw">use</span> <span class="ident">task_maker_exec</span>::{<span class="ident">ClientInfo</span>, <span class="ident">ExecutorStatus</span>, <span class="ident">ExecutorWorkerStatus</span>, <span class="ident">WorkerCurrentJobStatus</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format::ioi</span>::{
-    <span class="ident">BatchTypeData</span>, <span class="ident">Booklet</span>, <span class="ident">BookletConfig</span>, <span class="ident">Checker</span>, <span class="ident">CommunicationTypeData</span>, <span class="ident">IOITask</span>, <span class="ident">InputGenerator</span>,
-    <span class="ident">InputValidator</span>, <span class="ident">OutputGenerator</span>, <span class="ident">Statement</span>, <span class="ident">StatementConfig</span>, <span class="ident">SubtaskInfo</span>, <span class="ident">TaskInfoScoring</span>,
-    <span class="ident">TaskInfoStatement</span>, <span class="ident">TaskType</span>, <span class="ident">TestcaseInfo</span>, <span class="ident">TestcaseScoreAggregator</span>,
+<span class="kw">use </span>task_maker_dag::{ExecutionResourcesUsage, ExecutionResult, ExecutionStatus, File};
+<span class="kw">use </span>task_maker_exec::{ClientInfo, ExecutorStatus, ExecutorWorkerStatus, WorkerCurrentJobStatus};
+<span class="kw">use </span>task_maker_format::ioi::{
+    BatchTypeData, Booklet, BookletConfig, Checker, CommunicationTypeData, IOITask, InputGenerator,
+    InputValidator, OutputGenerator, Statement, StatementConfig, SubtaskInfo, TaskInfoScoring,
+    TaskInfoStatement, TaskType, TestcaseInfo, TestcaseScoreAggregator,
 };
-<span class="kw">use</span> <span class="ident">task_maker_format::ioi</span>::{<span class="ident">IOITaskInfo</span>, <span class="ident">TaskInfoAttachment</span>, <span class="ident">TaskInfoLimits</span>, <span class="ident">TaskInfoSubtask</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format::terry::TerryTaskInfo</span>;
-<span class="kw">use</span> <span class="ident">task_maker_format::terry</span>::{
-    <span class="ident">CaseStatus</span>, <span class="ident">SolutionAlert</span>, <span class="ident">SolutionFeedback</span>, <span class="ident">SolutionFeedbackCase</span>, <span class="ident">SolutionOutcome</span>,
-    <span class="ident">SolutionValidation</span>, <span class="ident">SolutionValidationCase</span>, <span class="ident">TerryTask</span>,
+<span class="kw">use </span>task_maker_format::ioi::{IOITaskInfo, TaskInfoAttachment, TaskInfoLimits, TaskInfoSubtask};
+<span class="kw">use </span>task_maker_format::terry::TerryTaskInfo;
+<span class="kw">use </span>task_maker_format::terry::{
+    CaseStatus, SolutionAlert, SolutionFeedback, SolutionFeedbackCase, SolutionOutcome,
+    SolutionValidation, SolutionValidationCase, TerryTask,
 };
-<span class="kw">use</span> <span class="ident">task_maker_format::ui</span>::{<span class="ident">UIExecutionStatus</span>, <span class="ident">UIMessage</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format::TaskInfo</span>;
-<span class="kw">use</span> <span class="ident">task_maker_lang</span>::{<span class="ident">Dependency</span>, <span class="ident">GraderMap</span>, <span class="ident">SourceFile</span>};
+<span class="kw">use </span>task_maker_format::ui::{UIExecutionStatus, UIMessage};
+<span class="kw">use </span>task_maker_format::TaskInfo;
+<span class="kw">use </span>task_maker_lang::{Dependency, GraderMap, SourceFile};
 
-<span class="doccomment">/// Print to stdout the type definition for the specified type.</span>
-<span class="macro">macro_rules!</span> <span class="ident">export_ts</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> : <span class="ident">ty</span>) =&gt; {
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">fix_bug_1</span>(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span><span class="ident">::type_script_ify</span>()))
+<span class="doccomment">/// Print to stdout the type definition for the specified type.
+</span><span class="macro">macro_rules! </span>export_ts {
+    (<span class="macro-nonterminal">$t </span>: ty) =&gt; {
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, fix_bug_1(&lt;<span class="macro-nonterminal">$t</span>&gt;::type_script_ify()))
     };
 }
 
-<span class="doccomment">/// Apply the fix from PR#1 fixing some invalid types.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// https://github.com/arabidopsis/typescript-definitions/pull/1</span>
-<span class="kw">fn</span> <span class="ident">fix_bug_1</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">def</span>: <span class="ident">S</span>) -&gt; <span class="ident">String</span> {
-    <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">r&quot;(?m)\[\s*(\w+)\s*:\s*(\w+)\s*\]&quot;</span>).<span class="ident">unwrap</span>();
-    <span class="kw">let</span> <span class="ident">substitution</span> <span class="op">=</span> <span class="string">&quot;[$1 in $2]&quot;</span>;
-    <span class="ident">regex</span>.<span class="ident">replace_all</span>(<span class="ident">def</span>.<span class="ident">as_ref</span>(), <span class="ident">substitution</span>).<span class="ident">to_string</span>()
+<span class="doccomment">/// Apply the fix from PR#1 fixing some invalid types.
+///
+/// https://github.com/arabidopsis/typescript-definitions/pull/1
+</span><span class="kw">fn </span>fix_bug_1&lt;S: AsRef&lt;str&gt;&gt;(def: S) -&gt; String {
+    <span class="kw">let </span>regex = Regex::new(<span class="string">r&quot;(?m)\[\s*(\w+)\s*:\s*(\w+)\s*\]&quot;</span>).unwrap();
+    <span class="kw">let </span>substitution = <span class="string">&quot;[$1 in $2]&quot;</span>;
+    regex.replace_all(def.as_ref(), substitution).to_string()
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">debug_assertions</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_typescriptify</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="attribute">#[cfg(debug_assertions)]
+</span><span class="kw">pub fn </span>main_typescriptify() -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
     <span class="macro">println!</span>(<span class="string">&quot;// Type aliases&quot;</span>);
     <span class="macro">println!</span>(<span class="string">&quot;export type SubtaskId = number;&quot;</span>);
     <span class="macro">println!</span>(<span class="string">&quot;export type TestcaseId = number;&quot;</span>);
@@ -155,56 +155,56 @@
     <span class="macro">println!</span>(<span class="string">&quot;export type Seed = number;&quot;</span>);
     <span class="macro">println!</span>(<span class="string">&quot;export type Language = string;&quot;</span>);
     <span class="macro">println!</span>(<span class="string">&quot;export type Mutex&lt;T&gt; = T;&quot;</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">UIMessage</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">UIExecutionStatus</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">ExecutorWorkerStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">WorkerCurrentJobStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">ClientInfo</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">IOITask</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TerryTask</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SolutionOutcome</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">ExecutionResult</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskType</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SubtaskInfo</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TestcaseInfo</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TestcaseScoreAggregator</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">GraderMap</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">Dependency</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">File</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">Booklet</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">BookletConfig</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">Statement</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">StatementConfig</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SolutionValidation</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SolutionValidationCase</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SolutionAlert</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">CaseStatus</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SolutionFeedback</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SolutionFeedbackCase</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">ExecutionStatus</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">ExecutionResourcesUsage</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">BatchTypeData</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">CommunicationTypeData</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">Checker</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">SourceFile</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">InputGenerator</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">InputValidator</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">OutputGenerator</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskInfo</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">IOITaskInfo</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskInfoLimits</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskInfoAttachment</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskInfoSubtask</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskInfoScoring</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TaskInfoStatement</span>);
-    <span class="macro">export_ts!</span>(<span class="ident">TerryTaskInfo</span>);
+    <span class="macro">export_ts!</span>(UIMessage);
+    <span class="macro">export_ts!</span>(UIExecutionStatus);
+    <span class="macro">export_ts!</span>(ExecutorStatus&lt;SystemTime&gt;);
+    <span class="macro">export_ts!</span>(ExecutorWorkerStatus&lt;SystemTime&gt;);
+    <span class="macro">export_ts!</span>(WorkerCurrentJobStatus&lt;SystemTime&gt;);
+    <span class="macro">export_ts!</span>(ClientInfo);
+    <span class="macro">export_ts!</span>(IOITask);
+    <span class="macro">export_ts!</span>(TerryTask);
+    <span class="macro">export_ts!</span>(SolutionOutcome);
+    <span class="macro">export_ts!</span>(ExecutionResult);
+    <span class="macro">export_ts!</span>(TaskType);
+    <span class="macro">export_ts!</span>(SubtaskInfo);
+    <span class="macro">export_ts!</span>(TestcaseInfo);
+    <span class="macro">export_ts!</span>(TestcaseScoreAggregator);
+    <span class="macro">export_ts!</span>(GraderMap);
+    <span class="macro">export_ts!</span>(Dependency);
+    <span class="macro">export_ts!</span>(File);
+    <span class="macro">export_ts!</span>(Booklet);
+    <span class="macro">export_ts!</span>(BookletConfig);
+    <span class="macro">export_ts!</span>(Statement);
+    <span class="macro">export_ts!</span>(StatementConfig);
+    <span class="macro">export_ts!</span>(SolutionValidation);
+    <span class="macro">export_ts!</span>(SolutionValidationCase);
+    <span class="macro">export_ts!</span>(SolutionAlert);
+    <span class="macro">export_ts!</span>(CaseStatus);
+    <span class="macro">export_ts!</span>(SolutionFeedback);
+    <span class="macro">export_ts!</span>(SolutionFeedbackCase);
+    <span class="macro">export_ts!</span>(ExecutionStatus);
+    <span class="macro">export_ts!</span>(ExecutionResourcesUsage);
+    <span class="macro">export_ts!</span>(BatchTypeData);
+    <span class="macro">export_ts!</span>(CommunicationTypeData);
+    <span class="macro">export_ts!</span>(Checker);
+    <span class="macro">export_ts!</span>(SourceFile);
+    <span class="macro">export_ts!</span>(InputGenerator);
+    <span class="macro">export_ts!</span>(InputValidator);
+    <span class="macro">export_ts!</span>(OutputGenerator);
+    <span class="macro">export_ts!</span>(TaskInfo);
+    <span class="macro">export_ts!</span>(IOITaskInfo);
+    <span class="macro">export_ts!</span>(TaskInfoLimits);
+    <span class="macro">export_ts!</span>(TaskInfoAttachment);
+    <span class="macro">export_ts!</span>(TaskInfoSubtask);
+    <span class="macro">export_ts!</span>(TaskInfoScoring);
+    <span class="macro">export_ts!</span>(TaskInfoStatement);
+    <span class="macro">export_ts!</span>(TerryTaskInfo);
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">debug_assertions</span>))]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_typescriptify</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="attribute">#[cfg(not(debug_assertions))]
+</span><span class="kw">pub fn </span>main_typescriptify() -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
     <span class="macro">anyhow::bail!</span>(<span class="string">&quot;This program should be compiled in debug mode&quot;</span>);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

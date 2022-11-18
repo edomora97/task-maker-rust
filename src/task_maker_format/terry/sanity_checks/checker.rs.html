@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/sanity_checks/checker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>checker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/sanity_checks/checker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>checker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -104,111 +104,111 @@
 <span id="104">104</span>
 <span id="105">105</span>
 <span id="106">106</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>anyhow::{bail, Context, Error};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::File</span>;
+<span class="kw">use </span>task_maker_dag::File;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sanity_checks::SanityCheck</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::TerryTask</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">list_files</span>, <span class="ident">EvaluationData</span>, <span class="ident">UISender</span>, <span class="ident">DATA_DIR</span>};
-<span class="kw">use</span> <span class="ident">std::path::Path</span>;
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::terry::TerryTask;
+<span class="kw">use crate</span>::{list_files, EvaluationData, UISender, DATA_DIR};
+<span class="kw">use </span>std::path::Path;
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="doccomment">/// Fuzz the checker with some nasty output files making sure it doesn&#39;t crash.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The bad output files can be found inside `bad_outputs` in the data directory.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FuzzChecker</span>;
+<span class="doccomment">/// Fuzz the checker with some nasty output files making sure it doesn&#39;t crash.
+///
+/// The bad output files can be found inside `bad_outputs` in the data directory.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>FuzzChecker;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">TerryTask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FuzzChecker</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;FuzzChecker&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;TerryTask&gt; <span class="kw">for </span>FuzzChecker {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;FuzzChecker&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">pre_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">TerryTask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">outputs_dir</span> <span class="op">=</span> <span class="ident">DATA_DIR</span>.<span class="ident">join</span>(<span class="string">&quot;bad_outputs&quot;</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">outputs_dir</span>.<span class="ident">exists</span>() {
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>TerryTask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>outputs_dir = DATA_DIR.join(<span class="string">&quot;bad_outputs&quot;</span>);
+        <span class="kw">if </span>!outputs_dir.exists() {
             <span class="macro">bail!</span>(<span class="string">&quot;DATA_DIR/bad_outputs does not exists&quot;</span>);
         }
-        <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">list_files</span>(<span class="ident">outputs_dir</span>, <span class="macro">vec!</span>[<span class="string">&quot;*.txt&quot;</span>]);
-        <span class="kw">if</span> <span class="ident">outputs</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">let </span>outputs = list_files(outputs_dir, <span class="macro">vec!</span>[<span class="string">&quot;*.txt&quot;</span>]);
+        <span class="kw">if </span>outputs.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="comment">// keep the seed fixed for the cache</span>
-        <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="number">42</span>;
-        <span class="kw">let</span> (<span class="ident">input</span>, <span class="kw-2">mut</span> <span class="ident">gen</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">generator</span>.<span class="ident">generate</span>(
-            <span class="ident">eval</span>,
-            <span class="string">&quot;Generation of input for FuzzChecker&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">seed</span>,
-            <span class="ident">task</span>.<span class="ident">official_solution</span>.<span class="ident">clone</span>(),
+        <span class="comment">// keep the seed fixed for the cache
+        </span><span class="kw">let </span>seed = <span class="number">42</span>;
+        <span class="kw">let </span>(input, <span class="kw-2">mut </span>gen) = task.generator.generate(
+            eval,
+            <span class="string">&quot;Generation of input for FuzzChecker&quot;</span>.into(),
+            seed,
+            task.official_solution.clone(),
         )<span class="question-mark">?</span>;
-        <span class="ident">gen</span>.<span class="ident">capture_stderr</span>(<span class="number">1024</span>);
-        <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">gen</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">res</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">res</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+        gen.capture_stderr(<span class="number">1024</span>);
+        <span class="kw">let </span>sender = eval.sender.clone();
+        eval.dag.on_execution_done(<span class="kw-2">&amp;</span>gen.uuid, <span class="kw">move </span>|res| {
+            <span class="kw">if </span>!res.status.is_success() {
+                <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
                     <span class="string">&quot;Failed to generate input for FuzzChecker with seed {}&quot;</span>,
-                    <span class="ident">seed</span>
+                    seed
                 ))
-                .<span class="ident">with_note</span>(<span class="macro">format!</span>(<span class="string">&quot;The generator failed with: {:?}&quot;</span>, <span class="ident">res</span>.<span class="ident">status</span>));
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">res</span>.<span class="ident">stderr</span> {
-                    <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>
-                        .<span class="ident">with_help</span>(<span class="string">&quot;The generator stderr is:&quot;</span>)
-                        .<span class="ident">with_help_attachment</span>(<span class="ident">stderr</span>);
+                .with_note(<span class="macro">format!</span>(<span class="string">&quot;The generator failed with: {:?}&quot;</span>, res.status));
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = res.stderr {
+                    diagnostic = diagnostic
+                        .with_help(<span class="string">&quot;The generator stderr is:&quot;</span>)
+                        .with_help_attachment(stderr);
                 }
-                <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
             }
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">gen</span>);
-        <span class="kw">for</span> <span class="ident">output</span> <span class="kw">in</span> <span class="ident">outputs</span> {
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="ident">output</span>.<span class="ident">file_name</span>().<span class="ident">context</span>(<span class="string">&quot;invalid file name&quot;</span>)<span class="question-mark">?</span>);
-            <span class="kw">let</span> <span class="ident">output_file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="macro">format!</span>(<span class="string">&quot;Bad output {}&quot;</span>, <span class="ident">name</span>.<span class="ident">display</span>()));
-            <span class="kw">let</span> <span class="ident">output_uuid</span> <span class="op">=</span> <span class="ident">output_file</span>.<span class="ident">uuid</span>;
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">output_file</span>, <span class="kw-2">&amp;</span><span class="ident">output</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-            <span class="kw">let</span> <span class="ident">name2</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">to_owned</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">check</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">checker</span>.<span class="ident">check</span>(
-                <span class="ident">eval</span>,
-                <span class="macro">format!</span>(<span class="string">&quot;Checking bad input {}&quot;</span>, <span class="ident">name</span>.<span class="ident">display</span>()),
-                <span class="ident">input</span>,
-                <span class="ident">output_uuid</span>,
-                <span class="ident">task</span>.<span class="ident">official_solution</span>.<span class="ident">clone</span>(),
-                <span class="kw">move</span> <span class="op">|</span><span class="ident">outcome</span><span class="op">|</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">outcome</span> {
-                        <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+        eval.dag.add_execution(gen);
+        <span class="kw">for </span>output <span class="kw">in </span>outputs {
+            <span class="kw">let </span>name = Path::new(output.file_name().context(<span class="string">&quot;invalid file name&quot;</span>)<span class="question-mark">?</span>);
+            <span class="kw">let </span>output_file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Bad output {}&quot;</span>, name.display()));
+            <span class="kw">let </span>output_uuid = output_file.uuid;
+            eval.dag.provide_file(output_file, <span class="kw-2">&amp;</span>output)<span class="question-mark">?</span>;
+            <span class="kw">let </span>sender = eval.sender.clone();
+            <span class="kw">let </span>name2 = name.to_owned();
+            <span class="kw">let </span><span class="kw-2">mut </span>check = task.checker.check(
+                eval,
+                <span class="macro">format!</span>(<span class="string">&quot;Checking bad input {}&quot;</span>, name.display()),
+                input,
+                output_uuid,
+                task.official_solution.clone(),
+                <span class="kw">move </span>|outcome| {
+                    <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = outcome {
+                        sender.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
                             <span class="string">&quot;Checker failed on bad output {}: {}&quot;</span>,
-                            <span class="ident">name2</span>.<span class="ident">display</span>(),
-                            <span class="ident">e</span>
+                            name2.display(),
+                            e
                         )))<span class="question-mark">?</span>;
                     }
                     <span class="prelude-val">Ok</span>(())
                 },
             )<span class="question-mark">?</span>;
-            <span class="ident">check</span>.<span class="ident">capture_stderr</span>(<span class="number">1024</span>);
-            <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-            <span class="kw">let</span> <span class="ident">name2</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">to_owned</span>();
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">check</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">res</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">res</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+            check.capture_stderr(<span class="number">1024</span>);
+            <span class="kw">let </span>sender = eval.sender.clone();
+            <span class="kw">let </span>name2 = name.to_owned();
+            eval.dag.on_execution_done(<span class="kw-2">&amp;</span>check.uuid, <span class="kw">move </span>|res| {
+                <span class="kw">if </span>!res.status.is_success() {
+                    <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
                         <span class="string">&quot;Checker failed on bad output {}: {:?}&quot;</span>,
-                        <span class="ident">name2</span>.<span class="ident">display</span>(),
-                        <span class="ident">res</span>.<span class="ident">status</span>
+                        name2.display(),
+                        res.status
                     ))
-                    .<span class="ident">with_note</span>(<span class="macro">format!</span>(<span class="string">&quot;The checker failed with: {:?}&quot;</span>, <span class="ident">res</span>.<span class="ident">status</span>));
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">res</span>.<span class="ident">stderr</span> {
-                        <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>
-                            .<span class="ident">with_help</span>(<span class="string">&quot;The checker&#39;s stderr is:&quot;</span>)
-                            .<span class="ident">with_help_attachment</span>(<span class="ident">stderr</span>);
+                    .with_note(<span class="macro">format!</span>(<span class="string">&quot;The checker failed with: {:?}&quot;</span>, res.status));
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = res.stderr {
+                        diagnostic = diagnostic
+                            .with_help(<span class="string">&quot;The checker&#39;s stderr is:&quot;</span>)
+                            .with_help_attachment(stderr);
                     }
-                    <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                    sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(())
             });
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">check</span>);
+            eval.dag.add_execution(check);
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

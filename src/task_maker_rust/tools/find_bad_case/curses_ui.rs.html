@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/curses_ui.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curses_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/curses_ui.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curses_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -147,154 +147,154 @@
 <span id="147">147</span>
 <span id="148">148</span>
 <span id="149">149</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">tui::layout</span>::{<span class="ident">Constraint</span>, <span class="ident">Direction</span>, <span class="ident">Layout</span>, <span class="ident">Rect</span>};
-<span class="kw">use</span> <span class="ident">tui::text</span>::{<span class="ident">Span</span>, <span class="ident">Spans</span>};
-<span class="kw">use</span> <span class="ident">tui::widgets</span>::{<span class="ident">Paragraph</span>, <span class="ident">Wrap</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>tui::layout::{Constraint, Direction, Layout, Rect};
+<span class="kw">use </span>tui::text::{Span, Spans};
+<span class="kw">use </span>tui::widgets::{Paragraph, Wrap};
 
-<span class="kw">use</span> <span class="ident">task_maker_format::ui::curses</span>::{<span class="ident">BLUE</span>, <span class="ident">BOLD</span>, <span class="ident">GREEN</span>, <span class="ident">RED</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format::ui</span>::{
-    <span class="ident">inner_block</span>, <span class="ident">render_block</span>, <span class="ident">render_server_status</span>, <span class="ident">CursesDrawer</span>, <span class="ident">FrameType</span>,
+<span class="kw">use </span>task_maker_format::ui::curses::{BLUE, BOLD, GREEN, RED};
+<span class="kw">use </span>task_maker_format::ui::{
+    inner_block, render_block, render_server_status, CursesDrawer, FrameType,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tools::find_bad_case::state</span>::{<span class="ident">SharedUIState</span>, <span class="ident">TestcaseStatus</span>, <span class="ident">UIState</span>};
+<span class="kw">use </span><span class="kw">crate</span>::tools::find_bad_case::state::{SharedUIState, TestcaseStatus, UIState};
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CursesUI</span>;
+<span class="kw">pub struct </span>CursesUI;
 
-<span class="kw">impl</span> <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">UIState</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CursesUI</span> {
-    <span class="kw">fn</span> <span class="ident">draw</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">loading</span>: <span class="ident">char</span>, <span class="ident">frame_index</span>: <span class="ident">usize</span>) {
-        <span class="ident">CursesUI::draw_frame</span>(<span class="ident">state</span>, <span class="ident">frame</span>, <span class="ident">loading</span>, <span class="ident">frame_index</span>);
+<span class="kw">impl </span>CursesDrawer&lt;UIState&gt; <span class="kw">for </span>CursesUI {
+    <span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>UIState, frame: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+        CursesUI::draw_frame(state, frame, loading, frame_index);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">CursesUI</span> {
-    <span class="kw">fn</span> <span class="ident">draw_frame</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">loading</span>: <span class="ident">char</span>, <span class="ident">frame_index</span>: <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="ident">header_len</span> <span class="op">=</span> <span class="number">10</span>; <span class="comment">// Number of lines of the header.</span>
-        <span class="kw">let</span> <span class="ident">workers_len</span> <span class="op">=</span> <span class="ident">state</span>
-            .<span class="ident">executor_status</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">connected_workers</span>.<span class="ident">len</span>())
-            .<span class="ident">unwrap_or</span>(<span class="number">0</span>) <span class="kw">as</span> <span class="ident">u16</span>
-            <span class="op">+</span> <span class="number">2</span>;
-        <span class="comment">// FIXME: shrink workers_len if needed</span>
-        <span class="kw">let</span> <span class="ident">chunks</span> <span class="op">=</span> <span class="ident">Layout::default</span>()
-            .<span class="ident">direction</span>(<span class="ident">Direction::Vertical</span>)
-            .<span class="ident">constraints</span>(
+<span class="kw">impl </span>CursesUI {
+    <span class="kw">fn </span>draw_frame(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+        <span class="kw">let </span>header_len = <span class="number">10</span>; <span class="comment">// Number of lines of the header.
+        </span><span class="kw">let </span>workers_len = state
+            .executor_status
+            .as_ref()
+            .map(|s| s.connected_workers.len())
+            .unwrap_or(<span class="number">0</span>) <span class="kw">as </span>u16
+            + <span class="number">2</span>;
+        <span class="comment">// FIXME: shrink workers_len if needed
+        </span><span class="kw">let </span>chunks = Layout::default()
+            .direction(Direction::Vertical)
+            .constraints(
                 [
-                    <span class="ident">Constraint::Length</span>(<span class="ident">header_len</span>),
-                    <span class="ident">Constraint::Min</span>(<span class="number">0</span>),
-                    <span class="ident">Constraint::Length</span>(<span class="ident">workers_len</span>),
+                    Constraint::Length(header_len),
+                    Constraint::Min(<span class="number">0</span>),
+                    Constraint::Length(workers_len),
                 ]
-                .<span class="ident">as_ref</span>(),
+                .as_ref(),
             )
-            .<span class="ident">split</span>(<span class="ident">f</span>.<span class="ident">size</span>());
+            .split(f.size());
 
-        <span class="kw">let</span> <span class="ident">shared</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">shared</span>.<span class="ident">read</span>().<span class="ident">unwrap</span>();
-        <span class="ident"><span class="self">Self</span>::render_header</span>(<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="ident">shared</span>, <span class="ident">f</span>, <span class="ident">chunks</span>[<span class="number">0</span>]);
-        <span class="ident"><span class="self">Self</span>::render_generation_status</span>(<span class="ident">state</span>, <span class="ident">f</span>, <span class="ident">chunks</span>[<span class="number">1</span>]);
-        <span class="ident">render_server_status</span>(
-            <span class="ident">f</span>,
-            <span class="ident">chunks</span>[<span class="number">2</span>],
-            <span class="ident">state</span>.<span class="ident">executor_status</span>.<span class="ident">as_ref</span>(),
-            <span class="ident">loading</span>,
-            <span class="ident">frame_index</span>,
+        <span class="kw">let </span>shared = state.shared.read().unwrap();
+        <span class="self">Self</span>::render_header(state, <span class="kw-2">&amp;</span>shared, f, chunks[<span class="number">0</span>]);
+        <span class="self">Self</span>::render_generation_status(state, f, chunks[<span class="number">1</span>]);
+        render_server_status(
+            f,
+            chunks[<span class="number">2</span>],
+            state.executor_status.as_ref(),
+            loading,
+            frame_index,
         );
     }
 
-    <span class="kw">fn</span> <span class="ident">render_header</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">shared</span>: <span class="kw-2">&amp;</span><span class="ident">SharedUIState</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">rect</span>: <span class="ident">Rect</span>) {
-        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">state</span>
-            .<span class="ident">batches</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="ident">b</span>.<span class="ident">testcase_status</span>.<span class="ident">iter</span>())
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">tc</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">tc</span>, <span class="ident">TestcaseStatus::Error</span>))
-            .<span class="ident">count</span>();
+    <span class="kw">fn </span>render_header(state: <span class="kw-2">&amp;</span>UIState, shared: <span class="kw-2">&amp;</span>SharedUIState, f: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect) {
+        <span class="kw">let </span>errors = state
+            .batches
+            .iter()
+            .flat_map(|b| b.testcase_status.iter())
+            .filter(|tc| <span class="macro">matches!</span>(tc, TestcaseStatus::Error))
+            .count();
 
-        <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="macro">vec!</span>[
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;Solution:        &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">state</span>.<span class="ident">solution</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>()),
+        <span class="kw">let </span>text = <span class="macro">vec!</span>[
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;Solution:        &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(state.solution.to_string_lossy().to_string()),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;Generator args:  &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">state</span>.<span class="ident">generator_args</span>.<span class="ident">iter</span>().<span class="ident">join</span>(<span class="string">&quot; &quot;</span>)),
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;Generator args:  &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(state.generator_args.iter().join(<span class="string">&quot; &quot;</span>)),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;Batch size:      &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">state</span>.<span class="ident">batch_size</span>.<span class="ident">to_string</span>()),
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;Batch size:      &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(state.batch_size.to_string()),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;Batch index:     &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">shared</span>.<span class="ident">batch_index</span>.<span class="ident">to_string</span>()),
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;Batch index:     &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(shared.batch_index.to_string()),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[<span class="ident">Span::styled</span>(<span class="string">&quot;Progress:&quot;</span>, <span class="kw-2">*</span><span class="ident">BLUE</span>)]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;    Generated:   &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">state</span>.<span class="ident">progress</span>.<span class="ident">inputs_generated</span>.<span class="ident">to_string</span>()),
+            Spans(<span class="macro">vec!</span>[Span::styled(<span class="string">&quot;Progress:&quot;</span>, <span class="kw-2">*</span>BLUE)]),
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;    Generated:   &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(state.progress.inputs_generated.to_string()),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;    Solved:      &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">state</span>.<span class="ident">progress</span>.<span class="ident">inputs_solved</span>.<span class="ident">to_string</span>()),
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;    Solved:      &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(state.progress.inputs_solved.to_string()),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;    Average gen: &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="macro">format!</span>(
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;    Average gen: &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(<span class="macro">format!</span>(
                     <span class="string">&quot;{:.3}s\n&quot;</span>,
-                    <span class="ident">state</span>.<span class="ident">progress</span>.<span class="ident">generator_time_sum</span>
-                        <span class="op">/</span> (<span class="ident">state</span>.<span class="ident">progress</span>.<span class="ident">inputs_generated</span>.<span class="ident">max</span>(<span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span>)
+                    state.progress.generator_time_sum
+                        / (state.progress.inputs_generated.max(<span class="number">1</span>) <span class="kw">as </span>f64)
                 )),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;    Average sol: &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="macro">format!</span>(
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;    Average sol: &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(<span class="macro">format!</span>(
                     <span class="string">&quot;{:.3}s&quot;</span>,
-                    <span class="ident">state</span>.<span class="ident">progress</span>.<span class="ident">solution_time_sum</span> <span class="op">/</span> (<span class="ident">state</span>.<span class="ident">progress</span>.<span class="ident">inputs_solved</span>.<span class="ident">max</span>(<span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span>)
+                    state.progress.solution_time_sum / (state.progress.inputs_solved.max(<span class="number">1</span>) <span class="kw">as </span>f64)
                 )),
             ]),
-            <span class="ident">Spans</span>(<span class="macro">vec!</span>[
-                <span class="ident">Span::styled</span>(<span class="string">&quot;    Errors:      &quot;</span>, <span class="kw-2">*</span><span class="ident">BOLD</span>),
-                <span class="ident">Span::raw</span>(<span class="ident">errors</span>.<span class="ident">to_string</span>()),
+            Spans(<span class="macro">vec!</span>[
+                Span::styled(<span class="string">&quot;    Errors:      &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(errors.to_string()),
             ]),
         ];
 
-        <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">text</span>);
-        <span class="ident">f</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">rect</span>);
+        <span class="kw">let </span>paragraph = Paragraph::new(text);
+        f.render_widget(paragraph, rect);
     }
 
-    <span class="kw">fn</span> <span class="ident">render_generation_status</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">rect</span>: <span class="ident">Rect</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">text</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">state</span>.<span class="ident">batches</span>.<span class="ident">len</span>().<span class="ident">min</span>(<span class="number">10</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="ident">batch_index</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">batches</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">i</span>;
-            <span class="kw">let</span> <span class="ident">batch</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">state</span>.<span class="ident">batches</span>[<span class="ident">state</span>.<span class="ident">batches</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">i</span>];
-            <span class="ident">line</span>.<span class="ident">push</span>(<span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot;Batch {:&gt;3}: &quot;</span>, <span class="ident">batch_index</span>)));
-            <span class="ident">line</span>.<span class="ident">extend</span>(
-                <span class="ident">batch</span>
-                    .<span class="ident">testcase_status</span>
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">map</span>(<span class="ident"><span class="self">Self</span>::testcase_status_to_text</span>),
+    <span class="kw">fn </span>render_generation_status(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect) {
+        <span class="kw">let </span><span class="kw-2">mut </span>text = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..state.batches.len().min(<span class="number">10</span>) {
+            <span class="kw">let </span><span class="kw-2">mut </span>line = Vec::new();
+            <span class="kw">let </span>batch_index = state.batches.len() - <span class="number">1 </span>- i;
+            <span class="kw">let </span>batch = <span class="kw-2">&amp;</span>state.batches[state.batches.len() - <span class="number">1 </span>- i];
+            line.push(Span::raw(<span class="macro">format!</span>(<span class="string">&quot;Batch {:&gt;3}: &quot;</span>, batch_index)));
+            line.extend(
+                batch
+                    .testcase_status
+                    .iter()
+                    .map(<span class="self">Self</span>::testcase_status_to_text),
             );
-            <span class="ident">text</span>.<span class="ident">push</span>(<span class="ident">line</span>.<span class="ident">into</span>());
+            text.push(line.into());
         }
-        <span class="ident">render_block</span>(<span class="ident">f</span>, <span class="ident">rect</span>, <span class="string">&quot;Progress&quot;</span>);
-        <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">text</span>).<span class="ident">wrap</span>(<span class="ident">Wrap</span> { <span class="ident">trim</span>: <span class="bool-val">true</span> });
-        <span class="ident">f</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">inner_block</span>(<span class="ident">rect</span>));
+        render_block(f, rect, <span class="string">&quot;Progress&quot;</span>);
+        <span class="kw">let </span>paragraph = Paragraph::new(text).wrap(Wrap { trim: <span class="bool-val">true </span>});
+        f.render_widget(paragraph, inner_block(rect));
     }
 
-    <span class="kw">fn</span> <span class="ident">testcase_status_to_text</span>(<span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">TestcaseStatus</span>) -&gt; <span class="ident">Span</span> {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">TestcaseStatus::Pending</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;.&quot;</span>),
-            <span class="ident">TestcaseStatus::Generating</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;g&quot;</span>),
-            <span class="ident">TestcaseStatus::Generated</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;G&quot;</span>),
-            <span class="ident">TestcaseStatus::Validating</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;v&quot;</span>),
-            <span class="ident">TestcaseStatus::Validated</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;V&quot;</span>),
-            <span class="ident">TestcaseStatus::Solving</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;s&quot;</span>),
-            <span class="ident">TestcaseStatus::Solved</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;S&quot;</span>),
-            <span class="ident">TestcaseStatus::Checking</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;c&quot;</span>),
-            <span class="ident">TestcaseStatus::Success</span> =&gt; <span class="ident">Span::styled</span>(<span class="string">&quot;✓&quot;</span>, <span class="kw-2">*</span><span class="ident">GREEN</span>),
-            <span class="ident">TestcaseStatus::Failed</span>(<span class="kw">_</span>) =&gt; <span class="ident">Span::styled</span>(<span class="string">&quot;✕&quot;</span>, <span class="kw-2">*</span><span class="ident">RED</span>),
-            <span class="ident">TestcaseStatus::Error</span> =&gt; <span class="ident">Span::styled</span>(<span class="string">&quot;!&quot;</span>, <span class="kw-2">*</span><span class="ident">RED</span>),
+    <span class="kw">fn </span>testcase_status_to_text(status: <span class="kw-2">&amp;</span>TestcaseStatus) -&gt; Span {
+        <span class="kw">match </span>status {
+            TestcaseStatus::Pending =&gt; Span::raw(<span class="string">&quot;.&quot;</span>),
+            TestcaseStatus::Generating =&gt; Span::raw(<span class="string">&quot;g&quot;</span>),
+            TestcaseStatus::Generated =&gt; Span::raw(<span class="string">&quot;G&quot;</span>),
+            TestcaseStatus::Validating =&gt; Span::raw(<span class="string">&quot;v&quot;</span>),
+            TestcaseStatus::Validated =&gt; Span::raw(<span class="string">&quot;V&quot;</span>),
+            TestcaseStatus::Solving =&gt; Span::raw(<span class="string">&quot;s&quot;</span>),
+            TestcaseStatus::Solved =&gt; Span::raw(<span class="string">&quot;S&quot;</span>),
+            TestcaseStatus::Checking =&gt; Span::raw(<span class="string">&quot;c&quot;</span>),
+            TestcaseStatus::Success =&gt; Span::styled(<span class="string">&quot;✓&quot;</span>, <span class="kw-2">*</span>GREEN),
+            TestcaseStatus::Failed(<span class="kw">_</span>) =&gt; Span::styled(<span class="string">&quot;✕&quot;</span>, <span class="kw-2">*</span>RED),
+            TestcaseStatus::Error =&gt; Span::styled(<span class="string">&quot;!&quot;</span>, <span class="kw-2">*</span>RED),
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/sandbox_runner.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sandbox_runner.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/sandbox_runner.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sandbox_runner.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -89,96 +89,96 @@
 <span id="89">89</span>
 <span id="90">90</span>
 <span id="91">91</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::sync::atomic::AtomicU32</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::sync::atomic::AtomicU32;
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">tabox::configuration::SandboxConfiguration</span>;
-<span class="kw">use</span> <span class="ident">tabox::result</span>::{<span class="ident">ExitStatus</span>, <span class="ident">ResourceUsage</span>, <span class="ident">SandboxExecutionResult</span>};
+<span class="kw">use </span>tabox::configuration::SandboxConfiguration;
+<span class="kw">use </span>tabox::result::{ExitStatus, ResourceUsage, SandboxExecutionResult};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::RawSandboxResult</span>;
+<span class="kw">use </span><span class="kw">crate</span>::RawSandboxResult;
 
-<span class="doccomment">/// Something able to spawn a sandbox, wait for it to exit and return the results.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SandboxRunner</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
-    <span class="doccomment">/// Spawn a sandbox with the provided configuration, set the PID as soon as possible and wait</span>
-    <span class="doccomment">/// for it to exit. Parse the outcome of the sandbox and return it.</span>
-    <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">config</span>: <span class="ident">SandboxConfiguration</span>, <span class="ident">pid</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicU32</span><span class="op">&gt;</span>) -&gt; <span class="ident">RawSandboxResult</span>;
+<span class="doccomment">/// Something able to spawn a sandbox, wait for it to exit and return the results.
+</span><span class="kw">pub trait </span>SandboxRunner: Send + Sync {
+    <span class="doccomment">/// Spawn a sandbox with the provided configuration, set the PID as soon as possible and wait
+    /// for it to exit. Parse the outcome of the sandbox and return it.
+    </span><span class="kw">fn </span>run(<span class="kw-2">&amp;</span><span class="self">self</span>, config: SandboxConfiguration, pid: Arc&lt;AtomicU32&gt;) -&gt; RawSandboxResult;
 }
 
-<span class="doccomment">/// A fake sandbox that don&#39;t actually spawn anything and always return an error.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ErrorSandboxRunner</span>;
+<span class="doccomment">/// A fake sandbox that don&#39;t actually spawn anything and always return an error.
+</span><span class="attribute">#[derive(Default, Debug)]
+</span><span class="kw">pub struct </span>ErrorSandboxRunner;
 
-<span class="kw">impl</span> <span class="ident">SandboxRunner</span> <span class="kw">for</span> <span class="ident">ErrorSandboxRunner</span> {
-    <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_config</span>: <span class="ident">SandboxConfiguration</span>, <span class="ident">_pid</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicU32</span><span class="op">&gt;</span>) -&gt; <span class="ident">RawSandboxResult</span> {
-        <span class="ident">RawSandboxResult::Error</span>(<span class="string">&quot;Nope&quot;</span>.<span class="ident">to_owned</span>())
+<span class="kw">impl </span>SandboxRunner <span class="kw">for </span>ErrorSandboxRunner {
+    <span class="kw">fn </span>run(<span class="kw-2">&amp;</span><span class="self">self</span>, _config: SandboxConfiguration, _pid: Arc&lt;AtomicU32&gt;) -&gt; RawSandboxResult {
+        RawSandboxResult::Error(<span class="string">&quot;Nope&quot;</span>.to_owned())
     }
 }
 
-<span class="doccomment">/// A fake sandbox that don&#39;t actually spawn anything and always return successfully with exit code</span>
-<span class="doccomment">/// 0.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SuccessSandboxRunner</span>;
+<span class="doccomment">/// A fake sandbox that don&#39;t actually spawn anything and always return successfully with exit code
+/// 0.
+</span><span class="attribute">#[derive(Default, Debug)]
+</span><span class="kw">pub struct </span>SuccessSandboxRunner;
 
-<span class="kw">impl</span> <span class="ident">SandboxRunner</span> <span class="kw">for</span> <span class="ident">SuccessSandboxRunner</span> {
-    <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_config</span>: <span class="ident">SandboxConfiguration</span>, <span class="ident">_pid</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicU32</span><span class="op">&gt;</span>) -&gt; <span class="ident">RawSandboxResult</span> {
-        <span class="ident">RawSandboxResult::Success</span>(<span class="ident">SandboxExecutionResult</span> {
-            <span class="ident">status</span>: <span class="ident">ExitStatus::ExitCode</span>(<span class="number">0</span>),
-            <span class="ident">resource_usage</span>: <span class="ident">ResourceUsage</span> {
-                <span class="ident">memory_usage</span>: <span class="number">0</span>,
-                <span class="ident">user_cpu_time</span>: <span class="number">0.0</span>,
-                <span class="ident">system_cpu_time</span>: <span class="number">0.0</span>,
-                <span class="ident">wall_time_usage</span>: <span class="number">0.0</span>,
+<span class="kw">impl </span>SandboxRunner <span class="kw">for </span>SuccessSandboxRunner {
+    <span class="kw">fn </span>run(<span class="kw-2">&amp;</span><span class="self">self</span>, _config: SandboxConfiguration, _pid: Arc&lt;AtomicU32&gt;) -&gt; RawSandboxResult {
+        RawSandboxResult::Success(SandboxExecutionResult {
+            status: ExitStatus::ExitCode(<span class="number">0</span>),
+            resource_usage: ResourceUsage {
+                memory_usage: <span class="number">0</span>,
+                user_cpu_time: <span class="number">0.0</span>,
+                system_cpu_time: <span class="number">0.0</span>,
+                wall_time_usage: <span class="number">0.0</span>,
             },
         })
     }
 }
 
-<span class="doccomment">/// A fake sandbox that simply spawns the process and does not measure anything. No actual</span>
-<span class="doccomment">/// sandboxing is performed, so the process may do bad things.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UnsafeSandboxRunner</span>;
+<span class="doccomment">/// A fake sandbox that simply spawns the process and does not measure anything. No actual
+/// sandboxing is performed, so the process may do bad things.
+</span><span class="attribute">#[cfg(test)]
+#[derive(Default, Debug)]
+</span><span class="kw">pub struct </span>UnsafeSandboxRunner;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">impl</span> <span class="ident">SandboxRunner</span> <span class="kw">for</span> <span class="ident">UnsafeSandboxRunner</span> {
-    <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">config</span>: <span class="ident">SandboxConfiguration</span>, <span class="ident">_pid</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicU32</span><span class="op">&gt;</span>) -&gt; <span class="ident">RawSandboxResult</span> {
-        <span class="kw">use</span> <span class="ident">std::fs</span>::{<span class="ident">File</span>, <span class="ident">OpenOptions</span>};
-        <span class="kw">use</span> <span class="ident">std::process::Stdio</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">impl </span>SandboxRunner <span class="kw">for </span>UnsafeSandboxRunner {
+    <span class="kw">fn </span>run(<span class="kw-2">&amp;</span><span class="self">self</span>, config: SandboxConfiguration, _pid: Arc&lt;AtomicU32&gt;) -&gt; RawSandboxResult {
+        <span class="kw">use </span>std::fs::{File, OpenOptions};
+        <span class="kw">use </span>std::process::Stdio;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">child</span> <span class="op">=</span> <span class="ident">std::process::Command::new</span>(<span class="ident">config</span>.<span class="ident">executable</span>);
-        <span class="ident">child</span>.<span class="ident">args</span>(<span class="ident">config</span>.<span class="ident">args</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">config</span>.<span class="ident">stdout</span> {
-            <span class="ident">child</span>.<span class="ident">stdout</span>(<span class="ident">Stdio::from</span>(
-                <span class="ident">OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="ident">path</span>).<span class="ident">unwrap</span>(),
+        <span class="kw">let </span><span class="kw-2">mut </span>child = std::process::Command::new(config.executable);
+        child.args(config.args);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = config.stdout {
+            child.stdout(Stdio::from(
+                OpenOptions::new().write(<span class="bool-val">true</span>).open(path).unwrap(),
             ));
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">config</span>.<span class="ident">stderr</span> {
-            <span class="ident">child</span>.<span class="ident">stderr</span>(<span class="ident">Stdio::from</span>(
-                <span class="ident">OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="ident">path</span>).<span class="ident">unwrap</span>(),
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = config.stderr {
+            child.stderr(Stdio::from(
+                OpenOptions::new().write(<span class="bool-val">true</span>).open(path).unwrap(),
             ));
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">config</span>.<span class="ident">stdin</span> {
-            <span class="ident">child</span>.<span class="ident">stdin</span>(<span class="ident">Stdio::from</span>(<span class="ident">File::open</span>(<span class="ident">path</span>).<span class="ident">unwrap</span>()));
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = config.stdin {
+            child.stdin(Stdio::from(File::open(path).unwrap()));
         }
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">child</span>.<span class="ident">spawn</span>().<span class="ident">unwrap</span>().<span class="ident">wait</span>().<span class="ident">unwrap</span>();
+        <span class="kw">let </span>res = child.spawn().unwrap().wait().unwrap();
 
-        <span class="kw">let</span> <span class="ident">resource_usage</span> <span class="op">=</span> <span class="ident">ResourceUsage</span> {
-            <span class="ident">memory_usage</span>: <span class="number">0</span>,
-            <span class="ident">user_cpu_time</span>: <span class="number">0.0</span>,
-            <span class="ident">system_cpu_time</span>: <span class="number">0.0</span>,
-            <span class="ident">wall_time_usage</span>: <span class="number">0.0</span>,
+        <span class="kw">let </span>resource_usage = ResourceUsage {
+            memory_usage: <span class="number">0</span>,
+            user_cpu_time: <span class="number">0.0</span>,
+            system_cpu_time: <span class="number">0.0</span>,
+            wall_time_usage: <span class="number">0.0</span>,
         };
-        <span class="ident">RawSandboxResult::Success</span>(<span class="ident">SandboxExecutionResult</span> {
-            <span class="ident">status</span>: <span class="ident">ExitStatus::ExitCode</span>(<span class="ident">res</span>.<span class="ident">code</span>().<span class="ident">unwrap</span>()),
-            <span class="ident">resource_usage</span>,
+        RawSandboxResult::Success(SandboxExecutionResult {
+            status: ExitStatus::ExitCode(res.code().unwrap()),
+            resource_usage,
         })
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">SandboxRunner</span><span class="op">&gt;</span> <span class="ident">SandboxRunner</span> <span class="kw">for</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">conf</span>: <span class="ident">SandboxConfiguration</span>, <span class="ident">pid</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicU32</span><span class="op">&gt;</span>) -&gt; <span class="ident">RawSandboxResult</span> {
-        <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">run</span>(<span class="ident">conf</span>, <span class="ident">pid</span>)
+<span class="kw">impl</span>&lt;S: SandboxRunner&gt; SandboxRunner <span class="kw">for </span>Arc&lt;S&gt; {
+    <span class="kw">fn </span>run(<span class="kw-2">&amp;</span><span class="self">self</span>, conf: SandboxConfiguration, pid: Arc&lt;AtomicU32&gt;) -&gt; RawSandboxResult {
+        <span class="self">self</span>.as_ref().run(conf, pid)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

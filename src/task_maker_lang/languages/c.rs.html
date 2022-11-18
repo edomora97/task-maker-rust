@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/c.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>c.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/c.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>c.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -162,169 +162,169 @@
 <span id="162">162</span>
 <span id="163">163</span>
 <span id="164">164</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::Path</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::Path;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionCommand</span>;
+<span class="kw">use </span>task_maker_dag::ExecutionCommand;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::language</span>::{
-    <span class="ident">CompilationSettings</span>, <span class="ident">CompiledLanguageBuilder</span>, <span class="ident">SimpleCompiledLanguageBuilder</span>,
+<span class="kw">use </span><span class="kw">crate</span>::language::{
+    CompilationSettings, CompiledLanguageBuilder, SimpleCompiledLanguageBuilder,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::languages::cpp::find_cpp_deps</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Language</span>;
+<span class="kw">use </span><span class="kw">crate</span>::languages::cpp::find_cpp_deps;
+<span class="kw">use </span><span class="kw">crate</span>::Language;
 
-<span class="doccomment">/// Configuration of the C language to use.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageCConfiguration</span> {
-    <span class="doccomment">/// Compiler to use (e.g. ExecutionCommand::system(&quot;gcc&quot;) ).</span>
-    <span class="kw">pub</span> <span class="ident">compiler</span>: <span class="ident">ExecutionCommand</span>,
-    <span class="doccomment">/// Version of the C standard library to use (e.g. c11).</span>
-    <span class="kw">pub</span> <span class="ident">std_version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Extra flags to pass to the compiler.</span>
-    <span class="kw">pub</span> <span class="ident">extra_flags</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Configuration of the C language to use.
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>LanguageCConfiguration {
+    <span class="doccomment">/// Compiler to use (e.g. ExecutionCommand::system(&quot;gcc&quot;) ).
+    </span><span class="kw">pub </span>compiler: ExecutionCommand,
+    <span class="doccomment">/// Version of the C standard library to use (e.g. c11).
+    </span><span class="kw">pub </span>std_version: String,
+    <span class="doccomment">/// Extra flags to pass to the compiler.
+    </span><span class="kw">pub </span>extra_flags: Vec&lt;String&gt;,
 }
 
-<span class="doccomment">/// The C language.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageC</span> {
-    <span class="kw">pub</span> <span class="ident">config</span>: <span class="ident">LanguageCConfiguration</span>,
+<span class="doccomment">/// The C language.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>LanguageC {
+    <span class="kw">pub </span>config: LanguageCConfiguration,
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageC</span> {
-    <span class="doccomment">/// Make a new LanguageC using the specified version.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">config</span>: <span class="ident">LanguageCConfiguration</span>) -&gt; <span class="ident">LanguageC</span> {
-        <span class="ident">LanguageC</span> { <span class="ident">config</span> }
+<span class="kw">impl </span>LanguageC {
+    <span class="doccomment">/// Make a new LanguageC using the specified version.
+    </span><span class="kw">pub fn </span>new(config: LanguageCConfiguration) -&gt; LanguageC {
+        LanguageC { config }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageCConfiguration</span> {
-    <span class="doccomment">/// Get the configuration of C from the environment variables.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_env</span>() -&gt; <span class="ident">LanguageCConfiguration</span> {
-        <span class="kw">let</span> <span class="ident">compiler</span> <span class="op">=</span> <span class="ident">std::env::var_os</span>(<span class="string">&quot;TM_CC&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;gcc&quot;</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">std_version</span> <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TM_CC_STD_VERSION&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="string">&quot;c11&quot;</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">extra_flags</span> <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TM_CFLAGS&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">String::new</span>());
-        <span class="kw">let</span> <span class="ident">extra_flags</span> <span class="op">=</span> <span class="ident">shell_words::split</span>(<span class="kw-2">&amp;</span><span class="ident">extra_flags</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid $TM_CFLAGS&quot;</span>);
-        <span class="ident">LanguageCConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="ident">compiler</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>,
-            <span class="ident">extra_flags</span>,
+<span class="kw">impl </span>LanguageCConfiguration {
+    <span class="doccomment">/// Get the configuration of C from the environment variables.
+    </span><span class="kw">pub fn </span>from_env() -&gt; LanguageCConfiguration {
+        <span class="kw">let </span>compiler = std::env::var_os(<span class="string">&quot;TM_CC&quot;</span>).unwrap_or_else(|| <span class="string">&quot;gcc&quot;</span>.into());
+        <span class="kw">let </span>std_version = std::env::var(<span class="string">&quot;TM_CC_STD_VERSION&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;c11&quot;</span>.into());
+        <span class="kw">let </span>extra_flags = std::env::var(<span class="string">&quot;TM_CFLAGS&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| String::new());
+        <span class="kw">let </span>extra_flags = shell_words::split(<span class="kw-2">&amp;</span>extra_flags).expect(<span class="string">&quot;Invalid $TM_CFLAGS&quot;</span>);
+        LanguageCConfiguration {
+            compiler: ExecutionCommand::System(compiler.into()),
+            std_version,
+            extra_flags,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Language</span> <span class="kw">for</span> <span class="ident">LanguageC</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;C&quot;</span>
-    }
+<span class="kw">impl </span>Language <span class="kw">for </span>LanguageC {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;C&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="macro">vec!</span>[<span class="string">&quot;c&quot;</span>]
     }
 
-    <span class="kw">fn</span> <span class="ident">need_compilation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">true</span>
-    }
+    <span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">inline_comment_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="prelude-val">Some</span>(<span class="string">&quot;//&quot;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">compilation_builder</span>(
+    <span class="kw">fn </span>compilation_builder(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">settings</span>: <span class="ident">CompilationSettings</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CompiledLanguageBuilder</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">SimpleCompiledLanguageBuilder::new</span>(
+        source: <span class="kw-2">&amp;</span>Path,
+        settings: CompilationSettings,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">&#39;_</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>metadata = SimpleCompiledLanguageBuilder::new(
             <span class="self">self</span>,
-            <span class="ident">source</span>,
-            <span class="ident">settings</span>,
-            <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">compiler</span>.<span class="ident">clone</span>(),
+            source,
+            settings,
+            <span class="self">self</span>.config.compiler.clone(),
         );
-        <span class="kw">let</span> <span class="ident">binary_name</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">binary_name</span>.<span class="ident">clone</span>();
-        <span class="ident">metadata</span>
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-O2&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-Wall&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-ggdb3&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-DEVAL&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-fdiagnostics-color=always&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">std_version</span>))
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-o&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="ident">binary_name</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-lm&quot;</span>);
-        <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>.<span class="ident">extra_flags</span> {
-            <span class="ident">metadata</span>.<span class="ident">add_arg</span>(<span class="ident">arg</span>);
+        <span class="kw">let </span>binary_name = metadata.binary_name.clone();
+        metadata
+            .add_arg(<span class="string">&quot;-O2&quot;</span>)
+            .add_arg(<span class="string">&quot;-Wall&quot;</span>)
+            .add_arg(<span class="string">&quot;-ggdb3&quot;</span>)
+            .add_arg(<span class="string">&quot;-DEVAL&quot;</span>)
+            .add_arg(<span class="string">&quot;-fdiagnostics-color=always&quot;</span>)
+            .add_arg(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, <span class="self">self</span>.config.std_version))
+            .add_arg(<span class="string">&quot;-o&quot;</span>)
+            .add_arg(binary_name)
+            .add_arg(<span class="string">&quot;-lm&quot;</span>);
+        <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.config.extra_flags {
+            metadata.add_arg(arg);
         }
-        <span class="kw">if</span> <span class="ident">metadata</span>.<span class="ident">settings</span>.<span class="ident">list_static</span> {
-            <span class="ident">metadata</span>.<span class="ident">add_arg</span>(<span class="string">&quot;-static&quot;</span>);
+        <span class="kw">if </span>metadata.settings.list_static {
+            metadata.add_arg(<span class="string">&quot;-static&quot;</span>);
         }
 
-        <span class="ident">find_cpp_deps</span>(<span class="ident">source</span>)
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">metadata</span>.<span class="ident">add_dependency</span>(<span class="ident">d</span>));
-        <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">metadata</span>))
+        find_cpp_deps(source)
+            .into_iter()
+            .for_each(|d| metadata.add_dependency(d));
+        <span class="prelude-val">Some</span>(Box::new(metadata))
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>speculoos::prelude::<span class="kw-2">*</span>;
+    <span class="kw">use </span>tempfile::TempDir;
 
-    <span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionDAG</span>;
+    <span class="kw">use </span>task_maker_dag::ExecutionDAG;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">setup</span>() -&gt; <span class="ident">TempDir</span> {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.c&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="ident">foo</span>, <span class="string">&quot;int main() {}&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">tempdir</span>
+    <span class="kw">fn </span>setup() -&gt; TempDir {
+        <span class="kw">let </span>tempdir = TempDir::new().unwrap();
+        <span class="kw">let </span>foo = tempdir.path().join(<span class="string">&quot;foo.c&quot;</span>);
+        std::fs::write(foo, <span class="string">&quot;int main() {}&quot;</span>).unwrap();
+        tempdir
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args() {
+        <span class="kw">let </span>tmp = setup();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageC::new</span>(<span class="ident">LanguageCConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="string">&quot;gcc&quot;</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>: <span class="string">&quot;c11&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">extra_flags</span>: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">into</span>()],
+        <span class="kw">let </span>lang = LanguageC::new(LanguageCConfiguration {
+            compiler: ExecutionCommand::System(<span class="string">&quot;gcc&quot;</span>.into()),
+            std_version: <span class="string">&quot;c11&quot;</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
         });
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.c&quot;</span>), <span class="ident">CompilationSettings::default</span>())
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.c&quot;</span>), CompilationSettings::default())
+            .unwrap();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.c&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c11&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="kw">let </span>args = comp.args;
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;foo.c&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c11&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">&quot;-static&quot;</span>.to_string());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args_static</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args_static() {
+        <span class="kw">let </span>tmp = setup();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageC::new</span>(<span class="ident">LanguageCConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="string">&quot;gcc&quot;</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>: <span class="string">&quot;c11&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">extra_flags</span>: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">into</span>()],
+        <span class="kw">let </span>lang = LanguageC::new(LanguageCConfiguration {
+            compiler: ExecutionCommand::System(<span class="string">&quot;gcc&quot;</span>.into()),
+            std_version: <span class="string">&quot;c11&quot;</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
         });
-        <span class="kw">let</span> <span class="ident">settings</span> <span class="op">=</span> <span class="ident">CompilationSettings</span> {
-            <span class="ident">list_static</span>: <span class="bool-val">true</span>,
-            ..<span class="ident">Default::default</span>()
+        <span class="kw">let </span>settings = CompilationSettings {
+            list_static: <span class="bool-val">true</span>,
+            ..Default::default()
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.c&quot;</span>), <span class="ident">settings</span>)
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.c&quot;</span>), settings)
+            .unwrap();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.c&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c11&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="kw">let </span>args = comp.args;
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;foo.c&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c11&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-static&quot;</span>.to_string());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

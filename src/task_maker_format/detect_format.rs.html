@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/detect_format.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>detect_format.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_format/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/detect_format.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>detect_format.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_format/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -72,79 +72,79 @@
 <span id="72">72</span>
 <span id="73">73</span>
 <span id="74">74</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::fmt::Write;
+<span class="kw">use </span>std::path::PathBuf;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="prelude-ty">Result</span>};
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, <span class="prelude-ty">Result</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ioi</span>, <span class="ident">terry</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">TaskFormat</span>};
+<span class="kw">use crate</span>::{ioi, terry, EvaluationConfig, TaskFormat};
 
-<span class="doccomment">/// Search for a valid task directory, starting from base and going _at most_ `max_depth` times up.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_task</span>(
-    <span class="ident">base</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
-    <span class="ident">max_depth</span>: <span class="ident">u32</span>,
-    <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TaskFormat</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">unwrap_or_else</span>(<span class="ident">getcwd</span>);
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">base</span>.<span class="ident">is_absolute</span>() {
-        <span class="ident">base</span> <span class="op">=</span> <span class="ident">getcwd</span>().<span class="ident">join</span>(<span class="ident">base</span>);
+<span class="doccomment">/// Search for a valid task directory, starting from base and going _at most_ `max_depth` times up.
+</span><span class="kw">pub fn </span>find_task(
+    base: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
+    max_depth: u32,
+    eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+) -&gt; <span class="prelude-ty">Result</span>&lt;TaskFormat&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>base = base.unwrap_or_else(getcwd);
+    <span class="kw">if </span>!base.is_absolute() {
+        base = getcwd().join(base);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fails</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">max_depth</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="comment">// try to parse a IOI task</span>
-        <span class="kw">if</span> <span class="ident">ioi::IOITask::is_valid</span>(<span class="kw-2">&amp;</span><span class="ident">base</span>) {
-            <span class="kw">match</span> <span class="ident">ioi::IOITask::new</span>(<span class="kw-2">&amp;</span><span class="ident">base</span>, <span class="ident">eval_config</span>) {
-                <span class="prelude-val">Ok</span>(<span class="ident">ioi_task</span>) =&gt; <span class="ident">task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">ioi_task</span>.<span class="ident">into</span>()),
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; <span class="ident">fails</span>.<span class="ident">push</span>((<span class="string">&quot;IOI&quot;</span>, <span class="ident">base</span>.<span class="ident">clone</span>(), <span class="ident">err</span>)),
+    <span class="kw">let </span><span class="kw-2">mut </span>fails = <span class="macro">vec!</span>[];
+    <span class="kw">for _ in </span><span class="number">0</span>..max_depth {
+        <span class="kw">let </span><span class="kw-2">mut </span>task = <span class="prelude-val">None</span>;
+        <span class="comment">// try to parse a IOI task
+        </span><span class="kw">if </span>ioi::IOITask::is_valid(<span class="kw-2">&amp;</span>base) {
+            <span class="kw">match </span>ioi::IOITask::new(<span class="kw-2">&amp;</span>base, eval_config) {
+                <span class="prelude-val">Ok</span>(ioi_task) =&gt; task = <span class="prelude-val">Some</span>(ioi_task.into()),
+                <span class="prelude-val">Err</span>(err) =&gt; fails.push((<span class="string">&quot;IOI&quot;</span>, base.clone(), err)),
             }
         }
-        <span class="comment">// try to parse a Terry task</span>
-        <span class="kw">if</span> <span class="ident">terry::TerryTask::is_valid</span>(<span class="kw-2">&amp;</span><span class="ident">base</span>) {
-            <span class="kw">match</span> <span class="ident">terry::TerryTask::new</span>(<span class="kw-2">&amp;</span><span class="ident">base</span>, <span class="ident">eval_config</span>) {
-                <span class="prelude-val">Ok</span>(<span class="ident">terry_task</span>) =&gt; {
-                    <span class="kw">if</span> <span class="ident">task</span>.<span class="ident">is_some</span>() {
+        <span class="comment">// try to parse a Terry task
+        </span><span class="kw">if </span>terry::TerryTask::is_valid(<span class="kw-2">&amp;</span>base) {
+            <span class="kw">match </span>terry::TerryTask::new(<span class="kw-2">&amp;</span>base, eval_config) {
+                <span class="prelude-val">Ok</span>(terry_task) =&gt; {
+                    <span class="kw">if </span>task.is_some() {
                         <span class="macro">bail!</span>(<span class="string">&quot;Ambiguous task directory, can be either IOI and terry&quot;</span>)
                     }
-                    <span class="ident">task</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">terry_task</span>.<span class="ident">into</span>())
+                    task = <span class="prelude-val">Some</span>(terry_task.into())
                 }
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; <span class="ident">fails</span>.<span class="ident">push</span>((<span class="string">&quot;Terry&quot;</span>, <span class="ident">base</span>.<span class="ident">clone</span>(), <span class="ident">err</span>)),
+                <span class="prelude-val">Err</span>(err) =&gt; fails.push((<span class="string">&quot;Terry&quot;</span>, base.clone(), err)),
             }
         }
-        <span class="comment">// if a task is found, return it</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">task</span>) <span class="op">=</span> <span class="ident">task</span> {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">task</span>);
+        <span class="comment">// if a task is found, return it
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(task) = task {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(task);
         }
-        <span class="comment">// not task found yet, try on the parent folder</span>
-        <span class="ident">base</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">base</span>.<span class="ident">parent</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">parent</span>) =&gt; <span class="ident">parent</span>.<span class="ident">into</span>(),
-            <span class="kw">_</span> =&gt; <span class="kw">break</span>,
+        <span class="comment">// not task found yet, try on the parent folder
+        </span>base = <span class="kw">match </span>base.parent() {
+            <span class="prelude-val">Some</span>(parent) =&gt; parent.into(),
+            <span class="kw">_ </span>=&gt; <span class="kw">break</span>,
         };
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;\n&quot;</span>.<span class="ident">to_string</span>();
-    <span class="kw">for</span> (<span class="ident">format</span>, <span class="ident">path</span>, <span class="ident">error</span>) <span class="kw">in</span> <span class="ident">fails</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">writeln!</span>(
-            <span class="ident">message</span>,
+    <span class="kw">let </span><span class="kw-2">mut </span>message = <span class="string">&quot;\n&quot;</span>.to_string();
+    <span class="kw">for </span>(format, path, error) <span class="kw">in </span>fails {
+        <span class="kw">let _ </span>= <span class="macro">writeln!</span>(
+            message,
             <span class="string">&quot;    - Not a valid {} task at {}&quot;</span>,
-            <span class="ident">format</span>,
-            <span class="ident">path</span>.<span class="ident">display</span>()
+            format,
+            path.display()
         );
-        <span class="ident">error</span>.<span class="ident">chain</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">cause</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="ident">message</span>, <span class="string">&quot;      Caused by:\n        {}\n&quot;</span>, <span class="ident">cause</span>);
+        error.chain().for_each(|cause| {
+            <span class="kw">let _ </span>= <span class="macro">write!</span>(message, <span class="string">&quot;      Caused by:\n        {}\n&quot;</span>, cause);
         });
     }
 
-    <span class="prelude-val">Err</span>(<span class="macro">anyhow!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">message</span>)).<span class="ident">context</span>(<span class="string">&quot;Cannot find a valid task directory&quot;</span>)
+    <span class="prelude-val">Err</span>(<span class="macro">anyhow!</span>(<span class="string">&quot;{}&quot;</span>, message)).context(<span class="string">&quot;Cannot find a valid task directory&quot;</span>)
 }
 
-<span class="doccomment">/// Return the current working directory.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `std::env::current_dir()` resolves the symlinks of the cwd&#39;s hierarchy, `$PWD` is used instead.</span>
-<span class="kw">fn</span> <span class="ident">getcwd</span>() -&gt; <span class="ident">PathBuf</span> {
-    <span class="ident">std::env::var</span>(<span class="string">&quot;PWD&quot;</span>)
-        .<span class="ident">map</span>(<span class="ident">PathBuf::from</span>)
-        .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">std::env::current_dir</span>().<span class="ident">expect</span>(<span class="string">&quot;Cannot get current working directory&quot;</span>))
+<span class="doccomment">/// Return the current working directory.
+///
+/// `std::env::current_dir()` resolves the symlinks of the cwd&#39;s hierarchy, `$PWD` is used instead.
+</span><span class="kw">fn </span>getcwd() -&gt; PathBuf {
+    std::env::var(<span class="string">&quot;PWD&quot;</span>)
+        .map(PathBuf::from)
+        .unwrap_or_else(|<span class="kw">_</span>| std::env::current_dir().expect(<span class="string">&quot;Cannot get current working directory&quot;</span>))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

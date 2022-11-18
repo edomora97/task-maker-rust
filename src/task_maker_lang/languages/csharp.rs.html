@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/csharp.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>csharp.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/csharp.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>csharp.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -83,90 +83,90 @@
 <span id="83">83</span>
 <span id="84">84</span>
 <span id="85">85</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::Path</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::Path;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_dag::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::language</span>::{
-    <span class="ident">CompilationSettings</span>, <span class="ident">CompiledLanguageBuilder</span>, <span class="ident">Language</span>, <span class="ident">SimpleCompiledLanguageBuilder</span>,
+<span class="kw">use </span><span class="kw">crate</span>::language::{
+    CompilationSettings, CompiledLanguageBuilder, Language, SimpleCompiledLanguageBuilder,
 };
 
-<span class="doccomment">/// The C# language.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageCSharp</span>;
+<span class="doccomment">/// The C# language.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>LanguageCSharp;
 
-<span class="kw">impl</span> <span class="ident">LanguageCSharp</span> {
-    <span class="doccomment">/// Make a new LanguageCSharp</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">LanguageCSharp</span> {
-        <span class="ident">LanguageCSharp</span>
+<span class="kw">impl </span>LanguageCSharp {
+    <span class="doccomment">/// Make a new LanguageCSharp
+    </span><span class="kw">pub fn </span>new() -&gt; LanguageCSharp {
+        LanguageCSharp
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Language</span> <span class="kw">for</span> <span class="ident">LanguageCSharp</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;C#&quot;</span>
-    }
+<span class="kw">impl </span>Language <span class="kw">for </span>LanguageCSharp {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;C#&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="macro">vec!</span>[<span class="string">&quot;cs&quot;</span>]
     }
 
-    <span class="kw">fn</span> <span class="ident">need_compilation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">true</span>
-    }
+    <span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">inline_comment_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="prelude-val">Some</span>(<span class="string">&quot;//&quot;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">compilation_builder</span>(
+    <span class="kw">fn </span>compilation_builder(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">settings</span>: <span class="ident">CompilationSettings</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CompiledLanguageBuilder</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">SimpleCompiledLanguageBuilder::new</span>(
+        source: <span class="kw-2">&amp;</span>Path,
+        settings: CompilationSettings,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">&#39;_</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>metadata = SimpleCompiledLanguageBuilder::new(
             <span class="self">self</span>,
-            <span class="ident">source</span>,
-            <span class="ident">settings</span>,
-            <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;mcs&quot;</span>),
+            source,
+            settings,
+            ExecutionCommand::system(<span class="string">&quot;mcs&quot;</span>),
         );
-        <span class="kw">let</span> <span class="ident">binary_name</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">binary_name</span>.<span class="ident">clone</span>();
-        <span class="ident">metadata</span>
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-define:EVAL&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-optimize+&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="macro">format!</span>(<span class="string">&quot;-out:{}&quot;</span>, <span class="ident">binary_name</span>));
+        <span class="kw">let </span>binary_name = metadata.binary_name.clone();
+        metadata
+            .add_arg(<span class="string">&quot;-define:EVAL&quot;</span>)
+            .add_arg(<span class="string">&quot;-optimize+&quot;</span>)
+            .add_arg(<span class="macro">format!</span>(<span class="string">&quot;-out:{}&quot;</span>, binary_name));
 
-        <span class="ident">metadata</span>.<span class="ident">callback</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">comp</span><span class="op">|</span> {
-            <span class="ident">comp</span>.<span class="ident">limits_mut</span>().<span class="ident">add_extra_readable_dir</span>(<span class="string">&quot;/etc/mono&quot;</span>);
+        metadata.callback(<span class="kw">move </span>|comp| {
+            comp.limits_mut().add_extra_readable_dir(<span class="string">&quot;/etc/mono&quot;</span>);
         });
 
-        <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">metadata</span>))
+        <span class="prelude-val">Some</span>(Box::new(metadata))
     }
 
-    <span class="kw">fn</span> <span class="ident">runtime_command</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">_write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">ExecutionCommand</span> {
-        <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;mono&quot;</span>)
+    <span class="kw">fn </span>runtime_command(<span class="kw-2">&amp;</span><span class="self">self</span>, _path: <span class="kw-2">&amp;</span>Path, _write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;) -&gt; ExecutionCommand {
+        ExecutionCommand::system(<span class="string">&quot;mono&quot;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">runtime_args</span>(
+    <span class="kw">fn </span>runtime_args(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="ident">args</span>.<span class="ident">push</span>(
-            <span class="self">self</span>.<span class="ident">executable_name</span>(<span class="ident">path</span>, <span class="ident">write_to</span>)
-                .<span class="ident">to_string_lossy</span>()
-                .<span class="ident">to_string</span>(),
+        path: <span class="kw-2">&amp;</span>Path,
+        write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;,
+        <span class="kw-2">mut </span>args: Vec&lt;String&gt;,
+    ) -&gt; Vec&lt;String&gt; {
+        args.push(
+            <span class="self">self</span>.executable_name(path, write_to)
+                .to_string_lossy()
+                .to_string(),
         );
-        <span class="ident">args</span>
+        args
     }
 
-    <span class="kw">fn</span> <span class="ident">custom_limits</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">limits</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionLimits</span>) {
-        <span class="ident">limits</span>
-            .<span class="ident">add_extra_readable_dir</span>(<span class="string">&quot;/etc/mono&quot;</span>)
-            .<span class="ident">mount_proc</span>(<span class="bool-val">true</span>)
-            .<span class="ident">allow_multiprocess</span>();
+    <span class="kw">fn </span>custom_limits(<span class="kw-2">&amp;</span><span class="self">self</span>, limits: <span class="kw-2">&amp;mut </span>ExecutionLimits) {
+        limits
+            .add_extra_readable_dir(<span class="string">&quot;/etc/mono&quot;</span>)
+            .mount_proc(<span class="bool-val">true</span>)
+            .allow_multiprocess();
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

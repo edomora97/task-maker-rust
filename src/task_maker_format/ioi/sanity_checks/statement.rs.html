@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/statement.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/statement.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -395,100 +395,100 @@
 <span id="395">395</span>
 <span id="396">396</span>
 <span id="397">397</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::io::Read</span>;
-<span class="kw">use</span> <span class="ident">std::os::unix::ffi::OsStrExt</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">std::process::Command</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::io::Read;
+<span class="kw">use </span>std::os::unix::ffi::OsStrExt;
+<span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>std::process::Command;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">regex::Regex</span>;
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics</span>::{<span class="ident">CodeSpan</span>, <span class="ident">Diagnostic</span>};
+<span class="kw">use </span>anyhow::{Context, Error};
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>regex::Regex;
+<span class="kw">use </span>task_maker_diagnostics::{CodeSpan, Diagnostic};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">IOITask</span>, <span class="ident">SubtaskId</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sanity_checks::SanityCheck</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::EvaluationData</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{IOITask, SubtaskId};
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
 
-<span class="doccomment">/// Check that the subtasks in the statement are consistent with the ones of the task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StatementSubtasks</span>;
+<span class="doccomment">/// Check that the subtasks in the statement are consistent with the ones of the task.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>StatementSubtasks;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">IOITask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">StatementSubtasks</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;StatementSubtasks&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>StatementSubtasks {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;StatementSubtasks&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">pre_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">expected_subtasks</span> <span class="op">=</span> <span class="ident">task</span>
-            .<span class="ident">subtasks</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">st_num</span>, <span class="ident">st</span>)<span class="op">|</span> <span class="ident">ExtractedSubtask</span> {
-                <span class="ident">id</span>: <span class="kw-2">*</span><span class="ident">st_num</span>,
-                <span class="ident">score</span>: <span class="prelude-val">Some</span>(<span class="ident">st</span>.<span class="ident">max_score</span>),
-                <span class="ident">subtask_id_span</span>: <span class="ident">st</span>.<span class="ident">span</span>.<span class="ident">clone</span>(),
-                <span class="ident">subtask_score_span</span>: <span class="ident">st</span>.<span class="ident">span</span>.<span class="ident">clone</span>(),
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>expected_subtasks = task
+            .subtasks
+            .iter()
+            .map(|(st_num, st)| ExtractedSubtask {
+                id: <span class="kw-2">*</span>st_num,
+                score: <span class="prelude-val">Some</span>(st.max_score),
+                subtask_id_span: st.span.clone(),
+                subtask_score_span: st.span.clone(),
             })
-            .<span class="ident">sorted_by_key</span>(<span class="op">|</span><span class="ident">st</span><span class="op">|</span> <span class="ident">st</span>.<span class="ident">id</span>)
-            .<span class="ident">collect_vec</span>();
-        <span class="kw">for</span> <span class="ident">booklet</span> <span class="kw">in</span> <span class="ident">task</span>.<span class="ident">booklets</span>.<span class="ident">iter</span>() {
-            <span class="kw">if</span> <span class="ident">booklet</span>.<span class="ident">statements</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
+            .sorted_by_key(|st| st.id)
+            .collect_vec();
+        <span class="kw">for </span>booklet <span class="kw">in </span>task.booklets.iter() {
+            <span class="kw">if </span>booklet.statements.len() != <span class="number">1 </span>{
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">statement</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">booklet</span>.<span class="ident">statements</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">statement_path</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">statement</span>.<span class="ident">path</span>);
-            <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">statement</span>.<span class="ident">tex</span>();
-            <span class="kw">let</span> <span class="ident">subtasks</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">extract_subtasks</span>(<span class="ident">statement_path</span>, <span class="ident">source</span>) {
-                <span class="prelude-val">None</span> =&gt; <span class="kw">continue</span>,
-                <span class="prelude-val">Some</span>(<span class="ident">subtasks</span>) =&gt; <span class="ident">subtasks</span>,
+            <span class="kw">let </span>statement = <span class="kw-2">&amp;</span>booklet.statements[<span class="number">0</span>];
+            <span class="kw">let </span>statement_path = task.path_of(<span class="kw-2">&amp;</span>statement.path);
+            <span class="kw">let </span>source = statement.tex();
+            <span class="kw">let </span>subtasks = <span class="kw">match </span>extract_subtasks(statement_path, source) {
+                <span class="prelude-val">None </span>=&gt; <span class="kw">continue</span>,
+                <span class="prelude-val">Some</span>(subtasks) =&gt; subtasks,
             };
-            <span class="kw">let</span> <span class="ident">one_based</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">subtasks</span>[<span class="number">0</span>].<span class="ident">id</span> <span class="op">==</span> <span class="number">1</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> };
-            <span class="kw">for</span> (<span class="ident">expected</span>, <span class="ident">actual</span>) <span class="kw">in</span> <span class="ident">expected_subtasks</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">subtasks</span>.<span class="ident">iter</span>()) {
-                <span class="kw">let</span> <span class="ident">expected_id</span> <span class="op">=</span> <span class="ident">expected</span>.<span class="ident">id</span> <span class="op">+</span> <span class="ident">one_based</span>;
-                <span class="kw">if</span> <span class="ident">expected_id</span> <span class="op">!</span><span class="op">=</span> <span class="ident">actual</span>.<span class="ident">id</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+            <span class="kw">let </span>one_based = <span class="kw">if </span>subtasks[<span class="number">0</span>].id == <span class="number">1 </span>{ <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>};
+            <span class="kw">for </span>(expected, actual) <span class="kw">in </span>expected_subtasks.iter().zip(subtasks.iter()) {
+                <span class="kw">let </span>expected_id = expected.id + one_based;
+                <span class="kw">if </span>expected_id != actual.id {
+                    <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
                         <span class="string">&quot;The subtasks in {} are not sequentially numbered&quot;</span>,
-                        <span class="ident">statement_path</span>.<span class="ident">display</span>()
+                        statement_path.display()
                     ))
-                    .<span class="ident">with_note</span>(<span class="macro">format!</span>(
+                    .with_note(<span class="macro">format!</span>(
                         <span class="string">&quot;Expecting subtask {}, found subtask {}&quot;</span>,
-                        <span class="ident">expected_id</span>, <span class="ident">actual</span>.<span class="ident">id</span>
+                        expected_id, actual.id
                     ));
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">span</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">actual</span>.<span class="ident">subtask_id_span</span> {
-                        <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>.<span class="ident">with_code_span</span>(<span class="ident">span</span>.<span class="ident">clone</span>());
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = <span class="kw-2">&amp;</span>actual.subtask_id_span {
+                        diagnostic = diagnostic.with_code_span(span.clone());
                     }
-                    <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                    eval.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                     <span class="kw">break</span>;
                 }
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">actual_score</span>) <span class="op">=</span> <span class="ident">actual</span>.<span class="ident">score</span> {
-                    <span class="kw">if</span> <span class="macro">approx::abs_diff_ne!</span>(<span class="ident">expected</span>.<span class="ident">score</span>.<span class="ident">unwrap</span>(), <span class="ident">actual_score</span>) {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(actual_score) = actual.score {
+                    <span class="kw">if </span><span class="macro">approx::abs_diff_ne!</span>(expected.score.unwrap(), actual_score) {
+                        <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
                             <span class="string">&quot;The score of subtask {} in {} doesn&#39;t match the task&#39;s one&quot;</span>,
-                            <span class="ident">actual</span>.<span class="ident">id</span>,
-                            <span class="ident">statement_path</span>.<span class="ident">display</span>()
+                            actual.id,
+                            statement_path.display()
                         ))
-                        .<span class="ident">with_note</span>(<span class="macro">format!</span>(
+                        .with_note(<span class="macro">format!</span>(
                             <span class="string">&quot;Expecting {}, found {}&quot;</span>,
-                            <span class="ident">expected</span>.<span class="ident">score</span>.<span class="ident">unwrap</span>(),
-                            <span class="ident">actual_score</span>
+                            expected.score.unwrap(),
+                            actual_score
                         ));
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">span</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">actual</span>.<span class="ident">subtask_score_span</span> {
-                            <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>.<span class="ident">with_code_span</span>(<span class="ident">span</span>.<span class="ident">clone</span>());
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = <span class="kw-2">&amp;</span>actual.subtask_score_span {
+                            diagnostic = diagnostic.with_code_span(span.clone());
                         }
-                        <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                        eval.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                         <span class="kw">break</span>;
                     }
                 }
             }
-            <span class="kw">if</span> <span class="ident">expected_subtasks</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">subtasks</span>.<span class="ident">len</span>() {
-                <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(
-                    <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+            <span class="kw">if </span>expected_subtasks.len() != subtasks.len() {
+                eval.add_diagnostic(
+                    Diagnostic::error(<span class="macro">format!</span>(
                         <span class="string">&quot;Wrong number of subtasks in {}&quot;</span>,
-                        <span class="ident">statement_path</span>.<span class="ident">display</span>()
+                        statement_path.display()
                     ))
-                    .<span class="ident">with_note</span>(<span class="macro">format!</span>(
+                    .with_note(<span class="macro">format!</span>(
                         <span class="string">&quot;Expecting {} subtasks, found {}&quot;</span>,
-                        <span class="ident">expected_subtasks</span>.<span class="ident">len</span>(),
-                        <span class="ident">subtasks</span>.<span class="ident">len</span>()
+                        expected_subtasks.len(),
+                        subtasks.len()
                     )),
                 )<span class="question-mark">?</span>;
             }
@@ -497,58 +497,58 @@
     }
 }
 
-<span class="doccomment">/// Check that the statement file is valid.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StatementValid</span>;
+<span class="doccomment">/// Check that the statement file is valid.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>StatementValid;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">IOITask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">StatementValid</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;StatementValid&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>StatementValid {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;StatementValid&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">post_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">find_statement_pdf</span>(<span class="ident">task</span>) {
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">Diagnostic::error</span>(
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">match </span>find_statement_pdf(task) {
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(
                     <span class="string">&quot;Missing statement file (statement/statement.pdf or testo/testo.pdf)&quot;</span>,
                 )
-                .<span class="ident">with_note</span>(<span class="string">&quot;Without that file cms will not be able to import the task&quot;</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">booklet</span>) <span class="op">=</span> <span class="ident">task</span>.<span class="ident">booklets</span>.<span class="ident">first</span>() {
-                    <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">booklet</span>.<span class="ident">dest</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>();
-                    <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="ident">name</span>);
-                    <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>
-                        .<span class="ident">with_help</span>(<span class="macro">format!</span>(<span class="string">&quot;Try: ln -s {} testo/testo.pdf&quot;</span>, <span class="ident">name</span>.<span class="ident">display</span>()));
+                .with_note(<span class="string">&quot;Without that file cms will not be able to import the task&quot;</span>);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(booklet) = task.booklets.first() {
+                    <span class="kw">let </span>name = booklet.dest.file_name().unwrap();
+                    <span class="kw">let </span>name = Path::new(name);
+                    diagnostic = diagnostic
+                        .with_help(<span class="macro">format!</span>(<span class="string">&quot;Try: ln -s {} testo/testo.pdf&quot;</span>, name.display()));
                 };
-                <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                eval.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
             }
-            <span class="prelude-val">Some</span>(<span class="ident">path</span>) =&gt; {
-                <span class="comment">// normal file or valid symlink</span>
-                <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">exists</span>() {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::File::open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to open statement file at {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>())
+            <span class="prelude-val">Some</span>(path) =&gt; {
+                <span class="comment">// normal file or valid symlink
+                </span><span class="kw">if </span>path.exists() {
+                    <span class="kw">let </span><span class="kw-2">mut </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>path).with_context(|| {
+                        <span class="macro">format!</span>(<span class="string">&quot;Failed to open statement file at {}&quot;</span>, path.display())
                     })<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">4</span>];
-                    <span class="kw">let</span> <span class="ident">invalid</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">file</span>.<span class="ident">read_exact</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>) {
+                    <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">4</span>];
+                    <span class="kw">let </span>invalid = <span class="kw">match </span>file.read_exact(<span class="kw-2">&amp;mut </span>buf) {
                         <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
                         <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; {
-                            <span class="comment">// check PDF magic number</span>
-                            <span class="kw-2">&amp;</span><span class="ident">buf</span> <span class="op">!</span><span class="op">=</span> <span class="string">b&quot;%PDF&quot;</span>
-                        }
+                            <span class="comment">// check PDF magic number
+                            </span><span class="kw-2">&amp;</span>buf != <span class="string">b&quot;%PDF&quot;
+                        </span>}
                     };
 
-                    <span class="kw">if</span> <span class="ident">invalid</span> {
-                        <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+                    <span class="kw">if </span>invalid {
+                        eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
                             <span class="string">&quot;Invalid PDF file at {}&quot;</span>,
-                            <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">display</span>()
+                            task.path_of(<span class="kw-2">&amp;</span>path).display()
                         )))<span class="question-mark">?</span>;
                     }
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 }
-                <span class="comment">// broken symlink</span>
-                <span class="kw">else</span> <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">read_link</span>().<span class="ident">is_ok</span>() {
-                    <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+                <span class="comment">// broken symlink
+                </span><span class="kw">else if </span>path.read_link().is_ok() {
+                    eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
                         <span class="string">&quot;Statement {} is a broken link&quot;</span>,
-                        <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">display</span>()
+                        task.path_of(<span class="kw-2">&amp;</span>path).display()
                     )))<span class="question-mark">?</span>;
                 }
             }
@@ -557,100 +557,100 @@
     }
 }
 
-<span class="doccomment">/// Check that the statement file comes out of the compilation of one of the booklets.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StatementCompiled</span>;
+<span class="doccomment">/// Check that the statement file comes out of the compilation of one of the booklets.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>StatementCompiled;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">IOITask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">StatementCompiled</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;StatementCompiled&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>StatementCompiled {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;StatementCompiled&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">post_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="comment">// If there are no booklets it may mean that the statement is compiled with an external tool</span>
-        <span class="comment">// or that the statement compilation is not done. Either way this sanity check should be</span>
-        <span class="comment">// ignored.</span>
-        <span class="kw">if</span> <span class="ident">task</span>.<span class="ident">booklets</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="comment">// If there are no booklets it may mean that the statement is compiled with an external tool
+        // or that the statement compilation is not done. Either way this sanity check should be
+        // ignored.
+        </span><span class="kw">if </span>task.booklets.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">find_statement_pdf</span>(<span class="ident">task</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">path</span>) =&gt; <span class="ident">path</span>,
-            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
+        <span class="kw">let </span>path = <span class="kw">match </span>find_statement_pdf(task) {
+            <span class="prelude-val">Some</span>(path) =&gt; path,
+            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
         };
-        <span class="comment">// The source of the actual statement pdf (symlinks resolved). If the symlink is broken,</span>
-        <span class="comment">// there&#39;s nothing we can do (another sanity check will warn this error).</span>
-        <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">path</span>.<span class="ident">canonicalize</span>() {
-            <span class="prelude-val">Ok</span>(<span class="ident">path</span>) =&gt; <span class="ident">path</span>,
-            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
+        <span class="comment">// The source of the actual statement pdf (symlinks resolved). If the symlink is broken,
+        // there&#39;s nothing we can do (another sanity check will warn this error).
+        </span><span class="kw">let </span>target = <span class="kw">match </span>path.canonicalize() {
+            <span class="prelude-val">Ok</span>(path) =&gt; path,
+            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
         };
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">booklet_dest</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> <span class="ident">booklet</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">booklets</span> {
-            <span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">booklet</span>.<span class="ident">dest</span>.<span class="ident">canonicalize</span>() {
-                <span class="prelude-val">Ok</span>(<span class="ident">dest</span>) =&gt; <span class="ident">dest</span>,
-                <span class="kw">_</span> =&gt; <span class="kw">continue</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>booklet_dest = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>booklet <span class="kw">in </span><span class="kw-2">&amp;</span>task.booklets {
+            <span class="kw">let </span>dest = <span class="kw">match </span>booklet.dest.canonicalize() {
+                <span class="prelude-val">Ok</span>(dest) =&gt; dest,
+                <span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
             };
-            <span class="comment">// this booklet corresponds to the official statement file, so we are good!</span>
-            <span class="kw">if</span> <span class="ident">dest</span> <span class="op">==</span> <span class="ident">target</span> {
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+            <span class="comment">// this booklet corresponds to the official statement file, so we are good!
+            </span><span class="kw">if </span>dest == target {
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
-            <span class="ident">booklet_dest</span>.<span class="ident">push</span>(<span class="ident">dest</span>);
+            booklet_dest.push(dest);
         }
 
-        <span class="comment">// We didn&#39;t find any compiled booklet referring to the official statement, this means that</span>
-        <span class="comment">// the statement that will be used isn&#39;t the one compiled by us.</span>
-        <span class="kw">let</span> <span class="ident">booklet_dest</span> <span class="op">=</span> <span class="ident">booklet_dest</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="ident">p</span>))
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">to_string_lossy</span>())
-            .<span class="ident">join</span>(<span class="string">&quot;, &quot;</span>);
-        <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(
-            <span class="ident">Diagnostic::warning</span>(<span class="macro">format!</span>(
+        <span class="comment">// We didn&#39;t find any compiled booklet referring to the official statement, this means that
+        // the statement that will be used isn&#39;t the one compiled by us.
+        </span><span class="kw">let </span>booklet_dest = booklet_dest
+            .iter()
+            .map(|p| task.path_of(p))
+            .map(|p| p.to_string_lossy())
+            .join(<span class="string">&quot;, &quot;</span>);
+        eval.add_diagnostic(
+            Diagnostic::warning(<span class="macro">format!</span>(
                 <span class="string">&quot;The official statement at {} is not the one compiled by task-maker&quot;</span>,
-                <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">display</span>()
+                task.path_of(<span class="kw-2">&amp;</span>path).display()
             ))
-            .<span class="ident">with_help</span>(<span class="macro">format!</span>(
+            .with_help(<span class="macro">format!</span>(
                 <span class="string">&quot;Maybe it should be a symlink to one of the compiled PDF ({})&quot;</span>,
-                <span class="ident">booklet_dest</span>
+                booklet_dest
             )),
         )<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="doccomment">/// Check that the statement file is known to git.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StatementGit</span>;
+<span class="doccomment">/// Check that the statement file is known to git.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>StatementGit;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">IOITask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">StatementGit</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;StatementGit&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>StatementGit {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;StatementGit&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">post_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">find_statement_pdf</span>(<span class="ident">task</span>) {
-            <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-            <span class="prelude-val">Some</span>(<span class="ident">path</span>) =&gt; <span class="ident">path</span>,
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>path = <span class="kw">match </span>find_statement_pdf(task) {
+            <span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
+            <span class="prelude-val">Some</span>(path) =&gt; path,
         };
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="kw">let</span> <span class="ident">raw_path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">as_os_str</span>().<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">command</span> <span class="op">=</span> <span class="ident">Command::new</span>(<span class="string">&quot;git&quot;</span>);
-        <span class="ident">command</span>.<span class="ident">arg</span>(<span class="string">&quot;ls-files&quot;</span>).<span class="ident">arg</span>(<span class="string">&quot;-z&quot;</span>).<span class="ident">current_dir</span>(<span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">path</span>);
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">command</span>.<span class="ident">output</span>() {
-            <span class="comment">// git not available</span>
-            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-            <span class="prelude-val">Ok</span>(<span class="ident">output</span>) =&gt; <span class="ident">output</span>,
+        <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>path);
+        <span class="kw">let </span>raw_path = path.as_os_str().as_bytes();
+        <span class="kw">let </span><span class="kw-2">mut </span>command = Command::new(<span class="string">&quot;git&quot;</span>);
+        command.arg(<span class="string">&quot;ls-files&quot;</span>).arg(<span class="string">&quot;-z&quot;</span>).current_dir(<span class="kw-2">&amp;</span>task.path);
+        <span class="kw">let </span>output = <span class="kw">match </span>command.output() {
+            <span class="comment">// git not available
+            </span><span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
+            <span class="prelude-val">Ok</span>(output) =&gt; output,
         };
-        <span class="comment">// not a git repo</span>
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">output</span>.<span class="ident">status</span>.<span class="ident">success</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="comment">// not a git repo
+        </span><span class="kw">if </span>!output.status.success() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="comment">// file not know to git</span>
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">output</span>.<span class="ident">stdout</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">output</span>.<span class="ident">stdout</span>.<span class="ident">split</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="ident">b</span> <span class="op">==</span> <span class="number">0</span>).<span class="ident">any</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span> <span class="op">==</span> <span class="ident">raw_path</span>) {
-            <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(
-                <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(<span class="string">&quot;File {} is not known to git&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))
-                    .<span class="ident">with_help</span>(<span class="macro">format!</span>(<span class="string">&quot;Try git add -f {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>())),
+        <span class="comment">// file not know to git
+        </span><span class="kw">if </span>!output.stdout.is_empty() &amp;&amp; !output.stdout.split(|<span class="kw-2">&amp;</span>b| b == <span class="number">0</span>).any(|p| p == raw_path) {
+            eval.add_diagnostic(
+                Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;File {} is not known to git&quot;</span>, path.display()))
+                    .with_help(<span class="macro">format!</span>(<span class="string">&quot;Try git add -f {}&quot;</span>, path.display())),
             )<span class="question-mark">?</span>;
         }
 
@@ -658,139 +658,139 @@
     }
 }
 
-<span class="doccomment">/// An extracted subtask from the statement file.</span>
-<span class="kw">struct</span> <span class="ident">ExtractedSubtask</span> {
-    <span class="doccomment">/// The id of the subtask.</span>
-    <span class="ident">id</span>: <span class="ident">SubtaskId</span>,
-    <span class="doccomment">/// The score of the subtask, if present.</span>
-    <span class="ident">score</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Span of where the subtask id comes from.</span>
-    <span class="ident">subtask_id_span</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CodeSpan</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Span of where the subtask score comes from.</span>
-    <span class="ident">subtask_score_span</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CodeSpan</span><span class="op">&gt;</span>,
+<span class="doccomment">/// An extracted subtask from the statement file.
+</span><span class="kw">struct </span>ExtractedSubtask {
+    <span class="doccomment">/// The id of the subtask.
+    </span>id: SubtaskId,
+    <span class="doccomment">/// The score of the subtask, if present.
+    </span>score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// Span of where the subtask id comes from.
+    </span>subtask_id_span: <span class="prelude-ty">Option</span>&lt;CodeSpan&gt;,
+    <span class="doccomment">/// Span of where the subtask score comes from.
+    </span>subtask_score_span: <span class="prelude-ty">Option</span>&lt;CodeSpan&gt;,
 }
 
-<span class="doccomment">/// Extract from the OII&#39;s usual format the subtasks. They are for example:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `\item \textbf{\makebox[2cm][l]{Subtask 2} [20 punti]}: $L\leq 10$.`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The regex is pretty powerful and tries to match as many variations as possible.</span>
-<span class="kw">fn</span> <span class="ident">check_subtasks_oii</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExtractedSubtask</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">FIND_SUBTASKS</span>: <span class="ident">Regex</span> <span class="op">=</span>
-            <span class="ident">Regex::new</span>(<span class="string">r&quot;.*\{(Subtask ([0-9]+))\} *\[((?:\\phantom\{[^\}]+\})?([0-9]+).*)\].*&quot;</span>)
-                .<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+<span class="doccomment">/// Extract from the OII&#39;s usual format the subtasks. They are for example:
+///
+/// `\item \textbf{\makebox[2cm][l]{Subtask 2} [20 punti]}: $L\leq 10$.`
+///
+/// The regex is pretty powerful and tries to match as many variations as possible.
+</span><span class="kw">fn </span>check_subtasks_oii(path: <span class="kw-2">&amp;</span>Path, text: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex =
+            Regex::new(<span class="string">r&quot;.*\{(Subtask ([0-9]+))\} *\[((?:\\phantom\{[^\}]+\})?([0-9]+).*)\].*&quot;</span>)
+                .expect(<span class="string">&quot;Invalid regex&quot;</span>);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">subtask</span> <span class="kw">in</span> <span class="ident">FIND_SUBTASKS</span>.<span class="ident">captures_iter</span>(<span class="ident">text</span>) {
-        <span class="kw">let</span> <span class="ident">id_span</span> <span class="op">=</span> <span class="ident">subtask</span>.<span class="ident">get</span>(<span class="number">1</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">span</span><span class="op">|</span> {
-            <span class="ident">CodeSpan::from_str</span>(<span class="ident">path</span>, <span class="ident">text</span>, <span class="ident">span</span>.<span class="ident">start</span>(), <span class="ident">span</span>.<span class="ident">end</span>() <span class="op">-</span> <span class="ident">span</span>.<span class="ident">start</span>()).<span class="ident">ok</span>()
+    <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
+    <span class="kw">for </span>subtask <span class="kw">in </span>FIND_SUBTASKS.captures_iter(text) {
+        <span class="kw">let </span>id_span = subtask.get(<span class="number">1</span>).and_then(|span| {
+            CodeSpan::from_str(path, text, span.start(), span.end() - span.start()).ok()
         });
-        <span class="kw">let</span> <span class="ident">score_span</span> <span class="op">=</span> <span class="ident">subtask</span>.<span class="ident">get</span>(<span class="number">3</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">span</span><span class="op">|</span> {
-            <span class="ident">CodeSpan::from_str</span>(<span class="ident">path</span>, <span class="ident">text</span>, <span class="ident">span</span>.<span class="ident">start</span>(), <span class="ident">span</span>.<span class="ident">end</span>() <span class="op">-</span> <span class="ident">span</span>.<span class="ident">start</span>()).<span class="ident">ok</span>()
+        <span class="kw">let </span>score_span = subtask.get(<span class="number">3</span>).and_then(|span| {
+            CodeSpan::from_str(path, text, span.start(), span.end() - span.start()).ok()
         });
-        <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">subtask</span>[<span class="number">2</span>].<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>();
-        <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">subtask</span>[<span class="number">4</span>].<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>();
-        <span class="kw">if</span> <span class="kw">let</span> (<span class="prelude-val">Ok</span>(<span class="ident">num</span>), <span class="prelude-val">Ok</span>(<span class="ident">score</span>)) <span class="op">=</span> (<span class="ident">num</span>, <span class="ident">score</span>) {
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">ExtractedSubtask</span> {
-                <span class="ident">id</span>: <span class="ident">num</span>,
-                <span class="ident">score</span>: <span class="prelude-val">Some</span>(<span class="ident">score</span>),
-                <span class="ident">subtask_id_span</span>: <span class="ident">id_span</span>,
-                <span class="ident">subtask_score_span</span>: <span class="ident">score_span</span>,
+        <span class="kw">let </span>num = subtask[<span class="number">2</span>].parse::&lt;SubtaskId&gt;();
+        <span class="kw">let </span>score = subtask[<span class="number">4</span>].parse::&lt;f64&gt;();
+        <span class="kw">if let </span>(<span class="prelude-val">Ok</span>(num), <span class="prelude-val">Ok</span>(score)) = (num, score) {
+            result.push(ExtractedSubtask {
+                id: num,
+                score: <span class="prelude-val">Some</span>(score),
+                subtask_id_span: id_span,
+                subtask_score_span: score_span,
             });
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     }
-    <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_empty</span>() {
-        <span class="prelude-val">None</span>
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">result</span>)
+    <span class="kw">if </span>result.is_empty() {
+        <span class="prelude-val">None
+    </span>} <span class="kw">else </span>{
+        <span class="prelude-val">Some</span>(result)
     }
 }
 
-<span class="doccomment">/// Extract from the OII&#39;s new format the subtasks. They are for example:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `\item \subtask $L\leq 10$.`</span>
-<span class="kw">fn</span> <span class="ident">check_subtasks_oii_new</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExtractedSubtask</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">FIND_SUBTASKS</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">r&quot;(.*\\subtask.*)&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+<span class="doccomment">/// Extract from the OII&#39;s new format the subtasks. They are for example:
+///
+/// `\item \subtask $L\leq 10$.`
+</span><span class="kw">fn </span>check_subtasks_oii_new(path: <span class="kw-2">&amp;</span>Path, text: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex = Regex::new(<span class="string">r&quot;(.*\\subtask.*)&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">captures</span>) <span class="kw">in</span> <span class="ident">FIND_SUBTASKS</span>.<span class="ident">captures_iter</span>(<span class="ident">text</span>).<span class="ident">enumerate</span>() {
-        <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">get</span>(<span class="number">1</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">span</span><span class="op">|</span> {
-            <span class="ident">CodeSpan::from_str</span>(<span class="ident">path</span>, <span class="ident">text</span>, <span class="ident">span</span>.<span class="ident">start</span>(), <span class="ident">span</span>.<span class="ident">end</span>() <span class="op">-</span> <span class="ident">span</span>.<span class="ident">start</span>()).<span class="ident">ok</span>()
+    <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
+    <span class="kw">for </span>(index, captures) <span class="kw">in </span>FIND_SUBTASKS.captures_iter(text).enumerate() {
+        <span class="kw">let </span>span = captures.get(<span class="number">1</span>).and_then(|span| {
+            CodeSpan::from_str(path, text, span.start(), span.end() - span.start()).ok()
         });
-        <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">ExtractedSubtask</span> {
-            <span class="ident">id</span>: <span class="ident">index</span> <span class="kw">as</span> <span class="ident">SubtaskId</span>,
-            <span class="ident">score</span>: <span class="prelude-val">None</span>,
-            <span class="ident">subtask_id_span</span>: <span class="ident">span</span>,
-            <span class="ident">subtask_score_span</span>: <span class="prelude-val">None</span>,
+        result.push(ExtractedSubtask {
+            id: index <span class="kw">as </span>SubtaskId,
+            score: <span class="prelude-val">None</span>,
+            subtask_id_span: span,
+            subtask_score_span: <span class="prelude-val">None</span>,
         });
     }
-    <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_empty</span>() {
-        <span class="prelude-val">None</span>
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">result</span>)
+    <span class="kw">if </span>result.is_empty() {
+        <span class="prelude-val">None
+    </span>} <span class="kw">else </span>{
+        <span class="prelude-val">Some</span>(result)
     }
 }
 
-<span class="doccomment">/// Extract from the OIS&#39;s usual format the subtasks. They are for example:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `\OISubtask{10}{1}{$N \le 10$.}`</span>
-<span class="kw">fn</span> <span class="ident">check_subtasks_ois</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExtractedSubtask</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">FIND_SUBTASKS</span>: <span class="ident">Regex</span> <span class="op">=</span>
-            <span class="ident">Regex::new</span>(<span class="string">r&quot;.*\\OISubtask\{(\d+)\}\{\d+\}\{.+\}.*&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+<span class="doccomment">/// Extract from the OIS&#39;s usual format the subtasks. They are for example:
+///
+/// `\OISubtask{10}{1}{$N \le 10$.}`
+</span><span class="kw">fn </span>check_subtasks_ois(path: <span class="kw-2">&amp;</span>Path, text: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex =
+            Regex::new(<span class="string">r&quot;.*\\OISubtask\{(\d+)\}\{\d+\}\{.+\}.*&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">subtask</span>) <span class="kw">in</span> <span class="ident">FIND_SUBTASKS</span>.<span class="ident">captures_iter</span>(<span class="ident">text</span>).<span class="ident">enumerate</span>() {
-        <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">subtask</span>.<span class="ident">get</span>(<span class="number">1</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">span</span><span class="op">|</span> {
-            <span class="ident">CodeSpan::from_str</span>(<span class="ident">path</span>, <span class="ident">text</span>, <span class="ident">span</span>.<span class="ident">start</span>(), <span class="ident">span</span>.<span class="ident">end</span>() <span class="op">-</span> <span class="ident">span</span>.<span class="ident">start</span>()).<span class="ident">ok</span>()
+    <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
+    <span class="kw">for </span>(index, subtask) <span class="kw">in </span>FIND_SUBTASKS.captures_iter(text).enumerate() {
+        <span class="kw">let </span>span = subtask.get(<span class="number">1</span>).and_then(|span| {
+            CodeSpan::from_str(path, text, span.start(), span.end() - span.start()).ok()
         });
-        <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">subtask</span>[<span class="number">1</span>].<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>();
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">score</span>) <span class="op">=</span> <span class="ident">score</span> {
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">ExtractedSubtask</span> {
-                <span class="ident">id</span>: <span class="ident">index</span> <span class="kw">as</span> <span class="ident">SubtaskId</span>,
-                <span class="ident">score</span>: <span class="prelude-val">Some</span>(<span class="ident">score</span>),
-                <span class="ident">subtask_id_span</span>: <span class="prelude-val">None</span>,
-                <span class="ident">subtask_score_span</span>: <span class="ident">span</span>,
+        <span class="kw">let </span>score = subtask[<span class="number">1</span>].parse::&lt;f64&gt;();
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(score) = score {
+            result.push(ExtractedSubtask {
+                id: index <span class="kw">as </span>SubtaskId,
+                score: <span class="prelude-val">Some</span>(score),
+                subtask_id_span: <span class="prelude-val">None</span>,
+                subtask_score_span: span,
             });
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     }
-    <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_empty</span>() {
-        <span class="prelude-val">None</span>
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">result</span>)
+    <span class="kw">if </span>result.is_empty() {
+        <span class="prelude-val">None
+    </span>} <span class="kw">else </span>{
+        <span class="prelude-val">Some</span>(result)
     }
 }
 
-<span class="doccomment">/// Try to extract from the tex file the list of statements. If the list is empty, `None` is</span>
-<span class="doccomment">/// returned.</span>
-<span class="kw">fn</span> <span class="ident">extract_subtasks</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">tex</span>: <span class="ident">String</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExtractedSubtask</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">subtasks</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">subtasks</span>) <span class="op">=</span> <span class="ident">check_subtasks_oii</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">tex</span>) {
-        <span class="ident">subtasks</span>
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">subtasks</span>) <span class="op">=</span> <span class="ident">check_subtasks_oii_new</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">tex</span>) {
-        <span class="ident">subtasks</span>
-    } <span class="kw">else</span> {
-        <span class="ident">check_subtasks_ois</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">tex</span>)<span class="question-mark">?</span>
-    };
-    <span class="prelude-val">Some</span>(<span class="ident">subtasks</span>)
+<span class="doccomment">/// Try to extract from the tex file the list of statements. If the list is empty, `None` is
+/// returned.
+</span><span class="kw">fn </span>extract_subtasks(path: <span class="kw-2">&amp;</span>Path, tex: String) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
+    <span class="kw">let </span>subtasks = <span class="kw">if let </span><span class="prelude-val">Some</span>(subtasks) = check_subtasks_oii(path, <span class="kw-2">&amp;</span>tex) {
+        subtasks
+    } <span class="kw">else if let </span><span class="prelude-val">Some</span>(subtasks) = check_subtasks_oii_new(path, <span class="kw-2">&amp;</span>tex) {
+        subtasks
+    } <span class="kw">else </span>{
+        check_subtasks_ois(path, <span class="kw-2">&amp;</span>tex)<span class="question-mark">?
+    </span>};
+    <span class="prelude-val">Some</span>(subtasks)
 }
 
-<span class="doccomment">/// Search for the statement file, returning its path or None if it doesn&#39;t exists.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Will return the path even in case of broken links.</span>
-<span class="kw">fn</span> <span class="ident">find_statement_pdf</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
-    <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;statement/statement.pdf&quot;</span>, <span class="string">&quot;testo/testo.pdf&quot;</span>] {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path</span>.<span class="ident">join</span>(<span class="ident">path</span>);
-        <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">exists</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">path</span>.<span class="ident">read_link</span>().<span class="ident">is_ok</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>);
+<span class="doccomment">/// Search for the statement file, returning its path or None if it doesn&#39;t exists.
+///
+/// Will return the path even in case of broken links.
+</span><span class="kw">fn </span>find_statement_pdf(task: <span class="kw-2">&amp;</span>IOITask) -&gt; <span class="prelude-ty">Option</span>&lt;PathBuf&gt; {
+    <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">&quot;statement/statement.pdf&quot;</span>, <span class="string">&quot;testo/testo.pdf&quot;</span>] {
+        <span class="kw">let </span>path = task.path.join(path);
+        <span class="kw">if </span>path.exists() || path.read_link().is_ok() {
+            <span class="kw">return </span><span class="prelude-val">Some</span>(path);
         }
     }
-    <span class="prelude-val">None</span>
-}
+    <span class="prelude-val">None
+</span>}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

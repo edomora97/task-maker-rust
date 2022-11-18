@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/executors/remote_executor.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>remote_executor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_exec/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/executors/remote_executor.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>remote_executor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_exec/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -210,217 +210,217 @@
 <span id="210">210</span>
 <span id="211">211</span>
 <span id="212">212</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::net::SocketAddr</span>;
-<span class="kw">use</span> <span class="ident">std::sync::mpsc</span>::{<span class="ident">channel</span>, <span class="ident">Sender</span>};
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::net::SocketAddr;
+<span class="kw">use </span>std::sync::mpsc::{channel, Sender};
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">ductile</span>::{<span class="ident">ChannelSender</span>, <span class="ident">ChannelServer</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">uuid::Uuid</span>;
+<span class="kw">use </span>ductile::{ChannelSender, ChannelServer};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>uuid::Uuid;
 
-<span class="kw">use</span> <span class="ident">task_maker_cache::Cache</span>;
-<span class="kw">use</span> <span class="ident">task_maker_store::FileStore</span>;
+<span class="kw">use </span>task_maker_cache::Cache;
+<span class="kw">use </span>task_maker_store::FileStore;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::executor</span>::{<span class="ident">Executor</span>, <span class="ident">ExecutorInMessage</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::scheduler::ClientInfo</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">derive_key_from_password</span>, <span class="ident">WorkerConn</span>};
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use </span><span class="kw">crate</span>::executor::{Executor, ExecutorInMessage};
+<span class="kw">use </span><span class="kw">crate</span>::scheduler::ClientInfo;
+<span class="kw">use crate</span>::{derive_key_from_password, WorkerConn};
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
 
-<span class="doccomment">/// Version of task-maker</span>
-<span class="kw">const</span> <span class="ident">VERSION</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
+<span class="doccomment">/// Version of task-maker
+</span><span class="kw">const </span>VERSION: <span class="kw-2">&amp;</span>str = <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
 
-<span class="doccomment">/// An executor that accepts remote connections from clients and workers.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RemoteExecutor</span> {
-    <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
+<span class="doccomment">/// An executor that accepts remote connections from clients and workers.
+</span><span class="kw">pub struct </span>RemoteExecutor {
+    file_store: Arc&lt;FileStore&gt;,
 }
 
-<span class="doccomment">/// Message sent only by remote clients and workers for connecting to the server.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">RemoteEntityMessage</span> {
-    <span class="doccomment">/// Tell the remote executor the name of the client or of the worker.</span>
-    <span class="ident">Welcome</span> {
-        <span class="doccomment">/// The name of the client or of the worker.</span>
-        <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// The required version of task-maker.</span>
-        <span class="ident">version</span>: <span class="ident">String</span>,
+<span class="doccomment">/// Message sent only by remote clients and workers for connecting to the server.
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize)]
+</span><span class="kw">pub enum </span>RemoteEntityMessage {
+    <span class="doccomment">/// Tell the remote executor the name of the client or of the worker.
+    </span>Welcome {
+        <span class="doccomment">/// The name of the client or of the worker.
+        </span>name: String,
+        <span class="doccomment">/// The required version of task-maker.
+        </span>version: String,
     },
 }
 
-<span class="doccomment">/// Message sent only by the server in response of a `RemoteEntityMessage`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">RemoteEntityMessageResponse</span> {
-    <span class="doccomment">/// The server accepted the connection of the client, the communication can continue.</span>
-    <span class="ident">Accepted</span>,
-    <span class="doccomment">/// The server rejected the connection of the client, the channel will be closed.</span>
-    <span class="ident">Rejected</span>(<span class="ident">String</span>),
+<span class="doccomment">/// Message sent only by the server in response of a `RemoteEntityMessage`.
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize)]
+</span><span class="kw">pub enum </span>RemoteEntityMessageResponse {
+    <span class="doccomment">/// The server accepted the connection of the client, the communication can continue.
+    </span>Accepted,
+    <span class="doccomment">/// The server rejected the connection of the client, the channel will be closed.
+    </span>Rejected(String),
 }
 
-<span class="kw">impl</span> <span class="ident">RemoteExecutor</span> {
-    <span class="doccomment">/// Make a new `RemoteExecutor`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">RemoteExecutor</span> { <span class="ident">file_store</span> }
+<span class="kw">impl </span>RemoteExecutor {
+    <span class="doccomment">/// Make a new `RemoteExecutor`.
+    </span><span class="kw">pub fn </span>new(file_store: Arc&lt;FileStore&gt;) -&gt; <span class="self">Self </span>{
+        RemoteExecutor { file_store }
     }
 
-    <span class="doccomment">/// Start the executor binding the TCP sockets and waiting for clients and workers connections.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">S2</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Start the executor binding the TCP sockets and waiting for clients and workers connections.
+    </span><span class="kw">pub fn </span>start&lt;S: Into&lt;String&gt;, S2: Into&lt;String&gt;&gt;(
         <span class="self">self</span>,
-        <span class="ident">bind_client_addr</span>: <span class="ident">S</span>,
-        <span class="ident">bind_worker_addr</span>: <span class="ident">S2</span>,
-        <span class="ident">client_password</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="ident">worker_password</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="ident">cache</span>: <span class="ident">Cache</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">file_store</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">file_store</span>;
-        <span class="kw">let</span> <span class="ident">bind_client_addr</span> <span class="op">=</span> <span class="ident">bind_client_addr</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">bind_worker_addr</span> <span class="op">=</span> <span class="ident">bind_worker_addr</span>.<span class="ident">into</span>();
+        bind_client_addr: S,
+        bind_worker_addr: S2,
+        client_password: <span class="prelude-ty">Option</span>&lt;String&gt;,
+        worker_password: <span class="prelude-ty">Option</span>&lt;String&gt;,
+        cache: Cache,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>file_store = <span class="self">self</span>.file_store;
+        <span class="kw">let </span>bind_client_addr = bind_client_addr.into();
+        <span class="kw">let </span>bind_worker_addr = bind_worker_addr.into();
 
-        <span class="kw">let</span> (<span class="ident">executor_tx</span>, <span class="ident">executor_rx</span>) <span class="op">=</span> <span class="ident">channel</span>();
-        <span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">Executor::new</span>(<span class="ident">file_store</span>, <span class="ident">cache</span>, <span class="ident">executor_rx</span>, <span class="bool-val">true</span>);
+        <span class="kw">let </span>(executor_tx, executor_rx) = channel();
+        <span class="kw">let </span>executor = Executor::new(file_store, cache, executor_rx, <span class="bool-val">true</span>);
 
-        <span class="kw">let</span> <span class="ident">client_executor_tx</span> <span class="op">=</span> <span class="ident">executor_tx</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">client_listener_thread</span> <span class="op">=</span> <span class="ident">std::thread::Builder::new</span>()
-            .<span class="ident">name</span>(<span class="string">&quot;Client listener&quot;</span>.<span class="ident">to_string</span>())
-            .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                <span class="ident"><span class="self">Self</span>::client_listener</span>(<span class="ident">client_password</span>, <span class="ident">bind_client_addr</span>, <span class="ident">client_executor_tx</span>)
+        <span class="kw">let </span>client_executor_tx = executor_tx.clone();
+        <span class="kw">let </span>client_listener_thread = std::thread::Builder::new()
+            .name(<span class="string">&quot;Client listener&quot;</span>.to_string())
+            .spawn(<span class="kw">move </span>|| {
+                <span class="self">Self</span>::client_listener(client_password, bind_client_addr, client_executor_tx)
             })
-            .<span class="ident">context</span>(<span class="string">&quot;Cannot spawn client listener thread&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">worker_listener_thread</span> <span class="op">=</span> <span class="ident">std::thread::Builder::new</span>()
-            .<span class="ident">name</span>(<span class="string">&quot;Worker listener&quot;</span>.<span class="ident">to_string</span>())
-            .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> <span class="ident"><span class="self">Self</span>::worker_listener</span>(<span class="ident">worker_password</span>, <span class="ident">bind_worker_addr</span>, <span class="ident">executor_tx</span>))
-            .<span class="ident">context</span>(<span class="string">&quot;Cannot spawn worker listener thread&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">&quot;Cannot spawn client listener thread&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>worker_listener_thread = std::thread::Builder::new()
+            .name(<span class="string">&quot;Worker listener&quot;</span>.to_string())
+            .spawn(<span class="kw">move </span>|| <span class="self">Self</span>::worker_listener(worker_password, bind_worker_addr, executor_tx))
+            .context(<span class="string">&quot;Cannot spawn worker listener thread&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="ident">executor</span>.<span class="ident">run</span>()<span class="question-mark">?</span>;
+        executor.run()<span class="question-mark">?</span>;
 
-        <span class="ident">client_listener_thread</span>
-            .<span class="ident">join</span>()
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Client listener panicked: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>
-            .<span class="ident">context</span>(<span class="string">&quot;Client listener failed&quot;</span>)<span class="question-mark">?</span>;
-        <span class="ident">worker_listener_thread</span>
-            .<span class="ident">join</span>()
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Worker listener panicked: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>
-            .<span class="ident">context</span>(<span class="string">&quot;Worker listener failed&quot;</span>)<span class="question-mark">?</span>;
+        client_listener_thread
+            .join()
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Client listener panicked: {:?}&quot;</span>, e))<span class="question-mark">?
+            </span>.context(<span class="string">&quot;Client listener failed&quot;</span>)<span class="question-mark">?</span>;
+        worker_listener_thread
+            .join()
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Worker listener panicked: {:?}&quot;</span>, e))<span class="question-mark">?
+            </span>.context(<span class="string">&quot;Worker listener failed&quot;</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">client_listener</span>(
-        <span class="ident">client_password</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="ident">bind_client_addr</span>: <span class="ident">String</span>,
-        <span class="ident">client_executor_tx</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">ExecutorInMessage</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">server</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">client_password</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">password</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">derive_key_from_password</span>(<span class="ident">password</span>);
-                <span class="ident">ChannelServer::bind_with_enc</span>(<span class="kw-2">&amp;</span><span class="ident">bind_client_addr</span>, <span class="ident">key</span>)
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?</span>
-            }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="ident">ChannelServer::bind</span>(<span class="kw-2">&amp;</span><span class="ident">bind_client_addr</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?</span>
-            }
+    <span class="kw">fn </span>client_listener(
+        client_password: <span class="prelude-ty">Option</span>&lt;String&gt;,
+        bind_client_addr: String,
+        client_executor_tx: Sender&lt;ExecutorInMessage&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>server = <span class="kw">match </span>client_password {
+            <span class="prelude-val">Some</span>(password) =&gt; {
+                <span class="kw">let </span>key = derive_key_from_password(password);
+                ChannelServer::bind_with_enc(<span class="kw-2">&amp;</span>bind_client_addr, key)
+                    .context(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?
+            </span>}
+            <span class="prelude-val">None </span>=&gt; {
+                ChannelServer::bind(<span class="kw-2">&amp;</span>bind_client_addr).context(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?
+            </span>}
         };
         <span class="macro">info!</span>(
             <span class="string">&quot;Accepting client connections at tcp://{}&quot;</span>,
-            <span class="ident">server</span>
-                .<span class="ident">local_addr</span>()
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to get client address&quot;</span>)<span class="question-mark">?</span>
-        );
-        <span class="kw">for</span> (<span class="ident">sender</span>, <span class="ident">receiver</span>, <span class="ident">addr</span>) <span class="kw">in</span> <span class="ident">server</span> {
-            <span class="macro">info!</span>(<span class="string">&quot;Client connected from {}&quot;</span>, <span class="ident">addr</span>);
-            <span class="kw">let</span> <span class="ident">uuid</span> <span class="op">=</span> <span class="ident">Uuid::new_v4</span>();
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">RemoteEntityMessage::Welcome</span> { <span class="ident">name</span>, <span class="ident">version</span> }) <span class="op">=</span> <span class="ident">receiver</span>.<span class="ident">recv</span>() {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">validate_welcome</span>(<span class="ident">addr</span>, <span class="kw-2">&amp;</span><span class="ident">name</span>, <span class="ident">version</span>, <span class="kw-2">&amp;</span><span class="ident">sender</span>, <span class="string">&quot;Client&quot;</span>) {
+            server
+                .local_addr()
+                .context(<span class="string">&quot;Failed to get client address&quot;</span>)<span class="question-mark">?
+        </span>);
+        <span class="kw">for </span>(sender, receiver, addr) <span class="kw">in </span>server {
+            <span class="macro">info!</span>(<span class="string">&quot;Client connected from {}&quot;</span>, addr);
+            <span class="kw">let </span>uuid = Uuid::new_v4();
+            <span class="kw">let </span>name = <span class="kw">if let </span><span class="prelude-val">Ok</span>(RemoteEntityMessage::Welcome { name, version }) = receiver.recv() {
+                <span class="kw">if </span>!validate_welcome(addr, <span class="kw-2">&amp;</span>name, version, <span class="kw-2">&amp;</span>sender, <span class="string">&quot;Client&quot;</span>) {
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">name</span>
-            } <span class="kw">else</span> {
+                name
+            } <span class="kw">else </span>{
                 <span class="macro">warn!</span>(
                     <span class="string">&quot;Client at {} has not sent the correct welcome message!&quot;</span>,
-                    <span class="ident">addr</span>
+                    addr
                 );
                 <span class="kw">continue</span>;
             };
-            <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">ClientInfo</span> { <span class="ident">uuid</span>, <span class="ident">name</span> };
-            <span class="ident">client_executor_tx</span>
-                .<span class="ident">send</span>(<span class="ident">ExecutorInMessage::ClientConnected</span> {
-                    <span class="ident">client</span>,
-                    <span class="ident">sender</span>: <span class="ident">sender</span>.<span class="ident">change_type</span>(),
-                    <span class="ident">receiver</span>: <span class="ident">receiver</span>.<span class="ident">change_type</span>(),
+            <span class="kw">let </span>client = ClientInfo { uuid, name };
+            client_executor_tx
+                .send(ExecutorInMessage::ClientConnected {
+                    client,
+                    sender: sender.change_type(),
+                    receiver: receiver.change_type(),
                 })
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Executor is gone: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Executor is gone: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">worker_listener</span>(
-        <span class="ident">worker_password</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="ident">bind_worker_addr</span>: <span class="ident">String</span>,
-        <span class="ident">executor_tx</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">ExecutorInMessage</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">server</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">worker_password</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">password</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">derive_key_from_password</span>(<span class="ident">password</span>);
-                <span class="ident">ChannelServer::bind_with_enc</span>(<span class="kw-2">&amp;</span><span class="ident">bind_worker_addr</span>, <span class="ident">key</span>)
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?</span>
-            }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="ident">ChannelServer::bind</span>(<span class="kw-2">&amp;</span><span class="ident">bind_worker_addr</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?</span>
-            }
+    <span class="kw">fn </span>worker_listener(
+        worker_password: <span class="prelude-ty">Option</span>&lt;String&gt;,
+        bind_worker_addr: String,
+        executor_tx: Sender&lt;ExecutorInMessage&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>server = <span class="kw">match </span>worker_password {
+            <span class="prelude-val">Some</span>(password) =&gt; {
+                <span class="kw">let </span>key = derive_key_from_password(password);
+                ChannelServer::bind_with_enc(<span class="kw-2">&amp;</span>bind_worker_addr, key)
+                    .context(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?
+            </span>}
+            <span class="prelude-val">None </span>=&gt; {
+                ChannelServer::bind(<span class="kw-2">&amp;</span>bind_worker_addr).context(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?
+            </span>}
         };
         <span class="macro">info!</span>(
             <span class="string">&quot;Accepting worker connections at tcp://{}&quot;</span>,
-            <span class="ident">server</span>
-                .<span class="ident">local_addr</span>()
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to get worker remote address&quot;</span>)<span class="question-mark">?</span>
-        );
-        <span class="kw">for</span> (<span class="ident">sender</span>, <span class="ident">receiver</span>, <span class="ident">addr</span>) <span class="kw">in</span> <span class="ident">server</span> {
-            <span class="macro">info!</span>(<span class="string">&quot;Worker connected from {}&quot;</span>, <span class="ident">addr</span>);
-            <span class="kw">let</span> <span class="ident">uuid</span> <span class="op">=</span> <span class="ident">Uuid::new_v4</span>();
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">RemoteEntityMessage::Welcome</span> { <span class="ident">name</span>, <span class="ident">version</span> }) <span class="op">=</span> <span class="ident">receiver</span>.<span class="ident">recv</span>() {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">validate_welcome</span>(<span class="ident">addr</span>, <span class="kw-2">&amp;</span><span class="ident">name</span>, <span class="ident">version</span>, <span class="kw-2">&amp;</span><span class="ident">sender</span>, <span class="string">&quot;Worker&quot;</span>) {
+            server
+                .local_addr()
+                .context(<span class="string">&quot;Failed to get worker remote address&quot;</span>)<span class="question-mark">?
+        </span>);
+        <span class="kw">for </span>(sender, receiver, addr) <span class="kw">in </span>server {
+            <span class="macro">info!</span>(<span class="string">&quot;Worker connected from {}&quot;</span>, addr);
+            <span class="kw">let </span>uuid = Uuid::new_v4();
+            <span class="kw">let </span>name = <span class="kw">if let </span><span class="prelude-val">Ok</span>(RemoteEntityMessage::Welcome { name, version }) = receiver.recv() {
+                <span class="kw">if </span>!validate_welcome(addr, <span class="kw-2">&amp;</span>name, version, <span class="kw-2">&amp;</span>sender, <span class="string">&quot;Worker&quot;</span>) {
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">name</span>
-            } <span class="kw">else</span> {
+                name
+            } <span class="kw">else </span>{
                 <span class="macro">warn!</span>(
                     <span class="string">&quot;Worker at {} has not sent the correct welcome message!&quot;</span>,
-                    <span class="ident">addr</span>
+                    addr
                 );
                 <span class="kw">continue</span>;
             };
-            <span class="kw">let</span> <span class="ident">worker</span> <span class="op">=</span> <span class="ident">WorkerConn</span> {
-                <span class="ident">uuid</span>,
-                <span class="ident">name</span>,
-                <span class="ident">sender</span>: <span class="ident">sender</span>.<span class="ident">change_type</span>(),
-                <span class="ident">receiver</span>: <span class="ident">receiver</span>.<span class="ident">change_type</span>(),
+            <span class="kw">let </span>worker = WorkerConn {
+                uuid,
+                name,
+                sender: sender.change_type(),
+                receiver: receiver.change_type(),
             };
-            <span class="ident">executor_tx</span>
-                .<span class="ident">send</span>(<span class="ident">ExecutorInMessage::WorkerConnected</span> { <span class="ident">worker</span> })
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Executor is gone: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+            executor_tx
+                .send(ExecutorInMessage::WorkerConnected { worker })
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Executor is gone: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="kw">fn</span> <span class="ident">validate_welcome</span>(
-    <span class="ident">addr</span>: <span class="ident">SocketAddr</span>,
-    <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">version</span>: <span class="ident">String</span>,
-    <span class="ident">sender</span>: <span class="kw-2">&amp;</span><span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">RemoteEntityMessageResponse</span><span class="op">&gt;</span>,
-    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-) -&gt; <span class="ident">bool</span> {
-    <span class="kw">if</span> <span class="ident">version</span> <span class="op">!</span><span class="op">=</span> <span class="ident">VERSION</span> {
+<span class="kw">fn </span>validate_welcome(
+    addr: SocketAddr,
+    name: <span class="kw-2">&amp;</span>str,
+    version: String,
+    sender: <span class="kw-2">&amp;</span>ChannelSender&lt;RemoteEntityMessageResponse&gt;,
+    client: <span class="kw-2">&amp;</span>str,
+) -&gt; bool {
+    <span class="kw">if </span>version != VERSION {
         <span class="macro">warn!</span>(
             <span class="string">&quot;{} &#39;{}&#39; from {} connected with version {}, server has {}&quot;</span>,
-            <span class="ident">client</span>, <span class="ident">name</span>, <span class="ident">addr</span>, <span class="ident">version</span>, <span class="ident">VERSION</span>
+            client, name, addr, version, VERSION
         );
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">RemoteEntityMessageResponse::Rejected</span>(<span class="macro">format!</span>(
+        <span class="kw">let _ </span>= sender.send(RemoteEntityMessageResponse::Rejected(<span class="macro">format!</span>(
             <span class="string">&quot;Wrong task-maker version, you have {}, server has {}&quot;</span>,
-            <span class="ident">version</span>, <span class="ident">VERSION</span>
+            version, VERSION
         )));
-        <span class="bool-val">false</span>
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">RemoteEntityMessageResponse::Accepted</span>);
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">false
+    </span>} <span class="kw">else </span>{
+        <span class="kw">let _ </span>= sender.send(RemoteEntityMessageResponse::Accepted);
+        <span class="bool-val">true
+    </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

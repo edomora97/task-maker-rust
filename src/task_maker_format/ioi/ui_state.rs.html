@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/ui_state.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ui_state.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/ui_state.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ui_state.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -717,724 +717,724 @@
 <span id="717">717</span>
 <span id="718">718</span>
 <span id="719">719</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::time::SystemTime</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::time::SystemTime;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::DiagnosticContext</span>;
-<span class="kw">use</span> <span class="ident">task_maker_exec::ExecutorStatus</span>;
+<span class="kw">use </span>task_maker_dag::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_diagnostics::DiagnosticContext;
+<span class="kw">use </span>task_maker_exec::ExecutorStatus;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::solution</span>::{<span class="ident">SolutionCheck</span>, <span class="ident">SolutionCheckResult</span>, <span class="ident">SolutionInfo</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui</span>::{<span class="ident">CompilationStatus</span>, <span class="ident">UIExecutionStatus</span>, <span class="ident">UIMessage</span>, <span class="ident">UIStateT</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ioi</span>::<span class="kw-2">*</span>, <span class="ident">ScoreStatus</span>};
+<span class="kw">use </span><span class="kw">crate</span>::solution::{SolutionCheck, SolutionCheckResult, SolutionInfo};
+<span class="kw">use </span><span class="kw">crate</span>::ui::{CompilationStatus, UIExecutionStatus, UIMessage, UIStateT};
+<span class="kw">use crate</span>::{ioi::<span class="kw-2">*</span>, ScoreStatus};
 
-<span class="doccomment">/// Status of the generation of a testcase input and output.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TestcaseGenerationStatus</span> {
-    <span class="doccomment">/// The generation has not started yet.</span>
-    <span class="ident">Pending</span>,
-    <span class="doccomment">/// The input file is generating.</span>
-    <span class="ident">Generating</span>,
-    <span class="doccomment">/// The input file has been generated.</span>
-    <span class="ident">Generated</span>,
-    <span class="doccomment">/// The input file is being validated.</span>
-    <span class="ident">Validating</span>,
-    <span class="doccomment">/// The input file has been validated.</span>
-    <span class="ident">Validated</span>,
-    <span class="doccomment">/// The output file is generating.</span>
-    <span class="ident">Solving</span>,
-    <span class="doccomment">/// The output file has been generated.</span>
-    <span class="ident">Solved</span>,
-    <span class="doccomment">/// The generation of the testcase has failed.</span>
-    <span class="ident">Failed</span>,
-    <span class="doccomment">/// The generation has been skipped.</span>
-    <span class="ident">Skipped</span>,
+<span class="doccomment">/// Status of the generation of a testcase input and output.
+</span><span class="attribute">#[derive(Debug, Clone, Eq, PartialEq)]
+</span><span class="kw">pub enum </span>TestcaseGenerationStatus {
+    <span class="doccomment">/// The generation has not started yet.
+    </span>Pending,
+    <span class="doccomment">/// The input file is generating.
+    </span>Generating,
+    <span class="doccomment">/// The input file has been generated.
+    </span>Generated,
+    <span class="doccomment">/// The input file is being validated.
+    </span>Validating,
+    <span class="doccomment">/// The input file has been validated.
+    </span>Validated,
+    <span class="doccomment">/// The output file is generating.
+    </span>Solving,
+    <span class="doccomment">/// The output file has been generated.
+    </span>Solved,
+    <span class="doccomment">/// The generation of the testcase has failed.
+    </span>Failed,
+    <span class="doccomment">/// The generation has been skipped.
+    </span>Skipped,
 }
 
-<span class="doccomment">/// Status of the evaluation of a solution on a testcase.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TestcaseEvaluationStatus</span> {
-    <span class="doccomment">/// The solution has not started yet.</span>
-    <span class="ident">Pending</span>,
-    <span class="doccomment">/// The solution is running.</span>
-    <span class="ident">Solving</span>,
-    <span class="doccomment">/// The solution exited successfully, waiting for the checker.</span>
-    <span class="ident">Solved</span>,
-    <span class="doccomment">/// Checker is running.</span>
-    <span class="ident">Checking</span>,
-    <span class="doccomment">/// The solution scored 100% of the testcase.</span>
-    <span class="ident">Accepted</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// The output is wrong.</span>
-    <span class="ident">WrongAnswer</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// The solution is partially correct.</span>
-    <span class="ident">Partial</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// The solution timed out.</span>
-    <span class="ident">TimeLimitExceeded</span>,
-    <span class="doccomment">/// The solution exceeded the wall time limit.</span>
-    <span class="ident">WallTimeLimitExceeded</span>,
-    <span class="doccomment">/// The solution exceeded the memory limit.</span>
-    <span class="ident">MemoryLimitExceeded</span>,
-    <span class="doccomment">/// The solution crashed.</span>
-    <span class="ident">RuntimeError</span>,
-    <span class="doccomment">/// Something went wrong.</span>
-    <span class="ident">Failed</span>,
-    <span class="doccomment">/// The evaluation has been skipped.</span>
-    <span class="ident">Skipped</span>,
+<span class="doccomment">/// Status of the evaluation of a solution on a testcase.
+</span><span class="attribute">#[derive(Debug, Clone, Eq, PartialEq)]
+</span><span class="kw">pub enum </span>TestcaseEvaluationStatus {
+    <span class="doccomment">/// The solution has not started yet.
+    </span>Pending,
+    <span class="doccomment">/// The solution is running.
+    </span>Solving,
+    <span class="doccomment">/// The solution exited successfully, waiting for the checker.
+    </span>Solved,
+    <span class="doccomment">/// Checker is running.
+    </span>Checking,
+    <span class="doccomment">/// The solution scored 100% of the testcase.
+    </span>Accepted(String),
+    <span class="doccomment">/// The output is wrong.
+    </span>WrongAnswer(String),
+    <span class="doccomment">/// The solution is partially correct.
+    </span>Partial(String),
+    <span class="doccomment">/// The solution timed out.
+    </span>TimeLimitExceeded,
+    <span class="doccomment">/// The solution exceeded the wall time limit.
+    </span>WallTimeLimitExceeded,
+    <span class="doccomment">/// The solution exceeded the memory limit.
+    </span>MemoryLimitExceeded,
+    <span class="doccomment">/// The solution crashed.
+    </span>RuntimeError,
+    <span class="doccomment">/// Something went wrong.
+    </span>Failed,
+    <span class="doccomment">/// The evaluation has been skipped.
+    </span>Skipped,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">TestcaseEvaluationStatus</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SolutionCheckResult</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">TestcaseEvaluationStatus</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">TestcaseEvaluationStatus::Accepted</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::Accepted</span>),
-            <span class="ident">TestcaseEvaluationStatus::Partial</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::PartialScore</span>),
-            <span class="ident">TestcaseEvaluationStatus::WrongAnswer</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::WrongAnswer</span>),
-            <span class="ident">TestcaseEvaluationStatus::TimeLimitExceeded</span> =&gt; {
-                <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::TimeLimitExceeded</span>)
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>TestcaseEvaluationStatus&gt; <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;SolutionCheckResult&gt; {
+    <span class="kw">fn </span>from(status: <span class="kw-2">&amp;</span>TestcaseEvaluationStatus) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span>status {
+            TestcaseEvaluationStatus::Accepted(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(SolutionCheckResult::Accepted),
+            TestcaseEvaluationStatus::Partial(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(SolutionCheckResult::PartialScore),
+            TestcaseEvaluationStatus::WrongAnswer(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(SolutionCheckResult::WrongAnswer),
+            TestcaseEvaluationStatus::TimeLimitExceeded =&gt; {
+                <span class="prelude-val">Some</span>(SolutionCheckResult::TimeLimitExceeded)
             }
-            <span class="ident">TestcaseEvaluationStatus::WallTimeLimitExceeded</span> =&gt; {
-                <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::TimeLimitExceeded</span>)
+            TestcaseEvaluationStatus::WallTimeLimitExceeded =&gt; {
+                <span class="prelude-val">Some</span>(SolutionCheckResult::TimeLimitExceeded)
             }
-            <span class="ident">TestcaseEvaluationStatus::MemoryLimitExceeded</span> =&gt; {
-                <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::MemoryLimitExceeded</span>)
+            TestcaseEvaluationStatus::MemoryLimitExceeded =&gt; {
+                <span class="prelude-val">Some</span>(SolutionCheckResult::MemoryLimitExceeded)
             }
-            <span class="ident">TestcaseEvaluationStatus::RuntimeError</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">SolutionCheckResult::RuntimeError</span>),
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+            TestcaseEvaluationStatus::RuntimeError =&gt; <span class="prelude-val">Some</span>(SolutionCheckResult::RuntimeError),
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
         }
     }
 }
 
-<span class="doccomment">/// State of the generation of a testcases.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TestcaseGenerationState</span> {
-    <span class="doccomment">/// Status of the generation.</span>
-    <span class="kw">pub</span> <span class="ident">status</span>: <span class="ident">TestcaseGenerationStatus</span>,
-    <span class="doccomment">/// Result of the generation.</span>
-    <span class="kw">pub</span> <span class="ident">generation</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Result of the validation.</span>
-    <span class="kw">pub</span> <span class="ident">validation</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Result of the solution.</span>
-    <span class="kw">pub</span> <span class="ident">solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
+<span class="doccomment">/// State of the generation of a testcases.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>TestcaseGenerationState {
+    <span class="doccomment">/// Status of the generation.
+    </span><span class="kw">pub </span>status: TestcaseGenerationStatus,
+    <span class="doccomment">/// Result of the generation.
+    </span><span class="kw">pub </span>generation: <span class="prelude-ty">Option</span>&lt;ExecutionResult&gt;,
+    <span class="doccomment">/// Result of the validation.
+    </span><span class="kw">pub </span>validation: <span class="prelude-ty">Option</span>&lt;ExecutionResult&gt;,
+    <span class="doccomment">/// Result of the solution.
+    </span><span class="kw">pub </span>solution: <span class="prelude-ty">Option</span>&lt;ExecutionResult&gt;,
 }
 
-<span class="doccomment">/// State of the generation of a subtask.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SubtaskGenerationState</span> {
-    <span class="doccomment">/// State of the testcases of this subtask.</span>
-    <span class="kw">pub</span> <span class="ident">testcases</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TestcaseId</span>, <span class="ident">TestcaseGenerationState</span><span class="op">&gt;</span>,
+<span class="doccomment">/// State of the generation of a subtask.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>SubtaskGenerationState {
+    <span class="doccomment">/// State of the testcases of this subtask.
+    </span><span class="kw">pub </span>testcases: HashMap&lt;TestcaseId, TestcaseGenerationState&gt;,
 }
 
-<span class="doccomment">/// State of the evaluation of a testcase.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionTestcaseEvaluationState</span> {
-    <span class="doccomment">/// The score on that testcase</span>
-    <span class="kw">pub</span> <span class="ident">score</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The status of the execution.</span>
-    <span class="kw">pub</span> <span class="ident">status</span>: <span class="ident">TestcaseEvaluationStatus</span>,
-    <span class="doccomment">/// The result of the solution.</span>
-    <span class="kw">pub</span> <span class="ident">results</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The result of the checker.</span>
-    <span class="kw">pub</span> <span class="ident">checker</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
+<span class="doccomment">/// State of the evaluation of a testcase.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>SolutionTestcaseEvaluationState {
+    <span class="doccomment">/// The score on that testcase
+    </span><span class="kw">pub </span>score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// The status of the execution.
+    </span><span class="kw">pub </span>status: TestcaseEvaluationStatus,
+    <span class="doccomment">/// The result of the solution.
+    </span><span class="kw">pub </span>results: Vec&lt;<span class="prelude-ty">Option</span>&lt;ExecutionResult&gt;&gt;,
+    <span class="doccomment">/// The result of the checker.
+    </span><span class="kw">pub </span>checker: <span class="prelude-ty">Option</span>&lt;ExecutionResult&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">SolutionTestcaseEvaluationState</span> {
-    <span class="doccomment">/// Checks whether the resources used by a solution on a testcase are close to the limits of</span>
-    <span class="doccomment">/// time or memory.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The time &#39;t&#39; is close to the limit TL if:</span>
-    <span class="doccomment">///   TL * threshold &lt;= t &lt;= TL / threshold  &amp;&amp;  t &lt;= ceil(TL + extra time) - 0.1s</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The second condition guards against a value of extra time too small, which would mark every</span>
-    <span class="doccomment">/// TLE as &quot;close to the limits&quot;.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Memory limit is in MiB.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_close_to_limits</span>(
+<span class="kw">impl </span>SolutionTestcaseEvaluationState {
+    <span class="doccomment">/// Checks whether the resources used by a solution on a testcase are close to the limits of
+    /// time or memory.
+    ///
+    /// The time &#39;t&#39; is close to the limit TL if:
+    ///   TL * threshold &lt;= t &lt;= TL / threshold  &amp;&amp;  t &lt;= ceil(TL + extra time) - 0.1s
+    ///
+    /// The second condition guards against a value of extra time too small, which would mark every
+    /// TLE as &quot;close to the limits&quot;.
+    ///
+    /// Memory limit is in MiB.
+    </span><span class="kw">pub fn </span>is_close_to_limits(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">time_limit</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-        <span class="ident">extra_time</span>: <span class="ident">f64</span>,
-        <span class="ident">memory_limit</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
-        <span class="ident">threshold</span>: <span class="ident">f64</span>,
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="kw">for</span> <span class="ident">result</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">results</span>.<span class="ident">iter</span>().<span class="ident">flatten</span>() {
-            <span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">result</span>.<span class="ident">resources</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time_limit</span>) <span class="op">=</span> <span class="ident">time_limit</span> {
-                <span class="kw">let</span> <span class="ident">lower_bound</span> <span class="op">=</span> <span class="ident">time_limit</span> <span class="op">*</span> <span class="ident">threshold</span>;
-                <span class="kw">let</span> <span class="ident">upper_bound</span> <span class="op">=</span> <span class="ident">time_limit</span> <span class="op">/</span> <span class="ident">threshold</span>;
-                <span class="kw">if</span> <span class="ident">lower_bound</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">resources</span>.<span class="ident">cpu_time</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">resources</span>.<span class="ident">cpu_time</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">upper_bound</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">resources</span>.<span class="ident">cpu_time</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="ident">time_limit</span> <span class="op">+</span> <span class="ident">extra_time</span>).<span class="ident">ceil</span>() <span class="op">-</span> <span class="number">0.1</span>
-                {
-                    <span class="kw">return</span> <span class="bool-val">true</span>;
+        time_limit: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+        extra_time: f64,
+        memory_limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+        threshold: f64,
+    ) -&gt; bool {
+        <span class="kw">for </span>result <span class="kw">in </span><span class="self">self</span>.results.iter().flatten() {
+            <span class="kw">let </span>resources = <span class="kw-2">&amp;</span>result.resources;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(time_limit) = time_limit {
+                <span class="kw">let </span>lower_bound = time_limit * threshold;
+                <span class="kw">let </span>upper_bound = time_limit / threshold;
+                <span class="kw">if </span>lower_bound &lt;= resources.cpu_time
+                    &amp;&amp; resources.cpu_time &lt;= upper_bound
+                    &amp;&amp; resources.cpu_time &lt;= (time_limit + extra_time).ceil() - <span class="number">0.1
+                </span>{
+                    <span class="kw">return </span><span class="bool-val">true</span>;
                 }
             }
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">memory_limit</span>) <span class="op">=</span> <span class="ident">memory_limit</span> {
-                <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">memory</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">memory_limit</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="number">1024.0</span> <span class="op">*</span> <span class="ident">threshold</span> {
-                    <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(memory_limit) = memory_limit {
+                <span class="kw">if </span>resources.memory <span class="kw">as </span>f64 &gt;= memory_limit <span class="kw">as </span>f64 * <span class="number">1024.0 </span>* threshold {
+                    <span class="kw">return </span><span class="bool-val">true</span>;
                 }
             }
         }
 
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 }
 
-<span class="doccomment">/// State of the evaluation of a subtask.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionSubtaskEvaluationState</span> {
-    <span class="doccomment">/// Score of the subtask.</span>
-    <span class="kw">pub</span> <span class="ident">score</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Score of the subtask, normalized from 0.0 to 1.0.</span>
-    <span class="kw">pub</span> <span class="ident">normalized_score</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The state of the evaluation of the testcases.</span>
-    <span class="kw">pub</span> <span class="ident">testcases</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TestcaseId</span>, <span class="ident">SolutionTestcaseEvaluationState</span><span class="op">&gt;</span>,
+<span class="doccomment">/// State of the evaluation of a subtask.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>SolutionSubtaskEvaluationState {
+    <span class="doccomment">/// Score of the subtask.
+    </span><span class="kw">pub </span>score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// Score of the subtask, normalized from 0.0 to 1.0.
+    </span><span class="kw">pub </span>normalized_score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// The state of the evaluation of the testcases.
+    </span><span class="kw">pub </span>testcases: HashMap&lt;TestcaseId, SolutionTestcaseEvaluationState&gt;,
 }
 
-<span class="doccomment">/// State of the evaluation of a solution.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionEvaluationState</span> {
-    <span class="doccomment">/// Score of the solution.</span>
-    <span class="kw">pub</span> <span class="ident">score</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The state of the evaluation of the subtasks.</span>
-    <span class="kw">pub</span> <span class="ident">subtasks</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">SubtaskId</span>, <span class="ident">SolutionSubtaskEvaluationState</span><span class="op">&gt;</span>,
+<span class="doccomment">/// State of the evaluation of a solution.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>SolutionEvaluationState {
+    <span class="doccomment">/// Score of the solution.
+    </span><span class="kw">pub </span>score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// The state of the evaluation of the subtasks.
+    </span><span class="kw">pub </span>subtasks: HashMap&lt;SubtaskId, SolutionSubtaskEvaluationState&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">SolutionEvaluationState</span> {
-    <span class="doccomment">/// Make a new, empty, `SolutionEvaluationState`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>) -&gt; <span class="ident">SolutionEvaluationState</span> {
-        <span class="ident">SolutionEvaluationState</span> {
-            <span class="ident">score</span>: <span class="prelude-val">None</span>,
-            <span class="ident">subtasks</span>: <span class="ident">task</span>
-                .<span class="ident">subtasks</span>
-                .<span class="ident">values</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">subtask</span><span class="op">|</span> {
+<span class="kw">impl </span>SolutionEvaluationState {
+    <span class="doccomment">/// Make a new, empty, `SolutionEvaluationState`.
+    </span><span class="kw">pub fn </span>new(task: <span class="kw-2">&amp;</span>IOITask) -&gt; SolutionEvaluationState {
+        SolutionEvaluationState {
+            score: <span class="prelude-val">None</span>,
+            subtasks: task
+                .subtasks
+                .values()
+                .map(|subtask| {
                     (
-                        <span class="ident">subtask</span>.<span class="ident">id</span>,
-                        <span class="ident">SolutionSubtaskEvaluationState</span> {
-                            <span class="ident">score</span>: <span class="prelude-val">None</span>,
-                            <span class="ident">normalized_score</span>: <span class="prelude-val">None</span>,
-                            <span class="ident">testcases</span>: <span class="ident">subtask</span>
-                                .<span class="ident">testcases</span>
-                                .<span class="ident">values</span>()
-                                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">testcase</span><span class="op">|</span> {
+                        subtask.id,
+                        SolutionSubtaskEvaluationState {
+                            score: <span class="prelude-val">None</span>,
+                            normalized_score: <span class="prelude-val">None</span>,
+                            testcases: subtask
+                                .testcases
+                                .values()
+                                .map(|testcase| {
                                     (
-                                        <span class="ident">testcase</span>.<span class="ident">id</span>,
-                                        <span class="ident">SolutionTestcaseEvaluationState</span> {
-                                            <span class="ident">score</span>: <span class="prelude-val">None</span>,
-                                            <span class="ident">status</span>: <span class="ident">TestcaseEvaluationStatus::Pending</span>,
-                                            <span class="ident">results</span>: <span class="ident">Vec::new</span>(),
-                                            <span class="ident">checker</span>: <span class="prelude-val">None</span>,
+                                        testcase.id,
+                                        SolutionTestcaseEvaluationState {
+                                            score: <span class="prelude-val">None</span>,
+                                            status: TestcaseEvaluationStatus::Pending,
+                                            results: Vec::new(),
+                                            checker: <span class="prelude-val">None</span>,
                                         },
                                     )
                                 })
-                                .<span class="ident">collect</span>(),
+                                .collect(),
                         },
                     )
                 })
-                .<span class="ident">collect</span>(),
+                .collect(),
         }
     }
 }
 
-<span class="doccomment">/// The status of the compilation of a dependency of a booklet.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BookletDependencyState</span> {
-    <span class="doccomment">/// The status of the execution.</span>
-    <span class="kw">pub</span> <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+<span class="doccomment">/// The status of the compilation of a dependency of a booklet.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>BookletDependencyState {
+    <span class="doccomment">/// The status of the execution.
+    </span><span class="kw">pub </span>status: UIExecutionStatus,
 }
 
-<span class="doccomment">/// The status of the compilation of a booklet.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BookletState</span> {
-    <span class="doccomment">/// The status of the execution.</span>
-    <span class="kw">pub</span> <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
-    <span class="doccomment">/// The state of all the dependencies</span>
-    <span class="kw">pub</span> <span class="ident">dependencies</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BookletDependencyState</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The status of the compilation of a booklet.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>BookletState {
+    <span class="doccomment">/// The status of the execution.
+    </span><span class="kw">pub </span>status: UIExecutionStatus,
+    <span class="doccomment">/// The state of all the dependencies
+    </span><span class="kw">pub </span>dependencies: HashMap&lt;String, Vec&lt;BookletDependencyState&gt;&gt;,
 }
 
-<span class="doccomment">/// The state of a IOI task, all the information for the UI are stored here.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UIState</span> {
-    <span class="doccomment">/// The task.</span>
-    <span class="kw">pub</span> <span class="ident">task</span>: <span class="ident">IOITask</span>,
-    <span class="doccomment">/// The configuration of this evaluation.</span>
-    <span class="kw">pub</span> <span class="ident">config</span>: <span class="ident">ExecutionDAGConfig</span>,
-    <span class="doccomment">/// The maximum score of this task.</span>
-    <span class="kw">pub</span> <span class="ident">max_score</span>: <span class="ident">f64</span>,
-    <span class="doccomment">/// The set of solutions that will be evaluated.</span>
-    <span class="kw">pub</span> <span class="ident">solutions</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">SolutionInfo</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The status of the compilations.</span>
-    <span class="kw">pub</span> <span class="ident">compilations</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">CompilationStatus</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The state of the generation of the testcases.</span>
-    <span class="kw">pub</span> <span class="ident">generations</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">SubtaskId</span>, <span class="ident">SubtaskGenerationState</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The status of the evaluations of the solutions.</span>
-    <span class="kw">pub</span> <span class="ident">evaluations</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">SolutionEvaluationState</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The status of the executor.</span>
-    <span class="kw">pub</span> <span class="ident">executor_status</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The status of the booklets</span>
-    <span class="kw">pub</span> <span class="ident">booklets</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">BookletState</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Diagnostic context.</span>
-    <span class="kw">pub</span> <span class="ident">diagnostics</span>: <span class="ident">DiagnosticContext</span>,
+<span class="doccomment">/// The state of a IOI task, all the information for the UI are stored here.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>UIState {
+    <span class="doccomment">/// The task.
+    </span><span class="kw">pub </span>task: IOITask,
+    <span class="doccomment">/// The configuration of this evaluation.
+    </span><span class="kw">pub </span>config: ExecutionDAGConfig,
+    <span class="doccomment">/// The maximum score of this task.
+    </span><span class="kw">pub </span>max_score: f64,
+    <span class="doccomment">/// The set of solutions that will be evaluated.
+    </span><span class="kw">pub </span>solutions: HashMap&lt;PathBuf, SolutionInfo&gt;,
+    <span class="doccomment">/// The status of the compilations.
+    </span><span class="kw">pub </span>compilations: HashMap&lt;PathBuf, CompilationStatus&gt;,
+    <span class="doccomment">/// The state of the generation of the testcases.
+    </span><span class="kw">pub </span>generations: HashMap&lt;SubtaskId, SubtaskGenerationState&gt;,
+    <span class="doccomment">/// The status of the evaluations of the solutions.
+    </span><span class="kw">pub </span>evaluations: HashMap&lt;PathBuf, SolutionEvaluationState&gt;,
+    <span class="doccomment">/// The status of the executor.
+    </span><span class="kw">pub </span>executor_status: <span class="prelude-ty">Option</span>&lt;ExecutorStatus&lt;SystemTime&gt;&gt;,
+    <span class="doccomment">/// The status of the booklets
+    </span><span class="kw">pub </span>booklets: HashMap&lt;String, BookletState&gt;,
+    <span class="doccomment">/// Diagnostic context.
+    </span><span class="kw">pub </span>diagnostics: DiagnosticContext,
 }
 
-<span class="kw">impl</span> <span class="ident">TestcaseEvaluationStatus</span> {
-    <span class="doccomment">/// Whether the testcase evaluation has completed, either successfully or not.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_completed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="op">!</span><span class="macro">matches!</span>(
+<span class="kw">impl </span>TestcaseEvaluationStatus {
+    <span class="doccomment">/// Whether the testcase evaluation has completed, either successfully or not.
+    </span><span class="kw">pub fn </span>has_completed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        !<span class="macro">matches!</span>(
             <span class="self">self</span>,
-            <span class="ident">TestcaseEvaluationStatus::Pending</span>
-                <span class="op">|</span> <span class="ident">TestcaseEvaluationStatus::Solving</span>
-                <span class="op">|</span> <span class="ident">TestcaseEvaluationStatus::Solved</span>
-                <span class="op">|</span> <span class="ident">TestcaseEvaluationStatus::Checking</span>
+            TestcaseEvaluationStatus::Pending
+                | TestcaseEvaluationStatus::Solving
+                | TestcaseEvaluationStatus::Solved
+                | TestcaseEvaluationStatus::Checking
         )
     }
 
-    <span class="doccomment">/// Whether the testcase evaluation has completed successfully.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_success</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">TestcaseEvaluationStatus::Accepted</span>(<span class="kw">_</span>))
+    <span class="doccomment">/// Whether the testcase evaluation has completed successfully.
+    </span><span class="kw">pub fn </span>is_success(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="macro">matches!</span>(<span class="self">self</span>, TestcaseEvaluationStatus::Accepted(<span class="kw">_</span>))
     }
 
-    <span class="doccomment">/// Whether the testcase evaluation has completed with a partial score.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_partial</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">TestcaseEvaluationStatus::Partial</span>(<span class="kw">_</span>))
+    <span class="doccomment">/// Whether the testcase evaluation has completed with a partial score.
+    </span><span class="kw">pub fn </span>is_partial(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="macro">matches!</span>(<span class="self">self</span>, TestcaseEvaluationStatus::Partial(<span class="kw">_</span>))
     }
 
-    <span class="doccomment">/// A message representing this status.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">use</span> <span class="ident">TestcaseEvaluationStatus</span>::<span class="kw-2">*</span>;
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Pending</span> =&gt; <span class="string">&quot;Not done&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">Solving</span> =&gt; <span class="string">&quot;Solution running&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">Solved</span> =&gt; <span class="string">&quot;Solution completed&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">Checking</span> =&gt; <span class="string">&quot;Checker running&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">Accepted</span>(<span class="ident">s</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">is_empty</span>() {
-                    <span class="string">&quot;Output is correct&quot;</span>.<span class="ident">into</span>()
-                } <span class="kw">else</span> {
-                    <span class="ident">s</span>.<span class="ident">clone</span>()
+    <span class="doccomment">/// A message representing this status.
+    </span><span class="kw">pub fn </span>message(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+        <span class="kw">use </span>TestcaseEvaluationStatus::<span class="kw-2">*</span>;
+        <span class="kw">match </span><span class="self">self </span>{
+            Pending =&gt; <span class="string">&quot;Not done&quot;</span>.into(),
+            Solving =&gt; <span class="string">&quot;Solution running&quot;</span>.into(),
+            Solved =&gt; <span class="string">&quot;Solution completed&quot;</span>.into(),
+            Checking =&gt; <span class="string">&quot;Checker running&quot;</span>.into(),
+            Accepted(s) =&gt; {
+                <span class="kw">if </span>s.is_empty() {
+                    <span class="string">&quot;Output is correct&quot;</span>.into()
+                } <span class="kw">else </span>{
+                    s.clone()
                 }
             }
-            <span class="ident">WrongAnswer</span>(<span class="ident">s</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">is_empty</span>() {
-                    <span class="string">&quot;Output is not correct&quot;</span>.<span class="ident">into</span>()
-                } <span class="kw">else</span> {
-                    <span class="ident">s</span>.<span class="ident">clone</span>()
+            WrongAnswer(s) =&gt; {
+                <span class="kw">if </span>s.is_empty() {
+                    <span class="string">&quot;Output is not correct&quot;</span>.into()
+                } <span class="kw">else </span>{
+                    s.clone()
                 }
             }
-            <span class="ident">Partial</span>(<span class="ident">s</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">is_empty</span>() {
-                    <span class="string">&quot;Partially correct&quot;</span>.<span class="ident">into</span>()
-                } <span class="kw">else</span> {
-                    <span class="ident">s</span>.<span class="ident">clone</span>()
+            Partial(s) =&gt; {
+                <span class="kw">if </span>s.is_empty() {
+                    <span class="string">&quot;Partially correct&quot;</span>.into()
+                } <span class="kw">else </span>{
+                    s.clone()
                 }
             }
-            <span class="ident">TimeLimitExceeded</span> =&gt; <span class="string">&quot;Time limit exceeded&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">WallTimeLimitExceeded</span> =&gt; <span class="string">&quot;Execution took too long&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">MemoryLimitExceeded</span> =&gt; <span class="string">&quot;Memory limit exceeded&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">RuntimeError</span> =&gt; <span class="string">&quot;Runtime error&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">Failed</span> =&gt; <span class="string">&quot;Execution failed&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">Skipped</span> =&gt; <span class="string">&quot;Execution skipped&quot;</span>.<span class="ident">into</span>(),
+            TimeLimitExceeded =&gt; <span class="string">&quot;Time limit exceeded&quot;</span>.into(),
+            WallTimeLimitExceeded =&gt; <span class="string">&quot;Execution took too long&quot;</span>.into(),
+            MemoryLimitExceeded =&gt; <span class="string">&quot;Memory limit exceeded&quot;</span>.into(),
+            RuntimeError =&gt; <span class="string">&quot;Runtime error&quot;</span>.into(),
+            Failed =&gt; <span class="string">&quot;Execution failed&quot;</span>.into(),
+            Skipped =&gt; <span class="string">&quot;Execution skipped&quot;</span>.into(),
         }
     }
 }
 
-<span class="doccomment">/// The outcome of the execution of a check on a subtask.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionCheckOutcome</span> {
-    <span class="doccomment">/// The path of the solution.</span>
-    <span class="kw">pub</span> <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The check that originated this outcome.</span>
-    <span class="kw">pub</span> <span class="ident">check</span>: <span class="ident">SolutionCheck</span>,
-    <span class="doccomment">/// The id of the subtask this outcome refers to.</span>
-    <span class="kw">pub</span> <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-    <span class="doccomment">/// Whether the check was successful or not.</span>
-    <span class="kw">pub</span> <span class="ident">success</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// The outcome of the execution of a check on a subtask.
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>SolutionCheckOutcome {
+    <span class="doccomment">/// The path of the solution.
+    </span><span class="kw">pub </span>solution: PathBuf,
+    <span class="doccomment">/// The check that originated this outcome.
+    </span><span class="kw">pub </span>check: SolutionCheck,
+    <span class="doccomment">/// The id of the subtask this outcome refers to.
+    </span><span class="kw">pub </span>subtask_id: SubtaskId,
+    <span class="doccomment">/// Whether the check was successful or not.
+    </span><span class="kw">pub </span>success: bool,
 }
 
-<span class="kw">impl</span> <span class="ident">UIState</span> {
-    <span class="doccomment">/// Make a new `UIState`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">config</span>: <span class="ident">ExecutionDAGConfig</span>) -&gt; <span class="ident">UIState</span> {
-        <span class="kw">let</span> <span class="ident">generations</span> <span class="op">=</span> <span class="ident">task</span>
-            .<span class="ident">subtasks</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">st_num</span>, <span class="ident">subtask</span>)<span class="op">|</span> {
+<span class="kw">impl </span>UIState {
+    <span class="doccomment">/// Make a new `UIState`.
+    </span><span class="kw">pub fn </span>new(task: <span class="kw-2">&amp;</span>IOITask, config: ExecutionDAGConfig) -&gt; UIState {
+        <span class="kw">let </span>generations = task
+            .subtasks
+            .iter()
+            .map(|(st_num, subtask)| {
                 (
-                    <span class="kw-2">*</span><span class="ident">st_num</span>,
-                    <span class="ident">SubtaskGenerationState</span> {
-                        <span class="ident">testcases</span>: <span class="ident">subtask</span>
-                            .<span class="ident">testcases</span>
-                            .<span class="ident">iter</span>()
-                            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">tc_num</span>, <span class="kw">_</span>)<span class="op">|</span> {
+                    <span class="kw-2">*</span>st_num,
+                    SubtaskGenerationState {
+                        testcases: subtask
+                            .testcases
+                            .iter()
+                            .map(|(tc_num, <span class="kw">_</span>)| {
                                 (
-                                    <span class="kw-2">*</span><span class="ident">tc_num</span>,
-                                    <span class="ident">TestcaseGenerationState</span> {
-                                        <span class="ident">status</span>: <span class="ident">TestcaseGenerationStatus::Pending</span>,
-                                        <span class="ident">generation</span>: <span class="prelude-val">None</span>,
-                                        <span class="ident">validation</span>: <span class="prelude-val">None</span>,
-                                        <span class="ident">solution</span>: <span class="prelude-val">None</span>,
+                                    <span class="kw-2">*</span>tc_num,
+                                    TestcaseGenerationState {
+                                        status: TestcaseGenerationStatus::Pending,
+                                        generation: <span class="prelude-val">None</span>,
+                                        validation: <span class="prelude-val">None</span>,
+                                        solution: <span class="prelude-val">None</span>,
                                     },
                                 )
                             })
-                            .<span class="ident">collect</span>(),
+                            .collect(),
                     },
                 )
             })
-            .<span class="ident">collect</span>();
-        <span class="ident">UIState</span> {
-            <span class="ident">config</span>,
-            <span class="ident">max_score</span>: <span class="ident">task</span>.<span class="ident">subtasks</span>.<span class="ident">values</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">max_score</span>).<span class="ident">sum</span>(),
-            <span class="ident">task</span>: <span class="ident">task</span>.<span class="ident">clone</span>(),
-            <span class="ident">solutions</span>: <span class="ident">HashMap::new</span>(),
-            <span class="ident">compilations</span>: <span class="ident">HashMap::new</span>(),
-            <span class="ident">generations</span>,
-            <span class="ident">evaluations</span>: <span class="ident">HashMap::new</span>(),
-            <span class="ident">executor_status</span>: <span class="prelude-val">None</span>,
-            <span class="ident">booklets</span>: <span class="ident">HashMap::new</span>(),
-            <span class="ident">diagnostics</span>: <span class="ident">Default::default</span>(),
+            .collect();
+        UIState {
+            config,
+            max_score: task.subtasks.values().map(|s| s.max_score).sum(),
+            task: task.clone(),
+            solutions: HashMap::new(),
+            compilations: HashMap::new(),
+            generations,
+            evaluations: HashMap::new(),
+            executor_status: <span class="prelude-val">None</span>,
+            booklets: HashMap::new(),
+            diagnostics: Default::default(),
         }
     }
 
-    <span class="doccomment">/// Evaluate the checks of all the solutions.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This function should be called only after all the executions have completed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run_solution_checks</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SolutionCheckOutcome</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> (<span class="ident">path</span>, <span class="ident">solution</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">solutions</span>.<span class="ident">iter</span>() {
-            <span class="kw">for</span> <span class="ident">check</span> <span class="kw">in</span> <span class="ident">solution</span>.<span class="ident">checks</span>.<span class="ident">iter</span>() {
-                <span class="kw">let</span> <span class="ident">subtasks</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">task</span>
-                    .<span class="ident">find_subtasks_by_pattern_name</span>(<span class="kw-2">&amp;</span><span class="ident">check</span>.<span class="ident">subtask_name_pattern</span>);
-                <span class="kw">for</span> <span class="ident">subtask</span> <span class="kw">in</span> <span class="ident">subtasks</span> {
-                    <span class="kw">let</span> <span class="ident">solution_result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">evaluations</span>.<span class="ident">get</span>(<span class="ident">path</span>);
-                    <span class="comment">// The solution was not run on this subtask.</span>
-                    <span class="kw">if</span> <span class="ident">solution_result</span>.<span class="ident">is_none</span>() {
+    <span class="doccomment">/// Evaluate the checks of all the solutions.
+    ///
+    /// This function should be called only after all the executions have completed.
+    </span><span class="kw">pub fn </span>run_solution_checks(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;SolutionCheckOutcome&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>(path, solution) <span class="kw">in </span><span class="self">self</span>.solutions.iter() {
+            <span class="kw">for </span>check <span class="kw">in </span>solution.checks.iter() {
+                <span class="kw">let </span>subtasks = <span class="self">self
+                    </span>.task
+                    .find_subtasks_by_pattern_name(<span class="kw-2">&amp;</span>check.subtask_name_pattern);
+                <span class="kw">for </span>subtask <span class="kw">in </span>subtasks {
+                    <span class="kw">let </span>solution_result = <span class="self">self</span>.evaluations.get(path);
+                    <span class="comment">// The solution was not run on this subtask.
+                    </span><span class="kw">if </span>solution_result.is_none() {
                         <span class="kw">continue</span>;
                     }
-                    <span class="kw">let</span> <span class="ident">solution_result</span> <span class="op">=</span> <span class="ident">solution_result</span>.<span class="ident">unwrap</span>();
-                    <span class="kw">let</span> <span class="ident">subtask_result</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">solution_result</span>.<span class="ident">subtasks</span>[<span class="kw-2">&amp;</span><span class="ident">subtask</span>.<span class="ident">id</span>];
-                    <span class="kw">let</span> <span class="ident">testcase_results</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SolutionCheckResult</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">subtask_result</span>
-                        .<span class="ident">testcases</span>
-                        .<span class="ident">values</span>()
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">testcase</span><span class="op">|</span> (<span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">status</span>).<span class="ident">into</span>())
-                        .<span class="ident">collect_vec</span>();
-                    <span class="comment">// Not all the testcase results are valid.</span>
-                    <span class="kw">if</span> <span class="ident">testcase_results</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="ident">Option::is_none</span>) {
+                    <span class="kw">let </span>solution_result = solution_result.unwrap();
+                    <span class="kw">let </span>subtask_result = <span class="kw-2">&amp;</span>solution_result.subtasks[<span class="kw-2">&amp;</span>subtask.id];
+                    <span class="kw">let </span>testcase_results: Vec&lt;<span class="prelude-ty">Option</span>&lt;SolutionCheckResult&gt;&gt; = subtask_result
+                        .testcases
+                        .values()
+                        .map(|testcase| (<span class="kw-2">&amp;</span>testcase.status).into())
+                        .collect_vec();
+                    <span class="comment">// Not all the testcase results are valid.
+                    </span><span class="kw">if </span>testcase_results.iter().any(Option::is_none) {
                         <span class="kw">continue</span>;
                     }
-                    <span class="kw">let</span> <span class="ident">testcase_results</span> <span class="op">=</span> <span class="ident">testcase_results</span>
-                        .<span class="ident">into_iter</span>()
-                        .<span class="ident">map</span>(<span class="ident">Option::unwrap</span>)
-                        .<span class="ident">collect_vec</span>();
-                    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">check</span>.<span class="ident">result</span>.<span class="ident">check</span>(<span class="kw-2">&amp;</span><span class="ident">testcase_results</span>);
-                    <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">SolutionCheckOutcome</span> {
-                        <span class="ident">solution</span>: <span class="ident">path</span>.<span class="ident">clone</span>(),
-                        <span class="ident">check</span>: <span class="ident">check</span>.<span class="ident">clone</span>(),
-                        <span class="ident">subtask_id</span>: <span class="ident">subtask</span>.<span class="ident">id</span>,
-                        <span class="ident">success</span>,
+                    <span class="kw">let </span>testcase_results = testcase_results
+                        .into_iter()
+                        .map(Option::unwrap)
+                        .collect_vec();
+                    <span class="kw">let </span>success = check.result.check(<span class="kw-2">&amp;</span>testcase_results);
+                    result.push(SolutionCheckOutcome {
+                        solution: path.clone(),
+                        check: check.clone(),
+                        subtask_id: subtask.id,
+                        success,
                     })
                 }
             }
         }
-        <span class="ident">result</span>
+        result
     }
 }
 
-<span class="kw">impl</span> <span class="ident">UIStateT</span> <span class="kw">for</span> <span class="ident">UIState</span> {
-    <span class="doccomment">/// Apply a `UIMessage` to this state.</span>
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">UIMessage</span>) {
-        <span class="kw">match</span> <span class="ident">message</span> {
-            <span class="ident">UIMessage::StopUI</span> =&gt; {}
-            <span class="ident">UIMessage::ServerStatus</span> { <span class="ident">status</span> } =&gt; <span class="self">self</span>.<span class="ident">executor_status</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">status</span>),
-            <span class="ident">UIMessage::Solutions</span> { <span class="ident">solutions</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">solutions</span> <span class="op">=</span> <span class="ident">solutions</span>
-                    .<span class="ident">into_iter</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">info</span><span class="op">|</span> (<span class="ident">info</span>.<span class="ident">path</span>.<span class="ident">clone</span>(), <span class="ident">info</span>))
-                    .<span class="ident">collect</span>()
+<span class="kw">impl </span>UIStateT <span class="kw">for </span>UIState {
+    <span class="doccomment">/// Apply a `UIMessage` to this state.
+    </span><span class="kw">fn </span>apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: UIMessage) {
+        <span class="kw">match </span>message {
+            UIMessage::StopUI =&gt; {}
+            UIMessage::ServerStatus { status } =&gt; <span class="self">self</span>.executor_status = <span class="prelude-val">Some</span>(status),
+            UIMessage::Solutions { solutions } =&gt; {
+                <span class="self">self</span>.solutions = solutions
+                    .into_iter()
+                    .map(|info| (info.path.clone(), info))
+                    .collect()
             }
-            <span class="ident">UIMessage::Compilation</span> { <span class="ident">file</span>, <span class="ident">status</span> } =&gt; <span class="self">self</span>
-                .<span class="ident">compilations</span>
-                .<span class="ident">entry</span>(<span class="ident">file</span>)
-                .<span class="ident">or_insert</span>(<span class="ident">CompilationStatus::Pending</span>)
-                .<span class="ident">apply_status</span>(<span class="ident">status</span>),
-            <span class="ident">UIMessage::IOITask</span> { .. } =&gt; {}
-            <span class="ident">UIMessage::IOIGeneration</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">status</span>,
+            UIMessage::Compilation { file, status } =&gt; <span class="self">self
+                </span>.compilations
+                .entry(file)
+                .or_insert(CompilationStatus::Pending)
+                .apply_status(status),
+            UIMessage::IOITask { .. } =&gt; {}
+            UIMessage::IOIGeneration {
+                subtask,
+                testcase,
+                status,
             } =&gt; {
-                <span class="kw">let</span> <span class="ident">gen</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">generations</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Subtask is gone&quot;</span>)
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Testcase is gone&quot;</span>);
-                <span class="kw">match</span> <span class="ident">status</span> {
-                    <span class="ident">UIExecutionStatus::Pending</span> =&gt; <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Pending</span>,
-                    <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; {
-                        <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Generating</span>
+                <span class="kw">let </span>gen = <span class="self">self
+                    </span>.generations
+                    .get_mut(<span class="kw-2">&amp;</span>subtask)
+                    .expect(<span class="string">&quot;Subtask is gone&quot;</span>)
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase)
+                    .expect(<span class="string">&quot;Testcase is gone&quot;</span>);
+                <span class="kw">match </span>status {
+                    UIExecutionStatus::Pending =&gt; gen.status = TestcaseGenerationStatus::Pending,
+                    UIExecutionStatus::Started { .. } =&gt; {
+                        gen.status = TestcaseGenerationStatus::Generating
                     }
-                    <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ExecutionStatus::Success</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Generated</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Failed</span>;
+                    UIExecutionStatus::Done { result } =&gt; {
+                        <span class="kw">if let </span>ExecutionStatus::Success = result.status {
+                            gen.status = TestcaseGenerationStatus::Generated;
+                        } <span class="kw">else </span>{
+                            gen.status = TestcaseGenerationStatus::Failed;
                         }
-                        <span class="ident">gen</span>.<span class="ident">generation</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">result</span>);
+                        gen.generation = <span class="prelude-val">Some</span>(result);
                     }
-                    <span class="ident">UIExecutionStatus::Skipped</span> =&gt; <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Skipped</span>,
+                    UIExecutionStatus::Skipped =&gt; gen.status = TestcaseGenerationStatus::Skipped,
                 }
             }
-            <span class="ident">UIMessage::IOIValidation</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIValidation {
+                subtask,
+                testcase,
+                status,
             } =&gt; {
-                <span class="kw">let</span> <span class="ident">gen</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">generations</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Subtask is gone&quot;</span>)
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Testcase is gone&quot;</span>);
-                <span class="kw">match</span> <span class="ident">status</span> {
-                    <span class="ident">UIExecutionStatus::Pending</span> =&gt; <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Pending</span>,
-                    <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; {
-                        <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Validating</span>
+                <span class="kw">let </span>gen = <span class="self">self
+                    </span>.generations
+                    .get_mut(<span class="kw-2">&amp;</span>subtask)
+                    .expect(<span class="string">&quot;Subtask is gone&quot;</span>)
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase)
+                    .expect(<span class="string">&quot;Testcase is gone&quot;</span>);
+                <span class="kw">match </span>status {
+                    UIExecutionStatus::Pending =&gt; gen.status = TestcaseGenerationStatus::Pending,
+                    UIExecutionStatus::Started { .. } =&gt; {
+                        gen.status = TestcaseGenerationStatus::Validating
                     }
-                    <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ExecutionStatus::Success</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Validated</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Failed</span>;
+                    UIExecutionStatus::Done { result } =&gt; {
+                        <span class="kw">if let </span>ExecutionStatus::Success = result.status {
+                            gen.status = TestcaseGenerationStatus::Validated;
+                        } <span class="kw">else </span>{
+                            gen.status = TestcaseGenerationStatus::Failed;
                         }
-                        <span class="ident">gen</span>.<span class="ident">validation</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">result</span>);
+                        gen.validation = <span class="prelude-val">Some</span>(result);
                     }
-                    <span class="ident">UIExecutionStatus::Skipped</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TestcaseGenerationStatus::Failed</span> <span class="op">=</span> <span class="ident">gen</span>.<span class="ident">status</span> {
-                        } <span class="kw">else</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Skipped</span>;
-                        }
-                    }
-                }
-            }
-            <span class="ident">UIMessage::IOISolution</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">status</span>,
-            } =&gt; {
-                <span class="kw">let</span> <span class="ident">gen</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">generations</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Subtask is gone&quot;</span>)
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Testcase is gone&quot;</span>);
-                <span class="kw">match</span> <span class="ident">status</span> {
-                    <span class="ident">UIExecutionStatus::Pending</span> =&gt; <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Pending</span>,
-                    <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; {
-                        <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Solving</span>
-                    }
-                    <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ExecutionStatus::Success</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Solved</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Failed</span>;
-                        }
-                        <span class="ident">gen</span>.<span class="ident">solution</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">result</span>);
-                    }
-                    <span class="ident">UIExecutionStatus::Skipped</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TestcaseGenerationStatus::Failed</span> <span class="op">=</span> <span class="ident">gen</span>.<span class="ident">status</span> {
-                        } <span class="kw">else</span> {
-                            <span class="ident">gen</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseGenerationStatus::Skipped</span>;
+                    UIExecutionStatus::Skipped =&gt; {
+                        <span class="kw">if let </span>TestcaseGenerationStatus::Failed = gen.status {
+                        } <span class="kw">else </span>{
+                            gen.status = TestcaseGenerationStatus::Skipped;
                         }
                     }
                 }
             }
-            <span class="ident">UIMessage::IOIEvaluation</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">status</span>,
-                <span class="ident">part</span>,
-                <span class="ident">num_parts</span>,
+            UIMessage::IOISolution {
+                subtask,
+                testcase,
+                status,
             } =&gt; {
-                <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">task</span>;
-                <span class="kw">let</span> <span class="ident">eval</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">evaluations</span>
-                    .<span class="ident">entry</span>(<span class="ident">solution</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">SolutionEvaluationState::new</span>(<span class="ident">task</span>));
-                <span class="kw">let</span> <span class="ident">subtask</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">subtasks</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>).<span class="ident">expect</span>(<span class="string">&quot;Missing subtask&quot;</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">testcase</span> <span class="op">=</span> <span class="ident">subtask</span>
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Missing testcase&quot;</span>);
-                <span class="kw">if</span> <span class="ident">testcase</span>.<span class="ident">results</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">num_parts</span> {
-                    <span class="ident">testcase</span>.<span class="ident">results</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="prelude-val">None</span>; <span class="ident">num_parts</span>];
-                }
-                <span class="kw">match</span> <span class="ident">status</span> {
-                    <span class="ident">UIExecutionStatus::Pending</span> =&gt; {}
-                    <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; {
-                        <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::Solving</span>
+                <span class="kw">let </span>gen = <span class="self">self
+                    </span>.generations
+                    .get_mut(<span class="kw-2">&amp;</span>subtask)
+                    .expect(<span class="string">&quot;Subtask is gone&quot;</span>)
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase)
+                    .expect(<span class="string">&quot;Testcase is gone&quot;</span>);
+                <span class="kw">match </span>status {
+                    UIExecutionStatus::Pending =&gt; gen.status = TestcaseGenerationStatus::Pending,
+                    UIExecutionStatus::Started { .. } =&gt; {
+                        gen.status = TestcaseGenerationStatus::Solving
                     }
-                    <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                        <span class="kw">match</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                            <span class="ident">ExecutionStatus::Success</span> =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::Solved</span>
+                    UIExecutionStatus::Done { result } =&gt; {
+                        <span class="kw">if let </span>ExecutionStatus::Success = result.status {
+                            gen.status = TestcaseGenerationStatus::Solved;
+                        } <span class="kw">else </span>{
+                            gen.status = TestcaseGenerationStatus::Failed;
+                        }
+                        gen.solution = <span class="prelude-val">Some</span>(result);
+                    }
+                    UIExecutionStatus::Skipped =&gt; {
+                        <span class="kw">if let </span>TestcaseGenerationStatus::Failed = gen.status {
+                        } <span class="kw">else </span>{
+                            gen.status = TestcaseGenerationStatus::Skipped;
+                        }
+                    }
+                }
+            }
+            UIMessage::IOIEvaluation {
+                subtask,
+                testcase,
+                solution,
+                status,
+                part,
+                num_parts,
+            } =&gt; {
+                <span class="kw">let </span>task = <span class="kw-2">&amp;</span><span class="self">self</span>.task;
+                <span class="kw">let </span>eval = <span class="self">self
+                    </span>.evaluations
+                    .entry(solution)
+                    .or_insert_with(|| SolutionEvaluationState::new(task));
+                <span class="kw">let </span>subtask = eval.subtasks.get_mut(<span class="kw-2">&amp;</span>subtask).expect(<span class="string">&quot;Missing subtask&quot;</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>testcase = subtask
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase)
+                    .expect(<span class="string">&quot;Missing testcase&quot;</span>);
+                <span class="kw">if </span>testcase.results.len() != num_parts {
+                    testcase.results = <span class="macro">vec!</span>[<span class="prelude-val">None</span>; num_parts];
+                }
+                <span class="kw">match </span>status {
+                    UIExecutionStatus::Pending =&gt; {}
+                    UIExecutionStatus::Started { .. } =&gt; {
+                        testcase.status = TestcaseEvaluationStatus::Solving
+                    }
+                    UIExecutionStatus::Done { result } =&gt; {
+                        <span class="kw">match </span>result.status {
+                            ExecutionStatus::Success =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::Solved
                             }
-                            <span class="ident">ExecutionStatus::ReturnCode</span>(<span class="kw">_</span>) =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::RuntimeError</span>
+                            ExecutionStatus::ReturnCode(<span class="kw">_</span>) =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::RuntimeError
                             }
-                            <span class="ident">ExecutionStatus::Signal</span>(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::RuntimeError</span>
+                            ExecutionStatus::Signal(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::RuntimeError
                             }
-                            <span class="ident">ExecutionStatus::TimeLimitExceeded</span> =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::TimeLimitExceeded</span>
+                            ExecutionStatus::TimeLimitExceeded =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::TimeLimitExceeded
                             }
-                            <span class="ident">ExecutionStatus::SysTimeLimitExceeded</span> =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::TimeLimitExceeded</span>
+                            ExecutionStatus::SysTimeLimitExceeded =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::TimeLimitExceeded
                             }
-                            <span class="ident">ExecutionStatus::WallTimeLimitExceeded</span> =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::WallTimeLimitExceeded</span>
+                            ExecutionStatus::WallTimeLimitExceeded =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::WallTimeLimitExceeded
                             }
-                            <span class="ident">ExecutionStatus::MemoryLimitExceeded</span> =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::MemoryLimitExceeded</span>
+                            ExecutionStatus::MemoryLimitExceeded =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::MemoryLimitExceeded
                             }
-                            <span class="ident">ExecutionStatus::InternalError</span>(<span class="kw">_</span>) =&gt; {
-                                <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::Failed</span>
+                            ExecutionStatus::InternalError(<span class="kw">_</span>) =&gt; {
+                                testcase.status = TestcaseEvaluationStatus::Failed
                             }
                         }
-                        <span class="ident">testcase</span>.<span class="ident">results</span>[<span class="ident">part</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">result</span>);
+                        testcase.results[part] = <span class="prelude-val">Some</span>(result);
                     }
-                    <span class="ident">UIExecutionStatus::Skipped</span> =&gt; {
-                        <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::Skipped</span>
+                    UIExecutionStatus::Skipped =&gt; {
+                        testcase.status = TestcaseEvaluationStatus::Skipped
                     }
                 }
             }
-            <span class="ident">UIMessage::IOIChecker</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIChecker {
+                subtask,
+                testcase,
+                solution,
+                status,
             } =&gt; {
-                <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">task</span>;
-                <span class="kw">let</span> <span class="ident">eval</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">evaluations</span>
-                    .<span class="ident">entry</span>(<span class="ident">solution</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">SolutionEvaluationState::new</span>(<span class="ident">task</span>));
-                <span class="kw">let</span> <span class="ident">subtask</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">subtasks</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>).<span class="ident">expect</span>(<span class="string">&quot;Missing subtask&quot;</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">testcase</span> <span class="op">=</span> <span class="ident">subtask</span>
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Missing testcase&quot;</span>);
-                <span class="kw">match</span> <span class="ident">status</span> {
-                    <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; {
-                        <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="ident">TestcaseEvaluationStatus::Checking</span>;
+                <span class="kw">let </span>task = <span class="kw-2">&amp;</span><span class="self">self</span>.task;
+                <span class="kw">let </span>eval = <span class="self">self
+                    </span>.evaluations
+                    .entry(solution)
+                    .or_insert_with(|| SolutionEvaluationState::new(task));
+                <span class="kw">let </span>subtask = eval.subtasks.get_mut(<span class="kw-2">&amp;</span>subtask).expect(<span class="string">&quot;Missing subtask&quot;</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>testcase = subtask
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase)
+                    .expect(<span class="string">&quot;Missing testcase&quot;</span>);
+                <span class="kw">match </span>status {
+                    UIExecutionStatus::Started { .. } =&gt; {
+                        testcase.status = TestcaseEvaluationStatus::Checking;
                     }
-                    <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                        <span class="ident">testcase</span>.<span class="ident">checker</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">result</span>);
+                    UIExecutionStatus::Done { result } =&gt; {
+                        testcase.checker = <span class="prelude-val">Some</span>(result);
                     }
-                    <span class="kw">_</span> =&gt; {}
+                    <span class="kw">_ </span>=&gt; {}
                 }
             }
-            <span class="ident">UIMessage::IOITestcaseScore</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">score</span>,
-                <span class="ident">message</span>,
+            UIMessage::IOITestcaseScore {
+                subtask,
+                testcase,
+                solution,
+                score,
+                message,
             } =&gt; {
-                <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">task</span>;
-                <span class="kw">let</span> <span class="ident">eval</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">evaluations</span>
-                    .<span class="ident">entry</span>(<span class="ident">solution</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">SolutionEvaluationState::new</span>(<span class="ident">task</span>));
-                <span class="kw">let</span> <span class="ident">subtask</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">subtasks</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>).<span class="ident">expect</span>(<span class="string">&quot;Missing subtask&quot;</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">testcase</span> <span class="op">=</span> <span class="ident">subtask</span>
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">testcase</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Missing testcase&quot;</span>);
-                <span class="ident">testcase</span>.<span class="ident">score</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">score</span>);
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">testcase</span>.<span class="ident">status</span>.<span class="ident">has_completed</span>() {
-                    <span class="ident">testcase</span>.<span class="ident">status</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ScoreStatus::from_score</span>(<span class="ident">score</span>, <span class="number">1.0</span>) {
-                        <span class="ident">ScoreStatus::WrongAnswer</span> =&gt; <span class="ident">TestcaseEvaluationStatus::WrongAnswer</span>(<span class="ident">message</span>),
-                        <span class="ident">ScoreStatus::Accepted</span> =&gt; <span class="ident">TestcaseEvaluationStatus::Accepted</span>(<span class="ident">message</span>),
-                        <span class="ident">ScoreStatus::PartialScore</span> =&gt; <span class="ident">TestcaseEvaluationStatus::Partial</span>(<span class="ident">message</span>),
+                <span class="kw">let </span>task = <span class="kw-2">&amp;</span><span class="self">self</span>.task;
+                <span class="kw">let </span>eval = <span class="self">self
+                    </span>.evaluations
+                    .entry(solution)
+                    .or_insert_with(|| SolutionEvaluationState::new(task));
+                <span class="kw">let </span>subtask = eval.subtasks.get_mut(<span class="kw-2">&amp;</span>subtask).expect(<span class="string">&quot;Missing subtask&quot;</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>testcase = subtask
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase)
+                    .expect(<span class="string">&quot;Missing testcase&quot;</span>);
+                testcase.score = <span class="prelude-val">Some</span>(score);
+                <span class="kw">if </span>!testcase.status.has_completed() {
+                    testcase.status = <span class="kw">match </span>ScoreStatus::from_score(score, <span class="number">1.0</span>) {
+                        ScoreStatus::WrongAnswer =&gt; TestcaseEvaluationStatus::WrongAnswer(message),
+                        ScoreStatus::Accepted =&gt; TestcaseEvaluationStatus::Accepted(message),
+                        ScoreStatus::PartialScore =&gt; TestcaseEvaluationStatus::Partial(message),
                     };
                 }
             }
-            <span class="ident">UIMessage::IOISubtaskScore</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">score</span>,
-                <span class="ident">normalized_score</span>,
+            UIMessage::IOISubtaskScore {
+                subtask,
+                solution,
+                score,
+                normalized_score,
             } =&gt; {
-                <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">task</span>;
-                <span class="kw">let</span> <span class="ident">eval</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">evaluations</span>
-                    .<span class="ident">entry</span>(<span class="ident">solution</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">SolutionEvaluationState::new</span>(<span class="ident">task</span>));
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">subtask</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">subtasks</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">subtask</span>).<span class="ident">expect</span>(<span class="string">&quot;Missing subtask&quot;</span>);
-                <span class="ident">subtask</span>.<span class="ident">score</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">score</span>);
-                <span class="ident">subtask</span>.<span class="ident">normalized_score</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">normalized_score</span>);
+                <span class="kw">let </span>task = <span class="kw-2">&amp;</span><span class="self">self</span>.task;
+                <span class="kw">let </span>eval = <span class="self">self
+                    </span>.evaluations
+                    .entry(solution)
+                    .or_insert_with(|| SolutionEvaluationState::new(task));
+                <span class="kw">let </span><span class="kw-2">mut </span>subtask = eval.subtasks.get_mut(<span class="kw-2">&amp;</span>subtask).expect(<span class="string">&quot;Missing subtask&quot;</span>);
+                subtask.score = <span class="prelude-val">Some</span>(score);
+                subtask.normalized_score = <span class="prelude-val">Some</span>(normalized_score);
             }
-            <span class="ident">UIMessage::IOITaskScore</span> { <span class="ident">solution</span>, <span class="ident">score</span> } =&gt; {
-                <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">task</span>;
-                <span class="kw">let</span> <span class="ident">eval</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">evaluations</span>
-                    .<span class="ident">entry</span>(<span class="ident">solution</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">SolutionEvaluationState::new</span>(<span class="ident">task</span>));
-                <span class="ident">eval</span>.<span class="ident">score</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">score</span>);
+            UIMessage::IOITaskScore { solution, score } =&gt; {
+                <span class="kw">let </span>task = <span class="kw-2">&amp;</span><span class="self">self</span>.task;
+                <span class="kw">let </span>eval = <span class="self">self
+                    </span>.evaluations
+                    .entry(solution)
+                    .or_insert_with(|| SolutionEvaluationState::new(task));
+                eval.score = <span class="prelude-val">Some</span>(score);
             }
-            <span class="ident">UIMessage::IOIBooklet</span> { <span class="ident">name</span>, <span class="ident">status</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">booklets</span>
-                    .<span class="ident">entry</span>(<span class="ident">name</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">BookletState</span> {
-                        <span class="ident">status</span>: <span class="ident">UIExecutionStatus::Pending</span>,
-                        <span class="ident">dependencies</span>: <span class="ident">HashMap::new</span>(),
+            UIMessage::IOIBooklet { name, status } =&gt; {
+                <span class="self">self</span>.booklets
+                    .entry(name)
+                    .or_insert_with(|| BookletState {
+                        status: UIExecutionStatus::Pending,
+                        dependencies: HashMap::new(),
                     })
-                    .<span class="ident">status</span> <span class="op">=</span> <span class="ident">status</span>;
+                    .status = status;
             }
-            <span class="ident">UIMessage::IOIBookletDependency</span> {
-                <span class="ident">booklet</span>,
-                <span class="ident">name</span>,
-                <span class="ident">step</span>,
-                <span class="ident">num_steps</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIBookletDependency {
+                booklet,
+                name,
+                step,
+                num_steps,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">booklets</span>
-                    .<span class="ident">entry</span>(<span class="ident">booklet</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">BookletState</span> {
-                        <span class="ident">status</span>: <span class="ident">UIExecutionStatus::Pending</span>,
-                        <span class="ident">dependencies</span>: <span class="ident">HashMap::new</span>(),
+                <span class="self">self</span>.booklets
+                    .entry(booklet)
+                    .or_insert_with(|| BookletState {
+                        status: UIExecutionStatus::Pending,
+                        dependencies: HashMap::new(),
                     })
-                    .<span class="ident">dependencies</span>
-                    .<span class="ident">entry</span>(<span class="ident">name</span>)
-                    .<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> {
-                        (<span class="number">0</span>..<span class="ident">num_steps</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">BookletDependencyState</span> {
-                                <span class="ident">status</span>: <span class="ident">UIExecutionStatus::Pending</span>,
+                    .dependencies
+                    .entry(name)
+                    .or_insert_with(|| {
+                        (<span class="number">0</span>..num_steps)
+                            .map(|<span class="kw">_</span>| BookletDependencyState {
+                                status: UIExecutionStatus::Pending,
                             })
-                            .<span class="ident">collect</span>()
+                            .collect()
                     })
-                    .<span class="ident">get_mut</span>(<span class="ident">step</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Statement dependency step is gone&quot;</span>)
-                    .<span class="ident">status</span> <span class="op">=</span> <span class="ident">status</span>;
+                    .get_mut(step)
+                    .expect(<span class="string">&quot;Statement dependency step is gone&quot;</span>)
+                    .status = status;
             }
-            <span class="ident">UIMessage::Diagnostic</span> { <span class="ident">diagnostic</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">diagnostics</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>);
+            UIMessage::Diagnostic { diagnostic } =&gt; {
+                <span class="self">self</span>.diagnostics.add_diagnostic(diagnostic);
             }
-            <span class="ident">UIMessage::TerryTask</span> { .. }
-            <span class="op">|</span> <span class="ident">UIMessage::TerryGeneration</span> { .. }
-            <span class="op">|</span> <span class="ident">UIMessage::TerryValidation</span> { .. }
-            <span class="op">|</span> <span class="ident">UIMessage::TerrySolution</span> { .. }
-            <span class="op">|</span> <span class="ident">UIMessage::TerryChecker</span> { .. }
-            <span class="op">|</span> <span class="ident">UIMessage::TerrySolutionOutcome</span> { .. } =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;Terry message on IOI UI&quot;</span>),
+            UIMessage::TerryTask { .. }
+            | UIMessage::TerryGeneration { .. }
+            | UIMessage::TerryValidation { .. }
+            | UIMessage::TerrySolution { .. }
+            | UIMessage::TerryChecker { .. }
+            | UIMessage::TerrySolutionOutcome { .. } =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;Terry message on IOI UI&quot;</span>),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="ident">finish_ui::FinishUI::print</span>(<span class="self">self</span>);
+    <span class="kw">fn </span>finish(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        finish_ui::FinishUI::print(<span class="self">self</span>);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/input_validator.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>input_validator.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/input_validator.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>input_validator.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -108,115 +108,115 @@
 <span id="108">108</span>
 <span id="109">109</span>
 <span id="110">110</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::{Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">Execution</span>, <span class="ident">FileUuid</span>, <span class="ident">Priority</span>};
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
+<span class="kw">use </span>task_maker_dag::{Execution, FileUuid, Priority};
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>, <span class="ident">GENERATION_PRIORITY</span>, <span class="ident">STDERR_CONTENT_LENGTH</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::UIMessage</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">UISender</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>, <span class="ident">Tag</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{SubtaskId, TestcaseId, GENERATION_PRIORITY, STDERR_CONTENT_LENGTH};
+<span class="kw">use </span><span class="kw">crate</span>::ui::UIMessage;
+<span class="kw">use crate</span>::{bind_exec_callbacks, UISender};
+<span class="kw">use crate</span>::{EvaluationData, SourceFile, Tag};
 
-<span class="doccomment">/// The file name of the input file that the `InputValidator` has to validate. This file will be</span>
-<span class="doccomment">/// placed in the current working directory of the validation sandbox.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TM_VALIDATION_FILE_NAME</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;tm_validation_file&quot;</span>;
+<span class="doccomment">/// The file name of the input file that the `InputValidator` has to validate. This file will be
+/// placed in the current working directory of the validation sandbox.
+</span><span class="kw">pub const </span>TM_VALIDATION_FILE_NAME: <span class="kw-2">&amp;</span>str = <span class="string">&quot;tm_validation_file&quot;</span>;
 
-<span class="doccomment">/// An input file validator is responsible for checking that the input file follows the format and</span>
-<span class="doccomment">/// constraints defined by the task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">InputValidator</span> {
-    <span class="doccomment">/// Skip the validation and assume the input file is valid.</span>
-    <span class="ident">AssumeValid</span>,
-    <span class="doccomment">/// Use a custom command to check if the input file is valid. The command should exit with</span>
-    <span class="doccomment">/// non-zero return code if and only if the input is invalid.</span>
-    <span class="ident">Custom</span>(<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>),
+<span class="doccomment">/// An input file validator is responsible for checking that the input file follows the format and
+/// constraints defined by the task.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub enum </span>InputValidator {
+    <span class="doccomment">/// Skip the validation and assume the input file is valid.
+    </span>AssumeValid,
+    <span class="doccomment">/// Use a custom command to check if the input file is valid. The command should exit with
+    /// non-zero return code if and only if the input is invalid.
+    </span>Custom(Arc&lt;SourceFile&gt;, Vec&lt;String&gt;),
 }
 
-<span class="kw">impl</span> <span class="ident">InputValidator</span> {
-    <span class="doccomment">/// Build the execution for the validation of the input file. Return the handle to the standard</span>
-    <span class="doccomment">/// output of the validator, if any and the `Execution` if any. The execution does not send UI</span>
-    <span class="doccomment">/// messages yet and it&#39;s not added to the DAG.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">validate</span>(
+<span class="kw">impl </span>InputValidator {
+    <span class="doccomment">/// Build the execution for the validation of the input file. Return the handle to the standard
+    /// output of the validator, if any and the `Execution` if any. The execution does not send UI
+    /// messages yet and it&#39;s not added to the DAG.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>validate(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">description</span>: <span class="ident">String</span>,
-        <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-        <span class="ident">subtask_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>,
-        <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Execution</span><span class="op">&gt;</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">InputValidator::AssumeValid</span> =&gt; <span class="prelude-val">Ok</span>((<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)),
-            <span class="ident">InputValidator::Custom</span>(<span class="ident">source_file</span>, <span class="ident">args</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">source_file</span>
-                    .<span class="ident">execute</span>(<span class="ident">eval</span>, <span class="ident">description</span>, <span class="ident">args</span>.<span class="ident">clone</span>())
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to execute validator source file&quot;</span>)<span class="question-mark">?</span>;
-                <span class="ident">exec</span>.<span class="ident">input</span>(<span class="ident">input</span>, <span class="ident">TM_VALIDATION_FILE_NAME</span>, <span class="bool-val">false</span>)
-                    .<span class="ident">tag</span>(<span class="ident">Tag::Generation</span>.<span class="ident">into</span>())
-                    .<span class="ident">priority</span>(<span class="ident">GENERATION_PRIORITY</span> <span class="op">-</span> <span class="ident">testcase_id</span> <span class="kw">as</span> <span class="ident">Priority</span>)
-                    .<span class="ident">env</span>(<span class="string">&quot;TM_SUBTASK&quot;</span>, <span class="ident">subtask_id</span>.<span class="ident">to_string</span>())
-                    .<span class="ident">env</span>(<span class="string">&quot;TM_TESTCASE&quot;</span>, <span class="ident">testcase_id</span>.<span class="ident">to_string</span>());
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="ident">subtask_name</span> {
-                    <span class="ident">exec</span>.<span class="ident">env</span>(<span class="string">&quot;TM_SUBTASK_NAME&quot;</span>, <span class="ident">name</span>);
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        description: String,
+        subtask_id: SubtaskId,
+        subtask_name: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;,
+        testcase_id: TestcaseId,
+        input: FileUuid,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(<span class="prelude-ty">Option</span>&lt;FileUuid&gt;, <span class="prelude-ty">Option</span>&lt;Execution&gt;), Error&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            InputValidator::AssumeValid =&gt; <span class="prelude-val">Ok</span>((<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)),
+            InputValidator::Custom(source_file, args) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>exec = source_file
+                    .execute(eval, description, args.clone())
+                    .context(<span class="string">&quot;Failed to execute validator source file&quot;</span>)<span class="question-mark">?</span>;
+                exec.input(input, TM_VALIDATION_FILE_NAME, <span class="bool-val">false</span>)
+                    .tag(Tag::Generation.into())
+                    .priority(GENERATION_PRIORITY - testcase_id <span class="kw">as </span>Priority)
+                    .env(<span class="string">&quot;TM_SUBTASK&quot;</span>, subtask_id.to_string())
+                    .env(<span class="string">&quot;TM_TESTCASE&quot;</span>, testcase_id.to_string());
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = subtask_name {
+                    exec.env(<span class="string">&quot;TM_SUBTASK_NAME&quot;</span>, name);
                 }
-                <span class="ident">exec</span>.<span class="ident">limits_mut</span>().<span class="ident">allow_multiprocess</span>();
-                <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">stdout</span>();
+                exec.limits_mut().allow_multiprocess();
+                <span class="kw">let </span>stdout = exec.stdout();
 
-                <span class="prelude-val">Ok</span>((<span class="prelude-val">Some</span>(<span class="ident">stdout</span>.<span class="ident">uuid</span>), <span class="prelude-val">Some</span>(<span class="ident">exec</span>)))
+                <span class="prelude-val">Ok</span>((<span class="prelude-val">Some</span>(stdout.uuid), <span class="prelude-val">Some</span>(exec)))
             }
         }
     }
 
-    <span class="doccomment">/// Add the validation of the input file to the DAG and the callbacks to the UI, optionally</span>
-    <span class="doccomment">/// returning a fake file that blocks the usage of the actual input until the validation</span>
-    <span class="doccomment">/// succeeds. If the validation is ignored, `None` is returned.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">validate_and_bind</span>(
+    <span class="doccomment">/// Add the validation of the input file to the DAG and the callbacks to the UI, optionally
+    /// returning a fake file that blocks the usage of the actual input until the validation
+    /// succeeds. If the validation is ignored, `None` is returned.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>validate_and_bind(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-        <span class="ident">subtask_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>,
-        <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">handle</span>, <span class="ident">val</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">validate</span>(
-            <span class="ident">eval</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        subtask_id: SubtaskId,
+        subtask_name: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;,
+        testcase_id: TestcaseId,
+        input: FileUuid,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;FileUuid&gt;, Error&gt; {
+        <span class="kw">let </span>(handle, val) = <span class="self">self</span>.validate(
+            eval,
             <span class="macro">format!</span>(
                 <span class="string">&quot;Validation of input file of testcase {}, subtask {}&quot;</span>,
-                <span class="ident">testcase_id</span>, <span class="ident">subtask_id</span>
+                testcase_id, subtask_id
             ),
-            <span class="ident">subtask_id</span>,
-            <span class="ident">subtask_name</span>,
-            <span class="ident">testcase_id</span>,
-            <span class="ident">input</span>,
+            subtask_id,
+            subtask_name,
+            testcase_id,
+            input,
         )<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">val</span>) <span class="op">=</span> <span class="ident">val</span> {
-            <span class="ident">val</span>.<span class="ident">capture_stderr</span>(<span class="ident">STDERR_CONTENT_LENGTH</span>);
-            <span class="macro">bind_exec_callbacks!</span>(<span class="ident">eval</span>, <span class="ident">val</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="ident">status</span><span class="op">|</span> <span class="ident">UIMessage::IOIValidation</span> {
-                <span class="ident">subtask</span>: <span class="ident">subtask_id</span>,
-                <span class="ident">testcase</span>: <span class="ident">testcase_id</span>,
-                <span class="ident">status</span>
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>val) = val {
+            val.capture_stderr(STDERR_CONTENT_LENGTH);
+            <span class="macro">bind_exec_callbacks!</span>(eval, val.uuid, |status| UIMessage::IOIValidation {
+                subtask: subtask_id,
+                testcase: testcase_id,
+                status
             })<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">val</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span>
-                        <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(<span class="string">&quot;Failed to validate input {}&quot;</span>, <span class="ident">testcase_id</span>));
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">result</span>.<span class="ident">stderr</span> {
-                        <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>.<span class="ident">with_help_attachment</span>(<span class="ident">stderr</span>);
+            <span class="kw">let </span>sender = eval.sender.clone();
+            eval.dag.on_execution_done(<span class="kw-2">&amp;</span>val.uuid, <span class="kw">move </span>|result| {
+                <span class="kw">if </span>!result.status.is_success() {
+                    <span class="kw">let </span><span class="kw-2">mut </span>diagnostic =
+                        Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;Failed to validate input {}&quot;</span>, testcase_id));
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
+                        diagnostic = diagnostic.with_help_attachment(stderr);
                     }
-                    <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                    sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(())
             });
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">val</span>);
+            eval.dag.add_execution(val);
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">handle</span>)
+        <span class="prelude-val">Ok</span>(handle)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

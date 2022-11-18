@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/source_file.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>source_file.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_format/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/source_file.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>source_file.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_format/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -125,112 +125,112 @@
 <span id="125">125</span>
 <span id="126">126</span>
 <span id="127">127</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::ops::{Deref, DerefMut};
+<span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">use </span>anyhow::{Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
-<span class="kw">use</span> <span class="ident">task_maker_lang::GraderMap</span>;
+<span class="kw">use </span>task_maker_dag::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
+<span class="kw">use </span>task_maker_lang::GraderMap;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::EvaluationData</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">UISender</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ui::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
+<span class="kw">use crate</span>::{bind_exec_callbacks, UISender};
 
-<span class="doccomment">/// Wrapper around [`task_maker_lang::SourceFile`](../task_maker_lang/struct.SourceFile.html) that</span>
-<span class="doccomment">/// also sends to the UI the messages about the compilation, making the compilation completely</span>
-<span class="doccomment">/// transparent to the `SourceFile`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SourceFile</span> {
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">flatten</span>)]</span>
-    <span class="ident">base</span>: <span class="ident">task_maker_lang::SourceFile</span>,
+<span class="doccomment">/// Wrapper around [`task_maker_lang::SourceFile`](../task_maker_lang/struct.SourceFile.html) that
+/// also sends to the UI the messages about the compilation, making the compilation completely
+/// transparent to the `SourceFile`.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>SourceFile {
+    <span class="attribute">#[serde(flatten)]
+    </span>base: task_maker_lang::SourceFile,
 }
 
-<span class="kw">impl</span> <span class="ident">SourceFile</span> {
-    <span class="doccomment">/// Make a new `SourceFile`. See</span>
-    <span class="doccomment">/// [`task_maker_lang::SourceFile`](../task_maker_lang/struct.SourceFile.html) for the details.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="ident">P2</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="ident">P3</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-        <span class="ident">path</span>: <span class="ident">P</span>,
-        <span class="ident">base_path</span>: <span class="ident">P3</span>,
-        <span class="ident">grader_map</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">GraderMap</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">write_bin_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">P2</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">SourceFile</span> {
-            <span class="ident">base</span>: <span class="ident">task_maker_lang::SourceFile::new</span>(<span class="ident">path</span>, <span class="ident">base_path</span>, <span class="ident">grader_map</span>, <span class="ident">write_bin_to</span>)<span class="question-mark">?</span>,
+<span class="kw">impl </span>SourceFile {
+    <span class="doccomment">/// Make a new `SourceFile`. See
+    /// [`task_maker_lang::SourceFile`](../task_maker_lang/struct.SourceFile.html) for the details.
+    </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;, P2: Into&lt;PathBuf&gt;, P3: Into&lt;PathBuf&gt;&gt;(
+        path: P,
+        base_path: P3,
+        grader_map: <span class="prelude-ty">Option</span>&lt;Arc&lt;GraderMap&gt;&gt;,
+        write_bin_to: <span class="prelude-ty">Option</span>&lt;P2&gt;,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;SourceFile&gt; {
+        <span class="prelude-val">Some</span>(SourceFile {
+            base: task_maker_lang::SourceFile::new(path, base_path, grader_map, write_bin_to)<span class="question-mark">?</span>,
         })
     }
 
-    <span class="doccomment">/// Prepare an execution of the source file, eventually adding the compilation to the DAG.</span>
-    <span class="doccomment">/// The compilation messages are sent to the UI.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// After the preparation the binary is executed with the specified arguments.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// See [`task_maker_lang::SourceFile`](../task_maker_lang/struct.SourceFile.html) for the</span>
-    <span class="doccomment">/// details. Note that the return value is different because the compilation uuid is handled by</span>
-    <span class="doccomment">/// this method.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>, <span class="ident">S2</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">S2</span><span class="op">&gt;</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Prepare an execution of the source file, eventually adding the compilation to the DAG.
+    /// The compilation messages are sent to the UI.
+    ///
+    /// After the preparation the binary is executed with the specified arguments.
+    ///
+    /// See [`task_maker_lang::SourceFile`](../task_maker_lang/struct.SourceFile.html) for the
+    /// details. Note that the return value is different because the compilation uuid is handled by
+    /// this method.
+    </span><span class="kw">pub fn </span>execute&lt;S: AsRef&lt;str&gt;, S2: Into&lt;String&gt;, I: IntoIterator&lt;Item = S2&gt;&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">description</span>: <span class="ident">S</span>,
-        <span class="ident">args</span>: <span class="ident">I</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Execution</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">exec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">base</span>.<span class="ident">execute</span>(
-            <span class="kw-2">&amp;mut</span> <span class="ident">eval</span>.<span class="ident">dag</span>,
-            <span class="ident">description</span>,
-            <span class="ident">args</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">into</span>()).<span class="ident">collect</span>(),
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        description: S,
+        args: I,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Execution, Error&gt; {
+        <span class="kw">let </span>(comp, exec) = <span class="self">self</span>.base.execute(
+            <span class="kw-2">&amp;mut </span>eval.dag,
+            description,
+            args.into_iter().map(|s| s.into()).collect(),
         )<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">bind_compilation_exe</span>(<span class="ident">eval</span>, <span class="ident">comp</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">exec</span>)
+        <span class="self">self</span>.bind_compilation_exe(eval, comp)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(exec)
     }
 
-    <span class="doccomment">/// Prepare an execution of the source file, eventually adding the compilation to the DAG.</span>
-    <span class="doccomment">/// The compilation messages are sent to the UI.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prepare</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">comp</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">base</span>.<span class="ident">prepare</span>(<span class="kw-2">&amp;mut</span> <span class="ident">eval</span>.<span class="ident">dag</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">bind_compilation_exe</span>(<span class="ident">eval</span>, <span class="ident">comp</span>)<span class="question-mark">?</span>;
+    <span class="doccomment">/// Prepare an execution of the source file, eventually adding the compilation to the DAG.
+    /// The compilation messages are sent to the UI.
+    </span><span class="kw">pub fn </span>prepare(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>comp = <span class="self">self</span>.base.prepare(<span class="kw-2">&amp;mut </span>eval.dag)<span class="question-mark">?</span>;
+        <span class="self">self</span>.bind_compilation_exe(eval, comp)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Prepare the source file if needed and return the executable file.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">executable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">exe</span>, <span class="ident">comp</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">base</span>.<span class="ident">executable</span>(<span class="kw-2">&amp;mut</span> <span class="ident">eval</span>.<span class="ident">dag</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">bind_compilation_exe</span>(<span class="ident">eval</span>, <span class="ident">comp</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">exe</span>)
+    <span class="doccomment">/// Prepare the source file if needed and return the executable file.
+    </span><span class="kw">pub fn </span>executable(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;FileUuid, Error&gt; {
+        <span class="kw">let </span>(exe, comp) = <span class="self">self</span>.base.executable(<span class="kw-2">&amp;mut </span>eval.dag)<span class="question-mark">?</span>;
+        <span class="self">self</span>.bind_compilation_exe(eval, comp)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(exe)
     }
 
-    <span class="doccomment">/// Bind the callbacks for the compilation callbacks.</span>
-    <span class="kw">fn</span> <span class="ident">bind_compilation_exe</span>(
+    <span class="doccomment">/// Bind the callbacks for the compilation callbacks.
+    </span><span class="kw">fn </span>bind_compilation_exe(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">comp</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionUuid</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="comment">// if there is the compilation, send to the UI the messages</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">comp_uuid</span>) <span class="op">=</span> <span class="ident">comp</span> {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>;
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        comp: <span class="prelude-ty">Option</span>&lt;ExecutionUuid&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="comment">// if there is the compilation, send to the UI the messages
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(comp_uuid) = comp {
+            <span class="kw">let </span>path = <span class="kw-2">&amp;</span><span class="self">self</span>.path;
             <span class="macro">bind_exec_callbacks!</span>(
-                <span class="ident">eval</span>,
-                <span class="ident">comp_uuid</span>,
-                <span class="op">|</span><span class="ident">status</span>, <span class="ident">file</span><span class="op">|</span> <span class="ident">UIMessage::Compilation</span> { <span class="ident">file</span>, <span class="ident">status</span> },
-                <span class="ident">path</span>
+                eval,
+                comp_uuid,
+                |status, file| UIMessage::Compilation { file, status },
+                path
             )
-            .<span class="ident">context</span>(<span class="string">&quot;Failed to bind exec callbacks&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>
-                .<span class="ident">path</span>
-                .<span class="ident">strip_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">base_path</span>)
-                .<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>)
-                .<span class="ident">to_owned</span>();
-            <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">comp_uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">result</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">result</span>.<span class="ident">status</span>.<span class="ident">is_success</span>() {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagnostic</span> <span class="op">=</span>
-                        <span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(<span class="string">&quot;Failed to compile {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()));
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">result</span>.<span class="ident">stderr</span> {
-                        <span class="ident">diagnostic</span> <span class="op">=</span> <span class="ident">diagnostic</span>.<span class="ident">with_help_attachment</span>(<span class="ident">stderr</span>);
+            .context(<span class="string">&quot;Failed to bind exec callbacks&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>path = <span class="self">self
+                </span>.path
+                .strip_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>.base_path)
+                .unwrap_or(<span class="kw-2">&amp;</span><span class="self">self</span>.path)
+                .to_owned();
+            <span class="kw">let </span>sender = eval.sender.clone();
+            eval.dag.on_execution_done(<span class="kw-2">&amp;</span>comp_uuid, <span class="kw">move </span>|result| {
+                <span class="kw">if </span>!result.status.is_success() {
+                    <span class="kw">let </span><span class="kw-2">mut </span>diagnostic =
+                        Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;Failed to compile {}&quot;</span>, path.display()));
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
+                        diagnostic = diagnostic.with_help_attachment(stderr);
                     }
-                    <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(<span class="ident">diagnostic</span>)<span class="question-mark">?</span>;
+                    sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(())
             });
@@ -239,18 +239,18 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">task_maker_lang::SourceFile</span>;
+<span class="kw">impl </span>Deref <span class="kw">for </span>SourceFile {
+    <span class="kw">type </span>Target = task_maker_lang::SourceFile;
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">base</span>
+    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.base
     }
 }
 
-<span class="kw">impl</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">SourceFile</span> {
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Target</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">base</span>
+<span class="kw">impl </span>DerefMut <span class="kw">for </span>SourceFile {
+    <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.base
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/scheduler.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>scheduler.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/scheduler.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>scheduler.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -873,874 +873,874 @@
 <span id="873">873</span>
 <span id="874">874</span>
 <span id="875">875</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">BinaryHeap</span>, <span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
-<span class="kw">use</span> <span class="ident">std::sync::mpsc</span>::{<span class="ident">Receiver</span>, <span class="ident">Sender</span>};
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">std::time</span>::{<span class="ident">Duration</span>, <span class="ident">Instant</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>std::collections::{BinaryHeap, HashMap, HashSet};
+<span class="kw">use </span>std::sync::mpsc::{Receiver, Sender};
+<span class="kw">use </span>std::sync::Arc;
+<span class="kw">use </span>std::time::{Duration, Instant};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
-<span class="kw">use</span> <span class="ident">uuid::Uuid</span>;
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
+<span class="kw">use </span>uuid::Uuid;
 
-<span class="kw">use</span> <span class="ident">task_maker_cache</span>::{<span class="ident">Cache</span>, <span class="ident">CacheResult</span>};
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{
-    <span class="ident">CacheMode</span>, <span class="ident">DagPriority</span>, <span class="ident">ExecutionDAGData</span>, <span class="ident">ExecutionGroup</span>, <span class="ident">ExecutionGroupUuid</span>, <span class="ident">ExecutionResult</span>,
-    <span class="ident">ExecutionUuid</span>, <span class="ident">FileUuid</span>, <span class="ident">Priority</span>, <span class="ident">WorkerUuid</span>, <span class="ident">HIGH_PRIORITY</span>,
+<span class="kw">use </span>task_maker_cache::{Cache, CacheResult};
+<span class="kw">use </span>task_maker_dag::{
+    CacheMode, DagPriority, ExecutionDAGData, ExecutionGroup, ExecutionGroupUuid, ExecutionResult,
+    ExecutionUuid, FileUuid, Priority, WorkerUuid, HIGH_PRIORITY,
 };
-<span class="kw">use</span> <span class="ident">task_maker_store</span>::{<span class="ident">FileStore</span>, <span class="ident">FileStoreHandle</span>, <span class="ident">FileStoreKey</span>};
+<span class="kw">use </span>task_maker_store::{FileStore, FileStoreHandle, FileStoreKey};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::executor</span>::{
-    <span class="ident">ExecutionDAGWatchSet</span>, <span class="ident">ExecutorStatus</span>, <span class="ident">ExecutorWorkerStatus</span>, <span class="ident">WorkerCurrentJobStatus</span>, <span class="ident">WorkerJob</span>,
+<span class="kw">use </span><span class="kw">crate</span>::executor::{
+    ExecutionDAGWatchSet, ExecutorStatus, ExecutorWorkerStatus, WorkerCurrentJobStatus, WorkerJob,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::worker_manager::WorkerManagerInMessage</span>;
+<span class="kw">use </span><span class="kw">crate</span>::worker_manager::WorkerManagerInMessage;
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ClientUuid</span> <span class="op">=</span> <span class="ident">Uuid</span>;
+<span class="kw">pub type </span>ClientUuid = Uuid;
 
-<span class="doccomment">/// Information about a client of the scheduler.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClientInfo</span> {
-    <span class="doccomment">/// Unique identifier of the client.</span>
-    <span class="kw">pub</span> <span class="ident">uuid</span>: <span class="ident">ClientUuid</span>,
-    <span class="doccomment">/// The name of the client.</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
+<span class="doccomment">/// Information about a client of the scheduler.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, TypeScriptify)]
+</span><span class="kw">pub struct </span>ClientInfo {
+    <span class="doccomment">/// Unique identifier of the client.
+    </span><span class="kw">pub </span>uuid: ClientUuid,
+    <span class="doccomment">/// The name of the client.
+    </span><span class="kw">pub </span>name: String,
 }
 
-<span class="doccomment">/// Message coming in for the `Scheduler` from either an `Executor` or a `WorkerManager`.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">SchedulerInMessage</span> {
-    <span class="doccomment">/// A client asked to evaluate a DAG.</span>
-    <span class="ident">EvaluateDAG</span> {
-        <span class="doccomment">/// The information about the client issuing the request.</span>
-        <span class="ident">client</span>: <span class="ident">ClientInfo</span>,
-        <span class="doccomment">/// The DAG to evaluate.</span>
-        <span class="ident">dag</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ExecutionDAGData</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// The set of callbacks the client is interested in.</span>
-        <span class="ident">callbacks</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ExecutionDAGWatchSet</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Message coming in for the `Scheduler` from either an `Executor` or a `WorkerManager`.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum </span>SchedulerInMessage {
+    <span class="doccomment">/// A client asked to evaluate a DAG.
+    </span>EvaluateDAG {
+        <span class="doccomment">/// The information about the client issuing the request.
+        </span>client: ClientInfo,
+        <span class="doccomment">/// The DAG to evaluate.
+        </span>dag: Box&lt;ExecutionDAGData&gt;,
+        <span class="doccomment">/// The set of callbacks the client is interested in.
+        </span>callbacks: Box&lt;ExecutionDAGWatchSet&gt;,
     },
-    <span class="doccomment">/// A client has been disconnected, all the executions of that client should be removed and the</span>
-    <span class="doccomment">/// involved workers stopped.</span>
-    <span class="ident">ClientDisconnected</span> {
-        <span class="doccomment">/// The identifier of the client.</span>
-        <span class="ident">client</span>: <span class="ident">ClientUuid</span>,
+    <span class="doccomment">/// A client has been disconnected, all the executions of that client should be removed and the
+    /// involved workers stopped.
+    </span>ClientDisconnected {
+        <span class="doccomment">/// The identifier of the client.
+        </span>client: ClientUuid,
     },
-    <span class="doccomment">/// A new file of the DAG of a client is ready.</span>
-    <span class="ident">FileReady</span> {
-        <span class="doccomment">/// The identifier of the client that owns the file.</span>
-        <span class="ident">client</span>: <span class="ident">ClientUuid</span>,
-        <span class="doccomment">/// The identifier of the file that is now ready.</span>
-        <span class="ident">uuid</span>: <span class="ident">FileUuid</span>,
-        <span class="doccomment">/// The handle to the file in the store.</span>
-        <span class="ident">handle</span>: <span class="ident">FileStoreHandle</span>,
+    <span class="doccomment">/// A new file of the DAG of a client is ready.
+    </span>FileReady {
+        <span class="doccomment">/// The identifier of the client that owns the file.
+        </span>client: ClientUuid,
+        <span class="doccomment">/// The identifier of the file that is now ready.
+        </span>uuid: FileUuid,
+        <span class="doccomment">/// The handle to the file in the store.
+        </span>handle: FileStoreHandle,
     },
-    <span class="doccomment">/// A worker completed its job.</span>
-    <span class="ident">WorkerResult</span> {
-        <span class="doccomment">/// The uuid of the worker that was doing the job.</span>
-        <span class="ident">worker</span>: <span class="ident">WorkerUuid</span>,
-        <span class="doccomment">/// The list of the results of all the executions inside the group, in the same order.</span>
-        <span class="ident">result</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// The outputs that the worker produced.</span>
-        <span class="ident">outputs</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// A worker completed its job.
+    </span>WorkerResult {
+        <span class="doccomment">/// The uuid of the worker that was doing the job.
+        </span>worker: WorkerUuid,
+        <span class="doccomment">/// The list of the results of all the executions inside the group, in the same order.
+        </span>result: Vec&lt;ExecutionResult&gt;,
+        <span class="doccomment">/// The outputs that the worker produced.
+        </span>outputs: HashMap&lt;FileUuid, FileStoreHandle&gt;,
     },
-    <span class="doccomment">/// A new worker is ready for executing some work.</span>
-    <span class="ident">WorkerConnected</span> {
-        <span class="doccomment">/// The uuid of the worker.</span>
-        <span class="ident">uuid</span>: <span class="ident">WorkerUuid</span>,
-        <span class="doccomment">/// The name of the worker.</span>
-        <span class="ident">name</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// A new worker is ready for executing some work.
+    </span>WorkerConnected {
+        <span class="doccomment">/// The uuid of the worker.
+        </span>uuid: WorkerUuid,
+        <span class="doccomment">/// The name of the worker.
+        </span>name: String,
     },
-    <span class="doccomment">/// A previously ready worker is not ready anymore.</span>
-    <span class="ident">WorkerDisconnected</span> {
-        <span class="doccomment">/// The uuid of the worker that has disconnected.</span>
-        <span class="ident">uuid</span>: <span class="ident">WorkerUuid</span>,
+    <span class="doccomment">/// A previously ready worker is not ready anymore.
+    </span>WorkerDisconnected {
+        <span class="doccomment">/// The uuid of the worker that has disconnected.
+        </span>uuid: WorkerUuid,
     },
-    <span class="doccomment">/// The executor is asking for the status of the scheduler.</span>
-    <span class="ident">Status</span> { <span class="ident">client</span>: <span class="ident">ClientUuid</span> },
-    <span class="doccomment">/// The executor is asking to exit.</span>
-    <span class="ident">Exit</span>,
+    <span class="doccomment">/// The executor is asking for the status of the scheduler.
+    </span>Status { client: ClientUuid },
+    <span class="doccomment">/// The executor is asking to exit.
+    </span>Exit,
 }
 
-<span class="doccomment">/// Message that is sent from the `Scheduler` to the `Executor` informing a client that an event</span>
-<span class="doccomment">/// occurred. All the identifiers of executions and files are relative to a client, which its</span>
-<span class="doccomment">/// identifier is sent alongside this enum.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">SchedulerExecutorMessageData</span> {
-    <span class="doccomment">/// A watched execution started.</span>
-    <span class="ident">ExecutionStarted</span> {
-        <span class="doccomment">/// The uuid of the execution.</span>
-        <span class="ident">execution</span>: <span class="ident">ExecutionUuid</span>,
-        <span class="doccomment">/// The uuid of the worker on which the execution started.</span>
-        <span class="ident">worker</span>: <span class="ident">WorkerUuid</span>,
+<span class="doccomment">/// Message that is sent from the `Scheduler` to the `Executor` informing a client that an event
+/// occurred. All the identifiers of executions and files are relative to a client, which its
+/// identifier is sent alongside this enum.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum </span>SchedulerExecutorMessageData {
+    <span class="doccomment">/// A watched execution started.
+    </span>ExecutionStarted {
+        <span class="doccomment">/// The uuid of the execution.
+        </span>execution: ExecutionUuid,
+        <span class="doccomment">/// The uuid of the worker on which the execution started.
+        </span>worker: WorkerUuid,
     },
-    <span class="doccomment">/// A watched execution completed.</span>
-    <span class="ident">ExecutionDone</span> {
-        <span class="doccomment">/// The uuid of the execution.</span>
-        <span class="ident">execution</span>: <span class="ident">ExecutionUuid</span>,
-        <span class="doccomment">/// The result of the execution.</span>
-        <span class="ident">result</span>: <span class="ident">ExecutionResult</span>,
+    <span class="doccomment">/// A watched execution completed.
+    </span>ExecutionDone {
+        <span class="doccomment">/// The uuid of the execution.
+        </span>execution: ExecutionUuid,
+        <span class="doccomment">/// The result of the execution.
+        </span>result: ExecutionResult,
     },
-    <span class="doccomment">/// A watched execution has been skipped because one of its dependencies failed.</span>
-    <span class="ident">ExecutionSkipped</span> {
-        <span class="doccomment">/// The uuid of the execution that has been skipped.</span>
-        <span class="ident">execution</span>: <span class="ident">ExecutionUuid</span>,
+    <span class="doccomment">/// A watched execution has been skipped because one of its dependencies failed.
+    </span>ExecutionSkipped {
+        <span class="doccomment">/// The uuid of the execution that has been skipped.
+        </span>execution: ExecutionUuid,
     },
-    <span class="doccomment">/// A watched file has been produced and its now ready.</span>
-    <span class="ident">FileReady</span> {
-        <span class="doccomment">/// The uuid of the produced file.</span>
-        <span class="ident">file</span>: <span class="ident">FileUuid</span>,
-        <span class="doccomment">/// An handle to the file inside the file store.</span>
-        <span class="ident">handle</span>: <span class="ident">FileStoreHandle</span>,
-        <span class="doccomment">/// Whether this file has been produced successfully or its execution failed doing so.</span>
-        <span class="ident">successful</span>: <span class="ident">bool</span>,
-        <span class="doccomment">/// This file is urgent, it should be sent to the client ASAP.</span>
-        <span class="ident">urgent</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// A watched file has been produced and its now ready.
+    </span>FileReady {
+        <span class="doccomment">/// The uuid of the produced file.
+        </span>file: FileUuid,
+        <span class="doccomment">/// An handle to the file inside the file store.
+        </span>handle: FileStoreHandle,
+        <span class="doccomment">/// Whether this file has been produced successfully or its execution failed doing so.
+        </span>successful: bool,
+        <span class="doccomment">/// This file is urgent, it should be sent to the client ASAP.
+        </span>urgent: bool,
     },
-    <span class="doccomment">/// The evaluation has been completed.</span>
-    <span class="ident">EvaluationDone</span>,
-    <span class="doccomment">/// The status of the execution.</span>
-    <span class="ident">Status</span> { <span class="ident">status</span>: <span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span> },
+    <span class="doccomment">/// The evaluation has been completed.
+    </span>EvaluationDone,
+    <span class="doccomment">/// The status of the execution.
+    </span>Status { status: ExecutorStatus&lt;Duration&gt; },
 }
 
-<span class="doccomment">/// The actual message sent from the Scheduler to an Executor. Since all the fields of the</span>
-<span class="doccomment">/// enumeration would have got the client, it has been extracted here.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type</span> <span class="ident">SchedulerExecutorMessage</span> <span class="op">=</span> (<span class="ident">ClientUuid</span>, <span class="ident">SchedulerExecutorMessageData</span>);
+<span class="doccomment">/// The actual message sent from the Scheduler to an Executor. Since all the fields of the
+/// enumeration would have got the client, it has been extracted here.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type </span>SchedulerExecutorMessage = (ClientUuid, SchedulerExecutorMessageData);
 
-<span class="doccomment">/// The state of a connected worker.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">struct</span> <span class="ident">ConnectedWorker</span> {
-    <span class="doccomment">/// The uuid of the worker.</span>
-    <span class="ident">uuid</span>: <span class="ident">WorkerUuid</span>,
-    <span class="doccomment">/// The name of the worker.</span>
-    <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The job the worker is currently working on, with the instant of the start.</span>
-    <span class="ident">current_job</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">ClientUuid</span>, <span class="ident">ExecutionGroupUuid</span>, <span class="ident">Instant</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// The state of a connected worker.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">struct </span>ConnectedWorker {
+    <span class="doccomment">/// The uuid of the worker.
+    </span>uuid: WorkerUuid,
+    <span class="doccomment">/// The name of the worker.
+    </span>name: String,
+    <span class="doccomment">/// The job the worker is currently working on, with the instant of the start.
+    </span>current_job: <span class="prelude-ty">Option</span>&lt;(ClientUuid, ExecutionGroupUuid, Instant)&gt;,
 }
 
-<span class="doccomment">/// The scheduling information about the DAG of a single client.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SchedulerClientData</span> {
-    <span class="doccomment">/// The name of the client.</span>
-    <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The DAGs the scheduler is currently working on.</span>
-    <span class="ident">dag</span>: <span class="ident">ExecutionDAGData</span>,
-    <span class="doccomment">/// The set of callbacks the client is interested in.</span>
-    <span class="ident">callbacks</span>: <span class="ident">ExecutionDAGWatchSet</span>,
-    <span class="doccomment">/// The set of executions that depends on a file, this is a lookup table for when the files</span>
-    <span class="doccomment">/// become ready.</span>
-    <span class="ident">input_of</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">ExecutionGroupUuid</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The set of executions that are ready to be executed. Note that this is not the same as</span>
-    <span class="doccomment">/// `Scheduler::ready_execs`, it&#39;s just a fast lookup for known if there is still something to</span>
-    <span class="doccomment">/// do for this client.</span>
-    <span class="ident">ready_groups</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">ExecutionGroupUuid</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The set of executions that are currently running in a worker.</span>
-    <span class="ident">running_groups</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">ExecutionGroupUuid</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The list of tasks waiting for some dependencies, each with the list of missing files, when a</span>
-    <span class="doccomment">/// task is ready it&#39;s removed from the map.</span>
-    <span class="ident">missing_deps</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ExecutionGroupUuid</span>, <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The list of known [`FileStoreHandle`](../task_maker_store/struct.FileStoreHandle.html)s.</span>
-    <span class="doccomment">/// Storing them here prevents the `FileStore` from flushing them away.</span>
-    <span class="ident">file_handles</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The scheduling information about the DAG of a single client.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">struct </span>SchedulerClientData {
+    <span class="doccomment">/// The name of the client.
+    </span>name: String,
+    <span class="doccomment">/// The DAGs the scheduler is currently working on.
+    </span>dag: ExecutionDAGData,
+    <span class="doccomment">/// The set of callbacks the client is interested in.
+    </span>callbacks: ExecutionDAGWatchSet,
+    <span class="doccomment">/// The set of executions that depends on a file, this is a lookup table for when the files
+    /// become ready.
+    </span>input_of: HashMap&lt;FileUuid, HashSet&lt;ExecutionGroupUuid&gt;&gt;,
+    <span class="doccomment">/// The set of executions that are ready to be executed. Note that this is not the same as
+    /// `Scheduler::ready_execs`, it&#39;s just a fast lookup for known if there is still something to
+    /// do for this client.
+    </span>ready_groups: HashSet&lt;ExecutionGroupUuid&gt;,
+    <span class="doccomment">/// The set of executions that are currently running in a worker.
+    </span>running_groups: HashSet&lt;ExecutionGroupUuid&gt;,
+    <span class="doccomment">/// The list of tasks waiting for some dependencies, each with the list of missing files, when a
+    /// task is ready it&#39;s removed from the map.
+    </span>missing_deps: HashMap&lt;ExecutionGroupUuid, HashSet&lt;FileUuid&gt;&gt;,
+    <span class="doccomment">/// The list of known [`FileStoreHandle`](../task_maker_store/struct.FileStoreHandle.html)s.
+    /// Storing them here prevents the `FileStore` from flushing them away.
+    </span>file_handles: HashMap&lt;FileUuid, FileStoreHandle&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">SchedulerClientData</span> {
-    <span class="doccomment">/// Make a new `SchedulerClientData` based on the DAG the client sent.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="ident">dag</span>: <span class="ident">ExecutionDAGData</span>,
-        <span class="ident">callbacks</span>: <span class="ident">ExecutionDAGWatchSet</span>,
-    ) -&gt; <span class="ident">SchedulerClientData</span> {
-        <span class="ident">SchedulerClientData</span> {
-            <span class="ident">name</span>,
-            <span class="ident">dag</span>,
-            <span class="ident">callbacks</span>,
-            <span class="ident">input_of</span>: <span class="ident">HashMap::new</span>(),
-            <span class="ident">ready_groups</span>: <span class="ident">HashSet::new</span>(),
-            <span class="ident">running_groups</span>: <span class="ident">HashSet::new</span>(),
-            <span class="ident">missing_deps</span>: <span class="ident">HashMap::new</span>(),
-            <span class="ident">file_handles</span>: <span class="ident">HashMap::new</span>(),
+<span class="kw">impl </span>SchedulerClientData {
+    <span class="doccomment">/// Make a new `SchedulerClientData` based on the DAG the client sent.
+    </span><span class="kw">fn </span>new(
+        name: String,
+        dag: ExecutionDAGData,
+        callbacks: ExecutionDAGWatchSet,
+    ) -&gt; SchedulerClientData {
+        SchedulerClientData {
+            name,
+            dag,
+            callbacks,
+            input_of: HashMap::new(),
+            ready_groups: HashSet::new(),
+            running_groups: HashSet::new(),
+            missing_deps: HashMap::new(),
+            file_handles: HashMap::new(),
         }
     }
 
-    <span class="doccomment">/// True if the client has completed all the executions and there are no more ready nor running</span>
-    <span class="doccomment">/// ones.</span>
-    <span class="kw">fn</span> <span class="ident">is_done</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">ready_groups</span>.<span class="ident">is_empty</span>()
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">running_groups</span>.<span class="ident">is_empty</span>()
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">missing_deps</span>.<span class="ident">is_empty</span>()
+    <span class="doccomment">/// True if the client has completed all the executions and there are no more ready nor running
+    /// ones.
+    </span><span class="kw">fn </span>is_done(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.ready_groups.is_empty()
+            &amp;&amp; <span class="self">self</span>.running_groups.is_empty()
+            &amp;&amp; <span class="self">self</span>.missing_deps.is_empty()
     }
 }
 
-<span class="doccomment">/// A `Scheduler` is a service that is able to orchestrate the execution of the DAGs, sending the</span>
-<span class="doccomment">/// jobs to the workers, listening for events and managing the cache of the executions.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The scheduler communicates with the Executor for knowing when a client connects, disconnects and</span>
-<span class="doccomment">/// ask for the evaluation of a DAG, and sends messages to the clients via the Executor. It also</span>
-<span class="doccomment">/// communicates with the WorkerManager for sending messages to the workers and known when a worker</span>
-<span class="doccomment">/// connects or disconnects.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Scheduler</span> {
-    <span class="doccomment">/// A reference to the local file store.</span>
-    <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The cache to use for the executions.</span>
-    <span class="ident">cache</span>: <span class="ident">Cache</span>,
-    <span class="doccomment">/// Receiver of the messages delivered to the scheduler.</span>
-    <span class="ident">receiver</span>: <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">SchedulerInMessage</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Sender of the messages to the Executor, aka the messages to the actual clients.</span>
-    <span class="ident">executor</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">SchedulerExecutorMessage</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Sender of the messages to the WorkerManager, aka the messages to the workers.</span>
-    <span class="ident">worker_manager</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A `Scheduler` is a service that is able to orchestrate the execution of the DAGs, sending the
+/// jobs to the workers, listening for events and managing the cache of the executions.
+///
+/// The scheduler communicates with the Executor for knowing when a client connects, disconnects and
+/// ask for the evaluation of a DAG, and sends messages to the clients via the Executor. It also
+/// communicates with the WorkerManager for sending messages to the workers and known when a worker
+/// connects or disconnects.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Scheduler {
+    <span class="doccomment">/// A reference to the local file store.
+    </span>file_store: Arc&lt;FileStore&gt;,
+    <span class="doccomment">/// The cache to use for the executions.
+    </span>cache: Cache,
+    <span class="doccomment">/// Receiver of the messages delivered to the scheduler.
+    </span>receiver: Receiver&lt;SchedulerInMessage&gt;,
+    <span class="doccomment">/// Sender of the messages to the Executor, aka the messages to the actual clients.
+    </span>executor: Sender&lt;SchedulerExecutorMessage&gt;,
+    <span class="doccomment">/// Sender of the messages to the WorkerManager, aka the messages to the workers.
+    </span>worker_manager: Sender&lt;WorkerManagerInMessage&gt;,
 
-    <span class="doccomment">/// The priority queue of the ready tasks, waiting for the workers.</span>
-    <span class="ident">ready_execs</span>: <span class="ident">BinaryHeap</span><span class="op">&lt;</span>(<span class="ident">DagPriority</span>, <span class="ident">Priority</span>, <span class="ident">ExecutionGroupUuid</span>, <span class="ident">ClientUuid</span>)<span class="op">&gt;</span>,
-    <span class="doccomment">/// The data about the clients currently working.</span>
-    <span class="ident">clients</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ClientUuid</span>, <span class="ident">SchedulerClientData</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The priority queue of the ready tasks, waiting for the workers.
+    </span>ready_execs: BinaryHeap&lt;(DagPriority, Priority, ExecutionGroupUuid, ClientUuid)&gt;,
+    <span class="doccomment">/// The data about the clients currently working.
+    </span>clients: HashMap&lt;ClientUuid, SchedulerClientData&gt;,
 
-    <span class="doccomment">/// The list of the workers that are either ready for some work or already working on a job.</span>
-    <span class="ident">connected_workers</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">WorkerUuid</span>, <span class="ident">ConnectedWorker</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The list of the workers that are either ready for some work or already working on a job.
+    </span>connected_workers: HashMap&lt;WorkerUuid, ConnectedWorker&gt;,
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unnecessary_wraps</span>)]</span>
-<span class="kw">impl</span> <span class="ident">Scheduler</span> {
-    <span class="doccomment">/// Make a new `Scheduler` based on the specified file store and cache. It will receive the</span>
-    <span class="doccomment">/// messages using the provided channel and sends messages to the executor and worker manager</span>
-    <span class="doccomment">/// with the specified channels.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-        <span class="ident">cache</span>: <span class="ident">Cache</span>,
-        <span class="ident">receiver</span>: <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">SchedulerInMessage</span><span class="op">&gt;</span>,
-        <span class="ident">executor</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">SchedulerExecutorMessage</span><span class="op">&gt;</span>,
-        <span class="ident">worker_manager</span>: <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">WorkerManagerInMessage</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Scheduler</span> {
-        <span class="ident">Scheduler</span> {
-            <span class="ident">file_store</span>,
-            <span class="ident">cache</span>,
-            <span class="ident">receiver</span>,
-            <span class="ident">executor</span>,
-            <span class="ident">worker_manager</span>,
+<span class="attribute">#[allow(clippy::unnecessary_wraps)]
+</span><span class="kw">impl </span>Scheduler {
+    <span class="doccomment">/// Make a new `Scheduler` based on the specified file store and cache. It will receive the
+    /// messages using the provided channel and sends messages to the executor and worker manager
+    /// with the specified channels.
+    </span><span class="kw">pub fn </span>new(
+        file_store: Arc&lt;FileStore&gt;,
+        cache: Cache,
+        receiver: Receiver&lt;SchedulerInMessage&gt;,
+        executor: Sender&lt;SchedulerExecutorMessage&gt;,
+        worker_manager: Sender&lt;WorkerManagerInMessage&gt;,
+    ) -&gt; Scheduler {
+        Scheduler {
+            file_store,
+            cache,
+            receiver,
+            executor,
+            worker_manager,
 
-            <span class="ident">ready_execs</span>: <span class="ident">BinaryHeap::new</span>(),
-            <span class="ident">clients</span>: <span class="ident">HashMap::new</span>(),
+            ready_execs: BinaryHeap::new(),
+            clients: HashMap::new(),
 
-            <span class="ident">connected_workers</span>: <span class="ident">HashMap::new</span>(),
+            connected_workers: HashMap::new(),
         }
     }
 
-    <span class="doccomment">/// Run the `Scheduler` listening for incoming messages and blocking util the scheduler is</span>
-    <span class="doccomment">/// asked to exit. When the scheduler exits it will turn down the worker manager too.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">receiver</span>.<span class="ident">recv</span>() {
-            <span class="kw">match</span> <span class="ident">message</span> {
-                <span class="ident">SchedulerInMessage::Exit</span> =&gt; {
+    <span class="doccomment">/// Run the `Scheduler` listening for incoming messages and blocking util the scheduler is
+    /// asked to exit. When the scheduler exits it will turn down the worker manager too.
+    </span><span class="kw">pub fn </span>run(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = <span class="self">self</span>.receiver.recv() {
+            <span class="kw">match </span>message {
+                SchedulerInMessage::Exit =&gt; {
                     <span class="macro">debug!</span>(<span class="string">&quot;Scheduler asked to exit&quot;</span>);
                     <span class="kw">break</span>;
                 }
-                <span class="ident">SchedulerInMessage::EvaluateDAG</span> {
-                    <span class="ident">client</span>,
-                    <span class="ident">dag</span>,
-                    <span class="ident">callbacks</span>,
+                SchedulerInMessage::EvaluateDAG {
+                    client,
+                    dag,
+                    callbacks,
                 } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_evaluate_dag</span>(<span class="ident">client</span>, <span class="kw-2">*</span><span class="ident">dag</span>, <span class="kw-2">*</span><span class="ident">callbacks</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle EvaluateDAG&quot;</span>)<span class="question-mark">?</span>;
+                    <span class="self">self</span>.handle_evaluate_dag(client, <span class="kw-2">*</span>dag, <span class="kw-2">*</span>callbacks)
+                        .context(<span class="string">&quot;Failed to handle EvaluateDAG&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">SchedulerInMessage::FileReady</span> {
-                    <span class="ident">client</span>,
-                    <span class="ident">uuid</span>,
-                    <span class="ident">handle</span>,
+                SchedulerInMessage::FileReady {
+                    client,
+                    uuid,
+                    handle,
                 } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_file_ready</span>(<span class="ident">client</span>, <span class="ident">uuid</span>, <span class="ident">handle</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle FileReady&quot;</span>)<span class="question-mark">?</span>;
+                    <span class="self">self</span>.handle_file_ready(client, uuid, handle)
+                        .context(<span class="string">&quot;Failed to handle FileReady&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">SchedulerInMessage::WorkerResult</span> {
-                    <span class="ident">worker</span>,
-                    <span class="ident">result</span>,
-                    <span class="ident">outputs</span>,
+                SchedulerInMessage::WorkerResult {
+                    worker,
+                    result,
+                    outputs,
                 } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_worker_result</span>(<span class="ident">worker</span>, <span class="ident">result</span>, <span class="ident">outputs</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle WorkerResult&quot;</span>)<span class="question-mark">?</span>;
+                    <span class="self">self</span>.handle_worker_result(worker, result, outputs)
+                        .context(<span class="string">&quot;Failed to handle WorkerResult&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">SchedulerInMessage::WorkerConnected</span> { <span class="ident">uuid</span>, <span class="ident">name</span> } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_worker_connected</span>(<span class="ident">uuid</span>, <span class="ident">name</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle WorkerConnected&quot;</span>)<span class="question-mark">?</span>;
+                SchedulerInMessage::WorkerConnected { uuid, name } =&gt; {
+                    <span class="self">self</span>.handle_worker_connected(uuid, name)
+                        .context(<span class="string">&quot;Failed to handle WorkerConnected&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">SchedulerInMessage::WorkerDisconnected</span> { <span class="ident">uuid</span> } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_worker_disconnected</span>(<span class="ident">uuid</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle WorkerDisconnected&quot;</span>)<span class="question-mark">?</span>;
+                SchedulerInMessage::WorkerDisconnected { uuid } =&gt; {
+                    <span class="self">self</span>.handle_worker_disconnected(uuid)
+                        .context(<span class="string">&quot;Failed to handle WorkerDisconnected&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">SchedulerInMessage::ClientDisconnected</span> { <span class="ident">client</span> } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_client_disconnected</span>(<span class="ident">client</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle ClientDisconnected&quot;</span>)<span class="question-mark">?</span>;
+                SchedulerInMessage::ClientDisconnected { client } =&gt; {
+                    <span class="self">self</span>.handle_client_disconnected(client)
+                        .context(<span class="string">&quot;Failed to handle ClientDisconnected&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">SchedulerInMessage::Status</span> { <span class="ident">client</span> } =&gt; {
-                    <span class="self">self</span>.<span class="ident">handle_status_request</span>(<span class="ident">client</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to handle Status&quot;</span>)<span class="question-mark">?</span>;
+                SchedulerInMessage::Status { client } =&gt; {
+                    <span class="self">self</span>.handle_status_request(client)
+                        .context(<span class="string">&quot;Failed to handle Status&quot;</span>)<span class="question-mark">?</span>;
                 }
             }
         }
         <span class="macro">debug!</span>(<span class="string">&quot;Scheduler exiting&quot;</span>);
-        <span class="self">self</span>.<span class="ident">worker_manager</span>
-            .<span class="ident">send</span>(<span class="ident">WorkerManagerInMessage::Exit</span>)
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot tell the worker manager to exit: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+        <span class="self">self</span>.worker_manager
+            .send(WorkerManagerInMessage::Exit)
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot tell the worker manager to exit: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the client request to evaluate a DAG.</span>
-    <span class="kw">fn</span> <span class="ident">handle_evaluate_dag</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">client</span>: <span class="ident">ClientInfo</span>,
-        <span class="ident">dag</span>: <span class="ident">ExecutionDAGData</span>,
-        <span class="ident">callbacks</span>: <span class="ident">ExecutionDAGWatchSet</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="macro">info!</span>(<span class="string">&quot;Client &#39;{}&#39; asked to evaluate a new DAG&quot;</span>, <span class="ident">client</span>.<span class="ident">name</span>);
-        <span class="comment">// build the scheduler structures, insert the client in the list of working</span>
-        <span class="comment">// clients and schedule all the already cached executions.</span>
-        <span class="kw">let</span> <span class="ident">dag_priority</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">config</span>.<span class="ident">priority</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">client_data</span> <span class="op">=</span> <span class="ident">SchedulerClientData::new</span>(<span class="ident">client</span>.<span class="ident">name</span>, <span class="ident">dag</span>, <span class="ident">callbacks</span>);
-        <span class="kw">for</span> <span class="ident">group</span> <span class="kw">in</span> <span class="ident">client_data</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>.<span class="ident">values</span>() {
-            <span class="kw">let</span> <span class="ident">missing_dep</span> <span class="op">=</span> <span class="ident">client_data</span>.<span class="ident">missing_deps</span>.<span class="ident">entry</span>(<span class="ident">group</span>.<span class="ident">uuid</span>).<span class="ident">or_default</span>();
-            <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                <span class="kw">for</span> <span class="ident">input</span> <span class="kw">in</span> <span class="ident">exec</span>.<span class="ident">dependencies</span>() {
-                    <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> <span class="ident">client_data</span>.<span class="ident">input_of</span>.<span class="ident">entry</span>(<span class="ident">input</span>).<span class="ident">or_default</span>();
-                    <span class="ident">entry</span>.<span class="ident">insert</span>(<span class="ident">group</span>.<span class="ident">uuid</span>);
-                    <span class="ident">missing_dep</span>.<span class="ident">insert</span>(<span class="ident">input</span>);
+    <span class="doccomment">/// Handle the client request to evaluate a DAG.
+    </span><span class="kw">fn </span>handle_evaluate_dag(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        client: ClientInfo,
+        dag: ExecutionDAGData,
+        callbacks: ExecutionDAGWatchSet,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">info!</span>(<span class="string">&quot;Client &#39;{}&#39; asked to evaluate a new DAG&quot;</span>, client.name);
+        <span class="comment">// build the scheduler structures, insert the client in the list of working
+        // clients and schedule all the already cached executions.
+        </span><span class="kw">let </span>dag_priority = dag.config.priority;
+        <span class="kw">let </span><span class="kw-2">mut </span>client_data = SchedulerClientData::new(client.name, dag, callbacks);
+        <span class="kw">for </span>group <span class="kw">in </span>client_data.dag.execution_groups.values() {
+            <span class="kw">let </span>missing_dep = client_data.missing_deps.entry(group.uuid).or_default();
+            <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                <span class="kw">for </span>input <span class="kw">in </span>exec.dependencies() {
+                    <span class="kw">let </span>entry = client_data.input_of.entry(input).or_default();
+                    entry.insert(group.uuid);
+                    missing_dep.insert(input);
                 }
             }
-            <span class="comment">// if this execution does not have any dependency, schedule it immediately</span>
-            <span class="kw">if</span> <span class="ident">missing_dep</span>.<span class="ident">is_empty</span>() {
-                <span class="ident">client_data</span>.<span class="ident">missing_deps</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">uuid</span>);
-                <span class="ident">client_data</span>.<span class="ident">ready_groups</span>.<span class="ident">insert</span>(<span class="ident">group</span>.<span class="ident">uuid</span>);
-                <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                    <span class="self">self</span>.<span class="ident">ready_execs</span>
-                        .<span class="ident">push</span>((<span class="ident">dag_priority</span>, <span class="ident">exec</span>.<span class="ident">priority</span>, <span class="ident">group</span>.<span class="ident">uuid</span>, <span class="ident">client</span>.<span class="ident">uuid</span>));
+            <span class="comment">// if this execution does not have any dependency, schedule it immediately
+            </span><span class="kw">if </span>missing_dep.is_empty() {
+                client_data.missing_deps.remove(<span class="kw-2">&amp;</span>group.uuid);
+                client_data.ready_groups.insert(group.uuid);
+                <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                    <span class="self">self</span>.ready_execs
+                        .push((dag_priority, exec.priority, group.uuid, client.uuid));
                 }
             }
         }
-        <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">insert</span>(<span class="ident">client</span>.<span class="ident">uuid</span>, <span class="ident">client_data</span>);
-        <span class="comment">// the client may have sent and empty DAG</span>
-        <span class="self">self</span>.<span class="ident">check_completion</span>(<span class="ident">client</span>.<span class="ident">uuid</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.clients.insert(client.uuid, client_data);
+        <span class="comment">// the client may have sent and empty DAG
+        </span><span class="self">self</span>.check_completion(client.uuid)<span class="question-mark">?</span>;
 
-        <span class="self">self</span>.<span class="ident">schedule_cached</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">assign_jobs</span>()<span class="question-mark">?</span>;
+        <span class="self">self</span>.schedule_cached()<span class="question-mark">?</span>;
+        <span class="self">self</span>.assign_jobs()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the message of a file being ready.</span>
-    <span class="kw">fn</span> <span class="ident">handle_file_ready</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>,
-        <span class="ident">uuid</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">handle</span>: <span class="ident">FileStoreHandle</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>.<span class="ident">file_handles</span>.<span class="ident">insert</span>(<span class="ident">uuid</span>, <span class="ident">handle</span>);
-            <span class="self">self</span>.<span class="ident">file_success</span>(<span class="ident">client_uuid</span>, <span class="ident">uuid</span>)<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">check_completion</span>(<span class="ident">client_uuid</span>)<span class="question-mark">?</span>;
-        } <span class="kw">else</span> {
+    <span class="doccomment">/// Handle the message of a file being ready.
+    </span><span class="kw">fn </span>handle_file_ready(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        client_uuid: ClientUuid,
+        uuid: FileUuid,
+        handle: FileStoreHandle,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client.file_handles.insert(uuid, handle);
+            <span class="self">self</span>.file_success(client_uuid, uuid)<span class="question-mark">?</span>;
+            <span class="self">self</span>.check_completion(client_uuid)<span class="question-mark">?</span>;
+        } <span class="kw">else </span>{
             <span class="macro">warn!</span>(<span class="string">&quot;Client is gone&quot;</span>);
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the completion of an execution on a worker.</span>
-    <span class="kw">fn</span> <span class="ident">handle_worker_result</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">worker</span>: <span class="ident">WorkerUuid</span>,
-        <span class="ident">result</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
-        <span class="ident">outputs</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">worker</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">connected_workers</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">worker</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">worker</span>) =&gt; <span class="ident">worker</span>,
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="macro">warn!</span>(<span class="string">&quot;Unknown worker {} completed a job&quot;</span>, <span class="ident">worker</span>);
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="doccomment">/// Handle the completion of an execution on a worker.
+    </span><span class="kw">fn </span>handle_worker_result(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        worker: WorkerUuid,
+        result: Vec&lt;ExecutionResult&gt;,
+        outputs: HashMap&lt;FileUuid, FileStoreHandle&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>worker = <span class="kw">match </span><span class="self">self</span>.connected_workers.remove(<span class="kw-2">&amp;</span>worker) {
+            <span class="prelude-val">Some</span>(worker) =&gt; worker,
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="macro">warn!</span>(<span class="string">&quot;Unknown worker {} completed a job&quot;</span>, worker);
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
         };
-        <span class="kw">let</span> (<span class="ident">client_uuid</span>, <span class="ident">group_uuid</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">worker</span>.<span class="ident">current_job</span> {
-            <span class="prelude-val">Some</span>((<span class="ident">client</span>, <span class="ident">exec</span>, <span class="kw">_</span>)) =&gt; (<span class="ident">client</span>, <span class="ident">exec</span>),
-            <span class="prelude-val">None</span> =&gt; {
+        <span class="kw">let </span>(client_uuid, group_uuid) = <span class="kw">match </span>worker.current_job {
+            <span class="prelude-val">Some</span>((client, exec, <span class="kw">_</span>)) =&gt; (client, exec),
+            <span class="prelude-val">None </span>=&gt; {
                 <span class="macro">warn!</span>(
                     <span class="string">&quot;Worker {} ({}) completed a job that wasn&#39;t doing&quot;</span>,
-                    <span class="ident">worker</span>.<span class="ident">name</span>, <span class="ident">worker</span>.<span class="ident">uuid</span>
+                    worker.name, worker.uuid
                 );
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
         };
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
             <span class="macro">warn!</span>(<span class="string">&quot;Worker completed execution but client is gone&quot;</span>);
-            <span class="self">self</span>.<span class="ident">assign_jobs</span>()<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">check_completion</span>(<span class="ident">client_uuid</span>)<span class="question-mark">?</span>;
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+            <span class="self">self</span>.assign_jobs()<span class="question-mark">?</span>;
+            <span class="self">self</span>.check_completion(client_uuid)<span class="question-mark">?</span>;
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
-        <span class="kw">let</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>].<span class="ident">clone</span>();
+        <span class="kw">let </span>group = client.dag.execution_groups[<span class="kw-2">&amp;</span>group_uuid].clone();
         <span class="macro">info!</span>(
             <span class="string">&quot;Worker {:?} completed execution group {}&quot;</span>,
-            <span class="ident">worker</span>, <span class="ident">group</span>.<span class="ident">uuid</span>
+            worker, group.uuid
         );
-        <span class="kw">if</span> <span class="ident">group</span>.<span class="ident">executions</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">result</span>.<span class="ident">len</span>() {
-            <span class="comment">// FIXME: this is a pretty bad way to handle this error, it should never happen but if</span>
-            <span class="comment">//        the workers are not trusted it can cause a DoS of the server. Maybe just</span>
-            <span class="comment">//        rescheduling the job or disconnecting the client is a better choice.</span>
-            <span class="macro">bail!</span>(<span class="string">&quot;Invalid worker result: the number of results ({}) does not match the number of executions ({})&quot;</span>, <span class="ident">result</span>.<span class="ident">len</span>(), <span class="ident">group</span>.<span class="ident">executions</span>.<span class="ident">len</span>());
+        <span class="kw">if </span>group.executions.len() != result.len() {
+            <span class="comment">// FIXME: this is a pretty bad way to handle this error, it should never happen but if
+            //        the workers are not trusted it can cause a DoS of the server. Maybe just
+            //        rescheduling the job or disconnecting the client is a better choice.
+            </span><span class="macro">bail!</span>(<span class="string">&quot;Invalid worker result: the number of results ({}) does not match the number of executions ({})&quot;</span>, result.len(), group.executions.len());
         }
-        <span class="ident">client</span>.<span class="ident">running_groups</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>);
-        <span class="self">self</span>.<span class="ident">exec_completed</span>(<span class="ident">client_uuid</span>, <span class="kw-2">&amp;</span><span class="ident">group</span>, <span class="ident">result</span>, <span class="ident">outputs</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">assign_jobs</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">check_completion</span>(<span class="ident">client_uuid</span>)<span class="question-mark">?</span>;
+        client.running_groups.remove(<span class="kw-2">&amp;</span>group_uuid);
+        <span class="self">self</span>.exec_completed(client_uuid, <span class="kw-2">&amp;</span>group, result, outputs, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.assign_jobs()<span class="question-mark">?</span>;
+        <span class="self">self</span>.check_completion(client_uuid)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the connection of a worker.</span>
-    <span class="kw">fn</span> <span class="ident">handle_worker_connected</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">uuid</span>: <span class="ident">WorkerUuid</span>, <span class="ident">name</span>: <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="macro">info!</span>(<span class="string">&quot;Worker {} ({}) connected&quot;</span>, <span class="ident">name</span>, <span class="ident">uuid</span>);
-        <span class="self">self</span>.<span class="ident">connected_workers</span>.<span class="ident">insert</span>(
-            <span class="ident">uuid</span>,
-            <span class="ident">ConnectedWorker</span> {
-                <span class="ident">uuid</span>,
-                <span class="ident">name</span>,
-                <span class="ident">current_job</span>: <span class="prelude-val">None</span>,
+    <span class="doccomment">/// Handle the connection of a worker.
+    </span><span class="kw">fn </span>handle_worker_connected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, uuid: WorkerUuid, name: String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">info!</span>(<span class="string">&quot;Worker {} ({}) connected&quot;</span>, name, uuid);
+        <span class="self">self</span>.connected_workers.insert(
+            uuid,
+            ConnectedWorker {
+                uuid,
+                name,
+                current_job: <span class="prelude-val">None</span>,
             },
         );
-        <span class="self">self</span>.<span class="ident">assign_jobs</span>()<span class="question-mark">?</span>;
+        <span class="self">self</span>.assign_jobs()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the disconnection of a worker.</span>
-    <span class="kw">fn</span> <span class="ident">handle_worker_disconnected</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">uuid</span>: <span class="ident">WorkerUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="macro">info!</span>(<span class="string">&quot;Worker {} disconnected&quot;</span>, <span class="ident">uuid</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">worker</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">connected_workers</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">uuid</span>) {
-            <span class="comment">// reschedule the job if the worker failed</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">client_uuid</span>, <span class="ident">job</span>, <span class="kw">_</span>)) <span class="op">=</span> <span class="ident">worker</span>.<span class="ident">current_job</span> {
-                <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-                    <span class="ident">client</span>
-                } <span class="kw">else</span> {
+    <span class="doccomment">/// Handle the disconnection of a worker.
+    </span><span class="kw">fn </span>handle_worker_disconnected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, uuid: WorkerUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">info!</span>(<span class="string">&quot;Worker {} disconnected&quot;</span>, uuid);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(worker) = <span class="self">self</span>.connected_workers.remove(<span class="kw-2">&amp;</span>uuid) {
+            <span class="comment">// reschedule the job if the worker failed
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>((client_uuid, job, <span class="kw">_</span>)) = worker.current_job {
+                <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+                    client
+                } <span class="kw">else </span>{
                     <span class="macro">warn!</span>(<span class="string">&quot;Worker was doing something for a gone client&quot;</span>);
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 };
-                <span class="kw">let</span> <span class="ident">priority</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="kw-2">&amp;</span><span class="ident">job</span>].<span class="ident">priority</span>();
-                <span class="self">self</span>.<span class="ident">ready_execs</span>
-                    .<span class="ident">push</span>((<span class="ident">HIGH_PRIORITY</span>, <span class="ident">priority</span>, <span class="ident">job</span>, <span class="ident">client_uuid</span>));
-                <span class="ident">client</span>.<span class="ident">ready_groups</span>.<span class="ident">insert</span>(<span class="ident">job</span>);
-                <span class="ident">client</span>.<span class="ident">running_groups</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">job</span>);
+                <span class="kw">let </span>priority = client.dag.execution_groups[<span class="kw-2">&amp;</span>job].priority();
+                <span class="self">self</span>.ready_execs
+                    .push((HIGH_PRIORITY, priority, job, client_uuid));
+                client.ready_groups.insert(job);
+                client.running_groups.remove(<span class="kw-2">&amp;</span>job);
             }
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the disconnection of a client.</span>
-    <span class="kw">fn</span> <span class="ident">handle_client_disconnected</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="macro">info!</span>(<span class="string">&quot;Client {} disconnected&quot;</span>, <span class="ident">client_uuid</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">client</span>.<span class="ident">is_done</span>() {
+    <span class="doccomment">/// Handle the disconnection of a client.
+    </span><span class="kw">fn </span>handle_client_disconnected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">info!</span>(<span class="string">&quot;Client {} disconnected&quot;</span>, client_uuid);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get(<span class="kw-2">&amp;</span>client_uuid) {
+            <span class="kw">if </span>!client.is_done() {
                 <span class="macro">warn!</span>(<span class="string">&quot;The client&#39;s evaluation wasn&#39;t completed yet&quot;</span>);
-                <span class="comment">// Even if the computation has not been completed, send the EvaluationDone so that</span>
-                <span class="comment">// the executor can exit cleanly.</span>
-                <span class="self">self</span>.<span class="ident">executor</span>
-                    .<span class="ident">send</span>((<span class="ident">client_uuid</span>, <span class="ident">SchedulerExecutorMessageData::EvaluationDone</span>))
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to send EvaluationDone to the executor&quot;</span>)<span class="question-mark">?</span>;
+                <span class="comment">// Even if the computation has not been completed, send the EvaluationDone so that
+                // the executor can exit cleanly.
+                </span><span class="self">self</span>.executor
+                    .send((client_uuid, SchedulerExecutorMessageData::EvaluationDone))
+                    .context(<span class="string">&quot;Failed to send EvaluationDone to the executor&quot;</span>)<span class="question-mark">?</span>;
             }
         }
-        <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="ident">BinaryHeap::new</span>();
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">dag_priority</span>, <span class="ident">priority</span>, <span class="ident">exec</span>, <span class="ident">client</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">ready_execs</span>.<span class="ident">pop</span>() {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">client</span>) {
-                <span class="ident">remaining</span>.<span class="ident">push</span>((<span class="ident">dag_priority</span>, <span class="ident">priority</span>, <span class="ident">exec</span>, <span class="ident">client</span>));
+        <span class="self">self</span>.clients.remove(<span class="kw-2">&amp;</span>client_uuid);
+        <span class="kw">let </span><span class="kw-2">mut </span>remaining = BinaryHeap::new();
+        <span class="kw">while let </span><span class="prelude-val">Some</span>((dag_priority, priority, exec, client)) = <span class="self">self</span>.ready_execs.pop() {
+            <span class="kw">if </span><span class="self">self</span>.clients.contains_key(<span class="kw-2">&amp;</span>client) {
+                remaining.push((dag_priority, priority, exec, client));
             }
         }
-        <span class="self">self</span>.<span class="ident">ready_execs</span> <span class="op">=</span> <span class="ident">remaining</span>;
-        <span class="comment">// stop the jobs that are still running in the workers</span>
-        <span class="kw">for</span> (<span class="ident">uuid</span>, <span class="ident">worker</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">connected_workers</span>.<span class="ident">iter</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">owner</span>, <span class="ident">exec</span>, <span class="kw">_</span>)) <span class="op">=</span> <span class="ident">worker</span>.<span class="ident">current_job</span> {
-                <span class="kw">if</span> <span class="ident">owner</span> <span class="op">==</span> <span class="ident">client_uuid</span> {
+        <span class="self">self</span>.ready_execs = remaining;
+        <span class="comment">// stop the jobs that are still running in the workers
+        </span><span class="kw">for </span>(uuid, worker) <span class="kw">in </span><span class="self">self</span>.connected_workers.iter() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((owner, exec, <span class="kw">_</span>)) = worker.current_job {
+                <span class="kw">if </span>owner == client_uuid {
                     <span class="macro">warn!</span>(
                         <span class="string">&quot;Worker {} is doing {} owned by disconnected client, killing&quot;</span>,
-                        <span class="ident">uuid</span>, <span class="ident">exec</span>
+                        uuid, exec
                     );
-                    <span class="self">self</span>.<span class="ident">worker_manager</span>
-                        .<span class="ident">send</span>(<span class="ident">WorkerManagerInMessage::StopWorkerJob</span> {
-                            <span class="ident">worker</span>: <span class="kw-2">*</span><span class="ident">uuid</span>,
-                            <span class="ident">job</span>: <span class="ident">exec</span>,
+                    <span class="self">self</span>.worker_manager
+                        .send(WorkerManagerInMessage::StopWorkerJob {
+                            worker: <span class="kw-2">*</span>uuid,
+                            job: exec,
                         })
-                        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send StopWorkerJob to worker: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+                        .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send StopWorkerJob to worker: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
                 }
             }
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Handle the status request of a client.</span>
-    <span class="kw">fn</span> <span class="ident">handle_status_request</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ready_execs</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">waiting_execs</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">client</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">values</span>() {
-            <span class="ident">ready_execs</span> <span class="op">+</span><span class="op">=</span> <span class="ident">client</span>.<span class="ident">ready_groups</span>.<span class="ident">len</span>();
-            <span class="ident">waiting_execs</span> <span class="op">+</span><span class="op">=</span> <span class="ident">client</span>.<span class="ident">missing_deps</span>.<span class="ident">len</span>();
+    <span class="doccomment">/// Handle the status request of a client.
+    </span><span class="kw">fn </span>handle_status_request(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>ready_execs = <span class="number">0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>waiting_execs = <span class="number">0</span>;
+        <span class="kw">for </span>client <span class="kw">in </span><span class="self">self</span>.clients.values() {
+            ready_execs += client.ready_groups.len();
+            waiting_execs += client.missing_deps.len();
         }
-        <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="ident">ExecutorStatus</span> {
-            <span class="ident">connected_workers</span>: <span class="self">self</span>
-                .<span class="ident">connected_workers</span>
-                .<span class="ident">values</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">worker</span><span class="op">|</span> <span class="ident">ExecutorWorkerStatus</span> {
-                    <span class="ident">uuid</span>: <span class="ident">worker</span>.<span class="ident">uuid</span>,
-                    <span class="ident">name</span>: <span class="ident">worker</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
-                    <span class="ident">current_job</span>: <span class="ident">worker</span>.<span class="ident">current_job</span>.<span class="ident">as_ref</span>().<span class="ident">and_then</span>(
-                        <span class="op">|</span>(<span class="ident">client_uuid</span>, <span class="ident">exec_uuid</span>, <span class="ident">start</span>)<span class="op">|</span> {
-                            <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get</span>(<span class="ident">client_uuid</span>)<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="ident">exec_uuid</span>];
-                            <span class="prelude-val">Some</span>(<span class="ident">WorkerCurrentJobStatus</span> {
-                                <span class="ident">job</span>: <span class="ident">exec</span>.<span class="ident">description</span>.<span class="ident">clone</span>(),
-                                <span class="ident">client</span>: <span class="ident">ClientInfo</span> {
-                                    <span class="ident">uuid</span>: <span class="kw-2">*</span><span class="ident">client_uuid</span>,
-                                    <span class="ident">name</span>: <span class="ident">client</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
+        <span class="kw">let </span>status = ExecutorStatus {
+            connected_workers: <span class="self">self
+                </span>.connected_workers
+                .values()
+                .map(|worker| ExecutorWorkerStatus {
+                    uuid: worker.uuid,
+                    name: worker.name.clone(),
+                    current_job: worker.current_job.as_ref().and_then(
+                        |(client_uuid, exec_uuid, start)| {
+                            <span class="kw">let </span>client = <span class="self">self</span>.clients.get(client_uuid)<span class="question-mark">?</span>;
+                            <span class="kw">let </span>exec = <span class="kw-2">&amp;</span>client.dag.execution_groups[exec_uuid];
+                            <span class="prelude-val">Some</span>(WorkerCurrentJobStatus {
+                                job: exec.description.clone(),
+                                client: ClientInfo {
+                                    uuid: <span class="kw-2">*</span>client_uuid,
+                                    name: client.name.clone(),
                                 },
-                                <span class="ident">duration</span>: <span class="ident">start</span>.<span class="ident">elapsed</span>(),
+                                duration: start.elapsed(),
                             })
                         },
                     ),
                 })
-                .<span class="ident">collect</span>(),
-            <span class="ident">ready_execs</span>,
-            <span class="ident">waiting_execs</span>,
+                .collect(),
+            ready_execs,
+            waiting_execs,
         };
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">executor</span>
-            .<span class="ident">send</span>((<span class="ident">client_uuid</span>, <span class="ident">SchedulerExecutorMessageData::Status</span> { <span class="ident">status</span> }))
+        <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self
+            </span>.executor
+            .send((client_uuid, SchedulerExecutorMessageData::Status { status }))
         {
-            <span class="macro">warn!</span>(<span class="string">&quot;Cannot send the status to the client: {:?}&quot;</span>, <span class="ident">e</span>);
+            <span class="macro">warn!</span>(<span class="string">&quot;Cannot send the status to the client: {:?}&quot;</span>, e);
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Check if the client has completed the evaluation, if so tell the client we are done.</span>
-    <span class="kw">fn</span> <span class="ident">check_completion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// client is gone, dont worry to much about it</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="doccomment">/// Check if the client has completed the evaluation, if so tell the client we are done.
+    </span><span class="kw">fn </span>check_completion(<span class="kw-2">&amp;</span><span class="self">self</span>, client_uuid: ClientUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
+            <span class="comment">// client is gone, dont worry to much about it
+            </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
-        <span class="kw">if</span> <span class="ident">client</span>.<span class="ident">is_done</span>() {
-            <span class="macro">debug!</span>(<span class="string">&quot;Computation completed for client: {}&quot;</span>, <span class="ident">client_uuid</span>);
-            <span class="self">self</span>.<span class="ident">executor</span>
-                .<span class="ident">send</span>((<span class="ident">client_uuid</span>, <span class="ident">SchedulerExecutorMessageData::EvaluationDone</span>))
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to send EvaluationDone to the executor&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">if </span>client.is_done() {
+            <span class="macro">debug!</span>(<span class="string">&quot;Computation completed for client: {}&quot;</span>, client_uuid);
+            <span class="self">self</span>.executor
+                .send((client_uuid, SchedulerExecutorMessageData::EvaluationDone))
+                .context(<span class="string">&quot;Failed to send EvaluationDone to the executor&quot;</span>)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Mark a file as failed, skipping all the executions that depends on it (even transitively).</span>
-    <span class="doccomment">/// This will also send the file to the client, if needed.</span>
-    <span class="kw">fn</span> <span class="ident">file_failed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>, <span class="ident">file</span>: <span class="ident">FileUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">send_file</span>(<span class="ident">client_uuid</span>, <span class="ident">file</span>, <span class="bool-val">false</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+    <span class="doccomment">/// Mark a file as failed, skipping all the executions that depends on it (even transitively).
+    /// This will also send the file to the client, if needed.
+    </span><span class="kw">fn </span>file_failed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid, file: FileUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="self">self</span>.send_file(client_uuid, file, <span class="bool-val">false</span>).with_context(|| {
             <span class="macro">format!</span>(
                 <span class="string">&quot;Failed sending failed file {} to client {}&quot;</span>,
-                <span class="ident">file</span>, <span class="ident">client_uuid</span>
+                file, client_uuid
             )
         })<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// client is gone, dont worry to much about it</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
+            <span class="comment">// client is gone, dont worry to much about it
+            </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">client</span>.<span class="ident">input_of</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">if </span>!client.input_of.contains_key(<span class="kw-2">&amp;</span>file) {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">failed_files</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">for</span> <span class="ident">group_uuid</span> <span class="kw">in</span> <span class="ident">client</span>.<span class="ident">input_of</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>].<span class="ident">clone</span>() {
-            <span class="comment">// do not skip the same execution twice</span>
-            <span class="kw">if</span> <span class="ident">client</span>.<span class="ident">missing_deps</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>) {
-                <span class="ident">client</span>.<span class="ident">missing_deps</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>);
-            } <span class="kw">else</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>failed_files = Vec::new();
+        <span class="kw">for </span>group_uuid <span class="kw">in </span>client.input_of[<span class="kw-2">&amp;</span>file].clone() {
+            <span class="comment">// do not skip the same execution twice
+            </span><span class="kw">if </span>client.missing_deps.contains_key(<span class="kw-2">&amp;</span>group_uuid) {
+                client.missing_deps.remove(<span class="kw-2">&amp;</span>group_uuid);
+            } <span class="kw">else </span>{
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">group</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>];
-            <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                <span class="kw">if</span> <span class="ident">client</span>.<span class="ident">callbacks</span>.<span class="ident">executions</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">executor</span>.<span class="ident">send</span>((
-                        <span class="ident">client_uuid</span>,
-                        <span class="ident">SchedulerExecutorMessageData::ExecutionSkipped</span> {
-                            <span class="ident">execution</span>: <span class="ident">exec</span>.<span class="ident">uuid</span>,
+            <span class="kw">let </span>group = <span class="kw-2">&amp;</span>client.dag.execution_groups[<span class="kw-2">&amp;</span>group_uuid];
+            <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                <span class="kw">if </span>client.callbacks.executions.contains(<span class="kw-2">&amp;</span>exec.uuid) {
+                    <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((
+                        client_uuid,
+                        SchedulerExecutorMessageData::ExecutionSkipped {
+                            execution: exec.uuid,
                         },
                     )) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution was skipped: {:?}&quot;</span>, <span class="ident">e</span>);
+                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution was skipped: {:?}&quot;</span>, e);
                     }
                 }
-                <span class="kw">for</span> <span class="ident">output</span> <span class="kw">in</span> <span class="ident">exec</span>.<span class="ident">outputs</span>() {
-                    <span class="ident">failed_files</span>.<span class="ident">push</span>((<span class="ident">client_uuid</span>, <span class="ident">output</span>));
+                <span class="kw">for </span>output <span class="kw">in </span>exec.outputs() {
+                    failed_files.push((client_uuid, output));
                 }
             }
         }
-        <span class="kw">for</span> (<span class="ident">client_uuid</span>, <span class="ident">output</span>) <span class="kw">in</span> <span class="ident">failed_files</span> {
-            <span class="self">self</span>.<span class="ident">file_failed</span>(<span class="ident">client_uuid</span>, <span class="ident">output</span>)<span class="question-mark">?</span>;
+        <span class="kw">for </span>(client_uuid, output) <span class="kw">in </span>failed_files {
+            <span class="self">self</span>.file_failed(client_uuid, output)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Mark a file as successful and schedule all the executions that become ready.</span>
-    <span class="doccomment">/// This will also send the file to the client, if needed.</span>
-    <span class="kw">fn</span> <span class="ident">file_success</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>, <span class="ident">file</span>: <span class="ident">FileUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">send_file</span>(<span class="ident">client_uuid</span>, <span class="ident">file</span>, <span class="bool-val">true</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+    <span class="doccomment">/// Mark a file as successful and schedule all the executions that become ready.
+    /// This will also send the file to the client, if needed.
+    </span><span class="kw">fn </span>file_success(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid, file: FileUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="self">self</span>.send_file(client_uuid, file, <span class="bool-val">true</span>).with_context(|| {
             <span class="macro">format!</span>(
                 <span class="string">&quot;Failed sending succeeded file {} to client {}&quot;</span>,
-                <span class="ident">file</span>, <span class="ident">client_uuid</span>
+                file, client_uuid
             )
         })<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// client is gone, dont worry to much about it</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
+            <span class="comment">// client is gone, dont worry to much about it
+            </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">client</span>.<span class="ident">input_of</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">if </span>!client.input_of.contains_key(<span class="kw-2">&amp;</span>file) {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="kw">for</span> <span class="ident">group_uuid</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">input_of</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>] {
-            <span class="kw">let</span> <span class="ident">group</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="ident">group_uuid</span>];
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">files</span>) <span class="op">=</span> <span class="ident">client</span>.<span class="ident">missing_deps</span>.<span class="ident">get_mut</span>(<span class="ident">group_uuid</span>) {
-                <span class="ident">files</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>);
-                <span class="kw">if</span> <span class="ident">files</span>.<span class="ident">is_empty</span>() {
-                    <span class="ident">client</span>.<span class="ident">missing_deps</span>.<span class="ident">remove</span>(<span class="ident">group_uuid</span>);
-                    <span class="self">self</span>.<span class="ident">ready_execs</span>.<span class="ident">push</span>((
-                        <span class="ident">HIGH_PRIORITY</span>,
-                        <span class="ident">group</span>.<span class="ident">priority</span>(),
-                        <span class="kw-2">*</span><span class="ident">group_uuid</span>,
-                        <span class="ident">client_uuid</span>,
+        <span class="kw">for </span>group_uuid <span class="kw">in </span><span class="kw-2">&amp;</span>client.input_of[<span class="kw-2">&amp;</span>file] {
+            <span class="kw">let </span>group = <span class="kw-2">&amp;</span>client.dag.execution_groups[group_uuid];
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(files) = client.missing_deps.get_mut(group_uuid) {
+                files.remove(<span class="kw-2">&amp;</span>file);
+                <span class="kw">if </span>files.is_empty() {
+                    client.missing_deps.remove(group_uuid);
+                    <span class="self">self</span>.ready_execs.push((
+                        HIGH_PRIORITY,
+                        group.priority(),
+                        <span class="kw-2">*</span>group_uuid,
+                        client_uuid,
                     ));
-                    <span class="ident">client</span>.<span class="ident">ready_groups</span>.<span class="ident">insert</span>(<span class="kw-2">*</span><span class="ident">group_uuid</span>);
+                    client.ready_groups.insert(<span class="kw-2">*</span>group_uuid);
                 }
             }
         }
-        <span class="self">self</span>.<span class="ident">schedule_cached</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">assign_jobs</span>()<span class="question-mark">?</span>;
+        <span class="self">self</span>.schedule_cached()<span class="question-mark">?</span>;
+        <span class="self">self</span>.assign_jobs()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Send a file to the client if its uuid is included in the callbacks.</span>
-    <span class="kw">fn</span> <span class="ident">send_file</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>,
-        <span class="ident">file</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">status</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// client is gone, dont worry to much about it</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="doccomment">/// Send a file to the client if its uuid is included in the callbacks.
+    </span><span class="kw">fn </span>send_file(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        client_uuid: ClientUuid,
+        file: FileUuid,
+        status: bool,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
+            <span class="comment">// client is gone, dont worry to much about it
+            </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">client</span>.<span class="ident">callbacks</span>.<span class="ident">files</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">if </span>!client.callbacks.files.contains(<span class="kw-2">&amp;</span>file) {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">client</span>.<span class="ident">file_handles</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+        <span class="kw">if </span>!client.file_handles.contains_key(<span class="kw-2">&amp;</span>file) {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
-        <span class="kw">let</span> <span class="ident">mex</span> <span class="op">=</span> <span class="ident">SchedulerExecutorMessageData::FileReady</span> {
-            <span class="ident">file</span>,
-            <span class="ident">handle</span>: <span class="ident">client</span>.<span class="ident">file_handles</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>].<span class="ident">clone</span>(),
-            <span class="ident">successful</span>: <span class="ident">status</span>,
-            <span class="ident">urgent</span>: <span class="ident">client</span>.<span class="ident">callbacks</span>.<span class="ident">urgent_files</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>),
+        <span class="kw">let </span>mex = SchedulerExecutorMessageData::FileReady {
+            file,
+            handle: client.file_handles[<span class="kw-2">&amp;</span>file].clone(),
+            successful: status,
+            urgent: client.callbacks.urgent_files.contains(<span class="kw-2">&amp;</span>file),
         };
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">executor</span>.<span class="ident">send</span>((<span class="ident">client_uuid</span>, <span class="ident">mex</span>)) {
-            <span class="macro">warn!</span>(<span class="string">&quot;Cannot send the file to the client: {:?}&quot;</span>, <span class="ident">e</span>);
+        <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((client_uuid, mex)) {
+            <span class="macro">warn!</span>(<span class="string">&quot;Cannot send the file to the client: {:?}&quot;</span>, e);
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Mark an execution as completed, sending the notification to the client and marking all the</span>
-    <span class="doccomment">/// produced files as done. Add the execution to the cache and schedule all the new executions</span>
-    <span class="doccomment">/// that become ready.</span>
-    <span class="kw">fn</span> <span class="ident">exec_completed</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>,
-        <span class="ident">group</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionGroup</span>,
-        <span class="ident">result</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
-        <span class="ident">outputs</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
-        <span class="ident">from_cache</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// client is gone, dont worry to much about it</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+    <span class="doccomment">/// Mark an execution as completed, sending the notification to the client and marking all the
+    /// produced files as done. Add the execution to the cache and schedule all the new executions
+    /// that become ready.
+    </span><span class="kw">fn </span>exec_completed(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        client_uuid: ClientUuid,
+        group: <span class="kw-2">&amp;</span>ExecutionGroup,
+        result: Vec&lt;ExecutionResult&gt;,
+        outputs: HashMap&lt;FileUuid, FileStoreHandle&gt;,
+        from_cache: bool,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
+            <span class="comment">// client is gone, dont worry to much about it
+            </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
-        <span class="kw">for</span> (<span class="ident">exec</span>, <span class="ident">res</span>) <span class="kw">in</span> <span class="ident">group</span>.<span class="ident">executions</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">result</span>.<span class="ident">iter</span>()) {
-            <span class="kw">if</span> <span class="ident">client</span>.<span class="ident">callbacks</span>.<span class="ident">executions</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>) {
-                <span class="kw">let</span> <span class="ident">mex</span> <span class="op">=</span> <span class="ident">SchedulerExecutorMessageData::ExecutionDone</span> {
-                    <span class="ident">execution</span>: <span class="ident">exec</span>.<span class="ident">uuid</span>,
-                    <span class="ident">result</span>: <span class="ident">res</span>.<span class="ident">clone</span>(),
+        <span class="kw">for </span>(exec, res) <span class="kw">in </span>group.executions.iter().zip(result.iter()) {
+            <span class="kw">if </span>client.callbacks.executions.contains(<span class="kw-2">&amp;</span>exec.uuid) {
+                <span class="kw">let </span>mex = SchedulerExecutorMessageData::ExecutionDone {
+                    execution: exec.uuid,
+                    result: res.clone(),
                 };
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">executor</span>.<span class="ident">send</span>((<span class="ident">client_uuid</span>, <span class="ident">mex</span>)) {
-                    <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution is done: {:?}&quot;</span>, <span class="ident">e</span>);
+                <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((client_uuid, mex)) {
+                    <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution is done: {:?}&quot;</span>, e);
                 }
             }
         }
-        <span class="kw">for</span> (<span class="ident">uuid</span>, <span class="ident">handle</span>) <span class="kw">in</span> <span class="ident">outputs</span>.<span class="ident">iter</span>() {
-            <span class="ident">client</span>.<span class="ident">file_handles</span>.<span class="ident">insert</span>(<span class="kw-2">*</span><span class="ident">uuid</span>, <span class="ident">handle</span>.<span class="ident">clone</span>());
+        <span class="kw">for </span>(uuid, handle) <span class="kw">in </span>outputs.iter() {
+            client.file_handles.insert(<span class="kw-2">*</span>uuid, handle.clone());
         }
 
-        <span class="kw">let</span> <span class="ident">successful</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="ident">status</span>.<span class="ident">is_success</span>());
-        <span class="kw">let</span> <span class="ident">internal_error</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="ident">status</span>.<span class="ident">is_internal_error</span>());
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">from_cache</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">internal_error</span> {
-            <span class="self">self</span>.<span class="ident">cache_execution</span>(<span class="ident">client_uuid</span>, <span class="ident">group</span>, <span class="ident">outputs</span>, <span class="ident">result</span>);
+        <span class="kw">let </span>successful = result.iter().all(|r| r.status.is_success());
+        <span class="kw">let </span>internal_error = result.iter().any(|r| r.status.is_internal_error());
+        <span class="kw">if </span>!from_cache &amp;&amp; !internal_error {
+            <span class="self">self</span>.cache_execution(client_uuid, group, outputs, result);
         }
-        <span class="kw">if</span> <span class="ident">successful</span> {
-            <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                <span class="kw">for</span> <span class="ident">output</span> <span class="kw">in</span> <span class="ident">exec</span>.<span class="ident">outputs</span>() {
-                    <span class="self">self</span>.<span class="ident">file_success</span>(<span class="ident">client_uuid</span>, <span class="ident">output</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to mark execution group {} as completed&quot;</span>, <span class="ident">group</span>.<span class="ident">uuid</span>)
+        <span class="kw">if </span>successful {
+            <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                <span class="kw">for </span>output <span class="kw">in </span>exec.outputs() {
+                    <span class="self">self</span>.file_success(client_uuid, output).with_context(|| {
+                        <span class="macro">format!</span>(<span class="string">&quot;Failed to mark execution group {} as completed&quot;</span>, group.uuid)
                     })<span class="question-mark">?</span>;
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                <span class="kw">for</span> <span class="ident">output</span> <span class="kw">in</span> <span class="ident">exec</span>.<span class="ident">outputs</span>() {
-                    <span class="self">self</span>.<span class="ident">file_failed</span>(<span class="ident">client_uuid</span>, <span class="ident">output</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to mark execution group {} as failed&quot;</span>, <span class="ident">group</span>.<span class="ident">uuid</span>)
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                <span class="kw">for </span>output <span class="kw">in </span>exec.outputs() {
+                    <span class="self">self</span>.file_failed(client_uuid, output).with_context(|| {
+                        <span class="macro">format!</span>(<span class="string">&quot;Failed to mark execution group {} as failed&quot;</span>, group.uuid)
                     })<span class="question-mark">?</span>;
                 }
             }
         }
-        <span class="self">self</span>.<span class="ident">schedule_cached</span>()<span class="question-mark">?</span>;
+        <span class="self">self</span>.schedule_cached()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Store an execution in the cache.</span>
-    <span class="kw">fn</span> <span class="ident">cache_execution</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">client_uuid</span>: <span class="ident">ClientUuid</span>,
-        <span class="ident">group</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionGroup</span>,
-        <span class="ident">outputs</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreHandle</span><span class="op">&gt;</span>,
-        <span class="ident">result</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ExecutionResult</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Store an execution in the cache.
+    </span><span class="kw">fn </span>cache_execution(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        client_uuid: ClientUuid,
+        group: <span class="kw-2">&amp;</span>ExecutionGroup,
+        outputs: HashMap&lt;FileUuid, FileStoreHandle&gt;,
+        result: Vec&lt;ExecutionResult&gt;,
     ) {
-        <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-            <span class="ident">client</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// client is gone, dont worry to much about it</span>
-            <span class="kw">return</span>;
+        <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+            client
+        } <span class="kw">else </span>{
+            <span class="comment">// client is gone, dont worry to much about it
+            </span><span class="kw">return</span>;
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file_keys</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreKey</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">group</span>
-            .<span class="ident">executions</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">dependencies</span>())
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> (<span class="ident">f</span>, <span class="ident">client</span>.<span class="ident">file_handles</span>[<span class="kw-2">&amp;</span><span class="ident">f</span>].<span class="ident">key</span>().<span class="ident">clone</span>()))
-            .<span class="ident">collect</span>();
-        <span class="kw">for</span> <span class="ident">output</span> <span class="kw">in</span> <span class="ident">group</span>.<span class="ident">executions</span>.<span class="ident">iter</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">outputs</span>()) {
-            <span class="ident">file_keys</span>.<span class="ident">insert</span>(<span class="ident">output</span>, <span class="ident">outputs</span>[<span class="kw-2">&amp;</span><span class="ident">output</span>].<span class="ident">key</span>().<span class="ident">clone</span>());
+        <span class="kw">let </span><span class="kw-2">mut </span>file_keys: HashMap&lt;FileUuid, FileStoreKey&gt; = group
+            .executions
+            .iter()
+            .flat_map(|e| e.dependencies())
+            .map(|f| (f, client.file_handles[<span class="kw-2">&amp;</span>f].key().clone()))
+            .collect();
+        <span class="kw">for </span>output <span class="kw">in </span>group.executions.iter().flat_map(|e| e.outputs()) {
+            file_keys.insert(output, outputs[<span class="kw-2">&amp;</span>output].key().clone());
         }
-        <span class="self">self</span>.<span class="ident">cache</span>.<span class="ident">insert</span>(<span class="ident">group</span>, <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">file_handles</span>, <span class="ident">result</span>);
+        <span class="self">self</span>.cache.insert(group, <span class="kw-2">&amp;</span>client.file_handles, result);
     }
 
-    <span class="doccomment">/// Look at all the ready executions and mark as completed all the ones that are inside the</span>
-    <span class="doccomment">/// cache.</span>
-    <span class="kw">fn</span> <span class="ident">schedule_cached</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">not_cached</span> <span class="op">=</span> <span class="ident">BinaryHeap::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cached</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+    <span class="doccomment">/// Look at all the ready executions and mark as completed all the ones that are inside the
+    /// cache.
+    </span><span class="kw">fn </span>schedule_cached(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>not_cached = BinaryHeap::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>cached = Vec::new();
 
-        <span class="kw">for</span> (<span class="ident">dag_priority</span>, <span class="ident">priority</span>, <span class="ident">group_uuid</span>, <span class="ident">client_uuid</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">ready_execs</span>.<span class="ident">iter</span>() {
-            <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="ident">client_uuid</span>) {
-                <span class="ident">client</span>
-            } <span class="kw">else</span> {
-                <span class="comment">// client is gone, dont worry to much about it</span>
-                <span class="kw">continue</span>;
+        <span class="kw">for </span>(dag_priority, priority, group_uuid, client_uuid) <span class="kw">in </span><span class="self">self</span>.ready_execs.iter() {
+            <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(client_uuid) {
+                client
+            } <span class="kw">else </span>{
+                <span class="comment">// client is gone, dont worry to much about it
+                </span><span class="kw">continue</span>;
             };
-            <span class="kw">let</span> <span class="ident">dag</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">dag</span>;
-            <span class="kw">let</span> <span class="ident">cache_mode</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">dag</span>.<span class="ident">config</span>.<span class="ident">cache_mode</span>;
-            <span class="comment">// disable the cache for the execution</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">CacheMode::Nothing</span> <span class="op">=</span> <span class="ident">cache_mode</span> {
-                <span class="ident">not_cached</span>.<span class="ident">push</span>((<span class="kw-2">*</span><span class="ident">dag_priority</span>, <span class="kw-2">*</span><span class="ident">priority</span>, <span class="kw-2">*</span><span class="ident">group_uuid</span>, <span class="kw-2">*</span><span class="ident">client_uuid</span>));
+            <span class="kw">let </span>dag = <span class="kw-2">&amp;</span>client.dag;
+            <span class="kw">let </span>cache_mode = <span class="kw-2">&amp;</span>dag.config.cache_mode;
+            <span class="comment">// disable the cache for the execution
+            </span><span class="kw">if let </span>CacheMode::Nothing = cache_mode {
+                not_cached.push((<span class="kw-2">*</span>dag_priority, <span class="kw-2">*</span>priority, <span class="kw-2">*</span>group_uuid, <span class="kw-2">*</span>client_uuid));
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="ident">group_uuid</span>].<span class="ident">clone</span>();
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">Scheduler::is_cacheable</span>(<span class="kw-2">&amp;</span><span class="ident">group</span>, <span class="ident">cache_mode</span>) {
-                <span class="ident">not_cached</span>.<span class="ident">push</span>((<span class="kw-2">*</span><span class="ident">dag_priority</span>, <span class="kw-2">*</span><span class="ident">priority</span>, <span class="ident">group</span>.<span class="ident">uuid</span>, <span class="kw-2">*</span><span class="ident">client_uuid</span>));
+            <span class="kw">let </span>group = dag.execution_groups[group_uuid].clone();
+            <span class="kw">if </span>!Scheduler::is_cacheable(<span class="kw-2">&amp;</span>group, cache_mode) {
+                not_cached.push((<span class="kw-2">*</span>dag_priority, <span class="kw-2">*</span>priority, group.uuid, <span class="kw-2">*</span>client_uuid));
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>
-                .<span class="ident">cache</span>
-                .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">group</span>, <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">file_handles</span>, <span class="self">self</span>.<span class="ident">file_store</span>.<span class="ident">as_ref</span>());
-            <span class="kw">match</span> <span class="ident">result</span> {
-                <span class="ident">CacheResult::Hit</span> { <span class="ident">result</span>, <span class="ident">outputs</span> } =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} is a cache hit!&quot;</span>, <span class="ident">group</span>.<span class="ident">uuid</span>);
-                    <span class="ident">client</span>.<span class="ident">ready_groups</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">uuid</span>);
-                    <span class="ident">cached</span>.<span class="ident">push</span>((<span class="kw-2">*</span><span class="ident">client_uuid</span>, <span class="ident">group</span>, <span class="ident">result</span>, <span class="ident">outputs</span>));
+            <span class="kw">let </span>result = <span class="self">self
+                </span>.cache
+                .get(<span class="kw-2">&amp;</span>group, <span class="kw-2">&amp;</span>client.file_handles, <span class="self">self</span>.file_store.as_ref());
+            <span class="kw">match </span>result {
+                CacheResult::Hit { result, outputs } =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} is a cache hit!&quot;</span>, group.uuid);
+                    client.ready_groups.remove(<span class="kw-2">&amp;</span>group.uuid);
+                    cached.push((<span class="kw-2">*</span>client_uuid, group, result, outputs));
                 }
-                <span class="ident">CacheResult::Miss</span> =&gt; {
-                    <span class="ident">not_cached</span>.<span class="ident">push</span>((<span class="kw-2">*</span><span class="ident">dag_priority</span>, <span class="kw-2">*</span><span class="ident">priority</span>, <span class="ident">group</span>.<span class="ident">uuid</span>, <span class="kw-2">*</span><span class="ident">client_uuid</span>));
+                CacheResult::Miss =&gt; {
+                    not_cached.push((<span class="kw-2">*</span>dag_priority, <span class="kw-2">*</span>priority, group.uuid, <span class="kw-2">*</span>client_uuid));
                 }
             }
         }
 
-        <span class="self">self</span>.<span class="ident">ready_execs</span> <span class="op">=</span> <span class="ident">not_cached</span>;
-        <span class="kw">for</span> (<span class="ident">client</span>, <span class="ident">exec</span>, <span class="ident">result</span>, <span class="ident">outputs</span>) <span class="kw">in</span> <span class="ident">cached</span>.<span class="ident">into_iter</span>() {
-            <span class="self">self</span>.<span class="ident">exec_completed</span>(<span class="ident">client</span>, <span class="kw-2">&amp;</span><span class="ident">exec</span>, <span class="ident">result</span>, <span class="ident">outputs</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.ready_execs = not_cached;
+        <span class="kw">for </span>(client, exec, result, outputs) <span class="kw">in </span>cached.into_iter() {
+            <span class="self">self</span>.exec_completed(client, <span class="kw-2">&amp;</span>exec, result, outputs, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
         }
 
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Whether an execution is eligible to be fetch from the cache.</span>
-    <span class="kw">fn</span> <span class="ident">is_cacheable</span>(<span class="ident">group</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionGroup</span>, <span class="ident">cache_mode</span>: <span class="kw-2">&amp;</span><span class="ident">CacheMode</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="kw">let</span> (<span class="ident">CacheMode::Except</span>(<span class="ident">set</span>), <span class="prelude-val">Some</span>(<span class="ident">tag</span>)) <span class="op">=</span> (<span class="ident">cache_mode</span>, <span class="ident">group</span>.<span class="ident">tag</span>().<span class="ident">as_ref</span>()) {
-            <span class="kw">if</span> <span class="ident">set</span>.<span class="ident">contains</span>(<span class="ident">tag</span>) {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+    <span class="doccomment">/// Whether an execution is eligible to be fetch from the cache.
+    </span><span class="kw">fn </span>is_cacheable(group: <span class="kw-2">&amp;</span>ExecutionGroup, cache_mode: <span class="kw-2">&amp;</span>CacheMode) -&gt; bool {
+        <span class="kw">if let </span>(CacheMode::Except(set), <span class="prelude-val">Some</span>(tag)) = (cache_mode, group.tag().as_ref()) {
+            <span class="kw">if </span>set.contains(tag) {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
         }
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">true
+    </span>}
 
-    <span class="doccomment">/// Give to each free worker a job from the ready executions.</span>
-    <span class="kw">fn</span> <span class="ident">assign_jobs</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">for</span> (<span class="ident">worker_uuid</span>, <span class="ident">worker</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">connected_workers</span>.<span class="ident">iter_mut</span>() {
-            <span class="kw">if</span> <span class="ident">worker</span>.<span class="ident">current_job</span>.<span class="ident">is_some</span>() {
+    <span class="doccomment">/// Give to each free worker a job from the ready executions.
+    </span><span class="kw">fn </span>assign_jobs(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">for </span>(worker_uuid, worker) <span class="kw">in </span><span class="self">self</span>.connected_workers.iter_mut() {
+            <span class="kw">if </span>worker.current_job.is_some() {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> (<span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">group_uuid</span>, <span class="ident">client_uuid</span>) <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">ready_execs</span>.<span class="ident">pop</span>() {
-                <span class="prelude-val">Some</span>(<span class="ident">exec</span>) =&gt; <span class="ident">exec</span>,
-                <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+            <span class="kw">let </span>(<span class="kw">_</span>, <span class="kw">_</span>, group_uuid, client_uuid) = <span class="kw">match </span><span class="self">self</span>.ready_execs.pop() {
+                <span class="prelude-val">Some</span>(exec) =&gt; exec,
+                <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
             };
-            <span class="macro">trace!</span>(<span class="string">&quot;Assigning {} to worker {}&quot;</span>, <span class="ident">group_uuid</span>, <span class="ident">worker_uuid</span>);
-            <span class="ident">worker</span>.<span class="ident">current_job</span> <span class="op">=</span> <span class="prelude-val">Some</span>((<span class="ident">client_uuid</span>, <span class="ident">group_uuid</span>, <span class="ident">Instant::now</span>()));
-            <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">client_uuid</span>) {
-                <span class="ident">client</span>
-            } <span class="kw">else</span> {
-                <span class="comment">// client is gone, dont worry to much about it</span>
-                <span class="kw">continue</span>;
+            <span class="macro">trace!</span>(<span class="string">&quot;Assigning {} to worker {}&quot;</span>, group_uuid, worker_uuid);
+            worker.current_job = <span class="prelude-val">Some</span>((client_uuid, group_uuid, Instant::now()));
+            <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
+                client
+            } <span class="kw">else </span>{
+                <span class="comment">// client is gone, dont worry to much about it
+                </span><span class="kw">continue</span>;
             };
-            <span class="ident">client</span>.<span class="ident">ready_groups</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>);
-            <span class="ident">client</span>.<span class="ident">running_groups</span>.<span class="ident">insert</span>(<span class="ident">group_uuid</span>);
-            <span class="kw">let</span> <span class="ident">group</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">client</span>.<span class="ident">dag</span>.<span class="ident">execution_groups</span>[<span class="kw-2">&amp;</span><span class="ident">group_uuid</span>];
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dep_keys</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileStoreKey</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-            <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                <span class="kw">for</span> <span class="ident">file</span> <span class="kw">in</span> <span class="ident">exec</span>.<span class="ident">dependencies</span>() {
-                    <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">client</span>
-                        .<span class="ident">file_handles</span>
-                        .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>)
-                        .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;Unknown file key of {}&quot;</span>, <span class="ident">file</span>))
-                        .<span class="ident">key</span>()
-                        .<span class="ident">clone</span>();
-                    <span class="ident">dep_keys</span>.<span class="ident">insert</span>(<span class="ident">file</span>, <span class="ident">handle</span>);
+            client.ready_groups.remove(<span class="kw-2">&amp;</span>group_uuid);
+            client.running_groups.insert(group_uuid);
+            <span class="kw">let </span>group = <span class="kw-2">&amp;</span>client.dag.execution_groups[<span class="kw-2">&amp;</span>group_uuid];
+            <span class="kw">let </span><span class="kw-2">mut </span>dep_keys: HashMap&lt;FileUuid, FileStoreKey&gt; = HashMap::new();
+            <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                <span class="kw">for </span>file <span class="kw">in </span>exec.dependencies() {
+                    <span class="kw">let </span>handle = client
+                        .file_handles
+                        .get(<span class="kw-2">&amp;</span>file)
+                        .unwrap_or_else(|| <span class="macro">panic!</span>(<span class="string">&quot;Unknown file key of {}&quot;</span>, file))
+                        .key()
+                        .clone();
+                    dep_keys.insert(file, handle);
                 }
             }
-            <span class="kw">let</span> <span class="ident">job</span> <span class="op">=</span> <span class="ident">WorkerJob</span> {
-                <span class="ident">group</span>: <span class="ident">group</span>.<span class="ident">clone</span>(),
-                <span class="ident">dep_keys</span>,
+            <span class="kw">let </span>job = WorkerJob {
+                group: group.clone(),
+                dep_keys,
             };
-            <span class="self">self</span>.<span class="ident">worker_manager</span>
-                .<span class="ident">send</span>(<span class="ident">WorkerManagerInMessage::WorkerJob</span> {
-                    <span class="ident">worker</span>: <span class="kw-2">*</span><span class="ident">worker_uuid</span>,
-                    <span class="ident">job</span>,
+            <span class="self">self</span>.worker_manager
+                .send(WorkerManagerInMessage::WorkerJob {
+                    worker: <span class="kw-2">*</span>worker_uuid,
+                    job,
                 })
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send WorkerJob to worker: {:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-            <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">group</span>.<span class="ident">executions</span> {
-                <span class="kw">if</span> <span class="ident">client</span>.<span class="ident">callbacks</span>.<span class="ident">executions</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">executor</span>.<span class="ident">send</span>((
-                        <span class="ident">client_uuid</span>,
-                        <span class="ident">SchedulerExecutorMessageData::ExecutionStarted</span> {
-                            <span class="ident">execution</span>: <span class="ident">exec</span>.<span class="ident">uuid</span>,
-                            <span class="ident">worker</span>: <span class="kw-2">*</span><span class="ident">worker_uuid</span>,
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send WorkerJob to worker: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+            <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
+                <span class="kw">if </span>client.callbacks.executions.contains(<span class="kw-2">&amp;</span>exec.uuid) {
+                    <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((
+                        client_uuid,
+                        SchedulerExecutorMessageData::ExecutionStarted {
+                            execution: exec.uuid,
+                            worker: <span class="kw-2">*</span>worker_uuid,
                         },
                     )) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution started: {:?}&quot;</span>, <span class="ident">e</span>);
+                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution started: {:?}&quot;</span>, e);
                     }
                 }
             }
@@ -1749,4 +1749,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

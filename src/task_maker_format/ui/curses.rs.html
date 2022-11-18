@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/curses.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curses.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/curses.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curses.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -429,436 +429,436 @@
 <span id="429">429</span>
 <span id="430">430</span>
 <span id="431">431</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Utilities for writing UIs with Curses.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Utilities for writing UIs with Curses.
 
-<span class="kw">use</span> <span class="ident">std::io</span>;
-<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::sync::atomic</span>::{<span class="ident">AtomicBool</span>, <span class="ident">Ordering</span>};
-<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">RwLock</span>};
-<span class="kw">use</span> <span class="ident">std::thread::JoinHandle</span>;
-<span class="kw">use</span> <span class="ident">std::time::SystemTime</span>;
+</span><span class="kw">use </span>std::io;
+<span class="kw">use </span>std::marker::PhantomData;
+<span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::sync::atomic::{AtomicBool, Ordering};
+<span class="kw">use </span>std::sync::{Arc, RwLock};
+<span class="kw">use </span>std::thread::JoinHandle;
+<span class="kw">use </span>std::time::SystemTime;
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">nix::sys::signal</span>::{<span class="self">self</span>, <span class="ident">Signal</span>};
-<span class="kw">use</span> <span class="ident">nix::unistd::Pid</span>;
-<span class="kw">use</span> <span class="ident">termion::event</span>::{<span class="ident">Event</span>, <span class="ident">Key</span>};
-<span class="kw">use</span> <span class="ident">termion::input</span>::{<span class="ident">MouseTerminal</span>, <span class="ident">TermRead</span>};
-<span class="kw">use</span> <span class="ident">termion::raw</span>::{<span class="ident">IntoRawMode</span>, <span class="ident">RawTerminal</span>};
-<span class="kw">use</span> <span class="ident">termion::screen::AlternateScreen</span>;
-<span class="kw">use</span> <span class="ident">tui::backend::TermionBackend</span>;
-<span class="kw">use</span> <span class="ident">tui::layout::Rect</span>;
-<span class="kw">use</span> <span class="ident">tui::style</span>::{<span class="ident">Color</span>, <span class="ident">Modifier</span>, <span class="ident">Style</span>};
-<span class="kw">use</span> <span class="ident">tui::text</span>::{<span class="ident">Span</span>, <span class="ident">Spans</span>};
-<span class="kw">use</span> <span class="ident">tui::widgets</span>::{<span class="ident">Block</span>, <span class="ident">Borders</span>, <span class="ident">Paragraph</span>};
-<span class="kw">use</span> <span class="ident">tui</span>::{<span class="ident">Frame</span>, <span class="ident">Terminal</span>};
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>nix::sys::signal::{<span class="self">self</span>, Signal};
+<span class="kw">use </span>nix::unistd::Pid;
+<span class="kw">use </span>termion::event::{Event, Key};
+<span class="kw">use </span>termion::input::{MouseTerminal, TermRead};
+<span class="kw">use </span>termion::raw::{IntoRawMode, RawTerminal};
+<span class="kw">use </span>termion::screen::AlternateScreen;
+<span class="kw">use </span>tui::backend::TermionBackend;
+<span class="kw">use </span>tui::layout::Rect;
+<span class="kw">use </span>tui::style::{Color, Modifier, Style};
+<span class="kw">use </span>tui::text::{Span, Spans};
+<span class="kw">use </span>tui::widgets::{Block, Borders, Paragraph};
+<span class="kw">use </span>tui::{Frame, Terminal};
 
-<span class="kw">use</span> <span class="ident">task_maker_exec</span>::{<span class="ident">ExecutorStatus</span>, <span class="ident">ExecutorWorkerStatus</span>};
+<span class="kw">use </span>task_maker_exec::{ExecutorStatus, ExecutorWorkerStatus};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui</span>::{<span class="ident">CompilationStatus</span>, <span class="ident">FinishUI</span>, <span class="ident">UIMessage</span>, <span class="ident">UIStateT</span>, <span class="ident">UI</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ui::{CompilationStatus, FinishUI, UIMessage, UIStateT, UI};
 
-<span class="doccomment">/// The framerate of the UI.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">FPS</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">30</span>;
-<span class="doccomment">/// After how many seconds rotate the list of workers if they don&#39;t fit on the screen.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">ROTATION_DELAY</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="doccomment">/// The framerate of the UI.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>FPS: u64 = <span class="number">30</span>;
+<span class="doccomment">/// After how many seconds rotate the list of workers if they don&#39;t fit on the screen.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>ROTATION_DELAY: u64 = <span class="number">1</span>;
 
-<span class="doccomment">/// The type of the terminal with its backend.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FrameType</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Frame</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">TermionBackend</span><span class="op">&lt;</span><span class="ident">AlternateScreen</span><span class="op">&lt;</span><span class="ident">MouseTerminal</span><span class="op">&lt;</span><span class="ident">RawTerminal</span><span class="op">&lt;</span><span class="ident">io::Stdout</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="doccomment">/// The type of the terminal with its backend.
+</span><span class="kw">pub type </span>FrameType&lt;<span class="lifetime">&#39;a</span>&gt; =
+    Frame&lt;<span class="lifetime">&#39;a</span>, TermionBackend&lt;AlternateScreen&lt;MouseTerminal&lt;RawTerminal&lt;io::Stdout&gt;&gt;&gt;&gt;&gt;;
 
-<span class="macro">macro_rules!</span> <span class="ident">define_color_inner</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>,) =&gt; {
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>
+<span class="macro">macro_rules! </span>define_color_inner {
+    (<span class="macro-nonterminal">$color</span>:expr,) =&gt; {
+        <span class="macro-nonterminal">$color
+    </span>};
+    (<span class="macro-nonterminal">$color</span>:expr, basic(<span class="macro-nonterminal">$basic</span>:ident), $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>.fg(Color::<span class="macro-nonterminal">$basic</span>), $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">basic</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">basic</span>:<span class="ident">ident</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">fg</span>(<span class="ident">Color</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">basic</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    (<span class="macro-nonterminal">$color</span>:expr, rgb(<span class="macro-nonterminal">$r</span>:expr, <span class="macro-nonterminal">$g</span>:expr, <span class="macro-nonterminal">$b</span>:expr), $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro">define_color_inner!</span>(<span class="kw">if </span><span class="kw-2">*</span><span class="macro-nonterminal">$crate::ui::HAS_TRUECOLOR </span>{
+            <span class="macro-nonterminal">$color</span>.fg(Color::Rgb(<span class="macro-nonterminal">$r</span>, <span class="macro-nonterminal">$g</span>, <span class="macro-nonterminal">$b</span>))
+        } <span class="kw">else </span>{
+            <span class="macro-nonterminal">$color
+        </span>}, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">rgb</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">g</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>:<span class="ident">expr</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro">define_color_inner!</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::ui::HAS_TRUECOLOR</span> {
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">fg</span>(<span class="ident">Color::Rgb</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">g</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>))
-        } <span class="kw">else</span> {
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>
-        }, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
-    };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">bold</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">add_modifier</span>(<span class="ident">Modifier::BOLD</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
-    };
-}
-<span class="macro">macro_rules!</span> <span class="ident">define_color</span> {
-    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro">define_color_inner!</span>(<span class="ident">Style::default</span>(), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>,)
+    (<span class="macro-nonterminal">$color</span>:expr, bold, $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>.add_modifier(Modifier::BOLD), $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
 }
-
-<span class="macro">lazy_static!</span> {
-    <span class="doccomment">/// Green color.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">GREEN</span>: <span class="ident">Style</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">LightGreen</span>), <span class="ident">bold</span>);
-    <span class="doccomment">/// Red color.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">RED</span>: <span class="ident">Style</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">LightRed</span>), <span class="ident">bold</span>);
-    <span class="doccomment">/// Blue color.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BLUE</span>: <span class="ident">Style</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">LightBlue</span>), <span class="ident">bold</span>);
-    <span class="doccomment">/// Yellow color.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">YELLOW</span>: <span class="ident">Style</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">LightYellow</span>), <span class="ident">bold</span>);
-    <span class="doccomment">/// Orange color.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ORANGE</span>: <span class="ident">Style</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Yellow</span>), <span class="ident">rgb</span>(<span class="number">255</span>, <span class="number">165</span>, <span class="number">0</span>), <span class="ident">bold</span>);
-    <span class="doccomment">/// Bold.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BOLD</span>: <span class="ident">Style</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">bold</span>);
+<span class="macro">macro_rules! </span>define_color {
+    ($(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro">define_color_inner!</span>(Style::default(), $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>,)
+    };
 }
 
-<span class="doccomment">/// A generic animated UI for tasks, dynamically refreshing using curses as a backend.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// - `State` is the type of `UIState` for this UI.</span>
-<span class="doccomment">/// - `Drawer` is the drawer for the frames of the UI.</span>
-<span class="doccomment">/// - `FinishUI` is the UI that prints the final results.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CursesUI</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">State</span>: <span class="ident">UIStateT</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Drawer</span>: <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Finish</span>: <span class="ident">FinishUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="macro">lazy_static! </span>{
+    <span class="doccomment">/// Green color.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>GREEN: Style = <span class="macro">define_color!</span>(basic(LightGreen), bold);
+    <span class="doccomment">/// Red color.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>RED: Style = <span class="macro">define_color!</span>(basic(LightRed), bold);
+    <span class="doccomment">/// Blue color.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>BLUE: Style = <span class="macro">define_color!</span>(basic(LightBlue), bold);
+    <span class="doccomment">/// Yellow color.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>YELLOW: Style = <span class="macro">define_color!</span>(basic(LightYellow), bold);
+    <span class="doccomment">/// Orange color.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>ORANGE: Style = <span class="macro">define_color!</span>(basic(Yellow), rgb(<span class="number">255</span>, <span class="number">165</span>, <span class="number">0</span>), bold);
+    <span class="doccomment">/// Bold.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>BOLD: Style = <span class="macro">define_color!</span>(bold);
+}
+
+<span class="doccomment">/// A generic animated UI for tasks, dynamically refreshing using curses as a backend.
+///
+/// - `State` is the type of `UIState` for this UI.
+/// - `Drawer` is the drawer for the frames of the UI.
+/// - `FinishUI` is the UI that prints the final results.
+</span><span class="kw">pub struct </span>CursesUI&lt;State, Drawer, Finish&gt;
+<span class="kw">where
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 {
-    <span class="doccomment">/// The thread where the UI lives.</span>
-    <span class="ident">ui_thread</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">JoinHandle</span><span class="op">&lt;</span>()<span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The state of the task for the UI.</span>
-    <span class="ident">state</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// When it becomes true the UI will stop.</span>
-    <span class="ident">stop</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicBool</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The thread where the UI lives.
+    </span>ui_thread: <span class="prelude-ty">Option</span>&lt;JoinHandle&lt;()&gt;&gt;,
+    <span class="doccomment">/// The state of the task for the UI.
+    </span>state: Arc&lt;RwLock&lt;State&gt;&gt;,
+    <span class="doccomment">/// When it becomes true the UI will stop.
+    </span>stop: Arc&lt;AtomicBool&gt;,
 
-    <span class="ident">drawer</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Drawer</span><span class="op">&gt;</span>,
-    <span class="ident">finish_ui</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Finish</span><span class="op">&gt;</span>,
+    drawer: PhantomData&lt;Drawer&gt;,
+    finish_ui: PhantomData&lt;Finish&gt;,
 }
 
-<span class="doccomment">/// A drawer for the frames of the UI.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Draw a frame of the UI using the provided state, onto the frame, using the loading</span>
-    <span class="doccomment">/// character. Frame index is a counter of the number of frames encountered so far.</span>
-    <span class="kw">fn</span> <span class="ident">draw</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">State</span>, <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">loading</span>: <span class="ident">char</span>, <span class="ident">frame_index</span>: <span class="ident">usize</span>);
+<span class="doccomment">/// A drawer for the frames of the UI.
+</span><span class="kw">pub trait </span>CursesDrawer&lt;State&gt; {
+    <span class="doccomment">/// Draw a frame of the UI using the provided state, onto the frame, using the loading
+    /// character. Frame index is a counter of the number of frames encountered so far.
+    </span><span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>State, frame: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize);
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span> <span class="ident">CursesUI</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">State</span>: <span class="ident">UIStateT</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Drawer</span>: <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Finish</span>: <span class="ident">FinishUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="kw">impl</span>&lt;State, Drawer, Finish&gt; CursesUI&lt;State, Drawer, Finish&gt;
+<span class="kw">where
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 {
-    <span class="doccomment">/// Make a new generic `CursesUI`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">state</span>: <span class="ident">State</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CursesUI</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">RwLock::new</span>(<span class="ident">state</span>));
-        <span class="kw">let</span> <span class="ident">stop</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ui</span> <span class="op">=</span> <span class="ident">CursesUI</span> {
-            <span class="ident">ui_thread</span>: <span class="prelude-val">None</span>,
-            <span class="ident">state</span>: <span class="ident">state</span>.<span class="ident">clone</span>(),
-            <span class="ident">stop</span>: <span class="ident">stop</span>.<span class="ident">clone</span>(),
-            <span class="ident">drawer</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">finish_ui</span>: <span class="ident">Default::default</span>(),
+    <span class="doccomment">/// Make a new generic `CursesUI`.
+    </span><span class="kw">pub fn </span>new(state: State) -&gt; <span class="prelude-ty">Result</span>&lt;CursesUI&lt;State, Drawer, Finish&gt;, Error&gt; {
+        <span class="kw">let </span>state = Arc::new(RwLock::new(state));
+        <span class="kw">let </span>stop = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>ui = CursesUI {
+            ui_thread: <span class="prelude-val">None</span>,
+            state: state.clone(),
+            stop: stop.clone(),
+            drawer: Default::default(),
+            finish_ui: Default::default(),
         };
-        <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">ui</span>.<span class="ident">start</span>(<span class="ident">state</span>, <span class="ident">stop</span>)<span class="question-mark">?</span>;
-        <span class="ident">ui</span>.<span class="ident">ui_thread</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">handle</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">ui</span>)
+        <span class="kw">let </span>handle = ui.start(state, stop)<span class="question-mark">?</span>;
+        ui.ui_thread = <span class="prelude-val">Some</span>(handle);
+        <span class="prelude-val">Ok</span>(ui)
     }
 
-    <span class="doccomment">/// Start the drawing thread of the UI, returning the `JoinHandle` of it.</span>
-    <span class="kw">fn</span> <span class="ident">start</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">state</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">stop</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicBool</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">JoinHandle</span><span class="op">&lt;</span>()<span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">io::stdout</span>().<span class="ident">into_raw_mode</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">MouseTerminal::from</span>(<span class="ident">stdout</span>);
-        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">AlternateScreen::from</span>(<span class="ident">stdout</span>);
-        <span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">TermionBackend::new</span>(<span class="ident">stdout</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">terminal</span> <span class="op">=</span> <span class="ident">Terminal::new</span>(<span class="ident">backend</span>)<span class="question-mark">?</span>;
-        <span class="ident">terminal</span>.<span class="ident">hide_cursor</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">std::thread::Builder::new</span>()
-            .<span class="ident">name</span>(<span class="string">&quot;CursesUI thread&quot;</span>.<span class="ident">to_owned</span>())
-            .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">loading</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="string">&#39;◐&#39;</span>, <span class="string">&#39;◓&#39;</span>, <span class="string">&#39;◑&#39;</span>, <span class="string">&#39;◒&#39;</span>];
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">loading_index</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">let</span> <span class="ident">stdin</span> <span class="op">=</span> <span class="ident">termion::async_stdin</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">stdin</span>.<span class="ident">events</span>();
-                <span class="kw">while</span> <span class="op">!</span><span class="ident">stop</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>) {
-                    <span class="comment">// FIXME: handling the ^C this way inhibits the real ^C handler. Doing so the workers may</span>
-                    <span class="comment">//        not be killed properly (locally and remotely).</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">event</span>)) <span class="op">=</span> <span class="ident">events</span>.<span class="ident">next</span>() {
-                        <span class="kw">match</span> <span class="ident">event</span> {
-                            <span class="ident">Event::Key</span>(<span class="ident">Key::Ctrl</span>(<span class="string">&#39;c&#39;</span>)) <span class="op">|</span> <span class="ident">Event::Key</span>(<span class="ident">Key::Ctrl</span>(<span class="string">&#39;\\&#39;</span>)) =&gt; {
-                                <span class="ident">drop</span>(<span class="ident">terminal</span>);
-                                <span class="ident">send_ctrl_c</span>();
+    <span class="doccomment">/// Start the drawing thread of the UI, returning the `JoinHandle` of it.
+    </span><span class="kw">fn </span>start(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        state: Arc&lt;RwLock&lt;State&gt;&gt;,
+        stop: Arc&lt;AtomicBool&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;JoinHandle&lt;()&gt;, Error&gt; {
+        <span class="kw">let </span>stdout = io::stdout().into_raw_mode()<span class="question-mark">?</span>;
+        <span class="kw">let </span>stdout = MouseTerminal::from(stdout);
+        <span class="kw">let </span>stdout = AlternateScreen::from(stdout);
+        <span class="kw">let </span>backend = TermionBackend::new(stdout);
+        <span class="kw">let </span><span class="kw-2">mut </span>terminal = Terminal::new(backend)<span class="question-mark">?</span>;
+        terminal.hide_cursor()<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(std::thread::Builder::new()
+            .name(<span class="string">&quot;CursesUI thread&quot;</span>.to_owned())
+            .spawn(<span class="kw">move </span>|| {
+                <span class="kw">let </span>loading = <span class="macro">vec!</span>[<span class="string">&#39;◐&#39;</span>, <span class="string">&#39;◓&#39;</span>, <span class="string">&#39;◑&#39;</span>, <span class="string">&#39;◒&#39;</span>];
+                <span class="kw">let </span><span class="kw-2">mut </span>loading_index = <span class="number">0</span>;
+                <span class="kw">let </span>stdin = termion::async_stdin();
+                <span class="kw">let </span><span class="kw-2">mut </span>events = stdin.events();
+                <span class="kw">while </span>!stop.load(Ordering::Relaxed) {
+                    <span class="comment">// FIXME: handling the ^C this way inhibits the real ^C handler. Doing so the workers may
+                    //        not be killed properly (locally and remotely).
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(event)) = events.next() {
+                        <span class="kw">match </span>event {
+                            Event::Key(Key::Ctrl(<span class="string">&#39;c&#39;</span>)) | Event::Key(Key::Ctrl(<span class="string">&#39;\\&#39;</span>)) =&gt; {
+                                drop(terminal);
+                                send_ctrl_c();
                                 <span class="kw">return</span>;
                             }
-                            <span class="kw">_</span> =&gt; {}
+                            <span class="kw">_ </span>=&gt; {}
                         }
                     }
-                    <span class="kw">let</span> <span class="ident">loading</span> <span class="op">=</span> <span class="ident">loading</span>[<span class="ident">loading_index</span> <span class="op">%</span> <span class="ident">loading</span>.<span class="ident">len</span>()];
-                    <span class="ident">terminal</span>
-                        .<span class="ident">draw</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> {
-                            <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">read</span>().<span class="ident">expect</span>(<span class="string">&quot;UI state lock is poisoned&quot;</span>);
-                            <span class="ident">Drawer::draw</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>, <span class="ident">f</span>, <span class="ident">loading</span>, <span class="ident">loading_index</span>);
+                    <span class="kw">let </span>loading = loading[loading_index % loading.len()];
+                    terminal
+                        .draw(|f| {
+                            <span class="kw">let </span>state = state.read().expect(<span class="string">&quot;UI state lock is poisoned&quot;</span>);
+                            Drawer::draw(<span class="kw-2">&amp;</span>state, f, loading, loading_index);
                         })
-                        .<span class="ident">expect</span>(<span class="string">&quot;Failed to draw to the screen&quot;</span>);
-                    <span class="comment">// reduce the framerate to at most `FPS`</span>
-                    <span class="ident">std::thread::sleep</span>(<span class="ident">std::time::Duration::from_micros</span>(<span class="number">1_000_000</span> <span class="op">/</span> <span class="ident">FPS</span>));
-                    <span class="ident">loading_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        .expect(<span class="string">&quot;Failed to draw to the screen&quot;</span>);
+                    <span class="comment">// reduce the framerate to at most `FPS`
+                    </span>std::thread::sleep(std::time::Duration::from_micros(<span class="number">1_000_000 </span>/ FPS));
+                    loading_index += <span class="number">1</span>;
                 }
             })<span class="question-mark">?</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span> <span class="ident">UI</span> <span class="kw">for</span> <span class="ident">CursesUI</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">State</span>: <span class="ident">UIStateT</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Drawer</span>: <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Finish</span>: <span class="ident">FinishUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="kw">impl</span>&lt;State, Drawer, Finish&gt; UI <span class="kw">for </span>CursesUI&lt;State, Drawer, Finish&gt;
+<span class="kw">where
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 {
-    <span class="kw">fn</span> <span class="ident">on_message</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">UIMessage</span>) {
-        <span class="self">self</span>.<span class="ident">state</span>
-            .<span class="ident">write</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;UI state lock is poisoned&quot;</span>)
-            .<span class="ident">apply</span>(<span class="ident">message</span>);
+    <span class="kw">fn </span>on_message(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: UIMessage) {
+        <span class="self">self</span>.state
+            .write()
+            .expect(<span class="string">&quot;UI state lock is poisoned&quot;</span>)
+            .apply(message);
     }
 
-    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">stop</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
-        <span class="self">self</span>.<span class="ident">ui_thread</span>
-            .<span class="ident">take</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;UI finished more than once&quot;</span>)
-            .<span class="ident">join</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;UI thread failed&quot;</span>);
-        <span class="comment">// at this point the terminal should be restored</span>
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">read</span>().<span class="ident">expect</span>(<span class="string">&quot;State lock is poisoned&quot;</span>);
-        <span class="ident">Finish::print</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>);
+    <span class="kw">fn </span>finish(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.stop.store(<span class="bool-val">true</span>, Ordering::Relaxed);
+        <span class="self">self</span>.ui_thread
+            .take()
+            .expect(<span class="string">&quot;UI finished more than once&quot;</span>)
+            .join()
+            .expect(<span class="string">&quot;UI thread failed&quot;</span>);
+        <span class="comment">// at this point the terminal should be restored
+        </span><span class="kw">let </span>state = <span class="self">self</span>.state.read().expect(<span class="string">&quot;State lock is poisoned&quot;</span>);
+        Finish::print(<span class="kw-2">&amp;</span>state);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">CursesUI</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Drawer</span>, <span class="ident">Finish</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">State</span>: <span class="ident">UIStateT</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Drawer</span>: <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">Finish</span>: <span class="ident">FinishUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="kw">impl</span>&lt;State, Drawer, Finish&gt; Drop <span class="kw">for </span>CursesUI&lt;State, Drawer, Finish&gt;
+<span class="kw">where
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 {
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="comment">// tell the ui to stop and wait for it, the terminal will be released.</span>
-        <span class="self">self</span>.<span class="ident">stop</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">ui_thread</span>.<span class="ident">is_some</span>() {
-            <span class="comment">// try not to panic during unwind</span>
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ui_thread</span>.<span class="ident">take</span>().<span class="ident">unwrap</span>().<span class="ident">join</span>();
+    <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="comment">// tell the ui to stop and wait for it, the terminal will be released.
+        </span><span class="self">self</span>.stop.store(<span class="bool-val">true</span>, Ordering::Relaxed);
+        <span class="kw">if </span><span class="self">self</span>.ui_thread.is_some() {
+            <span class="comment">// try not to panic during unwind
+            </span><span class="kw">let _ </span>= <span class="self">self</span>.ui_thread.take().unwrap().join();
         }
     }
 }
 
-<span class="doccomment">/// Get the rect of the inner rect of a block with the borders.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inner_block</span>(<span class="ident">rect</span>: <span class="ident">Rect</span>) -&gt; <span class="ident">Rect</span> {
-    <span class="kw">if</span> <span class="ident">rect</span>.<span class="ident">width</span> <span class="op">&lt;</span> <span class="number">2</span> <span class="op">|</span><span class="op">|</span> <span class="ident">rect</span>.<span class="ident">height</span> <span class="op">&lt;</span> <span class="number">2</span> {
-        <span class="kw">return</span> <span class="ident">Rect::new</span>(<span class="ident">rect</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">rect</span>.<span class="ident">y</span> <span class="op">+</span> <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);
+<span class="doccomment">/// Get the rect of the inner rect of a block with the borders.
+</span><span class="kw">pub fn </span>inner_block(rect: Rect) -&gt; Rect {
+    <span class="kw">if </span>rect.width &lt; <span class="number">2 </span>|| rect.height &lt; <span class="number">2 </span>{
+        <span class="kw">return </span>Rect::new(rect.x + <span class="number">1</span>, rect.y + <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);
     }
-    <span class="ident">Rect::new</span>(<span class="ident">rect</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">rect</span>.<span class="ident">y</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">rect</span>.<span class="ident">width</span> <span class="op">-</span> <span class="number">2</span>, <span class="ident">rect</span>.<span class="ident">height</span> <span class="op">-</span> <span class="number">2</span>)
+    Rect::new(rect.x + <span class="number">1</span>, rect.y + <span class="number">1</span>, rect.width - <span class="number">2</span>, rect.height - <span class="number">2</span>)
 }
 
-<span class="doccomment">/// Draw the compilation block.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">draw_compilations</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span><span class="op">&gt;</span>(
-    <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>,
-    <span class="ident">rect</span>: <span class="ident">Rect</span>,
-    <span class="ident">compilations</span>: <span class="ident">I</span>,
-    <span class="ident">loading</span>: <span class="ident">char</span>,
-) <span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">PathBuf</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">CompilationStatus</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// Draw the compilation block.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>draw_compilations&lt;<span class="lifetime">&#39;a</span>, I&gt;(
+    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    rect: Rect,
+    compilations: I,
+    loading: char,
+) <span class="kw">where
+    </span>I: Iterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>PathBuf, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>CompilationStatus)&gt;,
 {
-    <span class="kw">let</span> <span class="ident">compilations</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">compilations</span>.<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">compilations</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">k</span>.<span class="ident">file_name</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>).<span class="ident">len</span>())
-        .<span class="ident">max</span>()
-        .<span class="ident">unwrap_or</span>(<span class="number">0</span>)
-        <span class="op">+</span> <span class="number">4</span>;
-    <span class="kw">let</span> <span class="ident">text</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Spans</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">compilations</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">sorted_by_key</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="kw-2">*</span><span class="ident">k</span>)
-        .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">file</span>, <span class="ident">status</span>)<span class="op">|</span> {
+    <span class="kw">let </span>compilations: Vec&lt;<span class="kw">_</span>&gt; = compilations.collect();
+    <span class="kw">let </span>max_len = compilations
+        .iter()
+        .map(|(k, <span class="kw">_</span>)| k.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>).len())
+        .max()
+        .unwrap_or(<span class="number">0</span>)
+        + <span class="number">4</span>;
+    <span class="kw">let </span>text: Vec&lt;Spans&gt; = compilations
+        .iter()
+        .sorted_by_key(|(k, <span class="kw">_</span>)| <span class="kw-2">*</span>k)
+        .map(|(file, status)| {
             <span class="macro">vec!</span>[
-                <span class="ident">Span::raw</span>(<span class="macro">format!</span>(
+                Span::raw(<span class="macro">format!</span>(
                     <span class="string">&quot;{:&lt;max_len$}&quot;</span>,
-                    <span class="ident">file</span>.<span class="ident">file_name</span>()
-                        .<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>)
-                        .<span class="ident">to_string_lossy</span>(),
-                    <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">max_len</span>
+                    file.file_name()
+                        .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+                        .to_string_lossy(),
+                    max_len = max_len
                 )),
-                <span class="ident">compilation_status_text</span>(<span class="ident">status</span>, <span class="ident">loading</span>),
+                compilation_status_text(status, loading),
             ]
-            .<span class="ident">into</span>()
+            .into()
         })
-        .<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">text</span>);
-    <span class="ident">frame</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">rect</span>);
+        .collect();
+    <span class="kw">let </span>paragraph = Paragraph::new(text);
+    frame.render_widget(paragraph, rect);
 }
 
-<span class="doccomment">/// Get the `Text` relative to the compilation status of a file.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">compilation_status_text</span>(<span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">CompilationStatus</span>, <span class="ident">loading</span>: <span class="ident">char</span>) -&gt; <span class="ident">Span</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="ident">status</span> {
-        <span class="ident">CompilationStatus::Pending</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;... &quot;</span>),
-        <span class="ident">CompilationStatus::Running</span> =&gt; <span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot;{}   &quot;</span>, <span class="ident">loading</span>)),
-        <span class="ident">CompilationStatus::Done</span> { .. } =&gt; <span class="ident">Span::styled</span>(<span class="string">&quot;OK  &quot;</span>, <span class="kw-2">*</span><span class="ident">GREEN</span>),
-        <span class="ident">CompilationStatus::Failed</span> { .. } =&gt; <span class="ident">Span::styled</span>(<span class="string">&quot;FAIL&quot;</span>, <span class="kw-2">*</span><span class="ident">RED</span>),
-        <span class="ident">CompilationStatus::Skipped</span> =&gt; <span class="ident">Span::styled</span>(<span class="string">&quot;skip&quot;</span>, <span class="kw-2">*</span><span class="ident">YELLOW</span>),
+<span class="doccomment">/// Get the `Text` relative to the compilation status of a file.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>compilation_status_text(status: <span class="kw-2">&amp;</span>CompilationStatus, loading: char) -&gt; Span&lt;<span class="lifetime">&#39;static</span>&gt; {
+    <span class="kw">match </span>status {
+        CompilationStatus::Pending =&gt; Span::raw(<span class="string">&quot;... &quot;</span>),
+        CompilationStatus::Running =&gt; Span::raw(<span class="macro">format!</span>(<span class="string">&quot;{}   &quot;</span>, loading)),
+        CompilationStatus::Done { .. } =&gt; Span::styled(<span class="string">&quot;OK  &quot;</span>, <span class="kw-2">*</span>GREEN),
+        CompilationStatus::Failed { .. } =&gt; Span::styled(<span class="string">&quot;FAIL&quot;</span>, <span class="kw-2">*</span>RED),
+        CompilationStatus::Skipped =&gt; Span::styled(<span class="string">&quot;skip&quot;</span>, <span class="kw-2">*</span>YELLOW),
     }
 }
 
-<span class="doccomment">/// Render a block with the specified title.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render_block</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">rect</span>: <span class="ident">Rect</span>, <span class="ident">title</span>: <span class="ident">S</span>) {
-    <span class="kw">let</span> <span class="ident">block</span> <span class="op">=</span> <span class="ident">Block::default</span>()
-        .<span class="ident">title</span>(<span class="ident">Span::styled</span>(<span class="ident">title</span>.<span class="ident">as_ref</span>(), <span class="kw-2">*</span><span class="ident">BLUE</span>))
-        .<span class="ident">borders</span>(<span class="ident">Borders::ALL</span>);
-    <span class="ident">frame</span>.<span class="ident">render_widget</span>(<span class="ident">block</span>, <span class="ident">rect</span>);
+<span class="doccomment">/// Render a block with the specified title.
+</span><span class="kw">pub fn </span>render_block&lt;S: AsRef&lt;str&gt;&gt;(frame: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect, title: S) {
+    <span class="kw">let </span>block = Block::default()
+        .title(Span::styled(title.as_ref(), <span class="kw-2">*</span>BLUE))
+        .borders(Borders::ALL);
+    frame.render_widget(block, rect);
 }
 
-<span class="doccomment">/// Draw the server status block.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render_server_status</span>(
-    <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>,
-    <span class="ident">rect</span>: <span class="ident">Rect</span>,
-    <span class="ident">status</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">loading</span>: <span class="ident">char</span>,
-    <span class="ident">frame_index</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Draw the server status block.
+</span><span class="kw">pub fn </span>render_server_status(
+    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    rect: Rect,
+    status: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutorStatus&lt;SystemTime&gt;&gt;,
+    loading: char,
+    frame_index: usize,
 ) {
-    <span class="kw">let</span> <span class="ident">title</span> <span class="op">=</span> <span class="string">&quot; Server status &quot;</span>;
-    <span class="ident">render_block</span>(<span class="ident">frame</span>, <span class="ident">rect</span>, <span class="ident">title</span>);
-    <span class="ident">draw_server_status_summary</span>(
-        <span class="ident">frame</span>,
-        <span class="ident">Rect::new</span>(
-            <span class="ident">rect</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">title</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span> <span class="op">+</span> <span class="number">2</span>,
-            <span class="ident">rect</span>.<span class="ident">y</span>,
-            <span class="ident">rect</span>.<span class="ident">width</span>.<span class="ident">saturating_sub</span>(<span class="ident">title</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span> <span class="op">+</span> <span class="number">2</span>),
+    <span class="kw">let </span>title = <span class="string">&quot; Server status &quot;</span>;
+    render_block(frame, rect, title);
+    draw_server_status_summary(
+        frame,
+        Rect::new(
+            rect.x + title.len() <span class="kw">as </span>u16 + <span class="number">2</span>,
+            rect.y,
+            rect.width.saturating_sub(title.len() <span class="kw">as </span>u16 + <span class="number">2</span>),
             <span class="number">1</span>,
         ),
-        <span class="ident">status</span>,
+        status,
     );
-    <span class="ident">draw_server_status</span>(
-        <span class="ident">frame</span>,
-        <span class="ident">inner_block</span>(<span class="ident">rect</span>),
-        <span class="ident">status</span>,
-        <span class="ident">loading</span>,
-        <span class="ident">frame_index</span> <span class="op">/</span> <span class="ident">FPS</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">/</span> <span class="ident">ROTATION_DELAY</span> <span class="kw">as</span> <span class="ident">usize</span>,
+    draw_server_status(
+        frame,
+        inner_block(rect),
+        status,
+        loading,
+        frame_index / FPS <span class="kw">as </span>usize / ROTATION_DELAY <span class="kw">as </span>usize,
     );
 }
 
-<span class="doccomment">/// Draw the summary of the server status on the border of the block.</span>
-<span class="kw">fn</span> <span class="ident">draw_server_status_summary</span>(
-    <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>,
-    <span class="ident">rect</span>: <span class="ident">Rect</span>,
-    <span class="ident">status</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Draw the summary of the server status on the border of the block.
+</span><span class="kw">fn </span>draw_server_status_summary(
+    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    rect: Rect,
+    status: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutorStatus&lt;SystemTime&gt;&gt;,
 ) {
-    <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">status</span>) <span class="op">=</span> <span class="ident">status</span> {
-        <span class="ident">status</span>
-    } <span class="kw">else</span> {
+    <span class="kw">let </span>status = <span class="kw">if let </span><span class="prelude-val">Some</span>(status) = status {
+        status
+    } <span class="kw">else </span>{
         <span class="kw">return</span>;
     };
-    <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">Spans</span>(<span class="macro">vec!</span>[
-        <span class="ident">Span::styled</span>(<span class="string">&quot; Ready &quot;</span>, <span class="ident">Style::default</span>().<span class="ident">add_modifier</span>(<span class="ident">Modifier::BOLD</span>)),
-        <span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot;{} ─&quot;</span>, <span class="ident">status</span>.<span class="ident">ready_execs</span>)),
-        <span class="ident">Span::styled</span>(<span class="string">&quot; Waiting &quot;</span>, <span class="ident">Style::default</span>().<span class="ident">add_modifier</span>(<span class="ident">Modifier::BOLD</span>)),
-        <span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot;{} &quot;</span>, <span class="ident">status</span>.<span class="ident">waiting_execs</span>)),
+    <span class="kw">let </span>paragraph = Paragraph::new(Spans(<span class="macro">vec!</span>[
+        Span::styled(<span class="string">&quot; Ready &quot;</span>, Style::default().add_modifier(Modifier::BOLD)),
+        Span::raw(<span class="macro">format!</span>(<span class="string">&quot;{} ─&quot;</span>, status.ready_execs)),
+        Span::styled(<span class="string">&quot; Waiting &quot;</span>, Style::default().add_modifier(Modifier::BOLD)),
+        Span::raw(<span class="macro">format!</span>(<span class="string">&quot;{} &quot;</span>, status.waiting_execs)),
     ]));
-    <span class="ident">frame</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">rect</span>);
+    frame.render_widget(paragraph, rect);
 }
 
-<span class="doccomment">/// Draw the content of the server status box, splitting the workers in 2 groups if they don&#39;t fit,</span>
-<span class="doccomment">/// and rotating them if they still don&#39;t fit.</span>
-<span class="kw">fn</span> <span class="ident">draw_server_status</span>(
-    <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>,
-    <span class="ident">rect</span>: <span class="ident">Rect</span>,
-    <span class="ident">status</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">loading</span>: <span class="ident">char</span>,
-    <span class="kw-2">mut</span> <span class="ident">rotation_index</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Draw the content of the server status box, splitting the workers in 2 groups if they don&#39;t fit,
+/// and rotating them if they still don&#39;t fit.
+</span><span class="kw">fn </span>draw_server_status(
+    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    rect: Rect,
+    status: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutorStatus&lt;SystemTime&gt;&gt;,
+    loading: char,
+    <span class="kw-2">mut </span>rotation_index: usize,
 ) {
-    <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">status</span>) <span class="op">=</span> <span class="ident">status</span> {
-        <span class="ident">status</span>
-    } <span class="kw">else</span> {
+    <span class="kw">let </span>status = <span class="kw">if let </span><span class="prelude-val">Some</span>(status) = status {
+        status
+    } <span class="kw">else </span>{
         <span class="kw">return</span>;
     };
-    <span class="kw">let</span> <span class="ident">rects</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">status</span>.<span class="ident">connected_workers</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span> <span class="op">&gt;</span> <span class="ident">rect</span>.<span class="ident">height</span> {
+    <span class="kw">let </span>rects = <span class="kw">if </span>status.connected_workers.len() <span class="kw">as </span>u16 &gt; rect.height {
         <span class="macro">vec!</span>[
-            <span class="ident">Rect::new</span>(<span class="ident">rect</span>.<span class="ident">x</span>, <span class="ident">rect</span>.<span class="ident">y</span>, <span class="ident">rect</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">2</span>, <span class="ident">rect</span>.<span class="ident">height</span>),
-            <span class="ident">Rect::new</span>(
-                <span class="ident">rect</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">rect</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">2</span>,
-                <span class="ident">rect</span>.<span class="ident">y</span>,
-                <span class="ident">rect</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">rect</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">2</span>,
-                <span class="ident">rect</span>.<span class="ident">height</span>,
+            Rect::new(rect.x, rect.y, rect.width / <span class="number">2</span>, rect.height),
+            Rect::new(
+                rect.x + rect.width / <span class="number">2</span>,
+                rect.y,
+                rect.width - rect.width / <span class="number">2</span>,
+                rect.height,
             ),
         ]
-    } <span class="kw">else</span> {
-        <span class="macro">vec!</span>[<span class="ident">rect</span>]
+    } <span class="kw">else </span>{
+        <span class="macro">vec!</span>[rect]
     };
-    <span class="kw">let</span> <span class="ident">workers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">status</span>
-        .<span class="ident">connected_workers</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">sorted_by_key</span>(<span class="op">|</span><span class="ident">worker</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">worker</span>.<span class="ident">name</span>)
-        .<span class="ident">collect</span>();
-    <span class="comment">// if the workers fit in the screen there is no need to rotate them</span>
-    <span class="kw">if</span> <span class="ident">rect</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">rects</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">workers</span>.<span class="ident">len</span>() {
-        <span class="ident">rotation_index</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">let </span>workers: Vec&lt;<span class="kw">_</span>&gt; = status
+        .connected_workers
+        .iter()
+        .sorted_by_key(|worker| <span class="kw-2">&amp;</span>worker.name)
+        .collect();
+    <span class="comment">// if the workers fit in the screen there is no need to rotate them
+    </span><span class="kw">if </span>rect.height <span class="kw">as </span>usize * rects.len() &gt;= workers.len() {
+        rotation_index = <span class="number">0</span>;
     }
-    <span class="comment">// avoid drawing if the screen is too small</span>
-    <span class="kw">if</span> <span class="ident">rect</span>.<span class="ident">height</span> <span class="op">==</span> <span class="number">0</span> {
+    <span class="comment">// avoid drawing if the screen is too small
+    </span><span class="kw">if </span>rect.height == <span class="number">0 </span>{
         <span class="kw">return</span>;
     }
-    <span class="kw">let</span> <span class="ident">num_workers</span> <span class="op">=</span> <span class="ident">workers</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="ident">chunks</span> <span class="op">=</span> <span class="ident">workers</span>
-        .<span class="ident">into_iter</span>()
-        .<span class="ident">cycle</span>()
-        .<span class="ident">skip</span>(<span class="ident">rotation_index</span>)
-        .<span class="ident">take</span>(<span class="ident">num_workers</span>)
-        .<span class="ident">chunks</span>(<span class="ident">rect</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>);
-    <span class="kw">for</span> (<span class="ident">rect</span>, <span class="ident">chunk</span>) <span class="kw">in</span> <span class="ident">rects</span>.<span class="ident">into_iter</span>().<span class="ident">zip</span>(<span class="kw-2">&amp;</span><span class="ident">chunks</span>) {
-        <span class="ident">draw_workers_chunk</span>(<span class="ident">frame</span>, <span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">chunk</span>.<span class="ident">collect_vec</span>(), <span class="ident">loading</span>);
+    <span class="kw">let </span>num_workers = workers.len();
+    <span class="kw">let </span>chunks = workers
+        .into_iter()
+        .cycle()
+        .skip(rotation_index)
+        .take(num_workers)
+        .chunks(rect.height <span class="kw">as </span>usize);
+    <span class="kw">for </span>(rect, chunk) <span class="kw">in </span>rects.into_iter().zip(<span class="kw-2">&amp;</span>chunks) {
+        draw_workers_chunk(frame, rect, <span class="kw-2">&amp;</span>chunk.collect_vec(), loading);
     }
 }
 
-<span class="doccomment">/// Draw a chunk of workers in the specified rectangle.</span>
-<span class="kw">fn</span> <span class="ident">draw_workers_chunk</span>(
-    <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>,
-    <span class="ident">rect</span>: <span class="ident">Rect</span>,
-    <span class="ident">workers</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">ExecutorWorkerStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>],
-    <span class="ident">loading</span>: <span class="ident">char</span>,
+<span class="doccomment">/// Draw a chunk of workers in the specified rectangle.
+</span><span class="kw">fn </span>draw_workers_chunk(
+    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    rect: Rect,
+    workers: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>ExecutorWorkerStatus&lt;SystemTime&gt;],
+    loading: char,
 ) {
-    <span class="kw">let</span> <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">workers</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">worker</span><span class="op">|</span> <span class="ident">worker</span>.<span class="ident">name</span>.<span class="ident">len</span>())
-        .<span class="ident">max</span>()
-        .<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-    <span class="kw">let</span> <span class="ident">text</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Spans</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">workers</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">worker</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">worker_name</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;- {:&lt;max_len$} &quot;</span>, <span class="ident">worker</span>.<span class="ident">name</span>, <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">max_len</span>);
-            <span class="kw">let</span> <span class="ident">worker_name_len</span> <span class="op">=</span> <span class="ident">worker_name</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">spans</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="ident">worker_name</span>)];
+    <span class="kw">let </span>max_len = workers
+        .iter()
+        .map(|worker| worker.name.len())
+        .max()
+        .unwrap_or(<span class="number">0</span>);
+    <span class="kw">let </span>text: Vec&lt;Spans&gt; = workers
+        .iter()
+        .map(|worker| {
+            <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">&quot;- {:&lt;max_len$} &quot;</span>, worker.name, max_len = max_len);
+            <span class="kw">let </span>worker_name_len = worker_name.len();
+            <span class="kw">let </span><span class="kw-2">mut </span>spans = <span class="macro">vec!</span>[Span::raw(worker_name)];
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">job</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">worker</span>.<span class="ident">current_job</span> {
-                <span class="kw">let</span> <span class="ident">duration</span> <span class="op">=</span>
-                    (<span class="ident">job</span>.<span class="ident">duration</span>.<span class="ident">elapsed</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">as_millis</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>) <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">1000.0</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">line</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{} {} ({:.2}s)&quot;</span>, <span class="ident">loading</span>, <span class="ident">job</span>.<span class="ident">job</span>, <span class="ident">duration</span>);
-                <span class="kw">if</span> <span class="ident">worker_name_len</span> <span class="op">+</span> <span class="ident">line</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">rect</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> {
-                    <span class="kw">let</span> <span class="ident">extra_len</span> <span class="op">=</span> <span class="ident">worker_name_len</span> <span class="op">+</span> <span class="ident">line</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">rect</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                    <span class="comment">// there is not enough space for the job name, even with the ellipsis</span>
-                    <span class="kw">if</span> <span class="ident">extra_len</span> <span class="op">+</span> <span class="number">3</span> <span class="op">&gt;</span> <span class="ident">job</span>.<span class="ident">job</span>.<span class="ident">len</span>() {
-                        <span class="ident">line</span> <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="number">0</span>..<span class="ident">rect</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>]).<span class="ident">into</span>();
-                    } <span class="kw">else</span> {
-                        <span class="kw">let</span> <span class="ident">job_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">job</span>.<span class="ident">job</span>[<span class="number">0</span>..<span class="ident">job</span>.<span class="ident">job</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">extra_len</span> <span class="op">-</span> <span class="number">3</span>];
-                        <span class="ident">line</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{} {}... ({:.2}s)&quot;</span>, <span class="ident">loading</span>, <span class="ident">job_name</span>, <span class="ident">duration</span>);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(job) = <span class="kw-2">&amp;</span>worker.current_job {
+                <span class="kw">let </span>duration =
+                    (job.duration.elapsed().map(|d| d.as_millis()).unwrap_or(<span class="number">0</span>) <span class="kw">as </span>f64) / <span class="number">1000.0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>line = <span class="macro">format!</span>(<span class="string">&quot;{} {} ({:.2}s)&quot;</span>, loading, job.job, duration);
+                <span class="kw">if </span>worker_name_len + line.len() &gt; rect.width <span class="kw">as </span>usize {
+                    <span class="kw">let </span>extra_len = worker_name_len + line.len() - rect.width <span class="kw">as </span>usize;
+                    <span class="comment">// there is not enough space for the job name, even with the ellipsis
+                    </span><span class="kw">if </span>extra_len + <span class="number">3 </span>&gt; job.job.len() {
+                        line = (<span class="kw-2">&amp;</span>line[<span class="number">0</span>..rect.width <span class="kw">as </span>usize]).into();
+                    } <span class="kw">else </span>{
+                        <span class="kw">let </span>job_name = <span class="kw-2">&amp;</span>job.job[<span class="number">0</span>..job.job.len() - extra_len - <span class="number">3</span>];
+                        line = <span class="macro">format!</span>(<span class="string">&quot;{} {}... ({:.2}s)&quot;</span>, loading, job_name, duration);
                     }
                 }
-                <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">Span::raw</span>(<span class="ident">line</span>));
+                spans.push(Span::raw(line));
             }
-            <span class="ident">spans</span>.<span class="ident">into</span>()
+            spans.into()
         })
-        .<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">text</span>);
-    <span class="ident">frame</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">rect</span>);
+        .collect();
+    <span class="kw">let </span>paragraph = Paragraph::new(text);
+    frame.render_widget(paragraph, rect);
 }
 
-<span class="doccomment">/// Send to the current process `SIGINT`, letting it exit gracefully.</span>
-<span class="kw">fn</span> <span class="ident">send_ctrl_c</span>() {
-    <span class="kw">let</span> <span class="ident">pid</span> <span class="op">=</span> <span class="ident">std::process::id</span>();
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">signal::kill</span>(<span class="ident">Pid::from_raw</span>(<span class="ident">pid</span> <span class="kw">as</span> <span class="ident">i32</span>), <span class="ident">Signal::SIGINT</span>) {
-        <span class="macro">error!</span>(<span class="string">&quot;Failed to send SIGINT to {}: {}&quot;</span>, <span class="ident">pid</span>, <span class="ident">e</span>);
+<span class="doccomment">/// Send to the current process `SIGINT`, letting it exit gracefully.
+</span><span class="kw">fn </span>send_ctrl_c() {
+    <span class="kw">let </span>pid = std::process::id();
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = signal::kill(Pid::from_raw(pid <span class="kw">as </span>i32), Signal::SIGINT) {
+        <span class="macro">error!</span>(<span class="string">&quot;Failed to send SIGINT to {}: {}&quot;</span>, pid, e);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

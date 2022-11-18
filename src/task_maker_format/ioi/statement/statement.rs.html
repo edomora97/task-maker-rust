@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/statement.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/statement.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -341,348 +341,348 @@
 <span id="341">341</span>
 <span id="342">342</span>
 <span id="343">343</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">askama::Template</span>;
-<span class="kw">use</span> <span class="ident">regex::Regex</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::{Context, Error};
+<span class="kw">use </span>askama::Template;
+<span class="kw">use </span>regex::Regex;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::File</span>;
+<span class="kw">use </span>task_maker_dag::File;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::statement::asy::AsyFile</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">BookletConfig</span>, <span class="ident">IOITask</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::EvaluationData</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::statement::asy::AsyFile;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{BookletConfig, IOITask};
+<span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
 
-<span class="macro">lazy_static!</span> {
-    <span class="doccomment">/// This regex will match all the `\usepackage` inside a latex file.</span>
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">USE_PACKAGE_REGEX</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">r&quot;\\usepackage.+&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+<span class="macro">lazy_static! </span>{
+    <span class="doccomment">/// This regex will match all the `\usepackage` inside a latex file.
+    </span><span class="kw">static </span><span class="kw-2">ref </span>USE_PACKAGE_REGEX: Regex = Regex::new(<span class="string">r&quot;\\usepackage.+&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
 }
 
-<span class="doccomment">/// The configuration of a `Statement`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Default</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StatementConfig</span> {
-    <span class="doccomment">/// The name of the task.</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The title of the task.</span>
-    <span class="kw">pub</span> <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The input file of the task, empty for `stdin`.</span>
-    <span class="kw">pub</span> <span class="ident">infile</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The output file of the task, empty for `stdout`.</span>
-    <span class="kw">pub</span> <span class="ident">outfile</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The time limit of the task.</span>
-    <span class="kw">pub</span> <span class="ident">time_limit</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The memory limit of the task.</span>
-    <span class="kw">pub</span> <span class="ident">memory_limit</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The difficulty of the task.</span>
-    <span class="kw">pub</span> <span class="ident">difficulty</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The level of the syllabus of the task.</span>
-    <span class="kw">pub</span> <span class="ident">syllabus_level</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The configuration of a `Statement`.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, Default, TypeScriptify)]
+</span><span class="kw">pub struct </span>StatementConfig {
+    <span class="doccomment">/// The name of the task.
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// The title of the task.
+    </span><span class="kw">pub </span>title: String,
+    <span class="doccomment">/// The input file of the task, empty for `stdin`.
+    </span><span class="kw">pub </span>infile: String,
+    <span class="doccomment">/// The output file of the task, empty for `stdout`.
+    </span><span class="kw">pub </span>outfile: String,
+    <span class="doccomment">/// The time limit of the task.
+    </span><span class="kw">pub </span>time_limit: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// The memory limit of the task.
+    </span><span class="kw">pub </span>memory_limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+    <span class="doccomment">/// The difficulty of the task.
+    </span><span class="kw">pub </span>difficulty: <span class="prelude-ty">Option</span>&lt;u8&gt;,
+    <span class="doccomment">/// The level of the syllabus of the task.
+    </span><span class="kw">pub </span>syllabus_level: <span class="prelude-ty">Option</span>&lt;u8&gt;,
 }
 
-<span class="doccomment">/// A statement is a `.tex` file with all the other assets included in its directory.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Statement</span> {
-    <span class="doccomment">/// The configuration of the statement.</span>
-    <span class="ident">config</span>: <span class="ident">StatementConfig</span>,
-    <span class="doccomment">/// The path of the `.tex` file.</span>
-    <span class="kw">pub</span> <span class="ident">path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The content of the `.tex` file, stored here to avoid reading the file many times.</span>
-    <span class="ident">content</span>: <span class="ident">String</span>,
+<span class="doccomment">/// A statement is a `.tex` file with all the other assets included in its directory.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>Statement {
+    <span class="doccomment">/// The configuration of the statement.
+    </span>config: StatementConfig,
+    <span class="doccomment">/// The path of the `.tex` file.
+    </span><span class="kw">pub </span>path: PathBuf,
+    <span class="doccomment">/// The content of the `.tex` file, stored here to avoid reading the file many times.
+    </span>content: String,
 }
 
-<span class="doccomment">/// Template to use to render the `statement.tex` file.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Template</span>)]</span>
-<span class="attribute">#[<span class="ident">template</span>(<span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;task.tex&quot;</span>, <span class="ident">escape</span> <span class="op">=</span> <span class="string">&quot;none&quot;</span>, <span class="ident">syntax</span> <span class="op">=</span> <span class="string">&quot;tex&quot;</span>)]</span>
-<span class="kw">struct</span> <span class="ident">TaskTemplate</span> {
-    <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="ident">infile</span>: <span class="ident">String</span>,
-    <span class="ident">outfile</span>: <span class="ident">String</span>,
-    <span class="ident">time_limit</span>: <span class="ident">String</span>,
-    <span class="ident">memory_limit</span>: <span class="ident">String</span>,
-    <span class="ident">difficulty</span>: <span class="ident">String</span>,
-    <span class="ident">syllabus_level</span>: <span class="ident">String</span>,
-    <span class="ident">content</span>: <span class="ident">String</span>,
+<span class="doccomment">/// Template to use to render the `statement.tex` file.
+</span><span class="attribute">#[derive(Template)]
+#[template(path = <span class="string">&quot;task.tex&quot;</span>, escape = <span class="string">&quot;none&quot;</span>, syntax = <span class="string">&quot;tex&quot;</span>)]
+</span><span class="kw">struct </span>TaskTemplate {
+    name: String,
+    title: String,
+    infile: String,
+    outfile: String,
+    time_limit: String,
+    memory_limit: String,
+    difficulty: String,
+    syllabus_level: String,
+    content: String,
 }
 
-<span class="kw">impl</span> <span class="ident">Statement</span> {
-    <span class="doccomment">/// Make a new `Statement` from a `.tex` file and its configuration.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>, <span class="ident">config</span>: <span class="ident">StatementConfig</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">content</span> <span class="op">=</span> <span class="ident">std::fs::read_to_string</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)
-            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to read statement file from {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">Statement</span> {
-            <span class="ident">config</span>,
-            <span class="ident">path</span>,
-            <span class="ident">content</span>,
+<span class="kw">impl </span>Statement {
+    <span class="doccomment">/// Make a new `Statement` from a `.tex` file and its configuration.
+    </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;&gt;(path: P, config: StatementConfig) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
+        <span class="kw">let </span>path = path.into();
+        <span class="kw">let </span>content = std::fs::read_to_string(<span class="kw-2">&amp;</span>path)
+            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read statement file from {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(Statement {
+            config,
+            path,
+            content,
         })
     }
 
-    <span class="doccomment">/// Return a ref to the configuration of the statement.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">config</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">StatementConfig</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>
+    <span class="doccomment">/// Return a ref to the configuration of the statement.
+    </span><span class="kw">pub fn </span>config(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>StatementConfig {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.config
     }
 
-    <span class="doccomment">/// Build all the dependencies of this statement, returning a vector of (path inside the task</span>
-    <span class="doccomment">/// folder, File).</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_deps</span>(
+    <span class="doccomment">/// Build all the dependencies of this statement, returning a vector of (path inside the task
+    /// folder, File).
+    </span><span class="kw">pub fn </span>build_deps(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">booklet_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">booklet_config</span>: <span class="kw-2">&amp;</span><span class="ident">BookletConfig</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="ident">File</span>)<span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">base_dir</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">parent</span>().<span class="ident">context</span>(<span class="string">&quot;Invalid statement path&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">glob_pattern</span> <span class="op">=</span> <span class="ident">base_dir</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>() <span class="op">+</span> <span class="string">&quot;/**/*&quot;</span>;
-        <span class="kw">let</span> <span class="ident">logo</span> <span class="op">=</span> <span class="ident">booklet_config</span>
-            .<span class="ident">logo</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">Path::new</span>(<span class="ident">p</span>).<span class="ident">file_name</span>())
-            .<span class="ident">map</span>(<span class="ident">PathBuf::from</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">deps</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="ident">glob::glob</span>(<span class="kw-2">&amp;</span><span class="ident">glob_pattern</span>).<span class="ident">context</span>(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">?</span> {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">context</span>(<span class="string">&quot;Failed to iterate statement files&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">path</span>.<span class="ident">is_file</span>() {
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        booklet_name: <span class="kw-2">&amp;</span>str,
+        booklet_config: <span class="kw-2">&amp;</span>BookletConfig,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;(PathBuf, File)&gt;, Error&gt; {
+        <span class="kw">let </span>base_dir = <span class="self">self</span>.path.parent().context(<span class="string">&quot;Invalid statement path&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>glob_pattern = base_dir.to_string_lossy().to_string() + <span class="string">&quot;/**/*&quot;</span>;
+        <span class="kw">let </span>logo = booklet_config
+            .logo
+            .as_ref()
+            .and_then(|p| Path::new(p).file_name())
+            .map(PathBuf::from);
+        <span class="kw">let </span><span class="kw-2">mut </span>deps = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>glob_pattern).context(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">? </span>{
+            <span class="kw">let </span>path = path.context(<span class="string">&quot;Failed to iterate statement files&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">if </span>!path.is_file() {
                 <span class="kw">continue</span>;
             }
-            <span class="self">self</span>.<span class="ident">process_possible_dependency</span>(<span class="ident">base_dir</span>, <span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="kw-2">&amp;mut</span> <span class="ident">deps</span>, <span class="ident">eval</span>, <span class="ident">booklet_name</span>, <span class="kw-2">&amp;</span><span class="ident">logo</span>)
-                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+            <span class="self">self</span>.process_possible_dependency(base_dir, <span class="kw-2">&amp;</span>path, <span class="kw-2">&amp;mut </span>deps, eval, booklet_name, <span class="kw-2">&amp;</span>logo)
+                .with_context(|| {
                     <span class="macro">format!</span>(
                         <span class="string">&quot;Failed to process possible dependency at {}&quot;</span>,
-                        <span class="ident">path</span>.<span class="ident">display</span>()
+                        path.display()
                     )
                 })<span class="question-mark">?</span>;
         }
-        <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="kw-2">&amp;</span>[<span class="ident">Path::new</span>(<span class="string">&quot;../gen/limiti.py&quot;</span>), <span class="ident">Path::new</span>(<span class="string">&quot;../gen/GEN&quot;</span>)] {
-            <span class="kw">let</span> <span class="ident">full_path</span> <span class="op">=</span> <span class="ident">base_dir</span>.<span class="ident">join</span>(<span class="ident">path</span>);
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">full_path</span>.<span class="ident">is_file</span>() {
+        <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[Path::new(<span class="string">&quot;../gen/limiti.py&quot;</span>), Path::new(<span class="string">&quot;../gen/GEN&quot;</span>)] {
+            <span class="kw">let </span>full_path = base_dir.join(path);
+            <span class="kw">if </span>!full_path.is_file() {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="macro">format!</span>(<span class="string">&quot;Dependency of {} at {:?}&quot;</span>, <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">name</span>, <span class="ident">path</span>));
-            <span class="ident">eval</span>.<span class="ident">dag</span>
-                .<span class="ident">provide_file</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">full_path</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">deps</span>.<span class="ident">push</span>((<span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>().<span class="ident">into</span>(), <span class="ident">file</span>));
+            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Dependency of {} at {:?}&quot;</span>, <span class="self">self</span>.config.name, path));
+            eval.dag
+                .provide_file(file.clone(), <span class="kw-2">&amp;</span>full_path)
+                .context(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
+            deps.push((path.file_name().unwrap().into(), file));
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">deps</span>)
+        <span class="prelude-val">Ok</span>(deps)
     }
 
-    <span class="doccomment">/// Return the _tex_ source file of the statement, patched with the template.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">let</span> <span class="ident">template</span> <span class="op">=</span> <span class="ident">TaskTemplate</span> {
-            <span class="ident">name</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
-            <span class="ident">title</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">title</span>.<span class="ident">clone</span>(),
-            <span class="ident">infile</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">infile</span>.<span class="ident">clone</span>(),
-            <span class="ident">outfile</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">outfile</span>.<span class="ident">clone</span>(),
-            <span class="ident">time_limit</span>: <span class="self">self</span>
-                .<span class="ident">config</span>
-                .<span class="ident">time_limit</span>
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string</span>())
-                .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>),
-            <span class="ident">memory_limit</span>: <span class="self">self</span>
-                .<span class="ident">config</span>
-                .<span class="ident">memory_limit</span>
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string</span>())
-                .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>),
-            <span class="ident">difficulty</span>: <span class="self">self</span>
-                .<span class="ident">config</span>
-                .<span class="ident">difficulty</span>
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string</span>())
-                .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>),
-            <span class="ident">syllabus_level</span>: <span class="self">self</span>
-                .<span class="ident">config</span>
-                .<span class="ident">syllabus_level</span>
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string</span>())
-                .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>),
-            <span class="ident">content</span>: <span class="ident">USE_PACKAGE_REGEX</span>
-                .<span class="ident">replace_all</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">content</span>, <span class="string">r&quot;% $0&quot;</span>)
-                .<span class="ident">to_string</span>(),
+    <span class="doccomment">/// Return the _tex_ source file of the statement, patched with the template.
+    </span><span class="kw">pub fn </span>tex(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+        <span class="kw">let </span>template = TaskTemplate {
+            name: <span class="self">self</span>.config.name.clone(),
+            title: <span class="self">self</span>.config.title.clone(),
+            infile: <span class="self">self</span>.config.infile.clone(),
+            outfile: <span class="self">self</span>.config.outfile.clone(),
+            time_limit: <span class="self">self
+                </span>.config
+                .time_limit
+                .map(|x| x.to_string())
+                .unwrap_or_else(String::new),
+            memory_limit: <span class="self">self
+                </span>.config
+                .memory_limit
+                .map(|x| x.to_string())
+                .unwrap_or_else(String::new),
+            difficulty: <span class="self">self
+                </span>.config
+                .difficulty
+                .map(|x| x.to_string())
+                .unwrap_or_else(String::new),
+            syllabus_level: <span class="self">self
+                </span>.config
+                .syllabus_level
+                .map(|x| x.to_string())
+                .unwrap_or_else(String::new),
+            content: USE_PACKAGE_REGEX
+                .replace_all(<span class="kw-2">&amp;</span><span class="self">self</span>.content, <span class="string">r&quot;% $0&quot;</span>)
+                .to_string(),
         };
-        <span class="ident">template</span>.<span class="ident">to_string</span>()
+        template.to_string()
     }
 
-    <span class="doccomment">/// Return a list of all the `\usepackage` used by the statement.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">packages</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">packages</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">for</span> <span class="ident">package</span> <span class="kw">in</span> <span class="ident">USE_PACKAGE_REGEX</span>.<span class="ident">find_iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">content</span>) {
-            <span class="ident">packages</span>.<span class="ident">push</span>(<span class="ident">package</span>.<span class="ident">as_str</span>().<span class="ident">to_owned</span>());
+    <span class="doccomment">/// Return a list of all the `\usepackage` used by the statement.
+    </span><span class="kw">pub fn </span>packages(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;String&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>packages = Vec::new();
+        <span class="kw">for </span>package <span class="kw">in </span>USE_PACKAGE_REGEX.find_iter(<span class="kw-2">&amp;</span><span class="self">self</span>.content) {
+            packages.push(package.as_str().to_owned());
         }
-        <span class="ident">packages</span>
+        packages
     }
 
-    <span class="doccomment">/// Process a possible statement dependency, eventually adding it to the compilation.</span>
-    <span class="kw">fn</span> <span class="ident">process_possible_dependency</span>(
+    <span class="doccomment">/// Process a possible statement dependency, eventually adding it to the compilation.
+    </span><span class="kw">fn </span>process_possible_dependency(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">base_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">deps</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="ident">File</span>)<span class="op">&gt;</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">booklet_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">logo</span>: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">suffix</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">strip_prefix</span>(<span class="ident">base_dir</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">path</span>
-            .<span class="ident">extension</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>())
-            .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>);
-        <span class="kw">if</span> <span class="ident">ext</span>.<span class="ident">as_str</span>() <span class="op">==</span> <span class="string">&quot;asy&quot;</span> {
-            <span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">suffix</span>.<span class="ident">with_extension</span>(<span class="string">&quot;pdf&quot;</span>);
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">content</span>.<span class="ident">contains</span>(<span class="ident">dest</span>.<span class="ident">to_string_lossy</span>().<span class="ident">as_ref</span>()) {
-                <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">AsyFile::compile</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">eval</span>, <span class="ident">booklet_name</span>)
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to compile asy file&quot;</span>)<span class="question-mark">?</span>;
-                <span class="ident">deps</span>.<span class="ident">push</span>((<span class="ident">dest</span>, <span class="ident">file</span>));
+        base_dir: <span class="kw-2">&amp;</span>Path,
+        path: <span class="kw-2">&amp;</span>Path,
+        deps: <span class="kw-2">&amp;mut </span>Vec&lt;(PathBuf, File)&gt;,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        booklet_name: <span class="kw-2">&amp;</span>str,
+        logo: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>suffix = path.strip_prefix(base_dir).unwrap();
+        <span class="kw">let </span>ext = path
+            .extension()
+            .map(|s| s.to_string_lossy().to_string())
+            .unwrap_or_else(String::new);
+        <span class="kw">if </span>ext.as_str() == <span class="string">&quot;asy&quot; </span>{
+            <span class="kw">let </span>dest = suffix.with_extension(<span class="string">&quot;pdf&quot;</span>);
+            <span class="kw">if </span><span class="self">self</span>.content.contains(dest.to_string_lossy().as_ref()) {
+                <span class="kw">let </span>file = AsyFile::compile(<span class="kw-2">&amp;</span>path, eval, booklet_name)
+                    .context(<span class="string">&quot;Failed to compile asy file&quot;</span>)<span class="question-mark">?</span>;
+                deps.push((dest, file));
             }
-        } <span class="kw">else</span> {
-            <span class="kw">if</span> <span class="ident">ext</span> <span class="op">==</span> <span class="string">&quot;pdf&quot;</span> {
-                <span class="comment">// the .pdf file can be the logo of the contest (is present). If it&#39;s the logo it is</span>
-                <span class="comment">// always added.</span>
-                <span class="kw">let</span> <span class="ident">is_logo</span> <span class="op">=</span> <span class="kw">match</span> (<span class="ident">path</span>.<span class="ident">file_name</span>(), <span class="kw-2">&amp;</span><span class="ident">logo</span>) {
-                    (<span class="prelude-val">Some</span>(<span class="ident">name</span>), <span class="prelude-val">Some</span>(<span class="ident">logo</span>)) =&gt; <span class="ident">name</span> <span class="op">==</span> <span class="ident">logo</span>,
-                    <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+        } <span class="kw">else </span>{
+            <span class="kw">if </span>ext == <span class="string">&quot;pdf&quot; </span>{
+                <span class="comment">// the .pdf file can be the logo of the contest (is present). If it&#39;s the logo it is
+                // always added.
+                </span><span class="kw">let </span>is_logo = <span class="kw">match </span>(path.file_name(), <span class="kw-2">&amp;</span>logo) {
+                    (<span class="prelude-val">Some</span>(name), <span class="prelude-val">Some</span>(logo)) =&gt; name == logo,
+                    <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
                 };
-                <span class="comment">// skip this file if it&#39;s not the logo and it&#39;s not a valid pdf dependency.</span>
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">is_logo</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">Statement::is_valid_pdf_dependency</span>(<span class="ident">path</span>)<span class="question-mark">?</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                <span class="comment">// skip this file if it&#39;s not the logo and it&#39;s not a valid pdf dependency.
+                </span><span class="kw">if </span>!is_logo &amp;&amp; !Statement::is_valid_pdf_dependency(path)<span class="question-mark">? </span>{
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 }
             }
-            <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="macro">format!</span>(
+            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(
                 <span class="string">&quot;Dependency of {} at {:?}&quot;</span>,
-                <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">name</span>, <span class="ident">suffix</span>
+                <span class="self">self</span>.config.name, suffix
             ));
-            <span class="ident">eval</span>.<span class="ident">dag</span>
-                .<span class="ident">provide_file</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">path</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">deps</span>.<span class="ident">push</span>((<span class="ident">suffix</span>.<span class="ident">into</span>(), <span class="ident">file</span>));
+            eval.dag
+                .provide_file(file.clone(), <span class="kw-2">&amp;</span>path)
+                .context(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
+            deps.push((suffix.into(), file));
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Check if this pdf file should be considered a valid dependency.</span>
-    <span class="doccomment">/// There are some cases where the .pdf should not be considered a dependency:</span>
-    <span class="doccomment">/// - The file is the output of an asy compilation: asy will build it from scratch (or use the</span>
-    <span class="doccomment">///   cache)</span>
-    <span class="doccomment">/// - The file is the output of a .tex file (i.e. statement.tex, english.tex, ...): it could be</span>
-    <span class="doccomment">///   the previous output of this statement, do not add it to the sandbox, otherwise the cache</span>
-    <span class="doccomment">///   will miss every time.</span>
-    <span class="kw">fn</span> <span class="ident">is_valid_pdf_dependency</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="comment">// resolve the symlinks</span>
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>
-            .<span class="ident">canonicalize</span>()
-            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to get real path of {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-        <span class="comment">// ignore .pdf files that have the .asy source</span>
-        <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">with_extension</span>(<span class="string">&quot;asy&quot;</span>).<span class="ident">exists</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
+    <span class="doccomment">/// Check if this pdf file should be considered a valid dependency.
+    /// There are some cases where the .pdf should not be considered a dependency:
+    /// - The file is the output of an asy compilation: asy will build it from scratch (or use the
+    ///   cache)
+    /// - The file is the output of a .tex file (i.e. statement.tex, english.tex, ...): it could be
+    ///   the previous output of this statement, do not add it to the sandbox, otherwise the cache
+    ///   will miss every time.
+    </span><span class="kw">fn </span>is_valid_pdf_dependency(path: <span class="kw-2">&amp;</span>Path) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="comment">// resolve the symlinks
+        </span><span class="kw">let </span>path = path
+            .canonicalize()
+            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to get real path of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+        <span class="comment">// ignore .pdf files that have the .asy source
+        </span><span class="kw">if </span>path.with_extension(<span class="string">&quot;asy&quot;</span>).exists() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
         }
-        <span class="comment">// ignore .pdf files that have the .tex source</span>
-        <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">with_extension</span>(<span class="string">&quot;tex&quot;</span>).<span class="ident">exists</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
+        <span class="comment">// ignore .pdf files that have the .tex source
+        </span><span class="kw">if </span>path.with_extension(<span class="string">&quot;tex&quot;</span>).exists() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
         }
         <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">StatementConfig</span> {
-    <span class="doccomment">/// Make a new `StatementConfig` from an instance of a `ioi::IOITask`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_task</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">StatementConfig</span> {
-            <span class="ident">name</span>: <span class="ident">task</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
-            <span class="ident">title</span>: <span class="ident">task</span>.<span class="ident">title</span>.<span class="ident">clone</span>(),
-            <span class="ident">infile</span>: <span class="ident">task</span>
-                .<span class="ident">infile</span>
-                .<span class="ident">as_ref</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>())
-                .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>),
-            <span class="ident">outfile</span>: <span class="ident">task</span>
-                .<span class="ident">outfile</span>
-                .<span class="ident">as_ref</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>())
-                .<span class="ident">unwrap_or_else</span>(<span class="ident">String::new</span>),
-            <span class="ident">time_limit</span>: <span class="ident">task</span>.<span class="ident">time_limit</span>,
-            <span class="ident">memory_limit</span>: <span class="ident">task</span>.<span class="ident">memory_limit</span>,
-            <span class="ident">difficulty</span>: <span class="ident">task</span>.<span class="ident">difficulty</span>,
-            <span class="ident">syllabus_level</span>: <span class="ident">task</span>.<span class="ident">syllabus_level</span>,
+<span class="kw">impl </span>StatementConfig {
+    <span class="doccomment">/// Make a new `StatementConfig` from an instance of a `ioi::IOITask`.
+    </span><span class="kw">pub fn </span>from_task(task: <span class="kw-2">&amp;</span>IOITask) -&gt; <span class="self">Self </span>{
+        StatementConfig {
+            name: task.name.clone(),
+            title: task.title.clone(),
+            infile: task
+                .infile
+                .as_ref()
+                .map(|p| p.to_string_lossy().to_string())
+                .unwrap_or_else(String::new),
+            outfile: task
+                .outfile
+                .as_ref()
+                .map(|p| p.to_string_lossy().to_string())
+                .unwrap_or_else(String::new),
+            time_limit: task.time_limit,
+            memory_limit: task.memory_limit,
+            difficulty: task.difficulty,
+            syllabus_level: task.syllabus_level,
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">std::path::Path</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>std::path::Path;
 
-    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
+    <span class="kw">use </span>tempfile::TempDir;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">Statement</span>, <span class="ident">StatementConfig</span>};
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::EvaluationData</span>;
+    <span class="kw">use </span><span class="kw">crate</span>::ioi::{Statement, StatementConfig};
+    <span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_valid_pdf_dependency_valid</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;test.pdf&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="ident">Statement::is_valid_pdf_dependency</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_is_valid_pdf_dependency_valid() {
+        <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.pdf&quot;</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="macro">assert!</span>(Statement::is_valid_pdf_dependency(<span class="kw-2">&amp;</span>path).unwrap());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_valid_pdf_dependency_asy</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;test.pdf&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>.<span class="ident">with_extension</span>(<span class="string">&quot;asy&quot;</span>), <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">Statement::is_valid_pdf_dependency</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_is_valid_pdf_dependency_asy() {
+        <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.pdf&quot;</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
+        std::fs::write(<span class="kw-2">&amp;</span>path.with_extension(<span class="string">&quot;asy&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="macro">assert!</span>(!Statement::is_valid_pdf_dependency(<span class="kw-2">&amp;</span>path).unwrap());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_valid_pdf_dependency_tex</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;test.pdf&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>.<span class="ident">with_extension</span>(<span class="string">&quot;tex&quot;</span>), <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">Statement::is_valid_pdf_dependency</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_is_valid_pdf_dependency_tex() {
+        <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.pdf&quot;</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
+        std::fs::write(<span class="kw-2">&amp;</span>path.with_extension(<span class="string">&quot;tex&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="macro">assert!</span>(!Statement::is_valid_pdf_dependency(<span class="kw-2">&amp;</span>path).unwrap());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_is_valid_pdf_dependency_invalid</span>() {
-        <span class="macro">assert!</span>(<span class="ident">Statement::is_valid_pdf_dependency</span>(<span class="ident">Path::new</span>(<span class="string">&quot;/do/not/exists&quot;</span>)).<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_is_valid_pdf_dependency_invalid() {
+        <span class="macro">assert!</span>(Statement::is_valid_pdf_dependency(Path::new(<span class="string">&quot;/do/not/exists&quot;</span>)).is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_process_possible_dependency</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;test.tex&quot;</span>);
-        <span class="kw">let</span> <span class="ident">logo</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;logo.pdf&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;lol&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">logo</span>, <span class="string">&quot;lol&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">statement</span> <span class="op">=</span> <span class="ident">Statement::new</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">StatementConfig::default</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">logo2</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">logo</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_process_possible_dependency() {
+        <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.tex&quot;</span>);
+        <span class="kw">let </span>logo = tmpdir.path().join(<span class="string">&quot;logo.pdf&quot;</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;lol&quot;</span>).unwrap();
+        std::fs::write(<span class="kw-2">&amp;</span>logo, <span class="string">&quot;lol&quot;</span>).unwrap();
+        <span class="kw">let </span>statement = Statement::new(<span class="kw-2">&amp;</span>path, StatementConfig::default()).unwrap();
+        <span class="kw">let </span>logo2 = <span class="prelude-val">Some</span>(logo);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">eval</span> <span class="op">=</span> <span class="ident">EvaluationData::new</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>()).<span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">in_files</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="string">&quot;logo.pdf&quot;</span>, <span class="string">&quot;test.png&quot;</span>, <span class="string">&quot;asset.pdf&quot;</span>];
-        <span class="kw">let</span> <span class="ident">not_in_files</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="string">&quot;asy_image.pdf&quot;</span>, <span class="string">&quot;tex_file.pdf&quot;</span>];
-        <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;asy_image.asy&quot;</span>), <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">std::fs::write</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;tex_file.tex&quot;</span>), <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>eval = EvaluationData::new(tmpdir.path()).<span class="number">0</span>;
+        <span class="kw">let </span>in_files = <span class="macro">vec!</span>[<span class="string">&quot;logo.pdf&quot;</span>, <span class="string">&quot;test.png&quot;</span>, <span class="string">&quot;asset.pdf&quot;</span>];
+        <span class="kw">let </span>not_in_files = <span class="macro">vec!</span>[<span class="string">&quot;asy_image.pdf&quot;</span>, <span class="string">&quot;tex_file.pdf&quot;</span>];
+        std::fs::write(tmpdir.path().join(<span class="string">&quot;asy_image.asy&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">&quot;tex_file.tex&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">deps</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> <span class="ident">file</span> <span class="kw">in</span> <span class="ident">in_files</span>.<span class="ident">iter</span>().<span class="ident">chain</span>(<span class="ident">not_in_files</span>.<span class="ident">iter</span>()) {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="ident">file</span>);
-            <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
-            <span class="ident">statement</span>
-                .<span class="ident">process_possible_dependency</span>(
-                    <span class="ident">tmpdir</span>.<span class="ident">path</span>(),
-                    <span class="kw-2">&amp;</span><span class="ident">path</span>,
-                    <span class="kw-2">&amp;mut</span> <span class="ident">deps</span>,
-                    <span class="kw-2">&amp;mut</span> <span class="ident">eval</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>deps = <span class="macro">vec!</span>[];
+        <span class="kw">for </span>file <span class="kw">in </span>in_files.iter().chain(not_in_files.iter()) {
+            <span class="kw">let </span>path = tmpdir.path().join(file);
+            std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
+            statement
+                .process_possible_dependency(
+                    tmpdir.path(),
+                    <span class="kw-2">&amp;</span>path,
+                    <span class="kw-2">&amp;mut </span>deps,
+                    <span class="kw-2">&amp;mut </span>eval,
                     <span class="string">&quot;name&quot;</span>,
-                    <span class="kw-2">&amp;</span><span class="ident">logo2</span>,
+                    <span class="kw-2">&amp;</span>logo2,
                 )
-                .<span class="ident">unwrap</span>();
+                .unwrap();
         }
-        <span class="kw">let</span> <span class="ident">deps</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">deps</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="number">0</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>())
-            .<span class="ident">collect</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">deps</span>, <span class="ident">in_files</span>);
+        <span class="kw">let </span>deps: Vec&lt;<span class="kw">_</span>&gt; = deps
+            .into_iter()
+            .map(|v| v.<span class="number">0</span>.to_string_lossy().to_string())
+            .collect();
+        <span class="macro">assert_eq!</span>(deps, in_files);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

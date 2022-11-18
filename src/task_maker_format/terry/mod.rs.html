@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -261,224 +261,224 @@
 <span id="261">261</span>
 <span id="262">262</span>
 <span id="263">263</span>
-</pre><pre class="rust"><code><span class="doccomment">//! The Terry task format.</span>
-<span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="doccomment">//! The Terry task format.
+</span><span class="kw">use </span>std::collections::HashSet;
+<span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">task_info</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionDAGConfig</span>;
+<span class="kw">pub use </span>task_info::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_dag::ExecutionDAGConfig;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sanity_checks::SanityChecks</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::solution::SolutionInfo</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::curses_ui::CursesUI</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::dag</span>::{<span class="ident">Checker</span>, <span class="ident">InputGenerator</span>, <span class="ident">InputValidator</span>, <span class="ident">Solution</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::format::parse_task</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::ui_state::UIState</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui</span>::{<span class="ident">JsonUI</span>, <span class="ident">PrintUI</span>, <span class="ident">RawUI</span>, <span class="ident">SilentUI</span>, <span class="ident">UIMessage</span>, <span class="ident">UIType</span>, <span class="ident">UI</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">list_files</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>, <span class="ident">TaskInfo</span>, <span class="ident">UISender</span>};
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityChecks;
+<span class="kw">use </span><span class="kw">crate</span>::solution::SolutionInfo;
+<span class="kw">use </span><span class="kw">crate</span>::terry::curses_ui::CursesUI;
+<span class="kw">use </span><span class="kw">crate</span>::terry::dag::{Checker, InputGenerator, InputValidator, Solution};
+<span class="kw">use </span><span class="kw">crate</span>::terry::format::parse_task;
+<span class="kw">use </span><span class="kw">crate</span>::terry::ui_state::UIState;
+<span class="kw">use </span><span class="kw">crate</span>::ui::{JsonUI, PrintUI, RawUI, SilentUI, UIMessage, UIType, UI};
+<span class="kw">use crate</span>::{list_files, EvaluationConfig, EvaluationData, SourceFile, TaskInfo, UISender};
 
-<span class="kw">mod</span> <span class="ident">curses_ui</span>;
-<span class="kw">mod</span> <span class="ident">dag</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">finish_ui</span>;
-<span class="kw">mod</span> <span class="ident">format</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">sanity_checks</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">task_info</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">ui_state</span>;
+<span class="kw">mod </span>curses_ui;
+<span class="kw">mod </span>dag;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>finish_ui;
+<span class="kw">mod </span>format;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>sanity_checks;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>task_info;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>ui_state;
 
-<span class="doccomment">/// The type of the seed of a generator for an input file.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Seed</span> <span class="op">=</span> <span class="ident">u64</span>;
+<span class="doccomment">/// The type of the seed of a generator for an input file.
+</span><span class="kw">pub type </span>Seed = u64;
 
-<span class="doccomment">/// Information about a generic Terry task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TerryTask</span> {
-    <span class="doccomment">/// Path of the directory of the task.</span>
-    <span class="kw">pub</span> <span class="ident">path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The name of the task (the short one).</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The title of the task (the long one).</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The maximum score for this task.</span>
-    <span class="kw">pub</span> <span class="ident">max_score</span>: <span class="ident">f64</span>,
+<span class="doccomment">/// Information about a generic Terry task.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>TerryTask {
+    <span class="doccomment">/// Path of the directory of the task.
+    </span><span class="kw">pub </span>path: PathBuf,
+    <span class="doccomment">/// The name of the task (the short one).
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// The title of the task (the long one).
+    </span><span class="kw">pub </span>description: String,
+    <span class="doccomment">/// The maximum score for this task.
+    </span><span class="kw">pub </span>max_score: f64,
 
-    <span class="doccomment">/// The generator of input files of this task.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">generator</span>: <span class="ident">InputGenerator</span>,
-    <span class="doccomment">/// The validator of input files of this task.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">validator</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">InputValidator</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The checker of input/output files of this task.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">checker</span>: <span class="ident">Checker</span>,
-    <span class="doccomment">/// The official solution of this task, if any. Will be compiled and placed in the sandbox of</span>
-    <span class="doccomment">/// the generation/validation/checking.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The sanity checks attached to this task. Wrapped in Arc since `SanityChecks` is not Clone.</span>
-    <span class="doccomment">/// It&#39;s also not `Serialize` nor `Deserialize`, all the sanity checks will be lost on</span>
-    <span class="doccomment">/// serialization.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>, <span class="ident">skip_deserializing</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">sanity_checks</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SanityChecks</span><span class="op">&lt;</span><span class="ident">TerryTask</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The generator of input files of this task.
+    </span><span class="attribute">#[serde(skip_serializing)]
+    </span><span class="kw">pub </span>generator: InputGenerator,
+    <span class="doccomment">/// The validator of input files of this task.
+    </span><span class="attribute">#[serde(skip_serializing)]
+    </span><span class="kw">pub </span>validator: <span class="prelude-ty">Option</span>&lt;InputValidator&gt;,
+    <span class="doccomment">/// The checker of input/output files of this task.
+    </span><span class="attribute">#[serde(skip_serializing)]
+    </span><span class="kw">pub </span>checker: Checker,
+    <span class="doccomment">/// The official solution of this task, if any. Will be compiled and placed in the sandbox of
+    /// the generation/validation/checking.
+    </span><span class="attribute">#[serde(skip_serializing)]
+    </span><span class="kw">pub </span>official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+    <span class="doccomment">/// The sanity checks attached to this task. Wrapped in Arc since `SanityChecks` is not Clone.
+    /// It&#39;s also not `Serialize` nor `Deserialize`, all the sanity checks will be lost on
+    /// serialization.
+    </span><span class="attribute">#[serde(skip_serializing, skip_deserializing)]
+    </span><span class="kw">pub </span>sanity_checks: Arc&lt;SanityChecks&lt;TerryTask&gt;&gt;,
 }
 
-<span class="doccomment">/// The output of the checker for a solution.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionOutcome</span> {
-    <span class="doccomment">/// The score normalized from 0.0 to 1.0.</span>
-    <span class="kw">pub</span> <span class="ident">score</span>: <span class="ident">f64</span>,
-    <span class="doccomment">/// The validation outcome of the solution.</span>
-    <span class="kw">pub</span> <span class="ident">validation</span>: <span class="ident">SolutionValidation</span>,
-    <span class="doccomment">/// The feedback outcome of the solution.</span>
-    <span class="kw">pub</span> <span class="ident">feedback</span>: <span class="ident">SolutionFeedback</span>,
+<span class="doccomment">/// The output of the checker for a solution.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>SolutionOutcome {
+    <span class="doccomment">/// The score normalized from 0.0 to 1.0.
+    </span><span class="kw">pub </span>score: f64,
+    <span class="doccomment">/// The validation outcome of the solution.
+    </span><span class="kw">pub </span>validation: SolutionValidation,
+    <span class="doccomment">/// The feedback outcome of the solution.
+    </span><span class="kw">pub </span>feedback: SolutionFeedback,
 }
 
-<span class="doccomment">/// The validation part of the outcome of a solution.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionValidation</span> {
-    <span class="doccomment">/// The validation of the test cases, in the same order as the input.</span>
-    <span class="kw">pub</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SolutionValidationCase</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The alerts sent by the checker regarding the validation.</span>
-    <span class="kw">pub</span> <span class="ident">alerts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SolutionAlert</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The validation part of the outcome of a solution.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>SolutionValidation {
+    <span class="doccomment">/// The validation of the test cases, in the same order as the input.
+    </span><span class="kw">pub </span>cases: Vec&lt;SolutionValidationCase&gt;,
+    <span class="doccomment">/// The alerts sent by the checker regarding the validation.
+    </span><span class="kw">pub </span>alerts: Vec&lt;SolutionAlert&gt;,
 }
 
-<span class="doccomment">/// The validation outcome of a test case.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionValidationCase</span> {
-    <span class="doccomment">/// The status of the testcase.</span>
-    <span class="kw">pub</span> <span class="ident">status</span>: <span class="ident">CaseStatus</span>,
-    <span class="doccomment">/// An optional message associated to the test case.</span>
-    <span class="kw">pub</span> <span class="ident">message</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The validation outcome of a test case.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>SolutionValidationCase {
+    <span class="doccomment">/// The status of the testcase.
+    </span><span class="kw">pub </span>status: CaseStatus,
+    <span class="doccomment">/// An optional message associated to the test case.
+    </span><span class="kw">pub </span>message: <span class="prelude-ty">Option</span>&lt;String&gt;,
 }
 
-<span class="doccomment">/// The possible statuses of the validation of a test case.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;lowercase&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CaseStatus</span> {
-    <span class="doccomment">/// The testcase is not present in the output file.</span>
-    <span class="ident">Missing</span>,
-    <span class="doccomment">/// The testcase is present and correctly parsed.</span>
-    <span class="ident">Parsed</span>,
-    <span class="doccomment">/// The testcase is present but its format is invalid.</span>
-    <span class="ident">Invalid</span>,
+<span class="doccomment">/// The possible statuses of the validation of a test case.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+#[serde(rename_all = <span class="string">&quot;lowercase&quot;</span>)]
+</span><span class="kw">pub enum </span>CaseStatus {
+    <span class="doccomment">/// The testcase is not present in the output file.
+    </span>Missing,
+    <span class="doccomment">/// The testcase is present and correctly parsed.
+    </span>Parsed,
+    <span class="doccomment">/// The testcase is present but its format is invalid.
+    </span>Invalid,
 }
 
-<span class="doccomment">/// The feedback part of the outcome.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionFeedback</span> {
-    <span class="doccomment">/// The feedback of each testcase, in the same order as the input.</span>
-    <span class="kw">pub</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SolutionFeedbackCase</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The alerts sent by the checker regarding the feedback.</span>
-    <span class="kw">pub</span> <span class="ident">alerts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SolutionAlert</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The feedback part of the outcome.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>SolutionFeedback {
+    <span class="doccomment">/// The feedback of each testcase, in the same order as the input.
+    </span><span class="kw">pub </span>cases: Vec&lt;SolutionFeedbackCase&gt;,
+    <span class="doccomment">/// The alerts sent by the checker regarding the feedback.
+    </span><span class="kw">pub </span>alerts: Vec&lt;SolutionAlert&gt;,
 }
 
-<span class="doccomment">/// The feedback of a test case.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionFeedbackCase</span> {
-    <span class="doccomment">/// Whether this testcase is correct.</span>
-    <span class="kw">pub</span> <span class="ident">correct</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// An optional message associated to the test case.</span>
-    <span class="kw">pub</span> <span class="ident">message</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The feedback of a test case.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>SolutionFeedbackCase {
+    <span class="doccomment">/// Whether this testcase is correct.
+    </span><span class="kw">pub </span>correct: bool,
+    <span class="doccomment">/// An optional message associated to the test case.
+    </span><span class="kw">pub </span>message: <span class="prelude-ty">Option</span>&lt;String&gt;,
 }
 
-<span class="doccomment">/// A message with an associated severity.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SolutionAlert</span> {
-    <span class="doccomment">/// The severity of the alert message.</span>
-    <span class="kw">pub</span> <span class="ident">severity</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The content of the alert.</span>
-    <span class="kw">pub</span> <span class="ident">message</span>: <span class="ident">String</span>,
+<span class="doccomment">/// A message with an associated severity.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>SolutionAlert {
+    <span class="doccomment">/// The severity of the alert message.
+    </span><span class="kw">pub </span>severity: String,
+    <span class="doccomment">/// The content of the alert.
+    </span><span class="kw">pub </span>message: String,
 }
 
-<span class="kw">impl</span> <span class="ident">TerryTask</span> {
-    <span class="doccomment">/// Try to make a `Task` from the specified path. Will return `Err` if the format of the task</span>
-    <span class="doccomment">/// is not Terry or if the task is corrupted and cannot be parsed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-        <span class="ident">path</span>: <span class="ident">P</span>,
-        <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TerryTask</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">parse_task</span>(<span class="ident">path</span>.<span class="ident">as_ref</span>(), <span class="ident">eval_config</span>)
+<span class="kw">impl </span>TerryTask {
+    <span class="doccomment">/// Try to make a `Task` from the specified path. Will return `Err` if the format of the task
+    /// is not Terry or if the task is corrupted and cannot be parsed.
+    </span><span class="kw">pub fn </span>new&lt;P: AsRef&lt;Path&gt;&gt;(
+        path: P,
+        eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;TerryTask, Error&gt; {
+        parse_task(path.as_ref(), eval_config)
     }
 
-    <span class="doccomment">/// Check if in the provided path there could be a Terry-like task.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">path</span>.<span class="ident">as_ref</span>().<span class="ident">join</span>(<span class="string">&quot;task.yaml&quot;</span>).<span class="ident">exists</span>()
+    <span class="doccomment">/// Check if in the provided path there could be a Terry-like task.
+    </span><span class="kw">pub fn </span>is_valid&lt;P: AsRef&lt;Path&gt;&gt;(path: P) -&gt; bool {
+        path.as_ref().join(<span class="string">&quot;task.yaml&quot;</span>).exists()
     }
 
-    <span class="doccomment">/// Get the root directory of the task.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Path</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>
+    <span class="doccomment">/// Get the root directory of the task.
+    </span><span class="kw">pub fn </span>path(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Path {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.path
     }
 
-    <span class="doccomment">/// Get an appropriate `UI` for this task.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ui</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ui_type</span>: <span class="kw-2">&amp;</span><span class="ident">UIType</span>, <span class="ident">_config</span>: <span class="ident">ExecutionDAGConfig</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UI</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">ui_type</span> {
-            <span class="ident">UIType::Raw</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">RawUI::new</span>())),
-            <span class="ident">UIType::Json</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">JsonUI::new</span>())),
-            <span class="ident">UIType::Silent</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">SilentUI::new</span>())),
-            <span class="ident">UIType::Print</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">PrintUI::new</span>(<span class="ident">UIState::new</span>(<span class="self">self</span>)))),
-            <span class="ident">UIType::Curses</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">CursesUI::new</span>(<span class="ident">UIState::new</span>(<span class="self">self</span>))<span class="question-mark">?</span>)),
+    <span class="doccomment">/// Get an appropriate `UI` for this task.
+    </span><span class="kw">pub fn </span>ui(<span class="kw-2">&amp;</span><span class="self">self</span>, ui_type: <span class="kw-2">&amp;</span>UIType, _config: ExecutionDAGConfig) -&gt; <span class="prelude-ty">Result</span>&lt;Box&lt;<span class="kw">dyn </span>UI&gt;, Error&gt; {
+        <span class="kw">match </span>ui_type {
+            UIType::Raw =&gt; <span class="prelude-val">Ok</span>(Box::new(RawUI::new())),
+            UIType::Json =&gt; <span class="prelude-val">Ok</span>(Box::new(JsonUI::new())),
+            UIType::Silent =&gt; <span class="prelude-val">Ok</span>(Box::new(SilentUI::new())),
+            UIType::Print =&gt; <span class="prelude-val">Ok</span>(Box::new(PrintUI::new(UIState::new(<span class="self">self</span>)))),
+            UIType::Curses =&gt; <span class="prelude-val">Ok</span>(Box::new(CursesUI::new(UIState::new(<span class="self">self</span>))<span class="question-mark">?</span>)),
         }
     }
 
-    <span class="doccomment">/// Add the executions required for evaluating this task to the execution DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_dag</span>(
+    <span class="doccomment">/// Add the executions required for evaluating this task to the execution DAG.
+    </span><span class="kw">pub fn </span>build_dag(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">UIMessage::TerryTask</span> {
-            <span class="ident">task</span>: <span class="ident">Box::new</span>(<span class="self">self</span>.<span class="ident">clone</span>()),
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        config: <span class="kw-2">&amp;</span>EvaluationConfig,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        eval.sender.send(UIMessage::TerryTask {
+            task: Box::new(<span class="self">self</span>.clone()),
         })<span class="question-mark">?</span>;
-        <span class="ident">eval</span>.<span class="ident">solutions</span> <span class="op">=</span> <span class="ident">config</span>.<span class="ident">find_solutions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>, <span class="macro">vec!</span>[<span class="string">&quot;solutions/*&quot;</span>], <span class="prelude-val">None</span>, <span class="ident">eval</span>);
-        <span class="self">self</span>.<span class="ident">sanity_checks</span>.<span class="ident">pre_hook</span>(<span class="self">self</span>, <span class="ident">eval</span>)<span class="question-mark">?</span>;
+        eval.solutions = config.find_solutions(<span class="kw-2">&amp;</span><span class="self">self</span>.path, <span class="macro">vec!</span>[<span class="string">&quot;solutions/*&quot;</span>], <span class="prelude-val">None</span>, eval);
+        <span class="self">self</span>.sanity_checks.pre_hook(<span class="self">self</span>, eval)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">solution_info</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">solutions</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">SolutionInfo::from</span>).<span class="ident">collect_vec</span>();
-        <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">UIMessage::Solutions</span> {
-            <span class="ident">solutions</span>: <span class="ident">solution_info</span>,
+        <span class="kw">let </span>solution_info = eval.solutions.iter().map(SolutionInfo::from).collect_vec();
+        eval.sender.send(UIMessage::Solutions {
+            solutions: solution_info,
         })<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">solutions</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">solutions</span>.<span class="ident">clone</span>();
-        <span class="kw">for</span> <span class="ident">solution</span> <span class="kw">in</span> <span class="ident">solutions</span> {
-            <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">seed</span>) <span class="op">=</span> <span class="ident">config</span>.<span class="ident">seed</span> {
-                <span class="ident">seed</span>
-            } <span class="kw">else</span> {
-                <span class="ident">fastrand::u64</span>(<span class="number">0</span>..(<span class="ident">i32::MAX</span> <span class="kw">as</span> <span class="ident">u64</span>))
+        <span class="kw">let </span>solutions = eval.solutions.clone();
+        <span class="kw">for </span>solution <span class="kw">in </span>solutions {
+            <span class="kw">let </span>seed = <span class="kw">if let </span><span class="prelude-val">Some</span>(seed) = config.seed {
+                seed
+            } <span class="kw">else </span>{
+                fastrand::u64(<span class="number">0</span>..(i32::MAX <span class="kw">as </span>u64))
             };
-            <span class="kw">let</span> <span class="ident">input_file</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">generator</span>.<span class="ident">generate_and_bind</span>(
-                <span class="ident">eval</span>,
-                <span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">source_file</span>,
-                <span class="ident">seed</span>,
-                <span class="self">self</span>.<span class="ident">official_solution</span>.<span class="ident">clone</span>(),
+            <span class="kw">let </span>input_file = <span class="self">self</span>.generator.generate_and_bind(
+                eval,
+                <span class="kw-2">&amp;</span>solution.source_file,
+                seed,
+                <span class="self">self</span>.official_solution.clone(),
             )<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">validation_file</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">validator</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">validator</span>.<span class="ident">as_ref</span>() {
-                <span class="prelude-val">Some</span>(<span class="ident">validator</span>.<span class="ident">validate_and_bind</span>(
-                    <span class="ident">eval</span>,
-                    <span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">source_file</span>,
-                    <span class="ident">input_file</span>,
-                    <span class="self">self</span>.<span class="ident">official_solution</span>.<span class="ident">clone</span>(),
+            <span class="kw">let </span>validation_file = <span class="kw">if let </span><span class="prelude-val">Some</span>(validator) = <span class="self">self</span>.validator.as_ref() {
+                <span class="prelude-val">Some</span>(validator.validate_and_bind(
+                    eval,
+                    <span class="kw-2">&amp;</span>solution.source_file,
+                    input_file,
+                    <span class="self">self</span>.official_solution.clone(),
                 )<span class="question-mark">?</span>)
-            } <span class="kw">else</span> {
-                <span class="prelude-val">None</span>
-            };
-            <span class="kw">let</span> <span class="ident">output_file</span> <span class="op">=</span>
-                <span class="ident">Solution::solve_and_bind</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">source_file</span>, <span class="ident">input_file</span>, <span class="ident">validation_file</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-            <span class="kw">let</span> <span class="ident">solution_path</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">source_file</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-            <span class="self">self</span>.<span class="ident">checker</span>.<span class="ident">check_and_bind</span>(
-                <span class="ident">eval</span>,
-                <span class="kw-2">&amp;</span><span class="ident">solution</span>.<span class="ident">source_file</span>,
-                <span class="ident">input_file</span>,
-                <span class="ident">output_file</span>,
-                <span class="self">self</span>.<span class="ident">official_solution</span>.<span class="ident">clone</span>(),
-                <span class="kw">move</span> <span class="op">|</span><span class="ident">outcome</span><span class="op">|</span> {
-                    <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">UIMessage::TerrySolutionOutcome</span> {
-                        <span class="ident">solution</span>: <span class="ident">solution_path</span>,
-                        <span class="ident">outcome</span>: <span class="ident">outcome</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Invalid checker outcome: {}&quot;</span>, <span class="ident">e</span>)),
+            } <span class="kw">else </span>{
+                <span class="prelude-val">None
+            </span>};
+            <span class="kw">let </span>output_file =
+                Solution::solve_and_bind(eval, <span class="kw-2">&amp;</span>solution.source_file, input_file, validation_file)<span class="question-mark">?</span>;
+            <span class="kw">let </span>sender = eval.sender.clone();
+            <span class="kw">let </span>solution_path = solution.source_file.path.clone();
+            <span class="self">self</span>.checker.check_and_bind(
+                eval,
+                <span class="kw-2">&amp;</span>solution.source_file,
+                input_file,
+                output_file,
+                <span class="self">self</span>.official_solution.clone(),
+                <span class="kw">move </span>|outcome| {
+                    sender.send(UIMessage::TerrySolutionOutcome {
+                        solution: solution_path,
+                        outcome: outcome.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;Invalid checker outcome: {}&quot;</span>, e)),
                     })
                 },
             )<span class="question-mark">?</span>;
@@ -486,43 +486,43 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Hook called after the execution completed, useful for sending messages to the UI about the</span>
-    <span class="doccomment">/// results of the sanity checks with data available only after the evaluation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sanity_check_post_hook</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sanity_checks</span>.<span class="ident">post_hook</span>(<span class="self">self</span>, <span class="ident">eval</span>)
+    <span class="doccomment">/// Hook called after the execution completed, useful for sending messages to the UI about the
+    /// results of the sanity checks with data available only after the evaluation.
+    </span><span class="kw">pub fn </span>sanity_check_post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="self">self</span>.sanity_checks.post_hook(<span class="self">self</span>, eval)
     }
 
-    <span class="doccomment">/// Clean the task folder removing the files that can be generated automatically.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">all_managers</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">list_files</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>, <span class="macro">vec!</span>[<span class="string">&quot;managers/*.*&quot;</span>])
-            .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">file_stem</span>().<span class="ident">unwrap</span>().<span class="ident">into</span>())
-            .<span class="ident">collect</span>();
-        <span class="kw">for</span> <span class="ident">maybe_generated</span> <span class="kw">in</span> <span class="ident">list_files</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>, <span class="macro">vec!</span>[<span class="string">&quot;managers/*.*.*&quot;</span>]) {
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="ident">maybe_generated</span>.<span class="ident">file_stem</span>().<span class="ident">unwrap</span>());
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="ident">name</span>.<span class="ident">file_stem</span>().<span class="ident">unwrap</span>());
-            <span class="comment">// if there is a file.X associated to file.Y.Z, remove file.Y.Z, e.g.:</span>
-            <span class="comment">// in managers/ there is validator.py =&gt; all_managers includes &quot;validator&quot;</span>
-            <span class="comment">//   maybe_generated == &quot;validator.linux.x86_64&quot;</span>
-            <span class="comment">//   name == &quot;validator&quot;</span>
-            <span class="kw">if</span> <span class="ident">all_managers</span>.<span class="ident">contains</span>(<span class="ident">name</span>) {
-                <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, <span class="ident">maybe_generated</span>.<span class="ident">display</span>());
-                <span class="ident">std::fs::remove_file</span>(<span class="ident">maybe_generated</span>)<span class="question-mark">?</span>;
+    <span class="doccomment">/// Clean the task folder removing the files that can be generated automatically.
+    </span><span class="kw">pub fn </span>clean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>all_managers: HashSet&lt;PathBuf&gt; = list_files(<span class="kw-2">&amp;</span><span class="self">self</span>.path, <span class="macro">vec!</span>[<span class="string">&quot;managers/*.*&quot;</span>])
+            .iter()
+            .map(|f| f.file_stem().unwrap().into())
+            .collect();
+        <span class="kw">for </span>maybe_generated <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span><span class="self">self</span>.path, <span class="macro">vec!</span>[<span class="string">&quot;managers/*.*.*&quot;</span>]) {
+            <span class="kw">let </span>name = Path::new(maybe_generated.file_stem().unwrap());
+            <span class="kw">let </span>name = Path::new(name.file_stem().unwrap());
+            <span class="comment">// if there is a file.X associated to file.Y.Z, remove file.Y.Z, e.g.:
+            // in managers/ there is validator.py =&gt; all_managers includes &quot;validator&quot;
+            //   maybe_generated == &quot;validator.linux.x86_64&quot;
+            //   name == &quot;validator&quot;
+            </span><span class="kw">if </span>all_managers.contains(name) {
+                <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, maybe_generated.display());
+                std::fs::remove_file(maybe_generated)<span class="question-mark">?</span>;
             }
         }
-        <span class="comment">// remove the bin/ folder</span>
-        <span class="kw">let</span> <span class="ident">bin_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">join</span>(<span class="string">&quot;bin&quot;</span>);
-        <span class="kw">if</span> <span class="ident">bin_path</span>.<span class="ident">exists</span>() {
-            <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, <span class="ident">bin_path</span>.<span class="ident">display</span>());
-            <span class="ident">std::fs::remove_dir_all</span>(<span class="ident">bin_path</span>)<span class="question-mark">?</span>;
+        <span class="comment">// remove the bin/ folder
+        </span><span class="kw">let </span>bin_path = <span class="self">self</span>.path.join(<span class="string">&quot;bin&quot;</span>);
+        <span class="kw">if </span>bin_path.exists() {
+            <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, bin_path.display());
+            std::fs::remove_dir_all(bin_path)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Get the task information.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">task_info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TaskInfo</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">TaskInfo::Terry</span>(<span class="ident">task_info::TerryTaskInfo::new</span>(<span class="self">self</span>)<span class="question-mark">?</span>))
+    <span class="doccomment">/// Get the task information.
+    </span><span class="kw">pub fn </span>task_info(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;TaskInfo, Error&gt; {
+        <span class="prelude-val">Ok</span>(TaskInfo::Terry(task_info::TerryTaskInfo::new(<span class="self">self</span>)<span class="question-mark">?</span>))
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

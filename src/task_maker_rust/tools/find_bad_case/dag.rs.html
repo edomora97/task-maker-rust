@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/dag.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/dag.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -223,230 +223,230 @@
 <span id="223">223</span>
 <span id="224">224</span>
 <span id="225">225</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
 
-<span class="kw">use</span> <span class="ident">task_maker_format::ioi</span>::{
-    <span class="ident">InputGenerator</span>, <span class="ident">SubtaskInfo</span>, <span class="ident">TestcaseId</span>, <span class="ident">TestcaseInfo</span>, <span class="ident">GENERATION_PRIORITY</span>,
+<span class="kw">use </span>task_maker_format::ioi::{
+    InputGenerator, SubtaskInfo, TestcaseId, TestcaseInfo, GENERATION_PRIORITY,
 };
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">EvaluationData</span>, <span class="ident">TaskFormat</span>};
+<span class="kw">use </span>task_maker_format::{EvaluationData, TaskFormat};
 
-<span class="doccomment">/// The information about a testcase to generate.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TestcaseData</span> {
-    <span class="doccomment">/// The arguments to pass to the generator for producing this input file.</span>
-    <span class="kw">pub</span> <span class="ident">generator_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The seed used.</span>
-    <span class="kw">pub</span> <span class="ident">seed</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// The path of where to put this input file temporarily.</span>
-    <span class="kw">pub</span> <span class="ident">input_path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The path of where to put the output file to check.</span>
-    <span class="kw">pub</span> <span class="ident">output_path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The path of where to put the correct output file.</span>
-    <span class="kw">pub</span> <span class="ident">correct_output_path</span>: <span class="ident">PathBuf</span>,
+<span class="doccomment">/// The information about a testcase to generate.
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>TestcaseData {
+    <span class="doccomment">/// The arguments to pass to the generator for producing this input file.
+    </span><span class="kw">pub </span>generator_args: Vec&lt;String&gt;,
+    <span class="doccomment">/// The seed used.
+    </span><span class="kw">pub </span>seed: i32,
+    <span class="doccomment">/// The path of where to put this input file temporarily.
+    </span><span class="kw">pub </span>input_path: PathBuf,
+    <span class="doccomment">/// The path of where to put the output file to check.
+    </span><span class="kw">pub </span>output_path: PathBuf,
+    <span class="doccomment">/// The path of where to put the correct output file.
+    </span><span class="kw">pub </span>correct_output_path: PathBuf,
 }
 
-<span class="doccomment">/// A set of testcases that will be put in a single DAG.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Batch</span> {
-    <span class="kw">pub</span> <span class="ident">testcases</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TestcaseId</span>, <span class="ident">TestcaseData</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A set of testcases that will be put in a single DAG.
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>Batch {
+    <span class="kw">pub </span>testcases: HashMap&lt;TestcaseId, TestcaseData&gt;,
 }
 
-<span class="doccomment">/// Modify the task changing the subtasks and testcases in order to produce a DAG that runs the test</span>
-<span class="doccomment">/// testcases instead of the normal ones.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">patch_task_for_batch</span>(
-    <span class="ident">task</span>: <span class="kw-2">&amp;mut</span> <span class="ident">TaskFormat</span>,
-    <span class="ident">generator_args</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>],
-    <span class="ident">batch_size</span>: <span class="ident">usize</span>,
-    <span class="ident">batch_index</span>: <span class="ident">usize</span>,
-    <span class="ident">working_directory</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Batch</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">batch</span> <span class="op">=</span> <span class="ident">Batch::default</span>();
+<span class="doccomment">/// Modify the task changing the subtasks and testcases in order to produce a DAG that runs the test
+/// testcases instead of the normal ones.
+</span><span class="kw">pub fn </span>patch_task_for_batch(
+    task: <span class="kw-2">&amp;mut </span>TaskFormat,
+    generator_args: <span class="kw-2">&amp;</span>[String],
+    batch_size: usize,
+    batch_index: usize,
+    working_directory: <span class="kw-2">&amp;</span>Path,
+) -&gt; <span class="prelude-ty">Result</span>&lt;Batch, Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>batch = Batch::default();
 
-    <span class="kw">match</span> <span class="ident">task</span> {
-        <span class="ident">TaskFormat::IOI</span>(<span class="ident">task</span>) =&gt; {
-            <span class="comment">// A template testcase for selecting the generator and validator.</span>
-            <span class="kw">let</span> <span class="ident">testcase_template</span> <span class="op">=</span> <span class="ident">task</span>
-                .<span class="ident">subtasks</span>
-                .<span class="ident">values</span>()
-                .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">st</span><span class="op">|</span> <span class="ident">st</span>.<span class="ident">testcases</span>.<span class="ident">values</span>())
-                .<span class="ident">find</span>(<span class="op">|</span><span class="ident">tc</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">tc</span>.<span class="ident">input_generator</span>, <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="kw">_</span>)))
-                .<span class="ident">cloned</span>()
-                <span class="comment">// FIXME: in theory we can find the generator and the solution even without a testcase</span>
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to find a base testcase&quot;</span>))<span class="question-mark">?</span>;
-            <span class="comment">// Remove all the original testcases.</span>
-            <span class="ident">task</span>.<span class="ident">subtasks</span>.<span class="ident">clear</span>();
-            <span class="comment">// Create a single subtask with all the testcases of this batch.</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">testcases</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-            <span class="kw">for</span> <span class="ident">testcase_index</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">batch_size</span> {
-                <span class="kw">let</span> <span class="ident">testcase_id</span> <span class="op">=</span> (<span class="ident">batch_index</span> <span class="op">*</span> <span class="ident">batch_size</span> <span class="op">+</span> <span class="ident">testcase_index</span>) <span class="kw">as</span> <span class="ident">TestcaseId</span>;
+    <span class="kw">match </span>task {
+        TaskFormat::IOI(task) =&gt; {
+            <span class="comment">// A template testcase for selecting the generator and validator.
+            </span><span class="kw">let </span>testcase_template = task
+                .subtasks
+                .values()
+                .flat_map(|st| st.testcases.values())
+                .find(|tc| <span class="macro">matches!</span>(tc.input_generator, InputGenerator::Custom(<span class="kw">_</span>, <span class="kw">_</span>)))
+                .cloned()
+                <span class="comment">// FIXME: in theory we can find the generator and the solution even without a testcase
+                </span>.ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to find a base testcase&quot;</span>))<span class="question-mark">?</span>;
+            <span class="comment">// Remove all the original testcases.
+            </span>task.subtasks.clear();
+            <span class="comment">// Create a single subtask with all the testcases of this batch.
+            </span><span class="kw">let </span><span class="kw-2">mut </span>testcases = HashMap::new();
+            <span class="kw">for </span>testcase_index <span class="kw">in </span><span class="number">0</span>..batch_size {
+                <span class="kw">let </span>testcase_id = (batch_index * batch_size + testcase_index) <span class="kw">as </span>TestcaseId;
 
-                <span class="comment">// [0, i32::MAX] is a safe range for the seeds, since it is compatible with `stoi` in c++.</span>
-                <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="ident">fastrand::i32</span>(<span class="number">0</span>..<span class="ident">i32::MAX</span>);
+                <span class="comment">// [0, i32::MAX] is a safe range for the seeds, since it is compatible with `stoi` in c++.
+                </span><span class="kw">let </span>seed = fastrand::i32(<span class="number">0</span>..i32::MAX);
 
-                <span class="kw">let</span> <span class="ident">generator_args</span> <span class="op">=</span> <span class="ident">generator_args_for_testcase</span>(<span class="ident">generator_args</span>, <span class="ident">seed</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">input_generator</span> <span class="op">=</span> <span class="ident">testcase_template</span>.<span class="ident">input_generator</span>.<span class="ident">clone</span>();
-                <span class="kw">match</span> <span class="kw-2">&amp;mut</span> <span class="ident">input_generator</span> {
-                    <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; {
+                <span class="kw">let </span>generator_args = generator_args_for_testcase(generator_args, seed);
+                <span class="kw">let </span><span class="kw-2">mut </span>input_generator = testcase_template.input_generator.clone();
+                <span class="kw">match </span><span class="kw-2">&amp;mut </span>input_generator {
+                    InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; {
                         <span class="macro">unreachable!</span>(<span class="string">&quot;The generator cannot be StaticFile&quot;</span>)
                     }
-                    <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; {
-                        <span class="kw-2">*</span><span class="ident">args</span> <span class="op">=</span> <span class="ident">generator_args</span>.<span class="ident">clone</span>();
+                    InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; {
+                        <span class="kw-2">*</span>args = generator_args.clone();
                     }
                 }
 
-                <span class="kw">let</span> <span class="ident">testcase</span> <span class="op">=</span> <span class="ident">TestcaseInfo</span> {
-                    <span class="ident">id</span>: <span class="ident">testcase_id</span>,
-                    <span class="ident">input_generator</span>,
-                    <span class="ident">input_validator</span>: <span class="ident">task</span>.<span class="ident">input_validator_generator</span>.<span class="ident">generate</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
-                    <span class="ident">output_generator</span>: <span class="ident">testcase_template</span>.<span class="ident">output_generator</span>.<span class="ident">clone</span>(),
+                <span class="kw">let </span>testcase = TestcaseInfo {
+                    id: testcase_id,
+                    input_generator,
+                    input_validator: task.input_validator_generator.generate(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
+                    output_generator: testcase_template.output_generator.clone(),
                 };
 
-                <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">TestcaseData</span> {
-                    <span class="ident">generator_args</span>,
-                    <span class="ident">seed</span>,
-                    <span class="ident">input_path</span>: <span class="ident">working_directory</span>.<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/input.txt&quot;</span>, <span class="ident">seed</span>)),
-                    <span class="ident">output_path</span>: <span class="ident">working_directory</span>.<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/output.txt&quot;</span>, <span class="ident">seed</span>)),
-                    <span class="ident">correct_output_path</span>: <span class="ident">working_directory</span>
-                        .<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/correct_output.txt&quot;</span>, <span class="ident">seed</span>)),
+                <span class="kw">let </span>data = TestcaseData {
+                    generator_args,
+                    seed,
+                    input_path: working_directory.join(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/input.txt&quot;</span>, seed)),
+                    output_path: working_directory.join(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/output.txt&quot;</span>, seed)),
+                    correct_output_path: working_directory
+                        .join(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/correct_output.txt&quot;</span>, seed)),
                 };
 
-                <span class="ident">testcases</span>.<span class="ident">insert</span>(<span class="ident">testcase_id</span>, <span class="ident">testcase</span>);
-                <span class="ident">batch</span>.<span class="ident">testcases</span>.<span class="ident">insert</span>(<span class="ident">testcase_id</span>, <span class="ident">data</span>);
+                testcases.insert(testcase_id, testcase);
+                batch.testcases.insert(testcase_id, data);
             }
-            <span class="kw">let</span> <span class="ident">subtask</span> <span class="op">=</span> <span class="ident">SubtaskInfo</span> {
-                <span class="ident">id</span>: <span class="number">0</span>,
-                <span class="ident">name</span>: <span class="prelude-val">Some</span>(<span class="macro">format!</span>(<span class="string">&quot;batch-{}&quot;</span>, <span class="ident">batch_index</span>)),
-                <span class="ident">description</span>: <span class="prelude-val">None</span>,
-                <span class="ident">max_score</span>: <span class="number">100.0</span>,
-                <span class="ident">testcases</span>,
-                <span class="ident">span</span>: <span class="prelude-val">None</span>,
+            <span class="kw">let </span>subtask = SubtaskInfo {
+                id: <span class="number">0</span>,
+                name: <span class="prelude-val">Some</span>(<span class="macro">format!</span>(<span class="string">&quot;batch-{}&quot;</span>, batch_index)),
+                description: <span class="prelude-val">None</span>,
+                max_score: <span class="number">100.0</span>,
+                testcases,
+                span: <span class="prelude-val">None</span>,
             };
-            <span class="ident">task</span>.<span class="ident">subtasks</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="ident">subtask</span>);
+            task.subtasks.insert(<span class="number">0</span>, subtask);
         }
-        <span class="ident">TaskFormat::Terry</span>(<span class="kw">_</span>) =&gt; {
+        TaskFormat::Terry(<span class="kw">_</span>) =&gt; {
             <span class="macro">bail!</span>(<span class="string">&quot;Terry tasks are not currently supported&quot;</span>)
         }
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">batch</span>)
+    <span class="prelude-val">Ok</span>(batch)
 }
 
-<span class="doccomment">/// Produce the set of arguments of the generator replacing &#39;{}&#39; with the seed.</span>
-<span class="kw">fn</span> <span class="ident">generator_args_for_testcase</span>(<span class="ident">args</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>], <span class="ident">seed</span>: <span class="ident">i32</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="ident">args</span>.<span class="ident">iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">arg</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">arg</span>.<span class="ident">as_str</span>() {
-            <span class="string">&quot;{}&quot;</span> =&gt; <span class="ident">seed</span>.<span class="ident">to_string</span>(),
-            <span class="kw">_</span> =&gt; <span class="ident">arg</span>.<span class="ident">into</span>(),
+<span class="doccomment">/// Produce the set of arguments of the generator replacing &#39;{}&#39; with the seed.
+</span><span class="kw">fn </span>generator_args_for_testcase(args: <span class="kw-2">&amp;</span>[String], seed: i32) -&gt; Vec&lt;String&gt; {
+    args.iter()
+        .map(|arg| <span class="kw">match </span>arg.as_str() {
+            <span class="string">&quot;{}&quot; </span>=&gt; seed.to_string(),
+            <span class="kw">_ </span>=&gt; arg.into(),
         })
-        .<span class="ident">collect</span>()
+        .collect()
 }
 
-<span class="doccomment">/// Patch the DAG fixing the file callbacks. We want to redirect where the generated files are</span>
-<span class="doccomment">/// stored into a temporary path, and copy them to the task directory only if needed. Furthermore</span>
-<span class="doccomment">/// we want to save also the output produced by the solution to test. Additionally, we want to</span>
-<span class="doccomment">/// change the priorities of the executions, making generations as important as executions (so that</span>
-<span class="doccomment">/// we don&#39;t have to wait for all the generations before starting evaluating).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">patch_dag</span>(<span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>, <span class="ident">batch_size</span>: <span class="ident">usize</span>, <span class="ident">batch</span>: <span class="kw-2">&amp;</span><span class="ident">Batch</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">processed</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="ident">get_testcase_id</span> <span class="op">=</span> <span class="op">|</span><span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">|</span> -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TestcaseId</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">file_name</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">expect</span>(<span class="string">&quot;Path without a file name&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file_name</span> <span class="op">=</span> <span class="ident">file_name</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">put</span> <span class="op">=</span> <span class="ident">file_name</span>.<span class="ident">rfind</span>(<span class="string">&quot;put&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">dot</span> <span class="op">=</span> <span class="ident">file_name</span>.<span class="ident">rfind</span>(<span class="string">&#39;.&#39;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">number</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">file_name</span>[<span class="ident">put</span> <span class="op">+</span> <span class="number">3</span>..<span class="ident">dot</span>];
-        <span class="ident">number</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">TestcaseId</span><span class="op">&gt;</span>().<span class="ident">ok</span>()
+<span class="doccomment">/// Patch the DAG fixing the file callbacks. We want to redirect where the generated files are
+/// stored into a temporary path, and copy them to the task directory only if needed. Furthermore
+/// we want to save also the output produced by the solution to test. Additionally, we want to
+/// change the priorities of the executions, making generations as important as executions (so that
+/// we don&#39;t have to wait for all the generations before starting evaluating).
+</span><span class="kw">pub fn </span>patch_dag(eval: <span class="kw-2">&amp;mut </span>EvaluationData, batch_size: usize, batch: <span class="kw-2">&amp;</span>Batch) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>processed = <span class="number">0</span>;
+    <span class="kw">let </span>get_testcase_id = |path: <span class="kw-2">&amp;</span>Path| -&gt; <span class="prelude-ty">Option</span>&lt;TestcaseId&gt; {
+        <span class="kw">let </span>file_name = path.file_name().expect(<span class="string">&quot;Path without a file name&quot;</span>);
+        <span class="kw">let </span>file_name = file_name.to_string_lossy().to_string();
+        <span class="kw">let </span>put = file_name.rfind(<span class="string">&quot;put&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>dot = file_name.rfind(<span class="string">&#39;.&#39;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>number = <span class="kw-2">&amp;</span>file_name[put + <span class="number">3</span>..dot];
+        number.parse::&lt;TestcaseId&gt;().ok()
     };
 
-    <span class="comment">// Redirect the file write_to to the temporary directory.</span>
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>) <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>() {
-        <span class="kw">for</span> <span class="ident">file_callback</span> <span class="kw">in</span> <span class="ident">callbacks</span>.<span class="ident">file_callbacks</span>.<span class="ident">values_mut</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">write_to</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">file_callback</span>.<span class="ident">write_to</span> {
-                <span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">write_to</span>
-                    .<span class="ident">dest</span>
-                    .<span class="ident">strip_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">eval</span>.<span class="ident">task_root</span>)
-                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+    <span class="comment">// Redirect the file write_to to the temporary directory.
+    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = eval.dag.callbacks.as_mut() {
+        <span class="kw">for </span>file_callback <span class="kw">in </span>callbacks.file_callbacks.values_mut() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(write_to) = <span class="kw-2">&amp;mut </span>file_callback.write_to {
+                <span class="kw">let </span>dest = write_to
+                    .dest
+                    .strip_prefix(<span class="kw-2">&amp;</span>eval.task_root)
+                    .with_context(|| {
                         <span class="macro">format!</span>(
                             <span class="string">&quot;Found output file outside the task: {}&quot;</span>,
-                            <span class="ident">write_to</span>.<span class="ident">dest</span>.<span class="ident">display</span>()
+                            write_to.dest.display()
                         )
                     })<span class="question-mark">?</span>;
-                <span class="comment">// This file is neither an input nor an output.</span>
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">dest</span>.<span class="ident">starts_with</span>(<span class="string">&quot;input&quot;</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">dest</span>.<span class="ident">starts_with</span>(<span class="string">&quot;output&quot;</span>) {
+                <span class="comment">// This file is neither an input nor an output.
+                </span><span class="kw">if </span>!dest.starts_with(<span class="string">&quot;input&quot;</span>) &amp;&amp; !dest.starts_with(<span class="string">&quot;output&quot;</span>) {
                     <span class="kw">continue</span>;
                 }
-                <span class="kw">let</span> <span class="ident">testcase_id</span> <span class="op">=</span> <span class="ident">get_testcase_id</span>(<span class="ident">dest</span>)
-                    .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot find the testcase id of {}&quot;</span>, <span class="ident">dest</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">testcase</span> <span class="op">=</span> <span class="ident">batch</span>.<span class="ident">testcases</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">testcase_id</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+                <span class="kw">let </span>testcase_id = get_testcase_id(dest)
+                    .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot find the testcase id of {}&quot;</span>, dest.display()))<span class="question-mark">?</span>;
+                <span class="kw">let </span>testcase = batch.testcases.get(<span class="kw-2">&amp;</span>testcase_id).ok_or_else(|| {
                     <span class="macro">anyhow!</span>(
                         <span class="string">&quot;Testcase {} is not present in the batch (from {})&quot;</span>,
-                        <span class="ident">testcase_id</span>,
-                        <span class="ident">dest</span>.<span class="ident">display</span>()
+                        testcase_id,
+                        dest.display()
                     )
                 })<span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="ident">dest</span>.<span class="ident">starts_with</span>(<span class="string">&quot;input&quot;</span>) {
-                    <span class="ident">write_to</span>.<span class="ident">dest</span> <span class="op">=</span> <span class="ident">testcase</span>.<span class="ident">input_path</span>.<span class="ident">clone</span>();
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">dest</span>.<span class="ident">starts_with</span>(<span class="string">&quot;output&quot;</span>) {
-                    <span class="ident">write_to</span>.<span class="ident">dest</span> <span class="op">=</span> <span class="ident">testcase</span>.<span class="ident">correct_output_path</span>.<span class="ident">clone</span>();
+                <span class="kw">if </span>dest.starts_with(<span class="string">&quot;input&quot;</span>) {
+                    write_to.dest = testcase.input_path.clone();
+                } <span class="kw">else if </span>dest.starts_with(<span class="string">&quot;output&quot;</span>) {
+                    write_to.dest = testcase.correct_output_path.clone();
                 }
-                <span class="comment">// Always write the file.</span>
-                <span class="ident">write_to</span>.<span class="ident">allow_failure</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                <span class="comment">// Always write the file.
+                </span>write_to.allow_failure = <span class="bool-val">true</span>;
             }
         }
     }
 
-    <span class="kw">let</span> <span class="ident">get_testcase_id</span> <span class="op">=</span> <span class="op">|</span><span class="ident">description</span>: <span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">|</span> -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TestcaseId</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">description</span>.<span class="ident">rfind</span>(<span class="string">&quot;testcase &quot;</span>)<span class="question-mark">?</span> <span class="op">+</span> <span class="string">&quot;testcase &quot;</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">description</span>.<span class="ident">rfind</span>(<span class="string">&quot;, &quot;</span>)<span class="question-mark">?</span>;
-        <span class="ident">description</span>[<span class="ident">start</span>..<span class="ident">end</span>].<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">TestcaseId</span><span class="op">&gt;</span>().<span class="ident">ok</span>()
+    <span class="kw">let </span>get_testcase_id = |description: <span class="kw-2">&amp;</span>str| -&gt; <span class="prelude-ty">Option</span>&lt;TestcaseId&gt; {
+        <span class="kw">let </span>start = description.rfind(<span class="string">&quot;testcase &quot;</span>)<span class="question-mark">? </span>+ <span class="string">&quot;testcase &quot;</span>.len();
+        <span class="kw">let </span>end = description.rfind(<span class="string">&quot;, &quot;</span>)<span class="question-mark">?</span>;
+        description[start..end].parse::&lt;TestcaseId&gt;().ok()
     };
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_file_callbacks</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="kw">for</span> <span class="ident">group</span> <span class="kw">in</span> <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">execution_groups</span>.<span class="ident">values_mut</span>() {
-        <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="ident">group</span>.<span class="ident">executions</span>.<span class="ident">iter_mut</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tag</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">exec</span>.<span class="ident">tag</span> {
-                <span class="kw">if</span> <span class="ident">tag</span>.<span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;evaluation&quot;</span> {
-                    <span class="comment">// The priority of generation is GENERATION_PRIORITY - testcase id.</span>
-                    <span class="ident">exec</span>.<span class="ident">priority</span> <span class="op">=</span> <span class="ident">GENERATION_PRIORITY</span> <span class="op">+</span> <span class="number">1</span>;
-                    <span class="ident">processed</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">stdout</span>.<span class="ident">as_ref</span>();
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stdout</span>) <span class="op">=</span> <span class="ident">stdout</span> {
-                        <span class="kw">let</span> <span class="ident">testcase_id</span> <span class="op">=</span> <span class="ident">get_testcase_id</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">description</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-                            <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to find testcase id from &#39;{}&#39;&quot;</span>, <span class="ident">exec</span>.<span class="ident">description</span>)
+    <span class="kw">let </span><span class="kw-2">mut </span>new_file_callbacks = <span class="macro">vec!</span>[];
+    <span class="kw">for </span>group <span class="kw">in </span>eval.dag.data.execution_groups.values_mut() {
+        <span class="kw">for </span>exec <span class="kw">in </span>group.executions.iter_mut() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(tag) = <span class="kw-2">&amp;mut </span>exec.tag {
+                <span class="kw">if </span>tag.name == <span class="string">&quot;evaluation&quot; </span>{
+                    <span class="comment">// The priority of generation is GENERATION_PRIORITY - testcase id.
+                    </span>exec.priority = GENERATION_PRIORITY + <span class="number">1</span>;
+                    processed += <span class="number">1</span>;
+                    <span class="kw">let </span>stdout = exec.stdout.as_ref();
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stdout) = stdout {
+                        <span class="kw">let </span>testcase_id = get_testcase_id(<span class="kw-2">&amp;</span>exec.description).ok_or_else(|| {
+                            <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to find testcase id from &#39;{}&#39;&quot;</span>, exec.description)
                         })<span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="ident">testcase</span> <span class="op">=</span> <span class="ident">batch</span>.<span class="ident">testcases</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">testcase_id</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+                        <span class="kw">let </span>testcase = batch.testcases.get(<span class="kw-2">&amp;</span>testcase_id).ok_or_else(|| {
                             <span class="macro">anyhow!</span>(
                                 <span class="string">&quot;Testcase {} is not present in the batch (from {})&quot;</span>,
-                                <span class="ident">testcase_id</span>,
-                                <span class="ident">exec</span>.<span class="ident">description</span>
+                                testcase_id,
+                                exec.description
                             )
                         })<span class="question-mark">?</span>;
-                        <span class="ident">new_file_callbacks</span>.<span class="ident">push</span>((<span class="ident">stdout</span>.<span class="ident">uuid</span>, <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">output_path</span>));
-                    } <span class="kw">else</span> {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Execution &#39;{}&#39; doesn&#39;t capture stdout&quot;</span>, <span class="ident">exec</span>.<span class="ident">description</span>);
+                        new_file_callbacks.push((stdout.uuid, <span class="kw-2">&amp;</span>testcase.output_path));
+                    } <span class="kw">else </span>{
+                        <span class="macro">warn!</span>(<span class="string">&quot;Execution &#39;{}&#39; doesn&#39;t capture stdout&quot;</span>, exec.description);
                     }
                 }
-                <span class="kw">if</span> <span class="ident">tag</span>.<span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;checking&quot;</span> {
-                    <span class="comment">// The priority of the checker is GENERATION_PRIORITY - testcase id.</span>
-                    <span class="ident">exec</span>.<span class="ident">priority</span> <span class="op">=</span> <span class="ident">GENERATION_PRIORITY</span> <span class="op">+</span> <span class="number">1</span>;
-                    <span class="ident">processed</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw">if </span>tag.name == <span class="string">&quot;checking&quot; </span>{
+                    <span class="comment">// The priority of the checker is GENERATION_PRIORITY - testcase id.
+                    </span>exec.priority = GENERATION_PRIORITY + <span class="number">1</span>;
+                    processed += <span class="number">1</span>;
                 }
             }
         }
     }
-    <span class="kw">for</span> (<span class="ident">file_id</span>, <span class="ident">path</span>) <span class="kw">in</span> <span class="ident">new_file_callbacks</span> {
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">write_file_to_allow_fail</span>(<span class="ident">file_id</span>, <span class="ident">path</span>, <span class="bool-val">false</span>);
+    <span class="kw">for </span>(file_id, path) <span class="kw">in </span>new_file_callbacks {
+        eval.dag.write_file_to_allow_fail(file_id, path, <span class="bool-val">false</span>);
     }
 
-    <span class="kw">if</span> <span class="ident">processed</span> <span class="op">!</span><span class="op">=</span> <span class="ident">batch_size</span> <span class="op">*</span> <span class="number">2</span> {
+    <span class="kw">if </span>processed != batch_size * <span class="number">2 </span>{
         <span class="macro">bail!</span>(
             <span class="string">&quot;Failed to find the {} executions: {} found&quot;</span>,
-            <span class="ident">batch_size</span> <span class="op">*</span> <span class="number">2</span>,
-            <span class="ident">processed</span>
+            batch_size * <span class="number">2</span>,
+            processed
         );
     }
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

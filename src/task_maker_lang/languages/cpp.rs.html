@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/cpp.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cpp.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/cpp.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cpp.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -286,293 +286,293 @@
 <span id="286">286</span>
 <span id="287">287</span>
 <span id="288">288</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">regex::Regex</span>;
+<span class="kw">use </span>regex::Regex;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_dag::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::language</span>::{
-    <span class="ident">CompilationSettings</span>, <span class="ident">CompiledLanguageBuilder</span>, <span class="ident">Language</span>, <span class="ident">SimpleCompiledLanguageBuilder</span>,
+<span class="kw">use </span><span class="kw">crate</span>::language::{
+    CompilationSettings, CompiledLanguageBuilder, Language, SimpleCompiledLanguageBuilder,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::languages::find_dependencies</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Dependency</span>;
+<span class="kw">use </span><span class="kw">crate</span>::languages::find_dependencies;
+<span class="kw">use </span><span class="kw">crate</span>::Dependency;
 
-<span class="doccomment">/// Configuration of the C++ language to use.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageCppConfiguration</span> {
-    <span class="doccomment">/// Compiler to use (e.g. ExecutionCommand::system(&quot;g++&quot;) ).</span>
-    <span class="kw">pub</span> <span class="ident">compiler</span>: <span class="ident">ExecutionCommand</span>,
-    <span class="doccomment">/// Version of the C++ standard library to use (e.g. c++11).</span>
-    <span class="kw">pub</span> <span class="ident">std_version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Extra flags to pass to the compiler.</span>
-    <span class="kw">pub</span> <span class="ident">extra_flags</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Configuration of the C++ language to use.
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>LanguageCppConfiguration {
+    <span class="doccomment">/// Compiler to use (e.g. ExecutionCommand::system(&quot;g++&quot;) ).
+    </span><span class="kw">pub </span>compiler: ExecutionCommand,
+    <span class="doccomment">/// Version of the C++ standard library to use (e.g. c++11).
+    </span><span class="kw">pub </span>std_version: String,
+    <span class="doccomment">/// Extra flags to pass to the compiler.
+    </span><span class="kw">pub </span>extra_flags: Vec&lt;String&gt;,
 }
 
-<span class="doccomment">/// The C++ language.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageCpp</span> {
-    <span class="kw">pub</span> <span class="ident">config</span>: <span class="ident">LanguageCppConfiguration</span>,
+<span class="doccomment">/// The C++ language.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>LanguageCpp {
+    <span class="kw">pub </span>config: LanguageCppConfiguration,
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageCppConfiguration</span> {
-    <span class="doccomment">/// Get the configuration of C++ from the environment variables.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_env</span>() -&gt; <span class="ident">LanguageCppConfiguration</span> {
-        <span class="kw">let</span> <span class="ident">compiler</span> <span class="op">=</span> <span class="ident">std::env::var_os</span>(<span class="string">&quot;TM_CXX&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;g++&quot;</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">std_version</span> <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TM_CXX_STD_VERSION&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="string">&quot;c++17&quot;</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">extra_flags</span> <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TM_CXXFLAGS&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">String::new</span>());
-        <span class="kw">let</span> <span class="ident">extra_flags</span> <span class="op">=</span> <span class="ident">shell_words::split</span>(<span class="kw-2">&amp;</span><span class="ident">extra_flags</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid $TM_CXXFLAGS&quot;</span>);
-        <span class="ident">LanguageCppConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="ident">compiler</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>,
-            <span class="ident">extra_flags</span>,
+<span class="kw">impl </span>LanguageCppConfiguration {
+    <span class="doccomment">/// Get the configuration of C++ from the environment variables.
+    </span><span class="kw">pub fn </span>from_env() -&gt; LanguageCppConfiguration {
+        <span class="kw">let </span>compiler = std::env::var_os(<span class="string">&quot;TM_CXX&quot;</span>).unwrap_or_else(|| <span class="string">&quot;g++&quot;</span>.into());
+        <span class="kw">let </span>std_version = std::env::var(<span class="string">&quot;TM_CXX_STD_VERSION&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;c++17&quot;</span>.into());
+        <span class="kw">let </span>extra_flags = std::env::var(<span class="string">&quot;TM_CXXFLAGS&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| String::new());
+        <span class="kw">let </span>extra_flags = shell_words::split(<span class="kw-2">&amp;</span>extra_flags).expect(<span class="string">&quot;Invalid $TM_CXXFLAGS&quot;</span>);
+        LanguageCppConfiguration {
+            compiler: ExecutionCommand::System(compiler.into()),
+            std_version,
+            extra_flags,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageCpp</span> {
-    <span class="doccomment">/// Make a new LanguageCpp using the specified version.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">config</span>: <span class="ident">LanguageCppConfiguration</span>) -&gt; <span class="ident">LanguageCpp</span> {
-        <span class="ident">LanguageCpp</span> { <span class="ident">config</span> }
+<span class="kw">impl </span>LanguageCpp {
+    <span class="doccomment">/// Make a new LanguageCpp using the specified version.
+    </span><span class="kw">pub fn </span>new(config: LanguageCppConfiguration) -&gt; LanguageCpp {
+        LanguageCpp { config }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Language</span> <span class="kw">for</span> <span class="ident">LanguageCpp</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;C++&quot;</span>
-    }
+<span class="kw">impl </span>Language <span class="kw">for </span>LanguageCpp {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;C++&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="macro">vec!</span>[<span class="string">&quot;cpp&quot;</span>, <span class="string">&quot;cc&quot;</span>, <span class="string">&quot;c++&quot;</span>]
     }
 
-    <span class="kw">fn</span> <span class="ident">need_compilation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">true</span>
-    }
+    <span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">inline_comment_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="prelude-val">Some</span>(<span class="string">&quot;//&quot;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">compilation_builder</span>(
+    <span class="kw">fn </span>compilation_builder(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">settings</span>: <span class="ident">CompilationSettings</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CompiledLanguageBuilder</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">SimpleCompiledLanguageBuilder::new</span>(
+        source: <span class="kw-2">&amp;</span>Path,
+        settings: CompilationSettings,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">&#39;_</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>metadata = SimpleCompiledLanguageBuilder::new(
             <span class="self">self</span>,
-            <span class="ident">source</span>,
-            <span class="ident">settings</span>,
-            <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">compiler</span>.<span class="ident">clone</span>(),
+            source,
+            settings,
+            <span class="self">self</span>.config.compiler.clone(),
         );
-        <span class="kw">let</span> <span class="ident">binary_name</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">binary_name</span>.<span class="ident">clone</span>();
-        <span class="ident">metadata</span>
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-O2&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-Wall&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-ggdb3&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-DEVAL&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-fdiagnostics-color=always&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">std_version</span>))
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-o&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="ident">binary_name</span>);
-        <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>.<span class="ident">extra_flags</span> {
-            <span class="ident">metadata</span>.<span class="ident">add_arg</span>(<span class="ident">arg</span>);
+        <span class="kw">let </span>binary_name = metadata.binary_name.clone();
+        metadata
+            .add_arg(<span class="string">&quot;-O2&quot;</span>)
+            .add_arg(<span class="string">&quot;-Wall&quot;</span>)
+            .add_arg(<span class="string">&quot;-ggdb3&quot;</span>)
+            .add_arg(<span class="string">&quot;-DEVAL&quot;</span>)
+            .add_arg(<span class="string">&quot;-fdiagnostics-color=always&quot;</span>)
+            .add_arg(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, <span class="self">self</span>.config.std_version))
+            .add_arg(<span class="string">&quot;-o&quot;</span>)
+            .add_arg(binary_name);
+        <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.config.extra_flags {
+            metadata.add_arg(arg);
         }
-        <span class="kw">if</span> <span class="ident">metadata</span>.<span class="ident">settings</span>.<span class="ident">list_static</span> {
-            <span class="ident">metadata</span>.<span class="ident">add_arg</span>(<span class="string">&quot;-static&quot;</span>);
+        <span class="kw">if </span>metadata.settings.list_static {
+            metadata.add_arg(<span class="string">&quot;-static&quot;</span>);
         }
 
-        <span class="ident">find_cpp_deps</span>(<span class="ident">source</span>)
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">metadata</span>.<span class="ident">add_dependency</span>(<span class="ident">d</span>));
-        <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">metadata</span>))
+        find_cpp_deps(source)
+            .into_iter()
+            .for_each(|d| metadata.add_dependency(d));
+        <span class="prelude-val">Some</span>(Box::new(metadata))
     }
 }
 
-<span class="doccomment">/// Extract all the dependencies of a C/C++ source file.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">find_cpp_deps</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span> {
-    <span class="ident">find_dependencies</span>(<span class="ident">path</span>, <span class="ident">extract_includes</span>)
+<span class="doccomment">/// Extract all the dependencies of a C/C++ source file.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>find_cpp_deps(path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;Dependency&gt; {
+    find_dependencies(path, extract_includes)
 }
 
-<span class="doccomment">/// Extracts all the #include in the file. The supported includes are the ones in the form:</span>
-<span class="doccomment">/// * `#include &lt;file&gt;`</span>
-<span class="doccomment">/// * `#include &quot;file&quot;`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The space after `include` is optional.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The returned values are in the form (local_path, sandbox_path). Those paths are equal, and are</span>
-<span class="doccomment">/// just the include itself.</span>
-<span class="kw">fn</span> <span class="ident">extract_includes</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="ident">PathBuf</span>)<span class="op">&gt;</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">RE</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">r#&quot;#include\s*[&lt;&quot;]([^&quot;&gt;]+)[&gt;&quot;]&quot;#</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+<span class="doccomment">/// Extracts all the #include in the file. The supported includes are the ones in the form:
+/// * `#include &lt;file&gt;`
+/// * `#include &quot;file&quot;`
+///
+/// The space after `include` is optional.
+///
+/// The returned values are in the form (local_path, sandbox_path). Those paths are equal, and are
+/// just the include itself.
+</span><span class="kw">fn </span>extract_includes(path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;(PathBuf, PathBuf)&gt; {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex = Regex::new(<span class="string">r#&quot;#include\s*[&lt;&quot;]([^&quot;&gt;]+)[&gt;&quot;]&quot;#</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
     }
-    <span class="kw">let</span> <span class="ident">content</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">std::fs::read_to_string</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>) {
-        <span class="prelude-val">Ok</span>(<span class="ident">content</span>) =&gt; <span class="ident">content</span>,
-        <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="macro">vec!</span>[],
+    <span class="kw">let </span>content = <span class="kw">match </span>std::fs::read_to_string(<span class="kw-2">&amp;</span>path) {
+        <span class="prelude-val">Ok</span>(content) =&gt; content,
+        <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="macro">vec!</span>[],
     };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">add_file</span> <span class="op">=</span> <span class="op">|</span><span class="ident">include</span>: <span class="ident">PathBuf</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">local</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">with_file_name</span>(<span class="kw-2">&amp;</span><span class="ident">include</span>);
-        <span class="ident">res</span>.<span class="ident">push</span>((<span class="ident">local</span>, <span class="ident">include</span>));
+    <span class="kw">let </span><span class="kw-2">mut </span>res = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>add_file = |include: PathBuf| {
+        <span class="kw">let </span>local = path.with_file_name(<span class="kw-2">&amp;</span>include);
+        res.push((local, include));
     };
-    <span class="kw">for</span> <span class="ident">cap</span> <span class="kw">in</span> <span class="ident">RE</span>.<span class="ident">captures_iter</span>(<span class="kw-2">&amp;</span><span class="ident">content</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">cap</span>.<span class="ident">get</span>(<span class="number">1</span>) {
-            <span class="ident">add_file</span>(<span class="ident">PathBuf::from</span>(<span class="ident">path</span>.<span class="ident">as_str</span>()));
+    <span class="kw">for </span>cap <span class="kw">in </span>RE.captures_iter(<span class="kw-2">&amp;</span>content) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = cap.get(<span class="number">1</span>) {
+            add_file(PathBuf::from(path.as_str()));
         }
     }
-    <span class="ident">res</span>
+    res
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">std::fs::write</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>std::fs::write;
 
-    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
+    <span class="kw">use </span>speculoos::prelude::<span class="kw-2">*</span>;
+    <span class="kw">use </span>tempfile::TempDir;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">setup</span>() -&gt; <span class="ident">TempDir</span> {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.cpp&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="ident">foo</span>, <span class="string">&quot;int main() {}&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">tempdir</span>
+    <span class="kw">fn </span>setup() -&gt; TempDir {
+        <span class="kw">let </span>tempdir = TempDir::new().unwrap();
+        <span class="kw">let </span>foo = tempdir.path().join(<span class="string">&quot;foo.cpp&quot;</span>);
+        std::fs::write(foo, <span class="string">&quot;int main() {}&quot;</span>).unwrap();
+        tempdir
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args() {
+        <span class="kw">let </span>tmp = setup();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="string">&quot;g++&quot;</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>: <span class="string">&quot;c++14&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">extra_flags</span>: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">into</span>()],
+        <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration {
+            compiler: ExecutionCommand::System(<span class="string">&quot;g++&quot;</span>.into()),
+            std_version: <span class="string">&quot;c++14&quot;</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
         });
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.cpp&quot;</span>), <span class="ident">CompilationSettings::default</span>())
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.cpp&quot;</span>), CompilationSettings::default())
+            .unwrap();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.cpp&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="kw">let </span>args = comp.args;
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;foo.cpp&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c++14&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">&quot;-static&quot;</span>.to_string());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args_starting_with_dash</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
-        <span class="ident">std::fs::copy</span>(<span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.cpp&quot;</span>), <span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;-foo.cpp&quot;</span>)).<span class="ident">unwrap</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args_starting_with_dash() {
+        <span class="kw">let </span>tmp = setup();
+        std::fs::copy(tmp.path().join(<span class="string">&quot;foo.cpp&quot;</span>), tmp.path().join(<span class="string">&quot;-foo.cpp&quot;</span>)).unwrap();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="string">&quot;g++&quot;</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>: <span class="string">&quot;c++14&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">extra_flags</span>: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">into</span>()],
+        <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration {
+            compiler: ExecutionCommand::System(<span class="string">&quot;g++&quot;</span>.into()),
+            std_version: <span class="string">&quot;c++14&quot;</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
         });
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;-foo.cpp&quot;</span>), <span class="ident">CompilationSettings::default</span>())
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;-foo.cpp&quot;</span>), CompilationSettings::default())
+            .unwrap();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;./-foo.cpp&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="kw">let </span>args = comp.args;
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;./-foo.cpp&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c++14&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">&quot;-static&quot;</span>.to_string());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args_static</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args_static() {
+        <span class="kw">let </span>tmp = setup();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration</span> {
-            <span class="ident">compiler</span>: <span class="ident">ExecutionCommand::System</span>(<span class="string">&quot;g++&quot;</span>.<span class="ident">into</span>()),
-            <span class="ident">std_version</span>: <span class="string">&quot;c++14&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">extra_flags</span>: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">into</span>()],
+        <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration {
+            compiler: ExecutionCommand::System(<span class="string">&quot;g++&quot;</span>.into()),
+            std_version: <span class="string">&quot;c++14&quot;</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
         });
-        <span class="kw">let</span> <span class="ident">settings</span> <span class="op">=</span> <span class="ident">CompilationSettings</span> {
-            <span class="ident">list_static</span>: <span class="bool-val">true</span>,
-            ..<span class="ident">Default::default</span>()
+        <span class="kw">let </span>settings = CompilationSettings {
+            list_static: <span class="bool-val">true</span>,
+            ..Default::default()
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.cpp&quot;</span>), <span class="ident">settings</span>)
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.cpp&quot;</span>), settings)
+            .unwrap();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;foo.cpp&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-std=c++14&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-lfoobar&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;-static&quot;</span>.<span class="ident">to_string</span>());
+        <span class="kw">let </span>args = comp.args;
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;foo.cpp&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c++14&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-static&quot;</span>.to_string());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_extract_imports</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">setup</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="ident">write</span>(
-            <span class="kw-2">&amp;</span><span class="ident">path</span>,
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_extract_imports() {
+        <span class="kw">let </span>tmpdir = setup();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
+        write(
+            <span class="kw-2">&amp;</span>path,
             <span class="string">r#&quot;blabla\n#include&lt;iostream&gt;\n#include &quot;test.hpp&quot;\nrandom&quot;#</span>,
         )
-        .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">imports</span> <span class="op">=</span> <span class="ident">extract_includes</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">import</span>) <span class="kw">in</span> <span class="macro">vec!</span>[<span class="string">&quot;iostream&quot;</span>, <span class="string">&quot;test.hpp&quot;</span>].<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">let</span> <span class="ident">import</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">import</span>);
-            <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">imports</span>[<span class="ident">i</span>].<span class="number">0</span>).<span class="ident">is_equal_to</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">import</span>));
-            <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">imports</span>[<span class="ident">i</span>].<span class="number">1</span>).<span class="ident">is_equal_to</span>(<span class="kw-2">&amp;</span><span class="ident">import</span>);
+        .unwrap();
+        <span class="kw">let </span>imports = extract_includes(<span class="kw-2">&amp;</span>path);
+        <span class="kw">for </span>(i, import) <span class="kw">in </span><span class="macro">vec!</span>[<span class="string">&quot;iostream&quot;</span>, <span class="string">&quot;test.hpp&quot;</span>].iter().enumerate() {
+            <span class="kw">let </span>import = PathBuf::from(import);
+            assert_that(<span class="kw-2">&amp;</span>imports[i].<span class="number">0</span>).is_equal_to(tmpdir.path().join(<span class="kw-2">&amp;</span>import));
+            assert_that(<span class="kw-2">&amp;</span>imports[i].<span class="number">1</span>).is_equal_to(<span class="kw-2">&amp;</span>import);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_find_cpp_deps</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">setup</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="kw">let</span> <span class="ident">foo_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.hpp&quot;</span>);
-        <span class="kw">let</span> <span class="ident">bar_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bar.hpp&quot;</span>);
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;#include &lt;foo.hpp&gt;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">foo_path</span>, <span class="string">&quot;#include &lt;bar.hpp&gt;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">bar_path</span>, <span class="string">&quot;#include &lt;iostream&gt;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_cpp_deps</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">2</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.hpp&quot;</span>));
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">bar_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;bar.hpp&quot;</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_find_cpp_deps() {
+        <span class="kw">let </span>tmpdir = setup();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
+        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">&quot;foo.hpp&quot;</span>);
+        <span class="kw">let </span>bar_path = tmpdir.path().join(<span class="string">&quot;bar.hpp&quot;</span>);
+        write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;#include &lt;foo.hpp&gt;&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">&quot;#include &lt;bar.hpp&gt;&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>bar_path, <span class="string">&quot;#include &lt;iostream&gt;&quot;</span>).unwrap();
+        <span class="kw">let </span>deps = find_cpp_deps(<span class="kw-2">&amp;</span>path);
+        assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">2</span>);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(foo_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;foo.hpp&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].local_path).is_equal_to(bar_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;bar.hpp&quot;</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_find_cpp_deps_symlink</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">setup</span>();
-        <span class="ident">std::fs::create_dir</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;utils&quot;</span>)).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="kw">let</span> <span class="ident">dep_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;dep.hpp&quot;</span>);
-        <span class="kw">let</span> <span class="ident">inside_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;utils&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;inside.hpp&quot;</span>);
-        <span class="kw">let</span> <span class="ident">orig_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;utils&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;orig.cpp&quot;</span>);
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">dep_path</span>, <span class="string">&quot;#define 42 42&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">inside_path</span>, <span class="string">&quot;#define 42 41&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">orig_path</span>, <span class="string">&quot;#include&lt;dep.hpp&gt;\n#include&lt;inside.hpp&gt;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">std::os::unix::fs::symlink</span>(<span class="kw-2">&amp;</span><span class="ident">orig_path</span>, <span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
-        <span class="comment">// file.cpp includes ./dep.hpp and ./inside.hpp (so it shouldn&#39;t find ./utils/inside.hpp)</span>
-        <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_cpp_deps</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">dep_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;dep.hpp&quot;</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_find_cpp_deps_symlink() {
+        <span class="kw">let </span>tmpdir = setup();
+        std::fs::create_dir(tmpdir.path().join(<span class="string">&quot;utils&quot;</span>)).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
+        <span class="kw">let </span>dep_path = tmpdir.path().join(<span class="string">&quot;dep.hpp&quot;</span>);
+        <span class="kw">let </span>inside_path = tmpdir.path().join(<span class="string">&quot;utils&quot;</span>).join(<span class="string">&quot;inside.hpp&quot;</span>);
+        <span class="kw">let </span>orig_path = tmpdir.path().join(<span class="string">&quot;utils&quot;</span>).join(<span class="string">&quot;orig.cpp&quot;</span>);
+        write(<span class="kw-2">&amp;</span>dep_path, <span class="string">&quot;#define 42 42&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>inside_path, <span class="string">&quot;#define 42 41&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>orig_path, <span class="string">&quot;#include&lt;dep.hpp&gt;\n#include&lt;inside.hpp&gt;&quot;</span>).unwrap();
+        std::os::unix::fs::symlink(<span class="kw-2">&amp;</span>orig_path, <span class="kw-2">&amp;</span>path).unwrap();
+        <span class="comment">// file.cpp includes ./dep.hpp and ./inside.hpp (so it shouldn&#39;t find ./utils/inside.hpp)
+        </span><span class="kw">let </span>deps = find_cpp_deps(<span class="kw-2">&amp;</span>path);
+        assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">1</span>);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(dep_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;dep.hpp&quot;</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_find_cpp_deps_loop</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">setup</span>();
-        <span class="kw">let</span> <span class="ident">file_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="kw">let</span> <span class="ident">foo_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.hpp&quot;</span>);
-        <span class="comment">// file imports itself and foo and file import each other</span>
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">file_path</span>, <span class="string">&quot;#include &lt;file.cpp&gt;\n#include&lt;foo.hpp&gt;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">foo_path</span>, <span class="string">&quot;#include\&quot;file.cpp\&quot;&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_cpp_deps</span>(<span class="kw-2">&amp;</span><span class="ident">file_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.hpp&quot;</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_find_cpp_deps_loop() {
+        <span class="kw">let </span>tmpdir = setup();
+        <span class="kw">let </span>file_path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
+        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">&quot;foo.hpp&quot;</span>);
+        <span class="comment">// file imports itself and foo and file import each other
+        </span>write(<span class="kw-2">&amp;</span>file_path, <span class="string">&quot;#include &lt;file.cpp&gt;\n#include&lt;foo.hpp&gt;&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">&quot;#include\&quot;file.cpp\&quot;&quot;</span>).unwrap();
+        <span class="kw">let </span>deps = find_cpp_deps(<span class="kw-2">&amp;</span>file_path);
+        assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">1</span>);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(foo_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;foo.hpp&quot;</span>));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

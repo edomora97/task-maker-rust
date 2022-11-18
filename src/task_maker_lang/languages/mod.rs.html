@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -60,67 +60,67 @@
 <span id="60">60</span>
 <span id="61">61</span>
 <span id="62">62</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashSet</span>, <span class="ident">VecDeque</span>};
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::{HashSet, VecDeque};
+<span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::File</span>;
+<span class="kw">use </span>task_maker_dag::File;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Dependency</span>;
+<span class="kw">use </span><span class="kw">crate</span>::Dependency;
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">c</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">cpp</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">csharp</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">javascript</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">pascal</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">python</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">rust</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">shell</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>c;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>cpp;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>csharp;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>javascript;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>pascal;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>python;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>rust;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>shell;
 
-<span class="doccomment">/// Extract all the dependencies of a source file recursively. The file can include/import many</span>
-<span class="doccomment">/// other files, even cyclically. Each import is included only once in the result.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ## Params</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// - `path`: the root source file from which extract the dependencies.</span>
-<span class="doccomment">/// - `extract_imports`: a function called with the path of a source file, which returns a list of</span>
-<span class="doccomment">///   all the imported files (pair local_path, sandbox_path).</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">find_dependencies</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="kw-2">mut</span> <span class="ident">extract_imports</span>: <span class="ident">F</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="ident">PathBuf</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// Extract all the dependencies of a source file recursively. The file can include/import many
+/// other files, even cyclically. Each import is included only once in the result.
+///
+/// ## Params
+///
+/// - `path`: the root source file from which extract the dependencies.
+/// - `extract_imports`: a function called with the path of a source file, which returns a list of
+///   all the imported files (pair local_path, sandbox_path).
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>find_dependencies&lt;F&gt;(path: <span class="kw-2">&amp;</span>Path, <span class="kw-2">mut </span>extract_imports: F) -&gt; Vec&lt;Dependency&gt;
+<span class="kw">where
+    </span>F: FnMut(<span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;(PathBuf, PathBuf)&gt;,
 {
-    <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">parent</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid path&quot;</span>);
-    <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid path&quot;</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_files</span> <span class="op">=</span> <span class="ident">HashSet::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pending</span> <span class="op">=</span> <span class="ident">VecDeque::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">done</span> <span class="op">=</span> <span class="ident">HashSet::new</span>();
+    <span class="kw">let </span>base = path.parent().expect(<span class="string">&quot;Invalid path&quot;</span>);
+    <span class="kw">let </span>filename = path.file_name().expect(<span class="string">&quot;Invalid path&quot;</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[];
+    <span class="kw">let </span><span class="kw-2">mut </span>result_files = HashSet::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>pending = VecDeque::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>done = HashSet::new();
 
-    <span class="ident">pending</span>.<span class="ident">push_back</span>(<span class="ident">path</span>.<span class="ident">to_owned</span>());
-    <span class="kw">while</span> <span class="op">!</span><span class="ident">pending</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">pending</span>.<span class="ident">pop_front</span>().<span class="ident">unwrap</span>();
-        <span class="ident">done</span>.<span class="ident">insert</span>(<span class="ident">path</span>.<span class="ident">clone</span>());
-        <span class="kw">for</span> (<span class="ident">local_path</span>, <span class="ident">sandbox_path</span>) <span class="kw">in</span> <span class="ident">extract_imports</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>) {
-            <span class="kw">let</span> <span class="ident">local_path</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">local_path</span>);
-            <span class="kw">if</span> <span class="ident">local_path</span>.<span class="ident">exists</span>()
-                <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">done</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">local_path</span>)
-                <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">result_files</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">sandbox_path</span>)
+    pending.push_back(path.to_owned());
+    <span class="kw">while </span>!pending.is_empty() {
+        <span class="kw">let </span>path = pending.pop_front().unwrap();
+        done.insert(path.clone());
+        <span class="kw">for </span>(local_path, sandbox_path) <span class="kw">in </span>extract_imports(<span class="kw-2">&amp;</span>path) {
+            <span class="kw">let </span>local_path = base.join(<span class="kw-2">&amp;</span>local_path);
+            <span class="kw">if </span>local_path.exists()
+                &amp;&amp; !done.contains(<span class="kw-2">&amp;</span>local_path)
+                &amp;&amp; !result_files.contains(<span class="kw-2">&amp;</span>sandbox_path)
             {
-                <span class="ident">result_files</span>.<span class="ident">insert</span>(<span class="ident">sandbox_path</span>.<span class="ident">clone</span>());
-                <span class="ident">pending</span>.<span class="ident">push_back</span>(<span class="ident">local_path</span>.<span class="ident">clone</span>());
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">Dependency</span> {
-                    <span class="ident">file</span>: <span class="ident">File::new</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
+                result_files.insert(sandbox_path.clone());
+                pending.push_back(local_path.clone());
+                result.push(Dependency {
+                    file: File::new(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
                         <span class="string">&quot;Dependency {:?} at {:?} of {:?}&quot;</span>,
-                        <span class="ident">sandbox_path</span>, <span class="ident">local_path</span>, <span class="ident">filename</span>
+                        sandbox_path, local_path, filename
                     )),
-                    <span class="ident">local_path</span>,
-                    <span class="ident">sandbox_path</span>,
-                    <span class="ident">executable</span>: <span class="bool-val">false</span>,
+                    local_path,
+                    sandbox_path,
+                    executable: <span class="bool-val">false</span>,
                 });
             }
         }
     }
 
-    <span class="ident">result</span>
+    result
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

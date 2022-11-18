@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/task_type/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/task_type/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -92,99 +92,99 @@
 <span id="92">92</span>
 <span id="93">93</span>
 <span id="94">94</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::sync::{Arc, Mutex};
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">batch::BatchTypeData</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">communication</span>::{<span class="ident">CommunicationTypeData</span>, <span class="ident">UserIo</span>};
-<span class="kw">use</span> <span class="ident">task_maker_dag::FileUuid</span>;
+<span class="kw">pub use </span>batch::BatchTypeData;
+<span class="kw">pub use </span>communication::{CommunicationTypeData, UserIo};
+<span class="kw">use </span>task_maker_dag::FileUuid;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">Checker</span>, <span class="ident">IOITask</span>, <span class="ident">ScoreManager</span>, <span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{Checker, IOITask, ScoreManager, SubtaskId, TestcaseId};
+<span class="kw">use crate</span>::{EvaluationData, SourceFile};
 
-<span class="kw">mod</span> <span class="ident">batch</span>;
-<span class="kw">mod</span> <span class="ident">communication</span>;
+<span class="kw">mod </span>batch;
+<span class="kw">mod </span>communication;
 
-<span class="doccomment">/// The type of the task. This changes the behavior of the solutions.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TaskType</span> {
-    <span class="doccomment">/// The solution is a single file that will be executed once per testcase, feeding in the input</span>
-    <span class="doccomment">/// file and reading the output file. The solution may be compiled with additional graders</span>
-    <span class="doccomment">/// (called `grader.LANG`). The output is checked with an external program.</span>
-    <span class="ident">Batch</span>(<span class="ident">BatchTypeData</span>),
-    <span class="doccomment">/// The solution is executed in parallel with a manager and communicate using FIFO pipes. There</span>
-    <span class="doccomment">/// are only input files since the manager computes the score of the solution.</span>
-    <span class="ident">Communication</span>(<span class="ident">CommunicationTypeData</span>),
-    <span class="doccomment">/// Not an actual task.</span>
-    <span class="prelude-val">None</span>,
+<span class="doccomment">/// The type of the task. This changes the behavior of the solutions.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub enum </span>TaskType {
+    <span class="doccomment">/// The solution is a single file that will be executed once per testcase, feeding in the input
+    /// file and reading the output file. The solution may be compiled with additional graders
+    /// (called `grader.LANG`). The output is checked with an external program.
+    </span>Batch(BatchTypeData),
+    <span class="doccomment">/// The solution is executed in parallel with a manager and communicate using FIFO pipes. There
+    /// are only input files since the manager computes the score of the solution.
+    </span>Communication(CommunicationTypeData),
+    <span class="doccomment">/// Not an actual task.
+    </span><span class="prelude-val">None</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">TaskType</span> {
-    <span class="doccomment">/// Evaluate a solution on a testcase, eventually adding to the `ScoreManager` the result of the</span>
-    <span class="doccomment">/// evaluation. This will add both the execution as well as the checking to the DAG.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">evaluate</span>(
+<span class="kw">impl </span>TaskType {
+    <span class="doccomment">/// Evaluate a solution on a testcase, eventually adding to the `ScoreManager` the result of the
+    /// evaluation. This will add both the execution as well as the checking to the DAG.
+    </span><span class="attribute">#[allow(clippy::too_many_arguments)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>evaluate(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span>,
-        <span class="ident">testcase_id</span>: <span class="ident">TestcaseId</span>,
-        <span class="ident">source_file</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">validation_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-        <span class="ident">correct_output</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-        <span class="ident">score_manager</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ScoreManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">TaskType::Batch</span>(<span class="ident">data</span>) =&gt; <span class="ident">batch::evaluate</span>(
-                <span class="ident">task</span>,
-                <span class="ident">eval</span>,
-                <span class="ident">subtask_id</span>,
-                <span class="ident">testcase_id</span>,
-                <span class="ident">source_file</span>,
-                <span class="ident">input</span>,
-                <span class="ident">validation_handle</span>,
-                <span class="ident">correct_output</span>,
-                <span class="ident">score_manager</span>,
-                <span class="ident">data</span>,
+        task: <span class="kw-2">&amp;</span>IOITask,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        subtask_id: SubtaskId,
+        testcase_id: TestcaseId,
+        source_file: <span class="kw-2">&amp;</span>SourceFile,
+        input: FileUuid,
+        validation_handle: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+        correct_output: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+        score_manager: Arc&lt;Mutex&lt;ScoreManager&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            TaskType::Batch(data) =&gt; batch::evaluate(
+                task,
+                eval,
+                subtask_id,
+                testcase_id,
+                source_file,
+                input,
+                validation_handle,
+                correct_output,
+                score_manager,
+                data,
             ),
-            <span class="ident">TaskType::Communication</span>(<span class="ident">data</span>) =&gt; <span class="ident">communication::evaluate</span>(
-                <span class="ident">task</span>,
-                <span class="ident">eval</span>,
-                <span class="ident">subtask_id</span>,
-                <span class="ident">testcase_id</span>,
-                <span class="ident">source_file</span>,
-                <span class="ident">input</span>,
-                <span class="ident">validation_handle</span>,
-                <span class="ident">correct_output</span>,
-                <span class="ident">score_manager</span>,
-                <span class="ident">data</span>,
+            TaskType::Communication(data) =&gt; communication::evaluate(
+                task,
+                eval,
+                subtask_id,
+                testcase_id,
+                source_file,
+                input,
+                validation_handle,
+                correct_output,
+                score_manager,
+                data,
             ),
-            <span class="ident">TaskType::None</span> =&gt; <span class="prelude-val">Ok</span>(()),
+            TaskType::None =&gt; <span class="prelude-val">Ok</span>(()),
         }
     }
 
-    <span class="doccomment">/// Add to the DAG more executions based on the current task type.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For example this will force the compilation of the checker in a batch task.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">prepare_dag</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">TaskType::Batch</span>(<span class="ident">batch</span>) =&gt; <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">batch</span>.<span class="ident">checker</span> {
-                <span class="ident">Checker::Custom</span>(<span class="ident">checker</span>) =&gt; {
-                    <span class="ident">checker</span>.<span class="ident">prepare</span>(<span class="ident">eval</span>)<span class="question-mark">?</span>;
+    <span class="doccomment">/// Add to the DAG more executions based on the current task type.
+    ///
+    /// For example this will force the compilation of the checker in a batch task.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>prepare_dag(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            TaskType::Batch(batch) =&gt; <span class="kw">match </span><span class="kw-2">&amp;</span>batch.checker {
+                Checker::Custom(checker) =&gt; {
+                    checker.prepare(eval)<span class="question-mark">?</span>;
                 }
-                <span class="ident">Checker::WhiteDiff</span> =&gt; {}
+                Checker::WhiteDiff =&gt; {}
             },
-            <span class="ident">TaskType::Communication</span>(<span class="ident">communication</span>) =&gt; {
-                <span class="ident">communication</span>.<span class="ident">manager</span>.<span class="ident">prepare</span>(<span class="ident">eval</span>)<span class="question-mark">?</span>;
+            TaskType::Communication(communication) =&gt; {
+                communication.manager.prepare(eval)<span class="question-mark">?</span>;
             }
-            <span class="ident">TaskType::None</span> =&gt; {}
+            TaskType::None =&gt; {}
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

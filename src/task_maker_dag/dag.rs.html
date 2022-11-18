@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-dag/src/dag.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_dag/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-dag/src/dag.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_dag/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -611,618 +611,618 @@
 <span id="611">611</span>
 <span id="612">612</span>
 <span id="613">613</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::{HashMap, HashSet};
+<span class="kw">use </span>std::path::PathBuf;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">use </span>anyhow::{bail, Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
 
-<span class="kw">use</span> <span class="ident">task_maker_store</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_store::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::file</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::file::<span class="kw-2">*</span>;
+<span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// The setting of the cache level.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CacheMode</span> {
-    <span class="doccomment">/// Use the cache as much as possible.</span>
-    <span class="ident">Everything</span>,
-    <span class="doccomment">/// Never use the cache.</span>
-    <span class="ident">Nothing</span>,
-    <span class="doccomment">/// Use the cache except for these tags.</span>
-    <span class="ident">Except</span>(<span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">ExecutionTag</span><span class="op">&gt;</span>),
+<span class="doccomment">/// The setting of the cache level.
+</span><span class="attribute">#[derive(PartialEq, Eq, Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub enum </span>CacheMode {
+    <span class="doccomment">/// Use the cache as much as possible.
+    </span>Everything,
+    <span class="doccomment">/// Never use the cache.
+    </span>Nothing,
+    <span class="doccomment">/// Use the cache except for these tags.
+    </span>Except(HashSet&lt;ExecutionTag&gt;),
 }
 
-<span class="doccomment">/// Configuration setting of an `ExecutionDAG`, some of the values set here will be inherited in the</span>
-<span class="doccomment">/// configuration of the executions added.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutionDAGConfig</span> {
-    <span class="doccomment">/// Keep the sandbox directory of each execution.</span>
-    <span class="kw">pub</span> <span class="ident">keep_sandboxes</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// Do not write any file inside the task directory. This works by inhibiting the calls to</span>
-    <span class="doccomment">/// `write_file_to`, for this reason only the files added _after_ setting this value to `true`</span>
-    <span class="doccomment">/// will be discarded.</span>
-    <span class="kw">pub</span> <span class="ident">dry_run</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The cache mode for this DAG.</span>
-    <span class="kw">pub</span> <span class="ident">cache_mode</span>: <span class="ident">CacheMode</span>,
-    <span class="doccomment">/// Extra time to give to the sandbox before killing the process, in seconds.</span>
-    <span class="kw">pub</span> <span class="ident">extra_time</span>: <span class="ident">f64</span>,
-    <span class="doccomment">/// Extra memory to give to the sandbox before killing the process, in KiB.</span>
-    <span class="kw">pub</span> <span class="ident">extra_memory</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// Whether to copy the executables of the compilation inside their default destinations.</span>
-    <span class="kw">pub</span> <span class="ident">copy_exe</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// Whether to copy the log files of some interesting executions.</span>
-    <span class="kw">pub</span> <span class="ident">copy_logs</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// Priority of this DAG.</span>
-    <span class="kw">pub</span> <span class="ident">priority</span>: <span class="ident">DagPriority</span>,
+<span class="doccomment">/// Configuration setting of an `ExecutionDAG`, some of the values set here will be inherited in the
+/// configuration of the executions added.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>ExecutionDAGConfig {
+    <span class="doccomment">/// Keep the sandbox directory of each execution.
+    </span><span class="kw">pub </span>keep_sandboxes: bool,
+    <span class="doccomment">/// Do not write any file inside the task directory. This works by inhibiting the calls to
+    /// `write_file_to`, for this reason only the files added _after_ setting this value to `true`
+    /// will be discarded.
+    </span><span class="kw">pub </span>dry_run: bool,
+    <span class="doccomment">/// The cache mode for this DAG.
+    </span><span class="kw">pub </span>cache_mode: CacheMode,
+    <span class="doccomment">/// Extra time to give to the sandbox before killing the process, in seconds.
+    </span><span class="kw">pub </span>extra_time: f64,
+    <span class="doccomment">/// Extra memory to give to the sandbox before killing the process, in KiB.
+    </span><span class="kw">pub </span>extra_memory: u64,
+    <span class="doccomment">/// Whether to copy the executables of the compilation inside their default destinations.
+    </span><span class="kw">pub </span>copy_exe: bool,
+    <span class="doccomment">/// Whether to copy the log files of some interesting executions.
+    </span><span class="kw">pub </span>copy_logs: bool,
+    <span class="doccomment">/// Priority of this DAG.
+    </span><span class="kw">pub </span>priority: DagPriority,
 }
 
-<span class="doccomment">/// A wrapper around a `File` provided by the client, this means that the client knows the</span>
-<span class="doccomment">/// `FileStoreKey` and the path to that file if it&#39;s local, or it&#39;s content if it&#39;s generated.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ProvidedFile</span> {
-    <span class="doccomment">/// A file that is provided by the disk, knowing its path.</span>
-    <span class="ident">LocalFile</span> {
-        <span class="doccomment">/// The file handle.</span>
-        <span class="ident">file</span>: <span class="ident">File</span>,
-        <span class="doccomment">/// The key of the file for the lookup in the `FileStore`.</span>
-        <span class="ident">key</span>: <span class="ident">FileStoreKey</span>,
-        <span class="doccomment">/// Path to the file in the client.</span>
-        <span class="ident">local_path</span>: <span class="ident">PathBuf</span>,
+<span class="doccomment">/// A wrapper around a `File` provided by the client, this means that the client knows the
+/// `FileStoreKey` and the path to that file if it&#39;s local, or it&#39;s content if it&#39;s generated.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub enum </span>ProvidedFile {
+    <span class="doccomment">/// A file that is provided by the disk, knowing its path.
+    </span>LocalFile {
+        <span class="doccomment">/// The file handle.
+        </span>file: File,
+        <span class="doccomment">/// The key of the file for the lookup in the `FileStore`.
+        </span>key: FileStoreKey,
+        <span class="doccomment">/// Path to the file in the client.
+        </span>local_path: PathBuf,
     },
-    <span class="doccomment">/// A file that is provided from a in-memory buffer.</span>
-    <span class="ident">Content</span> {
-        <span class="doccomment">/// The file handle.</span>
-        <span class="ident">file</span>: <span class="ident">File</span>,
-        <span class="doccomment">/// The key of the file for the lookup in the `FileStore`.</span>
-        <span class="ident">key</span>: <span class="ident">FileStoreKey</span>,
-        <span class="doccomment">/// The content of the file.</span>
-        <span class="ident">content</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// A file that is provided from a in-memory buffer.
+    </span>Content {
+        <span class="doccomment">/// The file handle.
+        </span>file: File,
+        <span class="doccomment">/// The key of the file for the lookup in the `FileStore`.
+        </span>key: FileStoreKey,
+        <span class="doccomment">/// The content of the file.
+        </span>content: Vec&lt;u8&gt;,
     },
 }
 
-<span class="doccomment">/// Serializable part of the execution DAG: everything except the callbacks (which are not</span>
-<span class="doccomment">/// serializable).</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutionDAGData</span> {
-    <span class="doccomment">/// All the files provided by the client.</span>
-    <span class="kw">pub</span> <span class="ident">provided_files</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">ProvidedFile</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// All the executions to run.</span>
-    <span class="kw">pub</span> <span class="ident">execution_groups</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ExecutionGroupUuid</span>, <span class="ident">ExecutionGroup</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The configuration of this DAG.</span>
-    <span class="kw">pub</span> <span class="ident">config</span>: <span class="ident">ExecutionDAGConfig</span>,
+<span class="doccomment">/// Serializable part of the execution DAG: everything except the callbacks (which are not
+/// serializable).
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, Clone)]
+</span><span class="kw">pub struct </span>ExecutionDAGData {
+    <span class="doccomment">/// All the files provided by the client.
+    </span><span class="kw">pub </span>provided_files: HashMap&lt;FileUuid, ProvidedFile&gt;,
+    <span class="doccomment">/// All the executions to run.
+    </span><span class="kw">pub </span>execution_groups: HashMap&lt;ExecutionGroupUuid, ExecutionGroup&gt;,
+    <span class="doccomment">/// The configuration of this DAG.
+    </span><span class="kw">pub </span>config: ExecutionDAGConfig,
 }
 
-<span class="doccomment">/// The set of callbacks of a DAG.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutionDAGCallbacks</span> {
-    <span class="doccomment">/// The callbacks of the executions.</span>
-    <span class="kw">pub</span> <span class="ident">execution_callbacks</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ExecutionUuid</span>, <span class="ident">ExecutionCallbacks</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The callbacks of the files.</span>
-    <span class="kw">pub</span> <span class="ident">file_callbacks</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileCallbacks</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Set of the handles of the files that should be sent to the client as soon as possible. The</span>
-    <span class="doccomment">/// others will be sent at the end of the evaluation. Note that sending big files during the</span>
-    <span class="doccomment">/// evaluation can cause performance degradations.</span>
-    <span class="kw">pub</span> <span class="ident">urgent_files</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The set of callbacks of a DAG.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>ExecutionDAGCallbacks {
+    <span class="doccomment">/// The callbacks of the executions.
+    </span><span class="kw">pub </span>execution_callbacks: HashMap&lt;ExecutionUuid, ExecutionCallbacks&gt;,
+    <span class="doccomment">/// The callbacks of the files.
+    </span><span class="kw">pub </span>file_callbacks: HashMap&lt;FileUuid, FileCallbacks&gt;,
+    <span class="doccomment">/// Set of the handles of the files that should be sent to the client as soon as possible. The
+    /// others will be sent at the end of the evaluation. Note that sending big files during the
+    /// evaluation can cause performance degradations.
+    </span><span class="kw">pub </span>urgent_files: HashSet&lt;FileUuid&gt;,
 }
 
-<span class="doccomment">/// A computation DAG, this is not serializable because it contains the callbacks of the client.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutionDAG</span> {
-    <span class="doccomment">/// Serializable part of the DAG with all the executions and files.</span>
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">ExecutionDAGData</span>,
-    <span class="doccomment">/// The list of callbacks for the items of the DAG.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Upon cloning this DAG, the callbacks won&#39;t be available anymore. This is an Option to check</span>
-    <span class="doccomment">/// that the callbacks are never accessed on the clones.</span>
-    <span class="kw">pub</span> <span class="ident">callbacks</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionDAGCallbacks</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A computation DAG, this is not serializable because it contains the callbacks of the client.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>ExecutionDAG {
+    <span class="doccomment">/// Serializable part of the DAG with all the executions and files.
+    </span><span class="kw">pub </span>data: ExecutionDAGData,
+    <span class="doccomment">/// The list of callbacks for the items of the DAG.
+    ///
+    /// Upon cloning this DAG, the callbacks won&#39;t be available anymore. This is an Option to check
+    /// that the callbacks are never accessed on the clones.
+    </span><span class="kw">pub </span>callbacks: <span class="prelude-ty">Option</span>&lt;ExecutionDAGCallbacks&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">ExecutionDAG</span> {
-    <span class="doccomment">/// Create an empty ExecutionDAG, without files and executions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">ExecutionDAG</span> {
-        <span class="ident">ExecutionDAG</span> {
-            <span class="ident">data</span>: <span class="ident">ExecutionDAGData</span> {
-                <span class="ident">provided_files</span>: <span class="ident">HashMap::new</span>(),
-                <span class="ident">execution_groups</span>: <span class="ident">HashMap::new</span>(),
-                <span class="ident">config</span>: <span class="ident">ExecutionDAGConfig::new</span>(),
+<span class="kw">impl </span>ExecutionDAG {
+    <span class="doccomment">/// Create an empty ExecutionDAG, without files and executions.
+    </span><span class="kw">pub fn </span>new() -&gt; ExecutionDAG {
+        ExecutionDAG {
+            data: ExecutionDAGData {
+                provided_files: HashMap::new(),
+                execution_groups: HashMap::new(),
+                config: ExecutionDAGConfig::new(),
             },
-            <span class="ident">callbacks</span>: <span class="prelude-val">Some</span>(<span class="ident">ExecutionDAGCallbacks</span> {
-                <span class="ident">execution_callbacks</span>: <span class="ident">HashMap::new</span>(),
-                <span class="ident">file_callbacks</span>: <span class="ident">HashMap::new</span>(),
-                <span class="ident">urgent_files</span>: <span class="ident">HashSet::new</span>(),
+            callbacks: <span class="prelude-val">Some</span>(ExecutionDAGCallbacks {
+                execution_callbacks: HashMap::new(),
+                file_callbacks: HashMap::new(),
+                urgent_files: HashSet::new(),
             }),
         }
     }
 
-    <span class="doccomment">/// Provide a file for the computation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">provide_file</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">File</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">provided_files</span>.<span class="ident">insert</span>(
-            <span class="ident">file</span>.<span class="ident">uuid</span>,
-            <span class="ident">ProvidedFile::LocalFile</span> {
-                <span class="ident">file</span>,
-                <span class="ident">key</span>: <span class="ident">FileStoreKey::from_file</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)
-                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to compute file key of {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>,
-                <span class="ident">local_path</span>: <span class="ident">path</span>,
+    <span class="doccomment">/// Provide a file for the computation.
+    </span><span class="kw">pub fn </span>provide_file&lt;P: Into&lt;PathBuf&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: File, path: P) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>path = path.into();
+        <span class="self">self</span>.data.provided_files.insert(
+            file.uuid,
+            ProvidedFile::LocalFile {
+                file,
+                key: FileStoreKey::from_file(<span class="kw-2">&amp;</span>path)
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to compute file key of {}&quot;</span>, path.display()))<span class="question-mark">?</span>,
+                local_path: path,
             },
         );
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Provide the content of a file for the computation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">provide_content</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">File</span>, <span class="ident">content</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">provided_files</span>.<span class="ident">insert</span>(
-            <span class="ident">file</span>.<span class="ident">uuid</span>,
-            <span class="ident">ProvidedFile::Content</span> {
-                <span class="ident">file</span>,
-                <span class="ident">key</span>: <span class="ident">FileStoreKey::from_content</span>(<span class="kw-2">&amp;</span><span class="ident">content</span>),
-                <span class="ident">content</span>,
+    <span class="doccomment">/// Provide the content of a file for the computation.
+    </span><span class="kw">pub fn </span>provide_content(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: File, content: Vec&lt;u8&gt;) {
+        <span class="self">self</span>.data.provided_files.insert(
+            file.uuid,
+            ProvidedFile::Content {
+                file,
+                key: FileStoreKey::from_content(<span class="kw-2">&amp;</span>content),
+                content,
             },
         );
     }
 
-    <span class="doccomment">/// Add an execution to the DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_execution</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">execution</span>: <span class="ident">Execution</span>) {
-        <span class="ident">execution</span>.<span class="ident">config</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">ExecutionGroup::new</span>(<span class="ident">execution</span>.<span class="ident">description</span>.<span class="ident">clone</span>());
-        <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">execution</span>);
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">execution_groups</span>.<span class="ident">insert</span>(<span class="ident">group</span>.<span class="ident">uuid</span>, <span class="ident">group</span>);
+    <span class="doccomment">/// Add an execution to the DAG.
+    </span><span class="kw">pub fn </span>add_execution(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw-2">mut </span>execution: Execution) {
+        execution.config = <span class="self">self</span>.data.config.clone();
+        <span class="kw">let </span><span class="kw-2">mut </span>group = ExecutionGroup::new(execution.description.clone());
+        group.add_execution(execution);
+        <span class="self">self</span>.data.execution_groups.insert(group.uuid, group);
     }
 
-    <span class="doccomment">/// Add an execution group to the DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_execution_group</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">group</span>: <span class="ident">ExecutionGroup</span>) {
-        <span class="kw">for</span> <span class="ident">exec</span> <span class="kw">in</span> <span class="ident">group</span>.<span class="ident">executions</span>.<span class="ident">iter_mut</span>() {
-            <span class="ident">exec</span>.<span class="ident">config</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">clone</span>();
+    <span class="doccomment">/// Add an execution group to the DAG.
+    </span><span class="kw">pub fn </span>add_execution_group(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw-2">mut </span>group: ExecutionGroup) {
+        <span class="kw">for </span>exec <span class="kw">in </span>group.executions.iter_mut() {
+            exec.config = <span class="self">self</span>.data.config.clone();
         }
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">execution_groups</span>.<span class="ident">insert</span>(<span class="ident">group</span>.<span class="ident">uuid</span>, <span class="ident">group</span>);
+        <span class="self">self</span>.data.execution_groups.insert(group.uuid, group);
     }
 
-    <span class="doccomment">/// When `file` is ready it will be written to `path`. The file must be present in the dag</span>
-    <span class="doccomment">/// before the evaluation starts.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the config `dry_run` is set to true the calls to this function are no-op.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the generation of the file fails (i.e. the `Execution` that produced that file was</span>
-    <span class="doccomment">/// unsuccessful) the file is **not** written.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_file_to</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>, <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">file</span>: <span class="ident">F</span>,
-        <span class="ident">path</span>: <span class="ident">P</span>,
-        <span class="ident">executable</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// When `file` is ready it will be written to `path`. The file must be present in the dag
+    /// before the evaluation starts.
+    ///
+    /// If the config `dry_run` is set to true the calls to this function are no-op.
+    ///
+    /// If the generation of the file fails (i.e. the `Execution` that produced that file was
+    /// unsuccessful) the file is **not** written.
+    </span><span class="kw">pub fn </span>write_file_to&lt;F: Into&lt;FileUuid&gt;, P: Into&lt;PathBuf&gt;&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        file: F,
+        path: P,
+        executable: bool,
     ) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">dry_run</span> {
-            <span class="self">self</span>.<span class="ident">file_callback</span>(<span class="ident">file</span>.<span class="ident">into</span>()).<span class="ident">write_to</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">WriteToCallback</span> {
-                <span class="ident">dest</span>: <span class="ident">path</span>.<span class="ident">into</span>(),
-                <span class="ident">executable</span>,
-                <span class="ident">allow_failure</span>: <span class="bool-val">false</span>,
+        <span class="kw">if </span>!<span class="self">self</span>.data.config.dry_run {
+            <span class="self">self</span>.file_callback(file.into()).write_to = <span class="prelude-val">Some</span>(WriteToCallback {
+                dest: path.into(),
+                executable,
+                allow_failure: <span class="bool-val">false</span>,
             });
         }
     }
 
-    <span class="doccomment">/// Same as `write_file_to` but allowing failures.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_file_to_allow_fail</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>, <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">file</span>: <span class="ident">F</span>,
-        <span class="ident">path</span>: <span class="ident">P</span>,
-        <span class="ident">executable</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Same as `write_file_to` but allowing failures.
+    </span><span class="kw">pub fn </span>write_file_to_allow_fail&lt;F: Into&lt;FileUuid&gt;, P: Into&lt;PathBuf&gt;&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        file: F,
+        path: P,
+        executable: bool,
     ) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">dry_run</span> {
-            <span class="self">self</span>.<span class="ident">file_callback</span>(<span class="ident">file</span>.<span class="ident">into</span>()).<span class="ident">write_to</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">WriteToCallback</span> {
-                <span class="ident">dest</span>: <span class="ident">path</span>.<span class="ident">into</span>(),
-                <span class="ident">executable</span>,
-                <span class="ident">allow_failure</span>: <span class="bool-val">true</span>,
+        <span class="kw">if </span>!<span class="self">self</span>.data.config.dry_run {
+            <span class="self">self</span>.file_callback(file.into()).write_to = <span class="prelude-val">Some</span>(WriteToCallback {
+                dest: path.into(),
+                executable,
+                allow_failure: <span class="bool-val">true</span>,
             });
         }
     }
 
-    <span class="doccomment">/// Call `callback` with the first `limit` bytes of the file when it&#39;s ready. The file must be</span>
-    <span class="doccomment">/// present in the DAG before the evaluation starts.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the generation of the file fails (i.e. the `Execution` that produced that file was</span>
-    <span class="doccomment">/// unsuccessful) the callback **is called** anyways with the content of the file, if any.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_file_content</span><span class="op">&lt;</span><span class="ident">G</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">G</span>, <span class="ident">limit</span>: <span class="ident">usize</span>, <span class="ident">callback</span>: <span class="ident">F</span>)
-    <span class="kw">where</span>
-        <span class="ident">F</span>: (<span class="ident">FnOnce</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="doccomment">/// Call `callback` with the first `limit` bytes of the file when it&#39;s ready. The file must be
+    /// present in the DAG before the evaluation starts.
+    ///
+    /// If the generation of the file fails (i.e. the `Execution` that produced that file was
+    /// unsuccessful) the callback **is called** anyways with the content of the file, if any.
+    </span><span class="kw">pub fn </span>get_file_content&lt;G: Into&lt;FileUuid&gt;, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: G, limit: usize, callback: F)
+    <span class="kw">where
+        </span>F: (FnOnce(Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;) + <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.<span class="ident">file_callback</span>(<span class="ident">file</span>.<span class="ident">into</span>()).<span class="ident">get_content</span> <span class="op">=</span> <span class="prelude-val">Some</span>((<span class="ident">limit</span>, <span class="ident">Box::new</span>(<span class="ident">callback</span>)));
+        <span class="self">self</span>.file_callback(file.into()).get_content = <span class="prelude-val">Some</span>((limit, Box::new(callback)));
     }
 
-    <span class="doccomment">/// Add a callback that will be called when the execution starts.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_execution_start</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">execution</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionUuid</span>, <span class="ident">callback</span>: <span class="ident">F</span>)
-    <span class="kw">where</span>
-        <span class="ident">F</span>: (<span class="ident">FnOnce</span>(<span class="ident">WorkerUuid</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="doccomment">/// Add a callback that will be called when the execution starts.
+    </span><span class="kw">pub fn </span>on_execution_start&lt;F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, execution: <span class="kw-2">&amp;</span>ExecutionUuid, callback: F)
+    <span class="kw">where
+        </span>F: (FnOnce(WorkerUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;) + <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.<span class="ident">execution_callback</span>(<span class="ident">execution</span>)
-            .<span class="ident">on_start</span>
-            .<span class="ident">push</span>(<span class="ident">Box::new</span>(<span class="ident">callback</span>));
+        <span class="self">self</span>.execution_callback(execution)
+            .on_start
+            .push(Box::new(callback));
     }
 
-    <span class="doccomment">/// Add a callback that will be called when the execution ends.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_execution_done</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">execution</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionUuid</span>, <span class="ident">callback</span>: <span class="ident">F</span>)
-    <span class="kw">where</span>
-        <span class="ident">F</span>: (<span class="ident">FnOnce</span>(<span class="ident">ExecutionResult</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="doccomment">/// Add a callback that will be called when the execution ends.
+    </span><span class="kw">pub fn </span>on_execution_done&lt;F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, execution: <span class="kw-2">&amp;</span>ExecutionUuid, callback: F)
+    <span class="kw">where
+        </span>F: (FnOnce(ExecutionResult) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;) + <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.<span class="ident">execution_callback</span>(<span class="ident">execution</span>)
-            .<span class="ident">on_done</span>
-            .<span class="ident">push</span>(<span class="ident">Box::new</span>(<span class="ident">callback</span>));
+        <span class="self">self</span>.execution_callback(execution)
+            .on_done
+            .push(Box::new(callback));
     }
 
-    <span class="doccomment">/// Add a callback that will be called when the execution is skipped.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_execution_skip</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">execution</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionUuid</span>, <span class="ident">callback</span>: <span class="ident">F</span>)
-    <span class="kw">where</span>
-        <span class="ident">F</span>: (<span class="ident">FnOnce</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="doccomment">/// Add a callback that will be called when the execution is skipped.
+    </span><span class="kw">pub fn </span>on_execution_skip&lt;F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, execution: <span class="kw-2">&amp;</span>ExecutionUuid, callback: F)
+    <span class="kw">where
+        </span>F: (FnOnce() -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;) + <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.<span class="ident">execution_callback</span>(<span class="ident">execution</span>)
-            .<span class="ident">on_skip</span>
-            .<span class="ident">push</span>(<span class="ident">Box::new</span>(<span class="ident">callback</span>));
+        <span class="self">self</span>.execution_callback(execution)
+            .on_skip
+            .push(Box::new(callback));
     }
 
-    <span class="doccomment">/// Get a mutable reference to the config of this DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">config_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAGConfig</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">config</span>
+    <span class="doccomment">/// Get a mutable reference to the config of this DAG.
+    </span><span class="kw">pub fn </span>config_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>ExecutionDAGConfig {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.data.config
     }
 
-    <span class="doccomment">/// Makes sure that a callback item exists for that file and returns a &amp;mut to it.</span>
-    <span class="kw">fn</span> <span class="ident">file_callback</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">FileCallbacks</span> {
-        <span class="self">self</span>.<span class="ident">callbacks</span>
-            .<span class="ident">as_mut</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;Cannot change callbacks after cloning&quot;</span>)
-            .<span class="ident">file_callbacks</span>
-            .<span class="ident">entry</span>(<span class="ident">file</span>.<span class="ident">into</span>())
-            .<span class="ident">or_default</span>()
+    <span class="doccomment">/// Makes sure that a callback item exists for that file and returns a &amp;mut to it.
+    </span><span class="kw">fn </span>file_callback&lt;F: Into&lt;FileUuid&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: F) -&gt; <span class="kw-2">&amp;mut </span>FileCallbacks {
+        <span class="self">self</span>.callbacks
+            .as_mut()
+            .expect(<span class="string">&quot;Cannot change callbacks after cloning&quot;</span>)
+            .file_callbacks
+            .entry(file.into())
+            .or_default()
     }
 
-    <span class="doccomment">/// Get the list of registered file callbacks.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">file_callbacks</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileCallbacks</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>
+    <span class="doccomment">/// Get the list of registered file callbacks.
+    </span><span class="kw">pub fn </span>file_callbacks(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>HashMap&lt;FileUuid, FileCallbacks&gt; {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.callbacks.as_mut().unwrap().file_callbacks
     }
 
-    <span class="doccomment">/// Makes sure that a callback item exists for that execution and returns a &amp;mut to it.</span>
-    <span class="kw">fn</span> <span class="ident">execution_callback</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">execution</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionUuid</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionCallbacks</span> {
-        <span class="self">self</span>.<span class="ident">callbacks</span>
-            .<span class="ident">as_mut</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;Cannot change callbacks after cloning&quot;</span>)
-            .<span class="ident">execution_callbacks</span>
-            .<span class="ident">entry</span>(<span class="kw-2">*</span><span class="ident">execution</span>)
-            .<span class="ident">or_default</span>()
+    <span class="doccomment">/// Makes sure that a callback item exists for that execution and returns a &amp;mut to it.
+    </span><span class="kw">fn </span>execution_callback(<span class="kw-2">&amp;mut </span><span class="self">self</span>, execution: <span class="kw-2">&amp;</span>ExecutionUuid) -&gt; <span class="kw-2">&amp;mut </span>ExecutionCallbacks {
+        <span class="self">self</span>.callbacks
+            .as_mut()
+            .expect(<span class="string">&quot;Cannot change callbacks after cloning&quot;</span>)
+            .execution_callbacks
+            .entry(<span class="kw-2">*</span>execution)
+            .or_default()
     }
 
-    <span class="doccomment">/// Get the list of registered execution callbacks.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execution_callbacks</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ExecutionUuid</span>, <span class="ident">ExecutionCallbacks</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">execution_callbacks</span>
+    <span class="doccomment">/// Get the list of registered execution callbacks.
+    </span><span class="kw">pub fn </span>execution_callbacks(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>HashMap&lt;ExecutionUuid, ExecutionCallbacks&gt; {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.callbacks.as_mut().unwrap().execution_callbacks
     }
 
-    <span class="doccomment">/// Mark a file as urgent. The server will try to send it as soon as possible.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">urgent_file</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) {
-        <span class="self">self</span>.<span class="ident">callbacks</span>
-            .<span class="ident">as_mut</span>()
-            .<span class="ident">expect</span>(<span class="string">&quot;Cannot change callbacks after cloning&quot;</span>)
-            .<span class="ident">urgent_files</span>
-            .<span class="ident">insert</span>(<span class="ident">file</span>.<span class="ident">into</span>());
+    <span class="doccomment">/// Mark a file as urgent. The server will try to send it as soon as possible.
+    </span><span class="kw">pub fn </span>urgent_file&lt;F: Into&lt;FileUuid&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: F) {
+        <span class="self">self</span>.callbacks
+            .as_mut()
+            .expect(<span class="string">&quot;Cannot change callbacks after cloning&quot;</span>)
+            .urgent_files
+            .insert(file.into());
     }
 
-    <span class="doccomment">/// Get the list of urgent files.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">urgent_files</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">urgent_files</span>
+    <span class="doccomment">/// Get the list of urgent files.
+    </span><span class="kw">pub fn </span>urgent_files(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>HashSet&lt;FileUuid&gt; {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.callbacks.as_mut().unwrap().urgent_files
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">ExecutionDAG</span> {
-    <span class="doccomment">/// Clone this `ExecutionDAG`. The callbacks are not cloned, and trying to access them will</span>
-    <span class="doccomment">/// result in a panic.</span>
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">clone</span>(),
-            <span class="ident">callbacks</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl </span>Clone <span class="kw">for </span>ExecutionDAG {
+    <span class="doccomment">/// Clone this `ExecutionDAG`. The callbacks are not cloned, and trying to access them will
+    /// result in a panic.
+    </span><span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            data: <span class="self">self</span>.data.clone(),
+            callbacks: <span class="prelude-val">None</span>,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ExecutionDAGConfig</span> {
-    <span class="doccomment">/// Make a new `ExecutionDAGConfig`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">ExecutionDAGConfig</span> {
-        <span class="ident">ExecutionDAGConfig</span> {
-            <span class="ident">keep_sandboxes</span>: <span class="bool-val">false</span>,
-            <span class="ident">dry_run</span>: <span class="bool-val">false</span>,
-            <span class="ident">cache_mode</span>: <span class="ident">CacheMode::Everything</span>,
-            <span class="ident">extra_time</span>: <span class="number">0.5</span>,
-            <span class="ident">extra_memory</span>: <span class="number">8</span> <span class="op">*</span> <span class="number">1024</span>, <span class="comment">// 8 MiB</span>
-            <span class="ident">copy_exe</span>: <span class="bool-val">false</span>,
-            <span class="ident">copy_logs</span>: <span class="bool-val">false</span>,
-            <span class="ident">priority</span>: <span class="number">0</span>,
+<span class="kw">impl </span>ExecutionDAGConfig {
+    <span class="doccomment">/// Make a new `ExecutionDAGConfig`.
+    </span><span class="kw">pub fn </span>new() -&gt; ExecutionDAGConfig {
+        ExecutionDAGConfig {
+            keep_sandboxes: <span class="bool-val">false</span>,
+            dry_run: <span class="bool-val">false</span>,
+            cache_mode: CacheMode::Everything,
+            extra_time: <span class="number">0.5</span>,
+            extra_memory: <span class="number">8 </span>* <span class="number">1024</span>, <span class="comment">// 8 MiB
+            </span>copy_exe: <span class="bool-val">false</span>,
+            copy_logs: <span class="bool-val">false</span>,
+            priority: <span class="number">0</span>,
         }
     }
 
-    <span class="doccomment">/// Whether to keep the sandbox directory of each execution.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">keep_sandboxes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">keep_sandboxes</span>: <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">keep_sandboxes</span> <span class="op">=</span> <span class="ident">keep_sandboxes</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Whether to keep the sandbox directory of each execution.
+    </span><span class="kw">pub fn </span>keep_sandboxes(<span class="kw-2">&amp;mut </span><span class="self">self</span>, keep_sandboxes: bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.keep_sandboxes = keep_sandboxes;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Whether to ignore all the subsequent calls to `write_file_to`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dry_run</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dry_run</span>: <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">dry_run</span> <span class="op">=</span> <span class="ident">dry_run</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Whether to ignore all the subsequent calls to `write_file_to`.
+    </span><span class="kw">pub fn </span>dry_run(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dry_run: bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.dry_run = dry_run;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Set the cache mode for the executions of this DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cache_mode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cache_mode</span>: <span class="ident">CacheMode</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">cache_mode</span> <span class="op">=</span> <span class="ident">cache_mode</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Set the cache mode for the executions of this DAG.
+    </span><span class="kw">pub fn </span>cache_mode(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_mode: CacheMode) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.cache_mode = cache_mode;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Set the extra time to give to the executions before being killed by the sandbox.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extra_time</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">extra_time</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="macro">assert!</span>(<span class="ident">extra_time</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0.0</span>);
-        <span class="self">self</span>.<span class="ident">extra_time</span> <span class="op">=</span> <span class="ident">extra_time</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Set the extra time to give to the executions before being killed by the sandbox.
+    </span><span class="kw">pub fn </span>extra_time(<span class="kw-2">&amp;mut </span><span class="self">self</span>, extra_time: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="macro">assert!</span>(extra_time &gt;= <span class="number">0.0</span>);
+        <span class="self">self</span>.extra_time = extra_time;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Set the extra memory to give to the executions before being killed by the sandbox.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extra_memory</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">extra_memory</span>: <span class="ident">u64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">extra_memory</span> <span class="op">=</span> <span class="ident">extra_memory</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Set the extra memory to give to the executions before being killed by the sandbox.
+    </span><span class="kw">pub fn </span>extra_memory(<span class="kw-2">&amp;mut </span><span class="self">self</span>, extra_memory: u64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.extra_memory = extra_memory;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Set whether to copy the executables of the compilation inside their default destinations.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_exe</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">copy_exe</span>: <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">copy_exe</span> <span class="op">=</span> <span class="ident">copy_exe</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Set whether to copy the executables of the compilation inside their default destinations.
+    </span><span class="kw">pub fn </span>copy_exe(<span class="kw-2">&amp;mut </span><span class="self">self</span>, copy_exe: bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.copy_exe = copy_exe;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Set whether to copy the log files of some interesting executions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_logs</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">copy_logs</span>: <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">copy_logs</span> <span class="op">=</span> <span class="ident">copy_logs</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Set whether to copy the log files of some interesting executions.
+    </span><span class="kw">pub fn </span>copy_logs(<span class="kw-2">&amp;mut </span><span class="self">self</span>, copy_logs: bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.copy_logs = copy_logs;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Set the priority of this DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">priority</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">priority</span>: <span class="ident">DagPriority</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">priority</span> <span class="op">=</span> <span class="ident">priority</span>;
-        <span class="self">self</span>
+    <span class="doccomment">/// Set the priority of this DAG.
+    </span><span class="kw">pub fn </span>priority(<span class="kw-2">&amp;mut </span><span class="self">self</span>, priority: DagPriority) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.priority = priority;
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl </span>Default <span class="kw">for </span>ExecutionDAGConfig {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">ExecutionDAGConfig</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>()
+<span class="kw">impl </span>Default <span class="kw">for </span>ExecutionDAG {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">ExecutionDAG</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>()
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">CacheMode</span> {
-    <span class="doccomment">/// Make a `CacheMode` from the command line arguments:</span>
-    <span class="doccomment">/// * `None`: cache enabled</span>
-    <span class="doccomment">/// * `Some(None)`: cache disabled</span>
-    <span class="doccomment">/// * `Some(Some(comma separated list))`: cache disabled for the specified tags</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::option_option</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_from</span>(
-        <span class="ident">conf</span>: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">valid_tags</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>],
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CacheMode</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">conf</span> {
-            <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">CacheMode::Everything</span>),
-            <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">CacheMode::Nothing</span>),
-            <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(<span class="ident">list</span>)) =&gt; {
-                <span class="kw">let</span> <span class="ident">tags</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">list</span>.<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>).<span class="ident">map</span>(<span class="ident">ExecutionTag::from</span>).<span class="ident">collect</span>();
-                <span class="kw">for</span> <span class="ident">tag</span> <span class="kw">in</span> <span class="ident">tags</span>.<span class="ident">iter</span>() {
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">valid_tags</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">tag</span>.<span class="ident">name</span>) {
+<span class="kw">impl </span>CacheMode {
+    <span class="doccomment">/// Make a `CacheMode` from the command line arguments:
+    /// * `None`: cache enabled
+    /// * `Some(None)`: cache disabled
+    /// * `Some(Some(comma separated list))`: cache disabled for the specified tags
+    </span><span class="attribute">#[allow(clippy::option_option)]
+    </span><span class="kw">pub fn </span>try_from(
+        conf: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Option</span>&lt;String&gt;&gt;,
+        valid_tags: <span class="kw-2">&amp;</span>[String],
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;CacheMode, Error&gt; {
+        <span class="kw">match </span>conf {
+            <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Ok</span>(CacheMode::Everything),
+            <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Ok</span>(CacheMode::Nothing),
+            <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(list)) =&gt; {
+                <span class="kw">let </span>tags: HashSet&lt;<span class="kw">_</span>&gt; = list.split(<span class="string">&#39;,&#39;</span>).map(ExecutionTag::from).collect();
+                <span class="kw">for </span>tag <span class="kw">in </span>tags.iter() {
+                    <span class="kw">if </span>!valid_tags.contains(<span class="kw-2">&amp;</span>tag.name) {
                         <span class="macro">bail!</span>(
                             <span class="string">&quot;Invalid cache mode: {} (valid are: {})&quot;</span>,
-                            <span class="ident">tag</span>.<span class="ident">name</span>,
-                            <span class="ident">valid_tags</span>.<span class="ident">join</span>(<span class="string">&quot;, &quot;</span>)
+                            tag.name,
+                            valid_tags.join(<span class="string">&quot;, &quot;</span>)
                         );
                     }
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">CacheMode::Except</span>(<span class="ident">tags</span>))
+                <span class="prelude-val">Ok</span>(CacheMode::Except(tags))
             }
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">std::path::Path</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span>std::path::Path;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_provide_file</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">file_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">file_path</span>, <span class="string">&quot;bar&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">file_path</span>).<span class="ident">unwrap</span>();
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">provided_files</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>] {
-            <span class="ident">ProvidedFile::LocalFile</span> {
-                <span class="ident">file</span>, <span class="ident">local_path</span>, ..
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_provide_file() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>file_path = tmpdir.path().join(<span class="string">&quot;foo&quot;</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>file_path, <span class="string">&quot;bar&quot;</span>).unwrap();
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.provide_file(file.clone(), <span class="kw-2">&amp;</span>file_path).unwrap();
+        <span class="kw">match </span><span class="kw-2">&amp;</span>dag.data.provided_files[<span class="kw-2">&amp;</span>file.uuid] {
+            ProvidedFile::LocalFile {
+                file, local_path, ..
             } =&gt; {
-                <span class="macro">assert_eq!</span>(<span class="string">&quot;file&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">description</span>);
-                <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="ident">file_path</span>, <span class="ident">local_path</span>);
+                <span class="macro">assert_eq!</span>(<span class="string">&quot;file&quot;</span>, <span class="kw-2">&amp;</span>file.description);
+                <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>file_path, local_path);
             }
-            <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid provided file type&quot;</span>),
+            <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid provided file type&quot;</span>),
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_provide_file_not_existing</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">dag</span>.<span class="ident">provide_file</span>(<span class="ident">file</span>, <span class="string">&quot;/nope&quot;</span>).<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_provide_file_not_existing() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        <span class="macro">assert!</span>(dag.provide_file(file, <span class="string">&quot;/nope&quot;</span>).is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_provide_content</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">provide_content</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="string">b&quot;ciao&quot;</span>.<span class="ident">to_vec</span>());
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">provided_files</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>] {
-            <span class="ident">ProvidedFile::Content</span> { <span class="ident">file</span>, <span class="ident">content</span>, .. } =&gt; {
-                <span class="macro">assert_eq!</span>(<span class="string">&quot;file&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">description</span>);
-                <span class="macro">assert_eq!</span>(<span class="string">b&quot;ciao&quot;</span>, <span class="ident">content</span>.<span class="ident">as_slice</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_provide_content() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.provide_content(file.clone(), <span class="string">b&quot;ciao&quot;</span>.to_vec());
+        <span class="kw">match </span><span class="kw-2">&amp;</span>dag.data.provided_files[<span class="kw-2">&amp;</span>file.uuid] {
+            ProvidedFile::Content { file, content, .. } =&gt; {
+                <span class="macro">assert_eq!</span>(<span class="string">&quot;file&quot;</span>, <span class="kw-2">&amp;</span>file.description);
+                <span class="macro">assert_eq!</span>(<span class="string">b&quot;ciao&quot;</span>, content.as_slice());
             }
-            <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid provided file type&quot;</span>),
+            <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid provided file type&quot;</span>),
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_add_execution</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="ident">dag</span>.<span class="ident">config_mut</span>().<span class="ident">extra_time</span>(<span class="number">42.0</span>);
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
-        <span class="kw">let</span> <span class="ident">group_uuid</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">execution_groups</span>.<span class="ident">keys</span>().<span class="ident">next</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(<span class="string">&quot;exec&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">execution_groups</span>[<span class="ident">group_uuid</span>].<span class="ident">description</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_add_execution() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        dag.config_mut().extra_time(<span class="number">42.0</span>);
+        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        dag.add_execution(exec);
+        <span class="kw">let </span>group_uuid = dag.data.execution_groups.keys().next().unwrap();
+        <span class="macro">assert_eq!</span>(<span class="string">&quot;exec&quot;</span>, <span class="kw-2">&amp;</span>dag.data.execution_groups[group_uuid].description);
         <span class="macro">assert_abs_diff_eq!</span>(
             <span class="kw-2">&amp;</span><span class="number">42.0</span>,
-            <span class="kw-2">&amp;</span><span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">execution_groups</span>[<span class="ident">group_uuid</span>].<span class="ident">config</span>().<span class="ident">extra_time</span>
+            <span class="kw-2">&amp;</span>dag.data.execution_groups[group_uuid].config().extra_time
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_write_file_to</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="ident">write_to</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>]
-            .<span class="ident">write_to</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">Path::new</span>(<span class="string">&quot;foo&quot;</span>), <span class="ident">write_to</span>.<span class="ident">dest</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">write_to</span>.<span class="ident">allow_failure</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">write_to</span>.<span class="ident">executable</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_write_file_to() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.write_file_to(file.clone(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span>write_to = dag.callbacks.as_mut().unwrap().file_callbacks[<span class="kw-2">&amp;</span>file.uuid]
+            .write_to
+            .as_ref()
+            .unwrap();
+        <span class="macro">assert_eq!</span>(Path::new(<span class="string">&quot;foo&quot;</span>), write_to.dest);
+        <span class="macro">assert!</span>(!write_to.allow_failure);
+        <span class="macro">assert!</span>(!write_to.executable);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_write_file_to_executable</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">true</span>);
-        <span class="kw">let</span> <span class="ident">write_to</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>]
-            .<span class="ident">write_to</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">Path::new</span>(<span class="string">&quot;foo&quot;</span>), <span class="ident">write_to</span>.<span class="ident">dest</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">write_to</span>.<span class="ident">allow_failure</span>);
-        <span class="macro">assert!</span>(<span class="ident">write_to</span>.<span class="ident">executable</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_write_file_to_executable() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.write_file_to(file.clone(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">true</span>);
+        <span class="kw">let </span>write_to = dag.callbacks.as_mut().unwrap().file_callbacks[<span class="kw-2">&amp;</span>file.uuid]
+            .write_to
+            .as_ref()
+            .unwrap();
+        <span class="macro">assert_eq!</span>(Path::new(<span class="string">&quot;foo&quot;</span>), write_to.dest);
+        <span class="macro">assert!</span>(!write_to.allow_failure);
+        <span class="macro">assert!</span>(write_to.executable);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_write_file_to_allow_fail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to_allow_fail</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="ident">write_to</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>]
-            .<span class="ident">write_to</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">Path::new</span>(<span class="string">&quot;foo&quot;</span>), <span class="ident">write_to</span>.<span class="ident">dest</span>);
-        <span class="macro">assert!</span>(<span class="ident">write_to</span>.<span class="ident">allow_failure</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">write_to</span>.<span class="ident">executable</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_write_file_to_allow_fail() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.write_file_to_allow_fail(file.clone(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span>write_to = dag.callbacks.as_mut().unwrap().file_callbacks[<span class="kw-2">&amp;</span>file.uuid]
+            .write_to
+            .as_ref()
+            .unwrap();
+        <span class="macro">assert_eq!</span>(Path::new(<span class="string">&quot;foo&quot;</span>), write_to.dest);
+        <span class="macro">assert!</span>(write_to.allow_failure);
+        <span class="macro">assert!</span>(!write_to.executable);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_write_file_to_allow_fail_executable</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">write_file_to_allow_fail</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">true</span>);
-        <span class="kw">let</span> <span class="ident">write_to</span> <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>]
-            .<span class="ident">write_to</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">Path::new</span>(<span class="string">&quot;foo&quot;</span>), <span class="ident">write_to</span>.<span class="ident">dest</span>);
-        <span class="macro">assert!</span>(<span class="ident">write_to</span>.<span class="ident">allow_failure</span>);
-        <span class="macro">assert!</span>(<span class="ident">write_to</span>.<span class="ident">executable</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_write_file_to_allow_fail_executable() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.write_file_to_allow_fail(file.clone(), <span class="string">&quot;foo&quot;</span>, <span class="bool-val">true</span>);
+        <span class="kw">let </span>write_to = dag.callbacks.as_mut().unwrap().file_callbacks[<span class="kw-2">&amp;</span>file.uuid]
+            .write_to
+            .as_ref()
+            .unwrap();
+        <span class="macro">assert_eq!</span>(Path::new(<span class="string">&quot;foo&quot;</span>), write_to.dest);
+        <span class="macro">assert!</span>(write_to.allow_failure);
+        <span class="macro">assert!</span>(write_to.executable);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_get_file_content</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>);
-        <span class="ident">dag</span>.<span class="ident">get_file_content</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="number">1234</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()));
-        <span class="kw">let</span> (<span class="ident">limit</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>]
-            .<span class="ident">get_content</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="number">1234</span>, <span class="ident">limit</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_get_file_content() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        dag.get_file_content(file.clone(), <span class="number">1234</span>, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(()));
+        <span class="kw">let </span>(limit, <span class="kw">_</span>) = dag.callbacks.as_mut().unwrap().file_callbacks[<span class="kw-2">&amp;</span>file.uuid]
+            .get_content
+            .as_ref()
+            .unwrap();
+        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="number">1234</span>, limit);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_on_execution_start</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">on_execution_start</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_on_execution_start() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        dag.on_execution_start(<span class="kw-2">&amp;</span>exec.uuid, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(()));
         <span class="macro">assert_eq!</span>(
             <span class="number">1</span>,
-            <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">unwrap</span>().<span class="ident">execution_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>]
-                .<span class="ident">on_start</span>
-                .<span class="ident">len</span>()
+            dag.callbacks.unwrap().execution_callbacks[<span class="kw-2">&amp;</span>exec.uuid]
+                .on_start
+                .len()
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_on_execution_done</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_on_execution_done() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(()));
         <span class="macro">assert_eq!</span>(
             <span class="number">1</span>,
-            <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">unwrap</span>().<span class="ident">execution_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>]
-                .<span class="ident">on_done</span>
-                .<span class="ident">len</span>()
+            dag.callbacks.unwrap().execution_callbacks[<span class="kw-2">&amp;</span>exec.uuid]
+                .on_done
+                .len()
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_on_execution_skip</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(<span class="string">&quot;exec&quot;</span>, <span class="ident">ExecutionCommand::local</span>(<span class="string">&quot;foo&quot;</span>));
-        <span class="ident">dag</span>.<span class="ident">on_execution_skip</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="op">|</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_on_execution_skip() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec.uuid, || <span class="prelude-val">Ok</span>(()));
         <span class="macro">assert_eq!</span>(
             <span class="number">1</span>,
-            <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">unwrap</span>().<span class="ident">execution_callbacks</span>[<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>]
-                .<span class="ident">on_skip</span>
-                .<span class="ident">len</span>()
+            dag.callbacks.unwrap().execution_callbacks[<span class="kw-2">&amp;</span>exec.uuid]
+                .on_skip
+                .len()
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_config_mut</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="ident">dag</span>.<span class="ident">config_mut</span>().<span class="ident">extra_time</span>(<span class="number">123.0</span>);
-        <span class="macro">assert_abs_diff_eq!</span>(<span class="number">123.0</span>, <span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">extra_time</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_config_mut() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        dag.config_mut().extra_time(<span class="number">123.0</span>);
+        <span class="macro">assert_abs_diff_eq!</span>(<span class="number">123.0</span>, dag.data.config.extra_time);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_urgent_files</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dag</span> <span class="op">=</span> <span class="ident">ExecutionDAG::new</span>();
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;file&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">dag</span>.<span class="ident">urgent_file</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>);
-        <span class="macro">assert!</span>(<span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">unwrap</span>().<span class="ident">urgent_files</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>.<span class="ident">uuid</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_urgent_files() {
+        <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
+        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>.to_string());
+        dag.urgent_file(<span class="kw-2">&amp;</span>file);
+        <span class="macro">assert!</span>(dag.callbacks.unwrap().urgent_files.contains(<span class="kw-2">&amp;</span>file.uuid));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_cache_mode_try_from</span>() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_cache_mode_try_from() {
         <span class="macro">assert_eq!</span>(
-            <span class="ident">CacheMode::try_from</span>(<span class="kw-2">&amp;</span><span class="prelude-val">None</span>, <span class="kw-2">&amp;</span>[]).<span class="ident">unwrap</span>(),
-            <span class="ident">CacheMode::Everything</span>
+            CacheMode::try_from(<span class="kw-2">&amp;</span><span class="prelude-val">None</span>, <span class="kw-2">&amp;</span>[]).unwrap(),
+            CacheMode::Everything
         );
         <span class="macro">assert_eq!</span>(
-            <span class="ident">CacheMode::try_from</span>(<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="prelude-val">None</span>), <span class="kw-2">&amp;</span>[]).<span class="ident">unwrap</span>(),
-            <span class="ident">CacheMode::Nothing</span>
+            CacheMode::try_from(<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="prelude-val">None</span>), <span class="kw-2">&amp;</span>[]).unwrap(),
+            CacheMode::Nothing
         );
         <span class="macro">assert_eq!</span>(
-            <span class="ident">CacheMode::try_from</span>(<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;tag1&quot;</span>.<span class="ident">to_string</span>())), <span class="kw-2">&amp;</span>[<span class="string">&quot;tag1&quot;</span>.<span class="ident">to_string</span>()]).<span class="ident">unwrap</span>(),
-            <span class="ident">CacheMode::Except</span>(<span class="macro">vec!</span>[<span class="ident">ExecutionTag::from</span>(<span class="string">&quot;tag1&quot;</span>)].<span class="ident">into_iter</span>().<span class="ident">collect</span>())
+            CacheMode::try_from(<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;tag1&quot;</span>.to_string())), <span class="kw-2">&amp;</span>[<span class="string">&quot;tag1&quot;</span>.to_string()]).unwrap(),
+            CacheMode::Except(<span class="macro">vec!</span>[ExecutionTag::from(<span class="string">&quot;tag1&quot;</span>)].into_iter().collect())
         );
-        <span class="macro">assert!</span>(<span class="ident">CacheMode::try_from</span>(<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;tag1&quot;</span>.<span class="ident">to_string</span>())), <span class="kw-2">&amp;</span>[]).<span class="ident">is_err</span>());
+        <span class="macro">assert!</span>(CacheMode::try_from(<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;tag1&quot;</span>.to_string())), <span class="kw-2">&amp;</span>[]).is_err());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_dag" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_dag" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

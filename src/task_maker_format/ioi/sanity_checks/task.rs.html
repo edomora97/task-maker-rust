@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/task.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>task.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/task.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>task.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -57,58 +57,58 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::IOITask</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sanity_checks::SanityCheck</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">list_files</span>, <span class="ident">EvaluationData</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::IOITask;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use crate</span>::{list_files, EvaluationData};
 
-<span class="doccomment">/// The default maximum score of a task.</span>
-<span class="kw">const</span> <span class="ident">DEFAULT_TASK_MAX_SCORE</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">100.0</span>;
+<span class="doccomment">/// The default maximum score of a task.
+</span><span class="kw">const </span>DEFAULT_TASK_MAX_SCORE: f64 = <span class="number">100.0</span>;
 
-<span class="doccomment">/// Check that the task has the usual maximum score.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskMaxScore</span>;
+<span class="doccomment">/// Check that the task has the usual maximum score.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>TaskMaxScore;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">IOITask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TaskMaxScore</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;TaskMaxScore&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>TaskMaxScore {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;TaskMaxScore&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">pre_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">task_score</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">subtasks</span>.<span class="ident">values</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">st</span><span class="op">|</span> <span class="ident">st</span>.<span class="ident">max_score</span>).<span class="ident">sum</span>();
-        <span class="kw">if</span> <span class="macro">approx::abs_diff_ne!</span>(<span class="ident">task_score</span>, <span class="ident">DEFAULT_TASK_MAX_SCORE</span>) {
-            <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(<span class="ident">Diagnostic::error</span>(<span class="macro">format!</span>(
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>task_score: f64 = task.subtasks.values().map(|st| st.max_score).sum();
+        <span class="kw">if </span><span class="macro">approx::abs_diff_ne!</span>(task_score, DEFAULT_TASK_MAX_SCORE) {
+            eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
                 <span class="string">&quot;The score of the task is {} (not {})&quot;</span>,
-                <span class="ident">task_score</span>, <span class="ident">DEFAULT_TASK_MAX_SCORE</span>
+                task_score, DEFAULT_TASK_MAX_SCORE
             )))<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="doccomment">/// Check that there are no broken links.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BrokenSymlinks</span>;
+<span class="doccomment">/// Check that there are no broken links.
+</span><span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>BrokenSymlinks;
 
-<span class="kw">impl</span> <span class="ident">SanityCheck</span><span class="op">&lt;</span><span class="ident">IOITask</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BrokenSymlinks</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;BrokenSymlinks&quot;</span>
-    }
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>BrokenSymlinks {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;BrokenSymlinks&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">post_hook</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">for</span> <span class="ident">file</span> <span class="kw">in</span> <span class="ident">list_files</span>(<span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">path</span>, <span class="macro">vec!</span>[<span class="string">&quot;**/*&quot;</span>]) {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">file</span>.<span class="ident">exists</span>() {
-                <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>);
-                <span class="comment">// Ignore the symlinks here as they are not interesting.</span>
-                <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">starts_with</span>(<span class="string">&quot;fuzz&quot;</span>) {
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">for </span>file <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;**/*&quot;</span>]) {
+            <span class="kw">if </span>!file.exists() {
+                <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>file);
+                <span class="comment">// Ignore the symlinks here as they are not interesting.
+                </span><span class="kw">if </span>path.starts_with(<span class="string">&quot;fuzz&quot;</span>) {
                     <span class="kw">continue</span>;
                 }
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">content</span>) <span class="op">=</span> <span class="ident">file</span>.<span class="ident">read_link</span>() {
-                    <span class="ident">eval</span>.<span class="ident">add_diagnostic</span>(
-                        <span class="ident">Diagnostic::warning</span>(<span class="macro">format!</span>(<span class="string">&quot;{} is a broken symlink&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))
-                            .<span class="ident">with_note</span>(<span class="macro">format!</span>(<span class="string">&quot;It points to {}&quot;</span>, <span class="ident">content</span>.<span class="ident">display</span>())),
+                <span class="kw">if let </span><span class="prelude-val">Ok</span>(content) = file.read_link() {
+                    eval.add_diagnostic(
+                        Diagnostic::warning(<span class="macro">format!</span>(<span class="string">&quot;{} is a broken symlink&quot;</span>, path.display()))
+                            .with_note(<span class="macro">format!</span>(<span class="string">&quot;It points to {}&quot;</span>, content.display())),
                     )<span class="question-mark">?</span>;
                 }
             }
@@ -117,4 +117,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

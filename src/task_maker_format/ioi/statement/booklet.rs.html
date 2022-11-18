@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/booklet.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>booklet.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/booklet.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>booklet.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -375,382 +375,382 @@
 <span id="375">375</span>
 <span id="376">376</span>
 <span id="377">377</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashSet;
+<span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>std::sync::{Arc, Mutex};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">askama::Template</span>;
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">regex::Regex</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
+<span class="kw">use </span>askama::Template;
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>regex::Regex;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">Execution</span>, <span class="ident">ExecutionCommand</span>, <span class="ident">File</span>};
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
+<span class="kw">use </span>task_maker_dag::{Execution, ExecutionCommand, File};
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::statement::statement::Statement</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::UIMessageSender</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">ui::UIMessage</span>, <span class="ident">EvaluationData</span>, <span class="ident">Tag</span>, <span class="ident">UISender</span>, <span class="ident">DATA_DIR</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::statement::statement::Statement;
+<span class="kw">use </span><span class="kw">crate</span>::ui::UIMessageSender;
+<span class="kw">use crate</span>::{bind_exec_callbacks, ui::UIMessage, EvaluationData, Tag, UISender, DATA_DIR};
 
-<span class="doccomment">/// Configuration of a `Booklet`, including the setting from the contest configuration.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Default</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BookletConfig</span> {
-    <span class="doccomment">/// The language to use for this booklet, e.g. `&quot;english&quot;`.</span>
-    <span class="kw">pub</span> <span class="ident">language</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Whether to show the solutions in the booklet.</span>
-    <span class="kw">pub</span> <span class="ident">show_solutions</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// Whether to show the summary of the task.</span>
-    <span class="kw">pub</span> <span class="ident">show_summary</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The font encoding of the tex file.</span>
-    <span class="kw">pub</span> <span class="ident">font_enc</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The input encoding of the tex file.</span>
-    <span class="kw">pub</span> <span class="ident">input_enc</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The description of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The location of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">location</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The date of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">date</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The logo of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">logo</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Configuration of a `Booklet`, including the setting from the contest configuration.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, Default, TypeScriptify)]
+</span><span class="kw">pub struct </span>BookletConfig {
+    <span class="doccomment">/// The language to use for this booklet, e.g. `&quot;english&quot;`.
+    </span><span class="kw">pub </span>language: String,
+    <span class="doccomment">/// Whether to show the solutions in the booklet.
+    </span><span class="kw">pub </span>show_solutions: bool,
+    <span class="doccomment">/// Whether to show the summary of the task.
+    </span><span class="kw">pub </span>show_summary: bool,
+    <span class="doccomment">/// The font encoding of the tex file.
+    </span><span class="kw">pub </span>font_enc: String,
+    <span class="doccomment">/// The input encoding of the tex file.
+    </span><span class="kw">pub </span>input_enc: String,
+    <span class="doccomment">/// The description of the contest.
+    </span><span class="kw">pub </span>description: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The location of the contest.
+    </span><span class="kw">pub </span>location: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The date of the contest.
+    </span><span class="kw">pub </span>date: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The logo of the contest.
+    </span><span class="kw">pub </span>logo: <span class="prelude-ty">Option</span>&lt;String&gt;,
 }
 
-<span class="doccomment">/// Template to use to render the `booklet.tex` file.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Template</span>)]</span>
-<span class="attribute">#[<span class="ident">template</span>(<span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;booklet.tex&quot;</span>, <span class="ident">escape</span> <span class="op">=</span> <span class="string">&quot;none&quot;</span>, <span class="ident">syntax</span> <span class="op">=</span> <span class="string">&quot;tex&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BookletTemplate</span> {
-    <span class="ident">language</span>: <span class="ident">String</span>,
-    <span class="ident">show_solutions</span>: <span class="ident">String</span>,
-    <span class="ident">show_summary</span>: <span class="ident">String</span>,
-    <span class="ident">font_enc</span>: <span class="ident">String</span>,
-    <span class="ident">input_enc</span>: <span class="ident">String</span>,
-    <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="ident">location</span>: <span class="ident">String</span>,
-    <span class="ident">date</span>: <span class="ident">String</span>,
-    <span class="ident">logo</span>: <span class="ident">String</span>,
-    <span class="ident">packages</span>: <span class="ident">String</span>,
-    <span class="ident">tasks</span>: <span class="ident">String</span>,
+<span class="doccomment">/// Template to use to render the `booklet.tex` file.
+</span><span class="attribute">#[derive(Template)]
+#[template(path = <span class="string">&quot;booklet.tex&quot;</span>, escape = <span class="string">&quot;none&quot;</span>, syntax = <span class="string">&quot;tex&quot;</span>)]
+</span><span class="kw">pub struct </span>BookletTemplate {
+    language: String,
+    show_solutions: String,
+    show_summary: String,
+    font_enc: String,
+    input_enc: String,
+    description: String,
+    location: String,
+    date: String,
+    logo: String,
+    packages: String,
+    tasks: String,
 }
 
-<span class="doccomment">/// A `Booklet` is a pdf file containing the statements of some tasks. It is compiled from a series</span>
-<span class="doccomment">/// of `.tex` files defined by `Statement` objects. The compiled pdf file is then copied somewhere.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Booklet</span> {
-    <span class="doccomment">/// Configuration of the booklet.</span>
-    <span class="kw">pub</span> <span class="ident">config</span>: <span class="ident">BookletConfig</span>,
-    <span class="doccomment">/// The list of `Statement`s that are included in this booklet.</span>
-    <span class="kw">pub</span> <span class="ident">statements</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Statement</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Where to copy the booklet.</span>
-    <span class="kw">pub</span> <span class="ident">dest</span>: <span class="ident">PathBuf</span>,
+<span class="doccomment">/// A `Booklet` is a pdf file containing the statements of some tasks. It is compiled from a series
+/// of `.tex` files defined by `Statement` objects. The compiled pdf file is then copied somewhere.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>Booklet {
+    <span class="doccomment">/// Configuration of the booklet.
+    </span><span class="kw">pub </span>config: BookletConfig,
+    <span class="doccomment">/// The list of `Statement`s that are included in this booklet.
+    </span><span class="kw">pub </span>statements: Vec&lt;Statement&gt;,
+    <span class="doccomment">/// Where to copy the booklet.
+    </span><span class="kw">pub </span>dest: PathBuf,
 }
 
-<span class="doccomment">/// Part of the schema of `contest.yaml`, used for extracting the configuration of the booklet.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ContestYAML</span> {
-    <span class="doccomment">/// The description of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The location of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">location</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The date of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">date</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The logo of the contest.</span>
-    <span class="kw">pub</span> <span class="ident">logo</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// `Some(&quot;True&quot;)` if the time and memory limits should be put in the booklet.</span>
-    <span class="kw">pub</span> <span class="ident">show_summary</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The list of the tasks in the contest (in the correct order).</span>
-    <span class="kw">pub</span> <span class="ident">tasks</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Part of the schema of `contest.yaml`, used for extracting the configuration of the booklet.
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">pub struct </span>ContestYAML {
+    <span class="doccomment">/// The description of the contest.
+    </span><span class="kw">pub </span>description: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The location of the contest.
+    </span><span class="kw">pub </span>location: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The date of the contest.
+    </span><span class="kw">pub </span>date: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The logo of the contest.
+    </span><span class="kw">pub </span>logo: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// `Some(&quot;True&quot;)` if the time and memory limits should be put in the booklet.
+    </span><span class="kw">pub </span>show_summary: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The list of the tasks in the contest (in the correct order).
+    </span><span class="kw">pub </span>tasks: Vec&lt;String&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">Booklet</span> {
-    <span class="doccomment">/// Make a new `Booklet` using the specified configuration.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">config</span>: <span class="ident">BookletConfig</span>, <span class="ident">dest</span>: <span class="ident">P</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Booklet</span> {
-            <span class="ident">config</span>,
-            <span class="ident">dest</span>: <span class="ident">dest</span>.<span class="ident">into</span>(),
-            <span class="ident">statements</span>: <span class="ident">Vec::new</span>(),
+<span class="kw">impl </span>Booklet {
+    <span class="doccomment">/// Make a new `Booklet` using the specified configuration.
+    </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;&gt;(config: BookletConfig, dest: P) -&gt; <span class="self">Self </span>{
+        Booklet {
+            config,
+            dest: dest.into(),
+            statements: Vec::new(),
         }
     }
 
-    <span class="doccomment">/// Add a `Statement` to this booklet.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_statement</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">statement</span>: <span class="ident">Statement</span>) {
-        <span class="self">self</span>.<span class="ident">statements</span>.<span class="ident">push</span>(<span class="ident">statement</span>);
+    <span class="doccomment">/// Add a `Statement` to this booklet.
+    </span><span class="kw">pub fn </span>add_statement(<span class="kw-2">&amp;mut </span><span class="self">self</span>, statement: Statement) {
+        <span class="self">self</span>.statements.push(statement);
     }
 
-    <span class="doccomment">/// Build the booklet, eventually coping the final PDF to the specified destination.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">booklet_name</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">dest</span>
-            .<span class="ident">file_name</span>()
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid destination file {}&quot;</span>, <span class="self">self</span>.<span class="ident">dest</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>
-            .<span class="ident">to_string_lossy</span>()
-            .<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">Execution::new</span>(
+    <span class="doccomment">/// Build the booklet, eventually coping the final PDF to the specified destination.
+    </span><span class="kw">pub fn </span>build(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>booklet_name = <span class="self">self
+            </span>.dest
+            .file_name()
+            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid destination file {}&quot;</span>, <span class="self">self</span>.dest.display()))<span class="question-mark">?
+            </span>.to_string_lossy()
+            .to_string();
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(
             <span class="string">&quot;Compilation of the booklet&quot;</span>,
-            <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;latexmk&quot;</span>),
+            ExecutionCommand::system(<span class="string">&quot;latexmk&quot;</span>),
         );
-        <span class="ident">exec</span>.<span class="ident">args</span>(<span class="macro">vec!</span>[
+        exec.args(<span class="macro">vec!</span>[
             <span class="string">&quot;-shell-escape&quot;</span>,
             <span class="string">&quot;-f&quot;</span>,
             <span class="string">&quot;-interaction=nonstopmode&quot;</span>,
             <span class="string">&quot;-pdf&quot;</span>,
             <span class="string">&quot;booklet.tex&quot;</span>,
         ]);
-        <span class="ident">exec</span>.<span class="ident">limits_mut</span>()
-            .<span class="ident">read_only</span>(<span class="bool-val">false</span>)
-            .<span class="ident">allow_multiprocess</span>()
-            .<span class="ident">add_extra_readable_dir</span>(<span class="string">&quot;/etc&quot;</span>)
-            .<span class="ident">mount_tmpfs</span>(<span class="bool-val">true</span>);
-        <span class="ident">exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Booklet</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">output</span>(<span class="string">&quot;booklet.pdf&quot;</span>);
+        exec.limits_mut()
+            .read_only(<span class="bool-val">false</span>)
+            .allow_multiprocess()
+            .add_extra_readable_dir(<span class="string">&quot;/etc&quot;</span>)
+            .mount_tmpfs(<span class="bool-val">true</span>);
+        exec.tag(Tag::Booklet.into());
+        <span class="kw">let </span>output = exec.output(<span class="string">&quot;booklet.pdf&quot;</span>);
 
-        <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="string">&quot;Source of the booklet&quot;</span>);
-        <span class="kw">let</span> <span class="ident">tex</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">make_tex</span>();
-        <span class="ident">exec</span>.<span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="ident">source</span>, <span class="string">&quot;booklet.tex&quot;</span>, <span class="bool-val">false</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">provide_content</span>(<span class="ident">source</span>, <span class="ident">tex</span>.<span class="ident">into_bytes</span>());
+        <span class="kw">let </span>source = File::new(<span class="string">&quot;Source of the booklet&quot;</span>);
+        <span class="kw">let </span>tex = <span class="self">self</span>.make_tex();
+        exec.input(<span class="kw-2">&amp;</span>source, <span class="string">&quot;booklet.tex&quot;</span>, <span class="bool-val">false</span>);
+        eval.dag.provide_content(source, tex.into_bytes());
 
-        <span class="kw">for</span> <span class="ident">statement</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">statements</span>.<span class="ident">iter</span>() {
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">statement</span>.<span class="ident">config</span>().<span class="ident">name</span>;
-            <span class="kw">let</span> <span class="ident">tex</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="macro">format!</span>(<span class="string">&quot;Source of statement of {}&quot;</span>, <span class="ident">name</span>));
-            <span class="ident">exec</span>.<span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="ident">tex</span>, <span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>).<span class="ident">join</span>(<span class="string">&quot;statement.tex&quot;</span>), <span class="bool-val">false</span>);
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">provide_content</span>(<span class="ident">tex</span>, <span class="ident">statement</span>.<span class="ident">tex</span>().<span class="ident">into_bytes</span>());
-            <span class="kw">let</span> <span class="ident">base_dir</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>);
-            <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">statement</span>
-                .<span class="ident">build_deps</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;</span><span class="ident">booklet_name</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to build booklet dependencies&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">for</span> (<span class="ident">path</span>, <span class="ident">file</span>) <span class="kw">in</span> <span class="ident">deps</span> {
-                <span class="ident">exec</span>.<span class="ident">input</span>(<span class="ident">file</span>, <span class="ident">base_dir</span>.<span class="ident">join</span>(<span class="ident">path</span>), <span class="bool-val">false</span>);
+        <span class="kw">for </span>statement <span class="kw">in </span><span class="self">self</span>.statements.iter() {
+            <span class="kw">let </span>name = <span class="kw-2">&amp;</span>statement.config().name;
+            <span class="kw">let </span>tex = File::new(<span class="macro">format!</span>(<span class="string">&quot;Source of statement of {}&quot;</span>, name));
+            exec.input(<span class="kw-2">&amp;</span>tex, Path::new(<span class="kw-2">&amp;</span>name).join(<span class="string">&quot;statement.tex&quot;</span>), <span class="bool-val">false</span>);
+            eval.dag.provide_content(tex, statement.tex().into_bytes());
+            <span class="kw">let </span>base_dir = PathBuf::from(<span class="kw-2">&amp;</span>name);
+            <span class="kw">let </span>deps = statement
+                .build_deps(eval, <span class="kw-2">&amp;</span>booklet_name, <span class="kw-2">&amp;</span><span class="self">self</span>.config)
+                .context(<span class="string">&quot;Failed to build booklet dependencies&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">for </span>(path, file) <span class="kw">in </span>deps {
+                exec.input(file, base_dir.join(path), <span class="bool-val">false</span>);
             }
         }
 
-        <span class="comment">// copy all the files from the data/statements directory</span>
-        <span class="kw">let</span> <span class="ident">data_dir</span> <span class="op">=</span> <span class="ident">DATA_DIR</span>.<span class="ident">join</span>(<span class="string">&quot;statements&quot;</span>);
-        <span class="kw">let</span> <span class="ident">glob_pattern</span> <span class="op">=</span> <span class="ident">data_dir</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>() <span class="op">+</span> <span class="string">&quot;/**/*&quot;</span>;
-        <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="ident">glob::glob</span>(<span class="kw-2">&amp;</span><span class="ident">glob_pattern</span>).<span class="ident">context</span>(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">?</span> {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">context</span>(<span class="string">&quot;Failed to iterate with glob&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">path</span>.<span class="ident">is_file</span>() {
+        <span class="comment">// copy all the files from the data/statements directory
+        </span><span class="kw">let </span>data_dir = DATA_DIR.join(<span class="string">&quot;statements&quot;</span>);
+        <span class="kw">let </span>glob_pattern = data_dir.to_string_lossy().to_string() + <span class="string">&quot;/**/*&quot;</span>;
+        <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>glob_pattern).context(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">? </span>{
+            <span class="kw">let </span>path = path.context(<span class="string">&quot;Failed to iterate with glob&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">if </span>!path.is_file() {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::new</span>(<span class="macro">format!</span>(
+            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(
                 <span class="string">&quot;Booklet template file {:?}&quot;</span>,
-                <span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">context</span>(<span class="string">&quot;Invalid template file&quot;</span>)<span class="question-mark">?</span>
-            ));
-            <span class="ident">eval</span>.<span class="ident">dag</span>
-                .<span class="ident">provide_file</span>(<span class="ident">file</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">path</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to provide statement file&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">exec</span>.<span class="ident">input</span>(<span class="ident">file</span>, <span class="ident">path</span>.<span class="ident">strip_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">data_dir</span>)<span class="question-mark">?</span>, <span class="bool-val">false</span>);
+                path.file_name().context(<span class="string">&quot;Invalid template file&quot;</span>)<span class="question-mark">?
+            </span>));
+            eval.dag
+                .provide_file(file.clone(), <span class="kw-2">&amp;</span>path)
+                .context(<span class="string">&quot;Failed to provide statement file&quot;</span>)<span class="question-mark">?</span>;
+            exec.input(file, path.strip_prefix(<span class="kw-2">&amp;</span>data_dir)<span class="question-mark">?</span>, <span class="bool-val">false</span>);
         }
 
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">exec</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">name</span><span class="op">|</span> <span class="ident">UIMessage::IOIBooklet</span> { <span class="ident">name</span>, <span class="ident">status</span> },
-            <span class="ident">booklet_name</span>
+            eval,
+            exec.uuid,
+            |status, name| UIMessage::IOIBooklet { name, status },
+            booklet_name
         )<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">copy_logs</span> {
-            <span class="kw">let</span> <span class="ident">log_dir</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">task_root</span>.<span class="ident">join</span>(<span class="string">&quot;bin/logs/booklets&quot;</span>);
-            <span class="kw">let</span> <span class="ident">stderr_dest</span> <span class="op">=</span> <span class="ident">log_dir</span>.<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.stderr.log&quot;</span>, <span class="ident">booklet_name</span>));
-            <span class="kw">let</span> <span class="ident">stdout_dest</span> <span class="op">=</span> <span class="ident">log_dir</span>.<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.stdout.log&quot;</span>, <span class="ident">booklet_name</span>));
-            <span class="ident">eval</span>.<span class="ident">dag</span>
-                .<span class="ident">write_file_to_allow_fail</span>(<span class="ident">exec</span>.<span class="ident">stderr</span>(), <span class="ident">stderr_dest</span>, <span class="bool-val">false</span>);
-            <span class="ident">eval</span>.<span class="ident">dag</span>
-                .<span class="ident">write_file_to_allow_fail</span>(<span class="ident">exec</span>.<span class="ident">stdout</span>(), <span class="ident">stdout_dest</span>, <span class="bool-val">false</span>);
+        <span class="kw">if </span>eval.dag.data.config.copy_logs {
+            <span class="kw">let </span>log_dir = eval.task_root.join(<span class="string">&quot;bin/logs/booklets&quot;</span>);
+            <span class="kw">let </span>stderr_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">&quot;{}.stderr.log&quot;</span>, booklet_name));
+            <span class="kw">let </span>stdout_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">&quot;{}.stdout.log&quot;</span>, booklet_name));
+            eval.dag
+                .write_file_to_allow_fail(exec.stderr(), stderr_dest, <span class="bool-val">false</span>);
+            eval.dag
+                .write_file_to_allow_fail(exec.stdout(), stdout_dest, <span class="bool-val">false</span>);
         }
-        <span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">eval</span>.<span class="ident">sender</span>.<span class="ident">clone</span>();
-        <span class="ident">exec</span>.<span class="ident">capture_stdout</span>(<span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>);
-        <span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dest</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>().<span class="ident">to_owned</span>();
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">res</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">content</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">res</span>.<span class="ident">stdout</span> {
-                <span class="ident">Booklet::emit_warnings</span>(<span class="ident">dest</span>, <span class="ident">content</span>, <span class="ident">sender</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>sender = eval.sender.clone();
+        exec.capture_stdout(<span class="number">1024 </span>* <span class="number">1024 </span>* <span class="number">1024</span>);
+        <span class="kw">let </span>dest = <span class="self">self</span>.dest.file_name().unwrap().to_owned();
+        eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|res| {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(content) = <span class="kw-2">&amp;</span>res.stdout {
+                Booklet::emit_warnings(dest, content, sender)<span class="question-mark">?</span>;
             }
             <span class="prelude-val">Ok</span>(())
         });
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
-        <span class="comment">// latexmk may fail but still produce a good-enough pdf file</span>
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">write_file_to_allow_fail</span>(<span class="ident">output</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">dest</span>, <span class="bool-val">false</span>);
+        eval.dag.add_execution(exec);
+        <span class="comment">// latexmk may fail but still produce a good-enough pdf file
+        </span>eval.dag.write_file_to_allow_fail(output, <span class="kw-2">&amp;</span><span class="self">self</span>.dest, <span class="bool-val">false</span>);
 
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Build the main booklet.tex source file by combining the info from all the statements and</span>
-    <span class="doccomment">/// expanding the template.</span>
-    <span class="kw">fn</span> <span class="ident">make_tex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">packages</span> <span class="op">=</span> <span class="ident">HashSet::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tasks</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">for</span> <span class="ident">statement</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">statements</span>.<span class="ident">iter</span>() {
-            <span class="kw">for</span> <span class="ident">package</span> <span class="kw">in</span> <span class="ident">statement</span>.<span class="ident">packages</span>() {
-                <span class="ident">packages</span>.<span class="ident">insert</span>(<span class="ident">package</span>);
+    <span class="doccomment">/// Build the main booklet.tex source file by combining the info from all the statements and
+    /// expanding the template.
+    </span><span class="kw">fn </span>make_tex(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+        <span class="kw">let </span><span class="kw-2">mut </span>packages = HashSet::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>tasks = Vec::new();
+        <span class="kw">for </span>statement <span class="kw">in </span><span class="self">self</span>.statements.iter() {
+            <span class="kw">for </span>package <span class="kw">in </span>statement.packages() {
+                packages.insert(package);
             }
-            <span class="ident">tasks</span>.<span class="ident">push</span>(<span class="macro">format!</span>(
+            tasks.push(<span class="macro">format!</span>(
                 <span class="string">r&quot;\subimport{{./{}/}}{{statement.tex}}&quot;</span>,
-                <span class="ident">statement</span>.<span class="ident">config</span>().<span class="ident">name</span>
+                statement.config().name
             ));
         }
-        <span class="ident">BookletTemplate</span> {
-            <span class="ident">language</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">language</span>.<span class="ident">clone</span>(),
-            <span class="ident">show_solutions</span>: <span class="ident">Booklet::bool_to_tpl_string</span>(
-                <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">show_solutions</span>,
+        BookletTemplate {
+            language: <span class="self">self</span>.config.language.clone(),
+            show_solutions: Booklet::bool_to_tpl_string(
+                <span class="self">self</span>.config.show_solutions,
                 <span class="string">&quot;showsolutions&quot;</span>,
             ),
-            <span class="ident">show_summary</span>: <span class="ident">Booklet::bool_to_tpl_string</span>(<span class="self">self</span>.<span class="ident">config</span>.<span class="ident">show_summary</span>, <span class="string">&quot;showsummary&quot;</span>),
-            <span class="ident">font_enc</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">font_enc</span>.<span class="ident">clone</span>(),
-            <span class="ident">input_enc</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">input_enc</span>.<span class="ident">clone</span>(),
-            <span class="ident">description</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">description</span>.<span class="ident">clone</span>().<span class="ident">unwrap_or_default</span>(),
-            <span class="ident">location</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">location</span>.<span class="ident">clone</span>().<span class="ident">unwrap_or_default</span>(),
-            <span class="ident">date</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">date</span>.<span class="ident">clone</span>().<span class="ident">unwrap_or_default</span>(),
-            <span class="ident">logo</span>: <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">logo</span>.<span class="ident">clone</span>().<span class="ident">unwrap_or_default</span>(),
-            <span class="ident">packages</span>: <span class="ident">packages</span>.<span class="ident">iter</span>().<span class="ident">sorted</span>().<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>),
-            <span class="ident">tasks</span>: <span class="ident">tasks</span>.<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>),
+            show_summary: Booklet::bool_to_tpl_string(<span class="self">self</span>.config.show_summary, <span class="string">&quot;showsummary&quot;</span>),
+            font_enc: <span class="self">self</span>.config.font_enc.clone(),
+            input_enc: <span class="self">self</span>.config.input_enc.clone(),
+            description: <span class="self">self</span>.config.description.clone().unwrap_or_default(),
+            location: <span class="self">self</span>.config.location.clone().unwrap_or_default(),
+            date: <span class="self">self</span>.config.date.clone().unwrap_or_default(),
+            logo: <span class="self">self</span>.config.logo.clone().unwrap_or_default(),
+            packages: packages.iter().sorted().join(<span class="string">&quot;\n&quot;</span>),
+            tasks: tasks.join(<span class="string">&quot;\n&quot;</span>),
         }
-        .<span class="ident">to_string</span>()
+        .to_string()
     }
 
-    <span class="doccomment">/// Return a string which is `if_true` if `b` is true, otherwise an empty string.</span>
-    <span class="kw">fn</span> <span class="ident">bool_to_tpl_string</span>(<span class="ident">b</span>: <span class="ident">bool</span>, <span class="ident">if_true</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">if</span> <span class="ident">b</span> { <span class="ident">if_true</span> } <span class="kw">else</span> { <span class="string">&quot;&quot;</span> }.<span class="ident">to_string</span>()
+    <span class="doccomment">/// Return a string which is `if_true` if `b` is true, otherwise an empty string.
+    </span><span class="kw">fn </span>bool_to_tpl_string(b: bool, if_true: <span class="kw-2">&amp;</span>str) -&gt; String {
+        <span class="kw">if </span>b { if_true } <span class="kw">else </span>{ <span class="string">&quot;&quot; </span>}.to_string()
     }
 
-    <span class="doccomment">/// Given the content of the log from latexmk, extract the errors and emit them as warnings.</span>
-    <span class="kw">fn</span> <span class="ident">emit_warnings</span>(
-        <span class="ident">booklet_name</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-        <span class="ident">content</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">sender</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">UIMessageSender</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="macro">lazy_static!</span> {
-            <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">FIND_ERRORS</span>: <span class="ident">Regex</span> <span class="op">=</span>
-                <span class="ident">Regex::new</span>(<span class="string">r&quot;(?ms)^!(?: LaTeX Error:)? ([^\n]+).*?(^l\.\d+)&quot;</span>)
-                    .<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+    <span class="doccomment">/// Given the content of the log from latexmk, extract the errors and emit them as warnings.
+    </span><span class="kw">fn </span>emit_warnings(
+        booklet_name: <span class="kw">impl </span>AsRef&lt;Path&gt;,
+        content: <span class="kw-2">&amp;</span>[u8],
+        sender: Arc&lt;Mutex&lt;UIMessageSender&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">lazy_static! </span>{
+            <span class="kw">static </span><span class="kw-2">ref </span>FIND_ERRORS: Regex =
+                Regex::new(<span class="string">r&quot;(?ms)^!(?: LaTeX Error:)? ([^\n]+).*?(^l\.\d+)&quot;</span>)
+                    .expect(<span class="string">&quot;Invalid regex&quot;</span>);
         }
-        <span class="comment">// latexmk sometimes emit the same warning more than once</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">HashSet::new</span>();
-        <span class="kw">for</span> <span class="ident">cap</span> <span class="kw">in</span> <span class="ident">FIND_ERRORS</span>.<span class="ident">captures_iter</span>(<span class="kw-2">&amp;</span><span class="ident">String::from_utf8_lossy</span>(<span class="ident">content</span>)) {
-            <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">cap</span>[<span class="number">2</span>][<span class="number">2</span>..].<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>().<span class="ident">ok</span>();
-            <span class="ident">errors</span>.<span class="ident">insert</span>((<span class="ident">line</span>, <span class="ident">cap</span>[<span class="number">1</span>].<span class="ident">to_string</span>()));
+        <span class="comment">// latexmk sometimes emit the same warning more than once
+        </span><span class="kw">let </span><span class="kw-2">mut </span>errors = HashSet::new();
+        <span class="kw">for </span>cap <span class="kw">in </span>FIND_ERRORS.captures_iter(<span class="kw-2">&amp;</span>String::from_utf8_lossy(content)) {
+            <span class="kw">let </span>line = cap[<span class="number">2</span>][<span class="number">2</span>..].parse::&lt;i32&gt;().ok();
+            errors.insert((line, cap[<span class="number">1</span>].to_string()));
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">errors</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">let</span> <span class="ident">note</span> <span class="op">=</span> <span class="ident">errors</span>
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">sorted</span>()
-                .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">line</span>, <span class="ident">error</span>)<span class="op">|</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">line</span>) <span class="op">=</span> <span class="ident">line</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Line {}: {}&quot;</span>, <span class="ident">line</span>, <span class="ident">error</span>)
-                    } <span class="kw">else</span> {
-                        <span class="ident">error</span>
+        <span class="kw">if </span>!errors.is_empty() {
+            <span class="kw">let </span>note = errors
+                .into_iter()
+                .sorted()
+                .map(|(line, error)| {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(line) = line {
+                        <span class="macro">format!</span>(<span class="string">&quot;Line {}: {}&quot;</span>, line, error)
+                    } <span class="kw">else </span>{
+                        error
                     }
                 })
-                .<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>);
-            <span class="ident">sender</span>.<span class="ident">add_diagnostic</span>(
-                <span class="ident">Diagnostic::warning</span>(<span class="macro">format!</span>(
+                .join(<span class="string">&quot;\n&quot;</span>);
+            sender.add_diagnostic(
+                Diagnostic::warning(<span class="macro">format!</span>(
                     <span class="string">&quot;Found Latex errors while compiling the booklet {}&quot;</span>,
-                    <span class="ident">booklet_name</span>.<span class="ident">as_ref</span>().<span class="ident">display</span>()
+                    booklet_name.as_ref().display()
                 ))
-                .<span class="ident">with_note</span>(<span class="ident">note</span>),
+                .with_note(note),
             )<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">BookletConfig</span> {
-    <span class="doccomment">/// Build the `BookletConfig` from a contest.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_contest</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-        <span class="ident">language</span>: <span class="ident">S</span>,
-        <span class="ident">contest_dir</span>: <span class="ident">P</span>,
-        <span class="ident">booklet_solutions</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BookletConfig</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">contest_yaml</span>) <span class="op">=</span> <span class="ident"><span class="self">Self</span>::contest_yaml</span>(<span class="ident">contest_dir</span>) {
-            <span class="kw">let</span> <span class="ident">contest_yaml</span> <span class="op">=</span> <span class="ident">contest_yaml</span><span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">BookletConfig</span> {
-                <span class="ident">language</span>: <span class="ident">language</span>.<span class="ident">into</span>(),
-                <span class="ident">show_solutions</span>: <span class="ident">booklet_solutions</span>,
-                <span class="ident">show_summary</span>: <span class="ident">contest_yaml</span>.<span class="ident">show_summary</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="string">&quot;True&quot;</span>.<span class="ident">to_string</span>()),
-                <span class="ident">font_enc</span>: <span class="string">&quot;T1&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">input_enc</span>: <span class="string">&quot;utf8&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">description</span>: <span class="ident">contest_yaml</span>.<span class="ident">description</span>,
-                <span class="ident">location</span>: <span class="ident">contest_yaml</span>.<span class="ident">location</span>,
-                <span class="ident">date</span>: <span class="ident">contest_yaml</span>.<span class="ident">date</span>,
-                <span class="ident">logo</span>: <span class="ident">contest_yaml</span>.<span class="ident">logo</span>,
+<span class="kw">impl </span>BookletConfig {
+    <span class="doccomment">/// Build the `BookletConfig` from a contest.
+    </span><span class="kw">pub fn </span>from_contest&lt;S: Into&lt;String&gt;, P: Into&lt;PathBuf&gt;&gt;(
+        language: S,
+        contest_dir: P,
+        booklet_solutions: bool,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;BookletConfig, Error&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(contest_yaml) = <span class="self">Self</span>::contest_yaml(contest_dir) {
+            <span class="kw">let </span>contest_yaml = contest_yaml<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(BookletConfig {
+                language: language.into(),
+                show_solutions: booklet_solutions,
+                show_summary: contest_yaml.show_summary == <span class="prelude-val">Some</span>(<span class="string">&quot;True&quot;</span>.to_string()),
+                font_enc: <span class="string">&quot;T1&quot;</span>.into(),
+                input_enc: <span class="string">&quot;utf8&quot;</span>.into(),
+                description: contest_yaml.description,
+                location: contest_yaml.location,
+                date: contest_yaml.date,
+                logo: contest_yaml.logo,
             })
-        } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">BookletConfig</span> {
-                <span class="ident">language</span>: <span class="ident">language</span>.<span class="ident">into</span>(),
-                <span class="ident">show_solutions</span>: <span class="ident">booklet_solutions</span>,
-                <span class="ident">show_summary</span>: <span class="bool-val">false</span>,
-                <span class="ident">font_enc</span>: <span class="string">&quot;T1&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">input_enc</span>: <span class="string">&quot;utf8&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">description</span>: <span class="prelude-val">None</span>,
-                <span class="ident">location</span>: <span class="prelude-val">None</span>,
-                <span class="ident">date</span>: <span class="prelude-val">None</span>,
-                <span class="ident">logo</span>: <span class="prelude-val">None</span>,
+        } <span class="kw">else </span>{
+            <span class="prelude-val">Ok</span>(BookletConfig {
+                language: language.into(),
+                show_solutions: booklet_solutions,
+                show_summary: <span class="bool-val">false</span>,
+                font_enc: <span class="string">&quot;T1&quot;</span>.into(),
+                input_enc: <span class="string">&quot;utf8&quot;</span>.into(),
+                description: <span class="prelude-val">None</span>,
+                location: <span class="prelude-val">None</span>,
+                date: <span class="prelude-val">None</span>,
+                logo: <span class="prelude-val">None</span>,
             })
         }
     }
 
-    <span class="doccomment">/// Find and parse the contest.yaml in the provided contest root.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contest_yaml</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">contest_dir</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ContestYAML</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">contest_yaml_path</span> <span class="op">=</span> <span class="ident">contest_dir</span>.<span class="ident">into</span>().<span class="ident">join</span>(<span class="string">&quot;contest.yaml&quot;</span>);
-        <span class="kw">let</span> <span class="ident">parse_yaml</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::File::open</span>(<span class="kw-2">&amp;</span><span class="ident">contest_yaml_path</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+    <span class="doccomment">/// Find and parse the contest.yaml in the provided contest root.
+    </span><span class="kw">pub fn </span>contest_yaml&lt;P: Into&lt;PathBuf&gt;&gt;(contest_dir: P) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Result</span>&lt;ContestYAML, Error&gt;&gt; {
+        <span class="kw">let </span>contest_yaml_path = contest_dir.into().join(<span class="string">&quot;contest.yaml&quot;</span>);
+        <span class="kw">let </span>parse_yaml = || {
+            <span class="kw">let </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>contest_yaml_path).with_context(|| {
                 <span class="macro">format!</span>(
                     <span class="string">&quot;Failed to open contest.yaml at {}&quot;</span>,
-                    <span class="ident">contest_yaml_path</span>.<span class="ident">display</span>()
+                    contest_yaml_path.display()
                 )
             })<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">contest_yaml</span>: <span class="ident">ContestYAML</span> <span class="op">=</span>
-                <span class="ident">serde_yaml::from_reader</span>(<span class="ident">file</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to deserialize contest.yaml&quot;</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">contest_yaml</span>)
+            <span class="kw">let </span>contest_yaml: ContestYAML =
+                serde_yaml::from_reader(file).context(<span class="string">&quot;Failed to deserialize contest.yaml&quot;</span>)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(contest_yaml)
         };
 
-        <span class="kw">if</span> <span class="ident">contest_yaml_path</span>.<span class="ident">exists</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">parse_yaml</span>())
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
+        <span class="kw">if </span>contest_yaml_path.exists() {
+            <span class="prelude-val">Some</span>(parse_yaml())
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::StatementConfig</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">crate</span>::ioi::StatementConfig;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">get_outputs_with_logs</span>(<span class="ident">task_root</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">copy_logs</span>: <span class="ident">bool</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">eval</span>, <span class="ident">_recv</span>) <span class="op">=</span> <span class="ident">EvaluationData::new</span>(<span class="ident">task_root</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">config</span>.<span class="ident">copy_logs</span> <span class="op">=</span> <span class="ident">copy_logs</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">booklet</span> <span class="op">=</span> <span class="ident">Booklet::new</span>(<span class="ident">BookletConfig::default</span>(), <span class="ident">task_root</span>.<span class="ident">join</span>(<span class="string">&quot;dest.pdf&quot;</span>));
-        <span class="ident">std::fs::write</span>(<span class="ident">task_root</span>.<span class="ident">join</span>(<span class="string">&quot;text.tex&quot;</span>), <span class="string">&quot;loltex&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">statement</span> <span class="op">=</span>
-            <span class="ident">Statement::new</span>(<span class="ident">task_root</span>.<span class="ident">join</span>(<span class="string">&quot;text.tex&quot;</span>), <span class="ident">StatementConfig::default</span>()).<span class="ident">unwrap</span>();
-        <span class="ident">booklet</span>.<span class="ident">add_statement</span>(<span class="ident">statement</span>);
-        <span class="ident">booklet</span>.<span class="ident">build</span>(<span class="kw-2">&amp;mut</span> <span class="ident">eval</span>).<span class="ident">unwrap</span>();
-        <span class="ident">eval</span>.<span class="ident">dag</span>
-            .<span class="ident">file_callbacks</span>()
-            .<span class="ident">values</span>()
-            .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">write_to</span>.<span class="ident">as_ref</span>())
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">dest</span>.<span class="ident">clone</span>())
-            .<span class="ident">collect</span>()
+    <span class="kw">fn </span>get_outputs_with_logs(task_root: <span class="kw-2">&amp;</span>Path, copy_logs: bool) -&gt; Vec&lt;PathBuf&gt; {
+        <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(task_root);
+        eval.dag.data.config.copy_logs = copy_logs;
+        <span class="kw">let </span><span class="kw-2">mut </span>booklet = Booklet::new(BookletConfig::default(), task_root.join(<span class="string">&quot;dest.pdf&quot;</span>));
+        std::fs::write(task_root.join(<span class="string">&quot;text.tex&quot;</span>), <span class="string">&quot;loltex&quot;</span>).unwrap();
+        <span class="kw">let </span>statement =
+            Statement::new(task_root.join(<span class="string">&quot;text.tex&quot;</span>), StatementConfig::default()).unwrap();
+        booklet.add_statement(statement);
+        booklet.build(<span class="kw-2">&amp;mut </span>eval).unwrap();
+        eval.dag
+            .file_callbacks()
+            .values()
+            .filter_map(|f| f.write_to.as_ref())
+            .map(|f| f.dest.clone())
+            .collect()
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_logs_emitted_with_copy_logs</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">get_outputs_with_logs</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>(), <span class="bool-val">true</span>);
-        <span class="kw">let</span> <span class="ident">stderr_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bin/logs/booklets/dest.pdf.stderr.log&quot;</span>);
-        <span class="kw">let</span> <span class="ident">stdout_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bin/logs/booklets/dest.pdf.stdout.log&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">outputs</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">stderr_path</span>));
-        <span class="macro">assert!</span>(<span class="ident">outputs</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">stdout_path</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_logs_emitted_with_copy_logs() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>outputs = get_outputs_with_logs(tmpdir.path(), <span class="bool-val">true</span>);
+        <span class="kw">let </span>stderr_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stderr.log&quot;</span>);
+        <span class="kw">let </span>stdout_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stdout.log&quot;</span>);
+        <span class="macro">assert!</span>(outputs.contains(<span class="kw-2">&amp;</span>stderr_path));
+        <span class="macro">assert!</span>(outputs.contains(<span class="kw-2">&amp;</span>stdout_path));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_logs_not_emitted_by_default</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">get_outputs_with_logs</span>(<span class="ident">tmpdir</span>.<span class="ident">path</span>(), <span class="bool-val">false</span>);
-        <span class="kw">let</span> <span class="ident">stderr_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bin/logs/booklets/dest.pdf.stderr.log&quot;</span>);
-        <span class="kw">let</span> <span class="ident">stdout_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bin/logs/booklets/dest.pdf.stdout.log&quot;</span>);
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">outputs</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">stderr_path</span>));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">outputs</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">stdout_path</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_logs_not_emitted_by_default() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>outputs = get_outputs_with_logs(tmpdir.path(), <span class="bool-val">false</span>);
+        <span class="kw">let </span>stderr_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stderr.log&quot;</span>);
+        <span class="kw">let </span>stdout_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stdout.log&quot;</span>);
+        <span class="macro">assert!</span>(!outputs.contains(<span class="kw-2">&amp;</span>stderr_path));
+        <span class="macro">assert!</span>(!outputs.contains(<span class="kw-2">&amp;</span>stdout_path));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -447,454 +447,454 @@
 <span id="447">447</span>
 <span id="448">448</span>
 <span id="449">449</span>
-</pre><pre class="rust"><code><span class="doccomment">//! The UI functionality for the task formats.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! The UI functionality for the task formats.
 
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::sync::mpsc</span>::{<span class="ident">channel</span>, <span class="ident">Receiver</span>, <span class="ident">Sender</span>};
+</span><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::sync::mpsc::{channel, Receiver, Sender};
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">termcolor::WriteColor</span>;
-<span class="kw">use</span> <span class="ident">termcolor</span>::{<span class="ident">Color</span>, <span class="ident">ColorChoice</span>, <span class="ident">ColorSpec</span>, <span class="ident">StandardStream</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">pub use </span>termcolor::WriteColor;
+<span class="kw">use </span>termcolor::{Color, ColorChoice, ColorSpec, StandardStream};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">curses</span>::{
-    <span class="ident">inner_block</span>, <span class="ident">render_block</span>, <span class="ident">render_server_status</span>, <span class="ident">CursesDrawer</span>, <span class="ident">CursesUI</span>, <span class="ident">FrameType</span>,
+<span class="kw">pub use </span>curses::{
+    inner_block, render_block, render_server_status, CursesDrawer, CursesUI, FrameType,
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">json::JsonUI</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">print::PrintUI</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">raw::RawUI</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">silent::SilentUI</span>;
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">ExecutionResourcesUsage</span>, <span class="ident">ExecutionResult</span>, <span class="ident">ExecutionStatus</span>, <span class="ident">WorkerUuid</span>};
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::DiagnosticContext</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ui_message::UIMessage</span>;
+<span class="kw">pub use </span>json::JsonUI;
+<span class="kw">pub use </span>print::PrintUI;
+<span class="kw">pub use </span>raw::RawUI;
+<span class="kw">pub use </span>silent::SilentUI;
+<span class="kw">use </span>task_maker_dag::{ExecutionResourcesUsage, ExecutionResult, ExecutionStatus, WorkerUuid};
+<span class="kw">use </span>task_maker_diagnostics::DiagnosticContext;
+<span class="kw">pub use </span>ui_message::UIMessage;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">cwrite</span>, <span class="ident">cwriteln</span>};
+<span class="kw">use crate</span>::{cwrite, cwriteln};
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">curses</span>;
-<span class="kw">mod</span> <span class="ident">json</span>;
-<span class="kw">mod</span> <span class="ident">print</span>;
-<span class="kw">mod</span> <span class="ident">raw</span>;
-<span class="kw">mod</span> <span class="ident">silent</span>;
-<span class="kw">mod</span> <span class="ident">ui_message</span>;
+<span class="kw">pub mod </span>curses;
+<span class="kw">mod </span>json;
+<span class="kw">mod </span>print;
+<span class="kw">mod </span>raw;
+<span class="kw">mod </span>silent;
+<span class="kw">mod </span>ui_message;
 
-<span class="doccomment">/// Channel type for sending `UIMessage`s.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">UIChannelSender</span> <span class="op">=</span> <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">UIMessage</span><span class="op">&gt;</span>;
-<span class="doccomment">/// Channel type for receiving `UIMessage`s.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">UIChannelReceiver</span> <span class="op">=</span> <span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">UIMessage</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Channel type for sending `UIMessage`s.
+</span><span class="kw">pub type </span>UIChannelSender = Sender&lt;UIMessage&gt;;
+<span class="doccomment">/// Channel type for receiving `UIMessage`s.
+</span><span class="kw">pub type </span>UIChannelReceiver = Receiver&lt;UIMessage&gt;;
 
-<span class="macro">lazy_static!</span> {
-    <span class="doccomment">/// Whether the terminal supports ANSI 256 colors.</span>
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HAS_ANSI256</span>: <span class="ident">bool</span> <span class="op">=</span> {
-        <span class="kw">if</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TM_ANSI256&quot;</span>).<span class="ident">as_deref</span>() <span class="op">==</span> <span class="prelude-val">Ok</span>(<span class="string">&quot;true&quot;</span>) {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">support</span>) <span class="op">=</span> <span class="ident">supports_color::on</span>(<span class="ident">supports_color::Stream::Stdout</span>) {
-                <span class="ident">support</span>.<span class="ident">has_256</span>
-            } <span class="kw">else</span> {
-                <span class="bool-val">false</span>
-            }
-        } <span class="kw">else</span> {
-            <span class="bool-val">false</span>
-        }
+<span class="macro">lazy_static! </span>{
+    <span class="doccomment">/// Whether the terminal supports ANSI 256 colors.
+    </span><span class="kw">static </span><span class="kw-2">ref </span>HAS_ANSI256: bool = {
+        <span class="kw">if </span>std::env::var(<span class="string">&quot;TM_ANSI256&quot;</span>).as_deref() == <span class="prelude-val">Ok</span>(<span class="string">&quot;true&quot;</span>) {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(support) = supports_color::on(supports_color::Stream::Stdout) {
+                support.has_256
+            } <span class="kw">else </span>{
+                <span class="bool-val">false
+            </span>}
+        } <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
     };
-    <span class="doccomment">/// Whetner the terminal supports 24-bit Truecolor.</span>
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HAS_TRUECOLOR</span>: <span class="ident">bool</span> <span class="op">=</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">support</span>) <span class="op">=</span> <span class="ident">supports_color::on</span>(<span class="ident">supports_color::Stream::Stdout</span>) {
-            <span class="ident">support</span>.<span class="ident">has_16m</span>
-        } <span class="kw">else</span> {
-            <span class="bool-val">false</span>
-        }
+    <span class="doccomment">/// Whetner the terminal supports 24-bit Truecolor.
+    </span><span class="kw">static </span><span class="kw-2">ref </span>HAS_TRUECOLOR: bool = {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(support) = supports_color::on(supports_color::Stream::Stdout) {
+            support.has_16m
+        } <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
     };
 }
 
-<span class="macro">macro_rules!</span> <span class="ident">define_color_inner</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>,) =&gt; {};
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">ansi</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ansi</span>:<span class="ident">expr</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_ANSI256</span> {
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="ident">Color::Ansi256</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ansi</span>)));
+<span class="macro">macro_rules! </span>define_color_inner {
+    (<span class="macro-nonterminal">$color</span>:expr,) =&gt; {};
+    (<span class="macro-nonterminal">$color</span>:expr, ansi(<span class="macro-nonterminal">$ansi</span>:expr), $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="kw">if </span><span class="kw-2">*</span>HAS_ANSI256 {
+            <span class="macro-nonterminal">$color</span>.set_fg(<span class="prelude-val">Some</span>(Color::Ansi256(<span class="macro-nonterminal">$ansi</span>)));
         }
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">rgb</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">g</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>:<span class="ident">expr</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">HAS_TRUECOLOR</span> {
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="ident">Color::Rgb</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">g</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>)));
+    (<span class="macro-nonterminal">$color</span>:expr, rgb(<span class="macro-nonterminal">$r</span>:expr, <span class="macro-nonterminal">$g</span>:expr, <span class="macro-nonterminal">$b</span>:expr), $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="kw">if </span><span class="kw-2">*</span>HAS_TRUECOLOR {
+            <span class="macro-nonterminal">$color</span>.set_fg(<span class="prelude-val">Some</span>(Color::Rgb(<span class="macro-nonterminal">$r</span>, <span class="macro-nonterminal">$g</span>, <span class="macro-nonterminal">$b</span>)));
         }
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">basic</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">basic</span>:<span class="ident">ident</span>), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_fg</span>(<span class="prelude-val">Some</span>(<span class="ident">Color</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">basic</span>));
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    (<span class="macro-nonterminal">$color</span>:expr, basic(<span class="macro-nonterminal">$basic</span>:ident), $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro-nonterminal">$color</span>.set_fg(<span class="prelude-val">Some</span>(Color::<span class="macro-nonterminal">$basic</span>));
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">intense</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_intense</span>(<span class="bool-val">true</span>);
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    (<span class="macro-nonterminal">$color</span>:expr, intense, $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro-nonterminal">$color</span>.set_intense(<span class="bool-val">true</span>);
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, <span class="ident">bold</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>.<span class="ident">set_bold</span>(<span class="bool-val">true</span>);
-        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>)
+    (<span class="macro-nonterminal">$color</span>:expr, bold, $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {
+        <span class="macro-nonterminal">$color</span>.set_bold(<span class="bool-val">true</span>);
+        <span class="macro">define_color_inner!</span>(<span class="macro-nonterminal">$color</span>, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>)
     };
 }
-<span class="macro">macro_rules!</span> <span class="ident">define_color</span> {
-    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {{
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">ColorSpec::new</span>();
-        <span class="macro">define_color_inner!</span>(<span class="ident">color</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="kw-2">*</span>,);
-        <span class="ident">color</span>
+<span class="macro">macro_rules! </span>define_color {
+    ($(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; {{
+        <span class="kw">let </span><span class="kw-2">mut </span>color = ColorSpec::new();
+        <span class="macro">define_color_inner!</span>(color, $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>,);
+        color
     }};
 }
 
-<span class="macro">lazy_static!</span> {
-    <span class="doccomment">/// The RED color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">RED</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Red</span>), <span class="ident">ansi</span>(<span class="number">196</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
-    <span class="doccomment">/// The RED color to use with `cwrite!` and `cwriteln!`, without bold.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SOFT_RED</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Red</span>), <span class="ident">ansi</span>(<span class="number">196</span>), <span class="ident">intense</span>);
-    <span class="doccomment">/// The GREEN color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">GREEN</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Green</span>), <span class="ident">ansi</span>(<span class="number">118</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
-    <span class="doccomment">/// The YELLOW color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">YELLOW</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Yellow</span>), <span class="ident">ansi</span>(<span class="number">226</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
-    <span class="doccomment">/// The ORANGE color to use with `cwrite!` and `cwriteln!`.</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ORANGE</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Yellow</span>), <span class="ident">ansi</span>(<span class="number">214</span>), <span class="ident">rgb</span>(<span class="number">255</span>, <span class="number">165</span>, <span class="number">0</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
-    <span class="doccomment">/// The BLUE color to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BLUE</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">basic</span>(<span class="ident">Blue</span>), <span class="ident">ansi</span>(<span class="number">33</span>), <span class="ident">intense</span>, <span class="ident">bold</span>);
-    <span class="doccomment">/// The bold style to use with `cwrite!` and `cwriteln!`</span>
-    <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">BOLD</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="macro">define_color!</span>(<span class="ident">bold</span>);
+<span class="macro">lazy_static! </span>{
+    <span class="doccomment">/// The RED color to use with `cwrite!` and `cwriteln!`
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>RED: ColorSpec = <span class="macro">define_color!</span>(basic(Red), ansi(<span class="number">196</span>), intense, bold);
+    <span class="doccomment">/// The RED color to use with `cwrite!` and `cwriteln!`, without bold.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>SOFT_RED: ColorSpec = <span class="macro">define_color!</span>(basic(Red), ansi(<span class="number">196</span>), intense);
+    <span class="doccomment">/// The GREEN color to use with `cwrite!` and `cwriteln!`
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>GREEN: ColorSpec = <span class="macro">define_color!</span>(basic(Green), ansi(<span class="number">118</span>), intense, bold);
+    <span class="doccomment">/// The YELLOW color to use with `cwrite!` and `cwriteln!`
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>YELLOW: ColorSpec = <span class="macro">define_color!</span>(basic(Yellow), ansi(<span class="number">226</span>), intense, bold);
+    <span class="doccomment">/// The ORANGE color to use with `cwrite!` and `cwriteln!`.
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>ORANGE: ColorSpec = <span class="macro">define_color!</span>(basic(Yellow), ansi(<span class="number">214</span>), rgb(<span class="number">255</span>, <span class="number">165</span>, <span class="number">0</span>), intense, bold);
+    <span class="doccomment">/// The BLUE color to use with `cwrite!` and `cwriteln!`
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>BLUE: ColorSpec = <span class="macro">define_color!</span>(basic(Blue), ansi(<span class="number">33</span>), intense, bold);
+    <span class="doccomment">/// The bold style to use with `cwrite!` and `cwriteln!`
+    </span><span class="kw">pub static </span><span class="kw-2">ref </span>BOLD: ColorSpec = <span class="macro">define_color!</span>(bold);
 }
 
-<span class="doccomment">/// The status of an execution.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">UIExecutionStatus</span> {
-    <span class="doccomment">/// The `Execution` is known to the DAG and when all its dependencies are ready it will</span>
-    <span class="doccomment">/// started.</span>
-    <span class="ident">Pending</span>,
-    <span class="doccomment">/// The `Execution` has been started on a worker.</span>
-    <span class="ident">Started</span> {
-        <span class="doccomment">/// The UUID of the worker.</span>
-        <span class="ident">worker</span>: <span class="ident">WorkerUuid</span>,
+<span class="doccomment">/// The status of an execution.
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, TypeScriptify)]
+</span><span class="kw">pub enum </span>UIExecutionStatus {
+    <span class="doccomment">/// The `Execution` is known to the DAG and when all its dependencies are ready it will
+    /// started.
+    </span>Pending,
+    <span class="doccomment">/// The `Execution` has been started on a worker.
+    </span>Started {
+        <span class="doccomment">/// The UUID of the worker.
+        </span>worker: WorkerUuid,
     },
-    <span class="doccomment">/// The `Execution` has been completed.</span>
-    <span class="ident">Done</span> {
-        <span class="doccomment">/// The result of the execution.</span>
-        <span class="ident">result</span>: <span class="ident">ExecutionResult</span>,
+    <span class="doccomment">/// The `Execution` has been completed.
+    </span>Done {
+        <span class="doccomment">/// The result of the execution.
+        </span>result: ExecutionResult,
     },
-    <span class="doccomment">/// At least one of its dependencies have failed, the `Execution` has been skipped.</span>
-    <span class="ident">Skipped</span>,
+    <span class="doccomment">/// At least one of its dependencies have failed, the `Execution` has been skipped.
+    </span>Skipped,
 }
 
-<span class="doccomment">/// The status of the compilation of a file.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CompilationStatus</span> {
-    <span class="doccomment">/// The compilation is known but it has not started yet.</span>
-    <span class="ident">Pending</span>,
-    <span class="doccomment">/// The compilation is running on a worker.</span>
-    <span class="ident">Running</span>,
-    <span class="doccomment">/// The compilation has completed.</span>
-    <span class="ident">Done</span> {
-        <span class="doccomment">/// The result of the compilation.</span>
-        <span class="ident">result</span>: <span class="ident">ExecutionResult</span>,
-        <span class="doccomment">/// The standard output of the compilation.</span>
-        <span class="ident">stdout</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// The standard error of the compilation.</span>
-        <span class="ident">stderr</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The status of the compilation of a file.
+</span><span class="attribute">#[derive(Debug, Clone, PartialEq)]
+</span><span class="kw">pub enum </span>CompilationStatus {
+    <span class="doccomment">/// The compilation is known but it has not started yet.
+    </span>Pending,
+    <span class="doccomment">/// The compilation is running on a worker.
+    </span>Running,
+    <span class="doccomment">/// The compilation has completed.
+    </span>Done {
+        <span class="doccomment">/// The result of the compilation.
+        </span>result: ExecutionResult,
+        <span class="doccomment">/// The standard output of the compilation.
+        </span>stdout: <span class="prelude-ty">Option</span>&lt;String&gt;,
+        <span class="doccomment">/// The standard error of the compilation.
+        </span>stderr: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
-    <span class="doccomment">/// The compilation has failed.</span>
-    <span class="ident">Failed</span> {
-        <span class="doccomment">/// The result of the compilation.</span>
-        <span class="ident">result</span>: <span class="ident">ExecutionResult</span>,
-        <span class="doccomment">/// The standard output of the compilation.</span>
-        <span class="ident">stdout</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// The standard error of the compilation.</span>
-        <span class="ident">stderr</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The compilation has failed.
+    </span>Failed {
+        <span class="doccomment">/// The result of the compilation.
+        </span>result: ExecutionResult,
+        <span class="doccomment">/// The standard output of the compilation.
+        </span>stdout: <span class="prelude-ty">Option</span>&lt;String&gt;,
+        <span class="doccomment">/// The standard error of the compilation.
+        </span>stderr: <span class="prelude-ty">Option</span>&lt;String&gt;,
     },
-    <span class="doccomment">/// The compilation has been skipped.</span>
-    <span class="ident">Skipped</span>,
+    <span class="doccomment">/// The compilation has been skipped.
+    </span>Skipped,
 }
 
-<span class="kw">impl</span> <span class="ident">CompilationStatus</span> {
-    <span class="doccomment">/// Apply to this `CompilationStatus` a new `UIExecutionStatus`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply_status</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>) {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">UIExecutionStatus::Pending</span> =&gt; <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="ident">CompilationStatus::Pending</span>,
-            <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="ident">CompilationStatus::Running</span>,
-            <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">result</span>
-                    .<span class="ident">stdout</span>
-                    .<span class="ident">as_ref</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">String::from_utf8_lossy</span>(<span class="ident">s</span>).<span class="ident">into</span>());
-                <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">result</span>
-                    .<span class="ident">stderr</span>
-                    .<span class="ident">as_ref</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">String::from_utf8_lossy</span>(<span class="ident">s</span>).<span class="ident">into</span>());
-                <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ExecutionStatus::Success</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                    <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="ident">CompilationStatus::Done</span> {
-                        <span class="ident">result</span>,
-                        <span class="ident">stdout</span>,
-                        <span class="ident">stderr</span>,
+<span class="kw">impl </span>CompilationStatus {
+    <span class="doccomment">/// Apply to this `CompilationStatus` a new `UIExecutionStatus`.
+    </span><span class="kw">pub fn </span>apply_status(<span class="kw-2">&amp;mut </span><span class="self">self</span>, status: UIExecutionStatus) {
+        <span class="kw">match </span>status {
+            UIExecutionStatus::Pending =&gt; <span class="kw-2">*</span><span class="self">self </span>= CompilationStatus::Pending,
+            UIExecutionStatus::Started { .. } =&gt; <span class="kw-2">*</span><span class="self">self </span>= CompilationStatus::Running,
+            UIExecutionStatus::Done { result } =&gt; {
+                <span class="kw">let </span>stdout = result
+                    .stdout
+                    .as_ref()
+                    .map(|s| String::from_utf8_lossy(s).into());
+                <span class="kw">let </span>stderr = result
+                    .stderr
+                    .as_ref()
+                    .map(|s| String::from_utf8_lossy(s).into());
+                <span class="kw">if let </span>ExecutionStatus::Success = result.status {
+                    <span class="kw-2">*</span><span class="self">self </span>= CompilationStatus::Done {
+                        result,
+                        stdout,
+                        stderr,
                     };
-                } <span class="kw">else</span> {
-                    <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="ident">CompilationStatus::Failed</span> {
-                        <span class="ident">result</span>,
-                        <span class="ident">stdout</span>,
-                        <span class="ident">stderr</span>,
+                } <span class="kw">else </span>{
+                    <span class="kw-2">*</span><span class="self">self </span>= CompilationStatus::Failed {
+                        result,
+                        stdout,
+                        stderr,
                     };
                 }
             }
-            <span class="ident">UIExecutionStatus::Skipped</span> =&gt; <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="ident">CompilationStatus::Skipped</span>,
+            UIExecutionStatus::Skipped =&gt; <span class="kw-2">*</span><span class="self">self </span>= CompilationStatus::Skipped,
         }
     }
 }
 
-<span class="doccomment">/// The state of a task, all the information for the UI are stored here.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The `T` at the end is to disambiguate from `UIState` due to a strange behaviour of the compiler.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">UIStateT</span> {
-    <span class="doccomment">/// Apply a `UIMessage` to this state.</span>
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">UIMessage</span>);
+<span class="doccomment">/// The state of a task, all the information for the UI are stored here.
+///
+/// The `T` at the end is to disambiguate from `UIState` due to a strange behaviour of the compiler.
+</span><span class="kw">pub trait </span>UIStateT {
+    <span class="doccomment">/// Apply a `UIMessage` to this state.
+    </span><span class="kw">fn </span>apply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: UIMessage);
 
-    <span class="doccomment">/// Print the final results using a finish UI.</span>
-    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>);
+    <span class="doccomment">/// Print the final results using a finish UI.
+    </span><span class="kw">fn </span>finish(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
 }
 
-<span class="doccomment">/// UI that prints to `stdout` the ending result of the evaluation of a task.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FinishUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Print the final state of the UI.</span>
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">State</span>);
+<span class="doccomment">/// UI that prints to `stdout` the ending result of the evaluation of a task.
+</span><span class="kw">pub trait </span>FinishUI&lt;State&gt; {
+    <span class="doccomment">/// Print the final state of the UI.
+    </span><span class="kw">fn </span>print(state: <span class="kw-2">&amp;</span>State);
 }
 
-<span class="doccomment">/// Collection of utilities for drawing the finish UI.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FinishUIUtils</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Stream where to print to.</span>
-    <span class="ident">stream</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">StandardStream</span>,
+<span class="doccomment">/// Collection of utilities for drawing the finish UI.
+</span><span class="kw">pub struct </span>FinishUIUtils&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Stream where to print to.
+    </span>stream: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>StandardStream,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">FinishUIUtils</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Make a new `FinishUIUtils` borrowing a `StandardStream`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">stream</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">StandardStream</span>) -&gt; <span class="ident">FinishUIUtils</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">FinishUIUtils</span> { <span class="ident">stream</span> }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; FinishUIUtils&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Make a new `FinishUIUtils` borrowing a `StandardStream`.
+    </span><span class="kw">pub fn </span>new(stream: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>StandardStream) -&gt; FinishUIUtils&lt;<span class="lifetime">&#39;a</span>&gt; {
+        FinishUIUtils { stream }
     }
 
-    <span class="doccomment">/// Print all the compilation statuses.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">print_compilations</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">compilations</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">CompilationStatus</span><span class="op">&gt;</span>) {
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, <span class="ident">BLUE</span>, <span class="string">&quot;Compilations&quot;</span>);
-        <span class="kw">let</span> <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">compilations</span>
-            .<span class="ident">keys</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">file_name</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>).<span class="ident">len</span>())
-            .<span class="ident">max</span>()
-            .<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-        <span class="kw">for</span> (<span class="ident">path</span>, <span class="ident">status</span>) <span class="kw">in</span> <span class="ident">compilations</span> {
+    <span class="doccomment">/// Print all the compilation statuses.
+    </span><span class="kw">pub fn </span>print_compilations(<span class="kw-2">&amp;mut </span><span class="self">self</span>, compilations: <span class="kw-2">&amp;</span>HashMap&lt;PathBuf, CompilationStatus&gt;) {
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Compilations&quot;</span>);
+        <span class="kw">let </span>max_len = compilations
+            .keys()
+            .map(|p| p.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>).len())
+            .max()
+            .unwrap_or(<span class="number">0</span>);
+        <span class="kw">for </span>(path, status) <span class="kw">in </span>compilations {
             <span class="macro">print!</span>(
                 <span class="string">&quot;{:width$}  &quot;</span>,
-                <span class="ident">path</span>.<span class="ident">file_name</span>()
-                    .<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>)
-                    .<span class="ident">to_string_lossy</span>(),
-                <span class="ident">width</span> <span class="op">=</span> <span class="ident">max_len</span>
+                path.file_name()
+                    .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+                    .to_string_lossy(),
+                width = max_len
             );
-            <span class="kw">match</span> <span class="ident">status</span> {
-                <span class="ident">CompilationStatus::Done</span> { <span class="ident">result</span>, .. } =&gt; {
-                    <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">GREEN</span>, <span class="string">&quot; OK  &quot;</span>);
-                    <span class="ident">FinishUIUtils::print_time_memory</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>.<span class="ident">resources</span>);
+            <span class="kw">match </span>status {
+                CompilationStatus::Done { result, .. } =&gt; {
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot; OK  &quot;</span>);
+                    FinishUIUtils::print_time_memory(<span class="kw-2">&amp;</span>result.resources);
                 }
-                <span class="ident">CompilationStatus::Failed</span> {
-                    <span class="ident">result</span>,
-                    <span class="ident">stdout</span>,
-                    <span class="ident">stderr</span>,
+                CompilationStatus::Failed {
+                    result,
+                    stdout,
+                    stderr,
                 } =&gt; {
-                    <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">RED</span>, <span class="string">&quot;FAIL &quot;</span>);
-                    <span class="ident">FinishUIUtils::print_time_memory</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>.<span class="ident">resources</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stdout</span>) <span class="op">=</span> <span class="ident">stdout</span> {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">stdout</span>.<span class="ident">trim</span>().<span class="ident">is_empty</span>() {
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;FAIL &quot;</span>);
+                    FinishUIUtils::print_time_memory(<span class="kw-2">&amp;</span>result.resources);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stdout) = stdout {
+                        <span class="kw">if </span>!stdout.trim().is_empty() {
                             <span class="macro">println!</span>();
-                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, <span class="ident">BOLD</span>, <span class="string">&quot;stdout:&quot;</span>);
-                            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">stdout</span>.<span class="ident">trim</span>());
+                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;stdout:&quot;</span>);
+                            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, stdout.trim());
                         }
                     }
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">stderr</span> {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">stderr</span>.<span class="ident">trim</span>().<span class="ident">is_empty</span>() {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = stderr {
+                        <span class="kw">if </span>!stderr.trim().is_empty() {
                             <span class="macro">println!</span>();
-                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, <span class="ident">BOLD</span>, <span class="string">&quot;stderr:&quot;</span>);
-                            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">stderr</span>.<span class="ident">trim</span>());
+                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;stderr:&quot;</span>);
+                            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, stderr.trim());
                         }
                     }
                 }
-                <span class="kw">_</span> =&gt; {
-                    <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">YELLOW</span>, <span class="string">&quot;{:?}&quot;</span>, <span class="ident">status</span>);
+                <span class="kw">_ </span>=&gt; {
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;{:?}&quot;</span>, status);
                 }
             }
             <span class="macro">println!</span>();
         }
     }
 
-    <span class="doccomment">/// Print the time and memory usage of an execution.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">print_time_memory</span>(<span class="ident">resources</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionResourcesUsage</span>) {
+    <span class="doccomment">/// Print the time and memory usage of an execution.
+    </span><span class="kw">pub fn </span>print_time_memory(resources: <span class="kw-2">&amp;</span>ExecutionResourcesUsage) {
         <span class="macro">print!</span>(
             <span class="string">&quot;{:2.3}s | {:3.1}MiB&quot;</span>,
-            <span class="ident">resources</span>.<span class="ident">cpu_time</span>,
-            (<span class="ident">resources</span>.<span class="ident">memory</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">1024.0</span>
-        );
+            resources.cpu_time,
+            (resources.memory <span class="kw">as </span>f64) / <span class="number">1024.0
+        </span>);
     }
 
-    <span class="doccomment">/// Print a message for the non-successful variants of the provided status.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">print_fail_execution_status</span>(<span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionStatus</span>) {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">ExecutionStatus::Success</span> =&gt; {}
-            <span class="ident">ExecutionStatus::ReturnCode</span>(<span class="ident">code</span>) =&gt; <span class="macro">print!</span>(<span class="string">&quot;Exited with {}&quot;</span>, <span class="ident">code</span>),
-            <span class="ident">ExecutionStatus::Signal</span>(<span class="ident">sig</span>, <span class="ident">name</span>) =&gt; <span class="macro">print!</span>(<span class="string">&quot;Signal {} ({})&quot;</span>, <span class="ident">sig</span>, <span class="ident">name</span>),
-            <span class="ident">ExecutionStatus::TimeLimitExceeded</span> =&gt; <span class="macro">print!</span>(<span class="string">&quot;Time limit exceeded&quot;</span>),
-            <span class="ident">ExecutionStatus::SysTimeLimitExceeded</span> =&gt; <span class="macro">print!</span>(<span class="string">&quot;Kernel time limit exceeded&quot;</span>),
-            <span class="ident">ExecutionStatus::WallTimeLimitExceeded</span> =&gt; <span class="macro">print!</span>(<span class="string">&quot;Wall time limit exceeded&quot;</span>),
-            <span class="ident">ExecutionStatus::MemoryLimitExceeded</span> =&gt; <span class="macro">print!</span>(<span class="string">&quot;Memory limit exceeded&quot;</span>),
-            <span class="ident">ExecutionStatus::InternalError</span>(<span class="ident">err</span>) =&gt; <span class="macro">print!</span>(<span class="string">&quot;Internal error: {}&quot;</span>, <span class="ident">err</span>),
+    <span class="doccomment">/// Print a message for the non-successful variants of the provided status.
+    </span><span class="kw">pub fn </span>print_fail_execution_status(status: <span class="kw-2">&amp;</span>ExecutionStatus) {
+        <span class="kw">match </span>status {
+            ExecutionStatus::Success =&gt; {}
+            ExecutionStatus::ReturnCode(code) =&gt; <span class="macro">print!</span>(<span class="string">&quot;Exited with {}&quot;</span>, code),
+            ExecutionStatus::Signal(sig, name) =&gt; <span class="macro">print!</span>(<span class="string">&quot;Signal {} ({})&quot;</span>, sig, name),
+            ExecutionStatus::TimeLimitExceeded =&gt; <span class="macro">print!</span>(<span class="string">&quot;Time limit exceeded&quot;</span>),
+            ExecutionStatus::SysTimeLimitExceeded =&gt; <span class="macro">print!</span>(<span class="string">&quot;Kernel time limit exceeded&quot;</span>),
+            ExecutionStatus::WallTimeLimitExceeded =&gt; <span class="macro">print!</span>(<span class="string">&quot;Wall time limit exceeded&quot;</span>),
+            ExecutionStatus::MemoryLimitExceeded =&gt; <span class="macro">print!</span>(<span class="string">&quot;Memory limit exceeded&quot;</span>),
+            ExecutionStatus::InternalError(err) =&gt; <span class="macro">print!</span>(<span class="string">&quot;Internal error: {}&quot;</span>, err),
         }
     }
 
-    <span class="doccomment">/// Find the maximum length of the solutions name from the keys of the given structure.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_max_len</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">solutions</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span> {
-        <span class="ident">solutions</span>
-            .<span class="ident">keys</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">file_name</span>().<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>).<span class="ident">len</span>())
-            .<span class="ident">max</span>()
-            .<span class="ident">unwrap_or</span>(<span class="number">0</span>)
+    <span class="doccomment">/// Find the maximum length of the solutions name from the keys of the given structure.
+    </span><span class="kw">pub fn </span>get_max_len&lt;T&gt;(solutions: <span class="kw-2">&amp;</span>HashMap&lt;PathBuf, T&gt;) -&gt; usize {
+        solutions
+            .keys()
+            .map(|p| p.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>).len())
+            .max()
+            .unwrap_or(<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Print the diagnostics.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">print_diagnostic_messages</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">diagnostics</span>: <span class="kw-2">&amp;</span><span class="ident">DiagnosticContext</span>) {
-        <span class="kw">let</span> <span class="ident">diagnostics</span> <span class="op">=</span> <span class="ident">diagnostics</span>.<span class="ident">diagnostics</span>();
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">diagnostics</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">for</span> <span class="ident">diagnostic</span> <span class="kw">in</span> <span class="ident">diagnostics</span>.<span class="ident">iter</span>().<span class="ident">sorted_by_key</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">level</span>()) {
-                <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">diagnostic</span>);
+    <span class="doccomment">/// Print the diagnostics.
+    </span><span class="kw">pub fn </span>print_diagnostic_messages(<span class="kw-2">&amp;mut </span><span class="self">self</span>, diagnostics: <span class="kw-2">&amp;</span>DiagnosticContext) {
+        <span class="kw">let </span>diagnostics = diagnostics.diagnostics();
+        <span class="kw">if </span>!diagnostics.is_empty() {
+            <span class="kw">for </span>diagnostic <span class="kw">in </span>diagnostics.iter().sorted_by_key(|d| d.level()) {
+                <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, diagnostic);
             }
         }
     }
 }
 
-<span class="doccomment">/// The sender of the UIMessage</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UIMessageSender</span> {
-    <span class="ident">sender</span>: <span class="ident">UIChannelSender</span>,
+<span class="doccomment">/// The sender of the UIMessage
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>UIMessageSender {
+    sender: UIChannelSender,
 }
 
-<span class="kw">impl</span> <span class="ident">UIMessageSender</span> {
-    <span class="doccomment">/// Make a new pair of UIMessageSender and ChannelReceiver.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; (<span class="ident">UIMessageSender</span>, <span class="ident">UIChannelReceiver</span>) {
-        <span class="kw">let</span> (<span class="ident">sender</span>, <span class="ident">receiver</span>) <span class="op">=</span> <span class="ident">channel</span>();
-        (<span class="ident">UIMessageSender</span> { <span class="ident">sender</span> }, <span class="ident">receiver</span>)
+<span class="kw">impl </span>UIMessageSender {
+    <span class="doccomment">/// Make a new pair of UIMessageSender and ChannelReceiver.
+    </span><span class="kw">pub fn </span>new() -&gt; (UIMessageSender, UIChannelReceiver) {
+        <span class="kw">let </span>(sender, receiver) = channel();
+        (UIMessageSender { sender }, receiver)
     }
 
-    <span class="doccomment">/// Send a message to the channel.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">message</span>: <span class="ident">UIMessage</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">message</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">into</span>())
+    <span class="doccomment">/// Send a message to the channel.
+    </span><span class="kw">pub fn </span>send(<span class="kw-2">&amp;</span><span class="self">self</span>, message: UIMessage) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="self">self</span>.sender.send(message).map_err(|e| e.into())
     }
 }
 
-<span class="doccomment">/// The trait that describes the UI functionalities.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">UI</span>: <span class="ident">Send</span> {
-    <span class="doccomment">/// Process a new UI message.</span>
-    <span class="kw">fn</span> <span class="ident">on_message</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">UIMessage</span>);
-    <span class="doccomment">/// Make the UI print the ending results.</span>
-    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>);
+<span class="doccomment">/// The trait that describes the UI functionalities.
+</span><span class="kw">pub trait </span>UI: Send {
+    <span class="doccomment">/// Process a new UI message.
+    </span><span class="kw">fn </span>on_message(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: UIMessage);
+    <span class="doccomment">/// Make the UI print the ending results.
+    </span><span class="kw">fn </span>finish(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
 }
 
-<span class="doccomment">/// The type of the UI to use, it enumerates all the known UI interfaces.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">UIType</span> {
-    <span class="doccomment">/// The `PrintUI`.</span>
-    <span class="ident">Print</span>,
-    <span class="doccomment">/// The `RawUI`.</span>
-    <span class="ident">Raw</span>,
-    <span class="doccomment">/// The `CursesUI`.</span>
-    <span class="ident">Curses</span>,
-    <span class="doccomment">/// The `JsonUI`.</span>
-    <span class="ident">Json</span>,
-    <span class="doccomment">/// The `SilentUI`.</span>
-    <span class="ident">Silent</span>,
+<span class="doccomment">/// The type of the UI to use, it enumerates all the known UI interfaces.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>UIType {
+    <span class="doccomment">/// The `PrintUI`.
+    </span>Print,
+    <span class="doccomment">/// The `RawUI`.
+    </span>Raw,
+    <span class="doccomment">/// The `CursesUI`.
+    </span>Curses,
+    <span class="doccomment">/// The `JsonUI`.
+    </span>Json,
+    <span class="doccomment">/// The `SilentUI`.
+    </span>Silent,
 }
 
-<span class="kw">impl</span> <span class="ident">std::str::FromStr</span> <span class="kw">for</span> <span class="ident">UIType</span> {
-    <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> <span class="ident">String</span>;
+<span class="kw">impl </span>std::str::FromStr <span class="kw">for </span>UIType {
+    <span class="kw">type </span><span class="prelude-val">Err </span>= String;
 
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UIType</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">s</span>.<span class="ident">to_ascii_lowercase</span>().<span class="ident">as_str</span>() {
-            <span class="string">&quot;print&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">UIType::Print</span>),
-            <span class="string">&quot;raw&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">UIType::Raw</span>),
-            <span class="string">&quot;curses&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">UIType::Curses</span>),
-            <span class="string">&quot;json&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">UIType::Json</span>),
-            <span class="string">&quot;silent&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">UIType::Silent</span>),
-            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;Unknown ui: {}&quot;</span>, <span class="ident">s</span>)),
+    <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;UIType, <span class="self">Self</span>::Err&gt; {
+        <span class="kw">match </span>s.to_ascii_lowercase().as_str() {
+            <span class="string">&quot;print&quot; </span>=&gt; <span class="prelude-val">Ok</span>(UIType::Print),
+            <span class="string">&quot;raw&quot; </span>=&gt; <span class="prelude-val">Ok</span>(UIType::Raw),
+            <span class="string">&quot;curses&quot; </span>=&gt; <span class="prelude-val">Ok</span>(UIType::Curses),
+            <span class="string">&quot;json&quot; </span>=&gt; <span class="prelude-val">Ok</span>(UIType::Json),
+            <span class="string">&quot;silent&quot; </span>=&gt; <span class="prelude-val">Ok</span>(UIType::Silent),
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;Unknown ui: {}&quot;</span>, s)),
         }
     }
 }
 
-<span class="doccomment">/// A simple printer that outputs to stdout. This can be used with `cwrite!` and `cwriteln!`.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StdoutPrinter</span> {
-    <span class="doccomment">/// The actual stream.</span>
-    <span class="kw">pub</span> <span class="ident">stream</span>: <span class="ident">StandardStream</span>,
+<span class="doccomment">/// A simple printer that outputs to stdout. This can be used with `cwrite!` and `cwriteln!`.
+</span><span class="attribute">#[allow(dead_code)]
+</span><span class="kw">pub struct </span>StdoutPrinter {
+    <span class="doccomment">/// The actual stream.
+    </span><span class="kw">pub </span>stream: StandardStream,
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">StdoutPrinter</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">stream</span>: <span class="ident">StandardStream::stdout</span>(<span class="ident">ColorChoice::Auto</span>),
+<span class="kw">impl </span>Default <span class="kw">for </span>StdoutPrinter {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            stream: StandardStream::stdout(ColorChoice::Auto),
         }
     }
 }
 
-<span class="doccomment">/// Write to `$self.stream`, in the color specified as second parameter. The arguments that follow</span>
-<span class="doccomment">/// will be passed to `write!`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate task_maker_format;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// use termcolor::{ColorSpec, ColorChoice};</span>
-<span class="doccomment">/// use task_maker_format::ui::StdoutPrinter;</span>
-<span class="doccomment">/// use task_maker_format::cwrite;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # fn main() {</span>
-<span class="doccomment">/// let mut color = ColorSpec::new();</span>
-<span class="doccomment">/// color.set_bold(true);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let mut printer = StdoutPrinter::default();</span>
-<span class="doccomment">/// cwrite!(printer, color, &quot;The output is {}&quot;, 42);</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">cwrite</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {{
-        <span class="kw">use</span> <span class="ident">std::io::Write</span>;
-        <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::ui::WriteColor</span>;
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">stream</span>.<span class="ident">set_color</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>).<span class="ident">unwrap</span>();
-        <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">stream</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>).<span class="ident">unwrap</span>();
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">stream</span>.<span class="ident">reset</span>().<span class="ident">unwrap</span>();
+<span class="doccomment">/// Write to `$self.stream`, in the color specified as second parameter. The arguments that follow
+/// will be passed to `write!`.
+///
+/// ```
+/// #[macro_use]
+/// extern crate task_maker_format;
+///
+/// use termcolor::{ColorSpec, ColorChoice};
+/// use task_maker_format::ui::StdoutPrinter;
+/// use task_maker_format::cwrite;
+///
+/// # fn main() {
+/// let mut color = ColorSpec::new();
+/// color.set_bold(true);
+///
+/// let mut printer = StdoutPrinter::default();
+/// cwrite!(printer, color, &quot;The output is {}&quot;, 42);
+/// # }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>cwrite {
+    (<span class="macro-nonterminal">$self</span>:expr, <span class="macro-nonterminal">$color</span>:expr, $(<span class="macro-nonterminal">$arg</span>:tt)<span class="kw-2">*</span>) =&gt; {{
+        <span class="kw">use </span>std::io::Write;
+        <span class="kw">use </span><span class="macro-nonterminal">$crate::ui::WriteColor</span>;
+        <span class="macro-nonterminal">$self</span>.stream.set_color(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$color</span>).unwrap();
+        <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$self</span>.stream, $(<span class="macro-nonterminal">$arg</span>)<span class="kw-2">*</span>).unwrap();
+        <span class="macro-nonterminal">$self</span>.stream.reset().unwrap();
     }};
 }
 
-<span class="doccomment">/// Write to `$self.stream`, in the color specified as second parameter. The arguments that follow</span>
-<span class="doccomment">/// will be passed to `writeln!`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate task_maker_format;</span>
-<span class="doccomment">/// use termcolor::{ColorSpec, ColorChoice};</span>
-<span class="doccomment">/// use task_maker_format::ui::StdoutPrinter;</span>
-<span class="doccomment">/// use task_maker_format::cwrite;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # fn main() {</span>
-<span class="doccomment">/// let mut color = ColorSpec::new();</span>
-<span class="doccomment">/// color.set_bold(true);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let mut printer = StdoutPrinter::default();</span>
-<span class="doccomment">/// cwriteln!(printer, color, &quot;The output is {}&quot;, 42);</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">cwriteln</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {{
-        <span class="kw">use</span> <span class="ident">std::io::Write</span>;
-        <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::ui::WriteColor</span>;
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">stream</span>.<span class="ident">set_color</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">color</span>).<span class="ident">unwrap</span>();
-        <span class="macro">writeln!</span>(<span class="kw-2">&amp;mut</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">stream</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>).<span class="ident">unwrap</span>();
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">stream</span>.<span class="ident">reset</span>().<span class="ident">unwrap</span>();
+<span class="doccomment">/// Write to `$self.stream`, in the color specified as second parameter. The arguments that follow
+/// will be passed to `writeln!`.
+///
+/// ```
+/// #[macro_use]
+/// extern crate task_maker_format;
+/// use termcolor::{ColorSpec, ColorChoice};
+/// use task_maker_format::ui::StdoutPrinter;
+/// use task_maker_format::cwrite;
+///
+/// # fn main() {
+/// let mut color = ColorSpec::new();
+/// color.set_bold(true);
+///
+/// let mut printer = StdoutPrinter::default();
+/// cwriteln!(printer, color, &quot;The output is {}&quot;, 42);
+/// # }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>cwriteln {
+    (<span class="macro-nonterminal">$self</span>:expr, <span class="macro-nonterminal">$color</span>:expr, $(<span class="macro-nonterminal">$arg</span>:tt)<span class="kw-2">*</span>) =&gt; {{
+        <span class="kw">use </span>std::io::Write;
+        <span class="kw">use </span><span class="macro-nonterminal">$crate::ui::WriteColor</span>;
+        <span class="macro-nonterminal">$self</span>.stream.set_color(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$color</span>).unwrap();
+        <span class="macro">writeln!</span>(<span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$self</span>.stream, $(<span class="macro-nonterminal">$arg</span>)<span class="kw-2">*</span>).unwrap();
+        <span class="macro-nonterminal">$self</span>.stream.reset().unwrap();
     }};
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

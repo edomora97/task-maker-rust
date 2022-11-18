@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/rust.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rust.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/rust.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rust.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -160,167 +160,167 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionCommand</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>task_maker_dag::ExecutionCommand;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::language</span>::{
-    <span class="ident">CompilationSettings</span>, <span class="ident">CompiledLanguageBuilder</span>, <span class="ident">Language</span>, <span class="ident">SimpleCompiledLanguageBuilder</span>,
+<span class="kw">use </span><span class="kw">crate</span>::language::{
+    CompilationSettings, CompiledLanguageBuilder, Language, SimpleCompiledLanguageBuilder,
 };
 
-<span class="doccomment">/// Configuration of the Rust language to use.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageRustConfiguration</span> {
-    <span class="doccomment">/// Path to the rustup home in the worker.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// We cannot know if and where rustup is installed in the worker machines, and we cannot simply</span>
-    <span class="doccomment">/// expose `$HOME` and `$RUSTUP_HOME` because this has to make the entire `/home` readable.</span>
-    <span class="doccomment">/// Therefore, if you want to use rustup in the worker you have to clearly state here its path.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If `$RUSTUP_HOME` is set, this should be its value. Otherwise it should be `$HOME/.rustup`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If this is `None`, it is assumed that rustup is not used.</span>
-    <span class="kw">pub</span> <span class="ident">rustup_home_path</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Configuration of the Rust language to use.
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>LanguageRustConfiguration {
+    <span class="doccomment">/// Path to the rustup home in the worker.
+    ///
+    /// We cannot know if and where rustup is installed in the worker machines, and we cannot simply
+    /// expose `$HOME` and `$RUSTUP_HOME` because this has to make the entire `/home` readable.
+    /// Therefore, if you want to use rustup in the worker you have to clearly state here its path.
+    ///
+    /// If `$RUSTUP_HOME` is set, this should be its value. Otherwise it should be `$HOME/.rustup`.
+    ///
+    /// If this is `None`, it is assumed that rustup is not used.
+    </span><span class="kw">pub </span>rustup_home_path: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageRustConfiguration</span> {
-    <span class="kw">fn</span> <span class="ident">from_env</span>() -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">rustup_home_path</span> <span class="op">=</span> <span class="ident">std::env::var_os</span>(<span class="string">&quot;TM_RUSTUP_HOME&quot;</span>).<span class="ident">map</span>(<span class="ident">Into::into</span>);
-        <span class="self">Self</span> { <span class="ident">rustup_home_path</span> }
+<span class="kw">impl </span>LanguageRustConfiguration {
+    <span class="kw">fn </span>from_env() -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>rustup_home_path = std::env::var_os(<span class="string">&quot;TM_RUSTUP_HOME&quot;</span>).map(Into::into);
+        <span class="self">Self </span>{ rustup_home_path }
     }
 }
 
-<span class="doccomment">/// The Rust language.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageRust</span> {
-    <span class="doccomment">/// The configuration of Rust.</span>
-    <span class="kw">pub</span> <span class="ident">config</span>: <span class="ident">LanguageRustConfiguration</span>,
+<span class="doccomment">/// The Rust language.
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>LanguageRust {
+    <span class="doccomment">/// The configuration of Rust.
+    </span><span class="kw">pub </span>config: LanguageRustConfiguration,
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageRust</span> {
-    <span class="doccomment">/// Make a new `LanguageRust`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">config</span>: <span class="ident">LanguageRustConfiguration::from_env</span>(),
+<span class="kw">impl </span>LanguageRust {
+    <span class="doccomment">/// Make a new `LanguageRust`.
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            config: LanguageRustConfiguration::from_env(),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Language</span> <span class="kw">for</span> <span class="ident">LanguageRust</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="string">&quot;Rust&quot;</span>
-    }
+<span class="kw">impl </span>Language <span class="kw">for </span>LanguageRust {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;Rust&quot;
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="macro">vec!</span>[<span class="string">&quot;rs&quot;</span>]
     }
 
-    <span class="kw">fn</span> <span class="ident">need_compilation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">true</span>
-    }
+    <span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">inline_comment_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="prelude-val">Some</span>(<span class="string">&quot;//&quot;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">compilation_builder</span>(
+    <span class="kw">fn </span>compilation_builder(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">settings</span>: <span class="ident">CompilationSettings</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CompiledLanguageBuilder</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">SimpleCompiledLanguageBuilder::new</span>(
+        source: <span class="kw-2">&amp;</span>Path,
+        settings: CompilationSettings,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">&#39;_</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>metadata = SimpleCompiledLanguageBuilder::new(
             <span class="self">self</span>,
-            <span class="ident">source</span>,
-            <span class="ident">settings</span>,
-            <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;rustc&quot;</span>),
+            source,
+            settings,
+            ExecutionCommand::system(<span class="string">&quot;rustc&quot;</span>),
         );
-        <span class="ident">metadata</span>.<span class="ident">grader_only</span>();
-        <span class="comment">// Use a fixed name for the source file, so that the grader can import it.</span>
-        <span class="ident">metadata</span>.<span class="ident">source_name</span> <span class="op">=</span> <span class="string">&quot;source.rs&quot;</span>.<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">binary_name</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">binary_name</span>.<span class="ident">clone</span>();
-        <span class="ident">metadata</span>
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-O&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;--cfg&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;EVAL&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="string">&quot;-o&quot;</span>)
-            .<span class="ident">add_arg</span>(<span class="ident">binary_name</span>);
-        <span class="kw">if</span> <span class="ident">metadata</span>.<span class="ident">settings</span>.<span class="ident">list_static</span> {
-            <span class="ident">metadata</span>
-                .<span class="ident">add_arg</span>(<span class="string">&quot;--target&quot;</span>)
-                .<span class="ident">add_arg</span>(<span class="string">&quot;x86_64-unknown-linux-musl&quot;</span>);
+        metadata.grader_only();
+        <span class="comment">// Use a fixed name for the source file, so that the grader can import it.
+        </span>metadata.source_name = <span class="string">&quot;source.rs&quot;</span>.to_string();
+        <span class="kw">let </span>binary_name = metadata.binary_name.clone();
+        metadata
+            .add_arg(<span class="string">&quot;-O&quot;</span>)
+            .add_arg(<span class="string">&quot;--cfg&quot;</span>)
+            .add_arg(<span class="string">&quot;EVAL&quot;</span>)
+            .add_arg(<span class="string">&quot;-o&quot;</span>)
+            .add_arg(binary_name);
+        <span class="kw">if </span>metadata.settings.list_static {
+            metadata
+                .add_arg(<span class="string">&quot;--target&quot;</span>)
+                .add_arg(<span class="string">&quot;x86_64-unknown-linux-musl&quot;</span>);
         }
 
-        <span class="kw">let</span> <span class="ident">rustup_home_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">config</span>.<span class="ident">rustup_home_path</span>.<span class="ident">clone</span>();
-        <span class="ident">metadata</span>.<span class="ident">callback</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">comp</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rustup_home_path</span>) <span class="op">=</span> <span class="ident">rustup_home_path</span> {
-                <span class="ident">comp</span>.<span class="ident">env</span>(
+        <span class="kw">let </span>rustup_home_path = <span class="self">self</span>.config.rustup_home_path.clone();
+        metadata.callback(<span class="kw">move </span>|comp| {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(rustup_home_path) = rustup_home_path {
+                comp.env(
                     <span class="string">&quot;RUSTUP_HOME&quot;</span>,
-                    <span class="ident">rustup_home_path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>(),
+                    rustup_home_path.to_string_lossy().to_string(),
                 );
-                <span class="ident">comp</span>.<span class="ident">limits_mut</span>().<span class="ident">add_extra_readable_dir</span>(<span class="ident">rustup_home_path</span>);
+                comp.limits_mut().add_extra_readable_dir(rustup_home_path);
             }
         });
 
-        <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">metadata</span>))
+        <span class="prelude-val">Some</span>(Box::new(metadata))
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionDAG</span>;
-    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>speculoos::prelude::<span class="kw-2">*</span>;
+    <span class="kw">use </span>task_maker_dag::ExecutionDAG;
+    <span class="kw">use </span>tempfile::TempDir;
 
-    <span class="kw">use</span> <span class="kw">crate</span>::{
-        <span class="ident">language</span>::{<span class="ident">CompilationSettings</span>, <span class="ident">Language</span>},
-        <span class="ident">GraderMap</span>,
+    <span class="kw">use crate</span>::{
+        language::{CompilationSettings, Language},
+        GraderMap,
     };
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::LanguageRust</span>;
+    <span class="kw">use </span><span class="kw">super</span>::LanguageRust;
 
-    <span class="kw">fn</span> <span class="ident">setup</span>() -&gt; <span class="ident">TempDir</span> {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.rs&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="ident">foo</span>, <span class="string">&quot;fn main() {}&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">tempdir</span>
+    <span class="kw">fn </span>setup() -&gt; TempDir {
+        <span class="kw">let </span>tempdir = TempDir::new().unwrap();
+        <span class="kw">let </span>foo = tempdir.path().join(<span class="string">&quot;foo.rs&quot;</span>);
+        std::fs::write(foo, <span class="string">&quot;fn main() {}&quot;</span>).unwrap();
+        tempdir
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args() {
+        <span class="kw">let </span>tmp = setup();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageRust::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.rs&quot;</span>), <span class="ident">CompilationSettings::default</span>())
-            .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span>lang = LanguageRust::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.rs&quot;</span>), CompilationSettings::default())
+            .unwrap();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
+        <span class="kw">let </span>args = comp.args;
 
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;source.rs&quot;</span>.<span class="ident">to_string</span>());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;source.rs&quot;</span>.to_string());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_compilation_args_with_grader</span>() {
-        <span class="kw">let</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">setup</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_compilation_args_with_grader() {
+        <span class="kw">let </span>tmp = setup();
 
-        <span class="kw">let</span> <span class="ident">grader_path</span> <span class="op">=</span> <span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;grader.rs&quot;</span>);
-        <span class="ident">std::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">grader_path</span>, <span class="string">&quot;mod source;\nfn main() {}&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let </span>grader_path = tmp.path().join(<span class="string">&quot;grader.rs&quot;</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>grader_path, <span class="string">&quot;mod source;\nfn main() {}&quot;</span>).unwrap();
 
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageRust::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">lang</span>
-            .<span class="ident">compilation_builder</span>(<span class="kw-2">&amp;</span><span class="ident">tmp</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.rs&quot;</span>), <span class="ident">CompilationSettings::default</span>())
-            .<span class="ident">unwrap</span>();
+        <span class="kw">let </span>lang = LanguageRust::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.rs&quot;</span>), CompilationSettings::default())
+            .unwrap();
 
-        <span class="kw">let</span> <span class="ident">graders</span> <span class="op">=</span> <span class="ident">GraderMap::new</span>(<span class="macro">vec!</span>[<span class="kw-2">&amp;</span><span class="ident">grader_path</span>]);
-        <span class="ident">builder</span>.<span class="ident">use_grader</span>(<span class="kw-2">&amp;</span><span class="ident">graders</span>);
+        <span class="kw">let </span>graders = GraderMap::new(<span class="macro">vec!</span>[<span class="kw-2">&amp;</span>grader_path]);
+        builder.use_grader(<span class="kw-2">&amp;</span>graders);
 
-        <span class="kw">let</span> (<span class="ident">comp</span>, <span class="ident">_exec</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">finalize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG::new</span>()).<span class="ident">unwrap</span>();
+        <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">comp</span>.<span class="ident">args</span>;
+        <span class="kw">let </span>args = comp.args;
 
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">contains</span>(<span class="string">&quot;grader.rs&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">does_not_contain</span>(<span class="string">&quot;source.rs&quot;</span>.<span class="ident">to_string</span>());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;grader.rs&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">&quot;source.rs&quot;</span>.to_string());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

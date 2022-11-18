@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/format/italian_yaml/gen_gen.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gen_gen.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/format/italian_yaml/gen_gen.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gen_gen.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -546,553 +546,553 @@
 <span id="546">546</span>
 <span id="547">547</span>
 <span id="548">548</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::path::Path</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::Path;
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">pest::Parser</span>;
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
+<span class="kw">use </span>pest::Parser;
 
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::CodeSpan</span>;
+<span class="kw">use </span>task_maker_diagnostics::CodeSpan;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::format::italian_yaml::TaskInputEntry</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::italian_yaml::cleanup_subtask_name</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{
-    <span class="ident">InputGenerator</span>, <span class="ident">InputValidator</span>, <span class="ident">OutputGenerator</span>, <span class="ident">SubtaskId</span>, <span class="ident">SubtaskInfo</span>, <span class="ident">TestcaseId</span>,
-    <span class="ident">TestcaseInfo</span>,
+<span class="kw">use </span><span class="kw">crate</span>::ioi::format::italian_yaml::TaskInputEntry;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::italian_yaml::cleanup_subtask_name;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{
+    InputGenerator, InputValidator, OutputGenerator, SubtaskId, SubtaskInfo, TestcaseId,
+    TestcaseInfo,
 };
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">find_source_file</span>, <span class="ident">WriteBinTo</span>};
+<span class="kw">use crate</span>::{find_source_file, WriteBinTo};
 
-<span class="doccomment">/// This module exists because of a `pest`&#39;s bug: &lt;https://github.com/pest-parser/pest/issues/326&gt;</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="kw">mod</span> <span class="ident">parser</span> {
-    <span class="doccomment">/// The gen/GEN file parser.</span>
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>)]</span>
-    <span class="attribute">#[<span class="ident">grammar</span> <span class="op">=</span> <span class="string">&quot;ioi/format/italian_yaml/GEN.pest&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GENParser</span>;
+<span class="doccomment">/// This module exists because of a `pest`&#39;s bug: &lt;https://github.com/pest-parser/pest/issues/326&gt;
+</span><span class="attribute">#[allow(missing_docs)]
+</span><span class="kw">mod </span>parser {
+    <span class="doccomment">/// The gen/GEN file parser.
+    </span><span class="attribute">#[derive(Parser)]
+    #[grammar = <span class="string">&quot;ioi/format/italian_yaml/GEN.pest&quot;</span>]
+    </span><span class="kw">pub struct </span>GENParser;
 }
 
-<span class="doccomment">/// Parse the `gen/GEN` file extracting the subtasks and the testcases.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">parse_gen_gen</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>, <span class="ident">V</span>, <span class="ident">O</span><span class="op">&gt;</span>(
-    <span class="ident">path</span>: <span class="ident">P</span>,
-    <span class="ident">get_validator</span>: <span class="ident">V</span>,
-    <span class="ident">get_output_gen</span>: <span class="ident">O</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInputEntry</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">V</span>: <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span>,
-    <span class="ident">O</span>: <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span>,
+<span class="doccomment">/// Parse the `gen/GEN` file extracting the subtasks and the testcases.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>parse_gen_gen&lt;P: AsRef&lt;Path&gt;, V, O&gt;(
+    path: P,
+    get_validator: V,
+    get_output_gen: O,
+) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;TaskInputEntry&gt;, Error&gt;
+<span class="kw">where
+    </span>V: Fn(<span class="prelude-ty">Option</span>&lt;SubtaskId&gt;) -&gt; InputValidator,
+    O: Fn(TestcaseId) -&gt; OutputGenerator,
 {
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">as_ref</span>();
-    <span class="kw">let</span> <span class="ident">task_dir</span> <span class="op">=</span> <span class="ident">path</span>
-        .<span class="ident">parent</span>()
-        .<span class="ident">context</span>(<span class="string">&quot;Invalid gen/GEN path&quot;</span>)<span class="question-mark">?</span>
-        .<span class="ident">parent</span>()
-        .<span class="ident">context</span>(<span class="string">&quot;Invalid gen/GEN path&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">content</span> <span class="op">=</span> <span class="ident">std::fs::read_to_string</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Cannot read gen/GEN from {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span>
-        <span class="ident">parser::GENParser::parse</span>(<span class="ident">parser::Rule::file</span>, <span class="kw-2">&amp;</span><span class="ident">content</span>).<span class="ident">context</span>(<span class="string">&quot;Cannot parse gen/GEN&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">next</span>().<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>; <span class="comment">// extract the real file</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">testcase_count</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">subtask_id</span>: <span class="ident">SubtaskId</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">entries</span> <span class="op">=</span> <span class="macro">vec!</span>[];
+    <span class="kw">let </span>path = path.as_ref();
+    <span class="kw">let </span>task_dir = path
+        .parent()
+        .context(<span class="string">&quot;Invalid gen/GEN path&quot;</span>)<span class="question-mark">?
+        </span>.parent()
+        .context(<span class="string">&quot;Invalid gen/GEN path&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>content = std::fs::read_to_string(<span class="kw-2">&amp;</span>path)
+        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot read gen/GEN from {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>file =
+        parser::GENParser::parse(parser::Rule::file, <span class="kw-2">&amp;</span>content).context(<span class="string">&quot;Cannot parse gen/GEN&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>file = file.next().ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>; <span class="comment">// extract the real file
+    </span><span class="kw">let </span><span class="kw-2">mut </span>testcase_count = <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>subtask_id: SubtaskId = <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>entries = <span class="macro">vec!</span>[];
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_subtask</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">SubtaskInfo</span> {
-        <span class="ident">id</span>: <span class="number">0</span>,
-        <span class="ident">name</span>: <span class="prelude-val">None</span>,
-        <span class="ident">description</span>: <span class="prelude-val">None</span>,
-        <span class="ident">max_score</span>: <span class="number">100.0</span>,
-        <span class="ident">testcases</span>: <span class="ident">HashMap::new</span>(),
-        <span class="ident">span</span>: <span class="prelude-val">None</span>,
+    <span class="kw">let </span><span class="kw-2">mut </span>default_subtask = <span class="prelude-val">Some</span>(SubtaskInfo {
+        id: <span class="number">0</span>,
+        name: <span class="prelude-val">None</span>,
+        description: <span class="prelude-val">None</span>,
+        max_score: <span class="number">100.0</span>,
+        testcases: HashMap::new(),
+        span: <span class="prelude-val">None</span>,
     });
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">generators</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
-        <span class="ident">task_dir</span>,
+    <span class="kw">let </span><span class="kw-2">mut </span>generators = find_source_file(
+        task_dir,
         <span class="macro">vec!</span>[
             <span class="string">&quot;gen/generator.*&quot;</span>,
             <span class="string">&quot;gen/generatore.*&quot;</span>,
             <span class="string">&quot;gen/generator&quot;</span>,
             <span class="string">&quot;gen/generatore&quot;</span>,
         ],
-        <span class="ident">task_dir</span>,
+        task_dir,
         <span class="prelude-val">None</span>,
-        <span class="ident">WriteBinTo::path</span>(<span class="string">&quot;bin/generator&quot;</span>),
+        WriteBinTo::path(<span class="string">&quot;bin/generator&quot;</span>),
     );
-    <span class="kw">if</span> <span class="ident">generators</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="ident">generators</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">name</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">bail!</span>(<span class="string">&quot;Multiple generators found: {:?}&quot;</span>, <span class="ident">paths</span>);
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">generators</span>.<span class="ident">is_empty</span>() {
+    <span class="kw">if </span>generators.len() &gt; <span class="number">1 </span>{
+        <span class="kw">let </span>paths = generators.iter().map(|s| s.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="macro">bail!</span>(<span class="string">&quot;Multiple generators found: {:?}&quot;</span>, paths);
+    } <span class="kw">else if </span>generators.is_empty() {
         <span class="macro">bail!</span>(<span class="string">&quot;No generator found&quot;</span>);
     }
-    <span class="kw">let</span> <span class="ident">generator</span> <span class="op">=</span> <span class="ident">generators</span>.<span class="ident">pop</span>().<span class="ident">map</span>(<span class="ident">Arc::new</span>).<span class="ident">unwrap</span>();
-    <span class="macro">debug!</span>(<span class="string">&quot;Detected input generator: {:?}&quot;</span>, <span class="ident">generator</span>);
+    <span class="kw">let </span>generator = generators.pop().map(Arc::new).unwrap();
+    <span class="macro">debug!</span>(<span class="string">&quot;Detected input generator: {:?}&quot;</span>, generator);
 
-    <span class="kw">for</span> <span class="ident">line</span> <span class="kw">in</span> <span class="ident">file</span>.<span class="ident">into_inner</span>() {
-        <span class="kw">match</span> <span class="ident">line</span>.<span class="ident">as_rule</span>() {
-            <span class="ident">parser::Rule::line</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">as_span</span>();
-                <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">line</span>
-                    .<span class="ident">into_inner</span>()
-                    .<span class="ident">next</span>()
-                    .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>;
-                <span class="kw">match</span> <span class="ident">line</span>.<span class="ident">as_rule</span>() {
-                    <span class="ident">parser::Rule::subtask</span> =&gt; {
-                        <span class="ident">default_subtask</span>.<span class="ident">take</span>(); <span class="comment">// ignore the default subtask ever</span>
-                        <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="ident">line</span>
-                            .<span class="ident">into_inner</span>()
-                            .<span class="ident">next</span>()
-                            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>
-                            .<span class="ident">as_str</span>();
-                        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">strip_prefix</span>(<span class="ident">task_dir</span>).<span class="ident">unwrap_or</span>(<span class="ident">path</span>);
-                        <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Subtask</span>(<span class="ident">SubtaskInfo</span> {
-                            <span class="ident">id</span>: <span class="ident">subtask_id</span>,
-                            <span class="ident">name</span>: <span class="prelude-val">None</span>,
-                            <span class="ident">description</span>: <span class="prelude-val">None</span>,
-                            <span class="ident">max_score</span>: <span class="ident">score</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>().<span class="ident">context</span>(<span class="string">&quot;Invalid subtask score&quot;</span>)<span class="question-mark">?</span>,
-                            <span class="ident">testcases</span>: <span class="ident">HashMap::new</span>(),
-                            <span class="ident">span</span>: <span class="ident">CodeSpan::from_str</span>(
-                                <span class="ident">path</span>,
-                                <span class="kw-2">&amp;</span><span class="ident">content</span>,
-                                <span class="ident">span</span>.<span class="ident">start</span>(),
-                                <span class="ident">span</span>.<span class="ident">end</span>() <span class="op">-</span> <span class="ident">span</span>.<span class="ident">start</span>(),
+    <span class="kw">for </span>line <span class="kw">in </span>file.into_inner() {
+        <span class="kw">match </span>line.as_rule() {
+            parser::Rule::line =&gt; {
+                <span class="kw">let </span>span = line.as_span();
+                <span class="kw">let </span>line = line
+                    .into_inner()
+                    .next()
+                    .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>;
+                <span class="kw">match </span>line.as_rule() {
+                    parser::Rule::subtask =&gt; {
+                        default_subtask.take(); <span class="comment">// ignore the default subtask ever
+                        </span><span class="kw">let </span>score = line
+                            .into_inner()
+                            .next()
+                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?
+                            </span>.as_str();
+                        <span class="kw">let </span>path = path.strip_prefix(task_dir).unwrap_or(path);
+                        entries.push(TaskInputEntry::Subtask(SubtaskInfo {
+                            id: subtask_id,
+                            name: <span class="prelude-val">None</span>,
+                            description: <span class="prelude-val">None</span>,
+                            max_score: score.parse::&lt;f64&gt;().context(<span class="string">&quot;Invalid subtask score&quot;</span>)<span class="question-mark">?</span>,
+                            testcases: HashMap::new(),
+                            span: CodeSpan::from_str(
+                                path,
+                                <span class="kw-2">&amp;</span>content,
+                                span.start(),
+                                span.end() - span.start(),
                             )
-                            .<span class="ident">ok</span>(),
+                            .ok(),
                         }));
-                        <span class="ident">subtask_id</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        subtask_id += <span class="number">1</span>;
                     }
-                    <span class="ident">parser::Rule::subtask_name</span> =&gt; {
-                        <span class="kw">let</span> <span class="ident">last_entry</span> <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">last_mut</span>().<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+                    parser::Rule::subtask_name =&gt; {
+                        <span class="kw">let </span>last_entry = entries.last_mut().ok_or_else(|| {
                             <span class="macro">anyhow!</span>(<span class="string">&quot;A #STNAME: rule must immediately follow a #ST: in gen/GEN&quot;</span>)
                         })<span class="question-mark">?</span>;
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TaskInputEntry::Subtask</span>(<span class="ident">subtask</span>) <span class="op">=</span> <span class="ident">last_entry</span> {
-                            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">line</span>
-                                .<span class="ident">into_inner</span>()
-                                .<span class="ident">next</span>()
-                                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>
-                                .<span class="ident">as_str</span>();
-                            <span class="kw">if</span> <span class="ident">subtask</span>.<span class="ident">name</span>.<span class="ident">is_some</span>() {
+                        <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = last_entry {
+                            <span class="kw">let </span>name = line
+                                .into_inner()
+                                .next()
+                                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?
+                                </span>.as_str();
+                            <span class="kw">if </span>subtask.name.is_some() {
                                 <span class="macro">bail!</span>(<span class="string">&quot;Cannot assign the name of a subtask twice&quot;</span>);
                             }
-                            <span class="ident">subtask</span>.<span class="ident">name</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-                                <span class="ident">cleanup_subtask_name</span>(<span class="ident">name</span>)
-                                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Invalid subtask name: {}&quot;</span>, <span class="ident">name</span>))<span class="question-mark">?</span>,
+                            subtask.name = <span class="prelude-val">Some</span>(
+                                cleanup_subtask_name(name)
+                                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Invalid subtask name: {}&quot;</span>, name))<span class="question-mark">?</span>,
                             );
-                        } <span class="kw">else</span> {
+                        } <span class="kw">else </span>{
                             <span class="macro">bail!</span>(<span class="string">&quot;#STNAME: must immediately follow a #ST: in gen/GEN&quot;</span>);
                         }
                     }
-                    <span class="ident">parser::Rule::copy</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">default</span>) <span class="op">=</span> <span class="ident">default_subtask</span>.<span class="ident">take</span>() {
-                            <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Subtask</span>(<span class="ident">default</span>));
-                            <span class="ident">subtask_id</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    parser::Rule::copy =&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(default) = default_subtask.take() {
+                            entries.push(TaskInputEntry::Subtask(default));
+                            subtask_id += <span class="number">1</span>;
                         }
-                        <span class="kw">let</span> <span class="ident">what</span> <span class="op">=</span> <span class="ident">line</span>
-                            .<span class="ident">into_inner</span>()
-                            .<span class="ident">next</span>()
-                            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?</span>
-                            .<span class="ident">as_str</span>();
-                        <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Testcase</span>(<span class="ident">TestcaseInfo</span> {
-                            <span class="ident">id</span>: <span class="ident">testcase_count</span>,
-                            <span class="ident">input_generator</span>: <span class="ident">InputGenerator::StaticFile</span>(<span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="ident">what</span>)),
-                            <span class="ident">input_validator</span>: <span class="ident">get_validator</span>(<span class="prelude-val">Some</span>(<span class="ident">subtask_id</span> <span class="op">-</span> <span class="number">1</span>)),
-                            <span class="ident">output_generator</span>: <span class="ident">get_output_gen</span>(<span class="ident">testcase_count</span>),
+                        <span class="kw">let </span>what = line
+                            .into_inner()
+                            .next()
+                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?
+                            </span>.as_str();
+                        entries.push(TaskInputEntry::Testcase(TestcaseInfo {
+                            id: testcase_count,
+                            input_generator: InputGenerator::StaticFile(task_dir.join(what)),
+                            input_validator: get_validator(<span class="prelude-val">Some</span>(subtask_id - <span class="number">1</span>)),
+                            output_generator: get_output_gen(testcase_count),
                         }));
-                        <span class="ident">testcase_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        testcase_count += <span class="number">1</span>;
                     }
-                    <span class="ident">parser::Rule::command</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">default</span>) <span class="op">=</span> <span class="ident">default_subtask</span>.<span class="ident">take</span>() {
-                            <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Subtask</span>(<span class="ident">default</span>));
-                            <span class="ident">subtask_id</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    parser::Rule::command =&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(default) = default_subtask.take() {
+                            entries.push(TaskInputEntry::Subtask(default));
+                            subtask_id += <span class="number">1</span>;
                         }
-                        <span class="kw">let</span> <span class="ident">cmd</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span>
-                            <span class="ident">line</span>.<span class="ident">into_inner</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">as_str</span>().<span class="ident">to_owned</span>()).<span class="ident">collect</span>();
-                        <span class="kw">let</span> <span class="ident">output_generator</span> <span class="op">=</span> <span class="ident">get_output_gen</span>(<span class="ident">testcase_count</span>);
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">OutputGenerator::StaticFile</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">output_generator</span> {
+                        <span class="kw">let </span>cmd: Vec&lt;String&gt; =
+                            line.into_inner().map(|x| x.as_str().to_owned()).collect();
+                        <span class="kw">let </span>output_generator = get_output_gen(testcase_count);
+                        <span class="kw">if let </span>OutputGenerator::StaticFile(<span class="kw">_</span>) = output_generator {
                             <span class="macro">bail!</span>(<span class="string">&quot;Generator detected but no solution found. Cannot generate output files.&quot;</span>);
                         }
-                        <span class="ident">entries</span>.<span class="ident">push</span>(<span class="ident">TaskInputEntry::Testcase</span>(<span class="ident">TestcaseInfo</span> {
-                            <span class="ident">id</span>: <span class="ident">testcase_count</span>,
-                            <span class="ident">input_generator</span>: <span class="ident">InputGenerator::Custom</span>(<span class="ident">generator</span>.<span class="ident">clone</span>(), <span class="ident">cmd</span>),
-                            <span class="ident">input_validator</span>: <span class="ident">get_validator</span>(<span class="prelude-val">Some</span>(<span class="ident">subtask_id</span> <span class="op">-</span> <span class="number">1</span>)),
-                            <span class="ident">output_generator</span>,
+                        entries.push(TaskInputEntry::Testcase(TestcaseInfo {
+                            id: testcase_count,
+                            input_generator: InputGenerator::Custom(generator.clone(), cmd),
+                            input_validator: get_validator(<span class="prelude-val">Some</span>(subtask_id - <span class="number">1</span>)),
+                            output_generator,
                         }));
-                        <span class="ident">testcase_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        testcase_count += <span class="number">1</span>;
                     }
-                    <span class="ident">parser::Rule::comment</span> =&gt; {}
-                    <span class="ident">parser::Rule::empty</span> =&gt; {}
-                    <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+                    parser::Rule::comment =&gt; {}
+                    parser::Rule::empty =&gt; {}
+                    <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
                 }
             }
-            <span class="ident">parser::Rule::EOI</span> =&gt; {}
-            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+            parser::Rule::EOI =&gt; {}
+            <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
         }
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">entries</span>)
+    <span class="prelude-val">Ok</span>(entries)
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">std::fs</span>;
-    <span class="kw">use</span> <span class="ident">std::path::Path</span>;
-    <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>std::fs;
+    <span class="kw">use </span>std::path::Path;
+    <span class="kw">use </span>std::sync::Arc;
 
-    <span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-    <span class="kw">use</span> <span class="ident">pretty_assertions::assert_eq</span>;
-    <span class="kw">use</span> <span class="ident">tempfile::TempDir</span>;
+    <span class="kw">use </span>anyhow::Error;
+    <span class="kw">use </span>pretty_assertions::assert_eq;
+    <span class="kw">use </span>tempfile::TempDir;
 
-    <span class="kw">use</span> <span class="ident">TaskInputEntry</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span>TaskInputEntry::<span class="kw-2">*</span>;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::format::italian_yaml::gen_gen::parse_gen_gen</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::format::italian_yaml::TaskInputEntry</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">InputGenerator</span>, <span class="ident">InputValidator</span>, <span class="ident">OutputGenerator</span>, <span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>};
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::SourceFile</span>;
+    <span class="kw">use </span><span class="kw">crate</span>::ioi::format::italian_yaml::gen_gen::parse_gen_gen;
+    <span class="kw">use </span><span class="kw">crate</span>::ioi::format::italian_yaml::TaskInputEntry;
+    <span class="kw">use </span><span class="kw">crate</span>::ioi::{InputGenerator, InputValidator, OutputGenerator, SubtaskId, TestcaseId};
+    <span class="kw">use </span><span class="kw">crate</span>::SourceFile;
 
-    <span class="kw">fn</span> <span class="ident">make_task</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">gen_gen</span>: <span class="ident">S</span>) -&gt; <span class="ident">TempDir</span> {
-        <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="ident">TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="ident">fs::write</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;task.yaml&quot;</span>), <span class="string">&quot;name: foo\ntitle: foo bar\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">fs::create_dir</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>)).<span class="ident">unwrap</span>();
-        <span class="ident">fs::create_dir</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;sol&quot;</span>)).<span class="ident">unwrap</span>();
-        <span class="ident">fs::write</span>(<span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;GEN&quot;</span>), <span class="ident">gen_gen</span>.<span class="ident">as_ref</span>()).<span class="ident">unwrap</span>();
-        <span class="ident">fs::write</span>(
-            <span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;generator.py&quot;</span>),
+    <span class="kw">fn </span>make_task&lt;S: AsRef&lt;str&gt;&gt;(gen_gen: S) -&gt; TempDir {
+        <span class="kw">let </span>dir = TempDir::new().unwrap();
+        fs::write(dir.path().join(<span class="string">&quot;task.yaml&quot;</span>), <span class="string">&quot;name: foo\ntitle: foo bar\n&quot;</span>).unwrap();
+        fs::create_dir(dir.path().join(<span class="string">&quot;gen&quot;</span>)).unwrap();
+        fs::create_dir(dir.path().join(<span class="string">&quot;sol&quot;</span>)).unwrap();
+        fs::write(dir.path().join(<span class="string">&quot;gen&quot;</span>).join(<span class="string">&quot;GEN&quot;</span>), gen_gen.as_ref()).unwrap();
+        fs::write(
+            dir.path().join(<span class="string">&quot;gen&quot;</span>).join(<span class="string">&quot;generator.py&quot;</span>),
             <span class="string">&quot;#!/usr/bin/env python&quot;</span>,
         )
-        .<span class="ident">unwrap</span>();
-        <span class="ident">fs::write</span>(
-            <span class="ident">dir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;sol&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;solution.py&quot;</span>),
+        .unwrap();
+        fs::write(
+            dir.path().join(<span class="string">&quot;sol&quot;</span>).join(<span class="string">&quot;solution.py&quot;</span>),
             <span class="string">&quot;#!/usr/bin/env python&quot;</span>,
         )
-        .<span class="ident">unwrap</span>();
-        <span class="ident">dir</span>
+        .unwrap();
+        dir
     }
 
-    <span class="kw">fn</span> <span class="ident">get_validator</span>(<span class="ident">_subtask</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span> {
-        <span class="ident">InputValidator::AssumeValid</span>
+    <span class="kw">fn </span>get_validator(_subtask: <span class="prelude-ty">Option</span>&lt;SubtaskId&gt;) -&gt; InputValidator {
+        InputValidator::AssumeValid
     }
 
-    <span class="kw">fn</span> <span class="ident">get_output_generator</span>(<span class="ident">_testcase</span>: <span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span> {
-        <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="ident">SourceFile::new</span>(<span class="string">&quot;a.py&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">OutputGenerator::Custom</span>(<span class="ident">Arc::new</span>(<span class="ident">source</span>), <span class="macro">vec!</span>[])
+    <span class="kw">fn </span>get_output_generator(_testcase: TestcaseId) -&gt; OutputGenerator {
+        <span class="kw">let </span>source = SourceFile::new(<span class="string">&quot;a.py&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;<span class="kw-2">&amp;</span>str&gt;).unwrap();
+        OutputGenerator::Custom(Arc::new(source), <span class="macro">vec!</span>[])
     }
 
-    <span class="kw">fn</span> <span class="ident">get_entries</span>(<span class="ident">dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInputEntry</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">parse_gen_gen</span>(
-            <span class="ident">dir</span>.<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;GEN&quot;</span>),
-            <span class="ident">get_validator</span>,
-            <span class="ident">get_output_generator</span>,
+    <span class="kw">fn </span>get_entries(dir: <span class="kw-2">&amp;</span>Path) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;TaskInputEntry&gt;, Error&gt; {
+        parse_gen_gen(
+            dir.join(<span class="string">&quot;gen&quot;</span>).join(<span class="string">&quot;GEN&quot;</span>),
+            get_validator,
+            get_output_generator,
         )
     }
 
-    <span class="doccomment">/// Build a task and return the parsed gen/GEN.</span>
-    <span class="kw">fn</span> <span class="ident">get_parsed_gen_gen</span>(<span class="ident">gen_gen</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInputEntry</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">make_task</span>(<span class="ident">gen_gen</span>);
-        <span class="ident">get_entries</span>(<span class="ident">task</span>.<span class="ident">path</span>())
+    <span class="doccomment">/// Build a task and return the parsed gen/GEN.
+    </span><span class="kw">fn </span>get_parsed_gen_gen(gen_gen: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;TaskInputEntry&gt;, Error&gt; {
+        <span class="kw">let </span>task = make_task(gen_gen);
+        get_entries(task.path())
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_single_line</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;1234\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_single_line() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;1234\n&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase.id, <span class="number">0</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_single_line_without_ending_lf</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;1234&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_single_line_without_ending_lf() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;1234&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase.id, <span class="number">0</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_single_line_with_comments</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span>
-            <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;# this is a comment\n1234\n# this is a comment too\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_single_line_with_comments() {
+        <span class="kw">let </span>entries =
+            get_parsed_gen_gen(<span class="string">&quot;# this is a comment\n1234\n# this is a comment too\n&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase.id, <span class="number">0</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_comment_empty</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#\n1234\n#\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_comment_empty() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;#\n1234\n#\n&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase.id, <span class="number">0</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_comment_empty_no_ending_lf</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#\n1234\n#&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_comment_empty_no_ending_lf() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;#\n1234\n#&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase.id, <span class="number">0</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_line_with_comment</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;1234 # normal comment\n5678 #risky comment&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase1</span>), <span class="ident">Testcase</span>(<span class="ident">testcase2</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase1</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_line_with_comment() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;1234 # normal comment\n5678 #risky comment&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase1), Testcase(testcase2)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(testcase2.id, <span class="number">1</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase1.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase2</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase2.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_multiple_lines</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;1234\n5678\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase1</span>), <span class="ident">Testcase</span>(<span class="ident">testcase2</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase1</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_multiple_lines() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;1234\n5678\n&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase1), Testcase(testcase2)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(testcase2.id, <span class="number">1</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase1.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase2</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase2.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_copy</span>() {
-        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">make_task</span>(<span class="string">&quot;#COPY: random/file\n5678\n&quot;</span>);
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_entries</span>(<span class="ident">task</span>.<span class="ident">path</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase1</span>), <span class="ident">Testcase</span>(<span class="ident">testcase2</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase1</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="ident">path</span>) =&gt; {
-                    <span class="macro">assert_eq!</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;random/file&quot;</span>))
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_copy() {
+        <span class="kw">let </span>task = make_task(<span class="string">&quot;#COPY: random/file\n5678\n&quot;</span>);
+        <span class="kw">let </span>entries = get_entries(task.path()).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase1), Testcase(testcase2)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(testcase2.id, <span class="number">1</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase1.input_generator {
+                InputGenerator::StaticFile(path) =&gt; {
+                    <span class="macro">assert_eq!</span>(path, <span class="kw-2">&amp;</span>task.path().join(<span class="string">&quot;random/file&quot;</span>))
                 }
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+                InputGenerator::Custom(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase2</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase2.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtasks</span>() {
-        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">make_task</span>(<span class="string">&quot;#ST: 123\n#COPY: random/file\n5678\n#ST: 321\n1234\n&quot;</span>);
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_entries</span>(<span class="ident">task</span>.<span class="ident">path</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask1</span>), <span class="ident">Testcase</span>(<span class="ident">testcase1</span>), <span class="ident">Testcase</span>(<span class="ident">testcase2</span>), <span class="ident">Subtask</span>(<span class="ident">subtask2</span>), <span class="ident">Testcase</span>(<span class="ident">testcase3</span>)] <span class="op">=</span>
-            <span class="ident">entries</span>.<span class="ident">as_slice</span>()
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtasks() {
+        <span class="kw">let </span>task = make_task(<span class="string">&quot;#ST: 123\n#COPY: random/file\n5678\n#ST: 321\n1234\n&quot;</span>);
+        <span class="kw">let </span>entries = get_entries(task.path()).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask1), Testcase(testcase1), Testcase(testcase2), Subtask(subtask2), Testcase(testcase3)] =
+            entries.as_slice()
         {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">123</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">321</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase1</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="ident">path</span>) =&gt; {
-                    <span class="macro">assert_eq!</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">task</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;random/file&quot;</span>))
+            <span class="macro">assert_eq!</span>(subtask1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask1.max_score <span class="kw">as </span>u32, <span class="number">123</span>);
+            <span class="macro">assert_eq!</span>(testcase1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(testcase2.id, <span class="number">1</span>);
+            <span class="macro">assert_eq!</span>(subtask2.id, <span class="number">1</span>);
+            <span class="macro">assert_eq!</span>(subtask2.max_score <span class="kw">as </span>u32, <span class="number">321</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase1.input_generator {
+                InputGenerator::StaticFile(path) =&gt; {
+                    <span class="macro">assert_eq!</span>(path, <span class="kw-2">&amp;</span>task.path().join(<span class="string">&quot;random/file&quot;</span>))
                 }
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+                InputGenerator::Custom(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase2</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase2.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase3</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase3.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtasks_with_names</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span>
-            <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST: 123\n#STNAME: name\n5678\n#ST: 321\n#STNAME:wow\n1234\n&quot;</span>)
-                .<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask1</span>), <span class="ident">Testcase</span>(<span class="kw">_</span>), <span class="ident">Subtask</span>(<span class="ident">subtask2</span>), <span class="ident">Testcase</span>(<span class="kw">_</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>()
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtasks_with_names() {
+        <span class="kw">let </span>entries =
+            get_parsed_gen_gen(<span class="string">&quot;#ST: 123\n#STNAME: name\n5678\n#ST: 321\n#STNAME:wow\n1234\n&quot;</span>)
+                .unwrap();
+        <span class="kw">if let </span>[Subtask(subtask1), Testcase(<span class="kw">_</span>), Subtask(subtask2), Testcase(<span class="kw">_</span>)] = entries.as_slice()
         {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">123</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">name</span>.<span class="ident">as_deref</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;name&quot;</span>));
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">321</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">name</span>.<span class="ident">as_deref</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;wow&quot;</span>));
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+            <span class="macro">assert_eq!</span>(subtask1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask1.max_score <span class="kw">as </span>u32, <span class="number">123</span>);
+            <span class="macro">assert_eq!</span>(subtask1.name.as_deref(), <span class="prelude-val">Some</span>(<span class="string">&quot;name&quot;</span>));
+            <span class="macro">assert_eq!</span>(subtask2.id, <span class="number">1</span>);
+            <span class="macro">assert_eq!</span>(subtask2.max_score <span class="kw">as </span>u32, <span class="number">321</span>);
+            <span class="macro">assert_eq!</span>(subtask2.name.as_deref(), <span class="prelude-val">Some</span>(<span class="string">&quot;wow&quot;</span>));
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtasks_with_names_with_comments</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtasks_with_names_with_comments() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(
             <span class="string">&quot;#ST: 123\n#STNAME: name # comment\n5678\n#ST: 321\n#STNAME: wow#comment\n1234\n&quot;</span>,
         )
-        .<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask1</span>), <span class="ident">Testcase</span>(<span class="kw">_</span>), <span class="ident">Subtask</span>(<span class="ident">subtask2</span>), <span class="ident">Testcase</span>(<span class="kw">_</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>()
+        .unwrap();
+        <span class="kw">if let </span>[Subtask(subtask1), Testcase(<span class="kw">_</span>), Subtask(subtask2), Testcase(<span class="kw">_</span>)] = entries.as_slice()
         {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">123</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask1</span>.<span class="ident">name</span>.<span class="ident">as_deref</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;name&quot;</span>));
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">321</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask2</span>.<span class="ident">name</span>.<span class="ident">as_deref</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;wow&quot;</span>));
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+            <span class="macro">assert_eq!</span>(subtask1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask1.max_score <span class="kw">as </span>u32, <span class="number">123</span>);
+            <span class="macro">assert_eq!</span>(subtask1.name.as_deref(), <span class="prelude-val">Some</span>(<span class="string">&quot;name&quot;</span>));
+            <span class="macro">assert_eq!</span>(subtask2.id, <span class="number">1</span>);
+            <span class="macro">assert_eq!</span>(subtask2.max_score <span class="kw">as </span>u32, <span class="number">321</span>);
+            <span class="macro">assert_eq!</span>(subtask2.name.as_deref(), <span class="prelude-val">Some</span>(<span class="string">&quot;wow&quot;</span>));
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_empty_lines</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;\n\n1234\n\n\n5678\n\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase1</span>), <span class="ident">Testcase</span>(<span class="ident">testcase2</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase1</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase2</span>.<span class="ident">id</span>, <span class="number">1</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase1</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_empty_lines() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;\n\n1234\n\n\n5678\n\n&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase1), Testcase(testcase2)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase1.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(testcase2.id, <span class="number">1</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase1.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase2</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase2.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;5678&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_spaces_before_and_after</span>() {
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;  \t 1234\t  \t\n&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">if</span> <span class="kw">let</span> [<span class="ident">Subtask</span>(<span class="ident">subtask</span>), <span class="ident">Testcase</span>(<span class="ident">testcase</span>)] <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">as_slice</span>() {
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">subtask</span>.<span class="ident">max_score</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="number">100</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="number">0</span>);
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">testcase</span>.<span class="ident">input_generator</span> {
-                <span class="ident">InputGenerator::Custom</span>(<span class="kw">_</span>, <span class="ident">args</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.<span class="ident">to_string</span>()]),
-                <span class="ident">InputGenerator::StaticFile</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_spaces_before_and_after() {
+        <span class="kw">let </span>entries = get_parsed_gen_gen(<span class="string">&quot;  \t 1234\t  \t\n&quot;</span>).unwrap();
+        <span class="kw">if let </span>[Subtask(subtask), Testcase(testcase)] = entries.as_slice() {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.max_score <span class="kw">as </span>u32, <span class="number">100</span>);
+            <span class="macro">assert_eq!</span>(testcase.id, <span class="number">0</span>);
+            <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
+                InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; <span class="macro">assert_eq!</span>(args, <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="string">&quot;1234&quot;</span>.to_string()]),
+                InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Invalid generator&quot;</span>),
             }
-        } <span class="kw">else</span> {
-            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, <span class="ident">entries</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Wrong entries returned: {:?}&quot;</span>, entries);
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtask_name_empty</span>() {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME:&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtask_name_empty() {
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME:&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtask_name_with_spaces</span>() {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: two names&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: two\tnames&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: two\u{200B}names&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: two\u{FEFF}names&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: two\u{180E}names&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: a b&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtask_name_with_spaces() {
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: two names&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: two\tnames&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: two\u{200B}names&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: two\u{FEFF}names&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: two\u{180E}names&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: a b&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtask_name_illegal_characters</span>() {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: n*pe&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtask_name_illegal_characters() {
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: n*pe&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtask_name_start_with_dash</span>() {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: -nope&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtask_name_start_with_dash() {
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: -nope&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtask_name_double</span>() {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: one\n#STNAME: two&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtask_name_double() {
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: one\n#STNAME: two&quot;</span>);
+        <span class="macro">assert!</span>(res.is_err());
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_parser_subtask_name_utf_and_symbols</span>() {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: n²logn&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: N&lt;=2&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: N=5_&amp;&amp;_M=2&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">get_parsed_gen_gen</span>(<span class="string">&quot;#ST:1\n#STNAME: tree-line&quot;</span>);
-        <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_parser_subtask_name_utf_and_symbols() {
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: n²logn&quot;</span>);
+        <span class="macro">assert!</span>(res.is_ok());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: N&lt;=2&quot;</span>);
+        <span class="macro">assert!</span>(res.is_ok());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: N=5_&amp;&amp;_M=2&quot;</span>);
+        <span class="macro">assert!</span>(res.is_ok());
+        <span class="kw">let </span>res = get_parsed_gen_gen(<span class="string">&quot;#ST:1\n#STNAME: tree-line&quot;</span>);
+        <span class="macro">assert!</span>(res.is_ok());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

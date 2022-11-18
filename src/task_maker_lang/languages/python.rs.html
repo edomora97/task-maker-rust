@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/python.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>python.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/python.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>python.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_lang/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -205,212 +205,212 @@
 <span id="205">205</span>
 <span id="206">206</span>
 <span id="207">207</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">regex::Regex</span>;
+<span class="kw">use </span>regex::Regex;
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionCommand</span>;
+<span class="kw">use </span>task_maker_dag::ExecutionCommand;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::language::Language</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::languages::find_dependencies</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Dependency</span>;
+<span class="kw">use </span><span class="kw">crate</span>::language::Language;
+<span class="kw">use </span><span class="kw">crate</span>::languages::find_dependencies;
+<span class="kw">use </span><span class="kw">crate</span>::Dependency;
 
-<span class="doccomment">/// Version of the Python interpreter to use.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">LanguagePythonVersion</span> {
-    <span class="doccomment">/// Use the shebang written as the first line of the source.</span>
-    <span class="ident">Autodetect</span>,
-    <span class="doccomment">/// Force `python2`</span>
-    <span class="ident">Python2</span>,
-    <span class="doccomment">/// Force `python3`</span>
-    <span class="ident">Python3</span>,
+<span class="doccomment">/// Version of the Python interpreter to use.
+</span><span class="attribute">#[allow(dead_code)]
+#[derive(Debug)]
+</span><span class="kw">pub enum </span>LanguagePythonVersion {
+    <span class="doccomment">/// Use the shebang written as the first line of the source.
+    </span>Autodetect,
+    <span class="doccomment">/// Force `python2`
+    </span>Python2,
+    <span class="doccomment">/// Force `python3`
+    </span>Python3,
 }
 
-<span class="doccomment">/// The Python language</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguagePython</span> {
-    <span class="ident">version</span>: <span class="ident">LanguagePythonVersion</span>,
+<span class="doccomment">/// The Python language
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>LanguagePython {
+    version: LanguagePythonVersion,
 }
 
-<span class="kw">impl</span> <span class="ident">LanguagePython</span> {
-    <span class="doccomment">/// Make a new LanguagePython using the specified version.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">version</span>: <span class="ident">LanguagePythonVersion</span>) -&gt; <span class="ident">LanguagePython</span> {
-        <span class="ident">LanguagePython</span> { <span class="ident">version</span> }
+<span class="kw">impl </span>LanguagePython {
+    <span class="doccomment">/// Make a new LanguagePython using the specified version.
+    </span><span class="kw">pub fn </span>new(version: LanguagePythonVersion) -&gt; LanguagePython {
+        LanguagePython { version }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Language</span> <span class="kw">for</span> <span class="ident">LanguagePython</span> {
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">version</span> {
-            <span class="ident">LanguagePythonVersion::Autodetect</span> =&gt; <span class="string">&quot;Python / Autodetect&quot;</span>,
-            <span class="ident">LanguagePythonVersion::Python2</span> =&gt; <span class="string">&quot;Python2&quot;</span>,
-            <span class="ident">LanguagePythonVersion::Python3</span> =&gt; <span class="string">&quot;Python3&quot;</span>,
+<span class="kw">impl </span>Language <span class="kw">for </span>LanguagePython {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="kw">match </span><span class="self">self</span>.version {
+            LanguagePythonVersion::Autodetect =&gt; <span class="string">&quot;Python / Autodetect&quot;</span>,
+            LanguagePythonVersion::Python2 =&gt; <span class="string">&quot;Python2&quot;</span>,
+            LanguagePythonVersion::Python3 =&gt; <span class="string">&quot;Python3&quot;</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="macro">vec!</span>[<span class="string">&quot;py&quot;</span>]
     }
 
-    <span class="kw">fn</span> <span class="ident">need_compilation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">false</span>
-    }
+    <span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">inline_comment_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
         <span class="prelude-val">Some</span>(<span class="string">&quot;#&quot;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">runtime_command</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">ExecutionCommand</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">version</span> {
-            <span class="ident">LanguagePythonVersion::Autodetect</span> =&gt; {
-                <span class="ident">ExecutionCommand::local</span>(<span class="self">self</span>.<span class="ident">executable_name</span>(<span class="ident">path</span>, <span class="ident">write_to</span>))
+    <span class="kw">fn </span>runtime_command(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>Path, write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;) -&gt; ExecutionCommand {
+        <span class="kw">match </span><span class="self">self</span>.version {
+            LanguagePythonVersion::Autodetect =&gt; {
+                ExecutionCommand::local(<span class="self">self</span>.executable_name(path, write_to))
             }
-            <span class="ident">LanguagePythonVersion::Python2</span> =&gt; <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;python2&quot;</span>),
-            <span class="ident">LanguagePythonVersion::Python3</span> =&gt; <span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;python3&quot;</span>),
+            LanguagePythonVersion::Python2 =&gt; ExecutionCommand::system(<span class="string">&quot;python2&quot;</span>),
+            LanguagePythonVersion::Python3 =&gt; ExecutionCommand::system(<span class="string">&quot;python3&quot;</span>),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">runtime_args</span>(
+    <span class="kw">fn </span>runtime_args(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-        <span class="ident">write_to</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">version</span> {
-            <span class="ident">LanguagePythonVersion::Autodetect</span> =&gt; <span class="ident">args</span>,
-            <span class="kw">_</span> =&gt; {
-                <span class="comment">// will run for example: python3 program.py args...</span>
-                <span class="ident">args</span>.<span class="ident">insert</span>(
+        path: <span class="kw-2">&amp;</span>Path,
+        write_to: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;,
+        <span class="kw-2">mut </span>args: Vec&lt;String&gt;,
+    ) -&gt; Vec&lt;String&gt; {
+        <span class="kw">match </span><span class="self">self</span>.version {
+            LanguagePythonVersion::Autodetect =&gt; args,
+            <span class="kw">_ </span>=&gt; {
+                <span class="comment">// will run for example: python3 program.py args...
+                </span>args.insert(
                     <span class="number">0</span>,
-                    <span class="self">self</span>.<span class="ident">executable_name</span>(<span class="ident">path</span>, <span class="ident">write_to</span>)
-                        .<span class="ident">to_string_lossy</span>()
-                        .<span class="ident">to_string</span>(),
+                    <span class="self">self</span>.executable_name(path, write_to)
+                        .to_string_lossy()
+                        .to_string(),
                 );
-                <span class="ident">args</span>
+                args
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">runtime_dependencies</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span> {
-        <span class="ident">find_python_deps</span>(<span class="ident">path</span>)
+    <span class="kw">fn </span>runtime_dependencies(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;Dependency&gt; {
+        find_python_deps(path)
     }
 }
 
-<span class="doccomment">/// Extract all the dependencies of a python file recursively.</span>
-<span class="kw">fn</span> <span class="ident">find_python_deps</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span> {
-    <span class="ident">find_dependencies</span>(<span class="ident">path</span>, <span class="ident">extract_imports</span>)
+<span class="doccomment">/// Extract all the dependencies of a python file recursively.
+</span><span class="kw">fn </span>find_python_deps(path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;Dependency&gt; {
+    find_dependencies(path, extract_imports)
 }
 
-<span class="doccomment">/// Extracts all the imports in the file. The supported imports are the ones in</span>
-<span class="doccomment">/// the form:</span>
-<span class="doccomment">/// * `import __file__`</span>
-<span class="doccomment">/// * `from __file__ import stuff`</span>
-<span class="doccomment">/// * `import __file1__, __file2__`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The returned values are in the form (local_path, sandbox_path). Those paths</span>
-<span class="doccomment">/// are equal, and are just the import followed by `.py`, because of that the</span>
-<span class="doccomment">/// imports should not contain a dot (i.e. python modules are not supported).</span>
-<span class="kw">fn</span> <span class="ident">extract_imports</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">PathBuf</span>, <span class="ident">PathBuf</span>)<span class="op">&gt;</span> {
-    <span class="macro">lazy_static!</span> {
-        <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">RE</span>: <span class="ident">Regex</span> <span class="op">=</span>
-            <span class="ident">Regex::new</span>(<span class="string">&quot;import +(.+)|from +(.+) +import&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Invalid regex&quot;</span>);
+<span class="doccomment">/// Extracts all the imports in the file. The supported imports are the ones in
+/// the form:
+/// * `import __file__`
+/// * `from __file__ import stuff`
+/// * `import __file1__, __file2__`
+///
+/// The returned values are in the form (local_path, sandbox_path). Those paths
+/// are equal, and are just the import followed by `.py`, because of that the
+/// imports should not contain a dot (i.e. python modules are not supported).
+</span><span class="kw">fn </span>extract_imports(path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;(PathBuf, PathBuf)&gt; {
+    <span class="macro">lazy_static! </span>{
+        <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex =
+            Regex::new(<span class="string">&quot;import +(.+)|from +(.+) +import&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
     }
-    <span class="kw">let</span> <span class="ident">content</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">std::fs::read_to_string</span>(<span class="ident">path</span>) {
-        <span class="prelude-val">Ok</span>(<span class="ident">content</span>) =&gt; <span class="ident">content</span>,
-        <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="macro">vec!</span>[],
+    <span class="kw">let </span>content = <span class="kw">match </span>std::fs::read_to_string(path) {
+        <span class="prelude-val">Ok</span>(content) =&gt; content,
+        <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="macro">vec!</span>[],
     };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">cap</span> <span class="kw">in</span> <span class="ident">RE</span>.<span class="ident">captures_iter</span>(<span class="kw-2">&amp;</span><span class="ident">content</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">type1</span>) <span class="op">=</span> <span class="ident">cap</span>.<span class="ident">get</span>(<span class="number">1</span>) {
-            <span class="kw">for</span> <span class="ident">piece</span> <span class="kw">in</span> <span class="ident">type1</span>.<span class="ident">as_str</span>().<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>) {
-                <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.py&quot;</span>, <span class="ident">piece</span>.<span class="ident">trim</span>()));
-                <span class="ident">res</span>.<span class="ident">push</span>((<span class="ident">path</span>.<span class="ident">clone</span>(), <span class="ident">path</span>));
+    <span class="kw">let </span><span class="kw-2">mut </span>res = Vec::new();
+    <span class="kw">for </span>cap <span class="kw">in </span>RE.captures_iter(<span class="kw-2">&amp;</span>content) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(type1) = cap.get(<span class="number">1</span>) {
+            <span class="kw">for </span>piece <span class="kw">in </span>type1.as_str().split(<span class="string">&#39;,&#39;</span>) {
+                <span class="kw">let </span>path = PathBuf::from(<span class="macro">format!</span>(<span class="string">&quot;{}.py&quot;</span>, piece.trim()));
+                res.push((path.clone(), path));
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">type2</span>) <span class="op">=</span> <span class="ident">cap</span>.<span class="ident">get</span>(<span class="number">2</span>) {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.py&quot;</span>, <span class="ident">type2</span>.<span class="ident">as_str</span>().<span class="ident">trim</span>()));
-            <span class="ident">res</span>.<span class="ident">push</span>((<span class="ident">path</span>.<span class="ident">clone</span>(), <span class="ident">path</span>));
+        } <span class="kw">else if let </span><span class="prelude-val">Some</span>(type2) = cap.get(<span class="number">2</span>) {
+            <span class="kw">let </span>path = PathBuf::from(<span class="macro">format!</span>(<span class="string">&quot;{}.py&quot;</span>, type2.as_str().trim()));
+            res.push((path.clone(), path));
         }
     }
-    <span class="ident">res</span>
+    res
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">std::fs::write</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>std::fs::write;
 
-    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span>speculoos::prelude::<span class="kw-2">*</span>;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_runtime_args_autodetect</span>() {
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguagePython::new</span>(<span class="ident">LanguagePythonVersion::Autodetect</span>);
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;script.py&quot;</span>);
-        <span class="kw">let</span> <span class="ident">write_to</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;script.boh&quot;</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">runtime_command</span>(<span class="ident">path</span>, <span class="prelude-val">Some</span>(<span class="ident">write_to</span>)))
-            .<span class="ident">is_equal_to</span>(<span class="ident">ExecutionCommand::local</span>(<span class="ident">write_to</span>));
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">lang</span>.<span class="ident">runtime_args</span>(<span class="ident">path</span>, <span class="prelude-val">None</span>, <span class="macro">vec!</span>[<span class="string">&quot;arg&quot;</span>.<span class="ident">to_string</span>()]);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">is_equal_to</span>(<span class="macro">vec!</span>[<span class="string">&quot;arg&quot;</span>.<span class="ident">to_string</span>()]);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_runtime_args_autodetect() {
+        <span class="kw">let </span>lang = LanguagePython::new(LanguagePythonVersion::Autodetect);
+        <span class="kw">let </span>path = Path::new(<span class="string">&quot;script.py&quot;</span>);
+        <span class="kw">let </span>write_to = Path::new(<span class="string">&quot;script.boh&quot;</span>);
+        assert_that(<span class="kw-2">&amp;</span>lang.runtime_command(path, <span class="prelude-val">Some</span>(write_to)))
+            .is_equal_to(ExecutionCommand::local(write_to));
+        <span class="kw">let </span>args = lang.runtime_args(path, <span class="prelude-val">None</span>, <span class="macro">vec!</span>[<span class="string">&quot;arg&quot;</span>.to_string()]);
+        assert_that(<span class="kw-2">&amp;</span>args).is_equal_to(<span class="macro">vec!</span>[<span class="string">&quot;arg&quot;</span>.to_string()]);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_runtime_args_py3</span>() {
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguagePython::new</span>(<span class="ident">LanguagePythonVersion::Python3</span>);
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;script.py&quot;</span>);
-        <span class="kw">let</span> <span class="ident">write_to</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;script.boh&quot;</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">runtime_command</span>(<span class="ident">path</span>, <span class="prelude-val">Some</span>(<span class="ident">write_to</span>)))
-            .<span class="ident">is_equal_to</span>(<span class="ident">ExecutionCommand::system</span>(<span class="string">&quot;python3&quot;</span>));
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">lang</span>.<span class="ident">runtime_args</span>(<span class="ident">path</span>, <span class="prelude-val">Some</span>(<span class="ident">write_to</span>), <span class="macro">vec!</span>[<span class="string">&quot;arg&quot;</span>.<span class="ident">to_string</span>()]);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>).<span class="ident">is_equal_to</span>(<span class="macro">vec!</span>[<span class="string">&quot;script.boh&quot;</span>.<span class="ident">to_string</span>(), <span class="string">&quot;arg&quot;</span>.<span class="ident">to_string</span>()]);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_runtime_args_py3() {
+        <span class="kw">let </span>lang = LanguagePython::new(LanguagePythonVersion::Python3);
+        <span class="kw">let </span>path = Path::new(<span class="string">&quot;script.py&quot;</span>);
+        <span class="kw">let </span>write_to = Path::new(<span class="string">&quot;script.boh&quot;</span>);
+        assert_that(<span class="kw-2">&amp;</span>lang.runtime_command(path, <span class="prelude-val">Some</span>(write_to)))
+            .is_equal_to(ExecutionCommand::system(<span class="string">&quot;python3&quot;</span>));
+        <span class="kw">let </span>args = lang.runtime_args(path, <span class="prelude-val">Some</span>(write_to), <span class="macro">vec!</span>[<span class="string">&quot;arg&quot;</span>.to_string()]);
+        assert_that(<span class="kw-2">&amp;</span>args).is_equal_to(<span class="macro">vec!</span>[<span class="string">&quot;script.boh&quot;</span>.to_string(), <span class="string">&quot;arg&quot;</span>.to_string()]);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_extract_imports</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;script.py&quot;</span>);
-        <span class="ident">write</span>(
-            <span class="kw-2">&amp;</span><span class="ident">path</span>,
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_extract_imports() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;script.py&quot;</span>);
+        write(
+            <span class="kw-2">&amp;</span>path,
             <span class="string">&quot;random stuff\nimport foo\nfrom bar import xxx\nimport baz, biz&quot;</span>,
         )
-        .<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">imports</span> <span class="op">=</span> <span class="ident">extract_imports</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">import</span>) <span class="kw">in</span> <span class="macro">vec!</span>[<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>].<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">let</span> <span class="ident">import</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.py&quot;</span>, <span class="ident">import</span>));
-            <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">imports</span>[<span class="ident">i</span>]).<span class="ident">is_equal_to</span>((<span class="ident">import</span>.<span class="ident">clone</span>(), <span class="ident">import</span>));
+        .unwrap();
+        <span class="kw">let </span>imports = extract_imports(<span class="kw-2">&amp;</span>path);
+        <span class="kw">for </span>(i, import) <span class="kw">in </span><span class="macro">vec!</span>[<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>].iter().enumerate() {
+            <span class="kw">let </span>import = PathBuf::from(<span class="macro">format!</span>(<span class="string">&quot;{}.py&quot;</span>, import));
+            assert_that(<span class="kw-2">&amp;</span>imports[i]).is_equal_to((import.clone(), import));
         }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_find_python_deps</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;script.py&quot;</span>);
-        <span class="kw">let</span> <span class="ident">foo_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.py&quot;</span>);
-        <span class="kw">let</span> <span class="ident">bar_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;bar.py&quot;</span>);
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="string">&quot;import foo&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">foo_path</span>, <span class="string">&quot;import bar&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">bar_path</span>, <span class="string">&quot;import not_found&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_python_deps</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">2</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.py&quot;</span>));
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">bar_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">1</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;bar.py&quot;</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_find_python_deps() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;script.py&quot;</span>);
+        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">&quot;foo.py&quot;</span>);
+        <span class="kw">let </span>bar_path = tmpdir.path().join(<span class="string">&quot;bar.py&quot;</span>);
+        write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;import foo&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">&quot;import bar&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>bar_path, <span class="string">&quot;import not_found&quot;</span>).unwrap();
+        <span class="kw">let </span>deps = find_python_deps(<span class="kw-2">&amp;</span>path);
+        assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">2</span>);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(foo_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;foo.py&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].local_path).is_equal_to(bar_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;bar.py&quot;</span>));
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_find_python_deps_loop</span>() {
-        <span class="kw">let</span> <span class="ident">tmpdir</span> <span class="op">=</span> <span class="ident">tempfile::TempDir::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">script_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;script.py&quot;</span>);
-        <span class="kw">let</span> <span class="ident">foo_path</span> <span class="op">=</span> <span class="ident">tmpdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;foo.py&quot;</span>);
-        <span class="comment">// script imports itself and foo and script import each other</span>
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">script_path</span>, <span class="string">&quot;import foo\nimport script&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="ident">foo_path</span>, <span class="string">&quot;import script&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">deps</span> <span class="op">=</span> <span class="ident">find_python_deps</span>(<span class="kw-2">&amp;</span><span class="ident">script_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>).<span class="ident">has_length</span>(<span class="number">1</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">local_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">foo_path</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">deps</span>[<span class="number">0</span>].<span class="ident">sandbox_path</span>).<span class="ident">is_equal_to</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;foo.py&quot;</span>));
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_find_python_deps_loop() {
+        <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
+        <span class="kw">let </span>script_path = tmpdir.path().join(<span class="string">&quot;script.py&quot;</span>);
+        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">&quot;foo.py&quot;</span>);
+        <span class="comment">// script imports itself and foo and script import each other
+        </span>write(<span class="kw-2">&amp;</span>script_path, <span class="string">&quot;import foo\nimport script&quot;</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">&quot;import script&quot;</span>).unwrap();
+        <span class="kw">let </span>deps = find_python_deps(<span class="kw-2">&amp;</span>script_path);
+        assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">1</span>);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(foo_path);
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;foo.py&quot;</span>));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

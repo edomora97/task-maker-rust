@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/dag/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/dag/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -305,312 +305,312 @@
 <span id="305">305</span>
 <span id="306">306</span>
 <span id="307">307</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Serialize};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">Execution</span>, <span class="ident">ExecutionLimits</span>, <span class="ident">FileUuid</span>};
+<span class="kw">use </span>task_maker_dag::{Execution, ExecutionLimits, FileUuid};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry</span>::{<span class="ident">Seed</span>, <span class="ident">SolutionOutcome</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::UIMessage</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">bind_exec_callbacks</span>, <span class="ident">EvaluationData</span>, <span class="ident">SourceFile</span>, <span class="ident">Tag</span>};
+<span class="kw">use </span><span class="kw">crate</span>::terry::{Seed, SolutionOutcome};
+<span class="kw">use </span><span class="kw">crate</span>::ui::UIMessage;
+<span class="kw">use crate</span>::{bind_exec_callbacks, EvaluationData, SourceFile, Tag};
 
-<span class="doccomment">/// Maximum number of bytes of the checker&#39;s standard output.</span>
-<span class="kw">const</span> <span class="ident">OUTCOME_SIZE_LIMIT</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>; <span class="comment">// 1MiB</span>
-<span class="doccomment">/// Maximum number of bytes of the standard error of the executions.</span>
-<span class="kw">const</span> <span class="ident">STDERR_SIZE_LIMIT</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">10</span> <span class="op">*</span> <span class="number">1024</span>;
-<span class="doccomment">/// Time limit for the execution of the solutions.</span>
-<span class="kw">const</span> <span class="ident">SOLUTION_TIME_LIMIT</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">20.0</span>;
+<span class="doccomment">/// Maximum number of bytes of the checker&#39;s standard output.
+</span><span class="kw">const </span>OUTCOME_SIZE_LIMIT: usize = <span class="number">1024 </span>* <span class="number">1024</span>; <span class="comment">// 1MiB
+</span><span class="doccomment">/// Maximum number of bytes of the standard error of the executions.
+</span><span class="kw">const </span>STDERR_SIZE_LIMIT: usize = <span class="number">10 </span>* <span class="number">1024</span>;
+<span class="doccomment">/// Time limit for the execution of the solutions.
+</span><span class="kw">const </span>SOLUTION_TIME_LIMIT: f64 = <span class="number">20.0</span>;
 
-<span class="doccomment">/// The source of the input files.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InputGenerator</span> {
-    <span class="doccomment">/// The source file of the generator executable.</span>
-    <span class="ident">source</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The source of the input files.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>InputGenerator {
+    <span class="doccomment">/// The source file of the generator executable.
+    </span>source: Arc&lt;SourceFile&gt;,
 }
 
-<span class="doccomment">/// The validator of the input files.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InputValidator</span> {
-    <span class="doccomment">/// The source file of the validator executable.</span>
-    <span class="ident">source</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The validator of the input files.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>InputValidator {
+    <span class="doccomment">/// The source file of the validator executable.
+    </span>source: Arc&lt;SourceFile&gt;,
 }
 
-<span class="doccomment">/// A solution to test.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Solution</span>;
+<span class="doccomment">/// A solution to test.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>Solution;
 
-<span class="doccomment">/// The checker of the input/output files.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Checker</span> {
-    <span class="doccomment">/// The source file of the checker executable.</span>
-    <span class="ident">source</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The checker of the input/output files.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>Checker {
+    <span class="doccomment">/// The source file of the checker executable.
+    </span>source: Arc&lt;SourceFile&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">InputGenerator</span> {
-    <span class="doccomment">/// Make a new `InputGenerator` based on the specified source file.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">source</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputGenerator</span> {
-        <span class="ident">InputGenerator</span> { <span class="ident">source</span> }
+<span class="kw">impl </span>InputGenerator {
+    <span class="doccomment">/// Make a new `InputGenerator` based on the specified source file.
+    </span><span class="kw">pub fn </span>new(source: Arc&lt;SourceFile&gt;) -&gt; InputGenerator {
+        InputGenerator { source }
     }
 
-    <span class="doccomment">/// Build the execution for the generation of the input file, but don&#39;t bind the execution</span>
-    <span class="doccomment">/// callbacks.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">generate</span>(
+    <span class="doccomment">/// Build the execution for the generation of the input file, but don&#39;t bind the execution
+    /// callbacks.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>generate(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">description</span>: <span class="ident">String</span>,
-        <span class="ident">seed</span>: <span class="ident">Seed</span>,
-        <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">FileUuid</span>, <span class="ident">Execution</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span>
-            <span class="self">self</span>.<span class="ident">source</span>
-                .<span class="ident">execute</span>(<span class="ident">eval</span>, <span class="ident">description</span>, <span class="macro">vec!</span>[<span class="ident">seed</span>.<span class="ident">to_string</span>(), <span class="string">&quot;0&quot;</span>.<span class="ident">to_string</span>()])<span class="question-mark">?</span>;
-        <span class="ident">include_official_solution</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;mut</span> <span class="ident">exec</span>, <span class="ident">official_solution</span>)<span class="question-mark">?</span>;
-        <span class="ident">exec</span>.<span class="ident">limits_mut</span>().<span class="ident">allow_multiprocess</span>();
-        <span class="ident">exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Generation</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">input_file</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">stdout</span>();
-        <span class="prelude-val">Ok</span>((<span class="ident">input_file</span>.<span class="ident">uuid</span>, <span class="ident">exec</span>))
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        description: String,
+        seed: Seed,
+        official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(FileUuid, Execution), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>exec =
+            <span class="self">self</span>.source
+                .execute(eval, description, <span class="macro">vec!</span>[seed.to_string(), <span class="string">&quot;0&quot;</span>.to_string()])<span class="question-mark">?</span>;
+        include_official_solution(eval, <span class="kw-2">&amp;mut </span>exec, official_solution)<span class="question-mark">?</span>;
+        exec.limits_mut().allow_multiprocess();
+        exec.tag(Tag::Generation.into());
+        <span class="kw">let </span>input_file = exec.stdout();
+        <span class="prelude-val">Ok</span>((input_file.uuid, exec))
     }
 
-    <span class="doccomment">/// Build the execution for the generation of the input file, and bind the execution callbacks.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">generate_and_bind</span>(
+    <span class="doccomment">/// Build the execution for the generation of the input file, and bind the execution callbacks.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>generate_and_bind(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">solution</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-        <span class="ident">seed</span>: <span class="ident">Seed</span>,
-        <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">input</span>, <span class="kw-2">mut</span> <span class="ident">gen</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">generate</span>(
-            <span class="ident">eval</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        solution: <span class="kw-2">&amp;</span>SourceFile,
+        seed: Seed,
+        official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;FileUuid, Error&gt; {
+        <span class="kw">let </span>(input, <span class="kw-2">mut </span>gen) = <span class="self">self</span>.generate(
+            eval,
             <span class="macro">format!</span>(
                 <span class="string">&quot;Generation of input file for {} with seed {}&quot;</span>,
-                <span class="ident">solution</span>.<span class="ident">name</span>(),
-                <span class="ident">seed</span>
+                solution.name(),
+                seed
             ),
-            <span class="ident">seed</span>,
-            <span class="ident">official_solution</span>,
+            seed,
+            official_solution,
         )<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">config_mut</span>().<span class="ident">copy_exe</span> {
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">write_file_to</span>(
-                <span class="ident">input</span>,
-                <span class="ident">eval</span>.<span class="ident">task_root</span>
-                    .<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;bin/io/{}.in&quot;</span>, <span class="ident">solution</span>.<span class="ident">name</span>())),
+        <span class="kw">if </span>eval.dag.config_mut().copy_exe {
+            eval.dag.write_file_to(
+                input,
+                eval.task_root
+                    .join(<span class="macro">format!</span>(<span class="string">&quot;bin/io/{}.in&quot;</span>, solution.name())),
                 <span class="bool-val">false</span>,
             );
         }
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
+        <span class="kw">let </span>path = solution.path.clone();
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">gen</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span>, <span class="ident">seed</span><span class="op">|</span> <span class="ident">UIMessage::TerryGeneration</span> {
-                <span class="ident">solution</span>,
-                <span class="ident">seed</span>,
-                <span class="ident">status</span>
+            eval,
+            gen.uuid,
+            |status, solution, seed| UIMessage::TerryGeneration {
+                solution,
+                seed,
+                status
             },
-            <span class="ident">path</span>,
-            <span class="ident">seed</span>
+            path,
+            seed
         )<span class="question-mark">?</span>;
-        <span class="ident">gen</span>.<span class="ident">capture_stderr</span>(<span class="ident">STDERR_SIZE_LIMIT</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">gen</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">input</span>)
+        gen.capture_stderr(STDERR_SIZE_LIMIT);
+        eval.dag.add_execution(gen);
+        <span class="prelude-val">Ok</span>(input)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">InputValidator</span> {
-    <span class="doccomment">/// Make a new `InputValidator` based on the specified source file.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">source</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span> {
-        <span class="ident">InputValidator</span> { <span class="ident">source</span> }
+<span class="kw">impl </span>InputValidator {
+    <span class="doccomment">/// Make a new `InputValidator` based on the specified source file.
+    </span><span class="kw">pub fn </span>new(source: Arc&lt;SourceFile&gt;) -&gt; InputValidator {
+        InputValidator { source }
     }
 
-    <span class="doccomment">/// Build the execution for the validation of the input file, but don&#39;t bind the execution</span>
-    <span class="doccomment">/// callbacks.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">validate</span>(
+    <span class="doccomment">/// Build the execution for the validation of the input file, but don&#39;t bind the execution
+    /// callbacks.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>validate(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">description</span>: <span class="ident">String</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">FileUuid</span>, <span class="ident">Execution</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">source</span>.<span class="ident">execute</span>(<span class="ident">eval</span>, <span class="ident">description</span>, <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span><span class="ident">::new</span>())<span class="question-mark">?</span>;
-        <span class="ident">include_official_solution</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;mut</span> <span class="ident">exec</span>, <span class="ident">official_solution</span>)<span class="question-mark">?</span>;
-        <span class="ident">exec</span>.<span class="ident">limits_mut</span>().<span class="ident">allow_multiprocess</span>();
-        <span class="ident">exec</span>.<span class="ident">stdin</span>(<span class="ident">input</span>).<span class="ident">tag</span>(<span class="ident">Tag::Generation</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">stdout</span>();
-        <span class="prelude-val">Ok</span>((<span class="ident">stdout</span>.<span class="ident">uuid</span>, <span class="ident">exec</span>))
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        description: String,
+        input: FileUuid,
+        official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(FileUuid, Execution), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = <span class="self">self</span>.source.execute(eval, description, Vec::&lt;<span class="kw-2">&amp;</span>str&gt;::new())<span class="question-mark">?</span>;
+        include_official_solution(eval, <span class="kw-2">&amp;mut </span>exec, official_solution)<span class="question-mark">?</span>;
+        exec.limits_mut().allow_multiprocess();
+        exec.stdin(input).tag(Tag::Generation.into());
+        <span class="kw">let </span>stdout = exec.stdout();
+        <span class="prelude-val">Ok</span>((stdout.uuid, exec))
     }
 
-    <span class="doccomment">/// Build the execution for the validation of the input file, and bind the execution callbacks.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">validate_and_bind</span>(
+    <span class="doccomment">/// Build the execution for the validation of the input file, and bind the execution callbacks.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>validate_and_bind(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">solution</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">handle</span>, <span class="kw-2">mut</span> <span class="ident">val</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">validate</span>(
-            <span class="ident">eval</span>,
-            <span class="macro">format!</span>(<span class="string">&quot;Validation of input file for {}&quot;</span>, <span class="ident">solution</span>.<span class="ident">name</span>()),
-            <span class="ident">input</span>,
-            <span class="ident">official_solution</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        solution: <span class="kw-2">&amp;</span>SourceFile,
+        input: FileUuid,
+        official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;FileUuid, Error&gt; {
+        <span class="kw">let </span>(handle, <span class="kw-2">mut </span>val) = <span class="self">self</span>.validate(
+            eval,
+            <span class="macro">format!</span>(<span class="string">&quot;Validation of input file for {}&quot;</span>, solution.name()),
+            input,
+            official_solution,
         )<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
+        <span class="kw">let </span>path = solution.path.clone();
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">val</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::TerryValidation</span> { <span class="ident">solution</span>, <span class="ident">status</span> },
-            <span class="ident">path</span>
+            eval,
+            val.uuid,
+            |status, solution| UIMessage::TerryValidation { solution, status },
+            path
         )<span class="question-mark">?</span>;
-        <span class="ident">val</span>.<span class="ident">capture_stderr</span>(<span class="ident">STDERR_SIZE_LIMIT</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">val</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">handle</span>)
+        val.capture_stderr(STDERR_SIZE_LIMIT);
+        eval.dag.add_execution(val);
+        <span class="prelude-val">Ok</span>(handle)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Solution</span> {
-    <span class="doccomment">/// Use the provided solution to generate an output file based on the provided input file. If</span>
-    <span class="doccomment">/// the `validation_handle` is not `None`, the execution will wait for the validation to</span>
-    <span class="doccomment">/// succeed.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">solve</span>(
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">solution</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">validation_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">FileUuid</span>, <span class="ident">Execution</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">execute</span>(
-            <span class="ident">eval</span>,
-            <span class="macro">format!</span>(<span class="string">&quot;Evaluation of solution {}&quot;</span>, <span class="ident">solution</span>.<span class="ident">name</span>()),
-            <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span><span class="ident">::new</span>(),
+<span class="kw">impl </span>Solution {
+    <span class="doccomment">/// Use the provided solution to generate an output file based on the provided input file. If
+    /// the `validation_handle` is not `None`, the execution will wait for the validation to
+    /// succeed.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>solve(
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        solution: <span class="kw-2">&amp;</span>SourceFile,
+        input: FileUuid,
+        validation_handle: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(FileUuid, Execution), Error&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = solution.execute(
+            eval,
+            <span class="macro">format!</span>(<span class="string">&quot;Evaluation of solution {}&quot;</span>, solution.name()),
+            Vec::&lt;<span class="kw-2">&amp;</span>str&gt;::new(),
         )<span class="question-mark">?</span>;
-        <span class="ident">exec</span>.<span class="ident">stdin</span>(<span class="ident">input</span>);
-        <span class="ident">exec</span>.<span class="ident">tag</span>(<span class="ident">Tag::Evaluation</span>.<span class="ident">into</span>());
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">validation</span>) <span class="op">=</span> <span class="ident">validation_handle</span> {
-            <span class="ident">exec</span>.<span class="ident">input</span>(<span class="ident">validation</span>, <span class="string">&quot;wait_for_validation&quot;</span>, <span class="bool-val">false</span>);
+        exec.stdin(input);
+        exec.tag(Tag::Evaluation.into());
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(validation) = validation_handle {
+            exec.input(validation, <span class="string">&quot;wait_for_validation&quot;</span>, <span class="bool-val">false</span>);
         }
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">exec</span>.<span class="ident">stdout</span>();
-        <span class="ident">exec</span>.<span class="ident">limits_mut</span>()
-            .<span class="ident">cpu_time</span>(<span class="ident">SOLUTION_TIME_LIMIT</span>)
-            .<span class="ident">wall_time</span>(<span class="ident">SOLUTION_TIME_LIMIT</span> <span class="op">*</span> <span class="number">1.25</span>);
-        <span class="prelude-val">Ok</span>((<span class="ident">output</span>.<span class="ident">uuid</span>, <span class="ident">exec</span>))
+        <span class="kw">let </span>output = exec.stdout();
+        exec.limits_mut()
+            .cpu_time(SOLUTION_TIME_LIMIT)
+            .wall_time(SOLUTION_TIME_LIMIT * <span class="number">1.25</span>);
+        <span class="prelude-val">Ok</span>((output.uuid, exec))
     }
 
-    <span class="doccomment">/// Same as `Solution::solve` but also binding the execution callbacks.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">solve_and_bind</span>(
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">solution</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">validation_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FileUuid</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">output</span>, <span class="kw-2">mut</span> <span class="ident">sol</span>) <span class="op">=</span> <span class="ident">Solution::solve</span>(<span class="ident">eval</span>, <span class="ident">solution</span>, <span class="ident">input</span>, <span class="ident">validation_handle</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">config_mut</span>().<span class="ident">copy_exe</span> {
-            <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">write_file_to</span>(
-                <span class="ident">output</span>,
-                <span class="ident">eval</span>.<span class="ident">task_root</span>
-                    .<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;bin/io/{}.out&quot;</span>, <span class="ident">solution</span>.<span class="ident">name</span>())),
+    <span class="doccomment">/// Same as `Solution::solve` but also binding the execution callbacks.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>solve_and_bind(
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        solution: <span class="kw-2">&amp;</span>SourceFile,
+        input: FileUuid,
+        validation_handle: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;FileUuid, Error&gt; {
+        <span class="kw">let </span>(output, <span class="kw-2">mut </span>sol) = Solution::solve(eval, solution, input, validation_handle)<span class="question-mark">?</span>;
+        <span class="kw">if </span>eval.dag.config_mut().copy_exe {
+            eval.dag.write_file_to(
+                output,
+                eval.task_root
+                    .join(<span class="macro">format!</span>(<span class="string">&quot;bin/io/{}.out&quot;</span>, solution.name())),
                 <span class="bool-val">false</span>,
             );
         }
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
+        <span class="kw">let </span>path = solution.path.clone();
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">sol</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::TerrySolution</span> { <span class="ident">solution</span>, <span class="ident">status</span> },
-            <span class="ident">path</span>
+            eval,
+            sol.uuid,
+            |status, solution| UIMessage::TerrySolution { solution, status },
+            path
         )<span class="question-mark">?</span>;
-        <span class="ident">sol</span>.<span class="ident">capture_stderr</span>(<span class="ident">STDERR_SIZE_LIMIT</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">sol</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">output</span>)
+        sol.capture_stderr(STDERR_SIZE_LIMIT);
+        eval.dag.add_execution(sol);
+        <span class="prelude-val">Ok</span>(output)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Checker</span> {
-    <span class="doccomment">/// Make a new `Checker` based on the specified source file.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">source</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span>) -&gt; <span class="ident">Checker</span> {
-        <span class="ident">Checker</span> { <span class="ident">source</span> }
+<span class="kw">impl </span>Checker {
+    <span class="doccomment">/// Make a new `Checker` based on the specified source file.
+    </span><span class="kw">pub fn </span>new(source: Arc&lt;SourceFile&gt;) -&gt; Checker {
+        Checker { source }
     }
 
-    <span class="doccomment">/// Build the execution for the checking of the output file of a solution.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">check</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Build the execution for the checking of the output file of a solution.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>check&lt;F&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">description</span>: <span class="ident">String</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">output</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">callback</span>: <span class="ident">F</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Execution</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SolutionOutcome</span>, <span class="ident">Error</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        description: String,
+        input: FileUuid,
+        output: FileUuid,
+        official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+        callback: F,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Execution, Error&gt;
+    <span class="kw">where
+        </span>F: FnOnce(<span class="prelude-ty">Result</span>&lt;SolutionOutcome, Error&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">source</span>
-            .<span class="ident">execute</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;</span><span class="ident">description</span>, <span class="macro">vec!</span>[<span class="string">&quot;input.txt&quot;</span>, <span class="string">&quot;output.txt&quot;</span>])<span class="question-mark">?</span>;
-        <span class="ident">include_official_solution</span>(<span class="ident">eval</span>, <span class="kw-2">&amp;mut</span> <span class="ident">exec</span>, <span class="ident">official_solution</span>)<span class="question-mark">?</span>;
-        <span class="kw-2">*</span><span class="ident">exec</span>.<span class="ident">limits_mut</span>() <span class="op">=</span> <span class="ident">ExecutionLimits::unrestricted</span>();
-        <span class="ident">exec</span>.<span class="ident">input</span>(<span class="ident">input</span>, <span class="string">&quot;input.txt&quot;</span>, <span class="bool-val">false</span>)
-            .<span class="ident">input</span>(<span class="ident">output</span>, <span class="string">&quot;output.txt&quot;</span>, <span class="bool-val">false</span>)
-            .<span class="ident">capture_stdout</span>(<span class="ident">OUTCOME_SIZE_LIMIT</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">on_execution_done</span>(<span class="kw-2">&amp;</span><span class="ident">exec</span>.<span class="ident">uuid</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">res</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">res</span>
-                .<span class="ident">stdout</span>
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
-            <span class="ident">callback</span>(<span class="ident">serde_json::from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">into</span>()))
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = <span class="self">self
+            </span>.source
+            .execute(eval, <span class="kw-2">&amp;</span>description, <span class="macro">vec!</span>[<span class="string">&quot;input.txt&quot;</span>, <span class="string">&quot;output.txt&quot;</span>])<span class="question-mark">?</span>;
+        include_official_solution(eval, <span class="kw-2">&amp;mut </span>exec, official_solution)<span class="question-mark">?</span>;
+        <span class="kw-2">*</span>exec.limits_mut() = ExecutionLimits::unrestricted();
+        exec.input(input, <span class="string">&quot;input.txt&quot;</span>, <span class="bool-val">false</span>)
+            .input(output, <span class="string">&quot;output.txt&quot;</span>, <span class="bool-val">false</span>)
+            .capture_stdout(OUTCOME_SIZE_LIMIT);
+        eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|res| {
+            <span class="kw">let </span>stdout = res
+                .stdout
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
+            callback(serde_json::from_slice(<span class="kw-2">&amp;</span>stdout).map_err(|e| e.into()))
         });
-        <span class="prelude-val">Ok</span>(<span class="ident">exec</span>)
+        <span class="prelude-val">Ok</span>(exec)
     }
 
-    <span class="doccomment">/// Build the execution for the checking of the output file, and bind the execution callbacks.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">check_and_bind</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Build the execution for the checking of the output file, and bind the execution callbacks.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>check_and_bind&lt;F&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-        <span class="ident">solution</span>: <span class="kw-2">&amp;</span><span class="ident">SourceFile</span>,
-        <span class="ident">input</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">output</span>: <span class="ident">FileUuid</span>,
-        <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">callback</span>: <span class="ident">F</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SolutionOutcome</span>, <span class="ident">Error</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        solution: <span class="kw-2">&amp;</span>SourceFile,
+        input: FileUuid,
+        output: FileUuid,
+        official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+        callback: F,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
+    <span class="kw">where
+        </span>F: FnOnce(<span class="prelude-ty">Result</span>&lt;SolutionOutcome, Error&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">exec</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">check</span>(
-            <span class="ident">eval</span>,
-            <span class="macro">format!</span>(<span class="string">&quot;Checking output of {}&quot;</span>, <span class="ident">solution</span>.<span class="ident">name</span>()),
-            <span class="ident">input</span>,
-            <span class="ident">output</span>,
-            <span class="ident">official_solution</span>,
-            <span class="ident">callback</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = <span class="self">self</span>.check(
+            eval,
+            <span class="macro">format!</span>(<span class="string">&quot;Checking output of {}&quot;</span>, solution.name()),
+            input,
+            output,
+            official_solution,
+            callback,
         )<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
+        <span class="kw">let </span>path = solution.path.clone();
         <span class="macro">bind_exec_callbacks!</span>(
-            <span class="ident">eval</span>,
-            <span class="ident">exec</span>.<span class="ident">uuid</span>,
-            <span class="op">|</span><span class="ident">status</span>, <span class="ident">solution</span><span class="op">|</span> <span class="ident">UIMessage::TerryChecker</span> { <span class="ident">solution</span>, <span class="ident">status</span> },
-            <span class="ident">path</span>
+            eval,
+            exec.uuid,
+            |status, solution| UIMessage::TerryChecker { solution, status },
+            path
         )<span class="question-mark">?</span>;
-        <span class="ident">exec</span>.<span class="ident">capture_stderr</span>(<span class="ident">STDERR_SIZE_LIMIT</span>);
-        <span class="ident">eval</span>.<span class="ident">dag</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
+        exec.capture_stderr(STDERR_SIZE_LIMIT);
+        eval.dag.add_execution(exec);
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="doccomment">/// Include the compiled official solution to the sandbox of the provided execution.</span>
-<span class="kw">fn</span> <span class="ident">include_official_solution</span>(
-    <span class="ident">eval</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EvaluationData</span>,
-    <span class="ident">exec</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Execution</span>,
-    <span class="ident">official_solution</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">SourceFile</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">solution</span>) <span class="op">=</span> <span class="ident">official_solution</span> {
-        <span class="ident">exec</span>.<span class="ident">input</span>(
-            <span class="ident">solution</span>.<span class="ident">executable</span>(<span class="ident">eval</span>)<span class="question-mark">?</span>,
-            <span class="ident">solution</span>
-                .<span class="ident">write_bin_to</span>()
-                .<span class="ident">context</span>(<span class="string">&quot;managers should always be copied&quot;</span>)<span class="question-mark">?</span>
-                .<span class="ident">file_name</span>()
-                .<span class="ident">context</span>(<span class="string">&quot;Invalid solution path&quot;</span>)<span class="question-mark">?</span>,
+<span class="doccomment">/// Include the compiled official solution to the sandbox of the provided execution.
+</span><span class="kw">fn </span>include_official_solution(
+    eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+    exec: <span class="kw-2">&amp;mut </span>Execution,
+    official_solution: <span class="prelude-ty">Option</span>&lt;Arc&lt;SourceFile&gt;&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(solution) = official_solution {
+        exec.input(
+            solution.executable(eval)<span class="question-mark">?</span>,
+            solution
+                .write_bin_to()
+                .context(<span class="string">&quot;managers should always be copied&quot;</span>)<span class="question-mark">?
+                </span>.file_name()
+                .context(<span class="string">&quot;Invalid solution path&quot;</span>)<span class="question-mark">?</span>,
             <span class="bool-val">true</span>,
         );
     }
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

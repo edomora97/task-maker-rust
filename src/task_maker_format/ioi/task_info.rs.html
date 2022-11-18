@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/task_info.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>task_info.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/task_info.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>task_info.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -135,142 +135,142 @@
 <span id="135">135</span>
 <span id="136">136</span>
 <span id="137">137</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
 
-<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
-<span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::IOITask</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::IOITask;
 
-<span class="doccomment">/// Task information structure.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IOITaskInfo</span> {
-    <span class="doccomment">/// Version of this task-info structure.</span>
-    <span class="ident">version</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// Short name of the task.</span>
-    <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Title of the task.</span>
-    <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Scoring info.</span>
-    <span class="ident">scoring</span>: <span class="ident">TaskInfoScoring</span>,
-    <span class="doccomment">/// Limits of the task.</span>
-    <span class="ident">limits</span>: <span class="ident">TaskInfoLimits</span>,
-    <span class="doccomment">/// Statements of the task.</span>
-    <span class="ident">statements</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInfoStatement</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Attachments of the task.</span>
-    <span class="ident">attachments</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInfoAttachment</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Task information structure.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>IOITaskInfo {
+    <span class="doccomment">/// Version of this task-info structure.
+    </span>version: u64,
+    <span class="doccomment">/// Short name of the task.
+    </span>name: String,
+    <span class="doccomment">/// Title of the task.
+    </span>title: String,
+    <span class="doccomment">/// Scoring info.
+    </span>scoring: TaskInfoScoring,
+    <span class="doccomment">/// Limits of the task.
+    </span>limits: TaskInfoLimits,
+    <span class="doccomment">/// Statements of the task.
+    </span>statements: Vec&lt;TaskInfoStatement&gt;,
+    <span class="doccomment">/// Attachments of the task.
+    </span>attachments: Vec&lt;TaskInfoAttachment&gt;,
 }
 
-<span class="doccomment">/// Limits of the task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskInfoLimits</span> {
-    <span class="doccomment">/// Time limit in seconds.</span>
-    <span class="ident">time</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Memory limit in megabytes.</span>
-    <span class="ident">memory</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Limits of the task.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>TaskInfoLimits {
+    <span class="doccomment">/// Time limit in seconds.
+    </span>time: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// Memory limit in megabytes.
+    </span>memory: <span class="prelude-ty">Option</span>&lt;u64&gt;,
 }
 
-<span class="doccomment">/// Attachment of the task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskInfoAttachment</span> {
-    <span class="doccomment">/// Name of this attachment.</span>
-    <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// MIME type of this attachment.</span>
-    <span class="ident">content_type</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Path of this attachment relative to task directory.</span>
-    <span class="ident">path</span>: <span class="ident">PathBuf</span>,
+<span class="doccomment">/// Attachment of the task.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>TaskInfoAttachment {
+    <span class="doccomment">/// Name of this attachment.
+    </span>name: String,
+    <span class="doccomment">/// MIME type of this attachment.
+    </span>content_type: String,
+    <span class="doccomment">/// Path of this attachment relative to task directory.
+    </span>path: PathBuf,
 }
 
-<span class="doccomment">/// Info of the subtasks.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskInfoSubtask</span> {
-    <span class="doccomment">/// Maximum score for this subtask.</span>
-    <span class="ident">max_score</span>: <span class="ident">f64</span>,
-    <span class="doccomment">/// Number of testcases for this subtask.</span>
-    <span class="ident">testcases</span>: <span class="ident">u64</span>,
+<span class="doccomment">/// Info of the subtasks.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>TaskInfoSubtask {
+    <span class="doccomment">/// Maximum score for this subtask.
+    </span>max_score: f64,
+    <span class="doccomment">/// Number of testcases for this subtask.
+    </span>testcases: u64,
 }
 
-<span class="doccomment">/// Scoring for the task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskInfoScoring</span> {
-    <span class="doccomment">/// Maximum score for the task.</span>
-    <span class="ident">max_score</span>: <span class="ident">f64</span>,
-    <span class="doccomment">/// Subtasks of this task.</span>
-    <span class="ident">subtasks</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TaskInfoSubtask</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Scoring for the task.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>TaskInfoScoring {
+    <span class="doccomment">/// Maximum score for the task.
+    </span>max_score: f64,
+    <span class="doccomment">/// Subtasks of this task.
+    </span>subtasks: Vec&lt;TaskInfoSubtask&gt;,
 }
 
-<span class="doccomment">/// Statement of the task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TaskInfoStatement</span> {
-    <span class="doccomment">/// Language of the statement.</span>
-    <span class="ident">language</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Content type of the statement, as MIME type.</span>
-    <span class="ident">content_type</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// Path of the task, relative to the task directory.</span>
-    <span class="ident">path</span>: <span class="ident">PathBuf</span>,
+<span class="doccomment">/// Statement of the task.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="kw">pub struct </span>TaskInfoStatement {
+    <span class="doccomment">/// Language of the statement.
+    </span>language: String,
+    <span class="doccomment">/// Content type of the statement, as MIME type.
+    </span>content_type: String,
+    <span class="doccomment">/// Path of the task, relative to the task directory.
+    </span>path: PathBuf,
 }
 
-<span class="kw">impl</span> <span class="ident">IOITaskInfo</span> {
-    <span class="doccomment">/// Generate the task information from the provided `Task`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">task</span>: <span class="kw-2">&amp;</span><span class="ident">IOITask</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">IOITaskInfo</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">IOITaskInfo</span> {
-            <span class="ident">version</span>: <span class="number">1</span>,
-            <span class="ident">name</span>: <span class="ident">task</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
-            <span class="ident">title</span>: <span class="ident">task</span>.<span class="ident">title</span>.<span class="ident">clone</span>(),
-            <span class="ident">scoring</span>: <span class="ident">TaskInfoScoring</span> {
-                <span class="ident">max_score</span>: <span class="ident">task</span>
-                    .<span class="ident">subtasks</span>
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">fold</span>(<span class="number">0.0</span>, <span class="op">|</span><span class="ident">sum</span>, (<span class="kw">_</span>, <span class="ident">subtask</span>)<span class="op">|</span> <span class="ident">sum</span> <span class="op">+</span> <span class="ident">subtask</span>.<span class="ident">max_score</span>),
-                <span class="ident">subtasks</span>: <span class="ident">task</span>
-                    .<span class="ident">subtasks</span>
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">sorted_by_key</span>(<span class="op">|</span>(<span class="kw-2">&amp;</span><span class="ident">id</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">id</span>)
-                    .<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">subtask</span>)<span class="op">|</span> <span class="ident">TaskInfoSubtask</span> {
-                        <span class="ident">max_score</span>: <span class="ident">subtask</span>.<span class="ident">max_score</span>,
-                        <span class="ident">testcases</span>: <span class="ident">subtask</span>.<span class="ident">testcases</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u64</span>,
+<span class="kw">impl </span>IOITaskInfo {
+    <span class="doccomment">/// Generate the task information from the provided `Task`.
+    </span><span class="kw">pub fn </span>new(task: <span class="kw-2">&amp;</span>IOITask) -&gt; <span class="prelude-ty">Result</span>&lt;IOITaskInfo, Error&gt; {
+        <span class="prelude-val">Ok</span>(IOITaskInfo {
+            version: <span class="number">1</span>,
+            name: task.name.clone(),
+            title: task.title.clone(),
+            scoring: TaskInfoScoring {
+                max_score: task
+                    .subtasks
+                    .iter()
+                    .fold(<span class="number">0.0</span>, |sum, (<span class="kw">_</span>, subtask)| sum + subtask.max_score),
+                subtasks: task
+                    .subtasks
+                    .iter()
+                    .sorted_by_key(|(<span class="kw-2">&amp;</span>id, <span class="kw">_</span>)| id)
+                    .map(|(<span class="kw">_</span>, subtask)| TaskInfoSubtask {
+                        max_score: subtask.max_score,
+                        testcases: subtask.testcases.len() <span class="kw">as </span>u64,
                     })
-                    .<span class="ident">collect</span>(),
+                    .collect(),
             },
-            <span class="ident">limits</span>: <span class="ident">TaskInfoLimits</span> {
-                <span class="ident">time</span>: <span class="ident">task</span>.<span class="ident">time_limit</span>,
-                <span class="ident">memory</span>: <span class="ident">task</span>.<span class="ident">memory_limit</span>,
+            limits: TaskInfoLimits {
+                time: task.time_limit,
+                memory: task.memory_limit,
             },
-            <span class="ident">statements</span>: <span class="ident">task</span>
-                .<span class="ident">booklets</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">booklet</span><span class="op">|</span> <span class="ident">TaskInfoStatement</span> {
-                    <span class="ident">language</span>: <span class="ident">booklet</span>.<span class="ident">config</span>.<span class="ident">language</span>.<span class="ident">clone</span>(),
-                    <span class="ident">content_type</span>: <span class="ident">mime_guess::from_path</span>(<span class="kw-2">&amp;</span><span class="ident">booklet</span>.<span class="ident">dest</span>)
-                        .<span class="ident">first</span>()
-                        .<span class="ident">map_or</span>(<span class="string">&quot;UNKNOWN&quot;</span>.<span class="ident">into</span>(), <span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">to_string</span>()),
-                    <span class="ident">path</span>: <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">booklet</span>.<span class="ident">dest</span>).<span class="ident">into</span>(),
+            statements: task
+                .booklets
+                .iter()
+                .map(|booklet| TaskInfoStatement {
+                    language: booklet.config.language.clone(),
+                    content_type: mime_guess::from_path(<span class="kw-2">&amp;</span>booklet.dest)
+                        .first()
+                        .map_or(<span class="string">&quot;UNKNOWN&quot;</span>.into(), |t| t.to_string()),
+                    path: task.path_of(<span class="kw-2">&amp;</span>booklet.dest).into(),
                 })
-                .<span class="ident">collect</span>(),
-            <span class="ident">attachments</span>: <span class="ident">task</span>
-                .<span class="ident">path</span>
-                .<span class="ident">join</span>(<span class="string">&quot;att&quot;</span>)
-                .<span class="ident">read_dir</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">dir</span><span class="op">|</span> {
-                    <span class="ident">dir</span>.<span class="ident">filter</span>(<span class="op">|</span><span class="ident">entry</span><span class="op">|</span> <span class="ident">entry</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">file_type</span>().<span class="ident">unwrap</span>().<span class="ident">is_file</span>())
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">entry</span><span class="op">|</span> {
-                            <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">unwrap</span>();
-                            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">path</span>();
-                            <span class="ident">TaskInfoAttachment</span> {
-                                <span class="ident">name</span>: <span class="ident">entry</span>.<span class="ident">file_name</span>().<span class="ident">to_str</span>().<span class="ident">unwrap</span>().<span class="ident">into</span>(),
-                                <span class="ident">content_type</span>: <span class="ident">mime_guess::from_path</span>(<span class="ident">path</span>)
-                                    .<span class="ident">first</span>()
-                                    .<span class="ident">map_or</span>(<span class="string">&quot;UNKNOWN&quot;</span>.<span class="ident">into</span>(), <span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">to_string</span>()),
-                                <span class="ident">path</span>: <span class="ident">task</span>.<span class="ident">path_of</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>.<span class="ident">path</span>()).<span class="ident">into</span>(),
+                .collect(),
+            attachments: task
+                .path
+                .join(<span class="string">&quot;att&quot;</span>)
+                .read_dir()
+                .map(|dir| {
+                    dir.filter(|entry| entry.as_ref().unwrap().file_type().unwrap().is_file())
+                        .map(|entry| {
+                            <span class="kw">let </span>entry = entry.unwrap();
+                            <span class="kw">let </span>path = entry.path();
+                            TaskInfoAttachment {
+                                name: entry.file_name().to_str().unwrap().into(),
+                                content_type: mime_guess::from_path(path)
+                                    .first()
+                                    .map_or(<span class="string">&quot;UNKNOWN&quot;</span>.into(), |t| t.to_string()),
+                                path: task.path_of(<span class="kw-2">&amp;</span>entry.path()).into(),
                             }
                         })
-                        .<span class="ident">collect</span>()
+                        .collect()
                 })
-                .<span class="ident">unwrap_or_default</span>(),
+                .unwrap_or_default(),
         })
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

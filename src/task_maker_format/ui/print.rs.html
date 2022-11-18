@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/print.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>print.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/print.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>print.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -349,356 +349,356 @@
 <span id="349">349</span>
 <span id="350">350</span>
 <span id="351">351</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">termcolor</span>::{<span class="ident">ColorChoice</span>, <span class="ident">ColorSpec</span>, <span class="ident">StandardStream</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>termcolor::{ColorChoice, ColorSpec, StandardStream};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag::ExecutionStatus</span>;
+<span class="kw">use </span>task_maker_dag::ExecutionStatus;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::cwrite</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::CaseStatus</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::cwrite;
+<span class="kw">use </span><span class="kw">crate</span>::terry::CaseStatus;
+<span class="kw">use </span><span class="kw">crate</span>::ui::<span class="kw-2">*</span>;
 
-<span class="macro">lazy_static!</span> {
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ERROR</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="ident">RED</span>.<span class="ident">clone</span>();
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SUCCESS</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="ident">GREEN</span>.<span class="ident">clone</span>();
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">WARNING</span>: <span class="ident">ColorSpec</span> <span class="op">=</span> <span class="ident">YELLOW</span>.<span class="ident">clone</span>();
+<span class="macro">lazy_static! </span>{
+    <span class="kw">static </span><span class="kw-2">ref </span>ERROR: ColorSpec = RED.clone();
+    <span class="kw">static </span><span class="kw-2">ref </span>SUCCESS: ColorSpec = GREEN.clone();
+    <span class="kw">static </span><span class="kw-2">ref </span>WARNING: ColorSpec = YELLOW.clone();
 }
 
-<span class="doccomment">/// A simple UI that will print to stdout the human readable messages. Useful</span>
-<span class="doccomment">/// for debugging or for when curses is not available.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PrintUI</span><span class="op">&lt;</span><span class="ident">State</span>: <span class="ident">UIStateT</span><span class="op">&gt;</span> {
-    <span class="ident">stream</span>: <span class="ident">StandardStream</span>,
-    <span class="ident">state</span>: <span class="ident">State</span>,
+<span class="doccomment">/// A simple UI that will print to stdout the human readable messages. Useful
+/// for debugging or for when curses is not available.
+</span><span class="kw">pub struct </span>PrintUI&lt;State: UIStateT&gt; {
+    stream: StandardStream,
+    state: State,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">State</span>: <span class="ident">UIStateT</span><span class="op">&gt;</span> <span class="ident">PrintUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Make a new PrintUI.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">state</span>: <span class="ident">State</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">PrintUI</span> {
-            <span class="ident">stream</span>: <span class="ident">StandardStream::stdout</span>(<span class="ident">ColorChoice::Auto</span>),
-            <span class="ident">state</span>,
+<span class="kw">impl</span>&lt;State: UIStateT&gt; PrintUI&lt;State&gt; {
+    <span class="doccomment">/// Make a new PrintUI.
+    </span><span class="kw">pub fn </span>new(state: State) -&gt; <span class="self">Self </span>{
+        PrintUI {
+            stream: StandardStream::stdout(ColorChoice::Auto),
+            state,
         }
     }
 
-    <span class="doccomment">/// Write the UIExecutionStatus type to the console, coloring the message.</span>
-    <span class="kw">fn</span> <span class="ident">write_status</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">UIExecutionStatus</span>) {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">UIExecutionStatus::Pending</span> =&gt; <span class="macro">print!</span>(<span class="string">&quot;[PENDING] &quot;</span>),
-            <span class="ident">UIExecutionStatus::Started</span> { .. } =&gt; <span class="macro">print!</span>(<span class="string">&quot;[STARTED] &quot;</span>),
-            <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; <span class="kw">match</span> <span class="ident">result</span>.<span class="ident">status</span> {
-                <span class="ident">ExecutionStatus::Success</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">SUCCESS</span>, <span class="string">&quot;[DONE]    &quot;</span>),
-                <span class="kw">_</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">WARNING</span>, <span class="string">&quot;[DONE]    &quot;</span>),
+    <span class="doccomment">/// Write the UIExecutionStatus type to the console, coloring the message.
+    </span><span class="kw">fn </span>write_status(<span class="kw-2">&amp;mut </span><span class="self">self</span>, status: <span class="kw-2">&amp;</span>UIExecutionStatus) {
+        <span class="kw">match </span>status {
+            UIExecutionStatus::Pending =&gt; <span class="macro">print!</span>(<span class="string">&quot;[PENDING] &quot;</span>),
+            UIExecutionStatus::Started { .. } =&gt; <span class="macro">print!</span>(<span class="string">&quot;[STARTED] &quot;</span>),
+            UIExecutionStatus::Done { result } =&gt; <span class="kw">match </span>result.status {
+                ExecutionStatus::Success =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, SUCCESS, <span class="string">&quot;[DONE]    &quot;</span>),
+                <span class="kw">_ </span>=&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, WARNING, <span class="string">&quot;[DONE]    &quot;</span>),
             },
-            <span class="ident">UIExecutionStatus::Skipped</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">WARNING</span>, <span class="string">&quot;[SKIPPED] &quot;</span>),
+            UIExecutionStatus::Skipped =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, WARNING, <span class="string">&quot;[SKIPPED] &quot;</span>),
         };
     }
 
-    <span class="doccomment">/// Write the UIExecutionStatus details to the console.</span>
-    <span class="kw">fn</span> <span class="ident">write_status_details</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">UIExecutionStatus</span>) {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">UIExecutionStatus::Pending</span> =&gt; {}
-            <span class="ident">UIExecutionStatus::Started</span> { <span class="ident">worker</span> } =&gt; {
-                <span class="macro">print!</span>(<span class="string">&quot;Worker: {:?}&quot;</span>, <span class="ident">worker</span>);
+    <span class="doccomment">/// Write the UIExecutionStatus details to the console.
+    </span><span class="kw">fn </span>write_status_details(<span class="kw-2">&amp;mut </span><span class="self">self</span>, status: <span class="kw-2">&amp;</span>UIExecutionStatus) {
+        <span class="kw">match </span>status {
+            UIExecutionStatus::Pending =&gt; {}
+            UIExecutionStatus::Started { worker } =&gt; {
+                <span class="macro">print!</span>(<span class="string">&quot;Worker: {:?}&quot;</span>, worker);
             }
-            <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_execution_status</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>.<span class="ident">status</span>);
+            UIExecutionStatus::Done { result } =&gt; {
+                <span class="self">self</span>.write_execution_status(<span class="kw-2">&amp;</span>result.status);
             }
-            <span class="ident">UIExecutionStatus::Skipped</span> =&gt; {}
+            UIExecutionStatus::Skipped =&gt; {}
         }
     }
 
-    <span class="doccomment">/// Write the ExecutionStatus details to the console.</span>
-    <span class="kw">fn</span> <span class="ident">write_execution_status</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">status</span>: <span class="kw-2">&amp;</span><span class="ident">ExecutionStatus</span>) {
-        <span class="kw">match</span> <span class="ident">status</span> {
-            <span class="ident">ExecutionStatus::Success</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">SUCCESS</span>, <span class="string">&quot;[{:?}]&quot;</span>, <span class="ident">status</span>),
-            <span class="ident">ExecutionStatus::InternalError</span>(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">ERROR</span>, <span class="string">&quot;[{:?}]&quot;</span>, <span class="ident">status</span>),
-            <span class="kw">_</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">WARNING</span>, <span class="string">&quot;[{:?}]&quot;</span>, <span class="ident">status</span>),
+    <span class="doccomment">/// Write the ExecutionStatus details to the console.
+    </span><span class="kw">fn </span>write_execution_status(<span class="kw-2">&amp;mut </span><span class="self">self</span>, status: <span class="kw-2">&amp;</span>ExecutionStatus) {
+        <span class="kw">match </span>status {
+            ExecutionStatus::Success =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, SUCCESS, <span class="string">&quot;[{:?}]&quot;</span>, status),
+            ExecutionStatus::InternalError(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, ERROR, <span class="string">&quot;[{:?}]&quot;</span>, status),
+            <span class="kw">_ </span>=&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, WARNING, <span class="string">&quot;[{:?}]&quot;</span>, status),
         }
     }
 
-    <span class="doccomment">/// Write a message, padding it to at least 80 chars.</span>
-    <span class="kw">fn</span> <span class="ident">write_message</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">String</span>) {
-        <span class="macro">print!</span>(<span class="string">&quot;{:&lt;80}&quot;</span>, <span class="ident">message</span>);
+    <span class="doccomment">/// Write a message, padding it to at least 80 chars.
+    </span><span class="kw">fn </span>write_message(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: String) {
+        <span class="macro">print!</span>(<span class="string">&quot;{:&lt;80}&quot;</span>, message);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">State</span>: <span class="ident">UIStateT</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span> <span class="ident">UI</span> <span class="kw">for</span> <span class="ident">PrintUI</span><span class="op">&lt;</span><span class="ident">State</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cognitive_complexity</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">on_message</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="ident">UIMessage</span>) {
-        <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">apply</span>(<span class="ident">message</span>.<span class="ident">clone</span>());
-        <span class="kw">match</span> <span class="ident">message</span> {
-            <span class="ident">UIMessage::StopUI</span> =&gt; {}
-            <span class="ident">UIMessage::ServerStatus</span> { <span class="ident">status</span> } =&gt; {
+<span class="kw">impl</span>&lt;State: UIStateT + Send&gt; UI <span class="kw">for </span>PrintUI&lt;State&gt; {
+    <span class="attribute">#[allow(clippy::cognitive_complexity)]
+    </span><span class="kw">fn </span>on_message(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: UIMessage) {
+        <span class="self">self</span>.state.apply(message.clone());
+        <span class="kw">match </span>message {
+            UIMessage::StopUI =&gt; {}
+            UIMessage::ServerStatus { status } =&gt; {
                 <span class="macro">println!</span>(
                     <span class="string">&quot;[STATUS]  Server status: {} ready exec, {} waiting exec&quot;</span>,
-                    <span class="ident">status</span>.<span class="ident">ready_execs</span>, <span class="ident">status</span>.<span class="ident">waiting_execs</span>
+                    status.ready_execs, status.waiting_execs
                 );
-                <span class="kw">for</span> <span class="ident">worker</span> <span class="kw">in</span> <span class="ident">status</span>.<span class="ident">connected_workers</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">job</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">worker</span>.<span class="ident">current_job</span> {
-                        <span class="macro">println!</span>(<span class="string">&quot; - {} ({}): {}&quot;</span>, <span class="ident">worker</span>.<span class="ident">name</span>, <span class="ident">worker</span>.<span class="ident">uuid</span>, <span class="ident">job</span>.<span class="ident">job</span>);
-                    } <span class="kw">else</span> {
-                        <span class="macro">println!</span>(<span class="string">&quot; - {} ({})&quot;</span>, <span class="ident">worker</span>.<span class="ident">name</span>, <span class="ident">worker</span>.<span class="ident">uuid</span>);
+                <span class="kw">for </span>worker <span class="kw">in </span>status.connected_workers {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(job) = <span class="kw-2">&amp;</span>worker.current_job {
+                        <span class="macro">println!</span>(<span class="string">&quot; - {} ({}): {}&quot;</span>, worker.name, worker.uuid, job.job);
+                    } <span class="kw">else </span>{
+                        <span class="macro">println!</span>(<span class="string">&quot; - {} ({})&quot;</span>, worker.name, worker.uuid);
                     }
                 }
             }
-            <span class="ident">UIMessage::Solutions</span> { <span class="ident">solutions</span> } =&gt; {
+            UIMessage::Solutions { solutions } =&gt; {
                 <span class="macro">println!</span>(<span class="string">&quot;[SOLUTIONS] Solutions that will be evaluated:&quot;</span>);
-                <span class="kw">for</span> <span class="ident">solution</span> <span class="kw">in</span> <span class="ident">solutions</span> {
-                    <span class="macro">println!</span>(<span class="string">&quot;  - {}&quot;</span>, <span class="ident">solution</span>.<span class="ident">path</span>.<span class="ident">display</span>());
+                <span class="kw">for </span>solution <span class="kw">in </span>solutions {
+                    <span class="macro">println!</span>(<span class="string">&quot;  - {}&quot;</span>, solution.path.display());
                 }
             }
-            <span class="ident">UIMessage::Compilation</span> { <span class="ident">file</span>, <span class="ident">status</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(<span class="string">&quot;Compilation of {:?} &quot;</span>, <span class="ident">file</span>));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } <span class="op">=</span> <span class="ident">status</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">result</span>.<span class="ident">stderr</span> {
-                        <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>);
-                        <span class="macro">println!</span>(<span class="string">&quot;\n[STDERR]  Compilation stderr of {:?}&quot;</span>, <span class="ident">file</span>);
-                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">stderr</span>.<span class="ident">trim</span>());
+            UIMessage::Compilation { file, status } =&gt; {
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(<span class="string">&quot;Compilation of {:?} &quot;</span>, file));
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
+                <span class="kw">if let </span>UIExecutionStatus::Done { result } = status {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
+                        <span class="kw">let </span>stderr = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr);
+                        <span class="macro">println!</span>(<span class="string">&quot;\n[STDERR]  Compilation stderr of {:?}&quot;</span>, file);
+                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, stderr.trim());
                     }
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stdout</span>) <span class="op">=</span> <span class="ident">result</span>.<span class="ident">stdout</span> {
-                        <span class="kw">let</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stdout</span>);
-                        <span class="macro">println!</span>(<span class="string">&quot;\n[STDOUT]  Compilation stdout of {:?}&quot;</span>, <span class="ident">file</span>);
-                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">stdout</span>.<span class="ident">trim</span>());
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stdout) = result.stdout {
+                        <span class="kw">let </span>stdout = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stdout);
+                        <span class="macro">println!</span>(<span class="string">&quot;\n[STDOUT]  Compilation stdout of {:?}&quot;</span>, file);
+                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, stdout.trim());
                     }
                 }
             }
-            <span class="ident">UIMessage::IOITask</span> { <span class="ident">task</span> } =&gt; {
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">BOLD</span>, <span class="string">&quot;Task {} ({})\n&quot;</span>, <span class="ident">task</span>.<span class="ident">title</span>, <span class="ident">task</span>.<span class="ident">name</span>);
-                <span class="macro">println!</span>(<span class="string">&quot;Path: {:?}&quot;</span>, <span class="ident">task</span>.<span class="ident">path</span>);
+            UIMessage::IOITask { task } =&gt; {
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Task {} ({})\n&quot;</span>, task.title, task.name);
+                <span class="macro">println!</span>(<span class="string">&quot;Path: {:?}&quot;</span>, task.path);
                 <span class="macro">println!</span>(<span class="string">&quot;Subtasks&quot;</span>);
-                <span class="kw">for</span> (<span class="ident">st_num</span>, <span class="ident">subtask</span>) <span class="kw">in</span> <span class="ident">task</span>.<span class="ident">subtasks</span>.<span class="ident">iter</span>().<span class="ident">sorted_by_key</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">0</span>) {
-                    <span class="macro">println!</span>(<span class="string">&quot;  {}: {} points&quot;</span>, <span class="ident">st_num</span>, <span class="ident">subtask</span>.<span class="ident">max_score</span>);
+                <span class="kw">for </span>(st_num, subtask) <span class="kw">in </span>task.subtasks.iter().sorted_by_key(|x| x.<span class="number">0</span>) {
+                    <span class="macro">println!</span>(<span class="string">&quot;  {}: {} points&quot;</span>, st_num, subtask.max_score);
                     <span class="macro">print!</span>(<span class="string">&quot;     testcases: [&quot;</span>);
-                    <span class="kw">for</span> <span class="ident">tc_num</span> <span class="kw">in</span> <span class="ident">subtask</span>.<span class="ident">testcases</span>.<span class="ident">keys</span>().<span class="ident">sorted</span>() {
-                        <span class="macro">print!</span>(<span class="string">&quot; {}&quot;</span>, <span class="ident">tc_num</span>);
+                    <span class="kw">for </span>tc_num <span class="kw">in </span>subtask.testcases.keys().sorted() {
+                        <span class="macro">print!</span>(<span class="string">&quot; {}&quot;</span>, tc_num);
                     }
                     <span class="macro">println!</span>(<span class="string">&quot; ]&quot;</span>);
                 }
             }
-            <span class="ident">UIMessage::IOIGeneration</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIGeneration {
+                subtask,
+                testcase,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Generation of testcase {} of subtask {} &quot;</span>,
-                    <span class="ident">testcase</span>, <span class="ident">subtask</span>
+                    testcase, subtask
                 ));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } <span class="op">=</span> <span class="ident">status</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">result</span>.<span class="ident">stderr</span> {
-                        <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>);
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
+                <span class="kw">if let </span>UIExecutionStatus::Done { result } = status {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
+                        <span class="kw">let </span>stderr = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr);
                         <span class="macro">println!</span>(
                             <span class="string">&quot;\n[STDERR]  Generation stderr of testcase {} of subtask {}&quot;</span>,
-                            <span class="ident">testcase</span>, <span class="ident">subtask</span>
+                            testcase, subtask
                         );
-                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">stderr</span>.<span class="ident">trim</span>());
+                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, stderr.trim());
                     }
                 }
             }
-            <span class="ident">UIMessage::IOIValidation</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIValidation {
+                subtask,
+                testcase,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Validation of testcase {} of subtask {} &quot;</span>,
-                    <span class="ident">testcase</span>, <span class="ident">subtask</span>
+                    testcase, subtask
                 ));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="ident">UIExecutionStatus::Done</span> { <span class="ident">result</span> } <span class="op">=</span> <span class="ident">status</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">stderr</span>) <span class="op">=</span> <span class="ident">result</span>.<span class="ident">stderr</span> {
-                        <span class="kw">let</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">stderr</span>);
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
+                <span class="kw">if let </span>UIExecutionStatus::Done { result } = status {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
+                        <span class="kw">let </span>stderr = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr);
                         <span class="macro">println!</span>(
                             <span class="string">&quot;\n[STDERR]  Validation stderr of testcase {} of subtask {}&quot;</span>,
-                            <span class="ident">testcase</span>, <span class="ident">subtask</span>
+                            testcase, subtask
                         );
-                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">stderr</span>.<span class="ident">trim</span>());
+                        <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, stderr.trim());
                     }
                 }
             }
-            <span class="ident">UIMessage::IOISolution</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOISolution {
+                subtask,
+                testcase,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Solution of testcase {} of subtask {} &quot;</span>,
-                    <span class="ident">testcase</span>, <span class="ident">subtask</span>
+                    testcase, subtask
                 ));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
             }
-            <span class="ident">UIMessage::IOIEvaluation</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">status</span>,
-                <span class="ident">part</span>,
-                <span class="ident">num_parts</span>,
+            UIMessage::IOIEvaluation {
+                subtask,
+                testcase,
+                solution,
+                status,
+                part,
+                num_parts,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Evaluation of {:?} of testcase {} of subtask {} (part {} of {}) &quot;</span>,
-                    <span class="ident">solution</span>,
-                    <span class="ident">testcase</span>,
-                    <span class="ident">subtask</span>,
-                    <span class="ident">part</span> <span class="op">+</span> <span class="number">1</span>,
-                    <span class="ident">num_parts</span>
+                    solution,
+                    testcase,
+                    subtask,
+                    part + <span class="number">1</span>,
+                    num_parts
                 ));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
             }
-            <span class="ident">UIMessage::IOIChecker</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIChecker {
+                subtask,
+                testcase,
+                solution,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Checking output of {:?} of testcase {} of subtask {} &quot;</span>,
-                    <span class="ident">solution</span>, <span class="ident">testcase</span>, <span class="ident">subtask</span>
+                    solution, testcase, subtask
                 ));
             }
-            <span class="ident">UIMessage::IOITestcaseScore</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">testcase</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">score</span>,
-                <span class="ident">message</span>,
+            UIMessage::IOITestcaseScore {
+                subtask,
+                testcase,
+                solution,
+                score,
+                message,
             } =&gt; {
                 <span class="macro">print!</span>(<span class="string">&quot;[TESTCAS] &quot;</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Solution {:?} scored {} on testcase {} of subtask {}: {}&quot;</span>,
-                    <span class="ident">solution</span>, <span class="ident">score</span>, <span class="ident">testcase</span>, <span class="ident">subtask</span>, <span class="ident">message</span>
+                    solution, score, testcase, subtask, message
                 ));
             }
-            <span class="ident">UIMessage::IOISubtaskScore</span> {
-                <span class="ident">subtask</span>,
-                <span class="ident">solution</span>,
-                <span class="ident">score</span>,
-                <span class="ident">normalized_score</span>,
+            UIMessage::IOISubtaskScore {
+                subtask,
+                solution,
+                score,
+                normalized_score,
             } =&gt; {
                 <span class="macro">print!</span>(<span class="string">&quot;[SUBTASK] &quot;</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Solution {:?} scored {} on subtask {} (normalized score {})&quot;</span>,
-                    <span class="ident">solution</span>, <span class="ident">score</span>, <span class="ident">subtask</span>, <span class="ident">normalized_score</span>,
+                    solution, score, subtask, normalized_score,
                 ));
             }
-            <span class="ident">UIMessage::IOITaskScore</span> { <span class="ident">solution</span>, <span class="ident">score</span> } =&gt; {
+            UIMessage::IOITaskScore { solution, score } =&gt; {
                 <span class="macro">print!</span>(<span class="string">&quot;[TASK]    &quot;</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(<span class="string">&quot;Solution {:?} scored {} &quot;</span>, <span class="ident">solution</span>, <span class="ident">score</span>));
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(<span class="string">&quot;Solution {:?} scored {} &quot;</span>, solution, score));
             }
-            <span class="ident">UIMessage::IOIBooklet</span> { <span class="ident">name</span>, <span class="ident">status</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(<span class="string">&quot;Compilation of booklet {}&quot;</span>, <span class="ident">name</span>));
+            UIMessage::IOIBooklet { name, status } =&gt; {
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(<span class="string">&quot;Compilation of booklet {}&quot;</span>, name));
             }
-            <span class="ident">UIMessage::IOIBookletDependency</span> {
-                <span class="ident">booklet</span>,
-                <span class="ident">name</span>,
-                <span class="ident">step</span>,
-                <span class="ident">num_steps</span>,
-                <span class="ident">status</span>,
+            UIMessage::IOIBookletDependency {
+                booklet,
+                name,
+                step,
+                num_steps,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Compilation of dependency {} of booklet {} (step {} of {})&quot;</span>,
-                    <span class="ident">name</span>,
-                    <span class="ident">booklet</span>,
-                    <span class="ident">step</span> <span class="op">+</span> <span class="number">1</span>,
-                    <span class="ident">num_steps</span>
+                    name,
+                    booklet,
+                    step + <span class="number">1</span>,
+                    num_steps
                 ));
             }
-            <span class="ident">UIMessage::Diagnostic</span> { <span class="ident">diagnostic</span> } =&gt; {
+            UIMessage::Diagnostic { diagnostic } =&gt; {
                 <span class="macro">println!</span>(<span class="string">&quot;[DIAGNOSTIC]&quot;</span>);
-                <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">diagnostic</span>);
+                <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, diagnostic);
             }
-            <span class="ident">UIMessage::TerryTask</span> { .. } =&gt; {}
-            <span class="ident">UIMessage::TerryGeneration</span> {
-                <span class="ident">solution</span>,
-                <span class="ident">seed</span>,
-                <span class="ident">status</span>,
+            UIMessage::TerryTask { .. } =&gt; {}
+            UIMessage::TerryGeneration {
+                solution,
+                seed,
+                status,
             } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(
                     <span class="string">&quot;Generation of input for {} with seed {} &quot;</span>,
-                    <span class="ident">solution</span>.<span class="ident">display</span>(),
-                    <span class="ident">seed</span>
+                    solution.display(),
+                    seed
                 ));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
             }
-            <span class="ident">UIMessage::TerryValidation</span> { <span class="ident">solution</span>, <span class="ident">status</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(<span class="string">&quot;Validation of input for {} &quot;</span>, <span class="ident">solution</span>.<span class="ident">display</span>()));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
+            UIMessage::TerryValidation { solution, status } =&gt; {
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(<span class="string">&quot;Validation of input for {} &quot;</span>, solution.display()));
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
             }
-            <span class="ident">UIMessage::TerrySolution</span> { <span class="ident">solution</span>, <span class="ident">status</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(<span class="string">&quot;Solving input for {} &quot;</span>, <span class="ident">solution</span>.<span class="ident">display</span>()));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
+            UIMessage::TerrySolution { solution, status } =&gt; {
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(<span class="string">&quot;Solving input for {} &quot;</span>, solution.display()));
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
             }
-            <span class="ident">UIMessage::TerryChecker</span> { <span class="ident">solution</span>, <span class="ident">status</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">write_status</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
-                <span class="self">self</span>.<span class="ident">write_message</span>(<span class="macro">format!</span>(<span class="string">&quot;Checking output of {} &quot;</span>, <span class="ident">solution</span>.<span class="ident">display</span>()));
-                <span class="self">self</span>.<span class="ident">write_status_details</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>);
+            UIMessage::TerryChecker { solution, status } =&gt; {
+                <span class="self">self</span>.write_status(<span class="kw-2">&amp;</span>status);
+                <span class="self">self</span>.write_message(<span class="macro">format!</span>(<span class="string">&quot;Checking output of {} &quot;</span>, solution.display()));
+                <span class="self">self</span>.write_status_details(<span class="kw-2">&amp;</span>status);
             }
-            <span class="ident">UIMessage::TerrySolutionOutcome</span> { <span class="ident">solution</span>, <span class="ident">outcome</span> } =&gt; <span class="kw">match</span> <span class="ident">outcome</span> {
-                <span class="prelude-val">Ok</span>(<span class="ident">outcome</span>) =&gt; {
-                    <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">SUCCESS</span>, <span class="string">&quot;[OUTCOME] &quot;</span>);
-                    <span class="macro">println!</span>(<span class="string">&quot;Solution {} scored {}&quot;</span>, <span class="ident">solution</span>.<span class="ident">display</span>(), <span class="ident">outcome</span>.<span class="ident">score</span>);
+            UIMessage::TerrySolutionOutcome { solution, outcome } =&gt; <span class="kw">match </span>outcome {
+                <span class="prelude-val">Ok</span>(outcome) =&gt; {
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, SUCCESS, <span class="string">&quot;[OUTCOME] &quot;</span>);
+                    <span class="macro">println!</span>(<span class="string">&quot;Solution {} scored {}&quot;</span>, solution.display(), outcome.score);
                     <span class="macro">print!</span>(<span class="string">&quot;Validation: &quot;</span>);
-                    <span class="kw">for</span> <span class="ident">case</span> <span class="kw">in</span> <span class="ident">outcome</span>.<span class="ident">validation</span>.<span class="ident">cases</span>.<span class="ident">iter</span>() {
-                        <span class="kw">match</span> <span class="ident">case</span>.<span class="ident">status</span> {
-                            <span class="ident">CaseStatus::Missing</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">WARNING</span>, <span class="string">&quot;m &quot;</span>),
-                            <span class="ident">CaseStatus::Parsed</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">SUCCESS</span>, <span class="string">&quot;p &quot;</span>),
-                            <span class="ident">CaseStatus::Invalid</span> =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">ERROR</span>, <span class="string">&quot;i &quot;</span>),
+                    <span class="kw">for </span>case <span class="kw">in </span>outcome.validation.cases.iter() {
+                        <span class="kw">match </span>case.status {
+                            CaseStatus::Missing =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, WARNING, <span class="string">&quot;m &quot;</span>),
+                            CaseStatus::Parsed =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, SUCCESS, <span class="string">&quot;p &quot;</span>),
+                            CaseStatus::Invalid =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, ERROR, <span class="string">&quot;i &quot;</span>),
                         }
                     }
                     <span class="macro">println!</span>();
-                    <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">case</span>) <span class="kw">in</span> <span class="ident">outcome</span>.<span class="ident">validation</span>.<span class="ident">cases</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">case</span>.<span class="ident">message</span> {
-                            <span class="macro">println!</span>(<span class="string">&quot;    Case {}: {}&quot;</span>, <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">message</span>);
+                    <span class="kw">for </span>(i, case) <span class="kw">in </span>outcome.validation.cases.iter().enumerate() {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(message) = <span class="kw-2">&amp;</span>case.message {
+                            <span class="macro">println!</span>(<span class="string">&quot;    Case {}: {}&quot;</span>, i + <span class="number">1</span>, message);
                         }
                     }
-                    <span class="kw">for</span> <span class="ident">alert</span> <span class="kw">in</span> <span class="ident">outcome</span>.<span class="ident">validation</span>.<span class="ident">alerts</span>.<span class="ident">iter</span>() {
-                        <span class="macro">println!</span>(<span class="string">&quot;    [{}] {}&quot;</span>, <span class="ident">alert</span>.<span class="ident">severity</span>, <span class="ident">alert</span>.<span class="ident">message</span>);
+                    <span class="kw">for </span>alert <span class="kw">in </span>outcome.validation.alerts.iter() {
+                        <span class="macro">println!</span>(<span class="string">&quot;    [{}] {}&quot;</span>, alert.severity, alert.message);
                     }
                     <span class="macro">print!</span>(<span class="string">&quot;Feedback:   &quot;</span>);
-                    <span class="kw">for</span> <span class="ident">case</span> <span class="kw">in</span> <span class="ident">outcome</span>.<span class="ident">feedback</span>.<span class="ident">cases</span>.<span class="ident">iter</span>() {
-                        <span class="kw">if</span> <span class="ident">case</span>.<span class="ident">correct</span> {
-                            <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">SUCCESS</span>, <span class="string">&quot;c &quot;</span>);
-                        } <span class="kw">else</span> {
-                            <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">ERROR</span>, <span class="string">&quot;w &quot;</span>);
+                    <span class="kw">for </span>case <span class="kw">in </span>outcome.feedback.cases.iter() {
+                        <span class="kw">if </span>case.correct {
+                            <span class="macro">cwrite!</span>(<span class="self">self</span>, SUCCESS, <span class="string">&quot;c &quot;</span>);
+                        } <span class="kw">else </span>{
+                            <span class="macro">cwrite!</span>(<span class="self">self</span>, ERROR, <span class="string">&quot;w &quot;</span>);
                         }
                     }
                     <span class="macro">println!</span>();
-                    <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">case</span>) <span class="kw">in</span> <span class="ident">outcome</span>.<span class="ident">feedback</span>.<span class="ident">cases</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">case</span>.<span class="ident">message</span> {
-                            <span class="macro">println!</span>(<span class="string">&quot;    Case {}: {}&quot;</span>, <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">message</span>);
+                    <span class="kw">for </span>(i, case) <span class="kw">in </span>outcome.feedback.cases.iter().enumerate() {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(message) = <span class="kw-2">&amp;</span>case.message {
+                            <span class="macro">println!</span>(<span class="string">&quot;    Case {}: {}&quot;</span>, i + <span class="number">1</span>, message);
                         }
                     }
-                    <span class="kw">for</span> <span class="ident">alert</span> <span class="kw">in</span> <span class="ident">outcome</span>.<span class="ident">feedback</span>.<span class="ident">alerts</span>.<span class="ident">iter</span>() {
-                        <span class="macro">println!</span>(<span class="string">&quot;    [{}] {}&quot;</span>, <span class="ident">alert</span>.<span class="ident">severity</span>, <span class="ident">alert</span>.<span class="ident">message</span>);
+                    <span class="kw">for </span>alert <span class="kw">in </span>outcome.feedback.alerts.iter() {
+                        <span class="macro">println!</span>(<span class="string">&quot;    [{}] {}&quot;</span>, alert.severity, alert.message);
                     }
                 }
-                <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                    <span class="macro">cwrite!</span>(<span class="self">self</span>, <span class="ident">ERROR</span>, <span class="string">&quot;[OUTCOME] &quot;</span>);
-                    <span class="macro">print!</span>(<span class="string">&quot;Checker of {} failed: {}&quot;</span>, <span class="ident">solution</span>.<span class="ident">display</span>(), <span class="ident">e</span>);
+                <span class="prelude-val">Err</span>(e) =&gt; {
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, ERROR, <span class="string">&quot;[OUTCOME] &quot;</span>);
+                    <span class="macro">print!</span>(<span class="string">&quot;Checker of {} failed: {}&quot;</span>, solution.display(), e);
                 }
             },
         };
         <span class="macro">println!</span>();
     }
 
-    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
+    <span class="kw">fn </span>finish(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="macro">println!</span>();
         <span class="macro">println!</span>();
-        <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">finish</span>();
+        <span class="self">self</span>.state.finish();
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

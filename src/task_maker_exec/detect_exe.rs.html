@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/detect_exe.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>detect_exe.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/detect_exe.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>detect_exe.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -83,90 +83,90 @@
 <span id="83">83</span>
 <span id="84">84</span>
 <span id="85">85</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fs::File</span>;
-<span class="kw">use</span> <span class="ident">std::io::Read</span>;
-<span class="kw">use</span> <span class="ident">std::path::Path</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::fs::File;
+<span class="kw">use </span>std::io::Read;
+<span class="kw">use </span>std::path::Path;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
+<span class="kw">use </span>anyhow::{Context, Error};
 
-<span class="doccomment">/// The platform of an executable.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Ord</span>, <span class="ident">PartialOrd</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ExecutablePlatform</span> {
-    <span class="ident">Linux</span>,
-    <span class="ident">Windows</span>,
-    <span class="ident">MacOs</span>,
-    <span class="ident">MacOsFat</span>,
+<span class="doccomment">/// The platform of an executable.
+</span><span class="attribute">#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+</span><span class="kw">pub enum </span>ExecutablePlatform {
+    Linux,
+    Windows,
+    MacOs,
+    MacOsFat,
 }
 
-<span class="doccomment">/// The number of bits of the platform.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Ord</span>, <span class="ident">PartialOrd</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ExecutableBits</span> {
-    <span class="ident">Unknown</span>,
-    <span class="ident">Bits32</span>,
-    <span class="ident">Bits64</span>,
+<span class="doccomment">/// The number of bits of the platform.
+</span><span class="attribute">#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+</span><span class="kw">pub enum </span>ExecutableBits {
+    Unknown,
+    Bits32,
+    Bits64,
 }
 
-<span class="doccomment">/// A list of patterns for matching the header of the executables of the various platforms.</span>
-<span class="kw">const</span> <span class="ident">PATTERNS</span>: [(<span class="kw-2">&amp;</span>[<span class="ident">u8</span>], (<span class="ident">ExecutablePlatform</span>, <span class="ident">ExecutableBits</span>)); <span class="number">8</span>] <span class="op">=</span> [
+<span class="doccomment">/// A list of patterns for matching the header of the executables of the various platforms.
+</span><span class="kw">const </span>PATTERNS: [(<span class="kw-2">&amp;</span>[u8], (ExecutablePlatform, ExecutableBits)); <span class="number">8</span>] = [
     (
         <span class="string">b&quot;\x4D\x5A&quot;</span>,
-        (<span class="ident">ExecutablePlatform::Windows</span>, <span class="ident">ExecutableBits::Unknown</span>),
+        (ExecutablePlatform::Windows, ExecutableBits::Unknown),
     ),
-    (<span class="string">b&quot;#!&quot;</span>, (<span class="ident">ExecutablePlatform::Linux</span>, <span class="ident">ExecutableBits::Unknown</span>)),
+    (<span class="string">b&quot;#!&quot;</span>, (ExecutablePlatform::Linux, ExecutableBits::Unknown)),
     (
         <span class="string">b&quot;\xCE\xFA\xED\xFE&quot;</span>,
-        (<span class="ident">ExecutablePlatform::MacOs</span>, <span class="ident">ExecutableBits::Bits32</span>),
+        (ExecutablePlatform::MacOs, ExecutableBits::Bits32),
     ),
     (
         <span class="string">b&quot;\xCF\xFA\xED\xFE&quot;</span>,
-        (<span class="ident">ExecutablePlatform::MacOs</span>, <span class="ident">ExecutableBits::Bits64</span>),
+        (ExecutablePlatform::MacOs, ExecutableBits::Bits64),
     ),
     (
         <span class="string">b&quot;\xBE\xBA\xFE\xCA&quot;</span>,
-        (<span class="ident">ExecutablePlatform::MacOsFat</span>, <span class="ident">ExecutableBits::Bits32</span>),
+        (ExecutablePlatform::MacOsFat, ExecutableBits::Bits32),
     ),
     (
         <span class="string">b&quot;\xBF\xBA\xFE\xCA&quot;</span>,
-        (<span class="ident">ExecutablePlatform::MacOsFat</span>, <span class="ident">ExecutableBits::Bits64</span>),
+        (ExecutablePlatform::MacOsFat, ExecutableBits::Bits64),
     ),
     (
         <span class="string">b&quot;\x7F\x45\x4C\x46\x01&quot;</span>,
-        (<span class="ident">ExecutablePlatform::Linux</span>, <span class="ident">ExecutableBits::Bits32</span>),
+        (ExecutablePlatform::Linux, ExecutableBits::Bits32),
     ),
     (
         <span class="string">b&quot;\x7F\x45\x4C\x46\x02&quot;</span>,
-        (<span class="ident">ExecutablePlatform::Linux</span>, <span class="ident">ExecutableBits::Bits64</span>),
+        (ExecutablePlatform::Linux, ExecutableBits::Bits64),
     ),
 ];
 
-<span class="doccomment">/// Given a path to a file, check if the file is a valid executable.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// - If there is an error reading the file, `Err(_)` is returned.</span>
-<span class="doccomment">/// - If the file is not recognized as an executable, `Ok(None)` is returned.</span>
-<span class="doccomment">/// - Otherwise `Ok(Some((platform, bits)))` is returned.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">detect_exe</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-    <span class="ident">path</span>: <span class="ident">P</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">ExecutablePlatform</span>, <span class="ident">ExecutableBits</span>)<span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">as_ref</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::open</span>(<span class="ident">path</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to open file {} for detecting exe&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">header</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="kw">for</span> (<span class="ident">bytes</span>, <span class="ident">res</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">PATTERNS</span> {
-        <span class="kw">if</span> <span class="ident">header</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">bytes</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">missing</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0u8</span>; <span class="ident">bytes</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">header</span>.<span class="ident">len</span>()];
-            <span class="ident">file</span>.<span class="ident">read_exact</span>(<span class="kw-2">&amp;mut</span> <span class="ident">missing</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+<span class="doccomment">/// Given a path to a file, check if the file is a valid executable.
+///
+/// - If there is an error reading the file, `Err(_)` is returned.
+/// - If the file is not recognized as an executable, `Ok(None)` is returned.
+/// - Otherwise `Ok(Some((platform, bits)))` is returned.
+</span><span class="kw">pub fn </span>detect_exe&lt;P: AsRef&lt;Path&gt;&gt;(
+    path: P,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;(ExecutablePlatform, ExecutableBits)&gt;, Error&gt; {
+    <span class="kw">let </span>path = path.as_ref();
+    <span class="kw">let </span><span class="kw-2">mut </span>file = File::open(path)
+        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to open file {} for detecting exe&quot;</span>, path.display()))<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>header = <span class="macro">vec!</span>[];
+    <span class="kw">for </span>(bytes, res) <span class="kw">in </span><span class="kw-2">&amp;</span>PATTERNS {
+        <span class="kw">if </span>header.len() &lt; bytes.len() {
+            <span class="kw">let </span><span class="kw-2">mut </span>missing = <span class="macro">vec!</span>[<span class="number">0u8</span>; bytes.len() - header.len()];
+            file.read_exact(<span class="kw-2">&amp;mut </span>missing).with_context(|| {
                 <span class="macro">format!</span>(
                     <span class="string">&quot;Failed to read file content of {} for detecting exe&quot;</span>,
-                    <span class="ident">path</span>.<span class="ident">display</span>()
+                    path.display()
                 )
             })<span class="question-mark">?</span>;
-            <span class="ident">header</span>.<span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">missing</span>);
+            header.append(<span class="kw-2">&amp;mut </span>missing);
         }
-        <span class="kw">if</span> <span class="ident">header</span>.<span class="ident">starts_with</span>(<span class="ident">bytes</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="ident">res</span>));
+        <span class="kw">if </span>header.starts_with(bytes) {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw-2">*</span>res));
         }
     }
     <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

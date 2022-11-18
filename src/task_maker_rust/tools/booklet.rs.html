@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/booklet.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>booklet.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/booklet.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>booklet.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_rust/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -142,149 +142,149 @@
 <span id="142">142</span>
 <span id="143">143</span>
 <span id="144">144</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">clap::Parser</span>;
+<span class="kw">use </span>anyhow::{bail, Context, Error};
+<span class="kw">use </span>clap::Parser;
 
-<span class="kw">use</span> <span class="ident">task_maker_format::ioi</span>::{<span class="ident">make_context_booklets</span>, <span class="ident">Booklet</span>, <span class="ident">BookletConfig</span>, <span class="ident">IOITask</span>};
-<span class="kw">use</span> <span class="ident">task_maker_format</span>::{<span class="ident">find_task</span>, <span class="ident">EvaluationConfig</span>};
+<span class="kw">use </span>task_maker_format::ioi::{make_context_booklets, Booklet, BookletConfig, IOITask};
+<span class="kw">use </span>task_maker_format::{find_task, EvaluationConfig};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::context::RuntimeContext</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ExecutionOpt</span>, <span class="ident">LoggerOpt</span>, <span class="ident">StorageOpt</span>, <span class="ident">ToolsSandboxRunner</span>, <span class="ident">UIOpt</span>};
+<span class="kw">use </span><span class="kw">crate</span>::context::RuntimeContext;
+<span class="kw">use crate</span>::{ExecutionOpt, LoggerOpt, StorageOpt, ToolsSandboxRunner, UIOpt};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Parser</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BookletOpt</span> {
-    <span class="doccomment">/// Include the solutions in the booklet</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;booklet-solutions&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">booklet_solutions</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Parser, Debug, Clone)]
+</span><span class="kw">pub struct </span>BookletOpt {
+    <span class="doccomment">/// Include the solutions in the booklet
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;booklet-solutions&quot;</span>)]
+    </span><span class="kw">pub </span>booklet_solutions: bool,
 
-    <span class="doccomment">/// Directory of the context.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When specified, --task-dir should not be used.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;c&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;contest-dir&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">contest_dir</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Directory of the context.
+    ///
+    /// When specified, --task-dir should not be used.
+    </span><span class="attribute">#[clap(short = <span class="string">&#39;c&#39;</span>, long = <span class="string">&quot;contest-dir&quot;</span>)]
+    </span><span class="kw">pub </span>contest_dir: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
 
-    <span class="doccomment">/// Directory of the task.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// When specified, --contest-dir should not be used.</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">short</span> <span class="op">=</span> <span class="string">&#39;t&#39;</span>, <span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;task-dir&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">task_dir</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Directory of the task.
+    ///
+    /// When specified, --contest-dir should not be used.
+    </span><span class="attribute">#[clap(short = <span class="string">&#39;t&#39;</span>, long = <span class="string">&quot;task-dir&quot;</span>)]
+    </span><span class="kw">pub </span>task_dir: Vec&lt;PathBuf&gt;,
 
-    <span class="doccomment">/// Look at most for this number of parents for searching the task</span>
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span> <span class="op">=</span> <span class="string">&quot;max-depth&quot;</span>, <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;3&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">max_depth</span>: <span class="ident">u32</span>,
+    <span class="doccomment">/// Look at most for this number of parents for searching the task
+    </span><span class="attribute">#[clap(long = <span class="string">&quot;max-depth&quot;</span>, default_value = <span class="string">&quot;3&quot;</span>)]
+    </span><span class="kw">pub </span>max_depth: u32,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;UI&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">ui</span>: <span class="ident">UIOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;UI&quot;</span>))]
+    </span><span class="kw">pub </span>ui: UIOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;EXECUTION&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">execution</span>: <span class="ident">ExecutionOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;EXECUTION&quot;</span>))]
+    </span><span class="kw">pub </span>execution: ExecutionOpt,
 
-    <span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>, <span class="ident">next_help_heading</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="ident">storage</span>: <span class="ident">StorageOpt</span>,
+    <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]
+    </span><span class="kw">pub </span>storage: StorageOpt,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_booklet</span>(<span class="kw-2">mut</span> <span class="ident">opt</span>: <span class="ident">BookletOpt</span>, <span class="ident">logger_opt</span>: <span class="ident">LoggerOpt</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="ident">opt</span>.<span class="ident">ui</span>.<span class="ident">disable_if_needed</span>(<span class="kw-2">&amp;</span><span class="ident">logger_opt</span>);
-    <span class="kw">let</span> <span class="ident">eval_config</span> <span class="op">=</span> <span class="ident">EvaluationConfig</span> {
-        <span class="ident">solution_filter</span>: <span class="macro">vec!</span>[],
-        <span class="ident">booklet_solutions</span>: <span class="ident">opt</span>.<span class="ident">booklet_solutions</span>,
-        <span class="ident">no_statement</span>: <span class="bool-val">false</span>,
-        <span class="ident">solution_paths</span>: <span class="macro">vec!</span>[],
-        <span class="ident">disabled_sanity_checks</span>: <span class="macro">vec!</span>[],
-        <span class="ident">seed</span>: <span class="prelude-val">None</span>,
-        <span class="ident">dry_run</span>: <span class="ident">opt</span>.<span class="ident">execution</span>.<span class="ident">dry_run</span>,
+<span class="kw">pub fn </span>main_booklet(<span class="kw-2">mut </span>opt: BookletOpt, logger_opt: LoggerOpt) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    opt.ui.disable_if_needed(<span class="kw-2">&amp;</span>logger_opt);
+    <span class="kw">let </span>eval_config = EvaluationConfig {
+        solution_filter: <span class="macro">vec!</span>[],
+        booklet_solutions: opt.booklet_solutions,
+        no_statement: <span class="bool-val">false</span>,
+        solution_paths: <span class="macro">vec!</span>[],
+        disabled_sanity_checks: <span class="macro">vec!</span>[],
+        seed: <span class="prelude-val">None</span>,
+        dry_run: opt.execution.dry_run,
     };
 
-    <span class="kw">if</span> <span class="ident">opt</span>.<span class="ident">contest_dir</span>.<span class="ident">is_some</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">opt</span>.<span class="ident">task_dir</span>.<span class="ident">is_empty</span>() {
+    <span class="kw">if </span>opt.contest_dir.is_some() &amp;&amp; !opt.task_dir.is_empty() {
         <span class="macro">bail!</span>(<span class="string">&quot;Cannot mix --task-dir and --contest-dir&quot;</span>);
     }
 
-    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">task</span>, <span class="ident">booklets</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">contest_dir</span>) <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">contest_dir</span> {
-        <span class="ident">get_booklets_from_contest_dir</span>(<span class="kw-2">&amp;</span><span class="ident">contest_dir</span>, <span class="kw-2">&amp;</span><span class="ident">eval_config</span>)<span class="question-mark">?</span>
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">opt</span>.<span class="ident">task_dir</span>.<span class="ident">is_empty</span>() {
-        <span class="ident">get_booklets_from_task_dirs</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">task_dir</span>, <span class="kw-2">&amp;</span><span class="ident">eval_config</span>)<span class="question-mark">?</span>
-    } <span class="kw">else</span> {
-        <span class="ident">get_booklets_from_current_dir</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>, <span class="kw-2">&amp;</span><span class="ident">eval_config</span>)<span class="question-mark">?</span>
-    };
+    <span class="kw">let </span>(<span class="kw-2">mut </span>task, booklets) = <span class="kw">if let </span><span class="prelude-val">Some</span>(contest_dir) = opt.contest_dir {
+        get_booklets_from_contest_dir(<span class="kw-2">&amp;</span>contest_dir, <span class="kw-2">&amp;</span>eval_config)<span class="question-mark">?
+    </span>} <span class="kw">else if </span>!opt.task_dir.is_empty() {
+        get_booklets_from_task_dirs(<span class="kw-2">&amp;</span>opt.task_dir, <span class="kw-2">&amp;</span>eval_config)<span class="question-mark">?
+    </span>} <span class="kw">else </span>{
+        get_booklets_from_current_dir(<span class="kw-2">&amp;</span>opt, <span class="kw-2">&amp;</span>eval_config)<span class="question-mark">?
+    </span>};
 
-    <span class="comment">// clean up the task a bit for a cleaner ui</span>
-    <span class="ident">task</span>.<span class="ident">subtasks</span>.<span class="ident">clear</span>();
+    <span class="comment">// clean up the task a bit for a cleaner ui
+    </span>task.subtasks.clear();
 
-    <span class="comment">// setup the configuration and the evaluation metadata</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">RuntimeContext::new</span>(<span class="ident">task</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">execution</span>, <span class="op">|</span><span class="ident">_task</span>, <span class="ident">eval</span><span class="op">|</span> {
-        <span class="kw">for</span> <span class="ident">booklet</span> <span class="kw">in</span> <span class="ident">booklets</span> {
-            <span class="ident">booklet</span>.<span class="ident">build</span>(<span class="ident">eval</span>)<span class="question-mark">?</span>;
+    <span class="comment">// setup the configuration and the evaluation metadata
+    </span><span class="kw">let </span><span class="kw-2">mut </span>context = RuntimeContext::new(task.into(), <span class="kw-2">&amp;</span>opt.execution, |_task, eval| {
+        <span class="kw">for </span>booklet <span class="kw">in </span>booklets {
+            booklet.build(eval)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     })<span class="question-mark">?</span>;
-    <span class="ident">context</span>.<span class="ident">sandbox_runner</span>(<span class="ident">ToolsSandboxRunner::default</span>());
+    context.sandbox_runner(ToolsSandboxRunner::default());
 
-    <span class="comment">// start the execution</span>
-    <span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">connect_executor</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">execution</span>, <span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">storage</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">executor</span>.<span class="ident">start_ui</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>.<span class="ident">ui</span>.<span class="ident">ui</span>, <span class="op">|</span><span class="ident">ui</span>, <span class="ident">mex</span><span class="op">|</span> <span class="ident">ui</span>.<span class="ident">on_message</span>(<span class="ident">mex</span>))<span class="question-mark">?</span>;
-    <span class="ident">executor</span>.<span class="ident">execute</span>()<span class="question-mark">?</span>;
+    <span class="comment">// start the execution
+    </span><span class="kw">let </span>executor = context.connect_executor(<span class="kw-2">&amp;</span>opt.execution, <span class="kw-2">&amp;</span>opt.storage)<span class="question-mark">?</span>;
+    <span class="kw">let </span>executor = executor.start_ui(<span class="kw-2">&amp;</span>opt.ui.ui, |ui, mex| ui.on_message(mex))<span class="question-mark">?</span>;
+    executor.execute()<span class="question-mark">?</span>;
 
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">get_booklets_from_contest_dir</span>(
-    <span class="ident">contest_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-    <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">IOITask</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Booklet</span><span class="op">&gt;</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">contest_yaml</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">contest_yaml</span>) <span class="op">=</span> <span class="ident">BookletConfig::contest_yaml</span>(<span class="ident">contest_dir</span>) {
-        <span class="ident">contest_yaml</span><span class="question-mark">?</span>
-    } <span class="kw">else</span> {
+<span class="kw">fn </span>get_booklets_from_contest_dir(
+    contest_dir: <span class="kw-2">&amp;</span>Path,
+    eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(IOITask, Vec&lt;Booklet&gt;), Error&gt; {
+    <span class="kw">let </span>contest_yaml = <span class="kw">if let </span><span class="prelude-val">Some</span>(contest_yaml) = BookletConfig::contest_yaml(contest_dir) {
+        contest_yaml<span class="question-mark">?
+    </span>} <span class="kw">else </span>{
         <span class="macro">bail!</span>(<span class="string">&quot;Missing contest.yaml&quot;</span>);
     };
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tasks</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="kw">for</span> <span class="ident">task</span> <span class="kw">in</span> <span class="ident">contest_yaml</span>.<span class="ident">tasks</span> {
-        <span class="kw">let</span> <span class="ident">task_dir</span> <span class="op">=</span> <span class="ident">contest_dir</span>.<span class="ident">join</span>(<span class="ident">task</span>);
-        <span class="ident">tasks</span>.<span class="ident">push</span>(<span class="ident">task_dir</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>tasks = <span class="macro">vec!</span>[];
+    <span class="kw">for </span>task <span class="kw">in </span>contest_yaml.tasks {
+        <span class="kw">let </span>task_dir = contest_dir.join(task);
+        tasks.push(task_dir);
     }
 
-    <span class="ident">get_booklets_from_task_dirs</span>(<span class="kw-2">&amp;</span><span class="ident">tasks</span>, <span class="ident">eval_config</span>)
+    get_booklets_from_task_dirs(<span class="kw-2">&amp;</span>tasks, eval_config)
 }
 
-<span class="kw">fn</span> <span class="ident">get_booklets_from_task_dirs</span>(
-    <span class="ident">task_dirs</span>: <span class="kw-2">&amp;</span>[<span class="ident">PathBuf</span>],
-    <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">IOITask</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Booklet</span><span class="op">&gt;</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tasks</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="ident">task_dirs</span> {
-        <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">IOITask::new</span>(<span class="ident">path</span>, <span class="ident">eval_config</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+<span class="kw">fn </span>get_booklets_from_task_dirs(
+    task_dirs: <span class="kw-2">&amp;</span>[PathBuf],
+    eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(IOITask, Vec&lt;Booklet&gt;), Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>tasks = <span class="macro">vec!</span>[];
+    <span class="kw">for </span>path <span class="kw">in </span>task_dirs {
+        <span class="kw">let </span>task = IOITask::new(path, eval_config).with_context(|| {
             <span class="macro">format!</span>(
                 <span class="string">&quot;Booklet compilation is supported only for IOI tasks for now (task at {})&quot;</span>,
-                <span class="ident">path</span>.<span class="ident">display</span>()
+                path.display()
             )
         })<span class="question-mark">?</span>;
-        <span class="ident">tasks</span>.<span class="ident">push</span>(<span class="ident">task</span>);
+        tasks.push(task);
     }
-    <span class="kw">let</span> <span class="ident">booklets</span> <span class="op">=</span>
-        <span class="ident">make_context_booklets</span>(<span class="kw-2">&amp;</span><span class="ident">tasks</span>, <span class="ident">eval_config</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to get booklet data&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">IOITask::fake</span>();
-    <span class="ident">task</span>.<span class="ident">title</span> <span class="op">=</span> <span class="string">&quot;Booklet compilation&quot;</span>.<span class="ident">into</span>();
-    <span class="ident">task</span>.<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;booklet&quot;</span>.<span class="ident">into</span>();
-    <span class="prelude-val">Ok</span>((<span class="ident">task</span>, <span class="ident">booklets</span>))
+    <span class="kw">let </span>booklets =
+        make_context_booklets(<span class="kw-2">&amp;</span>tasks, eval_config).context(<span class="string">&quot;Failed to get booklet data&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>task = IOITask::fake();
+    task.title = <span class="string">&quot;Booklet compilation&quot;</span>.into();
+    task.name = <span class="string">&quot;booklet&quot;</span>.into();
+    <span class="prelude-val">Ok</span>((task, booklets))
 }
 
-<span class="kw">fn</span> <span class="ident">get_booklets_from_current_dir</span>(
-    <span class="ident">opt</span>: <span class="kw-2">&amp;</span><span class="ident">BookletOpt</span>,
-    <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">IOITask</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Booklet</span><span class="op">&gt;</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">find_task</span>(<span class="prelude-val">None</span>, <span class="ident">opt</span>.<span class="ident">max_depth</span>, <span class="ident">eval_config</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">path</span>();
-    <span class="kw">let</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">IOITask::new</span>(<span class="ident">path</span>, <span class="ident">eval_config</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+<span class="kw">fn </span>get_booklets_from_current_dir(
+    opt: <span class="kw-2">&amp;</span>BookletOpt,
+    eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(IOITask, Vec&lt;Booklet&gt;), Error&gt; {
+    <span class="kw">let </span>task = find_task(<span class="prelude-val">None</span>, opt.max_depth, eval_config)<span class="question-mark">?</span>;
+    <span class="kw">let </span>path = task.path();
+    <span class="kw">let </span>task = IOITask::new(path, eval_config).with_context(|| {
         <span class="macro">format!</span>(
             <span class="string">&quot;Booklet compilation is supported only for IOI tasks for now (task at {})&quot;</span>,
-            <span class="ident">path</span>.<span class="ident">display</span>()
+            path.display()
         )
     })<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="ident">booklets</span> <span class="op">=</span> <span class="ident">task</span>.<span class="ident">booklets</span>.<span class="ident">clone</span>();
-    <span class="prelude-val">Ok</span>((<span class="ident">task</span>, <span class="ident">booklets</span>))
+    <span class="kw">let </span>booklets = task.booklets.clone();
+    <span class="prelude-val">Ok</span>((task, booklets))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/curses_ui.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curses_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/curses_ui.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curses_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -214,221 +214,221 @@
 <span id="214">214</span>
 <span id="215">215</span>
 <span id="216">216</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
-<span class="kw">use</span> <span class="ident">tui::layout</span>::{<span class="ident">Constraint</span>, <span class="ident">Direction</span>, <span class="ident">Layout</span>, <span class="ident">Rect</span>};
-<span class="kw">use</span> <span class="ident">tui::style</span>::{<span class="ident">Modifier</span>, <span class="ident">Style</span>};
-<span class="kw">use</span> <span class="ident">tui::text</span>::{<span class="ident">Span</span>, <span class="ident">Spans</span>};
-<span class="kw">use</span> <span class="ident">tui::widgets</span>::{<span class="ident">Block</span>, <span class="ident">Borders</span>, <span class="ident">Paragraph</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>itertools::Itertools;
+<span class="kw">use </span>tui::layout::{Constraint, Direction, Layout, Rect};
+<span class="kw">use </span>tui::style::{Modifier, Style};
+<span class="kw">use </span>tui::text::{Span, Spans};
+<span class="kw">use </span>tui::widgets::{Block, Borders, Paragraph};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::finish_ui::FinishUI</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry::ui_state</span>::{<span class="ident">SolutionState</span>, <span class="ident">SolutionStatus</span>, <span class="ident">UIState</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry</span>::{<span class="ident">CaseStatus</span>, <span class="ident">SolutionOutcome</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::curses</span>::{
-    <span class="ident">compilation_status_text</span>, <span class="ident">draw_compilations</span>, <span class="ident">inner_block</span>, <span class="ident">render_block</span>, <span class="ident">render_server_status</span>,
-    <span class="ident">CursesDrawer</span>, <span class="ident">CursesUI</span> <span class="kw">as</span> <span class="ident">GenericCursesUI</span>, <span class="ident">FrameType</span>, <span class="ident">GREEN</span>, <span class="ident">RED</span>, <span class="ident">YELLOW</span>,
+<span class="kw">use </span><span class="kw">crate</span>::terry::finish_ui::FinishUI;
+<span class="kw">use </span><span class="kw">crate</span>::terry::ui_state::{SolutionState, SolutionStatus, UIState};
+<span class="kw">use </span><span class="kw">crate</span>::terry::{CaseStatus, SolutionOutcome};
+<span class="kw">use </span><span class="kw">crate</span>::ui::curses::{
+    compilation_status_text, draw_compilations, inner_block, render_block, render_server_status,
+    CursesDrawer, CursesUI <span class="kw">as </span>GenericCursesUI, FrameType, GREEN, RED, YELLOW,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::FinishUIUtils</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ui::FinishUIUtils;
 
-<span class="doccomment">/// An animated UI for Terry tasks, dynamically refreshing using curses as a backend.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type</span> <span class="ident">CursesUI</span> <span class="op">=</span> <span class="ident">GenericCursesUI</span><span class="op">&lt;</span><span class="ident">UIState</span>, <span class="ident">Drawer</span>, <span class="ident">FinishUI</span><span class="op">&gt;</span>;
+<span class="doccomment">/// An animated UI for Terry tasks, dynamically refreshing using curses as a backend.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type </span>CursesUI = GenericCursesUI&lt;UIState, Drawer, FinishUI&gt;;
 
-<span class="doccomment">/// The drawer of the Terry CursesUI.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Drawer</span>;
+<span class="doccomment">/// The drawer of the Terry CursesUI.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Drawer;
 
-<span class="kw">impl</span> <span class="ident">CursesDrawer</span><span class="op">&lt;</span><span class="ident">UIState</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Drawer</span> {
-    <span class="kw">fn</span> <span class="ident">draw</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">loading</span>: <span class="ident">char</span>, <span class="ident">frame_index</span>: <span class="ident">usize</span>) {
-        <span class="ident">draw_frame</span>(<span class="ident">state</span>, <span class="ident">frame</span>, <span class="ident">loading</span>, <span class="ident">frame_index</span>);
+<span class="kw">impl </span>CursesDrawer&lt;UIState&gt; <span class="kw">for </span>Drawer {
+    <span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>UIState, frame: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+        draw_frame(state, frame, loading, frame_index);
     }
 }
 
-<span class="doccomment">/// Draw a frame of interface to the provided `Frame`.</span>
-<span class="kw">fn</span> <span class="ident">draw_frame</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">loading</span>: <span class="ident">char</span>, <span class="ident">frame_index</span>: <span class="ident">usize</span>) {
-    <span class="kw">let</span> <span class="ident">header</span>: <span class="ident">Spans</span> <span class="op">=</span> <span class="macro">vec!</span>[
-        <span class="ident">Span::styled</span>(
-            <span class="ident">state</span>.<span class="ident">task</span>.<span class="ident">description</span>.<span class="ident">clone</span>(),
-            <span class="ident">Style::default</span>().<span class="ident">add_modifier</span>(<span class="ident">Modifier::BOLD</span>),
+<span class="doccomment">/// Draw a frame of interface to the provided `Frame`.
+</span><span class="kw">fn </span>draw_frame(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+    <span class="kw">let </span>header: Spans = <span class="macro">vec!</span>[
+        Span::styled(
+            state.task.description.clone(),
+            Style::default().add_modifier(Modifier::BOLD),
         ),
-        <span class="ident">Span::raw</span>(<span class="string">&quot; (&quot;</span>),
-        <span class="ident">Span::raw</span>(<span class="ident">state</span>.<span class="ident">task</span>.<span class="ident">name</span>.<span class="ident">clone</span>()),
-        <span class="ident">Span::raw</span>(<span class="string">&quot;)&quot;</span>),
+        Span::raw(<span class="string">&quot; (&quot;</span>),
+        Span::raw(state.task.name.clone()),
+        Span::raw(<span class="string">&quot;)&quot;</span>),
     ]
-    .<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">header_len</span> <span class="op">=</span> <span class="number">2</span>;
-    <span class="kw">let</span> <span class="ident">num_compilations</span> <span class="op">=</span> <span class="ident">state</span>
-        .<span class="ident">compilations</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">filter</span>(<span class="op">|</span>(<span class="ident">k</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="op">!</span><span class="ident">state</span>.<span class="ident">solutions</span>.<span class="ident">contains_key</span>(<span class="kw-2">*</span><span class="ident">k</span>))
-        .<span class="ident">count</span>();
-    <span class="kw">let</span> <span class="ident">compilations_len</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">num_compilations</span> <span class="op">&gt;</span> <span class="number">0</span> {
-        <span class="ident">num_compilations</span> <span class="kw">as</span> <span class="ident">u16</span> <span class="op">+</span> <span class="number">2</span>
-    } <span class="kw">else</span> {
-        <span class="number">0</span>
-    };
-    <span class="kw">let</span> <span class="ident">evaluations_len</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">solutions</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span> <span class="op">+</span> <span class="number">2</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">workers_len</span> <span class="op">=</span> <span class="ident">state</span>
-        .<span class="ident">executor_status</span>
-        .<span class="ident">as_ref</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">connected_workers</span>.<span class="ident">len</span>())
-        .<span class="ident">unwrap_or</span>(<span class="number">0</span>) <span class="kw">as</span> <span class="ident">u16</span>
-        <span class="op">+</span> <span class="number">2</span>;
-    <span class="kw">let</span> <span class="ident">total_height</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">size</span>().<span class="ident">height</span>;
-    <span class="comment">// fixed size section heights</span>
-    <span class="kw">let</span> <span class="ident">top_height</span> <span class="op">=</span> <span class="ident">header_len</span> <span class="op">+</span> <span class="ident">compilations_len</span>;
-    <span class="comment">// if the sections don&#39;t just fit, reduce the size of the workers until they fit but</span>
-    <span class="comment">// without shortening it more than 3 lines (aka box + 1 worker).</span>
-    <span class="kw">if</span> <span class="ident">top_height</span> <span class="op">+</span> <span class="ident">evaluations_len</span> <span class="op">+</span> <span class="ident">workers_len</span> <span class="op">&gt;</span> <span class="ident">total_height</span> {
-        <span class="ident">workers_len</span> <span class="op">=</span> <span class="ident">std::cmp::max</span>(
+    .into();
+    <span class="kw">let </span>header_len = <span class="number">2</span>;
+    <span class="kw">let </span>num_compilations = state
+        .compilations
+        .iter()
+        .filter(|(k, <span class="kw">_</span>)| !state.solutions.contains_key(<span class="kw-2">*</span>k))
+        .count();
+    <span class="kw">let </span>compilations_len = <span class="kw">if </span>num_compilations &gt; <span class="number">0 </span>{
+        num_compilations <span class="kw">as </span>u16 + <span class="number">2
+    </span>} <span class="kw">else </span>{
+        <span class="number">0
+    </span>};
+    <span class="kw">let </span>evaluations_len = state.solutions.len() <span class="kw">as </span>u16 + <span class="number">2</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>workers_len = state
+        .executor_status
+        .as_ref()
+        .map(|s| s.connected_workers.len())
+        .unwrap_or(<span class="number">0</span>) <span class="kw">as </span>u16
+        + <span class="number">2</span>;
+    <span class="kw">let </span>total_height = f.size().height;
+    <span class="comment">// fixed size section heights
+    </span><span class="kw">let </span>top_height = header_len + compilations_len;
+    <span class="comment">// if the sections don&#39;t just fit, reduce the size of the workers until they fit but
+    // without shortening it more than 3 lines (aka box + 1 worker).
+    </span><span class="kw">if </span>top_height + evaluations_len + workers_len &gt; total_height {
+        workers_len = std::cmp::max(
             <span class="number">3</span>,
-            <span class="ident">total_height</span> <span class="kw">as</span> <span class="ident">i16</span> <span class="op">-</span> <span class="ident">top_height</span> <span class="kw">as</span> <span class="ident">i16</span> <span class="op">-</span> <span class="ident">evaluations_len</span> <span class="kw">as</span> <span class="ident">i16</span>,
-        ) <span class="kw">as</span> <span class="ident">u16</span>;
+            total_height <span class="kw">as </span>i16 - top_height <span class="kw">as </span>i16 - evaluations_len <span class="kw">as </span>i16,
+        ) <span class="kw">as </span>u16;
     }
-    <span class="kw">let</span> <span class="ident">chunks</span> <span class="op">=</span> <span class="ident">Layout::default</span>()
-        .<span class="ident">direction</span>(<span class="ident">Direction::Vertical</span>)
-        .<span class="ident">constraints</span>(
+    <span class="kw">let </span>chunks = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints(
             [
-                <span class="ident">Constraint::Length</span>(<span class="ident">header_len</span>),
-                <span class="ident">Constraint::Length</span>(<span class="ident">compilations_len</span>),
-                <span class="ident">Constraint::Min</span>(<span class="number">0</span>),
-                <span class="ident">Constraint::Length</span>(<span class="ident">workers_len</span>),
+                Constraint::Length(header_len),
+                Constraint::Length(compilations_len),
+                Constraint::Min(<span class="number">0</span>),
+                Constraint::Length(workers_len),
             ]
-            .<span class="ident">as_ref</span>(),
+            .as_ref(),
         )
-        .<span class="ident">split</span>(<span class="ident">f</span>.<span class="ident">size</span>());
-    <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">header</span>).<span class="ident">block</span>(<span class="ident">Block::default</span>().<span class="ident">borders</span>(<span class="ident">Borders::NONE</span>));
-    <span class="ident">f</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">chunks</span>[<span class="number">0</span>]);
-    <span class="kw">if</span> <span class="ident">compilations_len</span> <span class="op">&gt;</span> <span class="number">0</span> {
-        <span class="ident">render_block</span>(<span class="ident">f</span>, <span class="ident">chunks</span>[<span class="number">1</span>], <span class="string">&quot; Compilations &quot;</span>);
-        <span class="ident">draw_compilations</span>(
-            <span class="ident">f</span>,
-            <span class="ident">inner_block</span>(<span class="ident">chunks</span>[<span class="number">1</span>]),
-            <span class="ident">state</span>
-                .<span class="ident">compilations</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">filter</span>(<span class="op">|</span>(<span class="ident">p</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="op">!</span><span class="ident">state</span>.<span class="ident">solutions</span>.<span class="ident">contains_key</span>(<span class="kw-2">*</span><span class="ident">p</span>)),
-            <span class="ident">loading</span>,
+        .split(f.size());
+    <span class="kw">let </span>paragraph = Paragraph::new(header).block(Block::default().borders(Borders::NONE));
+    f.render_widget(paragraph, chunks[<span class="number">0</span>]);
+    <span class="kw">if </span>compilations_len &gt; <span class="number">0 </span>{
+        render_block(f, chunks[<span class="number">1</span>], <span class="string">&quot; Compilations &quot;</span>);
+        draw_compilations(
+            f,
+            inner_block(chunks[<span class="number">1</span>]),
+            state
+                .compilations
+                .iter()
+                .filter(|(p, <span class="kw">_</span>)| !state.solutions.contains_key(<span class="kw-2">*</span>p)),
+            loading,
         );
     }
-    <span class="ident">render_block</span>(<span class="ident">f</span>, <span class="ident">chunks</span>[<span class="number">2</span>], <span class="string">&quot; Evaluations &quot;</span>);
-    <span class="ident">draw_evaluations</span>(<span class="ident">f</span>, <span class="ident">inner_block</span>(<span class="ident">chunks</span>[<span class="number">2</span>]), <span class="ident">state</span>, <span class="ident">loading</span>);
-    <span class="ident">render_server_status</span>(
-        <span class="ident">f</span>,
-        <span class="ident">chunks</span>[<span class="number">3</span>],
-        <span class="ident">state</span>.<span class="ident">executor_status</span>.<span class="ident">as_ref</span>(),
-        <span class="ident">loading</span>,
-        <span class="ident">frame_index</span>,
+    render_block(f, chunks[<span class="number">2</span>], <span class="string">&quot; Evaluations &quot;</span>);
+    draw_evaluations(f, inner_block(chunks[<span class="number">2</span>]), state, loading);
+    render_server_status(
+        f,
+        chunks[<span class="number">3</span>],
+        state.executor_status.as_ref(),
+        loading,
+        frame_index,
     );
 }
 
-<span class="doccomment">/// Draw the evaluations of the solutions.</span>
-<span class="kw">fn</span> <span class="ident">draw_evaluations</span>(<span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">FrameType</span>, <span class="ident">rect</span>: <span class="ident">Rect</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">UIState</span>, <span class="ident">loading</span>: <span class="ident">char</span>) {
-    <span class="kw">let</span> <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">FinishUIUtils::get_max_len</span>(<span class="kw-2">&amp;</span><span class="ident">state</span>.<span class="ident">solutions</span>);
-    <span class="kw">let</span> <span class="ident">text</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Spans</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">state</span>
-        .<span class="ident">solutions</span>
-        .<span class="ident">keys</span>()
-        .<span class="ident">sorted</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">path</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">solution_state</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">state</span>.<span class="ident">solutions</span>[<span class="ident">path</span>];
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">spans</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="macro">format!</span>(
+<span class="doccomment">/// Draw the evaluations of the solutions.
+</span><span class="kw">fn </span>draw_evaluations(frame: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect, state: <span class="kw-2">&amp;</span>UIState, loading: char) {
+    <span class="kw">let </span>max_len = FinishUIUtils::get_max_len(<span class="kw-2">&amp;</span>state.solutions);
+    <span class="kw">let </span>text: Vec&lt;Spans&gt; = state
+        .solutions
+        .keys()
+        .sorted()
+        .map(|path| {
+            <span class="kw">let </span>solution_state = <span class="kw-2">&amp;</span>state.solutions[path];
+            <span class="kw">let </span><span class="kw-2">mut </span>spans = <span class="macro">vec!</span>[Span::raw(<span class="macro">format!</span>(
                 <span class="string">&quot;{:&lt;max_len$}  &quot;</span>,
-                <span class="ident">path</span>.<span class="ident">file_name</span>()
-                    .<span class="ident">expect</span>(<span class="string">&quot;Invalid file name&quot;</span>)
-                    .<span class="ident">to_string_lossy</span>(),
-                <span class="ident">max_len</span> <span class="op">=</span> <span class="ident">max_len</span>
+                path.file_name()
+                    .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+                    .to_string_lossy(),
+                max_len = max_len
             ))];
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">comp_status</span>) <span class="op">=</span> <span class="ident">state</span>.<span class="ident">compilations</span>.<span class="ident">get</span>(<span class="ident">path</span>) {
-                <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">compilation_status_text</span>(<span class="ident">comp_status</span>, <span class="ident">loading</span>));
-            } <span class="kw">else</span> {
-                <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">Span::raw</span>(<span class="string">&quot;    &quot;</span>));
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(comp_status) = state.compilations.get(path) {
+                spans.push(compilation_status_text(comp_status, loading));
+            } <span class="kw">else </span>{
+                spans.push(Span::raw(<span class="string">&quot;    &quot;</span>));
             }
-            <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">Span::raw</span>(<span class="string">&quot; &quot;</span>));
-            <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">evaluation_score</span>(
-                <span class="ident">state</span>.<span class="ident">task</span>.<span class="ident">max_score</span>,
-                <span class="ident">solution_state</span>,
-                <span class="ident">loading</span>,
+            spans.push(Span::raw(<span class="string">&quot; &quot;</span>));
+            spans.push(evaluation_score(
+                state.task.max_score,
+                solution_state,
+                loading,
             ));
-            <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">Span::raw</span>(<span class="string">&quot;  &quot;</span>));
-            <span class="ident">spans</span>.<span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">evaluation_line</span>(<span class="ident">solution_state</span>));
-            <span class="ident">spans</span>.<span class="ident">into</span>()
+            spans.push(Span::raw(<span class="string">&quot;  &quot;</span>));
+            spans.append(<span class="kw-2">&amp;mut </span>evaluation_line(solution_state));
+            spans.into()
         })
-        .<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">Paragraph::new</span>(<span class="ident">text</span>);
-    <span class="ident">frame</span>.<span class="ident">render_widget</span>(<span class="ident">paragraph</span>, <span class="ident">rect</span>);
+        .collect();
+    <span class="kw">let </span>paragraph = Paragraph::new(text);
+    frame.render_widget(paragraph, rect);
 }
 
-<span class="doccomment">/// Return the line with the status of the evaluation of a solution.</span>
-<span class="kw">fn</span> <span class="ident">evaluation_line</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">SolutionState</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Span</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">state</span>.<span class="ident">status</span> {
-        <span class="ident">SolutionStatus::Pending</span> =&gt; <span class="macro">vec!</span>[],
-        <span class="ident">SolutionStatus::Generating</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Generating&quot;</span>)],
-        <span class="ident">SolutionStatus::Generated</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Generated&quot;</span>)],
-        <span class="ident">SolutionStatus::Validating</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Validating&quot;</span>)],
-        <span class="ident">SolutionStatus::Validated</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Validated&quot;</span>)],
-        <span class="ident">SolutionStatus::Solving</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Solving&quot;</span>)],
-        <span class="ident">SolutionStatus::Solved</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Solved&quot;</span>)],
-        <span class="ident">SolutionStatus::Checking</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Checking&quot;</span>)],
-        <span class="ident">SolutionStatus::Done</span> =&gt; <span class="ident">evaluation_outcome</span>(<span class="ident">state</span>.<span class="ident">outcome</span>.<span class="ident">as_ref</span>()),
-        <span class="ident">SolutionStatus::Failed</span>(<span class="ident">e</span>) =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot;Failed: {}&quot;</span>, <span class="ident">e</span>))],
-        <span class="ident">SolutionStatus::Skipped</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;Skipped&quot;</span>)],
+<span class="doccomment">/// Return the line with the status of the evaluation of a solution.
+</span><span class="kw">fn </span>evaluation_line&lt;<span class="lifetime">&#39;a</span>&gt;(state: <span class="kw-2">&amp;</span>SolutionState) -&gt; Vec&lt;Span&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">match </span><span class="kw-2">&amp;</span>state.status {
+        SolutionStatus::Pending =&gt; <span class="macro">vec!</span>[],
+        SolutionStatus::Generating =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Generating&quot;</span>)],
+        SolutionStatus::Generated =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Generated&quot;</span>)],
+        SolutionStatus::Validating =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Validating&quot;</span>)],
+        SolutionStatus::Validated =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Validated&quot;</span>)],
+        SolutionStatus::Solving =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Solving&quot;</span>)],
+        SolutionStatus::Solved =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Solved&quot;</span>)],
+        SolutionStatus::Checking =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Checking&quot;</span>)],
+        SolutionStatus::Done =&gt; evaluation_outcome(state.outcome.as_ref()),
+        SolutionStatus::Failed(e) =&gt; <span class="macro">vec!</span>[Span::raw(<span class="macro">format!</span>(<span class="string">&quot;Failed: {}&quot;</span>, e))],
+        SolutionStatus::Skipped =&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;Skipped&quot;</span>)],
     }
 }
 
-<span class="doccomment">/// Return the line with the outcome of the evaluation of a solution.</span>
-<span class="kw">fn</span> <span class="ident">evaluation_outcome</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">outcome</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SolutionOutcome</span>, <span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Span</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="ident">outcome</span> {
-        <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">outcome</span>)) =&gt; {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">for</span> (<span class="ident">val</span>, <span class="ident">feed</span>) <span class="kw">in</span> <span class="ident">outcome</span>
-                .<span class="ident">validation</span>
-                .<span class="ident">cases</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">zip</span>(<span class="ident">outcome</span>.<span class="ident">feedback</span>.<span class="ident">cases</span>.<span class="ident">iter</span>())
+<span class="doccomment">/// Return the line with the outcome of the evaluation of a solution.
+</span><span class="kw">fn </span>evaluation_outcome&lt;<span class="lifetime">&#39;a</span>&gt;(outcome: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="prelude-ty">Result</span>&lt;SolutionOutcome, String&gt;&gt;) -&gt; Vec&lt;Span&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">match </span>outcome {
+        <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(outcome)) =&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>res = Vec::new();
+            <span class="kw">for </span>(val, feed) <span class="kw">in </span>outcome
+                .validation
+                .cases
+                .iter()
+                .zip(outcome.feedback.cases.iter())
             {
-                <span class="kw">match</span> <span class="ident">val</span>.<span class="ident">status</span> {
-                    <span class="ident">CaseStatus::Missing</span> =&gt; <span class="ident">res</span>.<span class="ident">push</span>(<span class="ident">Span::styled</span>(<span class="string">&quot;m &quot;</span>, <span class="kw-2">*</span><span class="ident">YELLOW</span>)),
-                    <span class="ident">CaseStatus::Parsed</span> =&gt; {
-                        <span class="kw">if</span> <span class="ident">feed</span>.<span class="ident">correct</span> {
-                            <span class="ident">res</span>.<span class="ident">push</span>(<span class="ident">Span::styled</span>(<span class="string">&quot;c &quot;</span>, <span class="kw-2">*</span><span class="ident">GREEN</span>))
-                        } <span class="kw">else</span> {
-                            <span class="ident">res</span>.<span class="ident">push</span>(<span class="ident">Span::styled</span>(<span class="string">&quot;w &quot;</span>, <span class="kw-2">*</span><span class="ident">RED</span>))
+                <span class="kw">match </span>val.status {
+                    CaseStatus::Missing =&gt; res.push(Span::styled(<span class="string">&quot;m &quot;</span>, <span class="kw-2">*</span>YELLOW)),
+                    CaseStatus::Parsed =&gt; {
+                        <span class="kw">if </span>feed.correct {
+                            res.push(Span::styled(<span class="string">&quot;c &quot;</span>, <span class="kw-2">*</span>GREEN))
+                        } <span class="kw">else </span>{
+                            res.push(Span::styled(<span class="string">&quot;w &quot;</span>, <span class="kw-2">*</span>RED))
                         }
                     }
-                    <span class="ident">CaseStatus::Invalid</span> =&gt; <span class="ident">res</span>.<span class="ident">push</span>(<span class="ident">Span::styled</span>(<span class="string">&quot;i &quot;</span>, <span class="kw-2">*</span><span class="ident">RED</span>)),
+                    CaseStatus::Invalid =&gt; res.push(Span::styled(<span class="string">&quot;i &quot;</span>, <span class="kw-2">*</span>RED)),
                 }
             }
-            <span class="ident">res</span>
+            res
         }
-        <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot;Checker failed: {}&quot;</span>, <span class="ident">e</span>))],
-        <span class="prelude-val">None</span> =&gt; <span class="macro">vec!</span>[<span class="ident">Span::raw</span>(<span class="string">&quot;unknown&quot;</span>)],
+        <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(e)) =&gt; <span class="macro">vec!</span>[Span::raw(<span class="macro">format!</span>(<span class="string">&quot;Checker failed: {}&quot;</span>, e))],
+        <span class="prelude-val">None </span>=&gt; <span class="macro">vec!</span>[Span::raw(<span class="string">&quot;unknown&quot;</span>)],
     }
 }
 
-<span class="doccomment">/// Return the score column of a solution.</span>
-<span class="kw">fn</span> <span class="ident">evaluation_score</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">max_score</span>: <span class="ident">f64</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">SolutionState</span>, <span class="ident">loading</span>: <span class="ident">char</span>) -&gt; <span class="ident">Span</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="ident">state</span>.<span class="ident">status</span> {
-        <span class="ident">SolutionStatus::Pending</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot;...&quot;</span>),
-        <span class="ident">SolutionStatus::Generating</span>
-        <span class="op">|</span> <span class="ident">SolutionStatus::Generated</span>
-        <span class="op">|</span> <span class="ident">SolutionStatus::Validating</span>
-        <span class="op">|</span> <span class="ident">SolutionStatus::Validated</span>
-        <span class="op">|</span> <span class="ident">SolutionStatus::Solving</span>
-        <span class="op">|</span> <span class="ident">SolutionStatus::Solved</span>
-        <span class="op">|</span> <span class="ident">SolutionStatus::Checking</span> =&gt; <span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot; {} &quot;</span>, <span class="ident">loading</span>)),
-        <span class="ident">SolutionStatus::Done</span> =&gt; {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">outcome</span>)) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">state</span>.<span class="ident">outcome</span> {
-                <span class="kw">let</span> <span class="ident">score</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{:&gt;3.0}&quot;</span>, <span class="ident">outcome</span>.<span class="ident">score</span> <span class="op">*</span> <span class="ident">max_score</span>);
-                <span class="kw">if</span> <span class="macro">abs_diff_eq!</span>(<span class="ident">outcome</span>.<span class="ident">score</span>, <span class="number">0.0</span>) {
-                    <span class="ident">Span::styled</span>(<span class="ident">score</span>, <span class="kw-2">*</span><span class="ident">RED</span>)
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="macro">abs_diff_eq!</span>(<span class="ident">outcome</span>.<span class="ident">score</span>, <span class="number">1.0</span>) {
-                    <span class="ident">Span::styled</span>(<span class="ident">score</span>, <span class="kw-2">*</span><span class="ident">GREEN</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">Span::styled</span>(<span class="ident">score</span>, <span class="kw-2">*</span><span class="ident">YELLOW</span>)
+<span class="doccomment">/// Return the score column of a solution.
+</span><span class="kw">fn </span>evaluation_score&lt;<span class="lifetime">&#39;a</span>&gt;(max_score: f64, state: <span class="kw-2">&amp;</span>SolutionState, loading: char) -&gt; Span&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">match </span>state.status {
+        SolutionStatus::Pending =&gt; Span::raw(<span class="string">&quot;...&quot;</span>),
+        SolutionStatus::Generating
+        | SolutionStatus::Generated
+        | SolutionStatus::Validating
+        | SolutionStatus::Validated
+        | SolutionStatus::Solving
+        | SolutionStatus::Solved
+        | SolutionStatus::Checking =&gt; Span::raw(<span class="macro">format!</span>(<span class="string">&quot; {} &quot;</span>, loading)),
+        SolutionStatus::Done =&gt; {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(outcome)) = <span class="kw-2">&amp;</span>state.outcome {
+                <span class="kw">let </span>score = <span class="macro">format!</span>(<span class="string">&quot;{:&gt;3.0}&quot;</span>, outcome.score * max_score);
+                <span class="kw">if </span><span class="macro">abs_diff_eq!</span>(outcome.score, <span class="number">0.0</span>) {
+                    Span::styled(score, <span class="kw-2">*</span>RED)
+                } <span class="kw">else if </span><span class="macro">abs_diff_eq!</span>(outcome.score, <span class="number">1.0</span>) {
+                    Span::styled(score, <span class="kw-2">*</span>GREEN)
+                } <span class="kw">else </span>{
+                    Span::styled(score, <span class="kw-2">*</span>YELLOW)
                 }
-            } <span class="kw">else</span> {
-                <span class="ident">Span::raw</span>(<span class="macro">format!</span>(<span class="string">&quot; {} &quot;</span>, <span class="ident">loading</span>))
+            } <span class="kw">else </span>{
+                Span::raw(<span class="macro">format!</span>(<span class="string">&quot; {} &quot;</span>, loading))
             }
         }
-        <span class="ident">SolutionStatus::Failed</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">SolutionStatus::Skipped</span> =&gt; <span class="ident">Span::raw</span>(<span class="string">&quot; X &quot;</span>),
+        SolutionStatus::Failed(<span class="kw">_</span>) | SolutionStatus::Skipped =&gt; Span::raw(<span class="string">&quot; X &quot;</span>),
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

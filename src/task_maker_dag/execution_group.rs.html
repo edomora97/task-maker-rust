@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-dag/src/execution_group.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>execution_group.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_dag/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-dag/src/execution_group.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>execution_group.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_dag/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_dag/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -111,118 +111,118 @@
 <span id="111">111</span>
 <span id="112">112</span>
 <span id="113">113</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">uuid::Uuid</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>uuid::Uuid;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Execution</span>, <span class="ident">ExecutionDAGConfig</span>, <span class="ident">ExecutionTag</span>, <span class="ident">Priority</span>};
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+<span class="kw">use crate</span>::{Execution, ExecutionDAGConfig, ExecutionTag, Priority};
+<span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="doccomment">/// Directory inside the sandbox where to place all the pipes of the group. This is used to allow</span>
-<span class="doccomment">/// the sandbox bind-mount all the pipes with a single mount point, inside all the sandboxes of the</span>
-<span class="doccomment">/// group.</span>
-<span class="kw">pub</span> <span class="kw">static</span> <span class="ident">FIFO_SANDBOX_DIR</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;tm_pipes&quot;</span>;
+<span class="doccomment">/// Directory inside the sandbox where to place all the pipes of the group. This is used to allow
+/// the sandbox bind-mount all the pipes with a single mount point, inside all the sandboxes of the
+/// group.
+</span><span class="kw">pub static </span>FIFO_SANDBOX_DIR: <span class="kw-2">&amp;</span>str = <span class="string">&quot;tm_pipes&quot;</span>;
 
-<span class="doccomment">/// The identifier of an execution group, it&#39;s globally unique and it identifies a group during an</span>
-<span class="doccomment">/// evaluation.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ExecutionGroupUuid</span> <span class="op">=</span> <span class="ident">Uuid</span>;
-<span class="doccomment">/// The identifier of a Fifo pipe inside a group.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FifoUuid</span> <span class="op">=</span> <span class="ident">Uuid</span>;
+<span class="doccomment">/// The identifier of an execution group, it&#39;s globally unique and it identifies a group during an
+/// evaluation.
+</span><span class="kw">pub type </span>ExecutionGroupUuid = Uuid;
+<span class="doccomment">/// The identifier of a Fifo pipe inside a group.
+</span><span class="kw">pub type </span>FifoUuid = Uuid;
 
-<span class="doccomment">/// A First-in First-out channel for letting executions communicate inside an execution group. Each</span>
-<span class="doccomment">/// Fifo is identified by an UUID which is unique inside the same `ExecutionGroup`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Fifo</span> {
-    <span class="doccomment">/// The UUID of this `Fifo`.</span>
-    <span class="kw">pub</span> <span class="ident">uuid</span>: <span class="ident">FifoUuid</span>,
+<span class="doccomment">/// A First-in First-out channel for letting executions communicate inside an execution group. Each
+/// Fifo is identified by an UUID which is unique inside the same `ExecutionGroup`.
+</span><span class="attribute">#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>Fifo {
+    <span class="doccomment">/// The UUID of this `Fifo`.
+    </span><span class="kw">pub </span>uuid: FifoUuid,
 }
 
-<span class="doccomment">/// A group of executions that have to be executed concurrently in the same worker. If any of the</span>
-<span class="doccomment">/// executions crash, all the group is stopped. The executions inside the group can communicate</span>
-<span class="doccomment">/// using FIFO pipes provided by the OS.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutionGroup</span> {
-    <span class="doccomment">/// The unique identifier of this group of executions.</span>
-    <span class="kw">pub</span> <span class="ident">uuid</span>: <span class="ident">ExecutionGroupUuid</span>,
-    <span class="doccomment">/// A textual description of the group.</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The list of executions to run.</span>
-    <span class="kw">pub</span> <span class="ident">executions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Execution</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The list of FIFO pipes to create for this group.</span>
-    <span class="kw">pub</span> <span class="ident">fifo</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Fifo</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A group of executions that have to be executed concurrently in the same worker. If any of the
+/// executions crash, all the group is stopped. The executions inside the group can communicate
+/// using FIFO pipes provided by the OS.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize)]
+</span><span class="kw">pub struct </span>ExecutionGroup {
+    <span class="doccomment">/// The unique identifier of this group of executions.
+    </span><span class="kw">pub </span>uuid: ExecutionGroupUuid,
+    <span class="doccomment">/// A textual description of the group.
+    </span><span class="kw">pub </span>description: String,
+    <span class="doccomment">/// The list of executions to run.
+    </span><span class="kw">pub </span>executions: Vec&lt;Execution&gt;,
+    <span class="doccomment">/// The list of FIFO pipes to create for this group.
+    </span><span class="kw">pub </span>fifo: Vec&lt;Fifo&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">Fifo</span> {
-    <span class="doccomment">/// Make a new Fifo with a random uuid.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">Fifo</span> {
-        <span class="ident">Fifo</span> {
-            <span class="ident">uuid</span>: <span class="ident">Uuid::new_v4</span>(),
+<span class="kw">impl </span>Fifo {
+    <span class="doccomment">/// Make a new Fifo with a random uuid.
+    </span><span class="kw">fn </span>new() -&gt; Fifo {
+        Fifo {
+            uuid: Uuid::new_v4(),
         }
     }
 
-    <span class="doccomment">/// The path inside the sandbox that this pipe is mapped to.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sandbox_path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PathBuf</span> {
-        <span class="ident">Path::new</span>(<span class="ident">FIFO_SANDBOX_DIR</span>).<span class="ident">join</span>(<span class="self">self</span>.<span class="ident">uuid</span>.<span class="ident">to_string</span>())
+    <span class="doccomment">/// The path inside the sandbox that this pipe is mapped to.
+    </span><span class="kw">pub fn </span>sandbox_path(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PathBuf {
+        Path::new(FIFO_SANDBOX_DIR).join(<span class="self">self</span>.uuid.to_string())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ExecutionGroup</span> {
-    <span class="doccomment">/// Create an empty execution group.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">descr</span>: <span class="ident">S</span>) -&gt; <span class="ident">ExecutionGroup</span> {
-        <span class="ident">ExecutionGroup</span> {
-            <span class="ident">uuid</span>: <span class="ident">Uuid::new_v4</span>(),
-            <span class="ident">description</span>: <span class="ident">descr</span>.<span class="ident">into</span>(),
-            <span class="ident">executions</span>: <span class="macro">vec!</span>[],
-            <span class="ident">fifo</span>: <span class="macro">vec!</span>[],
+<span class="kw">impl </span>ExecutionGroup {
+    <span class="doccomment">/// Create an empty execution group.
+    </span><span class="kw">pub fn </span>new&lt;S: Into&lt;String&gt;&gt;(descr: S) -&gt; ExecutionGroup {
+        ExecutionGroup {
+            uuid: Uuid::new_v4(),
+            description: descr.into(),
+            executions: <span class="macro">vec!</span>[],
+            fifo: <span class="macro">vec!</span>[],
         }
     }
 
-    <span class="doccomment">/// Add a new execution to the group.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_execution</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">exec</span>: <span class="ident">Execution</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">executions</span>.<span class="ident">push</span>(<span class="ident">exec</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// Add a new execution to the group.
+    </span><span class="kw">pub fn </span>add_execution(<span class="kw-2">&amp;mut </span><span class="self">self</span>, exec: Execution) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.executions.push(exec);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Create a new `Fifo` and return it.
+    </span><span class="kw">pub fn </span>new_fifo(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; Fifo {
+        <span class="kw">let </span>fifo = Fifo::new();
+        <span class="self">self</span>.fifo.push(fifo);
+        fifo
     }
 
-    <span class="doccomment">/// Create a new `Fifo` and return it.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_fifo</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">Fifo</span> {
-        <span class="kw">let</span> <span class="ident">fifo</span> <span class="op">=</span> <span class="ident">Fifo::new</span>();
-        <span class="self">self</span>.<span class="ident">fifo</span>.<span class="ident">push</span>(<span class="ident">fifo</span>);
-        <span class="ident">fifo</span>
+    <span class="doccomment">/// Priority of this execution group. The actual value is computed based on the executions
+    /// contained in this group.
+    </span><span class="kw">pub fn </span>priority(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Priority {
+        <span class="self">self</span>.executions
+            .iter()
+            .map(|e| e.priority)
+            .max()
+            .unwrap_or(<span class="number">0</span>)
     }
 
-    <span class="doccomment">/// Priority of this execution group. The actual value is computed based on the executions</span>
-    <span class="doccomment">/// contained in this group.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">priority</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Priority</span> {
-        <span class="self">self</span>.<span class="ident">executions</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">priority</span>)
-            .<span class="ident">max</span>()
-            .<span class="ident">unwrap_or</span>(<span class="number">0</span>)
+    <span class="doccomment">/// A reference to the configuration of the underlying DAG.
+    </span><span class="kw">pub fn </span>config(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ExecutionDAGConfig {
+        <span class="self">self</span>.executions
+            .get(<span class="number">0</span>)
+            .expect(<span class="string">&quot;Invalid group with zero executions&quot;</span>)
+            .config()
     }
 
-    <span class="doccomment">/// A reference to the configuration of the underlying DAG.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">config</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">ExecutionDAGConfig</span> {
-        <span class="self">self</span>.<span class="ident">executions</span>
-            .<span class="ident">get</span>(<span class="number">0</span>)
-            .<span class="ident">expect</span>(<span class="string">&quot;Invalid group with zero executions&quot;</span>)
-            .<span class="ident">config</span>()
-    }
-
-    <span class="doccomment">/// The tag of one of the executions in this group.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tag</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExecutionTag</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">executions</span>
-            .<span class="ident">get</span>(<span class="number">0</span>)
-            .<span class="ident">expect</span>(<span class="string">&quot;Invalid group with zero executions&quot;</span>)
-            .<span class="ident">tag</span>
-            .<span class="ident">clone</span>()
+    <span class="doccomment">/// The tag of one of the executions in this group.
+    </span><span class="kw">pub fn </span>tag(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;ExecutionTag&gt; {
+        <span class="self">self</span>.executions
+            .get(<span class="number">0</span>)
+            .expect(<span class="string">&quot;Invalid group with zero executions&quot;</span>)
+            .tag
+            .clone()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Execution</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ExecutionGroup</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">exec</span>: <span class="ident">Execution</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">ExecutionGroup::new</span>(<span class="ident">exec</span>.<span class="ident">description</span>.<span class="ident">clone</span>());
-        <span class="ident">group</span>.<span class="ident">add_execution</span>(<span class="ident">exec</span>);
-        <span class="ident">group</span>
+<span class="kw">impl </span>From&lt;Execution&gt; <span class="kw">for </span>ExecutionGroup {
+    <span class="kw">fn </span>from(exec: Execution) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>group = ExecutionGroup::new(exec.description.clone());
+        group.add_execution(exec);
+        group
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_dag" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_dag" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/format/italian_yaml/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/format/italian_yaml/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../task_maker_format/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -755,762 +755,762 @@
 <span id="755">755</span>
 <span id="756">756</span>
 <span id="757">757</span>
-</pre><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)</span>
-<span class="doccomment">//! and it&#39;s the most used format in the Italian Olympiads.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # `gen/GEN` format</span>
-<span class="doccomment">//! Here it&#39;s provided the definition of the format of the `gen/GEN` file, as interpreted by</span>
-<span class="doccomment">//! task-maker. The aim is to be as compatible as possible to the format accepted by `cmsMake` and</span>
-<span class="doccomment">//! `cmsImportTask`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `gen/GEN` file describes how the input files of the testcases should be generated and how</span>
-<span class="doccomment">//! the subtasks are composed. The formal definition of the format can be found looking at the</span>
-<span class="doccomment">//! [parsing grammar](https://github.com/edomora97/task-maker-rust/blob/master/task-maker-format/src/ioi/format/italian_yaml/GEN.pest).</span>
-<span class="doccomment">//! The format is described here informally.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Each line of that file can be of one of the following types:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - if the line starts with `# ` (number sign followed by a space) it is a comment and will be</span>
-<span class="doccomment">//!   ignored. Example: `# this is a comment`</span>
-<span class="doccomment">//! - if the line starts with `#ST:` it is the marker of the start of a new subtask. Following the</span>
-<span class="doccomment">//!   column there is the score of the subtask, an integer number. Example: `#ST: 20`, meaning that</span>
-<span class="doccomment">//!   all the following testcases, before the next `#ST:` are grouped in a single subtask worth 20</span>
-<span class="doccomment">//!   points.</span>
-<span class="doccomment">//! - if the line starts with `#COPY:` it is a testcase with a static input file, meaning that the</span>
-<span class="doccomment">//!   input file will be simply copied from the path specified after the column. Example:</span>
-<span class="doccomment">//!   `#COPY: gen/hardcoded.in`. The path is relative to the task root directory and the file must</span>
-<span class="doccomment">//!   exists and be readable from task-maker. The path should not contain spaces.</span>
-<span class="doccomment">//! - non-empty lines not starting with `#` defines a new testcases each. Each line contains</span>
-<span class="doccomment">//!   command line arguments to pass to the generator executable. The generator should be named</span>
-<span class="doccomment">//!   `gen/generator.*` or `gen/generatore.*`. Example: `1 2 3`, the generator will be invoked</span>
-<span class="doccomment">//!   passing the three arguments.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If a line contains a `#`, all the characters following it (`#` included) will be ignored as they</span>
-<span class="doccomment">//! are considered comments. Example: `1 2 3 # inline comment`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If no `#ST` lines are present, a single subtask worth 100 points is automatically added.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Full example of `gen/GEN`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```text</span>
-<span class="doccomment">//! # N     M       seed</span>
-<span class="doccomment">//! #ST: 0</span>
-<span class="doccomment">//! #COPY: gen/example1.txt</span>
-<span class="doccomment">//! #COPY: gen/example2.txt</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #ST: 30</span>
-<span class="doccomment">//! 10      1000    101</span>
-<span class="doccomment">//! 20      1000    102</span>
-<span class="doccomment">//! 1       1       103 # corner case!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #ST: 70</span>
-<span class="doccomment">//! 1000    10000   201</span>
-<span class="doccomment">//! 2000    10000   202</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! In this example the first line is ignored since it&#39;s a comment, then the definition of a subtask</span>
-<span class="doccomment">//! of zero points starts. The content of that subtask are 2 hardcoded input files, for example the</span>
-<span class="doccomment">//! sample cases in the text statement.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Then a new subtask of 30 points starts, it&#39;s composed of 3 testcases. Note that the comment on</span>
-<span class="doccomment">//! the third will be ignored and just the 3 numbers will be passed to the generator.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Then there is a third subtask with 2 testcases.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # `gen/cases.gen` format</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `gen/GEN` format is pretty limited regarding some important aspects of task preparation. For</span>
-<span class="doccomment">//! example it allows you to use just a single generator and a single validator. A new format, not</span>
-<span class="doccomment">//! yet officially supported by `cms` (but workaround exists!), is here described.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The formal definition of the format can be found in the</span>
-<span class="doccomment">//! [parsing grammar](https://github.com/edomora97/task-maker-rust/blob/master/task-maker-format/src/ioi/format/italian_yaml/cases.gen.pest).</span>
-<span class="doccomment">//! An informal explanation is here provided.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Similarly to `gen/GEN`, each line is independent and can be one of the following:</span>
-<span class="doccomment">//! - if it starts with `#` it is a comment and will be ignored.</span>
-<span class="doccomment">//! - if it starts with `:` it is a command and what follows is described below.</span>
-<span class="doccomment">//! - otherwise if it does not start with `#` nor `:`, it&#39;s a simple testcase definition. The</span>
-<span class="doccomment">//!   testcases will be generated using the _current generator_, which is either the default one or</span>
-<span class="doccomment">//!   the overridden one in the current subtask.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If a line contains a `#`, all the characters following it (`#` included) will be ignored as they</span>
-<span class="doccomment">//! are considered comments. Example: `1 2 3 # inline comment`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Backwards compatibility with cms</span>
-<span class="doccomment">//! Since the importers of cms do not yet support the `cases.gen` format, there is a workaround that</span>
-<span class="doccomment">//! works as follows: when the task is built task-maker will create a _fake_ `gen/GEN` with just the</span>
-<span class="doccomment">//! metadata needed by `cmsImportTask` (like the number of testcases and subtasks).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This file also contains some comments that may be found useful for debugging the generations.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! That file will be ignore by task-maker if the `cases.gen` file is present and will be removed</span>
-<span class="doccomment">//! with `--clean`. Note that you should not edit that file because it will be overwritten the next</span>
-<span class="doccomment">//! time task-maker will be launched. To keep that file you should remove the comment containing</span>
-<span class="doccomment">//! `tm-allow-delete`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## `cases.gen` commands</span>
-<span class="doccomment">//! The lines starting with a column `:` are commands. What follows the column is the actual command</span>
-<span class="doccomment">//! which can be of many types.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: GEN name path [args...]`</span>
-<span class="doccomment">//! This command registers a new generator for the task. The generator is referenced in the file</span>
-<span class="doccomment">//! with the specified `name`, a unique string without spaces. That generator&#39;s source file will be</span>
-<span class="doccomment">//! found at the specified `path`. The optional following `args...` define the command line</span>
-<span class="doccomment">//! arguments of this generator, they will be used for validating the constraints (see below).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If the name is `default` the generator will be considered the default one and will be used when</span>
-<span class="doccomment">//! no specific generator is selected.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: GEN default gen/generator.py N M seed` defines the _default_ generator for the task,</span>
-<span class="doccomment">//! whose source file is at `gen/generator.py` (relative to the task&#39;s root directory) and will</span>
-<span class="doccomment">//! accept 3 arguments named `N`, `M` and `seed`. When this generator will be used the variables</span>
-<span class="doccomment">//! `$N`, `$M` and `$seed` will be set and available for the constraint evaluation.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: GEN line gen/line.py` defines a new generator named `line` whose parameters are not</span>
-<span class="doccomment">//! known and won&#39;t be validated.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: VAL name path [args...]`</span>
-<span class="doccomment">//! This command registers a new validator for the task. The semantics of the command are the same</span>
-<span class="doccomment">//! of `: GEN name path [args...]`, including the behaviour of the `default` name.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If no arguments are specified for the validator the default behaviour is to pass the variables</span>
-<span class="doccomment">//! `$INPUT` and `$ST_NUM` (similar to `gen/GEN`, but the subtask is 0-based).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Note that, differently than `: GEN` the arguments of the validator do not define new variables,</span>
-<span class="doccomment">//! instead defines which parameters task-maker will pass to the validator. Because of that the</span>
-<span class="doccomment">//! variables should be prefixed with `$` (the variables are used, not declared).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Note that the `name` must be unique among the validators, but it can be the same of the one of</span>
-<span class="doccomment">//! a generator.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: VAL default gen/validator.py` defines the _default_ validator for the task.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: VAL line gen/val_line.py $INPUT $ST_NUM` defines the `line` validator which takes 2</span>
-<span class="doccomment">//! arguments, the same as the default behaviour, but using the variables to specify them.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: GEN name`</span>
-<span class="doccomment">//! This command overrides the default generator for the current subtask, meaning that all the</span>
-<span class="doccomment">//! testcases in the current subtask, following this command, will use the generator named `name` by</span>
-<span class="doccomment">//! default. A generator named `name` must have been previously defined.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: GEN line` sets the current generator to `line`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: VAL name`</span>
-<span class="doccomment">//! This command overrides the default validator for the current subtask, meaning that all the</span>
-<span class="doccomment">//! testcases in the current subtask, following this command, will use the validator named `name`.</span>
-<span class="doccomment">//! A validator named `name` must have been previously defined.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: VAL line` sets the current validator to `line`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: CONSTRAINT operand (operator operand)+`</span>
-<span class="doccomment">//! This command adds a constraint that validates the parameters of the testcases. The arguments of</span>
-<span class="doccomment">//! `: CONSTRAINT` form an expression that is an inequality (with equalities allowed) between</span>
-<span class="doccomment">//! constants and variables. When a testcase is defined using a generator with the arguments known,</span>
-<span class="doccomment">//! all those variables become defined and will be checked with all the constraints.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The operators available are: &lt; &lt;= &gt; &gt;= =, but note that the inequalities must have the same</span>
-<span class="doccomment">//! direction (cannot mix &lt; and &gt;).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Constraints defined before the first subtask will be used for all the subtasks. Constraints</span>
-<span class="doccomment">//! defined inside a subtask will be used only for that subtask.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `:CONSTRAINT 0 &lt;= $N &lt; $M &lt;= 1000000` will check that the variables `$N` and `$M` are</span>
-<span class="doccomment">//! between 0 and 1000000 and `$N` is smaller than `$M`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: SUBTASK score [description]`</span>
-<span class="doccomment">//! This command marks the start of a new subtask, just like how `#ST` in `gen/GEN` did. The score</span>
-<span class="doccomment">//! can be a simple floating point number (either an integer or an integer.integer). The description</span>
-<span class="doccomment">//! that follows is optional and will be included in the subtask metadata.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! When a new subtask is started the generator and validator will be reset to the default ones.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: SUBTASK 40 All the nodes are in a line` defines a new subtask worth 40 points, with</span>
-<span class="doccomment">//! the provided description.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: COPY path`</span>
-<span class="doccomment">//! This command creates a new testcase coping the input file from the specified path, relative to</span>
-<span class="doccomment">//! the task root directory. The file will be validated using the current validator of the subtask.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: COPY gen/hardcoded.in`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `: RUN name args...`</span>
-<span class="doccomment">//! This command creates a new testcase using the generator named `name`, passing to it the</span>
-<span class="doccomment">//! following arguments. The generator must have been previously defined.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If the generator has the definition of its parameters, they will be used for assigning the</span>
-<span class="doccomment">//! variables for checking the constraints. All the constraints must be satisfied for each testcase.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The arguments provided are parsed with a shell lexer, meaning that `&quot;` and `&#39;` have a semantic</span>
-<span class="doccomment">//! value (the same as a shell). Unlike `gen/GEN` you can pass arguments with a space in it using</span>
-<span class="doccomment">//! the quotes.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Example: `: RUN line 1 2 3` will run the `line` generator passing the three integers as</span>
-<span class="doccomment">//! arguments.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Testcase definition</span>
-<span class="doccomment">//! Similarly to `gen/GEN` lines that are not commands nor comments are simple testcase definition.</span>
-<span class="doccomment">//! Their semantics is the same of `: RUN default args...`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Automatic variables</span>
-<span class="doccomment">//! In the constraint evaluation and in the validator argument specification all the variables</span>
-<span class="doccomment">//! obtained from the parsing of the generator&#39;s arguments will be available. Also some automatic</span>
-<span class="doccomment">//! variables will be available:</span>
-<span class="doccomment">//! - `$ST_NUM`: the 0-based index of the subtask</span>
-<span class="doccomment">//! - `$ST_DESCRIPTION`: the description of the subtask</span>
-<span class="doccomment">//! - `$TC_NUM`: the 0-based index of the testcase</span>
-<span class="doccomment">//! - `$INPUT` _(only for validators)_: the name of the file to validate</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Full example of `cases.gen`</span>
-<span class="doccomment">//! ```text</span>
-<span class="doccomment">//! : GEN default gen/generator.py N M seed</span>
-<span class="doccomment">//! : GEN line gen/line.py N seed</span>
-<span class="doccomment">//! : GEN hard gen/hard.py</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! : VAL default gen/validator.py</span>
-<span class="doccomment">//! : VAL line gen/val_line.py $INPUT $ST_NUM # same as default</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! : CONSTRAINT 1 &lt;= $N &lt;= 1000</span>
-<span class="doccomment">//! : CONSTRAINT 1 &lt;= $M &lt;= 1000000</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! : SUBTASK 0 Examples</span>
-<span class="doccomment">//! : COPY gen/example1.in</span>
-<span class="doccomment">//! : COPY gen/example2.in</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! : SUBTASK 30 Nodes are in a line</span>
-<span class="doccomment">//! : GEN line</span>
-<span class="doccomment">//! : VAL line</span>
-<span class="doccomment">//! : CONSTRAINT $N &lt;= 500</span>
-<span class="doccomment">//! 500   101</span>
-<span class="doccomment">//! 500   102</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! : SUBTASK 70</span>
-<span class="doccomment">//! 1000   1000      201</span>
-<span class="doccomment">//! 1000   1000000   202</span>
-<span class="doccomment">//! : RUN hard 1000 1000 95% 12.3 203</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! In this example 3 generators and 2 validators are defined, named `default`, `line`, `hard` and</span>
-<span class="doccomment">//! `default`, `line` respectively. The `default` and `line` generators have their parameters</span>
-<span class="doccomment">//! specified, they will be used for the constraints check; the `hard` generator arguments won&#39;t be</span>
-<span class="doccomment">//! validated.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Note that the second validator has the arguments specified, and they are the same as the default</span>
-<span class="doccomment">//! ones. Also note that the inline comment will be ignored.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This file defines 3 subtasks, worth 0, 30 and 70 points each.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The first subtask contains 2 testcases whose file will be simply copied from the specified</span>
-<span class="doccomment">//! paths.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The second subtask has 2 testcases each generated with the `line` generator and validated with</span>
-<span class="doccomment">//! the `line` validator. Note that there is an additional constraint for the subtask, it will be</span>
-<span class="doccomment">//! checked only in this subtask.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The third subtask will use the `default` generator and validator, except for the last testcase</span>
-<span class="doccomment">//! which will use the `hard` one. Note that since the `hard` generator does not have the argument</span>
-<span class="doccomment">//! specification, its parameters won&#39;t be checked. Also note that the constraint `$N &lt;= 500` won&#39;t</span>
-<span class="doccomment">//! be checked because it was scoped only to the second subtask.</span>
-<span class="doccomment">//! The subtask also does not have a description, the default one (`Subtask 2`) will be used.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)
+//! and it&#39;s the most used format in the Italian Olympiads.
+//!
+//! # `gen/GEN` format
+//! Here it&#39;s provided the definition of the format of the `gen/GEN` file, as interpreted by
+//! task-maker. The aim is to be as compatible as possible to the format accepted by `cmsMake` and
+//! `cmsImportTask`.
+//!
+//! The `gen/GEN` file describes how the input files of the testcases should be generated and how
+//! the subtasks are composed. The formal definition of the format can be found looking at the
+//! [parsing grammar](https://github.com/edomora97/task-maker-rust/blob/master/task-maker-format/src/ioi/format/italian_yaml/GEN.pest).
+//! The format is described here informally.
+//!
+//! Each line of that file can be of one of the following types:
+//!
+//! - if the line starts with `# ` (number sign followed by a space) it is a comment and will be
+//!   ignored. Example: `# this is a comment`
+//! - if the line starts with `#ST:` it is the marker of the start of a new subtask. Following the
+//!   column there is the score of the subtask, an integer number. Example: `#ST: 20`, meaning that
+//!   all the following testcases, before the next `#ST:` are grouped in a single subtask worth 20
+//!   points.
+//! - if the line starts with `#COPY:` it is a testcase with a static input file, meaning that the
+//!   input file will be simply copied from the path specified after the column. Example:
+//!   `#COPY: gen/hardcoded.in`. The path is relative to the task root directory and the file must
+//!   exists and be readable from task-maker. The path should not contain spaces.
+//! - non-empty lines not starting with `#` defines a new testcases each. Each line contains
+//!   command line arguments to pass to the generator executable. The generator should be named
+//!   `gen/generator.*` or `gen/generatore.*`. Example: `1 2 3`, the generator will be invoked
+//!   passing the three arguments.
+//!
+//! If a line contains a `#`, all the characters following it (`#` included) will be ignored as they
+//! are considered comments. Example: `1 2 3 # inline comment`.
+//!
+//! If no `#ST` lines are present, a single subtask worth 100 points is automatically added.
+//!
+//! ## Full example of `gen/GEN`
+//!
+//! ```text
+//! # N     M       seed
+//! #ST: 0
+//! #COPY: gen/example1.txt
+//! #COPY: gen/example2.txt
+//!
+//! #ST: 30
+//! 10      1000    101
+//! 20      1000    102
+//! 1       1       103 # corner case!
+//!
+//! #ST: 70
+//! 1000    10000   201
+//! 2000    10000   202
+//! ```
+//!
+//! In this example the first line is ignored since it&#39;s a comment, then the definition of a subtask
+//! of zero points starts. The content of that subtask are 2 hardcoded input files, for example the
+//! sample cases in the text statement.
+//!
+//! Then a new subtask of 30 points starts, it&#39;s composed of 3 testcases. Note that the comment on
+//! the third will be ignored and just the 3 numbers will be passed to the generator.
+//!
+//! Then there is a third subtask with 2 testcases.
+//!
+//! # `gen/cases.gen` format
+//!
+//! The `gen/GEN` format is pretty limited regarding some important aspects of task preparation. For
+//! example it allows you to use just a single generator and a single validator. A new format, not
+//! yet officially supported by `cms` (but workaround exists!), is here described.
+//!
+//! The formal definition of the format can be found in the
+//! [parsing grammar](https://github.com/edomora97/task-maker-rust/blob/master/task-maker-format/src/ioi/format/italian_yaml/cases.gen.pest).
+//! An informal explanation is here provided.
+//!
+//! Similarly to `gen/GEN`, each line is independent and can be one of the following:
+//! - if it starts with `#` it is a comment and will be ignored.
+//! - if it starts with `:` it is a command and what follows is described below.
+//! - otherwise if it does not start with `#` nor `:`, it&#39;s a simple testcase definition. The
+//!   testcases will be generated using the _current generator_, which is either the default one or
+//!   the overridden one in the current subtask.
+//!
+//! If a line contains a `#`, all the characters following it (`#` included) will be ignored as they
+//! are considered comments. Example: `1 2 3 # inline comment`.
+//!
+//! ## Backwards compatibility with cms
+//! Since the importers of cms do not yet support the `cases.gen` format, there is a workaround that
+//! works as follows: when the task is built task-maker will create a _fake_ `gen/GEN` with just the
+//! metadata needed by `cmsImportTask` (like the number of testcases and subtasks).
+//!
+//! This file also contains some comments that may be found useful for debugging the generations.
+//!
+//! That file will be ignore by task-maker if the `cases.gen` file is present and will be removed
+//! with `--clean`. Note that you should not edit that file because it will be overwritten the next
+//! time task-maker will be launched. To keep that file you should remove the comment containing
+//! `tm-allow-delete`.
+//!
+//! ## `cases.gen` commands
+//! The lines starting with a column `:` are commands. What follows the column is the actual command
+//! which can be of many types.
+//!
+//! ### `: GEN name path [args...]`
+//! This command registers a new generator for the task. The generator is referenced in the file
+//! with the specified `name`, a unique string without spaces. That generator&#39;s source file will be
+//! found at the specified `path`. The optional following `args...` define the command line
+//! arguments of this generator, they will be used for validating the constraints (see below).
+//!
+//! If the name is `default` the generator will be considered the default one and will be used when
+//! no specific generator is selected.
+//!
+//! Example: `: GEN default gen/generator.py N M seed` defines the _default_ generator for the task,
+//! whose source file is at `gen/generator.py` (relative to the task&#39;s root directory) and will
+//! accept 3 arguments named `N`, `M` and `seed`. When this generator will be used the variables
+//! `$N`, `$M` and `$seed` will be set and available for the constraint evaluation.
+//!
+//! Example: `: GEN line gen/line.py` defines a new generator named `line` whose parameters are not
+//! known and won&#39;t be validated.
+//!
+//! ### `: VAL name path [args...]`
+//! This command registers a new validator for the task. The semantics of the command are the same
+//! of `: GEN name path [args...]`, including the behaviour of the `default` name.
+//!
+//! If no arguments are specified for the validator the default behaviour is to pass the variables
+//! `$INPUT` and `$ST_NUM` (similar to `gen/GEN`, but the subtask is 0-based).
+//!
+//! Note that, differently than `: GEN` the arguments of the validator do not define new variables,
+//! instead defines which parameters task-maker will pass to the validator. Because of that the
+//! variables should be prefixed with `$` (the variables are used, not declared).
+//!
+//! Note that the `name` must be unique among the validators, but it can be the same of the one of
+//! a generator.
+//!
+//! Example: `: VAL default gen/validator.py` defines the _default_ validator for the task.
+//!
+//! Example: `: VAL line gen/val_line.py $INPUT $ST_NUM` defines the `line` validator which takes 2
+//! arguments, the same as the default behaviour, but using the variables to specify them.
+//!
+//! ### `: GEN name`
+//! This command overrides the default generator for the current subtask, meaning that all the
+//! testcases in the current subtask, following this command, will use the generator named `name` by
+//! default. A generator named `name` must have been previously defined.
+//!
+//! Example: `: GEN line` sets the current generator to `line`.
+//!
+//! ### `: VAL name`
+//! This command overrides the default validator for the current subtask, meaning that all the
+//! testcases in the current subtask, following this command, will use the validator named `name`.
+//! A validator named `name` must have been previously defined.
+//!
+//! Example: `: VAL line` sets the current validator to `line`.
+//!
+//! ### `: CONSTRAINT operand (operator operand)+`
+//! This command adds a constraint that validates the parameters of the testcases. The arguments of
+//! `: CONSTRAINT` form an expression that is an inequality (with equalities allowed) between
+//! constants and variables. When a testcase is defined using a generator with the arguments known,
+//! all those variables become defined and will be checked with all the constraints.
+//!
+//! The operators available are: &lt; &lt;= &gt; &gt;= =, but note that the inequalities must have the same
+//! direction (cannot mix &lt; and &gt;).
+//!
+//! Constraints defined before the first subtask will be used for all the subtasks. Constraints
+//! defined inside a subtask will be used only for that subtask.
+//!
+//! Example: `:CONSTRAINT 0 &lt;= $N &lt; $M &lt;= 1000000` will check that the variables `$N` and `$M` are
+//! between 0 and 1000000 and `$N` is smaller than `$M`.
+//!
+//! ### `: SUBTASK score [description]`
+//! This command marks the start of a new subtask, just like how `#ST` in `gen/GEN` did. The score
+//! can be a simple floating point number (either an integer or an integer.integer). The description
+//! that follows is optional and will be included in the subtask metadata.
+//!
+//! When a new subtask is started the generator and validator will be reset to the default ones.
+//!
+//! Example: `: SUBTASK 40 All the nodes are in a line` defines a new subtask worth 40 points, with
+//! the provided description.
+//!
+//! ### `: COPY path`
+//! This command creates a new testcase coping the input file from the specified path, relative to
+//! the task root directory. The file will be validated using the current validator of the subtask.
+//!
+//! Example: `: COPY gen/hardcoded.in`
+//!
+//! ### `: RUN name args...`
+//! This command creates a new testcase using the generator named `name`, passing to it the
+//! following arguments. The generator must have been previously defined.
+//!
+//! If the generator has the definition of its parameters, they will be used for assigning the
+//! variables for checking the constraints. All the constraints must be satisfied for each testcase.
+//!
+//! The arguments provided are parsed with a shell lexer, meaning that `&quot;` and `&#39;` have a semantic
+//! value (the same as a shell). Unlike `gen/GEN` you can pass arguments with a space in it using
+//! the quotes.
+//!
+//! Example: `: RUN line 1 2 3` will run the `line` generator passing the three integers as
+//! arguments.
+//!
+//! ## Testcase definition
+//! Similarly to `gen/GEN` lines that are not commands nor comments are simple testcase definition.
+//! Their semantics is the same of `: RUN default args...`.
+//!
+//! ## Automatic variables
+//! In the constraint evaluation and in the validator argument specification all the variables
+//! obtained from the parsing of the generator&#39;s arguments will be available. Also some automatic
+//! variables will be available:
+//! - `$ST_NUM`: the 0-based index of the subtask
+//! - `$ST_DESCRIPTION`: the description of the subtask
+//! - `$TC_NUM`: the 0-based index of the testcase
+//! - `$INPUT` _(only for validators)_: the name of the file to validate
+//!
+//! ## Full example of `cases.gen`
+//! ```text
+//! : GEN default gen/generator.py N M seed
+//! : GEN line gen/line.py N seed
+//! : GEN hard gen/hard.py
+//!
+//! : VAL default gen/validator.py
+//! : VAL line gen/val_line.py $INPUT $ST_NUM # same as default
+//!
+//! : CONSTRAINT 1 &lt;= $N &lt;= 1000
+//! : CONSTRAINT 1 &lt;= $M &lt;= 1000000
+//!
+//! : SUBTASK 0 Examples
+//! : COPY gen/example1.in
+//! : COPY gen/example2.in
+//!
+//! : SUBTASK 30 Nodes are in a line
+//! : GEN line
+//! : VAL line
+//! : CONSTRAINT $N &lt;= 500
+//! 500   101
+//! 500   102
+//!
+//! : SUBTASK 70
+//! 1000   1000      201
+//! 1000   1000000   202
+//! : RUN hard 1000 1000 95% 12.3 203
+//! ```
+//!
+//! In this example 3 generators and 2 validators are defined, named `default`, `line`, `hard` and
+//! `default`, `line` respectively. The `default` and `line` generators have their parameters
+//! specified, they will be used for the constraints check; the `hard` generator arguments won&#39;t be
+//! validated.
+//!
+//! Note that the second validator has the arguments specified, and they are the same as the default
+//! ones. Also note that the inline comment will be ignored.
+//!
+//! This file defines 3 subtasks, worth 0, 30 and 70 points each.
+//!
+//! The first subtask contains 2 testcases whose file will be simply copied from the specified
+//! paths.
+//!
+//! The second subtask has 2 testcases each generated with the `line` generator and validated with
+//! the `line` validator. Note that there is an additional constraint for the subtask, it will be
+//! checked only in this subtask.
+//!
+//! The third subtask will use the `default` generator and validator, except for the last testcase
+//! which will use the `hard` one. Note that since the `hard` generator does not have the argument
+//! specification, its parameters won&#39;t be checked. Also note that the constraint `$N &lt;= 500` won&#39;t
+//! be checked because it was scoped only to the second subtask.
+//! The subtask also does not have a description, the default one (`Subtask 2`) will be used.
 
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::fs</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">std::str::FromStr</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+</span><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::fs;
+<span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>std::str::FromStr;
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">bail</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
-<span class="kw">use</span> <span class="ident">unic::normal::StrNormalForm</span>;
-<span class="kw">use</span> <span class="ident">unic::ucd::category::GeneralCategory</span>;
+<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
+<span class="kw">use </span>serde::{Deserialize, Deserializer, Serialize, Serializer};
+<span class="kw">use </span>unic::normal::StrNormalForm;
+<span class="kw">use </span>unic::ucd::category::GeneralCategory;
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">cases_gen</span>::{<span class="ident">is_gen_gen_deletable</span>, <span class="ident">TM_ALLOW_DELETE_COOKIE</span>};
-<span class="kw">use</span> <span class="ident">task_maker_lang::GraderMap</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use </span>cases_gen::{is_gen_gen_deletable, TM_ALLOW_DELETE_COOKIE};
+<span class="kw">use </span>task_maker_lang::GraderMap;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi::sanity_checks::get_sanity_checks</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{
-    <span class="ident">make_task_booklets</span>, <span class="ident">Checker</span>, <span class="ident">IOITask</span>, <span class="ident">InputValidator</span>, <span class="ident">OutputGenerator</span>, <span class="ident">SubtaskId</span>, <span class="ident">SubtaskInfo</span>,
-    <span class="ident">TaskType</span>, <span class="ident">TestcaseId</span>, <span class="ident">TestcaseInfo</span>, <span class="ident">TestcaseScoreAggregator</span>,
+<span class="kw">use </span><span class="kw">crate</span>::ioi::sanity_checks::get_sanity_checks;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{
+    make_task_booklets, Checker, IOITask, InputValidator, OutputGenerator, SubtaskId, SubtaskInfo,
+    TaskType, TestcaseId, TestcaseInfo, TestcaseScoreAggregator,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">BatchTypeData</span>, <span class="ident">CommunicationTypeData</span>, <span class="ident">UserIo</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">InputValidatorGenerator</span>, <span class="ident">TM_VALIDATION_FILE_NAME</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">find_source_file</span>, <span class="ident">list_files</span>, <span class="ident">EvaluationConfig</span>, <span class="ident">WriteBinTo</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{BatchTypeData, CommunicationTypeData, UserIo};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{InputValidatorGenerator, TM_VALIDATION_FILE_NAME};
+<span class="kw">use crate</span>::{find_source_file, list_files, EvaluationConfig, WriteBinTo};
 
-<span class="kw">mod</span> <span class="ident">cases_gen</span>;
-<span class="kw">mod</span> <span class="ident">gen_gen</span>;
-<span class="kw">mod</span> <span class="ident">static_inputs</span>;
+<span class="kw">mod </span>cases_gen;
+<span class="kw">mod </span>gen_gen;
+<span class="kw">mod </span>static_inputs;
 
-<span class="doccomment">/// The set of valid Unicode General Categories for the characters composing a subtask name.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VALID_SUBTASK_NAME_CHARACTER_CATEGORIES</span>: <span class="kw-2">&amp;</span>[<span class="ident">GeneralCategory</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-    <span class="comment">// L group (included in XID_Start)</span>
-    <span class="ident">GeneralCategory::LowercaseLetter</span>,
-    <span class="ident">GeneralCategory::ModifierLetter</span>,
-    <span class="ident">GeneralCategory::OtherLetter</span>,
-    <span class="ident">GeneralCategory::TitlecaseLetter</span>,
-    <span class="ident">GeneralCategory::UppercaseLetter</span>,
-    <span class="comment">// Nd group (included in XID_Continue)</span>
-    <span class="ident">GeneralCategory::DecimalNumber</span>,
-    <span class="comment">// Nl group (included in XID_Start)</span>
-    <span class="ident">GeneralCategory::LetterNumber</span>,
-    <span class="comment">// Mc group (included in XID_Continue)</span>
-    <span class="ident">GeneralCategory::SpacingMark</span>,
-    <span class="comment">// Mn group (included in XID_Continue)</span>
-    <span class="ident">GeneralCategory::NonspacingMark</span>,
-    <span class="comment">// Pc group (included in XID_Continue)</span>
-    <span class="ident">GeneralCategory::ConnectorPunctuation</span>,
-    <span class="comment">// Additional groups with useful symbols, but usually not valid in identifiers:</span>
-    <span class="ident">GeneralCategory::OtherNumber</span>,
-    <span class="ident">GeneralCategory::DashPunctuation</span>,
-    <span class="ident">GeneralCategory::ClosePunctuation</span>,
-    <span class="ident">GeneralCategory::FinalPunctuation</span>,
-    <span class="ident">GeneralCategory::InitialPunctuation</span>,
-    <span class="ident">GeneralCategory::OtherPunctuation</span>,
-    <span class="ident">GeneralCategory::OpenPunctuation</span>,
-    <span class="ident">GeneralCategory::CurrencySymbol</span>,
-    <span class="ident">GeneralCategory::ModifierSymbol</span>,
-    <span class="ident">GeneralCategory::MathSymbol</span>,
-    <span class="ident">GeneralCategory::OtherSymbol</span>,
+<span class="doccomment">/// The set of valid Unicode General Categories for the characters composing a subtask name.
+</span><span class="kw">pub const </span>VALID_SUBTASK_NAME_CHARACTER_CATEGORIES: <span class="kw-2">&amp;</span>[GeneralCategory] = <span class="kw-2">&amp;</span>[
+    <span class="comment">// L group (included in XID_Start)
+    </span>GeneralCategory::LowercaseLetter,
+    GeneralCategory::ModifierLetter,
+    GeneralCategory::OtherLetter,
+    GeneralCategory::TitlecaseLetter,
+    GeneralCategory::UppercaseLetter,
+    <span class="comment">// Nd group (included in XID_Continue)
+    </span>GeneralCategory::DecimalNumber,
+    <span class="comment">// Nl group (included in XID_Start)
+    </span>GeneralCategory::LetterNumber,
+    <span class="comment">// Mc group (included in XID_Continue)
+    </span>GeneralCategory::SpacingMark,
+    <span class="comment">// Mn group (included in XID_Continue)
+    </span>GeneralCategory::NonspacingMark,
+    <span class="comment">// Pc group (included in XID_Continue)
+    </span>GeneralCategory::ConnectorPunctuation,
+    <span class="comment">// Additional groups with useful symbols, but usually not valid in identifiers:
+    </span>GeneralCategory::OtherNumber,
+    GeneralCategory::DashPunctuation,
+    GeneralCategory::ClosePunctuation,
+    GeneralCategory::FinalPunctuation,
+    GeneralCategory::InitialPunctuation,
+    GeneralCategory::OtherPunctuation,
+    GeneralCategory::OpenPunctuation,
+    GeneralCategory::CurrencySymbol,
+    GeneralCategory::ModifierSymbol,
+    GeneralCategory::MathSymbol,
+    GeneralCategory::OtherSymbol,
 ];
 
-<span class="doccomment">/// Deserialized data from the task.yaml of a IOI format task.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">TaskYAML</span> {
-    <span class="doccomment">/// The name of the task (the short one).</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;nome_breve&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The title of the task (the long one).</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;nome&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The score type to use for this task.</span>
-    <span class="kw">pub</span> <span class="ident">score_type</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Deserialized data from the task.yaml of a IOI format task.
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize)]
+</span><span class="kw">struct </span>TaskYAML {
+    <span class="doccomment">/// The name of the task (the short one).
+    </span><span class="attribute">#[serde(alias = <span class="string">&quot;nome_breve&quot;</span>)]
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// The title of the task (the long one).
+    </span><span class="attribute">#[serde(alias = <span class="string">&quot;nome&quot;</span>)]
+    </span><span class="kw">pub </span>title: String,
+    <span class="doccomment">/// The score type to use for this task.
+    </span><span class="kw">pub </span>score_type: <span class="prelude-ty">Option</span>&lt;String&gt;,
 
-    <span class="doccomment">/// The time limit for the execution of the solutions, if not set it&#39;s unlimited.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;timeout&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">time_limit</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The memory limit in MiB of the execution of the solution, if not set it&#39;s unlimited.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;memlimit&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">memory_limit</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The time limit for the execution of the solutions, if not set it&#39;s unlimited.
+    </span><span class="attribute">#[serde(alias = <span class="string">&quot;timeout&quot;</span>)]
+    </span><span class="kw">pub </span>time_limit: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    <span class="doccomment">/// The memory limit in MiB of the execution of the solution, if not set it&#39;s unlimited.
+    </span><span class="attribute">#[serde(alias = <span class="string">&quot;memlimit&quot;</span>)]
+    </span><span class="kw">pub </span>memory_limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
 
-    <span class="doccomment">/// Whether this is an output only task. Defaults to false.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;bool::default&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;python_bool_serializer&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;python_bool_deserializer&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">output_only</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The input file for the solutions, usually &#39;input.txt&#39; or &#39;&#39; (stdin). Defaults to `&#39;&#39;`.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_infile&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">infile</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The output file for the solutions, usually &#39;output.txt&#39; or &#39;&#39; (stdout). Defaults to `&#39;&#39;`.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_outfile&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">outfile</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// Whether this is an output only task. Defaults to false.
+    </span><span class="attribute">#[serde(default = <span class="string">&quot;bool::default&quot;</span>)]
+    #[serde(serialize_with = <span class="string">&quot;python_bool_serializer&quot;</span>)]
+    #[serde(deserialize_with = <span class="string">&quot;python_bool_deserializer&quot;</span>)]
+    </span><span class="kw">pub </span>output_only: bool,
+    <span class="doccomment">/// The input file for the solutions, usually &#39;input.txt&#39; or &#39;&#39; (stdin). Defaults to `&#39;&#39;`.
+    </span><span class="attribute">#[serde(default = <span class="string">&quot;default_infile&quot;</span>)]
+    </span><span class="kw">pub </span>infile: String,
+    <span class="doccomment">/// The output file for the solutions, usually &#39;output.txt&#39; or &#39;&#39; (stdout). Defaults to `&#39;&#39;`.
+    </span><span class="attribute">#[serde(default = <span class="string">&quot;default_outfile&quot;</span>)]
+    </span><span class="kw">pub </span>outfile: String,
 
-    <span class="doccomment">/// An integer that defines the difficulty of the task. Used only in booklet compilations.</span>
-    <span class="kw">pub</span> <span class="ident">difficulty</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// An integer that defines the level inside a _syllabus_ (for example for the Olympiads in</span>
-    <span class="doccomment">/// Teams). Used only in booklet compilations.</span>
-    <span class="kw">pub</span> <span class="ident">syllabuslevel</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// An integer that defines the difficulty of the task. Used only in booklet compilations.
+    </span><span class="kw">pub </span>difficulty: <span class="prelude-ty">Option</span>&lt;u8&gt;,
+    <span class="doccomment">/// An integer that defines the level inside a _syllabus_ (for example for the Olympiads in
+    /// Teams). Used only in booklet compilations.
+    </span><span class="kw">pub </span>syllabuslevel: <span class="prelude-ty">Option</span>&lt;u8&gt;,
 
-    <span class="doccomment">/// Number of solution processes to spawn in parallel in a communication task.</span>
-    <span class="kw">pub</span> <span class="ident">num_processes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// The type of communication for the solution in a communication task.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Can be either &quot;std_io&quot; for using stdin/stdout, or &quot;fifo_io&quot; for using pipes given in argv.</span>
-    <span class="doccomment">/// Defaults to &quot;fifo_io&quot;.</span>
-    <span class="kw">pub</span> <span class="ident">user_io</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Number of solution processes to spawn in parallel in a communication task.
+    </span><span class="kw">pub </span>num_processes: <span class="prelude-ty">Option</span>&lt;u8&gt;,
+    <span class="doccomment">/// The type of communication for the solution in a communication task.
+    ///
+    /// Can be either &quot;std_io&quot; for using stdin/stdout, or &quot;fifo_io&quot; for using pipes given in argv.
+    /// Defaults to &quot;fifo_io&quot;.
+    </span><span class="kw">pub </span>user_io: <span class="prelude-ty">Option</span>&lt;String&gt;,
 }
 
-<span class="doccomment">/// The iterator item type when following the task input testcases.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">TaskInputEntry</span> {
-    <span class="doccomment">/// Create a new subtask given its information.</span>
-    <span class="ident">Subtask</span>(<span class="ident">SubtaskInfo</span>),
-    <span class="doccomment">/// Create a new testcase inside the last subtask given its information. `Testcase` can be sent</span>
-    <span class="doccomment">/// only after at least one `Subtask`.</span>
-    <span class="ident">Testcase</span>(<span class="ident">TestcaseInfo</span>),
+<span class="doccomment">/// The iterator item type when following the task input testcases.
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum </span>TaskInputEntry {
+    <span class="doccomment">/// Create a new subtask given its information.
+    </span>Subtask(SubtaskInfo),
+    <span class="doccomment">/// Create a new testcase inside the last subtask given its information. `Testcase` can be sent
+    /// only after at least one `Subtask`.
+    </span>Testcase(TestcaseInfo),
 }
 
-<span class="doccomment">/// Given the path to the task directory, try to parse the task inside of it assuming the format is</span>
-<span class="doccomment">/// `italian_yaml`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `italian_yaml` format is structured as follow:</span>
-<span class="doccomment">/// * `task.yaml` - file with the task information</span>
-<span class="doccomment">/// * `gen/` - folder with the generator and validator</span>
-<span class="doccomment">///     * `generator.xxx` (also `generatore`)</span>
-<span class="doccomment">///     * `validator.xxx` (also `valida`)</span>
-<span class="doccomment">///     * `GEN` - subtask and testcase specifications</span>
-<span class="doccomment">/// * `sol/` - folder with solutions, graders and stubs</span>
-<span class="doccomment">///     * `solution.xxx` the official solution (also `soluzione`)</span>
-<span class="doccomment">///     * other solutions with different names</span>
-<span class="doccomment">/// * `check/` - folder with the checker (also `cor/`)</span>
-<span class="doccomment">///     * `checker.xxx` (also `correttore`)</span>
-<span class="doccomment">/// * `input/` - folder with the input files</span>
-<span class="doccomment">/// * `output/` - folder with the output files</span>
-<span class="doccomment">/// * `statement/` - folder with the statement (also `testo`)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A task must have a generator (and a GEN file) or the input files should be  put in `input/`.</span>
-<span class="doccomment">/// The official solution must be present or the output files should be put in `output/`.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_task</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-    <span class="ident">task_dir</span>: <span class="ident">P</span>,
-    <span class="ident">eval_config</span>: <span class="kw-2">&amp;</span><span class="ident">EvaluationConfig</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">IOITask</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">task_dir</span> <span class="op">=</span> <span class="ident">task_dir</span>.<span class="ident">as_ref</span>();
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="string">&quot;task.yaml&quot;</span>);
-    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">fs::File::open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Cannot open task.yaml from {}&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">yaml</span>: <span class="ident">TaskYAML</span> <span class="op">=</span>
-        <span class="ident">serde_yaml::from_reader</span>(<span class="ident">file</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to deserialize task.yaml&quot;</span>)<span class="question-mark">?</span>;
-    <span class="macro">debug!</span>(<span class="string">&quot;The yaml is {:#?}&quot;</span>, <span class="ident">yaml</span>);
+<span class="doccomment">/// Given the path to the task directory, try to parse the task inside of it assuming the format is
+/// `italian_yaml`.
+///
+/// `italian_yaml` format is structured as follow:
+/// * `task.yaml` - file with the task information
+/// * `gen/` - folder with the generator and validator
+///     * `generator.xxx` (also `generatore`)
+///     * `validator.xxx` (also `valida`)
+///     * `GEN` - subtask and testcase specifications
+/// * `sol/` - folder with solutions, graders and stubs
+///     * `solution.xxx` the official solution (also `soluzione`)
+///     * other solutions with different names
+/// * `check/` - folder with the checker (also `cor/`)
+///     * `checker.xxx` (also `correttore`)
+/// * `input/` - folder with the input files
+/// * `output/` - folder with the output files
+/// * `statement/` - folder with the statement (also `testo`)
+///
+/// A task must have a generator (and a GEN file) or the input files should be  put in `input/`.
+/// The official solution must be present or the output files should be put in `output/`.
+</span><span class="kw">pub fn </span>parse_task&lt;P: AsRef&lt;Path&gt;&gt;(
+    task_dir: P,
+    eval_config: <span class="kw-2">&amp;</span>EvaluationConfig,
+) -&gt; <span class="prelude-ty">Result</span>&lt;IOITask, Error&gt; {
+    <span class="kw">let </span>task_dir = task_dir.as_ref();
+    <span class="kw">let </span>path = task_dir.join(<span class="string">&quot;task.yaml&quot;</span>);
+    <span class="kw">let </span>file = fs::File::open(<span class="kw-2">&amp;</span>path)
+        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot open task.yaml from {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+    <span class="kw">let </span>yaml: TaskYAML =
+        serde_yaml::from_reader(file).context(<span class="string">&quot;Failed to deserialize task.yaml&quot;</span>)<span class="question-mark">?</span>;
+    <span class="macro">debug!</span>(<span class="string">&quot;The yaml is {:#?}&quot;</span>, yaml);
 
-    <span class="kw">let</span> <span class="ident">map_file</span> <span class="op">=</span> <span class="op">|</span><span class="ident">file</span>: <span class="ident">String</span><span class="op">|</span> -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">file</span>.<span class="ident">as_ref</span>() {
-            <span class="string">&quot;&quot;</span> =&gt; <span class="prelude-val">None</span>,
-            <span class="kw">_</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>()),
+    <span class="kw">let </span>map_file = |file: String| -&gt; <span class="prelude-ty">Option</span>&lt;PathBuf&gt; {
+        <span class="kw">match </span>file.as_ref() {
+            <span class="string">&quot;&quot; </span>=&gt; <span class="prelude-val">None</span>,
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">Some</span>(file.into()),
         }
     };
-    <span class="kw">let</span> <span class="ident">infile</span> <span class="op">=</span> <span class="ident">map_file</span>(<span class="ident">yaml</span>.<span class="ident">infile</span>.<span class="ident">clone</span>());
-    <span class="kw">let</span> <span class="ident">outfile</span> <span class="op">=</span> <span class="ident">map_file</span>(<span class="ident">yaml</span>.<span class="ident">outfile</span>.<span class="ident">clone</span>());
+    <span class="kw">let </span>infile = map_file(yaml.infile.clone());
+    <span class="kw">let </span>outfile = map_file(yaml.outfile.clone());
 
-    <span class="kw">let</span> <span class="ident">graders</span> <span class="op">=</span> <span class="ident">list_files</span>(<span class="ident">task_dir</span>, <span class="macro">vec!</span>[<span class="string">&quot;sol/grader.*&quot;</span>, <span class="string">&quot;sol/stub.*&quot;</span>]);
-    <span class="kw">let</span> <span class="ident">grader_map</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">GraderMap::new</span>(<span class="ident">graders</span>));
-    <span class="macro">debug!</span>(<span class="string">&quot;The graders are: {:#?}&quot;</span>, <span class="ident">grader_map</span>);
+    <span class="kw">let </span>graders = list_files(task_dir, <span class="macro">vec!</span>[<span class="string">&quot;sol/grader.*&quot;</span>, <span class="string">&quot;sol/stub.*&quot;</span>]);
+    <span class="kw">let </span>grader_map = Arc::new(GraderMap::new(graders));
+    <span class="macro">debug!</span>(<span class="string">&quot;The graders are: {:#?}&quot;</span>, grader_map);
 
-    <span class="kw">let</span> <span class="ident">task_type</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">comm</span>) <span class="op">=</span> <span class="ident">parse_communication_task_data</span>(<span class="ident">task_dir</span>, <span class="kw-2">&amp;</span><span class="ident">yaml</span>)<span class="question-mark">?</span> {
-        <span class="ident">comm</span>
-    } <span class="kw">else</span> {
-        <span class="ident">parse_batch_task_data</span>(<span class="ident">task_dir</span>, <span class="ident">grader_map</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>
-    };
+    <span class="kw">let </span>task_type = <span class="kw">if let </span><span class="prelude-val">Some</span>(comm) = parse_communication_task_data(task_dir, <span class="kw-2">&amp;</span>yaml)<span class="question-mark">? </span>{
+        comm
+    } <span class="kw">else </span>{
+        parse_batch_task_data(task_dir, grader_map.clone())<span class="question-mark">?
+    </span>};
 
-    <span class="kw">let</span> <span class="ident">gen_gen</span> <span class="op">=</span> <span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;GEN&quot;</span>);
-    <span class="kw">let</span> <span class="ident">cases_gen</span> <span class="op">=</span> <span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="string">&quot;gen&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;cases.gen&quot;</span>);
-    <span class="kw">let</span> <span class="ident">output_generator</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TaskType::Batch</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">task_type</span> {
-            <span class="ident">Box::new</span>(
-                <span class="ident">detect_output_generator</span>(<span class="ident">task_dir</span>.<span class="ident">to_path_buf</span>(), <span class="ident">grader_map</span>.<span class="ident">clone</span>())
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to detect output generator&quot;</span>)<span class="question-mark">?</span>,
+    <span class="kw">let </span>gen_gen = task_dir.join(<span class="string">&quot;gen&quot;</span>).join(<span class="string">&quot;GEN&quot;</span>);
+    <span class="kw">let </span>cases_gen = task_dir.join(<span class="string">&quot;gen&quot;</span>).join(<span class="string">&quot;cases.gen&quot;</span>);
+    <span class="kw">let </span>output_generator: Box&lt;<span class="kw">dyn </span>Fn(TestcaseId) -&gt; OutputGenerator&gt; =
+        <span class="kw">if let </span>TaskType::Batch(<span class="kw">_</span>) = <span class="kw-2">&amp;</span>task_type {
+            Box::new(
+                detect_output_generator(task_dir.to_path_buf(), grader_map.clone())
+                    .context(<span class="string">&quot;Failed to detect output generator&quot;</span>)<span class="question-mark">?</span>,
             )
-        } <span class="kw">else</span> {
-            <span class="ident">Box::new</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">OutputGenerator::NotAvailable</span>)
+        } <span class="kw">else </span>{
+            Box::new(|<span class="kw">_</span>| OutputGenerator::NotAvailable)
         };
 
-    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">cases_gen</span>.<span class="ident">exists</span>() {
+    <span class="kw">let </span>inputs = <span class="kw">if </span>cases_gen.exists() {
         <span class="macro">debug!</span>(<span class="string">&quot;Parsing testcases from gen/cases.gen&quot;</span>);
-        <span class="kw">let</span> <span class="ident">gen</span> <span class="op">=</span> <span class="ident">cases_gen::CasesGen::new</span>(<span class="kw-2">&amp;</span><span class="ident">cases_gen</span>, <span class="ident">output_generator</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">eval_config</span>.<span class="ident">dry_run</span> {
-            <span class="ident">gen</span>.<span class="ident">write_gen_gen</span>().<span class="ident">context</span>(<span class="string">&quot;Failed to write gen/GEN&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>gen = cases_gen::CasesGen::new(<span class="kw-2">&amp;</span>cases_gen, output_generator)<span class="question-mark">?</span>;
+        <span class="kw">if </span>!eval_config.dry_run {
+            gen.write_gen_gen().context(<span class="string">&quot;Failed to write gen/GEN&quot;</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">gen</span>.<span class="ident">get_task_entries</span>()
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">gen_gen</span>.<span class="ident">exists</span>() {
+        gen.get_task_entries()
+    } <span class="kw">else if </span>gen_gen.exists() {
         <span class="macro">debug!</span>(<span class="string">&quot;Parsing testcases from gen/GEN&quot;</span>);
-        <span class="ident">gen_gen::parse_gen_gen</span>(
-            <span class="kw-2">&amp;</span><span class="ident">gen_gen</span>,
-            <span class="ident">detect_validator</span>(<span class="ident">task_dir</span>.<span class="ident">into</span>()).<span class="ident">context</span>(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
-            <span class="ident">output_generator</span>,
-        )<span class="question-mark">?</span>
-    } <span class="kw">else</span> {
+        gen_gen::parse_gen_gen(
+            <span class="kw-2">&amp;</span>gen_gen,
+            detect_validator(task_dir.into()).context(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
+            output_generator,
+        )<span class="question-mark">?
+    </span>} <span class="kw">else </span>{
         <span class="macro">debug!</span>(<span class="string">&quot;Using testcases inside input/&quot;</span>);
-        <span class="ident">static_inputs::static_inputs</span>(
-            <span class="ident">task_dir</span>,
-            <span class="ident">detect_validator</span>(<span class="ident">task_dir</span>.<span class="ident">into</span>()).<span class="ident">context</span>(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
-            <span class="ident">output_generator</span>,
+        static_inputs::static_inputs(
+            task_dir,
+            detect_validator(task_dir.into()).context(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
+            output_generator,
         )
-        .<span class="ident">collect</span>()
+        .collect()
     };
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">subtasks</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_subtask</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskInfo</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">for</span> <span class="ident">input</span> <span class="kw">in</span> <span class="ident">inputs</span> {
-        <span class="kw">match</span> <span class="ident">input</span> {
-            <span class="ident">TaskInputEntry::Subtask</span>(<span class="ident">subtask</span>) =&gt; {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">last_subtask</span>) <span class="op">=</span> <span class="ident">last_subtask</span>.<span class="ident">take</span>() {
-                    <span class="ident">subtasks</span>.<span class="ident">insert</span>(<span class="ident">last_subtask</span>.<span class="ident">id</span>, <span class="ident">last_subtask</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>subtasks = HashMap::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>last_subtask: <span class="prelude-ty">Option</span>&lt;SubtaskInfo&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">for </span>input <span class="kw">in </span>inputs {
+        <span class="kw">match </span>input {
+            TaskInputEntry::Subtask(subtask) =&gt; {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(last_subtask) = last_subtask.take() {
+                    subtasks.insert(last_subtask.id, last_subtask);
                 }
-                <span class="ident">last_subtask</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">subtask</span>);
+                last_subtask = <span class="prelude-val">Some</span>(subtask);
             }
-            <span class="ident">TaskInputEntry::Testcase</span>(<span class="ident">testcase</span>) =&gt; {
-                <span class="ident">last_subtask</span>
-                    .<span class="ident">as_mut</span>()
-                    .<span class="ident">context</span>(<span class="string">&quot;Testcase before Subtask&quot;</span>)<span class="question-mark">?</span>
-                    .<span class="ident">testcases</span>
-                    .<span class="ident">insert</span>(<span class="ident">testcase</span>.<span class="ident">id</span>, <span class="ident">testcase</span>);
+            TaskInputEntry::Testcase(testcase) =&gt; {
+                last_subtask
+                    .as_mut()
+                    .context(<span class="string">&quot;Testcase before Subtask&quot;</span>)<span class="question-mark">?
+                    </span>.testcases
+                    .insert(testcase.id, testcase);
             }
         }
     }
-    <span class="comment">// insert the last subtask to the map</span>
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">subtask</span>) <span class="op">=</span> <span class="ident">last_subtask</span>.<span class="ident">take</span>() {
-        <span class="ident">subtasks</span>.<span class="ident">insert</span>(<span class="ident">subtask</span>.<span class="ident">id</span>, <span class="ident">subtask</span>);
+    <span class="comment">// insert the last subtask to the map
+    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(subtask) = last_subtask.take() {
+        subtasks.insert(subtask.id, subtask);
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task</span> <span class="op">=</span> <span class="ident">IOITask</span> {
-        <span class="ident">path</span>: <span class="ident">task_dir</span>.<span class="ident">into</span>(),
-        <span class="ident">task_type</span>,
-        <span class="ident">name</span>: <span class="ident">yaml</span>.<span class="ident">name</span>,
-        <span class="ident">title</span>: <span class="ident">yaml</span>.<span class="ident">title</span>,
-        <span class="ident">time_limit</span>: <span class="ident">yaml</span>.<span class="ident">time_limit</span>,
-        <span class="ident">memory_limit</span>: <span class="ident">yaml</span>.<span class="ident">memory_limit</span>,
-        <span class="ident">infile</span>,
-        <span class="ident">outfile</span>,
-        <span class="ident">testcase_score_aggregator</span>: <span class="ident">yaml</span>
-            .<span class="ident">score_type</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">TestcaseScoreAggregator::from_str</span>(<span class="ident">s</span>))
-            .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">subtasks</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
-                    <span class="prelude-val">Ok</span>(<span class="ident">TestcaseScoreAggregator::Sum</span>)
-                } <span class="kw">else</span> {
-                    <span class="prelude-val">Ok</span>(<span class="ident">TestcaseScoreAggregator::Min</span>)
+    <span class="kw">let </span><span class="kw-2">mut </span>task = IOITask {
+        path: task_dir.into(),
+        task_type,
+        name: yaml.name,
+        title: yaml.title,
+        time_limit: yaml.time_limit,
+        memory_limit: yaml.memory_limit,
+        infile,
+        outfile,
+        testcase_score_aggregator: yaml
+            .score_type
+            .as_ref()
+            .map(|s| TestcaseScoreAggregator::from_str(s))
+            .unwrap_or_else(|| {
+                <span class="kw">if </span>subtasks.len() == <span class="number">1 </span>{
+                    <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Sum)
+                } <span class="kw">else </span>{
+                    <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Min)
                 }
             })<span class="question-mark">?</span>,
-        <span class="ident">subtasks</span>,
-        <span class="ident">grader_map</span>,
-        <span class="ident">booklets</span>: <span class="ident">Vec::new</span>(),
-        <span class="ident">difficulty</span>: <span class="ident">yaml</span>.<span class="ident">difficulty</span>,
-        <span class="ident">syllabus_level</span>: <span class="ident">yaml</span>.<span class="ident">syllabuslevel</span>,
-        <span class="ident">sanity_checks</span>: <span class="ident">Arc::new</span>(<span class="ident">get_sanity_checks</span>(<span class="kw-2">&amp;</span><span class="ident">eval_config</span>.<span class="ident">disabled_sanity_checks</span>)),
-        <span class="ident">input_validator_generator</span>: <span class="ident">InputValidatorGenerator::new</span>(
-            <span class="ident">detect_validator</span>(<span class="ident">task_dir</span>.<span class="ident">to_path_buf</span>()).<span class="ident">context</span>(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
+        subtasks,
+        grader_map,
+        booklets: Vec::new(),
+        difficulty: yaml.difficulty,
+        syllabus_level: yaml.syllabuslevel,
+        sanity_checks: Arc::new(get_sanity_checks(<span class="kw-2">&amp;</span>eval_config.disabled_sanity_checks)),
+        input_validator_generator: InputValidatorGenerator::new(
+            detect_validator(task_dir.to_path_buf()).context(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
         ),
     };
-    <span class="comment">// split the creation of the task because make_booklets need an instance of Task</span>
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">eval_config</span>.<span class="ident">no_statement</span> {
-        <span class="ident">task</span>.<span class="ident">booklets</span> <span class="op">=</span>
-            <span class="ident">make_task_booklets</span>(<span class="kw-2">&amp;</span><span class="ident">task</span>, <span class="ident">eval_config</span>).<span class="ident">context</span>(<span class="string">&quot;Failed to make booklets&quot;</span>)<span class="question-mark">?</span>;
+    <span class="comment">// split the creation of the task because make_booklets need an instance of Task
+    </span><span class="kw">if </span>!eval_config.no_statement {
+        task.booklets =
+            make_task_booklets(<span class="kw-2">&amp;</span>task, eval_config).context(<span class="string">&quot;Failed to make booklets&quot;</span>)<span class="question-mark">?</span>;
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">task</span>)
+    <span class="prelude-val">Ok</span>(task)
 }
 
-<span class="doccomment">/// Search for a valid input validator inside the task directory. Will return a function that, given</span>
-<span class="doccomment">/// a subtask id, returns an `InputValidator` using that validator. If no validator is found,</span>
-<span class="doccomment">/// `InputValidator::AssumeValid` is used.</span>
-<span class="kw">fn</span> <span class="ident">detect_validator</span>(
-    <span class="ident">task_dir</span>: <span class="ident">PathBuf</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Fn</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span>) -&gt; <span class="ident">InputValidator</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">validators</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
-        <span class="kw-2">&amp;</span><span class="ident">task_dir</span>,
+<span class="doccomment">/// Search for a valid input validator inside the task directory. Will return a function that, given
+/// a subtask id, returns an `InputValidator` using that validator. If no validator is found,
+/// `InputValidator::AssumeValid` is used.
+</span><span class="kw">fn </span>detect_validator(
+    task_dir: PathBuf,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw">impl </span>Fn(<span class="prelude-ty">Option</span>&lt;SubtaskId&gt;) -&gt; InputValidator, Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>validators = find_source_file(
+        <span class="kw-2">&amp;</span>task_dir,
         <span class="macro">vec!</span>[
             <span class="string">&quot;gen/validator.*&quot;</span>,
             <span class="string">&quot;gen/valida.*&quot;</span>,
             <span class="string">&quot;gen/validator&quot;</span>,
             <span class="string">&quot;gen/valida&quot;</span>,
         ],
-        <span class="kw-2">&amp;</span><span class="ident">task_dir</span>,
+        <span class="kw-2">&amp;</span>task_dir,
         <span class="prelude-val">None</span>,
-        <span class="ident">WriteBinTo::path</span>(<span class="string">&quot;bin/validator&quot;</span>),
+        WriteBinTo::path(<span class="string">&quot;bin/validator&quot;</span>),
     );
-    <span class="kw">if</span> <span class="ident">validators</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="ident">validators</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">name</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">bail!</span>(<span class="string">&quot;Multiple validators found: {:?}&quot;</span>, <span class="ident">paths</span>);
+    <span class="kw">if </span>validators.len() &gt; <span class="number">1 </span>{
+        <span class="kw">let </span>paths = validators.iter().map(|s| s.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="macro">bail!</span>(<span class="string">&quot;Multiple validators found: {:?}&quot;</span>, paths);
     }
-    <span class="kw">let</span> <span class="ident">validator</span> <span class="op">=</span> <span class="ident">validators</span>.<span class="ident">pop</span>().<span class="ident">map</span>(<span class="ident">Arc::new</span>);
-    <span class="macro">debug!</span>(<span class="string">&quot;Detected input validator: {:?}&quot;</span>, <span class="ident">validator</span>);
-    <span class="prelude-val">Ok</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">st</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SubtaskId</span><span class="op">&gt;</span><span class="op">|</span> -&gt; <span class="ident">InputValidator</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">validator</span>) <span class="op">=</span> <span class="ident">validator</span>.<span class="ident">as_ref</span>() {
-            <span class="ident">InputValidator::Custom</span>(
-                <span class="ident">validator</span>.<span class="ident">clone</span>(),
-                <span class="comment">// for legacy support reasons the subtask is passed 1-based</span>
-                <span class="macro">vec!</span>[
-                    <span class="ident">TM_VALIDATION_FILE_NAME</span>.<span class="ident">to_string</span>(),
-                    <span class="ident">st</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>).<span class="ident">to_string</span>(),
+    <span class="kw">let </span>validator = validators.pop().map(Arc::new);
+    <span class="macro">debug!</span>(<span class="string">&quot;Detected input validator: {:?}&quot;</span>, validator);
+    <span class="prelude-val">Ok</span>(<span class="kw">move </span>|st: <span class="prelude-ty">Option</span>&lt;SubtaskId&gt;| -&gt; InputValidator {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(validator) = validator.as_ref() {
+            InputValidator::Custom(
+                validator.clone(),
+                <span class="comment">// for legacy support reasons the subtask is passed 1-based
+                </span><span class="macro">vec!</span>[
+                    TM_VALIDATION_FILE_NAME.to_string(),
+                    st.map(|x| x + <span class="number">1</span>).unwrap_or(<span class="number">0</span>).to_string(),
                 ],
             )
-        } <span class="kw">else</span> {
-            <span class="ident">InputValidator::AssumeValid</span>
+        } <span class="kw">else </span>{
+            InputValidator::AssumeValid
         }
     })
 }
 
-<span class="doccomment">/// Search for a valid output generator (aka official solution) inside the task directory. Will</span>
-<span class="doccomment">/// return a function that, given a testcase id, returns an `OutputGenerator` using that generator.</span>
-<span class="doccomment">/// If no generator is found, `OutputGenerator::StaticFile` is used instead.</span>
-<span class="kw">fn</span> <span class="ident">detect_output_generator</span>(
-    <span class="ident">task_dir</span>: <span class="ident">PathBuf</span>,
-    <span class="ident">grader_map</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">GraderMap</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">TestcaseId</span>) -&gt; <span class="ident">OutputGenerator</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">official_solutions</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
-        <span class="kw-2">&amp;</span><span class="ident">task_dir</span>,
+<span class="doccomment">/// Search for a valid output generator (aka official solution) inside the task directory. Will
+/// return a function that, given a testcase id, returns an `OutputGenerator` using that generator.
+/// If no generator is found, `OutputGenerator::StaticFile` is used instead.
+</span><span class="kw">fn </span>detect_output_generator(
+    task_dir: PathBuf,
+    grader_map: Arc&lt;GraderMap&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw">impl </span>Fn(TestcaseId) -&gt; OutputGenerator, Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>official_solutions = find_source_file(
+        <span class="kw-2">&amp;</span>task_dir,
         <span class="macro">vec!</span>[
             <span class="string">&quot;sol/solution.*&quot;</span>,
             <span class="string">&quot;sol/soluzione.*&quot;</span>,
             <span class="string">&quot;sol/solution&quot;</span>,
             <span class="string">&quot;sol/soluzione&quot;</span>,
         ],
-        <span class="kw-2">&amp;</span><span class="ident">task_dir</span>,
-        <span class="prelude-val">Some</span>(<span class="ident">grader_map</span>),
-        <span class="ident">WriteBinTo::path</span>(<span class="string">&quot;bin/official_solution&quot;</span>),
+        <span class="kw-2">&amp;</span>task_dir,
+        <span class="prelude-val">Some</span>(grader_map),
+        WriteBinTo::path(<span class="string">&quot;bin/official_solution&quot;</span>),
     );
-    <span class="kw">if</span> <span class="ident">official_solutions</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="ident">official_solutions</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">name</span>())
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">bail!</span>(<span class="string">&quot;Multiple official solutions found: {:?}&quot;</span>, <span class="ident">paths</span>);
+    <span class="kw">if </span>official_solutions.len() &gt; <span class="number">1 </span>{
+        <span class="kw">let </span>paths = official_solutions
+            .iter()
+            .map(|s| s.name())
+            .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="macro">bail!</span>(<span class="string">&quot;Multiple official solutions found: {:?}&quot;</span>, paths);
     }
-    <span class="kw">let</span> <span class="ident">official_solution</span> <span class="op">=</span> <span class="ident">official_solutions</span>.<span class="ident">pop</span>().<span class="ident">map</span>(<span class="ident">Arc::new</span>);
-    <span class="macro">debug!</span>(<span class="string">&quot;Detected output generator: {:?}&quot;</span>, <span class="ident">official_solution</span>);
-    <span class="kw">let</span> <span class="ident">output_directory</span> <span class="op">=</span> <span class="ident">task_dir</span>.<span class="ident">join</span>(<span class="string">&quot;output&quot;</span>);
-    <span class="prelude-val">Ok</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">tc</span>: <span class="ident">TestcaseId</span><span class="op">|</span> -&gt; <span class="ident">OutputGenerator</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">solution</span>) <span class="op">=</span> <span class="ident">official_solution</span>.<span class="ident">as_ref</span>() {
-            <span class="ident">OutputGenerator::Custom</span>(<span class="ident">solution</span>.<span class="ident">clone</span>(), <span class="macro">vec!</span>[])
-        } <span class="kw">else</span> {
-            <span class="ident">OutputGenerator::StaticFile</span>(<span class="ident">output_directory</span>.<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;output{}.txt&quot;</span>, <span class="ident">tc</span>)))
+    <span class="kw">let </span>official_solution = official_solutions.pop().map(Arc::new);
+    <span class="macro">debug!</span>(<span class="string">&quot;Detected output generator: {:?}&quot;</span>, official_solution);
+    <span class="kw">let </span>output_directory = task_dir.join(<span class="string">&quot;output&quot;</span>);
+    <span class="prelude-val">Ok</span>(<span class="kw">move </span>|tc: TestcaseId| -&gt; OutputGenerator {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(solution) = official_solution.as_ref() {
+            OutputGenerator::Custom(solution.clone(), <span class="macro">vec!</span>[])
+        } <span class="kw">else </span>{
+            OutputGenerator::StaticFile(output_directory.join(<span class="macro">format!</span>(<span class="string">&quot;output{}.txt&quot;</span>, tc)))
         }
     })
 }
 
-<span class="doccomment">/// Parse the task components relative to the batch task type.</span>
-<span class="kw">fn</span> <span class="ident">parse_batch_task_data</span>(<span class="ident">task_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">grader_map</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">GraderMap</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TaskType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">checkers</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
-        <span class="ident">task_dir</span>,
+<span class="doccomment">/// Parse the task components relative to the batch task type.
+</span><span class="kw">fn </span>parse_batch_task_data(task_dir: <span class="kw-2">&amp;</span>Path, grader_map: Arc&lt;GraderMap&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;TaskType, Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>checkers = find_source_file(
+        task_dir,
         <span class="macro">vec!</span>[<span class="string">&quot;check/checker.*&quot;</span>, <span class="string">&quot;cor/correttore.*&quot;</span>],
-        <span class="ident">task_dir</span>,
+        task_dir,
         <span class="prelude-val">None</span>,
-        <span class="ident">WriteBinTo::WithoutExtension</span>,
+        WriteBinTo::WithoutExtension,
     );
-    <span class="kw">if</span> <span class="ident">checkers</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="ident">checkers</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">name</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">bail!</span>(<span class="string">&quot;Multiple checkers found: {:?}&quot;</span>, <span class="ident">paths</span>)
+    <span class="kw">if </span>checkers.len() &gt; <span class="number">1 </span>{
+        <span class="kw">let </span>paths = checkers.iter().map(|s| s.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="macro">bail!</span>(<span class="string">&quot;Multiple checkers found: {:?}&quot;</span>, paths)
     }
-    <span class="kw">let</span> <span class="ident">checker</span> <span class="op">=</span> <span class="ident">checkers</span>
-        .<span class="ident">pop</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">c</span><span class="op">|</span> {
-            <span class="comment">// Always copy the custom checker.</span>
-            <span class="ident">c</span>.<span class="ident">copy_exe</span>();
+    <span class="kw">let </span>checker = checkers
+        .pop()
+        .map(|<span class="kw-2">mut </span>c| {
+            <span class="comment">// Always copy the custom checker.
+            </span>c.copy_exe();
 
-            <span class="comment">// Link the checker statically. This makes sure that it will work also outside this machine.</span>
-            <span class="ident">c</span>.<span class="ident">link_static</span>();
+            <span class="comment">// Link the checker statically. This makes sure that it will work also outside this machine.
+            </span>c.link_static();
 
-            <span class="ident">Checker::Custom</span>(<span class="ident">Arc::new</span>(<span class="ident">c</span>))
+            Checker::Custom(Arc::new(c))
         })
-        .<span class="ident">unwrap_or</span>(<span class="ident">Checker::WhiteDiff</span>);
+        .unwrap_or(Checker::WhiteDiff);
 
-    <span class="kw">let</span> <span class="ident">official_solution</span> <span class="op">=</span> <span class="ident">detect_output_generator</span>(<span class="ident">task_dir</span>.<span class="ident">to_path_buf</span>(), <span class="ident">grader_map</span>)
-        .<span class="ident">context</span>(<span class="string">&quot;Failed to detect output generator&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">official_solution</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">official_solution</span>(<span class="number">0</span>) {
-        <span class="ident">gen</span> @ <span class="ident">OutputGenerator::Custom</span>(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">gen</span>),
-        <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+    <span class="kw">let </span>official_solution = detect_output_generator(task_dir.to_path_buf(), grader_map)
+        .context(<span class="string">&quot;Failed to detect output generator&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>official_solution = <span class="kw">match </span>official_solution(<span class="number">0</span>) {
+        gen @ OutputGenerator::Custom(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(gen),
+        <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
     };
-    <span class="prelude-val">Ok</span>(<span class="ident">TaskType::Batch</span>(<span class="ident">BatchTypeData</span> {
-        <span class="ident">output_generator</span>: <span class="ident">official_solution</span>,
-        <span class="ident">checker</span>,
+    <span class="prelude-val">Ok</span>(TaskType::Batch(BatchTypeData {
+        output_generator: official_solution,
+        checker,
     }))
 }
 
-<span class="doccomment">/// Parse the task components relative to the communication task type.</span>
-<span class="kw">fn</span> <span class="ident">parse_communication_task_data</span>(
-    <span class="ident">task_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-    <span class="ident">yaml</span>: <span class="kw-2">&amp;</span><span class="ident">TaskYAML</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TaskType</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">managers</span> <span class="op">=</span> <span class="ident">find_source_file</span>(
-        <span class="ident">task_dir</span>,
+<span class="doccomment">/// Parse the task components relative to the communication task type.
+</span><span class="kw">fn </span>parse_communication_task_data(
+    task_dir: <span class="kw-2">&amp;</span>Path,
+    yaml: <span class="kw-2">&amp;</span>TaskYAML,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;TaskType&gt;, Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>managers = find_source_file(
+        task_dir,
         <span class="macro">vec!</span>[<span class="string">&quot;check/manager.*&quot;</span>, <span class="string">&quot;cor/manager.*&quot;</span>],
-        <span class="ident">task_dir</span>,
+        task_dir,
         <span class="prelude-val">None</span>,
-        <span class="ident">WriteBinTo::WithoutExtension</span>,
+        WriteBinTo::WithoutExtension,
     );
-    <span class="kw">if</span> <span class="ident">managers</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">paths</span> <span class="op">=</span> <span class="ident">managers</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">name</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">bail!</span>(<span class="string">&quot;Multiple managers found: {:?}&quot;</span>, <span class="ident">paths</span>);
+    <span class="kw">if </span>managers.len() &gt; <span class="number">1 </span>{
+        <span class="kw">let </span>paths = managers.iter().map(|s| s.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="macro">bail!</span>(<span class="string">&quot;Multiple managers found: {:?}&quot;</span>, paths);
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">manager</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">manager</span>) <span class="op">=</span> <span class="ident">managers</span>.<span class="ident">pop</span>() {
-        <span class="ident">manager</span>
-    } <span class="kw">else</span> {
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>manager = <span class="kw">if let </span><span class="prelude-val">Some</span>(manager) = managers.pop() {
+        manager
+    } <span class="kw">else </span>{
+        <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
     };
 
-    <span class="comment">// Always copy the manager.</span>
-    <span class="ident">manager</span>.<span class="ident">copy_exe</span>();
+    <span class="comment">// Always copy the manager.
+    </span>manager.copy_exe();
 
-    <span class="comment">// Link the manager statically. This makes sure that it will work also outside this machine.</span>
-    <span class="ident">manager</span>.<span class="ident">link_static</span>();
+    <span class="comment">// Link the manager statically. This makes sure that it will work also outside this machine.
+    </span>manager.link_static();
 
-    <span class="kw">let</span> <span class="ident">user_io</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">yaml</span>.<span class="ident">user_io</span>.<span class="ident">as_deref</span>() {
-        <span class="prelude-val">None</span> =&gt; <span class="ident">UserIo::FifoIo</span>,
-        <span class="prelude-val">Some</span>(<span class="string">&quot;std_io&quot;</span>) =&gt; <span class="ident">UserIo::StdIo</span>,
-        <span class="prelude-val">Some</span>(<span class="string">&quot;fifo_io&quot;</span>) =&gt; <span class="ident">UserIo::FifoIo</span>,
-        <span class="prelude-val">Some</span>(<span class="ident">other</span>) =&gt; <span class="macro">bail!</span>(<span class="string">&quot;Unsupported value \&quot;{}\&quot; for user_io in task.yaml&quot;</span>, <span class="ident">other</span>),
+    <span class="kw">let </span>user_io = <span class="kw">match </span>yaml.user_io.as_deref() {
+        <span class="prelude-val">None </span>=&gt; UserIo::FifoIo,
+        <span class="prelude-val">Some</span>(<span class="string">&quot;std_io&quot;</span>) =&gt; UserIo::StdIo,
+        <span class="prelude-val">Some</span>(<span class="string">&quot;fifo_io&quot;</span>) =&gt; UserIo::FifoIo,
+        <span class="prelude-val">Some</span>(other) =&gt; <span class="macro">bail!</span>(<span class="string">&quot;Unsupported value \&quot;{}\&quot; for user_io in task.yaml&quot;</span>, other),
     };
 
-    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">TaskType::Communication</span>(<span class="ident">CommunicationTypeData</span> {
-        <span class="ident">manager</span>: <span class="ident">Arc::new</span>(<span class="ident">manager</span>),
-        <span class="ident">num_processes</span>: <span class="ident">yaml</span>.<span class="ident">num_processes</span>.<span class="ident">unwrap_or</span>(<span class="number">1</span>),
-        <span class="ident">user_io</span>,
+    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(TaskType::Communication(CommunicationTypeData {
+        manager: Arc::new(manager),
+        num_processes: yaml.num_processes.unwrap_or(<span class="number">1</span>),
+        user_io,
     })))
 }
 
-<span class="doccomment">/// Serializer of a boolean using the python syntax:</span>
-<span class="doccomment">/// - `true` -&gt; `True`</span>
-<span class="doccomment">/// - `false` -&gt; `False`</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::trivially_copy_pass_by_ref</span>)]</span>
-<span class="kw">fn</span> <span class="ident">python_bool_serializer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>, <span class="ident">ser</span>: <span class="ident">S</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S::Ok</span>, <span class="ident">S::Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">Serializer</span>,
+<span class="doccomment">/// Serializer of a boolean using the python syntax:
+/// - `true` -&gt; `True`
+/// - `false` -&gt; `False`
+</span><span class="attribute">#[allow(clippy::trivially_copy_pass_by_ref)]
+</span><span class="kw">fn </span>python_bool_serializer&lt;S&gt;(val: <span class="kw-2">&amp;</span>bool, ser: S) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt;
+<span class="kw">where
+    </span>S: Serializer,
 {
-    <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">val</span> {
-        <span class="ident">ser</span>.<span class="ident">serialize_str</span>(<span class="string">&quot;True&quot;</span>)
-    } <span class="kw">else</span> {
-        <span class="ident">ser</span>.<span class="ident">serialize_str</span>(<span class="string">&quot;False&quot;</span>)
+    <span class="kw">if </span><span class="kw-2">*</span>val {
+        ser.serialize_str(<span class="string">&quot;True&quot;</span>)
+    } <span class="kw">else </span>{
+        ser.serialize_str(<span class="string">&quot;False&quot;</span>)
     }
 }
 
-<span class="doccomment">/// Deserializer of a boolean using the python syntax:</span>
-<span class="doccomment">/// - `True` -&gt; `true`</span>
-<span class="doccomment">/// - `False` -&gt; `false`</span>
-<span class="doccomment">/// - other -&gt; error</span>
-<span class="kw">fn</span> <span class="ident">python_bool_deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">deser</span>: <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">D::Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Deserializer of a boolean using the python syntax:
+/// - `True` -&gt; `true`
+/// - `False` -&gt; `false`
+/// - other -&gt; error
+</span><span class="kw">fn </span>python_bool_deserializer&lt;<span class="lifetime">&#39;de</span>, D&gt;(deser: D) -&gt; <span class="prelude-ty">Result</span>&lt;bool, D::Error&gt;
+<span class="kw">where
+    </span>D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
 {
-    <span class="kw">use</span> <span class="ident">serde::de::Error</span>;
-    <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">String::deserialize</span>(<span class="ident">deser</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">val</span> <span class="op">==</span> <span class="string">&quot;True&quot;</span> {
+    <span class="kw">use </span>serde::de::Error;
+    <span class="kw">let </span>val = String::deserialize(deser)<span class="question-mark">?</span>;
+    <span class="kw">if </span>val == <span class="string">&quot;True&quot; </span>{
         <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">val</span> <span class="op">==</span> <span class="string">&quot;False&quot;</span> {
+    } <span class="kw">else if </span>val == <span class="string">&quot;False&quot; </span>{
         <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Err</span>(<span class="ident">Error::custom</span>(<span class="string">&quot;invalid bool, either True or False&quot;</span>))
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Err</span>(Error::custom(<span class="string">&quot;invalid bool, either True or False&quot;</span>))
     }
 }
 
-<span class="doccomment">/// The default value for the `infile` field of task.yaml.</span>
-<span class="kw">fn</span> <span class="ident">default_infile</span>() -&gt; <span class="ident">String</span> {
-    <span class="string">&quot;input.txt&quot;</span>.<span class="ident">into</span>()
+<span class="doccomment">/// The default value for the `infile` field of task.yaml.
+</span><span class="kw">fn </span>default_infile() -&gt; String {
+    <span class="string">&quot;input.txt&quot;</span>.into()
 }
 
-<span class="doccomment">/// The default value for the `outfile` field of task.yaml.</span>
-<span class="kw">fn</span> <span class="ident">default_outfile</span>() -&gt; <span class="ident">String</span> {
-    <span class="string">&quot;output.txt&quot;</span>.<span class="ident">into</span>()
+<span class="doccomment">/// The default value for the `outfile` field of task.yaml.
+</span><span class="kw">fn </span>default_outfile() -&gt; String {
+    <span class="string">&quot;output.txt&quot;</span>.into()
 }
 
-<span class="doccomment">/// Normalize and validate the content of the subtask name.</span>
-<span class="kw">fn</span> <span class="ident">cleanup_subtask_name</span>(<span class="ident">id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">id</span>.<span class="ident">trim</span>();
+<span class="doccomment">/// Normalize and validate the content of the subtask name.
+</span><span class="kw">fn </span>cleanup_subtask_name(id: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;String, Error&gt; {
+    <span class="kw">let </span>id = id.trim();
 
-    <span class="kw">let</span> <span class="ident">fail</span> <span class="op">=</span> <span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="prelude-val">Err</span>(<span class="macro">anyhow!</span>(<span class="string">&quot;&#39;{}&#39; is not a valid identifier: {}&quot;</span>, <span class="ident">id</span>, <span class="ident">err</span>));
+    <span class="kw">let </span>fail = |err| <span class="prelude-val">Err</span>(<span class="macro">anyhow!</span>(<span class="string">&quot;&#39;{}&#39; is not a valid identifier: {}&quot;</span>, id, err));
 
-    <span class="comment">// Normalize the identifier to avoid similar but different characters.</span>
-    <span class="kw">let</span> <span class="ident">normalized</span> <span class="op">=</span> <span class="ident">id</span>.<span class="ident">nfkc</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
+    <span class="comment">// Normalize the identifier to avoid similar but different characters.
+    </span><span class="kw">let </span>normalized = id.nfkc().collect::&lt;String&gt;();
 
-    <span class="kw">if</span> <span class="ident">normalized</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">return</span> <span class="ident">fail</span>(<span class="string">&quot;must be non-empty&quot;</span>);
+    <span class="kw">if </span>normalized.is_empty() {
+        <span class="kw">return </span>fail(<span class="string">&quot;must be non-empty&quot;</span>);
     }
-    <span class="kw">if</span> <span class="ident">normalized</span>.<span class="ident">starts_with</span>(<span class="string">&#39;-&#39;</span>) {
-        <span class="kw">return</span> <span class="ident">fail</span>(<span class="string">&quot;must not start with a dash (-)&quot;</span>);
+    <span class="kw">if </span>normalized.starts_with(<span class="string">&#39;-&#39;</span>) {
+        <span class="kw">return </span>fail(<span class="string">&quot;must not start with a dash (-)&quot;</span>);
     }
-    <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="ident">normalized</span>.<span class="ident">chars</span>() {
-        <span class="kw">if</span> <span class="ident">ch</span> <span class="op">==</span> <span class="string">&#39;*&#39;</span> {
-            <span class="kw">return</span> <span class="ident">fail</span>(<span class="string">&quot;must not contain asterisks (*)&quot;</span>);
+    <span class="kw">for </span>ch <span class="kw">in </span>normalized.chars() {
+        <span class="kw">if </span>ch == <span class="string">&#39;*&#39; </span>{
+            <span class="kw">return </span>fail(<span class="string">&quot;must not contain asterisks (*)&quot;</span>);
         }
-        <span class="kw">if</span> <span class="ident">ch</span> <span class="op">==</span> <span class="string">&#39;?&#39;</span> {
-            <span class="kw">return</span> <span class="ident">fail</span>(<span class="string">&quot;must not contain question marks (?)&quot;</span>);
+        <span class="kw">if </span>ch == <span class="string">&#39;?&#39; </span>{
+            <span class="kw">return </span>fail(<span class="string">&quot;must not contain question marks (?)&quot;</span>);
         }
-        <span class="kw">let</span> <span class="ident">category</span> <span class="op">=</span> <span class="ident">GeneralCategory::of</span>(<span class="ident">ch</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">VALID_SUBTASK_NAME_CHARACTER_CATEGORIES</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">category</span>) {
-            <span class="kw">return</span> <span class="ident">fail</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
+        <span class="kw">let </span>category = GeneralCategory::of(ch);
+        <span class="kw">if </span>!VALID_SUBTASK_NAME_CHARACTER_CATEGORIES.contains(<span class="kw-2">&amp;</span>category) {
+            <span class="kw">return </span>fail(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
                 <span class="string">&quot;contains an invalid character &#39;{}&#39; ({})&quot;</span>,
-                <span class="ident">ch</span>,
-                <span class="ident">ch</span>.<span class="ident">escape_default</span>()
+                ch,
+                ch.escape_default()
             ));
         }
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">normalized</span>)
+    <span class="prelude-val">Ok</span>(normalized)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

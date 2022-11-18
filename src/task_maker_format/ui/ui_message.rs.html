@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/ui_message.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ui_message.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/ui_message.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ui_message.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../task_maker_format/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../task_maker_format/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -215,222 +215,222 @@
 <span id="215">215</span>
 <span id="216">216</span>
 <span id="217">217</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
-<span class="kw">use</span> <span class="ident">std::time::SystemTime</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
+<span class="kw">use </span>std::time::SystemTime;
 
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">task_maker_diagnostics::Diagnostic</span>;
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>task_maker_diagnostics::Diagnostic;
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">use</span> <span class="ident">task_maker_exec::ExecutorStatus</span>;
+<span class="kw">use </span>task_maker_exec::ExecutorStatus;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ioi</span>::{<span class="ident">SubtaskId</span>, <span class="ident">TestcaseId</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::solution::SolutionInfo</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::terry</span>::{<span class="ident">Seed</span>, <span class="ident">SolutionOutcome</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ui::UIExecutionStatus</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ioi</span>, <span class="ident">terry</span>};
+<span class="kw">use </span><span class="kw">crate</span>::ioi::{SubtaskId, TestcaseId};
+<span class="kw">use </span><span class="kw">crate</span>::solution::SolutionInfo;
+<span class="kw">use </span><span class="kw">crate</span>::terry::{Seed, SolutionOutcome};
+<span class="kw">use </span><span class="kw">crate</span>::ui::UIExecutionStatus;
+<span class="kw">use crate</span>::{ioi, terry};
 
-<span class="doccomment">/// A message sent to the UI.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Clone</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">UIMessage</span> {
-    <span class="doccomment">/// A message asking the UI to exit.</span>
-    <span class="ident">StopUI</span>,
+<span class="doccomment">/// A message sent to the UI.
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, Clone, TypeScriptify)]
+</span><span class="kw">pub enum </span>UIMessage {
+    <span class="doccomment">/// A message asking the UI to exit.
+    </span>StopUI,
 
-    <span class="doccomment">/// An update on the status of the executor.</span>
-    <span class="ident">ServerStatus</span> {
-        <span class="doccomment">/// The status of the executor.</span>
-        <span class="ident">status</span>: <span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// An update on the status of the executor.
+    </span>ServerStatus {
+        <span class="doccomment">/// The status of the executor.
+        </span>status: ExecutorStatus&lt;SystemTime&gt;,
     },
 
-    <span class="doccomment">/// The list of solutions that will be evaluated.</span>
-    <span class="ident">Solutions</span> {
-        <span class="doccomment">/// The information of the solutions to evaluate.</span>
-        <span class="ident">solutions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SolutionInfo</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The list of solutions that will be evaluated.
+    </span>Solutions {
+        <span class="doccomment">/// The information of the solutions to evaluate.
+        </span>solutions: Vec&lt;SolutionInfo&gt;,
     },
 
-    <span class="doccomment">/// An update on the compilation status.</span>
-    <span class="ident">Compilation</span> {
-        <span class="doccomment">/// The compilation of this file.</span>
-        <span class="ident">file</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The status of the compilation.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// An update on the compilation status.
+    </span>Compilation {
+        <span class="doccomment">/// The compilation of this file.
+        </span>file: PathBuf,
+        <span class="doccomment">/// The status of the compilation.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The information about the task which is being run.</span>
-    <span class="ident">IOITask</span> {
-        <span class="doccomment">/// The task information.</span>
-        <span class="ident">task</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ioi::IOITask</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The information about the task which is being run.
+    </span>IOITask {
+        <span class="doccomment">/// The task information.
+        </span>task: Box&lt;ioi::IOITask&gt;,
     },
 
-    <span class="doccomment">/// The generation of a testcase in a IOI task.</span>
-    <span class="ident">IOIGeneration</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The id of the testcase.</span>
-        <span class="ident">testcase</span>: <span class="ident">TestcaseId</span>,
-        <span class="doccomment">/// The status of the generation.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The generation of a testcase in a IOI task.
+    </span>IOIGeneration {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The id of the testcase.
+        </span>testcase: TestcaseId,
+        <span class="doccomment">/// The status of the generation.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The validation of a testcase in a IOI task.</span>
-    <span class="ident">IOIValidation</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The id of the testcase.</span>
-        <span class="ident">testcase</span>: <span class="ident">TestcaseId</span>,
-        <span class="doccomment">/// The status of the validation.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The validation of a testcase in a IOI task.
+    </span>IOIValidation {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The id of the testcase.
+        </span>testcase: TestcaseId,
+        <span class="doccomment">/// The status of the validation.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The solution of a testcase in a IOI task.</span>
-    <span class="ident">IOISolution</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The id of the testcase.</span>
-        <span class="ident">testcase</span>: <span class="ident">TestcaseId</span>,
-        <span class="doccomment">/// The status of the solution.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The solution of a testcase in a IOI task.
+    </span>IOISolution {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The id of the testcase.
+        </span>testcase: TestcaseId,
+        <span class="doccomment">/// The status of the solution.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The evaluation of a solution in a IOI task.</span>
-    <span class="ident">IOIEvaluation</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The id of the testcase.</span>
-        <span class="ident">testcase</span>: <span class="ident">TestcaseId</span>,
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The status of the solution.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
-        <span class="doccomment">/// The index of the piece of evaluation of this solution.</span>
-        <span class="ident">part</span>: <span class="ident">usize</span>,
-        <span class="doccomment">/// The number of the parts the evaluation of this solution is split into.</span>
-        <span class="ident">num_parts</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// The evaluation of a solution in a IOI task.
+    </span>IOIEvaluation {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The id of the testcase.
+        </span>testcase: TestcaseId,
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The status of the solution.
+        </span>status: UIExecutionStatus,
+        <span class="doccomment">/// The index of the piece of evaluation of this solution.
+        </span>part: usize,
+        <span class="doccomment">/// The number of the parts the evaluation of this solution is split into.
+        </span>num_parts: usize,
     },
 
-    <span class="doccomment">/// The checking of a solution in a IOI task.</span>
-    <span class="ident">IOIChecker</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The id of the testcase.</span>
-        <span class="ident">testcase</span>: <span class="ident">TestcaseId</span>,
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The status of the solution. Note that a failure of this execution</span>
-        <span class="doccomment">/// may not mean that the checker failed.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The checking of a solution in a IOI task.
+    </span>IOIChecker {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The id of the testcase.
+        </span>testcase: TestcaseId,
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The status of the solution. Note that a failure of this execution
+        /// may not mean that the checker failed.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The score of a testcase is ready.</span>
-    <span class="ident">IOITestcaseScore</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The id of the testcase.</span>
-        <span class="ident">testcase</span>: <span class="ident">TestcaseId</span>,
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The score of the testcase.</span>
-        <span class="ident">score</span>: <span class="ident">f64</span>,
-        <span class="doccomment">/// The message associated with the score.</span>
-        <span class="ident">message</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// The score of a testcase is ready.
+    </span>IOITestcaseScore {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The id of the testcase.
+        </span>testcase: TestcaseId,
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The score of the testcase.
+        </span>score: f64,
+        <span class="doccomment">/// The message associated with the score.
+        </span>message: String,
     },
 
-    <span class="doccomment">/// The score of a subtask is ready.</span>
-    <span class="ident">IOISubtaskScore</span> {
-        <span class="doccomment">/// The id of the subtask.</span>
-        <span class="ident">subtask</span>: <span class="ident">SubtaskId</span>,
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The normalized score, a value between 0 and 1</span>
-        <span class="ident">normalized_score</span>: <span class="ident">f64</span>,
-        <span class="doccomment">/// The score of the subtask.</span>
-        <span class="ident">score</span>: <span class="ident">f64</span>,
+    <span class="doccomment">/// The score of a subtask is ready.
+    </span>IOISubtaskScore {
+        <span class="doccomment">/// The id of the subtask.
+        </span>subtask: SubtaskId,
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The normalized score, a value between 0 and 1
+        </span>normalized_score: f64,
+        <span class="doccomment">/// The score of the subtask.
+        </span>score: f64,
     },
 
-    <span class="doccomment">/// The score of a task is ready.</span>
-    <span class="ident">IOITaskScore</span> {
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The score of the task.</span>
-        <span class="ident">score</span>: <span class="ident">f64</span>,
+    <span class="doccomment">/// The score of a task is ready.
+    </span>IOITaskScore {
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The score of the task.
+        </span>score: f64,
     },
 
-    <span class="doccomment">/// The compilation of a booklet.</span>
-    <span class="ident">IOIBooklet</span> {
-        <span class="doccomment">/// The name of the booklet.</span>
-        <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// The status of the compilation.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The compilation of a booklet.
+    </span>IOIBooklet {
+        <span class="doccomment">/// The name of the booklet.
+        </span>name: String,
+        <span class="doccomment">/// The status of the compilation.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The compilation of a dependency of a booklet. It can be processed many times, for example an</span>
-    <span class="doccomment">/// asy file is compiled first, and then cropped.</span>
-    <span class="ident">IOIBookletDependency</span> {
-        <span class="doccomment">/// The name of the booklet.</span>
-        <span class="ident">booklet</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// The name of the dependency.</span>
-        <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// The index (0-based) of the step of this compilation.</span>
-        <span class="ident">step</span>: <span class="ident">usize</span>,
-        <span class="doccomment">/// The number of steps of the compilation of this dependency.</span>
-        <span class="ident">num_steps</span>: <span class="ident">usize</span>,
-        <span class="doccomment">/// The status of this step.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The compilation of a dependency of a booklet. It can be processed many times, for example an
+    /// asy file is compiled first, and then cropped.
+    </span>IOIBookletDependency {
+        <span class="doccomment">/// The name of the booklet.
+        </span>booklet: String,
+        <span class="doccomment">/// The name of the dependency.
+        </span>name: String,
+        <span class="doccomment">/// The index (0-based) of the step of this compilation.
+        </span>step: usize,
+        <span class="doccomment">/// The number of steps of the compilation of this dependency.
+        </span>num_steps: usize,
+        <span class="doccomment">/// The status of this step.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The information about the task which is being run.</span>
-    <span class="ident">TerryTask</span> {
-        <span class="doccomment">/// The task information.</span>
-        <span class="ident">task</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">terry::TerryTask</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The information about the task which is being run.
+    </span>TerryTask {
+        <span class="doccomment">/// The task information.
+        </span>task: Box&lt;terry::TerryTask&gt;,
     },
 
-    <span class="doccomment">/// The generation of a testcase in a Terry task.</span>
-    <span class="ident">TerryGeneration</span> {
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The seed used to generate the input file.</span>
-        <span class="ident">seed</span>: <span class="ident">Seed</span>,
-        <span class="doccomment">/// The status of the generation.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The generation of a testcase in a Terry task.
+    </span>TerryGeneration {
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The seed used to generate the input file.
+        </span>seed: Seed,
+        <span class="doccomment">/// The status of the generation.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The validation of a testcase in a Terry task.</span>
-    <span class="ident">TerryValidation</span> {
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The status of the validation.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The validation of a testcase in a Terry task.
+    </span>TerryValidation {
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The status of the validation.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The solution of a testcase in a Terry task.</span>
-    <span class="ident">TerrySolution</span> {
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The status of the solution.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The solution of a testcase in a Terry task.
+    </span>TerrySolution {
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The status of the solution.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The checking of a solution in a Terry task.</span>
-    <span class="ident">TerryChecker</span> {
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The status of the checker.</span>
-        <span class="ident">status</span>: <span class="ident">UIExecutionStatus</span>,
+    <span class="doccomment">/// The checking of a solution in a Terry task.
+    </span>TerryChecker {
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The status of the checker.
+        </span>status: UIExecutionStatus,
     },
 
-    <span class="doccomment">/// The outcome of a solution in a Terry task.</span>
-    <span class="ident">TerrySolutionOutcome</span> {
-        <span class="doccomment">/// The path of the solution.</span>
-        <span class="ident">solution</span>: <span class="ident">PathBuf</span>,
-        <span class="doccomment">/// The outcome of the solution. `Err` is caused by an invalid response from the checker.</span>
-        <span class="ident">outcome</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SolutionOutcome</span>, <span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// The outcome of a solution in a Terry task.
+    </span>TerrySolutionOutcome {
+        <span class="doccomment">/// The path of the solution.
+        </span>solution: PathBuf,
+        <span class="doccomment">/// The outcome of the solution. `Err` is caused by an invalid response from the checker.
+        </span>outcome: <span class="prelude-ty">Result</span>&lt;SolutionOutcome, String&gt;,
     },
 
-    <span class="doccomment">/// A diagnostic message has been emitted.</span>
-    <span class="ident">Diagnostic</span> {
-        <span class="doccomment">/// The diagnostic message.</span>
-        <span class="ident">diagnostic</span>: <span class="ident">Diagnostic</span>,
+    <span class="doccomment">/// A diagnostic message has been emitted.
+    </span>Diagnostic {
+        <span class="doccomment">/// The diagnostic message.
+        </span>diagnostic: Diagnostic,
     },
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

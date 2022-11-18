@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_lang/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_lang/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_lang/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -178,185 +178,185 @@
 <span id="178">178</span>
 <span id="179">179</span>
 <span id="180">180</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Crate for managing programming languages and source files.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This crate will expose some utility functions for making a DAG with the execution of commands</span>
-<span class="doccomment">//! that come directly from source files.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The [`Language`](languages/trait.Language.html) trait exposes the interface for defining new</span>
-<span class="doccomment">//! programming languages. The list of supported programming languages can be found in the source of</span>
-<span class="doccomment">//! this crate.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The entry point of this crate is [`LanguageManager`](struct.LanguageManager.html), a struct that</span>
-<span class="doccomment">//! is able to detect the language of a source file based on its extension. A trait object is used</span>
-<span class="doccomment">//! to keep track of the language.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! To actually use the language you can use [`SourceFile`](struct.SourceFile.html), it exposes the</span>
-<span class="doccomment">//! functionalities for compiling and running a source file.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Example</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! use task_maker_lang::LanguageManager;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! let lang = LanguageManager::detect_language(&quot;test.cpp&quot;).expect(&quot;unknown lang&quot;);</span>
-<span class="doccomment">//! assert!(lang.name().contains(&quot;C++&quot;))</span>
-<span class="doccomment">//! ```</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Crate for managing programming languages and source files.
+//!
+//! This crate will expose some utility functions for making a DAG with the execution of commands
+//! that come directly from source files.
+//!
+//! The [`Language`](languages/trait.Language.html) trait exposes the interface for defining new
+//! programming languages. The list of supported programming languages can be found in the source of
+//! this crate.
+//!
+//! The entry point of this crate is [`LanguageManager`](struct.LanguageManager.html), a struct that
+//! is able to detect the language of a source file based on its extension. A trait object is used
+//! to keep track of the language.
+//!
+//! To actually use the language you can use [`SourceFile`](struct.SourceFile.html), it exposes the
+//! functionalities for compiling and running a source file.
+//!
+//! # Example
+//!
+//! ```
+//! use task_maker_lang::LanguageManager;
+//!
+//! let lang = LanguageManager::detect_language(&quot;test.cpp&quot;).expect(&quot;unknown lang&quot;);
+//! assert!(lang.name().contains(&quot;C++&quot;))
+//! ```
 
-<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::upper_case_acronyms</span>)]</span>
+</span><span class="attribute">#![deny(missing_docs)]
+#![allow(clippy::upper_case_acronyms)]
 
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">lazy_static</span>;
+#[macro_use]
+</span><span class="kw">extern crate </span>lazy_static;
 
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+<span class="kw">use </span>std::path::{Path, PathBuf};
+<span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">typescript_definitions::TypeScriptify</span>;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">grader_map::GraderMap</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">source_file::SourceFile</span>;
-<span class="kw">use</span> <span class="ident">task_maker_dag::File</span>;
+<span class="kw">pub use </span>grader_map::GraderMap;
+<span class="kw">pub use </span>source_file::SourceFile;
+<span class="kw">use </span>task_maker_dag::File;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::language::Language</span>;
+<span class="kw">use </span><span class="kw">crate</span>::language::Language;
 
-<span class="kw">mod</span> <span class="ident">grader_map</span>;
-<span class="kw">mod</span> <span class="ident">language</span>;
-<span class="kw">mod</span> <span class="ident">languages</span>;
-<span class="kw">mod</span> <span class="ident">source_file</span>;
+<span class="kw">mod </span>grader_map;
+<span class="kw">mod </span>language;
+<span class="kw">mod </span>languages;
+<span class="kw">mod </span>source_file;
 
-<span class="doccomment">/// A dependency of an execution, all the sandbox paths must be relative and inside of the sandbox.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">TypeScriptify</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Dependency</span> {
-    <span class="doccomment">/// The handle of the file.</span>
-    <span class="kw">pub</span> <span class="ident">file</span>: <span class="ident">File</span>,
-    <span class="doccomment">/// The path of the file on the local system.</span>
-    <span class="kw">pub</span> <span class="ident">local_path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// The path inside of the sandbox of where to put the file. Must be relative to the sandbox and</span>
-    <span class="doccomment">/// inside of it.</span>
-    <span class="kw">pub</span> <span class="ident">sandbox_path</span>: <span class="ident">PathBuf</span>,
-    <span class="doccomment">/// Whether the file should be executable or not.</span>
-    <span class="kw">pub</span> <span class="ident">executable</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// A dependency of an execution, all the sandbox paths must be relative and inside of the sandbox.
+</span><span class="attribute">#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, TypeScriptify)]
+</span><span class="kw">pub struct </span>Dependency {
+    <span class="doccomment">/// The handle of the file.
+    </span><span class="kw">pub </span>file: File,
+    <span class="doccomment">/// The path of the file on the local system.
+    </span><span class="kw">pub </span>local_path: PathBuf,
+    <span class="doccomment">/// The path inside of the sandbox of where to put the file. Must be relative to the sandbox and
+    /// inside of it.
+    </span><span class="kw">pub </span>sandbox_path: PathBuf,
+    <span class="doccomment">/// Whether the file should be executable or not.
+    </span><span class="kw">pub </span>executable: bool,
 }
 
-<span class="doccomment">/// Manager of all the known languages, you should use this to get</span>
-<span class="doccomment">/// [`Language`](languages/trait.Language.html) instances.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LanguageManager</span> {
-    <span class="doccomment">/// The list of all the known languages.</span>
-    <span class="ident">known_languages</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Language</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Manager of all the known languages, you should use this to get
+/// [`Language`](languages/trait.Language.html) instances.
+</span><span class="kw">pub struct </span>LanguageManager {
+    <span class="doccomment">/// The list of all the known languages.
+    </span>known_languages: Vec&lt;Arc&lt;<span class="kw">dyn </span>Language + Sync + Send&gt;&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">LanguageManager</span> {
-    <span class="doccomment">/// Make a new `LanguageManager` with all the known languages.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">LanguageManager</span> {
-        <span class="kw">use</span> <span class="ident">languages</span>::<span class="kw-2">*</span>;
-        <span class="ident">LanguageManager</span> {
-            <span class="comment">// ordered by most important first</span>
-            <span class="ident">known_languages</span>: <span class="macro">vec!</span>[
-                <span class="ident">Arc::new</span>(<span class="ident">cpp::LanguageCpp::new</span>(
-                    <span class="ident">cpp::LanguageCppConfiguration::from_env</span>(),
+<span class="kw">impl </span>LanguageManager {
+    <span class="doccomment">/// Make a new `LanguageManager` with all the known languages.
+    </span><span class="kw">fn </span>new() -&gt; LanguageManager {
+        <span class="kw">use </span>languages::<span class="kw-2">*</span>;
+        LanguageManager {
+            <span class="comment">// ordered by most important first
+            </span>known_languages: <span class="macro">vec!</span>[
+                Arc::new(cpp::LanguageCpp::new(
+                    cpp::LanguageCppConfiguration::from_env(),
                 )),
-                <span class="ident">Arc::new</span>(<span class="ident">c::LanguageC::new</span>(<span class="ident">c::LanguageCConfiguration::from_env</span>())),
-                <span class="ident">Arc::new</span>(<span class="ident">python::LanguagePython::new</span>(
-                    <span class="ident">python::LanguagePythonVersion::Autodetect</span>,
+                Arc::new(c::LanguageC::new(c::LanguageCConfiguration::from_env())),
+                Arc::new(python::LanguagePython::new(
+                    python::LanguagePythonVersion::Autodetect,
                 )),
-                <span class="ident">Arc::new</span>(<span class="ident">shell::LanguageShell::new</span>()),
-                <span class="ident">Arc::new</span>(<span class="ident">pascal::LanguagePascal::new</span>()),
-                <span class="ident">Arc::new</span>(<span class="ident">rust::LanguageRust::new</span>()),
-                <span class="ident">Arc::new</span>(<span class="ident">csharp::LanguageCSharp::new</span>()),
-                <span class="ident">Arc::new</span>(<span class="ident">javascript::LanguageJS::new</span>()),
+                Arc::new(shell::LanguageShell::new()),
+                Arc::new(pascal::LanguagePascal::new()),
+                Arc::new(rust::LanguageRust::new()),
+                Arc::new(csharp::LanguageCSharp::new()),
+                Arc::new(javascript::LanguageJS::new()),
             ],
         }
     }
 
-    <span class="doccomment">/// Given a path to a file guess the language that the source file probably is.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use task_maker_lang::LanguageManager;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let cpp = LanguageManager::detect_language(&quot;test.cpp&quot;).unwrap();</span>
-    <span class="doccomment">/// assert!(cpp.name().contains(&quot;C++&quot;)); // it&#39;s something like &quot;C++11 / gcc&quot;</span>
-    <span class="doccomment">/// let py = LanguageManager::detect_language(&quot;test.py&quot;).unwrap();</span>
-    <span class="doccomment">/// assert!(py.name().contains(&quot;Python&quot;)); // it&#39;s something like &quot;Python / Autodetect&quot;</span>
-    <span class="doccomment">/// let unknown = LanguageManager::detect_language(&quot;test.foobar&quot;);</span>
-    <span class="doccomment">/// assert!(unknown.is_none());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">detect_language</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Language</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">manager</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">LANGUAGE_MANAGER_SINGL</span>;
-        <span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">path</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">extension</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">to_string_lossy</span>())
-            .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;&quot;</span>.<span class="ident">into</span>())
-            .<span class="ident">to_lowercase</span>();
-        <span class="kw">for</span> <span class="ident">lang</span> <span class="kw">in</span> <span class="ident">manager</span>.<span class="ident">known_languages</span>.<span class="ident">iter</span>() {
-            <span class="kw">for</span> <span class="ident">lang_ext</span> <span class="kw">in</span> <span class="ident">lang</span>.<span class="ident">extensions</span>().<span class="ident">iter</span>() {
-                <span class="kw">if</span> <span class="ident">ext</span> <span class="op">==</span> <span class="kw-2">*</span><span class="ident">lang_ext</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">lang</span>.<span class="ident">clone</span>());
+    <span class="doccomment">/// Given a path to a file guess the language that the source file probably is.
+    ///
+    /// ```
+    /// use task_maker_lang::LanguageManager;
+    ///
+    /// let cpp = LanguageManager::detect_language(&quot;test.cpp&quot;).unwrap();
+    /// assert!(cpp.name().contains(&quot;C++&quot;)); // it&#39;s something like &quot;C++11 / gcc&quot;
+    /// let py = LanguageManager::detect_language(&quot;test.py&quot;).unwrap();
+    /// assert!(py.name().contains(&quot;Python&quot;)); // it&#39;s something like &quot;Python / Autodetect&quot;
+    /// let unknown = LanguageManager::detect_language(&quot;test.foobar&quot;);
+    /// assert!(unknown.is_none());
+    /// ```
+    </span><span class="kw">pub fn </span>detect_language&lt;P: AsRef&lt;Path&gt;&gt;(path: P) -&gt; <span class="prelude-ty">Option</span>&lt;Arc&lt;<span class="kw">dyn </span>Language&gt;&gt; {
+        <span class="kw">let </span>manager = <span class="kw-2">&amp;</span>LANGUAGE_MANAGER_SINGL;
+        <span class="kw">let </span>ext = path
+            .as_ref()
+            .extension()
+            .map(|s| s.to_string_lossy())
+            .unwrap_or_else(|| <span class="string">&quot;&quot;</span>.into())
+            .to_lowercase();
+        <span class="kw">for </span>lang <span class="kw">in </span>manager.known_languages.iter() {
+            <span class="kw">for </span>lang_ext <span class="kw">in </span>lang.extensions().iter() {
+                <span class="kw">if </span>ext == <span class="kw-2">*</span>lang_ext {
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(lang.clone());
                 }
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="doccomment">/// Search between the known languages the one with the specified name and return it if found.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_name</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">name</span>: <span class="ident">S</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Language</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">manager</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">LANGUAGE_MANAGER_SINGL</span>;
-        <span class="kw">for</span> <span class="ident">lang</span> <span class="kw">in</span> <span class="ident">manager</span>.<span class="ident">known_languages</span>.<span class="ident">iter</span>() {
-            <span class="kw">if</span> <span class="ident">lang</span>.<span class="ident">name</span>() <span class="op">==</span> <span class="ident">name</span>.<span class="ident">as_ref</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">lang</span>.<span class="ident">clone</span>());
+    <span class="doccomment">/// Search between the known languages the one with the specified name and return it if found.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_name&lt;S: AsRef&lt;str&gt;&gt;(name: S) -&gt; <span class="prelude-ty">Option</span>&lt;Arc&lt;<span class="kw">dyn </span>Language&gt;&gt; {
+        <span class="kw">let </span>manager = <span class="kw-2">&amp;</span>LANGUAGE_MANAGER_SINGL;
+        <span class="kw">for </span>lang <span class="kw">in </span>manager.known_languages.iter() {
+            <span class="kw">if </span>lang.name() == name.as_ref() {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(lang.clone());
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 }
 
-<span class="macro">lazy_static!</span> {
-    <span class="doccomment">/// The singleton instance of the `LanguageManager`.</span>
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">LANGUAGE_MANAGER_SINGL</span>: <span class="ident">LanguageManager</span> <span class="op">=</span> <span class="ident">LanguageManager::new</span>();
+<span class="macro">lazy_static! </span>{
+    <span class="doccomment">/// The singleton instance of the `LanguageManager`.
+    </span><span class="kw">static </span><span class="kw-2">ref </span>LANGUAGE_MANAGER_SINGL: LanguageManager = LanguageManager::new();
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">speculoos::prelude</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span>speculoos::prelude::<span class="kw-2">*</span>;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::languages::cpp</span>::{<span class="ident">LanguageCpp</span>, <span class="ident">LanguageCppConfiguration</span>};
+    <span class="kw">use </span><span class="kw">crate</span>::languages::cpp::{LanguageCpp, LanguageCppConfiguration};
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_detect_language</span>() {
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="string">&quot;foo.cpp&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration::from_env</span>()).<span class="ident">name</span>();
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_detect_language() {
+        <span class="kw">let </span>lang = LanguageManager::detect_language(<span class="string">&quot;foo.cpp&quot;</span>).unwrap();
+        <span class="kw">let </span>name = LanguageCpp::new(LanguageCppConfiguration::from_env()).name();
+        assert_that(<span class="kw-2">&amp;</span>lang.name()).is_equal_to(name);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_detect_language_uppercase</span>() {
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="string">&quot;foo.CPP&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration::from_env</span>()).<span class="ident">name</span>();
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_detect_language_uppercase() {
+        <span class="kw">let </span>lang = LanguageManager::detect_language(<span class="string">&quot;foo.CPP&quot;</span>).unwrap();
+        <span class="kw">let </span>name = LanguageCpp::new(LanguageCppConfiguration::from_env()).name();
+        assert_that(<span class="kw-2">&amp;</span>lang.name()).is_equal_to(name);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_detect_language_unknown</span>() {
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::detect_language</span>(<span class="string">&quot;foo.blah&quot;</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>).<span class="ident">is_none</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_detect_language_unknown() {
+        <span class="kw">let </span>lang = LanguageManager::detect_language(<span class="string">&quot;foo.blah&quot;</span>);
+        assert_that(<span class="kw-2">&amp;</span>lang).is_none();
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_from_name</span>() {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">LanguageCpp::new</span>(<span class="ident">LanguageCppConfiguration::from_env</span>()).<span class="ident">name</span>();
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::from_name</span>(<span class="ident">name</span>).<span class="ident">unwrap</span>();
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>.<span class="ident">name</span>()).<span class="ident">is_equal_to</span>(<span class="ident">name</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_from_name() {
+        <span class="kw">let </span>name = LanguageCpp::new(LanguageCppConfiguration::from_env()).name();
+        <span class="kw">let </span>lang = LanguageManager::from_name(name).unwrap();
+        assert_that(<span class="kw-2">&amp;</span>lang.name()).is_equal_to(name);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_from_name_unknown</span>() {
-        <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="ident">LanguageManager::from_name</span>(<span class="string">&quot;Nope, this is not a language&quot;</span>);
-        <span class="ident">assert_that</span>(<span class="kw-2">&amp;</span><span class="ident">lang</span>).<span class="ident">is_none</span>();
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_from_name_unknown() {
+        <span class="kw">let </span>lang = LanguageManager::from_name(<span class="string">&quot;Nope, this is not a language&quot;</span>);
+        assert_that(<span class="kw-2">&amp;</span>lang).is_none();
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_lang" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

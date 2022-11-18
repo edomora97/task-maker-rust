@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../task_maker_exec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../task_maker_exec/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -441,220 +441,220 @@
 <span id="441">441</span>
 <span id="442">442</span>
 <span id="443">443</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">std::io::Write</span>;
-<span class="kw">use</span> <span class="ident">std::os::unix::fs::PermissionsExt</span>;
-<span class="kw">use</span> <span class="ident">std::path::Path</span>;
-<span class="kw">use</span> <span class="ident">std::sync::atomic</span>::{<span class="ident">AtomicBool</span>, <span class="ident">Ordering</span>};
-<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
-<span class="kw">use</span> <span class="ident">std::thread</span>;
-<span class="kw">use</span> <span class="ident">std::thread::JoinHandle</span>;
-<span class="kw">use</span> <span class="ident">std::time</span>::{<span class="ident">Duration</span>, <span class="ident">SystemTime</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::io::Write;
+<span class="kw">use </span>std::os::unix::fs::PermissionsExt;
+<span class="kw">use </span>std::path::Path;
+<span class="kw">use </span>std::sync::atomic::{AtomicBool, Ordering};
+<span class="kw">use </span>std::sync::{Arc, Mutex};
+<span class="kw">use </span>std::thread;
+<span class="kw">use </span>std::thread::JoinHandle;
+<span class="kw">use </span>std::time::{Duration, SystemTime};
 
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">anyhow</span>, <span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">ductile</span>::{<span class="ident">ChannelReceiver</span>, <span class="ident">ChannelSender</span>};
+<span class="kw">use </span>anyhow::{anyhow, Context, Error};
+<span class="kw">use </span>ductile::{ChannelReceiver, ChannelSender};
 
-<span class="kw">use</span> <span class="ident">task_maker_dag</span>::{<span class="ident">ExecutionDAG</span>, <span class="ident">FileCallbacks</span>, <span class="ident">FileUuid</span>, <span class="ident">ProvidedFile</span>, <span class="ident">WriteToCallback</span>};
-<span class="kw">use</span> <span class="ident">task_maker_store</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>task_maker_dag::{ExecutionDAG, FileCallbacks, FileUuid, ProvidedFile, WriteToCallback};
+<span class="kw">use </span>task_maker_store::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::executor</span>::{<span class="ident">ExecutionDAGWatchSet</span>, <span class="ident">ExecutorStatus</span>, <span class="ident">ExecutorWorkerStatus</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::proto</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::executor::{ExecutionDAGWatchSet, ExecutorStatus, ExecutorWorkerStatus};
+<span class="kw">use </span><span class="kw">crate</span>::proto::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// Interval between each Status message is sent asking for server status updates.</span>
-<span class="kw">const</span> <span class="ident">STATUS_POLL_INTERVAL_MS</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">1000</span>;
+<span class="doccomment">/// Interval between each Status message is sent asking for server status updates.
+</span><span class="kw">const </span>STATUS_POLL_INTERVAL_MS: u64 = <span class="number">1000</span>;
 
-<span class="doccomment">/// This is a client of the `Executor`, the client is who sends a DAG for an evaluation, provides</span>
-<span class="doccomment">/// some files and receives the callbacks from the server. When the server notifies a callback</span>
-<span class="doccomment">/// function is called by the client.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExecutorClient</span>;
+<span class="doccomment">/// This is a client of the `Executor`, the client is who sends a DAG for an evaluation, provides
+/// some files and receives the callbacks from the server. When the server notifies a callback
+/// function is called by the client.
+</span><span class="kw">pub struct </span>ExecutorClient;
 
-<span class="kw">impl</span> <span class="ident">ExecutorClient</span> {
-    <span class="doccomment">/// Begin the evaluation sending the DAG to the server, sending the files as needed and storing</span>
-    <span class="doccomment">/// the files from the server.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This method is blocking until the server ends the computation.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// * `eval` - The EvaluationData to evaluate.</span>
-    <span class="doccomment">/// * `sender` - A channel that sends messages to the server.</span>
-    <span class="doccomment">/// * `receiver` - A channel that receives messages from the server.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use task_maker_dag::ExecutionDAG;</span>
-    <span class="doccomment">/// use task_maker_store::FileStore;</span>
-    <span class="doccomment">/// use task_maker_exec::{executors::LocalExecutor, ExecutorClient, ErrorSandboxRunner};</span>
-    <span class="doccomment">/// use std::sync::mpsc::channel;</span>
-    <span class="doccomment">/// use std::sync::{Arc, Mutex};</span>
-    <span class="doccomment">/// use std::thread;</span>
-    <span class="doccomment">/// use std::path::PathBuf;</span>
-    <span class="doccomment">/// use task_maker_cache::Cache;</span>
-    <span class="doccomment">/// use ductile::new_local_channel;</span>
-    <span class="doccomment">/// # use tempfile::TempDir;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// // make a new, empty, DAG</span>
-    <span class="doccomment">/// let dag = ExecutionDAG::new();</span>
-    <span class="doccomment">/// // setup the communication channels</span>
-    <span class="doccomment">/// let (tx, rx_remote) = new_local_channel();</span>
-    <span class="doccomment">/// let (tx_remote, rx) = new_local_channel();</span>
-    <span class="doccomment">/// # let tmpdir = TempDir::new().unwrap();</span>
-    <span class="doccomment">/// # let path = tmpdir.path().to_owned();</span>
-    <span class="doccomment">/// # let sandbox_runner = ErrorSandboxRunner::default();</span>
-    <span class="doccomment">/// let file_store = Arc::new(FileStore::new(&amp;path, 1000, 1000).expect(&quot;Cannot create the file store&quot;));</span>
-    <span class="doccomment">/// let server_file_store = file_store.clone();</span>
-    <span class="doccomment">/// // make a new local executor in a second thread</span>
-    <span class="doccomment">/// let server = thread::spawn(move || {</span>
-    <span class="doccomment">///     let cache = Cache::new(&amp;path).expect(&quot;Cannot create the cache&quot;);</span>
-    <span class="doccomment">///     let mut executor = LocalExecutor::new(server_file_store, 4, path);</span>
-    <span class="doccomment">///     executor.evaluate(tx_remote, rx_remote, cache, sandbox_runner).unwrap();</span>
-    <span class="doccomment">/// });</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ExecutorClient::evaluate(dag, tx, &amp;rx, file_store, |_| Ok(())).unwrap(); // this will block!</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// server.join().expect(&quot;Server paniced&quot;);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cognitive_complexity</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">evaluate</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
-        <span class="kw-2">mut</span> <span class="ident">dag</span>: <span class="ident">ExecutionDAG</span>,
-        <span class="ident">sender</span>: <span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span>,
-        <span class="ident">receiver</span>: <span class="kw-2">&amp;</span><span class="ident">ChannelReceiver</span><span class="op">&lt;</span><span class="ident">ExecutorServerMessage</span><span class="op">&gt;</span>,
-        <span class="ident">file_store</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FileStore</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">status_callback</span>: <span class="ident">F</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>,
+<span class="kw">impl </span>ExecutorClient {
+    <span class="doccomment">/// Begin the evaluation sending the DAG to the server, sending the files as needed and storing
+    /// the files from the server.
+    ///
+    /// This method is blocking until the server ends the computation.
+    ///
+    /// * `eval` - The EvaluationData to evaluate.
+    /// * `sender` - A channel that sends messages to the server.
+    /// * `receiver` - A channel that receives messages from the server.
+    ///
+    /// ```
+    /// use task_maker_dag::ExecutionDAG;
+    /// use task_maker_store::FileStore;
+    /// use task_maker_exec::{executors::LocalExecutor, ExecutorClient, ErrorSandboxRunner};
+    /// use std::sync::mpsc::channel;
+    /// use std::sync::{Arc, Mutex};
+    /// use std::thread;
+    /// use std::path::PathBuf;
+    /// use task_maker_cache::Cache;
+    /// use ductile::new_local_channel;
+    /// # use tempfile::TempDir;
+    ///
+    /// // make a new, empty, DAG
+    /// let dag = ExecutionDAG::new();
+    /// // setup the communication channels
+    /// let (tx, rx_remote) = new_local_channel();
+    /// let (tx_remote, rx) = new_local_channel();
+    /// # let tmpdir = TempDir::new().unwrap();
+    /// # let path = tmpdir.path().to_owned();
+    /// # let sandbox_runner = ErrorSandboxRunner::default();
+    /// let file_store = Arc::new(FileStore::new(&amp;path, 1000, 1000).expect(&quot;Cannot create the file store&quot;));
+    /// let server_file_store = file_store.clone();
+    /// // make a new local executor in a second thread
+    /// let server = thread::spawn(move || {
+    ///     let cache = Cache::new(&amp;path).expect(&quot;Cannot create the cache&quot;);
+    ///     let mut executor = LocalExecutor::new(server_file_store, 4, path);
+    ///     executor.evaluate(tx_remote, rx_remote, cache, sandbox_runner).unwrap();
+    /// });
+    ///
+    /// ExecutorClient::evaluate(dag, tx, &amp;rx, file_store, |_| Ok(())).unwrap(); // this will block!
+    ///
+    /// server.join().expect(&quot;Server paniced&quot;);
+    /// ```
+    </span><span class="attribute">#[allow(clippy::cognitive_complexity)]
+    </span><span class="kw">pub fn </span>evaluate&lt;F&gt;(
+        <span class="kw-2">mut </span>dag: ExecutionDAG,
+        sender: ChannelSender&lt;ExecutorClientMessage&gt;,
+        receiver: <span class="kw-2">&amp;</span>ChannelReceiver&lt;ExecutorServerMessage&gt;,
+        file_store: Arc&lt;FileStore&gt;,
+        <span class="kw-2">mut </span>status_callback: F,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
+    <span class="kw">where
+        </span>F: FnMut(ExecutorStatus&lt;SystemTime&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;,
     {
         <span class="macro">trace!</span>(<span class="string">&quot;ExecutorClient started&quot;</span>);
-        <span class="ident">ExecutorClient::start_evaluation</span>(<span class="kw-2">&amp;mut</span> <span class="ident">dag</span>, <span class="kw-2">&amp;</span><span class="ident">sender</span>)<span class="question-mark">?</span>;
+        ExecutorClient::start_evaluation(<span class="kw-2">&amp;mut </span>dag, <span class="kw-2">&amp;</span>sender)<span class="question-mark">?</span>;
 
-        <span class="comment">// setup the status poller that will send to the server a Status message every</span>
-        <span class="comment">// STATUS_POLL_INTERVAL_MS milliseconds.</span>
-        <span class="kw">let</span> <span class="ident">done</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> <span class="ident">file_mode</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(()));
-        <span class="kw">let</span> <span class="ident">status_poller</span> <span class="op">=</span>
-            <span class="ident">ExecutorClient::spawn_status_poller</span>(<span class="ident">done</span>.<span class="ident">clone</span>(), <span class="ident">file_mode</span>.<span class="ident">clone</span>(), <span class="ident">sender</span>.<span class="ident">clone</span>());
+        <span class="comment">// setup the status poller that will send to the server a Status message every
+        // STATUS_POLL_INTERVAL_MS milliseconds.
+        </span><span class="kw">let </span>done = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>file_mode = Arc::new(Mutex::new(()));
+        <span class="kw">let </span>status_poller =
+            ExecutorClient::spawn_status_poller(done.clone(), file_mode.clone(), sender.clone());
 
-        <span class="macro">defer!</span> {{
+        <span class="macro">defer! </span>{{
             <span class="macro">info!</span>(<span class="string">&quot;Client has done, exiting&quot;</span>);
-            <span class="ident">done</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">Ordering::Relaxed</span>);
-            <span class="ident">status_poller</span>
-                .<span class="ident">join</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to join status poller: {:?}&quot;</span>, <span class="ident">e</span>)).<span class="ident">unwrap</span>();
+            done.store(<span class="bool-val">true</span>, Ordering::Relaxed);
+            status_poller
+                .join()
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to join status poller: {:?}&quot;</span>, e)).unwrap();
         }}
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">missing_files</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">while</span> <span class="ident">missing_files</span>.<span class="ident">unwrap_or</span>(<span class="number">1</span>) <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="kw">match</span> <span class="ident">receiver</span>.<span class="ident">recv</span>() {
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::AskFile</span>(<span class="ident">uuid</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server is asking for {}&quot;</span>, <span class="ident">uuid</span>);
-                    <span class="comment">// prevent the status poller for sending messages while sending the file</span>
-                    <span class="kw">let</span> <span class="ident">_lock</span> <span class="op">=</span> <span class="ident">file_mode</span>
-                        .<span class="ident">lock</span>()
-                        .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to obtain file_mode lock&quot;</span>))<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">provided_files</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">provided_files</span>;
-                    <span class="ident">handle_server_ask_file</span>(<span class="ident">uuid</span>, <span class="ident">provided_files</span>, <span class="kw-2">&amp;</span><span class="ident">sender</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to process AskFile({}) from the server&quot;</span>, <span class="ident">uuid</span>)
+        <span class="kw">let </span><span class="kw-2">mut </span>missing_files = <span class="prelude-val">None</span>;
+        <span class="kw">while </span>missing_files.unwrap_or(<span class="number">1</span>) &gt; <span class="number">0 </span>{
+            <span class="kw">match </span>receiver.recv() {
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::AskFile(uuid)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Server is asking for {}&quot;</span>, uuid);
+                    <span class="comment">// prevent the status poller for sending messages while sending the file
+                    </span><span class="kw">let </span>_lock = file_mode
+                        .lock()
+                        .map_err(|<span class="kw">_</span>| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to obtain file_mode lock&quot;</span>))<span class="question-mark">?</span>;
+                    <span class="kw">let </span>provided_files = <span class="kw-2">&amp;</span>dag.data.provided_files;
+                    handle_server_ask_file(uuid, provided_files, <span class="kw-2">&amp;</span>sender).with_context(|| {
+                        <span class="macro">format!</span>(<span class="string">&quot;Failed to process AskFile({}) from the server&quot;</span>, uuid)
                     })<span class="question-mark">?</span>;
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::ProvideFile</span>(<span class="ident">uuid</span>, <span class="ident">success</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server sent the file {}, success: {}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">success</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">missing</span>) <span class="op">=</span> <span class="ident">missing_files</span> {
-                        <span class="ident">missing_files</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">missing</span> <span class="op">-</span> <span class="number">1</span>);
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::ProvideFile(uuid, success)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Server sent the file {}, success: {}&quot;</span>, uuid, success);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(missing) = missing_files {
+                        missing_files = <span class="prelude-val">Some</span>(missing - <span class="number">1</span>);
                     }
-                    <span class="kw">let</span> <span class="ident">iterator</span> <span class="op">=</span> <span class="ident">ChannelFileIterator::new</span>(<span class="ident">receiver</span>);
-                    <span class="ident">process_provided_file</span>(<span class="ident">dag</span>.<span class="ident">file_callbacks</span>(), <span class="ident">uuid</span>, <span class="ident">success</span>, <span class="ident">iterator</span>, <span class="prelude-val">None</span>)
-                        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                    <span class="kw">let </span>iterator = ChannelFileIterator::new(receiver);
+                    process_provided_file(dag.file_callbacks(), uuid, success, iterator, <span class="prelude-val">None</span>)
+                        .with_context(|| {
                             <span class="macro">format!</span>(
                                 <span class="string">&quot;Failed to process ProvideFile({}, {}) from the server&quot;</span>,
-                                <span class="ident">uuid</span>, <span class="ident">success</span>
+                                uuid, success
                             )
                         })<span class="question-mark">?</span>;
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::NotifyStart</span>(<span class="ident">uuid</span>, <span class="ident">worker</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} started on {}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">worker</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>) <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">execution_callbacks</span>().<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">uuid</span>) {
-                        <span class="kw">for</span> <span class="ident">callback</span> <span class="kw">in</span> <span class="ident">callbacks</span>.<span class="ident">on_start</span>.<span class="ident">drain</span>(..) {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">callback</span>(<span class="ident">worker</span>) {
-                                <span class="macro">warn!</span>(<span class="string">&quot;Start callback for {} failed: {:?}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">e</span>);
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>);
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::NotifyStart(uuid, worker)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} started on {}&quot;</span>, uuid, worker);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = dag.execution_callbacks().get_mut(<span class="kw-2">&amp;</span>uuid) {
+                        <span class="kw">for </span>callback <span class="kw">in </span>callbacks.on_start.drain(..) {
+                            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = callback(worker) {
+                                <span class="macro">warn!</span>(<span class="string">&quot;Start callback for {} failed: {:?}&quot;</span>, uuid, e);
+                                <span class="kw">return </span><span class="prelude-val">Err</span>(e);
                             }
                         }
                     }
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::NotifyDone</span>(<span class="ident">uuid</span>, <span class="ident">result</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} completed with {:?}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">result</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>) <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">execution_callbacks</span>().<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">uuid</span>) {
-                        <span class="kw">for</span> <span class="ident">callback</span> <span class="kw">in</span> <span class="ident">callbacks</span>.<span class="ident">on_done</span>.<span class="ident">drain</span>(..) {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">callback</span>(<span class="ident">result</span>.<span class="ident">clone</span>()) {
-                                <span class="macro">warn!</span>(<span class="string">&quot;Done callback for {} failed: {:?}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">e</span>);
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>);
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::NotifyDone(uuid, result)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} completed with {:?}&quot;</span>, uuid, result);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = dag.execution_callbacks().get_mut(<span class="kw-2">&amp;</span>uuid) {
+                        <span class="kw">for </span>callback <span class="kw">in </span>callbacks.on_done.drain(..) {
+                            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = callback(result.clone()) {
+                                <span class="macro">warn!</span>(<span class="string">&quot;Done callback for {} failed: {:?}&quot;</span>, uuid, e);
+                                <span class="kw">return </span><span class="prelude-val">Err</span>(e);
                             }
                         }
                     }
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::NotifySkip</span>(<span class="ident">uuid</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} skipped&quot;</span>, <span class="ident">uuid</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callbacks</span>) <span class="op">=</span> <span class="ident">dag</span>.<span class="ident">execution_callbacks</span>().<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">uuid</span>) {
-                        <span class="kw">for</span> <span class="ident">callback</span> <span class="kw">in</span> <span class="ident">callbacks</span>.<span class="ident">on_skip</span>.<span class="ident">drain</span>(..) {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">callback</span>() {
-                                <span class="macro">warn!</span>(<span class="string">&quot;Skip callback for {} failed: {:?}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">e</span>);
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>);
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::NotifySkip(uuid)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} skipped&quot;</span>, uuid);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = dag.execution_callbacks().get_mut(<span class="kw-2">&amp;</span>uuid) {
+                        <span class="kw">for </span>callback <span class="kw">in </span>callbacks.on_skip.drain(..) {
+                            <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = callback() {
+                                <span class="macro">warn!</span>(<span class="string">&quot;Skip callback for {} failed: {:?}&quot;</span>, uuid, e);
+                                <span class="kw">return </span><span class="prelude-val">Err</span>(e);
                             }
                         }
                     }
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::Error</span>(<span class="ident">error</span>)) =&gt; {
-                    <span class="macro">error!</span>(<span class="string">&quot;Error occurred: {}&quot;</span>, <span class="ident">error</span>);
-                    <span class="ident">sender</span>
-                        .<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Stop</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to send Stop message to the server after an error&quot;</span>)<span class="question-mark">?</span>;
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::Error(error)) =&gt; {
+                    <span class="macro">error!</span>(<span class="string">&quot;Error occurred: {}&quot;</span>, error);
+                    sender
+                        .send(ExecutorClientMessage::Stop)
+                        .context(<span class="string">&quot;Failed to send Stop message to the server after an error&quot;</span>)<span class="question-mark">?</span>;
                     <span class="kw">break</span>;
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::Status</span>(<span class="ident">status</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server status: {:#?}&quot;</span>, <span class="ident">status</span>);
-                    <span class="ident">handle_server_status</span>(<span class="ident">status</span>, <span class="kw-2">&amp;mut</span> <span class="ident">status_callback</span>)
-                        .<span class="ident">context</span>(<span class="string">&quot;Failed to process Status() from the server&quot;</span>)<span class="question-mark">?</span>;
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::Status(status)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Server status: {:#?}&quot;</span>, status);
+                    handle_server_status(status, <span class="kw-2">&amp;mut </span>status_callback)
+                        .context(<span class="string">&quot;Failed to process Status() from the server&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="prelude-val">Ok</span>(<span class="ident">ExecutorServerMessage::Done</span>(<span class="ident">result</span>)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution completed producing {} files!&quot;</span>, <span class="ident">result</span>.<span class="ident">len</span>());
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">missing</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> (<span class="ident">uuid</span>, <span class="ident">key</span>, <span class="ident">success</span>) <span class="kw">in</span> <span class="ident">result</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="ident">file_store</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>) {
-                            <span class="kw">let</span> <span class="ident">iterator</span> <span class="op">=</span>
-                                <span class="ident">ReadFileIterator::new</span>(<span class="ident">handle</span>.<span class="ident">path</span>()).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                <span class="prelude-val">Ok</span>(ExecutorServerMessage::Done(result)) =&gt; {
+                    <span class="macro">info!</span>(<span class="string">&quot;Execution completed producing {} files!&quot;</span>, result.len());
+                    <span class="kw">let </span><span class="kw-2">mut </span>missing = <span class="number">0</span>;
+                    <span class="kw">for </span>(uuid, key, success) <span class="kw">in </span>result {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(handle) = file_store.get(<span class="kw-2">&amp;</span>key) {
+                            <span class="kw">let </span>iterator =
+                                ReadFileIterator::new(handle.path()).with_context(|| {
                                     <span class="macro">format!</span>(
                                         <span class="string">&quot;Failed to read produced file ({}) from the local storage&quot;</span>,
-                                        <span class="ident">handle</span>
+                                        handle
                                     )
                                 })<span class="question-mark">?</span>;
-                            <span class="ident">process_provided_file</span>(
-                                <span class="ident">dag</span>.<span class="ident">file_callbacks</span>(),
-                                <span class="ident">uuid</span>,
-                                <span class="ident">success</span>,
-                                <span class="ident">iterator</span>,
+                            process_provided_file(
+                                dag.file_callbacks(),
+                                uuid,
+                                success,
+                                iterator,
                                 <span class="prelude-val">None</span>,
                             )
-                            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                            .with_context(|| {
                                 <span class="macro">format!</span>(
                                     <span class="string">&quot;Failed to process produced file ({}) from the local storage&quot;</span>,
-                                    <span class="ident">handle</span>
+                                    handle
                                 )
                             })<span class="question-mark">?</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">sender</span>
-                                .<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::AskFile</span>(<span class="ident">uuid</span>, <span class="ident">key</span>, <span class="ident">success</span>))
-                                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                                    <span class="macro">format!</span>(<span class="string">&quot;Failed to ask for a completed file ({})&quot;</span>, <span class="ident">uuid</span>)
+                        } <span class="kw">else </span>{
+                            sender
+                                .send(ExecutorClientMessage::AskFile(uuid, key, success))
+                                .with_context(|| {
+                                    <span class="macro">format!</span>(<span class="string">&quot;Failed to ask for a completed file ({})&quot;</span>, uuid)
                                 })<span class="question-mark">?</span>;
-                            <span class="ident">missing</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                            missing += <span class="number">1</span>;
                         }
                     }
-                    <span class="ident">missing_files</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">missing</span>);
+                    missing_files = <span class="prelude-val">Some</span>(missing);
                 }
-                <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                    <span class="kw">let</span> <span class="ident">cause</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">root_cause</span>().<span class="ident">to_string</span>();
-                    <span class="kw">if</span> <span class="ident">cause</span> <span class="op">==</span> <span class="string">&quot;receiving on an empty and disconnected channel&quot;</span> {
-                        <span class="macro">trace!</span>(<span class="string">&quot;Connection closed: {}&quot;</span>, <span class="ident">cause</span>);
-                    } <span class="kw">else</span> {
-                        <span class="macro">error!</span>(<span class="string">&quot;Connection error: {}&quot;</span>, <span class="ident">cause</span>);
+                <span class="prelude-val">Err</span>(e) =&gt; {
+                    <span class="kw">let </span>cause = e.root_cause().to_string();
+                    <span class="kw">if </span>cause == <span class="string">&quot;receiving on an empty and disconnected channel&quot; </span>{
+                        <span class="macro">trace!</span>(<span class="string">&quot;Connection closed: {}&quot;</span>, cause);
+                    } <span class="kw">else </span>{
+                        <span class="macro">error!</span>(<span class="string">&quot;Connection error: {}&quot;</span>, cause);
                     }
                     <span class="kw">break</span>;
                 }
@@ -663,226 +663,226 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// Start the evaluation calling the file callbacks on the input files and sending the start</span>
-    <span class="doccomment">/// message to the Executor.</span>
-    <span class="kw">fn</span> <span class="ident">start_evaluation</span>(
-        <span class="ident">dag</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ExecutionDAG</span>,
-        <span class="ident">sender</span>: <span class="kw-2">&amp;</span><span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="comment">// list all the files/executions that want callbacks</span>
-        <span class="kw">let</span> <span class="ident">dag_callbacks</span> <span class="op">=</span> <span class="ident">ExecutionDAGWatchSet</span> {
-            <span class="ident">executions</span>: <span class="ident">dag</span>.<span class="ident">execution_callbacks</span>().<span class="ident">keys</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>(),
-            <span class="ident">files</span>: <span class="ident">dag</span>.<span class="ident">file_callbacks</span>().<span class="ident">keys</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>(),
-            <span class="ident">urgent_files</span>: <span class="ident">dag</span>.<span class="ident">urgent_files</span>().<span class="ident">clone</span>(),
+    <span class="doccomment">/// Start the evaluation calling the file callbacks on the input files and sending the start
+    /// message to the Executor.
+    </span><span class="kw">fn </span>start_evaluation(
+        dag: <span class="kw-2">&amp;mut </span>ExecutionDAG,
+        sender: <span class="kw-2">&amp;</span>ChannelSender&lt;ExecutorClientMessage&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="comment">// list all the files/executions that want callbacks
+        </span><span class="kw">let </span>dag_callbacks = ExecutionDAGWatchSet {
+            executions: dag.execution_callbacks().keys().cloned().collect(),
+            files: dag.file_callbacks().keys().cloned().collect(),
+            urgent_files: dag.urgent_files().clone(),
         };
-        <span class="kw">for</span> (<span class="ident">uuid</span>, <span class="ident">file</span>) <span class="kw">in</span> <span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">provided_files</span>.<span class="ident">iter</span>() {
-            <span class="kw">match</span> <span class="ident">file</span> {
-                <span class="ident">ProvidedFile::LocalFile</span> { <span class="ident">local_path</span>, .. } =&gt; {
-                    <span class="kw">let</span> <span class="ident">iterator</span> <span class="op">=</span> <span class="ident">ReadFileIterator::new</span>(<span class="kw-2">&amp;</span><span class="ident">local_path</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to read local file: {}&quot;</span>, <span class="ident">local_path</span>.<span class="ident">display</span>())
+        <span class="kw">for </span>(uuid, file) <span class="kw">in </span>dag.data.provided_files.iter() {
+            <span class="kw">match </span>file {
+                ProvidedFile::LocalFile { local_path, .. } =&gt; {
+                    <span class="kw">let </span>iterator = ReadFileIterator::new(<span class="kw-2">&amp;</span>local_path).with_context(|| {
+                        <span class="macro">format!</span>(<span class="string">&quot;Failed to read local file: {}&quot;</span>, local_path.display())
                     })<span class="question-mark">?</span>;
-                    <span class="ident">process_provided_file</span>(
-                        <span class="kw-2">&amp;mut</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>,
-                        <span class="kw-2">*</span><span class="ident">uuid</span>,
+                    process_provided_file(
+                        <span class="kw-2">&amp;mut </span>dag.callbacks.as_mut().unwrap().file_callbacks,
+                        <span class="kw-2">*</span>uuid,
                         <span class="bool-val">true</span>,
-                        <span class="ident">iterator</span>,
-                        <span class="prelude-val">Some</span>(<span class="ident">local_path</span>),
+                        iterator,
+                        <span class="prelude-val">Some</span>(local_path),
                     )
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to process local file&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">&quot;Failed to process local file&quot;</span>)<span class="question-mark">?</span>;
                 }
-                <span class="ident">ProvidedFile::Content</span> { <span class="ident">content</span>, .. } =&gt; {
-                    <span class="ident">process_provided_file</span>(
-                        <span class="kw-2">&amp;mut</span> <span class="ident">dag</span>.<span class="ident">callbacks</span>.<span class="ident">as_mut</span>().<span class="ident">unwrap</span>().<span class="ident">file_callbacks</span>,
-                        <span class="kw-2">*</span><span class="ident">uuid</span>,
+                ProvidedFile::Content { content, .. } =&gt; {
+                    process_provided_file(
+                        <span class="kw-2">&amp;mut </span>dag.callbacks.as_mut().unwrap().file_callbacks,
+                        <span class="kw-2">*</span>uuid,
                         <span class="bool-val">true</span>,
-                        <span class="macro">vec!</span>[<span class="ident">content</span>.<span class="ident">clone</span>()],
+                        <span class="macro">vec!</span>[content.clone()],
                         <span class="prelude-val">None</span>,
                     )
-                    .<span class="ident">context</span>(<span class="string">&quot;Failed to process file content&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">&quot;Failed to process file content&quot;</span>)<span class="question-mark">?</span>;
                 }
             }
         }
-        <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Evaluate</span> {
-            <span class="ident">dag</span>: <span class="ident">Box::new</span>(<span class="ident">dag</span>.<span class="ident">data</span>.<span class="ident">clone</span>()),
-            <span class="ident">callbacks</span>: <span class="ident">Box::new</span>(<span class="ident">dag_callbacks</span>),
+        sender.send(ExecutorClientMessage::Evaluate {
+            dag: Box::new(dag.data.clone()),
+            callbacks: Box::new(dag_callbacks),
         })
     }
 
-    <span class="doccomment">/// Spawn a thread that will ask the server status every `STATUS_POLL_INTERVAL_MS`, making sure</span>
-    <span class="doccomment">/// that the messages are not sent while being in the middle of sending a file.</span>
-    <span class="kw">fn</span> <span class="ident">spawn_status_poller</span>(
-        <span class="ident">done</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">AtomicBool</span><span class="op">&gt;</span>,
-        <span class="ident">file_mode</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span>()<span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">sender</span>: <span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">JoinHandle</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="ident">thread::Builder::new</span>()
-            .<span class="ident">name</span>(<span class="string">&quot;Client status poller&quot;</span>.<span class="ident">into</span>())
-            .<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                <span class="kw">while</span> <span class="op">!</span><span class="ident">done</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>) {
+    <span class="doccomment">/// Spawn a thread that will ask the server status every `STATUS_POLL_INTERVAL_MS`, making sure
+    /// that the messages are not sent while being in the middle of sending a file.
+    </span><span class="kw">fn </span>spawn_status_poller(
+        done: Arc&lt;AtomicBool&gt;,
+        file_mode: Arc&lt;Mutex&lt;()&gt;&gt;,
+        sender: ChannelSender&lt;ExecutorClientMessage&gt;,
+    ) -&gt; JoinHandle&lt;()&gt; {
+        thread::Builder::new()
+            .name(<span class="string">&quot;Client status poller&quot;</span>.into())
+            .spawn(<span class="kw">move </span>|| {
+                <span class="kw">while </span>!done.load(Ordering::Relaxed) {
                     {
-                        <span class="comment">// make sure to not interfere with the file sending protocol.</span>
-                        <span class="kw">let</span> <span class="ident">_lock</span> <span class="op">=</span> <span class="ident">file_mode</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-                        <span class="comment">// this may fail if the server is gone</span>
-                        <span class="kw">if</span> <span class="ident">sender</span>.<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::Status</span>).<span class="ident">is_err</span>() {
+                        <span class="comment">// make sure to not interfere with the file sending protocol.
+                        </span><span class="kw">let </span>_lock = file_mode.lock().unwrap();
+                        <span class="comment">// this may fail if the server is gone
+                        </span><span class="kw">if </span>sender.send(ExecutorClientMessage::Status).is_err() {
                             <span class="kw">break</span>;
                         }
                     }
-                    <span class="ident">thread::sleep</span>(<span class="ident">Duration::from_millis</span>(<span class="ident">STATUS_POLL_INTERVAL_MS</span>));
+                    thread::sleep(Duration::from_millis(STATUS_POLL_INTERVAL_MS));
                 }
             })
-            .<span class="ident">expect</span>(<span class="string">&quot;Failed to start client status poller thread&quot;</span>)
+            .expect(<span class="string">&quot;Failed to start client status poller thread&quot;</span>)
     }
 }
 
-<span class="doccomment">/// Server is asking for a file, handle the request sending the local file or the provided content.</span>
-<span class="doccomment">/// Note that this will trigger a protocol change for sending the file, no messages should be sent</span>
-<span class="doccomment">/// meanwhile.</span>
-<span class="kw">fn</span> <span class="ident">handle_server_ask_file</span>(
-    <span class="ident">uuid</span>: <span class="ident">FileUuid</span>,
-    <span class="ident">provided_files</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">ProvidedFile</span><span class="op">&gt;</span>,
-    <span class="ident">sender</span>: <span class="kw-2">&amp;</span><span class="ident">ChannelSender</span><span class="op">&lt;</span><span class="ident">ExecutorClientMessage</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">provided_files</span>[<span class="kw-2">&amp;</span><span class="ident">uuid</span>] {
-        <span class="ident">ProvidedFile::LocalFile</span> {
-            <span class="ident">local_path</span>, <span class="ident">key</span>, ..
+<span class="doccomment">/// Server is asking for a file, handle the request sending the local file or the provided content.
+/// Note that this will trigger a protocol change for sending the file, no messages should be sent
+/// meanwhile.
+</span><span class="kw">fn </span>handle_server_ask_file(
+    uuid: FileUuid,
+    provided_files: <span class="kw-2">&amp;</span>HashMap&lt;FileUuid, ProvidedFile&gt;,
+    sender: <span class="kw-2">&amp;</span>ChannelSender&lt;ExecutorClientMessage&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">match </span><span class="kw-2">&amp;</span>provided_files[<span class="kw-2">&amp;</span>uuid] {
+        ProvidedFile::LocalFile {
+            local_path, key, ..
         } =&gt; {
-            <span class="ident">sender</span>
-                .<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::ProvideFile</span>(<span class="ident">uuid</span>, <span class="ident">key</span>.<span class="ident">clone</span>()))
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">ChannelFileSender::send</span>(<span class="kw-2">&amp;</span><span class="ident">local_path</span>, <span class="ident">sender</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                <span class="macro">format!</span>(<span class="string">&quot;Failed to send local file from {}&quot;</span>, <span class="ident">local_path</span>.<span class="ident">display</span>())
+            sender
+                .send(ExecutorClientMessage::ProvideFile(uuid, key.clone()))
+                .context(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
+            ChannelFileSender::send(<span class="kw-2">&amp;</span>local_path, sender).with_context(|| {
+                <span class="macro">format!</span>(<span class="string">&quot;Failed to send local file from {}&quot;</span>, local_path.display())
             })<span class="question-mark">?</span>;
         }
-        <span class="ident">ProvidedFile::Content</span> { <span class="ident">content</span>, <span class="ident">key</span>, .. } =&gt; {
-            <span class="ident">sender</span>
-                .<span class="ident">send</span>(<span class="ident">ExecutorClientMessage::ProvideFile</span>(<span class="ident">uuid</span>, <span class="ident">key</span>.<span class="ident">clone</span>()))
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
-            <span class="ident">ChannelFileSender::send_data</span>(<span class="ident">content</span>.<span class="ident">clone</span>(), <span class="ident">sender</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Failed to send file content&quot;</span>)<span class="question-mark">?</span>;
+        ProvidedFile::Content { content, key, .. } =&gt; {
+            sender
+                .send(ExecutorClientMessage::ProvideFile(uuid, key.clone()))
+                .context(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
+            ChannelFileSender::send_data(content.clone(), sender)
+                .context(<span class="string">&quot;Failed to send file content&quot;</span>)<span class="question-mark">?</span>;
         }
     }
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="doccomment">/// Handle the server response to the status request.</span>
-<span class="kw">fn</span> <span class="ident">handle_server_status</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
-    <span class="ident">status</span>: <span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">Duration</span><span class="op">&gt;</span>,
-    <span class="ident">status_callback</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">ExecutorStatus</span><span class="op">&lt;</span><span class="ident">SystemTime</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Handle the server response to the status request.
+</span><span class="kw">fn </span>handle_server_status&lt;F&gt;(
+    status: ExecutorStatus&lt;Duration&gt;,
+    status_callback: <span class="kw-2">&amp;mut </span>F,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
+<span class="kw">where
+    </span>F: FnMut(ExecutorStatus&lt;SystemTime&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;,
 {
-    <span class="ident">status_callback</span>(<span class="ident">ExecutorStatus</span> {
-        <span class="ident">connected_workers</span>: <span class="ident">status</span>
-            .<span class="ident">connected_workers</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">worker</span><span class="op">|</span> <span class="ident">ExecutorWorkerStatus</span> {
-                <span class="ident">uuid</span>: <span class="ident">worker</span>.<span class="ident">uuid</span>,
-                <span class="ident">name</span>: <span class="ident">worker</span>.<span class="ident">name</span>,
-                <span class="ident">current_job</span>: <span class="ident">worker</span>.<span class="ident">current_job</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">status</span><span class="op">|</span> <span class="ident">status</span>.<span class="ident">into_system_time</span>()),
+    status_callback(ExecutorStatus {
+        connected_workers: status
+            .connected_workers
+            .into_iter()
+            .map(|worker| ExecutorWorkerStatus {
+                uuid: worker.uuid,
+                name: worker.name,
+                current_job: worker.current_job.map(|status| status.into_system_time()),
             })
-            .<span class="ident">collect</span>(),
-        <span class="ident">ready_execs</span>: <span class="ident">status</span>.<span class="ident">ready_execs</span>,
-        <span class="ident">waiting_execs</span>: <span class="ident">status</span>.<span class="ident">waiting_execs</span>,
+            .collect(),
+        ready_execs: status.ready_execs,
+        waiting_execs: status.waiting_execs,
     })
 }
 
-<span class="doccomment">/// Process a file provided either by the client or by the server, calling the callback and writing</span>
-<span class="doccomment">/// it to the `write_to` path. This will consume the iterator even if the callback is not present.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// If the iterator is reading the same file this function writes to, the result is the file getting</span>
-<span class="doccomment">/// truncated, for this reason a best-effort approach is implemented: if the iterator reads a local</span>
-<span class="doccomment">/// file pass to this function also the path to the file. The file wont be truncated if write_to</span>
-<span class="doccomment">/// points to the same file as the hint.</span>
-<span class="kw">fn</span> <span class="ident">process_provided_file</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-    <span class="ident">file_callbacks</span>: <span class="kw-2">&amp;mut</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">FileUuid</span>, <span class="ident">FileCallbacks</span><span class="op">&gt;</span>,
-    <span class="ident">uuid</span>: <span class="ident">FileUuid</span>,
-    <span class="ident">success</span>: <span class="ident">bool</span>,
-    <span class="ident">iterator</span>: <span class="ident">I</span>,
-    <span class="ident">source_path_hint</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callback</span>) <span class="op">=</span> <span class="ident">file_callbacks</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">uuid</span>) {
-        <span class="kw">let</span> <span class="ident">limit</span> <span class="op">=</span> <span class="ident">callback</span>
-            .<span class="ident">get_content</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">limit</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="kw-2">*</span><span class="ident">limit</span>)
-            .<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">file</span>, <span class="ident">dest</span>) <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">callback</span>.<span class="ident">write_to</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">WriteToCallback</span> {
-                <span class="ident">dest</span>,
-                <span class="ident">allow_failure</span>,
+<span class="doccomment">/// Process a file provided either by the client or by the server, calling the callback and writing
+/// it to the `write_to` path. This will consume the iterator even if the callback is not present.
+///
+/// If the iterator is reading the same file this function writes to, the result is the file getting
+/// truncated, for this reason a best-effort approach is implemented: if the iterator reads a local
+/// file pass to this function also the path to the file. The file wont be truncated if write_to
+/// points to the same file as the hint.
+</span><span class="kw">fn </span>process_provided_file&lt;I: IntoIterator&lt;Item = Vec&lt;u8&gt;&gt;&gt;(
+    file_callbacks: <span class="kw-2">&amp;mut </span>HashMap&lt;FileUuid, FileCallbacks&gt;,
+    uuid: FileUuid,
+    success: bool,
+    iterator: I,
+    source_path_hint: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Path&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(callback) = file_callbacks.get_mut(<span class="kw-2">&amp;</span>uuid) {
+        <span class="kw">let </span>limit = callback
+            .get_content
+            .as_ref()
+            .map(|(limit, <span class="kw">_</span>)| <span class="kw-2">*</span>limit)
+            .unwrap_or(<span class="number">0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>buffer: Vec&lt;u8&gt; = Vec::new();
+        <span class="kw">let </span>(<span class="kw-2">mut </span>file, dest) = <span class="kw">match </span><span class="kw-2">&amp;</span>callback.write_to {
+            <span class="prelude-val">Some</span>(WriteToCallback {
+                dest,
+                allow_failure,
                 ..
             }) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">success</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">allow_failure</span> {
+                <span class="kw">if </span>!success &amp;&amp; !<span class="kw-2">*</span>allow_failure {
                     (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">skip</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">source</span>) <span class="op">=</span> <span class="ident">source_path_hint</span> {
-                        <span class="kw">match</span> (<span class="ident">source</span>.<span class="ident">canonicalize</span>(), <span class="ident">dest</span>.<span class="ident">canonicalize</span>()) {
-                            (<span class="prelude-val">Ok</span>(<span class="ident">path</span>), <span class="prelude-val">Ok</span>(<span class="ident">path2</span>)) <span class="kw">if</span> <span class="ident">path</span> <span class="op">==</span> <span class="ident">path2</span> =&gt; {
-                                <span class="macro">info!</span>(<span class="string">&quot;Not writing {} from itself&quot;</span>, <span class="ident">path</span>.<span class="ident">display</span>());
-                                <span class="ident">skip</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>skip = <span class="bool-val">false</span>;
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(source) = source_path_hint {
+                        <span class="kw">match </span>(source.canonicalize(), dest.canonicalize()) {
+                            (<span class="prelude-val">Ok</span>(path), <span class="prelude-val">Ok</span>(path2)) <span class="kw">if </span>path == path2 =&gt; {
+                                <span class="macro">info!</span>(<span class="string">&quot;Not writing {} from itself&quot;</span>, path.display());
+                                skip = <span class="bool-val">true</span>;
                             }
-                            <span class="kw">_</span> =&gt; {}
+                            <span class="kw">_ </span>=&gt; {}
                         }
                     }
-                    <span class="kw">if</span> <span class="ident">skip</span> {
+                    <span class="kw">if </span>skip {
                         (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)
-                    } <span class="kw">else</span> {
-                        <span class="macro">info!</span>(<span class="string">&quot;Writing file {} to {}&quot;</span>, <span class="ident">uuid</span>, <span class="ident">dest</span>.<span class="ident">display</span>());
-                        <span class="kw">let</span> <span class="ident">parent</span> <span class="op">=</span> <span class="ident">dest</span>.<span class="ident">parent</span>().<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-                            <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid file destination path: {}&quot;</span>, <span class="ident">dest</span>.<span class="ident">display</span>())
+                    } <span class="kw">else </span>{
+                        <span class="macro">info!</span>(<span class="string">&quot;Writing file {} to {}&quot;</span>, uuid, dest.display());
+                        <span class="kw">let </span>parent = dest.parent().ok_or_else(|| {
+                            <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid file destination path: {}&quot;</span>, dest.display())
                         })<span class="question-mark">?</span>;
-                        <span class="ident">std::fs::create_dir_all</span>(<span class="ident">parent</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
+                        std::fs::create_dir_all(parent).with_context(|| {
                             <span class="macro">format!</span>(
                                 <span class="string">&quot;Failed to create parent directory ({}) for {}&quot;</span>,
-                                <span class="ident">parent</span>.<span class="ident">display</span>(),
-                                <span class="ident">dest</span>.<span class="ident">display</span>()
+                                parent.display(),
+                                dest.display()
                             )
                         })<span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::File::create</span>(<span class="kw-2">&amp;</span><span class="ident">dest</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                            <span class="macro">format!</span>(<span class="string">&quot;Failed to create file: {}&quot;</span>, <span class="ident">dest</span>.<span class="ident">display</span>())
+                        <span class="kw">let </span>file = std::fs::File::create(<span class="kw-2">&amp;</span>dest).with_context(|| {
+                            <span class="macro">format!</span>(<span class="string">&quot;Failed to create file: {}&quot;</span>, dest.display())
                         })<span class="question-mark">?</span>;
-                        (<span class="prelude-val">Some</span>(<span class="ident">file</span>), <span class="prelude-val">Some</span>(<span class="ident">dest</span>.<span class="ident">clone</span>()))
+                        (<span class="prelude-val">Some</span>(file), <span class="prelude-val">Some</span>(dest.clone()))
                     }
                 }
             }
-            <span class="kw">_</span> =&gt; (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>),
+            <span class="kw">_ </span>=&gt; (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>),
         };
-        <span class="kw">for</span> <span class="ident">chunk</span> <span class="kw">in</span> <span class="ident">iterator</span> {
-            <span class="kw">if</span> <span class="kw">let</span> (<span class="prelude-val">Some</span>(<span class="ident">file</span>), <span class="prelude-val">Some</span>(<span class="ident">dest</span>)) <span class="op">=</span> (<span class="kw-2">&amp;mut</span> <span class="ident">file</span>, <span class="kw-2">&amp;</span><span class="ident">dest</span>) {
-                <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span><span class="ident">chunk</span>)
-                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Failed to write chunk to {}&quot;</span>, <span class="ident">dest</span>.<span class="ident">display</span>()))<span class="question-mark">?</span>;
+        <span class="kw">for </span>chunk <span class="kw">in </span>iterator {
+            <span class="kw">if let </span>(<span class="prelude-val">Some</span>(file), <span class="prelude-val">Some</span>(dest)) = (<span class="kw-2">&amp;mut </span>file, <span class="kw-2">&amp;</span>dest) {
+                file.write_all(<span class="kw-2">&amp;</span>chunk)
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to write chunk to {}&quot;</span>, dest.display()))<span class="question-mark">?</span>;
             }
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">limit</span> {
-                <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">std::cmp::min</span>(<span class="ident">chunk</span>.<span class="ident">len</span>(), <span class="ident">limit</span> <span class="op">-</span> <span class="ident">buffer</span>.<span class="ident">len</span>());
-                <span class="ident">buffer</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">chunk</span>[..<span class="ident">len</span>]);
+            <span class="kw">if </span>buffer.len() &lt; limit {
+                <span class="kw">let </span>len = std::cmp::min(chunk.len(), limit - buffer.len());
+                buffer.extend_from_slice(<span class="kw-2">&amp;</span>chunk[..len]);
             }
         }
-        <span class="ident">drop</span>(<span class="ident">file</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">write_to</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">callback</span>.<span class="ident">write_to</span> {
-            <span class="kw">if</span> <span class="ident">write_to</span>.<span class="ident">executable</span> <span class="op">&amp;&amp;</span> <span class="ident">write_to</span>.<span class="ident">dest</span>.<span class="ident">exists</span>() {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">perm</span> <span class="op">=</span> <span class="ident">std::fs::metadata</span>(<span class="kw-2">&amp;</span><span class="ident">write_to</span>.<span class="ident">dest</span>)
-                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to get file metadata of {}&quot;</span>, <span class="ident">write_to</span>.<span class="ident">dest</span>.<span class="ident">display</span>())
-                    })<span class="question-mark">?</span>
-                    .<span class="ident">permissions</span>();
-                <span class="ident">perm</span>.<span class="ident">set_mode</span>(<span class="number">0o755</span>);
-                <span class="ident">std::fs::set_permissions</span>(<span class="kw-2">&amp;</span><span class="ident">write_to</span>.<span class="ident">dest</span>, <span class="ident">perm</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                    <span class="macro">format!</span>(<span class="string">&quot;Failed to make {} executable&quot;</span>, <span class="ident">write_to</span>.<span class="ident">dest</span>.<span class="ident">display</span>())
+        drop(file);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(write_to) = <span class="kw-2">&amp;</span>callback.write_to {
+            <span class="kw">if </span>write_to.executable &amp;&amp; write_to.dest.exists() {
+                <span class="kw">let </span><span class="kw-2">mut </span>perm = std::fs::metadata(<span class="kw-2">&amp;</span>write_to.dest)
+                    .with_context(|| {
+                        <span class="macro">format!</span>(<span class="string">&quot;Failed to get file metadata of {}&quot;</span>, write_to.dest.display())
+                    })<span class="question-mark">?
+                    </span>.permissions();
+                perm.set_mode(<span class="number">0o755</span>);
+                std::fs::set_permissions(<span class="kw-2">&amp;</span>write_to.dest, perm).with_context(|| {
+                    <span class="macro">format!</span>(<span class="string">&quot;Failed to make {} executable&quot;</span>, write_to.dest.display())
                 })<span class="question-mark">?</span>;
             }
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">get_content</span>) <span class="op">=</span> <span class="ident">callback</span>.<span class="ident">get_content</span>.<span class="ident">take</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">f</span>)<span class="op">|</span> <span class="ident">f</span>) {
-            <span class="ident">get_content</span>(<span class="ident">buffer</span>)
-                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;get_content callback for file {} failed&quot;</span>, <span class="ident">uuid</span>))<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(get_content) = callback.get_content.take().map(|(<span class="kw">_</span>, f)| f) {
+            get_content(buffer)
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;get_content callback for file {} failed&quot;</span>, uuid))<span class="question-mark">?</span>;
         }
-    } <span class="kw">else</span> {
-        <span class="ident">iterator</span>.<span class="ident">into_iter</span>().<span class="ident">last</span>();
+    } <span class="kw">else </span>{
+        iterator.into_iter().last();
     }
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
