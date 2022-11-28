@@ -678,7 +678,7 @@
         <span class="kw">for </span>(uuid, file) <span class="kw">in </span>dag.data.provided_files.iter() {
             <span class="kw">match </span>file {
                 ProvidedFile::LocalFile { local_path, .. } =&gt; {
-                    <span class="kw">let </span>iterator = ReadFileIterator::new(<span class="kw-2">&amp;</span>local_path).with_context(|| {
+                    <span class="kw">let </span>iterator = ReadFileIterator::new(local_path).with_context(|| {
                         <span class="macro">format!</span>(<span class="string">&quot;Failed to read local file: {}&quot;</span>, local_path.display())
                     })<span class="question-mark">?</span>;
                     process_provided_file(
@@ -749,7 +749,7 @@
             sender
                 .send(ExecutorClientMessage::ProvideFile(uuid, key.clone()))
                 .context(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
-            ChannelFileSender::send(<span class="kw-2">&amp;</span>local_path, sender).with_context(|| {
+            ChannelFileSender::send(local_path, sender).with_context(|| {
                 <span class="macro">format!</span>(<span class="string">&quot;Failed to send local file from {}&quot;</span>, local_path.display())
             })<span class="question-mark">?</span>;
         }
@@ -841,7 +841,7 @@
                                 dest.display()
                             )
                         })<span class="question-mark">?</span>;
-                        <span class="kw">let </span>file = std::fs::File::create(<span class="kw-2">&amp;</span>dest).with_context(|| {
+                        <span class="kw">let </span>file = std::fs::File::create(dest).with_context(|| {
                             <span class="macro">format!</span>(<span class="string">&quot;Failed to create file: {}&quot;</span>, dest.display())
                         })<span class="question-mark">?</span>;
                         (<span class="prelude-val">Some</span>(file), <span class="prelude-val">Some</span>(dest.clone()))

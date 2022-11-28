@@ -1171,7 +1171,7 @@
         }
         <span class="kw">for </span>(path, input) <span class="kw">in </span>execution.inputs.iter() {
             Sandbox::write_sandbox_file(
-                <span class="kw-2">&amp;</span>box_dir.join(<span class="string">&quot;box&quot;</span>).join(<span class="kw-2">&amp;</span>path),
+                <span class="kw-2">&amp;</span>box_dir.join(<span class="string">&quot;box&quot;</span>).join(path),
                 dep_keys
                     .get(<span class="kw-2">&amp;</span>input.file)
                     .context(<span class="string">&quot;file not provided&quot;</span>)<span class="question-mark">?
@@ -1180,7 +1180,7 @@
             )<span class="question-mark">?</span>;
         }
         <span class="kw">for </span>path <span class="kw">in </span>execution.outputs.keys() {
-            Sandbox::touch_file(<span class="kw-2">&amp;</span>box_dir.join(<span class="string">&quot;box&quot;</span>).join(<span class="kw-2">&amp;</span>path), <span class="number">0o600</span>)<span class="question-mark">?</span>;
+            Sandbox::touch_file(<span class="kw-2">&amp;</span>box_dir.join(<span class="string">&quot;box&quot;</span>).join(path), <span class="number">0o600</span>)<span class="question-mark">?</span>;
         }
         <span class="comment">// remove the write bit on the box folder
         </span><span class="kw">if </span>execution.limits.read_only {

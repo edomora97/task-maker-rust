@@ -529,7 +529,7 @@
         <span class="kw">if </span>ext.as_str() == <span class="string">&quot;asy&quot; </span>{
             <span class="kw">let </span>dest = suffix.with_extension(<span class="string">&quot;pdf&quot;</span>);
             <span class="kw">if </span><span class="self">self</span>.content.contains(dest.to_string_lossy().as_ref()) {
-                <span class="kw">let </span>file = AsyFile::compile(<span class="kw-2">&amp;</span>path, eval, booklet_name)
+                <span class="kw">let </span>file = AsyFile::compile(path, eval, booklet_name)
                     .context(<span class="string">&quot;Failed to compile asy file&quot;</span>)<span class="question-mark">?</span>;
                 deps.push((dest, file));
             }
@@ -551,7 +551,7 @@
                 <span class="self">self</span>.config.name, suffix
             ));
             eval.dag
-                .provide_file(file.clone(), <span class="kw-2">&amp;</span>path)
+                .provide_file(file.clone(), path)
                 .context(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
             deps.push((suffix.into(), file));
         }

@@ -1024,7 +1024,7 @@
         </span>} <span class="kw">else </span>{
             <span class="comment">// assuming moving files is atomic this should be MT-safe
             </span><span class="kw">let </span>dir = path.parent().unwrap();
-            std::fs::create_dir_all(<span class="kw-2">&amp;</span>dir)
+            std::fs::create_dir_all(dir)
                 .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot create directory at {}&quot;</span>, dir.display()))<span class="question-mark">?</span>;
             <span class="kw">let </span>tmpdir = tempfile::TempDir::new_in(path.parent().unwrap())
                 .context(<span class="string">&quot;Failed to create temporary directory for storing the file&quot;</span>)<span class="question-mark">?</span>;
@@ -1387,7 +1387,7 @@
 
     <span class="kw">fn </span>corrupt_file(path: <span class="kw-2">&amp;</span>Path) {
         {
-            <span class="kw">let </span>file = File::open(<span class="kw-2">&amp;</span>path).unwrap();
+            <span class="kw">let </span>file = File::open(path).unwrap();
             <span class="kw">let </span><span class="kw-2">mut </span>perm = file.metadata().unwrap().permissions();
             perm.set_readonly(<span class="bool-val">false</span>);
             file.set_permissions(perm).unwrap();
@@ -1537,7 +1537,7 @@
             </span><span class="kw">return</span>;
         }
         <span class="kw">let </span>cwd = get_cwd();
-        <span class="kw">let </span>store = FileStore::new(<span class="kw-2">&amp;</span>cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
+        <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
         <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>path = store.key_to_path(<span class="kw-2">&amp;</span>handle.key);
         corrupt_file(<span class="kw-2">&amp;</span>path);
@@ -1547,7 +1547,7 @@
     <span class="attribute">#[test]
     </span><span class="kw">fn </span>test_locked_files() {
         <span class="kw">let </span>cwd = get_cwd();
-        <span class="kw">let </span>store = FileStore::new(<span class="kw-2">&amp;</span>cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
+        <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
         <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>key = handle.key.clone();
         <span class="macro">assert_eq!</span>(store.locked_files.lock().unwrap().ref_counts[<span class="kw-2">&amp;</span>key], <span class="number">1</span>);
@@ -1567,7 +1567,7 @@
     <span class="attribute">#[test]
     </span><span class="kw">fn </span>test_locked_files_different_means() {
         <span class="kw">let </span>cwd = get_cwd();
-        <span class="kw">let </span>store = FileStore::new(<span class="kw-2">&amp;</span>cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
+        <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
         <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>key = handle.key.clone();
         <span class="macro">assert_eq!</span>(store.locked_files.lock().unwrap().ref_counts[<span class="kw-2">&amp;</span>key], <span class="number">1</span>);

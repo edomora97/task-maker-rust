@@ -162,7 +162,7 @@
                     subtask_id, testcase_id, path
                 ));
                 <span class="kw">let </span>uuid = file.uuid;
-                eval.dag.provide_file(file, <span class="kw-2">&amp;</span>path).with_context(|| {
+                eval.dag.provide_file(file, path).with_context(|| {
                     <span class="macro">format!</span>(
                         <span class="string">&quot;Failed to provide static input file from {}&quot;</span>,
                         path.display()

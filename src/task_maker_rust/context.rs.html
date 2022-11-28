@@ -453,7 +453,7 @@
 
         <span class="comment">// connect either to the remote executor or spawn a local one
         </span><span class="kw">let </span>(tx, rx, local_executor) = <span class="kw">if let </span><span class="prelude-val">Some</span>(evaluate_on) = <span class="kw-2">&amp;</span>opt.evaluate_on {
-            <span class="kw">let </span>(tx, rx) = connect_to_remote_server(<span class="kw-2">&amp;</span>evaluate_on, <span class="number">27182</span>)
+            <span class="kw">let </span>(tx, rx) = connect_to_remote_server(evaluate_on, <span class="number">27182</span>)
                 .context(<span class="string">&quot;Cannot connect to the remote server&quot;</span>)<span class="question-mark">?</span>;
             <span class="kw">let </span>name = opt
                 .name

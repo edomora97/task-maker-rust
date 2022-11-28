@@ -406,7 +406,7 @@
     <span class="macro">lazy_static! </span>{
         <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex = Regex::new(<span class="string">r#&quot;#include\s*[&lt;&quot;]([^&quot;&gt;]+)[&gt;&quot;]&quot;#</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
     }
-    <span class="kw">let </span>content = <span class="kw">match </span>std::fs::read_to_string(<span class="kw-2">&amp;</span>path) {
+    <span class="kw">let </span>content = <span class="kw">match </span>std::fs::read_to_string(path) {
         <span class="prelude-val">Ok</span>(content) =&gt; content,
         <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="macro">vec!</span>[],
     };

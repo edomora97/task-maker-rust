@@ -441,7 +441,7 @@
                 <span class="prelude-val">None </span>=&gt; <span class="kw">continue</span>,
                 <span class="prelude-val">Some</span>(subtasks) =&gt; subtasks,
             };
-            <span class="kw">let </span>one_based = <span class="kw">if </span>subtasks[<span class="number">0</span>].id == <span class="number">1 </span>{ <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>};
+            <span class="kw">let </span>one_based = (subtasks[<span class="number">0</span>].id == <span class="number">1</span>) <span class="kw">as </span>u32;
             <span class="kw">for </span>(expected, actual) <span class="kw">in </span>expected_subtasks.iter().zip(subtasks.iter()) {
                 <span class="kw">let </span>expected_id = expected.id + one_based;
                 <span class="kw">if </span>expected_id != actual.id {

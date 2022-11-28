@@ -1140,7 +1140,7 @@
                 )
             },
         )<span class="question-mark">?</span>;
-        std::os::unix::fs::symlink(<span class="kw-2">&amp;</span>artifact, <span class="kw-2">&amp;</span>target_artifact_path).with_context(|| {
+        std::os::unix::fs::symlink(artifact, <span class="kw-2">&amp;</span>target_artifact_path).with_context(|| {
             <span class="macro">anyhow!</span>(
                 <span class="string">&quot;Failed to create symlink: {} -&gt; {}&quot;</span>,
                 target_artifact_path.display(),
