@@ -286,6 +286,10 @@
 <span id="286">286</span>
 <span id="287">287</span>
 <span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
 <span class="kw">use </span>regex::Regex;
@@ -318,9 +322,13 @@
 <span class="kw">impl </span>LanguageCppConfiguration {
     <span class="doccomment">/// Get the configuration of C++ from the environment variables.
     </span><span class="kw">pub fn </span>from_env() -&gt; LanguageCppConfiguration {
-        <span class="kw">let </span>compiler = std::env::var_os(<span class="string">&quot;TM_CXX&quot;</span>).unwrap_or_else(|| <span class="string">&quot;g++&quot;</span>.into());
+        <span class="kw">let </span>compiler = std::env::var_os(<span class="string">&quot;TM_CXX&quot;</span>)
+            .or_else(|| std::env::var_os(<span class="string">&quot;CXX&quot;</span>))
+            .unwrap_or_else(|| <span class="string">&quot;g++&quot;</span>.into());
         <span class="kw">let </span>std_version = std::env::var(<span class="string">&quot;TM_CXX_STD_VERSION&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;c++17&quot;</span>.into());
-        <span class="kw">let </span>extra_flags = std::env::var(<span class="string">&quot;TM_CXXFLAGS&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| String::new());
+        <span class="kw">let </span>extra_flags = std::env::var(<span class="string">&quot;TM_CXXFLAGS&quot;</span>)
+            .or_else(|<span class="kw">_</span>| std::env::var(<span class="string">&quot;CXXFLAGS&quot;</span>))
+            .unwrap_or_else(|<span class="kw">_</span>| String::new());
         <span class="kw">let </span>extra_flags = shell_words::split(<span class="kw-2">&amp;</span>extra_flags).expect(<span class="string">&quot;Invalid $TM_CXXFLAGS&quot;</span>);
         LanguageCppConfiguration {
             compiler: ExecutionCommand::System(compiler.into()),

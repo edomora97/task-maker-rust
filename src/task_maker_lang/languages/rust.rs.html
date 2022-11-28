@@ -160,6 +160,8 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 <span class="kw">use </span>task_maker_dag::ExecutionCommand;
 
@@ -184,7 +186,9 @@
 
 <span class="kw">impl </span>LanguageRustConfiguration {
     <span class="kw">fn </span>from_env() -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>rustup_home_path = std::env::var_os(<span class="string">&quot;TM_RUSTUP_HOME&quot;</span>).map(Into::into);
+        <span class="kw">let </span>rustup_home_path = std::env::var_os(<span class="string">&quot;TM_RUSTUP_HOME&quot;</span>)
+            .or_else(|| std::env::var_os(<span class="string">&quot;RUSTUP_HOME&quot;</span>))
+            .map(Into::into);
         <span class="self">Self </span>{ rustup_home_path }
     }
 }
