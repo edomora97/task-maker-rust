@@ -107,6 +107,7 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
 </span><span class="kw">use </span>std::path::Path;
@@ -137,6 +138,7 @@
     <span class="kw">let </span>all: Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;<span class="kw">_</span>&gt;&gt;&gt; = <span class="macro">vec!</span>[
         Box::new(task::TaskMaxScore::default()),
         Box::new(task::BrokenSymlinks::default()),
+        Box::new(task::NoBitsStdCpp::default()),
         Box::new(att::AttGraders::default()),
         Box::new(att::AttTemplates::default()),
         Box::new(att::AttSampleFiles::default()),
