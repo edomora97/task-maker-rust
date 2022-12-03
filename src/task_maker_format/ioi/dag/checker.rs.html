@@ -314,7 +314,7 @@
                                 testcase_id
                             )
                         } <span class="kw">else </span>{
-                            <span class="macro">format!</span>(<span class="string">&quot;Checker failed while computing a score for a testcase&quot;</span>)
+                            <span class="string">&quot;Checker failed while computing a score for a testcase&quot;</span>.into()
                         };
                         <span class="kw">let </span>diagnostic = Diagnostic::error(message)
                             .with_note(description)
