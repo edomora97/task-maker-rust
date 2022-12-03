@@ -114,6 +114,7 @@
 <span id="114">114</span>
 <span id="115">115</span>
 <span id="116">116</span>
+<span id="117">117</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
 </span><span class="kw">use </span>std::path::Path;
@@ -154,6 +155,7 @@
         Box::new(att::AttWithNoCheck::default()),
         Box::new(att::AttEndWithNewLine::default()),
         Box::new(att::AttNoDirectory::default()),
+        Box::new(att::AttTemplatesShouldCompile::default()),
         Box::new(sol::SolGraders::default()),
         Box::new(sol::SolSymlink::default()),
         Box::new(statement::StatementSubtasks::default()),

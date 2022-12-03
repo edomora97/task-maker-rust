@@ -188,10 +188,10 @@
 
     <span class="doccomment">/// Prepare an execution of the source file, eventually adding the compilation to the DAG.
     /// The compilation messages are sent to the UI.
-    </span><span class="kw">pub fn </span>prepare(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">pub fn </span>prepare(<span class="kw-2">&amp;</span><span class="self">self</span>, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;ExecutionUuid&gt;, Error&gt; {
         <span class="kw">let </span>comp = <span class="self">self</span>.base.prepare(<span class="kw-2">&amp;mut </span>eval.dag)<span class="question-mark">?</span>;
         <span class="self">self</span>.bind_compilation_exe(eval, comp)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(())
+        <span class="prelude-val">Ok</span>(comp)
     }
 
     <span class="doccomment">/// Prepare the source file if needed and return the executable file.
