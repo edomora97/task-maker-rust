@@ -522,15 +522,6 @@
 <span id="522">522</span>
 <span id="523">523</span>
 <span id="524">524</span>
-<span id="525">525</span>
-<span id="526">526</span>
-<span id="527">527</span>
-<span id="528">528</span>
-<span id="529">529</span>
-<span id="530">530</span>
-<span id="531">531</span>
-<span id="532">532</span>
-<span id="533">533</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeSet, HashMap};
 <span class="kw">use </span>std::io::{Read, Seek, SeekFrom};
 <span class="kw">use </span>std::path::PathBuf;
@@ -1041,24 +1032,15 @@
             <span class="kw">let </span>source_file = SourceFile::new(
                 template,
                 <span class="kw-2">&amp;</span>task.path,
+                <span class="macro">format!</span>(
+                    <span class="string">&quot;Template {} compiled with attached grader {}&quot;</span>,
+                    att_name, att_grader_name
+                ),
                 <span class="prelude-val">Some</span>(Arc::new(grader_map)),
                 <span class="prelude-val">None</span>::&lt;String&gt;,
             );
             <span class="kw">if let </span><span class="prelude-val">Some</span>(source_file) = source_file {
-                <span class="kw">let </span>comp = source_file.prepare(eval)<span class="question-mark">?</span>;
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(uuid) = comp {
-                    <span class="kw">let </span>sender = eval.sender.clone();
-                    eval.dag.on_execution_done(<span class="kw-2">&amp;</span>uuid, <span class="kw">move </span>|result| {
-                        <span class="kw">if </span>!result.status.is_success() {
-                            <span class="kw">let </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                                <span class="string">&quot;Template {} failed to compile with grader {}&quot;</span>,
-                                att_name, att_grader_name
-                            ));
-                            sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
-                        }
-                        <span class="prelude-val">Ok</span>(())
-                    });
-                }
+                source_file.prepare(eval)<span class="question-mark">?</span>;
             }
         }
         <span class="prelude-val">Ok</span>(())

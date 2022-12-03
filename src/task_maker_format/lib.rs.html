@@ -413,6 +413,27 @@
 <span id="413">413</span>
 <span id="414">414</span>
 <span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Task parsing and execution using computation DAGs.
 //!
 //! This crate allows you to parse the tasks on disk and evaluate the solutions inside of them by
@@ -671,14 +692,18 @@
 
 <span class="doccomment">/// Make a `SourceFile` with each file that match the patterns provided, that is in a recognised
 /// language.
+///
+/// The file name is appended to `description_prefix` and used as description for the source file.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>find_source_file&lt;
     CwdPath: AsRef&lt;Path&gt;,
     Pattern: AsRef&lt;str&gt;,
     BasePath: Into&lt;PathBuf&gt;,
+    S: AsRef&lt;str&gt;,
 &gt;(
     cwd: CwdPath,
     patterns: Vec&lt;Pattern&gt;,
     base_path: BasePath,
+    description_prefix: S,
     grader_map: <span class="prelude-ty">Option</span>&lt;Arc&lt;GraderMap&gt;&gt;,
     write_bin_to: WriteBinTo,
 ) -&gt; Vec&lt;SourceFile&gt; {
@@ -691,9 +716,17 @@
                 WriteBinTo::WithoutExtension =&gt; <span class="prelude-val">Some</span>(path.with_extension(<span class="string">&quot;&quot;</span>)),
                 WriteBinTo::Path(path) =&gt; <span class="prelude-val">Some</span>(base_path.join(path)),
             };
+            <span class="kw">let </span>name = path.strip_prefix(<span class="kw-2">&amp;</span>base_path).unwrap_or(<span class="kw-2">&amp;</span>path);
             <span class="comment">// SourceFile::new may fail if the language is unknown
             </span>result.push(
-                SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="kw-2">&amp;</span>base_path, grader_map.clone(), write_bin_to).unwrap(),
+                SourceFile::new(
+                    <span class="kw-2">&amp;</span>path,
+                    <span class="kw-2">&amp;</span>base_path,
+                    <span class="macro">format!</span>(<span class="string">&quot;{} {}&quot;</span>, description_prefix.as_ref(), name.display()),
+                    grader_map.clone(),
+                    write_bin_to,
+                )
+                .unwrap(),
             );
         }
     }
@@ -795,6 +828,7 @@
             tmpdir.path(),
             <span class="macro">vec!</span>[<span class="string">&quot;foo/bar/*.py&quot;</span>],
             <span class="string">&quot;&quot;</span>,
+            <span class="string">&quot;&quot;</span>,
             <span class="prelude-val">None</span>,
             WriteBinTo::None,
         );
@@ -809,7 +843,14 @@
         std::fs::create_dir_all(tmpdir.path().join(<span class="string">&quot;foo&quot;</span>)).unwrap();
         std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
         std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/zzz.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = find_source_file(tmpdir.path(), <span class="macro">vec!</span>[<span class="string">&quot;foo/*.py&quot;</span>], <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, WriteBinTo::None);
+        <span class="kw">let </span>source = find_source_file(
+            tmpdir.path(),
+            <span class="macro">vec!</span>[<span class="string">&quot;foo/*.py&quot;</span>],
+            <span class="string">&quot;&quot;</span>,
+            <span class="string">&quot;&quot;</span>,
+            <span class="prelude-val">None</span>,
+            WriteBinTo::None,
+        );
         <span class="macro">assert_eq!</span>(source.len(), <span class="number">2</span>);
     }
 
@@ -821,6 +862,7 @@
         <span class="kw">let </span>source = find_source_file(
             tmpdir.path(),
             <span class="macro">vec!</span>[<span class="string">&quot;foo/bar/*.py&quot;</span>],
+            <span class="string">&quot;&quot;</span>,
             <span class="string">&quot;&quot;</span>,
             <span class="prelude-val">None</span>,
             WriteBinTo::None,

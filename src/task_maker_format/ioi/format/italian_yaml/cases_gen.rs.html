@@ -1647,6 +1647,7 @@
 <span id="1647">1647</span>
 <span id="1648">1648</span>
 <span id="1649">1649</span>
+<span id="1650">1650</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fmt::Debug;
 <span class="kw">use </span>std::fmt::Formatter;
@@ -2037,6 +2038,7 @@
             <span class="kw">let </span>source = SourceFile::new(
                 <span class="kw-2">&amp;</span>path,
                 task_dir,
+                <span class="macro">format!</span>(<span class="string">&quot;The {} named {}&quot;</span>, kind, name),
                 <span class="prelude-val">None</span>,
                 <span class="prelude-val">Some</span>(
                     task_dir

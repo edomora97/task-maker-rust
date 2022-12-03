@@ -374,6 +374,12 @@
 <span id="374">374</span>
 <span id="375">375</span>
 <span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::fs::File;
 <span class="kw">use </span>std::io::Read;
 <span class="kw">use </span>std::path::{Path, PathBuf};
@@ -412,7 +418,13 @@
             .join(<span class="string">&quot;bin&quot;</span>)
             .join(<span class="string">&quot;sol&quot;</span>)
             .join(path.file_name().unwrap());
-        <span class="kw">let </span>source_file = SourceFile::new(path, base_dir, grader_map, <span class="prelude-val">Some</span>(write_to))<span class="question-mark">?</span>;
+        <span class="kw">let </span>source_file = SourceFile::new(
+            path,
+            base_dir,
+            <span class="macro">format!</span>(<span class="string">&quot;Solution at {}&quot;</span>, path.display()),
+            grader_map,
+            <span class="prelude-val">Some</span>(write_to),
+        )<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="self">Self </span>{
             source_file: Arc::new(source_file),
             checks: SolutionCheck::extract_check_list(path, eval).ok()<span class="question-mark">?</span>,
@@ -737,7 +749,7 @@
         <span class="kw">let </span>checks = get_checks(
             <span class="string">&quot;
            /*
-            * @check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t   
+            * @check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t
             */
         &quot;</span>,
         )

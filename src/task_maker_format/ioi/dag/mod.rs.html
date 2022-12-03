@@ -773,7 +773,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;gen.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>generator = InputGenerator::Custom(Arc::new(source), <span class="macro">vec!</span>[]);
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(tmpdir.path());
         <span class="kw">let </span>out = generator.generate_and_bind(<span class="kw-2">&amp;mut </span>eval, <span class="number">0</span>, <span class="number">0</span>).unwrap();
@@ -809,7 +809,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;val.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>validator = InputValidator::Custom(Arc::new(source), <span class="macro">vec!</span>[]);
         <span class="kw">let </span>file = File::new(<span class="string">&quot;input&quot;</span>);
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(tmpdir.path());
@@ -833,7 +833,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;val.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>validator = InputValidator::Custom(Arc::new(source), <span class="macro">vec!</span>[]);
         <span class="kw">let </span>file = File::new(<span class="string">&quot;input&quot;</span>);
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(tmpdir.path());
@@ -896,7 +896,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;sol.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>generator = OutputGenerator::Custom(Arc::new(source), <span class="macro">vec!</span>[]);
         <span class="kw">let </span>file = File::new(<span class="string">&quot;input&quot;</span>);
         <span class="kw">let </span>val = File::new(<span class="string">&quot;validation&quot;</span>);
@@ -1029,7 +1029,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;check.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>checker = Checker::Custom(Arc::new(source));
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(tmpdir.path());
         <span class="kw">let </span>input = File::new(<span class="string">&quot;input&quot;</span>).uuid;
@@ -1054,7 +1054,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;check.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>checker = Checker::Custom(Arc::new(source));
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(tmpdir.path());
         <span class="kw">let </span>input = File::new(<span class="string">&quot;input&quot;</span>).uuid;
@@ -1092,7 +1092,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;check.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>checker = Checker::Custom(Arc::new(source));
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(tmpdir.path());
         <span class="kw">let </span>input = File::new(<span class="string">&quot;input&quot;</span>).uuid;
@@ -1130,7 +1130,7 @@
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;check.py&quot;</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>::&lt;PathBuf&gt;).unwrap();
         <span class="kw">let </span>checker = Checker::Custom(Arc::new(source));
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, recv) = EvaluationData::new(tmpdir.path());
         <span class="kw">let </span>input = File::new(<span class="string">&quot;input&quot;</span>).uuid;

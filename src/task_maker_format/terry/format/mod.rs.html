@@ -77,6 +77,7 @@
 <span id="77">77</span>
 <span id="78">78</span>
 <span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::fs;
 <span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::sync::Arc;
@@ -143,6 +144,7 @@
         task_dir,
         <span class="macro">vec!</span>[<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;managers/{}.*&quot;</span>, manager)],
         task_dir,
+        <span class="string">&quot;Terry manager at&quot;</span>,
         <span class="prelude-val">None</span>,
         WriteBinTo::path(<span class="macro">format!</span>(<span class="string">&quot;managers/{}.{}&quot;</span>, manager, <span class="kw-2">*</span>EXE_EXTENSION)),
     );
