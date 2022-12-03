@@ -441,6 +441,13 @@
 <span id="441">441</span>
 <span id="442">442</span>
 <span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::io::Write;
 <span class="kw">use </span>std::os::unix::fs::PermissionsExt;
@@ -855,10 +862,17 @@
                 file.write_all(<span class="kw-2">&amp;</span>chunk)
                     .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to write chunk to {}&quot;</span>, dest.display()))<span class="question-mark">?</span>;
             }
+            <span class="kw">for </span>get_content_chunked <span class="kw">in </span><span class="kw-2">&amp;mut </span>callback.get_content_chunked {
+                get_content_chunked(<span class="kw-2">&amp;</span>chunk).context(<span class="string">&quot;Get content chunked callback failed&quot;</span>)<span class="question-mark">?</span>;
+            }
             <span class="kw">if </span>buffer.len() &lt; limit {
                 <span class="kw">let </span>len = std::cmp::min(chunk.len(), limit - buffer.len());
                 buffer.extend_from_slice(<span class="kw-2">&amp;</span>chunk[..len]);
             }
+        }
+        <span class="comment">// Tell the callbacks the file has ended.
+        </span><span class="kw">for </span>get_content_chunked <span class="kw">in </span><span class="kw-2">&amp;mut </span>callback.get_content_chunked {
+            get_content_chunked(<span class="kw-2">&amp;</span>[]).context(<span class="string">&quot;Get content chunked callback failed&quot;</span>)<span class="question-mark">?</span>;
         }
         drop(file);
         <span class="kw">if let </span><span class="prelude-val">Some</span>(write_to) = <span class="kw-2">&amp;</span>callback.write_to {

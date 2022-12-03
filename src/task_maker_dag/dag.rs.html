@@ -611,6 +611,33 @@
 <span id="611">611</span>
 <span id="612">612</span>
 <span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{HashMap, HashSet};
 <span class="kw">use </span>std::path::PathBuf;
 
@@ -821,11 +848,38 @@
     ///
     /// If the generation of the file fails (i.e. the `Execution` that produced that file was
     /// unsuccessful) the callback **is called** anyways with the content of the file, if any.
+    ///
+    /// Calling this method twice on the same file will panic (this behaviour can be changed in the
+    /// future).
     </span><span class="kw">pub fn </span>get_file_content&lt;G: Into&lt;FileUuid&gt;, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: G, limit: usize, callback: F)
     <span class="kw">where
         </span>F: (FnOnce(Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;) + <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.file_callback(file.into()).get_content = <span class="prelude-val">Some</span>((limit, Box::new(callback)));
+        <span class="kw">let </span>file = file.into();
+        <span class="comment">// FIXME: add support for multiple get_content file callbacks on the same file. This may be
+        // needed for the sanity checks.
+        </span><span class="kw">let </span>old = <span class="self">self
+            </span>.file_callback(file)
+            .get_content
+            .replace((limit, Box::new(callback)));
+        <span class="kw">if </span>old.is_some() {
+            <span class="macro">panic!</span>(<span class="string">&quot;Overwriting get_file_content callback for {}&quot;</span>, file);
+        }
+    }
+
+    <span class="doccomment">/// Call `callback` with the chunks of the file when it&#39;s ready. The file must be present in
+    /// the DAG before the evaluation starts.
+    ///
+    /// If the generation of the file fails (i.e. the `Execution` that produced that file was
+    /// unsuccessful) the callback **is called** anyways with the content of the file, if any.
+    </span><span class="kw">pub fn </span>get_file_content_chunked&lt;G: Into&lt;FileUuid&gt;, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, file: G, callback: F)
+    <span class="kw">where
+        </span>F: (FnMut(<span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;) + <span class="lifetime">&#39;static</span>,
+    {
+        <span class="kw">let </span>file = file.into();
+        <span class="self">self</span>.file_callback(file)
+            .get_content_chunked
+            .push(Box::new(callback));
     }
 
     <span class="doccomment">/// Add a callback that will be called when the execution starts.

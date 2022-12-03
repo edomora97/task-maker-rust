@@ -131,7 +131,7 @@
 
     <span class="doccomment">/// Add the executions required for evaluating this task to the execution DAG.
     </span><span class="kw">pub fn </span>build_dag(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         eval: <span class="kw-2">&amp;mut </span>EvaluationData,
         config: <span class="kw-2">&amp;</span>EvaluationConfig,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {

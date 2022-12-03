@@ -378,12 +378,12 @@
     /// execution DAG for the execution. The closure is given a reference to the given task and a
     /// reference to the evaluation data.
     </span><span class="kw">pub fn </span>new&lt;BuildDag&gt;(
-        task: TaskFormat,
+        <span class="kw-2">mut </span>task: TaskFormat,
         opt: <span class="kw-2">&amp;</span>ExecutionOpt,
         build_dag: BuildDag,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt;
     <span class="kw">where
-        </span>BuildDag: FnOnce(<span class="kw-2">&amp;</span>TaskFormat, <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;,
+        </span>BuildDag: FnOnce(<span class="kw-2">&amp;mut </span>TaskFormat, <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;,
     {
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, ui_receiver) = EvaluationData::new(task.path());
 
@@ -409,7 +409,7 @@
         }
 
         <span class="comment">// build the execution dag
-        </span>build_dag(<span class="kw-2">&amp;</span>task, <span class="kw-2">&amp;mut </span>eval)<span class="question-mark">?</span>;
+        </span>build_dag(<span class="kw-2">&amp;mut </span>task, <span class="kw-2">&amp;mut </span>eval)<span class="question-mark">?</span>;
 
         <span class="macro">trace!</span>(<span class="string">&quot;The DAG is: {:#?}&quot;</span>, eval.dag);
         <span class="kw">if </span>opt.copy_dag {

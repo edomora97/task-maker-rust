@@ -214,12 +214,12 @@
         </span><span class="kw">let </span>path = <span class="self">self</span>.path.join(<span class="macro">format!</span>(<span class="string">&quot;input{}.txt&quot;</span>, id));
         <span class="kw">if </span>path.exists() {
             <span class="self">self</span>.index += <span class="number">1</span>;
-            <span class="prelude-val">Some</span>(TaskInputEntry::Testcase(TestcaseInfo {
+            <span class="prelude-val">Some</span>(TaskInputEntry::Testcase(TestcaseInfo::new(
                 id,
-                input_generator: InputGenerator::StaticFile(path),
-                input_validator: (<span class="self">self</span>.get_validator)(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
-                output_generator: (<span class="self">self</span>.get_output_gen)(id),
-            }))
+                InputGenerator::StaticFile(path),
+                (<span class="self">self</span>.get_validator)(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
+                (<span class="self">self</span>.get_output_gen)(id),
+            )))
         } <span class="kw">else </span>{
             <span class="prelude-val">None
         </span>}

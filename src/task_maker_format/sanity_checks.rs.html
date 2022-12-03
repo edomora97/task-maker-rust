@@ -106,6 +106,8 @@
 <span id="106">106</span>
 <span id="107">107</span>
 <span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
 </span><span class="kw">use </span>std::sync::Mutex;
@@ -160,6 +162,8 @@
     <span class="doccomment">/// Function called for the first pass of sanity checks of the task. This will check all the
     /// statically checkable properties of the task and may add some executions for checking dynamic
     /// properties of the task.
+    ///
+    /// This is executed after the DAG of the task is built.
     </span><span class="kw">pub fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>Task, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>state = <span class="self">self</span>.state.lock().unwrap();
         <span class="kw">for </span>check <span class="kw">in </span>state.sanity_checks.iter_mut() {

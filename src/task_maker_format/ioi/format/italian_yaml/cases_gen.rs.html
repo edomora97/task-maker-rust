@@ -1647,8 +1647,6 @@
 <span id="1647">1647</span>
 <span id="1648">1648</span>
 <span id="1649">1649</span>
-<span id="1650">1650</span>
-<span id="1651">1651</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fmt::Debug;
 <span class="kw">use </span>std::fmt::Formatter;
@@ -1981,14 +1979,13 @@
             }
         }
         <span class="kw">let </span>generator = InputGenerator::Custom(generator.source.clone(), args);
-        <span class="self">self</span>.result.push(TaskInputEntry::Testcase(TestcaseInfo {
-            id: <span class="self">self</span>.testcase_id,
-            input_generator: generator,
-            input_validator: <span class="self">self
-                </span>.get_validator(<span class="kw-2">&amp;</span>variables)
+        <span class="self">self</span>.result.push(TaskInputEntry::Testcase(TestcaseInfo::new(
+            <span class="self">self</span>.testcase_id,
+            generator,
+            <span class="self">self</span>.get_validator(<span class="kw-2">&amp;</span>variables)
                 .context(<span class="string">&quot;Cannot get testcase validator&quot;</span>)<span class="question-mark">?</span>,
-            output_generator: (<span class="self">self</span>.get_output_gen)(<span class="self">self</span>.testcase_id),
-        }));
+            (<span class="self">self</span>.get_output_gen)(<span class="self">self</span>.testcase_id),
+        )));
         <span class="self">self</span>.testcase_id += <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(())
     }
@@ -2211,14 +2208,13 @@
                 path.display()
             );
         }
-        <span class="self">self</span>.result.push(TaskInputEntry::Testcase(TestcaseInfo {
-            id: <span class="self">self</span>.testcase_id,
-            input_generator: InputGenerator::StaticFile(path),
-            input_validator: <span class="self">self
-                </span>.get_validator(<span class="kw-2">&amp;</span><span class="self">self</span>.get_auto_variables())
+        <span class="self">self</span>.result.push(TaskInputEntry::Testcase(TestcaseInfo::new(
+            <span class="self">self</span>.testcase_id,
+            InputGenerator::StaticFile(path),
+            <span class="self">self</span>.get_validator(<span class="kw-2">&amp;</span><span class="self">self</span>.get_auto_variables())
                 .context(<span class="string">&quot;Cannot get testcase validator&quot;</span>)<span class="question-mark">?</span>,
-            output_generator: (<span class="self">self</span>.get_output_gen)(<span class="self">self</span>.testcase_id),
-        }));
+            (<span class="self">self</span>.get_output_gen)(<span class="self">self</span>.testcase_id),
+        )));
         <span class="self">self</span>.testcase_id += <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(())
     }

@@ -558,6 +558,52 @@
 <span id="558">558</span>
 <span id="559">559</span>
 <span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The IOI task format.
 //!
 //! In IOI-like tasks there is the concept of _subtask_ and of _testcase_: a testcase is a single
@@ -593,7 +639,7 @@
 <span class="kw">pub use </span>format::italian_yaml;
 <span class="kw">pub use </span>statement::<span class="kw-2">*</span>;
 <span class="kw">pub use </span>task_info::<span class="kw-2">*</span>;
-<span class="kw">use </span>task_maker_dag::ExecutionDAGConfig;
+<span class="kw">use </span>task_maker_dag::{ExecutionDAGConfig, FileUuid};
 <span class="kw">use </span>task_maker_diagnostics::CodeSpan;
 <span class="kw">use </span>task_maker_lang::GraderMap;
 <span class="kw">pub use </span>ui_state::<span class="kw-2">*</span>;
@@ -737,6 +783,10 @@
     </span><span class="kw">pub </span>input_validator: InputValidator,
     <span class="doccomment">/// The generator of the output file for this testcase.
     </span><span class="kw">pub </span>output_generator: OutputGenerator,
+    <span class="doccomment">/// The generated input file UUID. This is set only after the DAG is built.
+    </span><span class="kw">pub </span>input_file: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
+    <span class="doccomment">/// The generated official output file UUID. This is set only after the DAG is built.
+    </span><span class="kw">pub </span>official_output_file: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
 }
 
 <span class="kw">impl </span>IOITask {
@@ -801,7 +851,7 @@
 
     <span class="doccomment">/// Add the executions required for evaluating this task to the execution DAG.
     </span><span class="kw">pub fn </span>build_dag(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         eval: <span class="kw-2">&amp;mut </span>EvaluationData,
         config: <span class="kw-2">&amp;</span>EvaluationConfig,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
@@ -814,9 +864,6 @@
             <span class="prelude-val">Some</span>(<span class="self">self</span>.grader_map.clone()),
             eval,
         );
-        <span class="self">self</span>.sanity_checks
-            .pre_hook(<span class="self">self</span>, eval)
-            .context(<span class="string">&quot;Sanity check pre-hooks failed&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="kw">let </span>empty_score_manager = ScoreManager::new(<span class="self">self</span>);
         <span class="kw">let </span>solutions: Vec&lt;<span class="kw">_</span>&gt; = eval
@@ -837,6 +884,8 @@
         <span class="self">self</span>.task_type
             .prepare_dag(eval)
             .context(<span class="string">&quot;Failed to prepare DAG&quot;</span>)<span class="question-mark">?</span>;
+
+        <span class="kw">let </span><span class="kw-2">mut </span>generated_io: HashMap&lt;<span class="kw">_</span>, HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt; = HashMap::new();
 
         <span class="kw">for </span>subtask <span class="kw">in </span><span class="self">self</span>.subtasks.values() {
             <span class="macro">trace!</span>(<span class="string">&quot;Executing the generation of subtask {}&quot;</span>, subtask.id);
@@ -866,6 +915,12 @@
                     .output_generator
                     .generate_and_bind(<span class="self">self</span>, eval, subtask.id, testcase.id, input, val_handle)
                     .context(<span class="string">&quot;Failed to bind output generator&quot;</span>)<span class="question-mark">?</span>;
+                <span class="comment">// Store the generated input and output files for setting them into the task
+                // outside the loop.
+                </span>generated_io
+                    .entry(subtask.id)
+                    .or_default()
+                    .insert(testcase.id, (input, output));
 
                 <span class="kw">for </span>(solution, score_manager) <span class="kw">in </span>solutions.iter() {
                     <span class="macro">trace!</span>(
@@ -891,11 +946,29 @@
                 }
             }
         }
+        <span class="comment">// Store inside the task the FileUuid of the input and official output files. This cannot
+        // be done while generating because task cannot be borrowed mutably in the loop.
+        </span><span class="kw">for </span>(subtask_id, subtask) <span class="kw">in </span>generated_io {
+            <span class="kw">for </span>(testcase_id, (input, output)) <span class="kw">in </span>subtask {
+                <span class="kw">let </span>testcase = <span class="self">self
+                    </span>.subtasks
+                    .get_mut(<span class="kw-2">&amp;</span>subtask_id)
+                    .unwrap()
+                    .testcases
+                    .get_mut(<span class="kw-2">&amp;</span>testcase_id)
+                    .unwrap();
+                testcase.input_file = <span class="prelude-val">Some</span>(input);
+                testcase.official_output_file = output;
+            }
+        }
         <span class="kw">for </span>booklet <span class="kw">in </span><span class="self">self</span>.booklets.iter() {
             booklet
                 .build(eval)
                 .context(<span class="string">&quot;Failed to bind booklet compilation&quot;</span>)<span class="question-mark">?</span>;
         }
+        <span class="self">self</span>.sanity_checks
+            .pre_hook(<span class="self">self</span>, eval)
+            .context(<span class="string">&quot;Sanity check pre-hooks failed&quot;</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -1021,6 +1094,25 @@
         } <span class="kw">else </span>{
             <span class="bool-val">false
         </span>}
+    }
+}
+
+<span class="kw">impl </span>TestcaseInfo {
+    <span class="doccomment">/// Make a new instance of [`TestcaseInfo`].
+    </span><span class="kw">pub fn </span>new(
+        id: TestcaseId,
+        input_generator: InputGenerator,
+        input_validator: InputValidator,
+        output_generator: OutputGenerator,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            id,
+            input_generator,
+            input_validator,
+            output_generator,
+            input_file: <span class="prelude-val">None</span>,
+            official_output_file: <span class="prelude-val">None</span>,
+        }
     }
 }
 

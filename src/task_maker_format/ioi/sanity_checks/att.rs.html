@@ -400,7 +400,78 @@
 <span id="400">400</span>
 <span id="401">401</span>
 <span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeSet, HashMap};
+<span class="kw">use </span>std::io::{Read, Seek, SeekFrom};
 <span class="kw">use </span>std::path::PathBuf;
 
 <span class="kw">use </span>anyhow::{anyhow, Context, Error};
@@ -414,6 +485,8 @@
 <span class="kw">use </span><span class="kw">crate</span>::ioi::{IOITask, InputGenerator, TaskType, TestcaseId};
 <span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
 <span class="kw">use crate</span>::{list_files, EvaluationData, SolutionCheck, UISender};
+
+<span class="kw">use </span><span class="kw">super</span>::io::CheckEndWithNewLine;
 
 <span class="doccomment">/// Check that all the graders are present inside att.
 </span><span class="attribute">#[derive(Debug, Default)]
@@ -797,6 +870,73 @@
                         .with_code_span(check.code_span.clone()),
                     )<span class="question-mark">?</span>;
                 }
+            }
+        }
+        <span class="prelude-val">Ok</span>(())
+    }
+}
+
+<span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>AttEndWithNewLine;
+
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttEndWithNewLine {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;AttEndWithNewLine&quot;
+    </span>}
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*&quot;</span>]) {
+            <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
+
+            <span class="kw">let </span><span class="kw-2">mut </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>att)
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to open attachment {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            <span class="comment">// Check the file size to avoid seeking to end-1 if the file is empty (which is not
+            // allowed).
+            </span><span class="kw">let </span>metadata = file
+                .metadata()
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read file size at {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+
+            <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">1</span>];
+            <span class="kw">let </span>chunk = <span class="kw">if </span>metadata.len() == <span class="number">0 </span>{
+                <span class="kw-2">&amp;</span>[]
+            } <span class="kw">else </span>{
+                file.seek(SeekFrom::End(-<span class="number">1</span>))
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to seek to the end of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                file.read_exact(<span class="kw-2">&amp;mut </span>buf)
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read last byte of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                <span class="kw-2">&amp;</span>buf[..]
+            };
+
+            <span class="kw">let </span><span class="kw-2">mut </span>checker = CheckEndWithNewLine::new(eval, <span class="string">&quot;Attached&quot;</span>, path.display());
+            checker.add_chunk(chunk)<span class="question-mark">?</span>;
+            checker.add_chunk(<span class="kw-2">&amp;</span>[])<span class="question-mark">?</span>;
+        }
+        <span class="prelude-val">Ok</span>(())
+    }
+}
+
+<span class="attribute">#[derive(Debug, Default)]
+</span><span class="kw">pub struct </span>AttNoDirectory;
+
+<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttNoDirectory {
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="string">&quot;AttNoDirectory&quot;
+    </span>}
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>dir =
+            std::fs::read_dir(task.path.join(<span class="string">&quot;att&quot;</span>)).context(<span class="string">&quot;Failed to open att/ directory&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">for </span>entry <span class="kw">in </span>dir {
+            <span class="kw">let </span>entry = entry.context(<span class="string">&quot;Error while reading att/ content&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>path = entry.path();
+            <span class="kw">let </span>canonical_path = path
+                .canonicalize()
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to find canonical path of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            <span class="kw">if </span>canonical_path.is_dir() {
+                eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
+                    <span class="string">&quot;Only file attachments are supported: {} is a directory&quot;</span>,
+                    task.path_of(<span class="kw-2">&amp;</span>path).display()
+                )))<span class="question-mark">?</span>;
             }
         }
         <span class="prelude-val">Ok</span>(())

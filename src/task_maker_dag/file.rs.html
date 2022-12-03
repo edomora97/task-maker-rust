@@ -101,6 +101,10 @@
 <span id="101">101</span>
 <span id="102">102</span>
 <span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
 
 <span class="kw">use </span>anyhow::Error;
@@ -114,6 +118,8 @@
 
 <span class="doccomment">/// Type of the callback called when a file is returned to the client.
 </span><span class="kw">pub type </span>GetContentCallback = Box&lt;<span class="kw">dyn </span>FnOnce(Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>&gt;;
+<span class="doccomment">/// Type of the callback called with the chunks of a file when it&#39;s ready.
+</span><span class="kw">pub type </span>GetContentChunkedCallback = Box&lt;<span class="kw">dyn </span>FnMut(<span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>&gt;;
 
 <span class="doccomment">/// Where to write the file to with some other information.
 </span><span class="attribute">#[derive(Debug, Clone)]
@@ -133,6 +139,8 @@
     </span><span class="kw">pub </span>write_to: <span class="prelude-ty">Option</span>&lt;WriteToCallback&gt;,
     <span class="doccomment">/// Callback to be called with the first bytes of the file.
     </span><span class="kw">pub </span>get_content: <span class="prelude-ty">Option</span>&lt;(usize, GetContentCallback)&gt;,
+    <span class="doccomment">/// Callbacks to be called with the chunks of a file ready.
+    </span><span class="kw">pub </span>get_content_chunked: Vec&lt;GetContentChunkedCallback&gt;,
 }
 
 <span class="doccomment">/// An handle to a file in the evaluation, this only tracks dependencies between executions.

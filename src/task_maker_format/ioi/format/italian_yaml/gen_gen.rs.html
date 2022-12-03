@@ -691,12 +691,12 @@
                             .next()
                             .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Corrupted parser&quot;</span>))<span class="question-mark">?
                             </span>.as_str();
-                        entries.push(TaskInputEntry::Testcase(TestcaseInfo {
-                            id: testcase_count,
-                            input_generator: InputGenerator::StaticFile(task_dir.join(what)),
-                            input_validator: get_validator(<span class="prelude-val">Some</span>(subtask_id - <span class="number">1</span>)),
-                            output_generator: get_output_gen(testcase_count),
-                        }));
+                        entries.push(TaskInputEntry::Testcase(TestcaseInfo::new(
+                            testcase_count,
+                            InputGenerator::StaticFile(task_dir.join(what)),
+                            get_validator(<span class="prelude-val">Some</span>(subtask_id - <span class="number">1</span>)),
+                            get_output_gen(testcase_count),
+                        )));
                         testcase_count += <span class="number">1</span>;
                     }
                     parser::Rule::command =&gt; {
@@ -710,12 +710,12 @@
                         <span class="kw">if let </span>OutputGenerator::StaticFile(<span class="kw">_</span>) = output_generator {
                             <span class="macro">bail!</span>(<span class="string">&quot;Generator detected but no solution found. Cannot generate output files.&quot;</span>);
                         }
-                        entries.push(TaskInputEntry::Testcase(TestcaseInfo {
-                            id: testcase_count,
-                            input_generator: InputGenerator::Custom(generator.clone(), cmd),
-                            input_validator: get_validator(<span class="prelude-val">Some</span>(subtask_id - <span class="number">1</span>)),
+                        entries.push(TaskInputEntry::Testcase(TestcaseInfo::new(
+                            testcase_count,
+                            InputGenerator::Custom(generator.clone(), cmd),
+                            get_validator(<span class="prelude-val">Some</span>(subtask_id - <span class="number">1</span>)),
                             output_generator,
-                        }));
+                        )));
                         testcase_count += <span class="number">1</span>;
                     }
                     parser::Rule::comment =&gt; {}

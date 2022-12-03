@@ -297,12 +297,12 @@
                     }
                 }
 
-                <span class="kw">let </span>testcase = TestcaseInfo {
-                    id: testcase_id,
+                <span class="kw">let </span>testcase = TestcaseInfo::new(
+                    testcase_id,
                     input_generator,
-                    input_validator: task.input_validator_generator.generate(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
-                    output_generator: testcase_template.output_generator.clone(),
-                };
+                    task.input_validator_generator.generate(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
+                    testcase_template.output_generator.clone(),
+                );
 
                 <span class="kw">let </span>data = TestcaseData {
                     generator_args,

@@ -435,7 +435,6 @@
             task: Box::new(<span class="self">self</span>.clone()),
         })<span class="question-mark">?</span>;
         eval.solutions = config.find_solutions(<span class="kw-2">&amp;</span><span class="self">self</span>.path, <span class="macro">vec!</span>[<span class="string">&quot;solutions/*&quot;</span>], <span class="prelude-val">None</span>, eval);
-        <span class="self">self</span>.sanity_checks.pre_hook(<span class="self">self</span>, eval)<span class="question-mark">?</span>;
 
         <span class="kw">let </span>solution_info = eval.solutions.iter().map(SolutionInfo::from).collect_vec();
         eval.sender.send(UIMessage::Solutions {
@@ -483,6 +482,7 @@
                 },
             )<span class="question-mark">?</span>;
         }
+        <span class="self">self</span>.sanity_checks.pre_hook(<span class="self">self</span>, eval)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
