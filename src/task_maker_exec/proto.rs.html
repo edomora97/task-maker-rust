@@ -223,6 +223,10 @@
 <span id="223">223</span>
 <span id="224">224</span>
 <span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The protocol related structs and enums.
 //!
 //! # Protocol Specification
@@ -416,9 +420,13 @@
         sender
             .send_raw(<span class="kw-2">&amp;</span>data)
             .context(<span class="string">&quot;Failed to send file chunk&quot;</span>)<span class="question-mark">?</span>;
-        sender
-            .send_raw(<span class="kw-2">&amp;</span>[])
-            .context(<span class="string">&quot;Failed to send file terminator&quot;</span>)<span class="question-mark">?</span>;
+        <span class="comment">// Send the EOF chunk only if the buffer is not empty (otherwise we would send EOF twice
+        // breaking the protocol).
+        </span><span class="kw">if </span>!data.is_empty() {
+            sender
+                .send_raw(<span class="kw-2">&amp;</span>[])
+                .context(<span class="string">&quot;Failed to send file terminator&quot;</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 }

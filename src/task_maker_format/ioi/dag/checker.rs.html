@@ -193,6 +193,16 @@
 <span id="193">193</span>
 <span id="194">194</span>
 <span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
 <span class="kw">use </span>std::sync::Arc;
 
@@ -231,7 +241,7 @@
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>check&lt;F&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         eval: <span class="kw-2">&amp;mut </span>EvaluationData,
-        testcase_id: TestcaseId,
+        testcase_id: <span class="prelude-ty">Option</span>&lt;TestcaseId&gt;,
         description: String,
         input: FileUuid,
         correct_output: FileUuid,
@@ -253,7 +263,7 @@
                 .input(correct_output, <span class="string">&quot;correct&quot;</span>, <span class="bool-val">false</span>)
                 .input(test_output, <span class="string">&quot;test&quot;</span>, <span class="bool-val">false</span>)
                 .tag(Tag::Checking.into())
-                .priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority);
+                .priority(EVALUATION_PRIORITY - testcase_id.unwrap_or_default() <span class="kw">as </span>Priority);
 
                 eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|result| {
                     <span class="kw">match </span>result.status {
@@ -285,7 +295,7 @@
                     .tag(Tag::Checking.into())
                     .capture_stdout(<span class="number">128</span>)
                     .capture_stderr(STDERR_CONTENT_LENGTH)
-                    .priority(EVALUATION_PRIORITY - testcase_id <span class="kw">as </span>Priority);
+                    .priority(EVALUATION_PRIORITY - testcase_id.unwrap_or_default() <span class="kw">as </span>Priority);
                 exec.limits_mut().allow_multiprocess();
                 <span class="kw">let </span>sender = eval.sender.clone();
                 eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|res| {
@@ -298,13 +308,18 @@
                     <span class="kw">let </span>message = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr).trim().to_string();
                     <span class="kw">let </span>message = <span class="self">Self</span>::translate_checker_message(message);
                     <span class="kw">if </span>!res.status.is_success() {
-                        <span class="kw">let </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;Checker failed while computing a score for testcase {}&quot;</span>,
-                            testcase_id
-                        ))
-                        .with_note(description)
-                        .with_help(<span class="macro">format!</span>(<span class="string">&quot;The checker crashed with: {:?}&quot;</span>, res.status))
-                        .with_help_attachment(stderr);
+                        <span class="kw">let </span>message = <span class="kw">if let </span><span class="prelude-val">Some</span>(testcase_id) = testcase_id {
+                            <span class="macro">format!</span>(
+                                <span class="string">&quot;Checker failed while computing a score for testcase {}&quot;</span>,
+                                testcase_id
+                            )
+                        } <span class="kw">else </span>{
+                            <span class="macro">format!</span>(<span class="string">&quot;Checker failed while computing a score for a testcase&quot;</span>)
+                        };
+                        <span class="kw">let </span>diagnostic = Diagnostic::error(message)
+                            .with_note(description)
+                            .with_help(<span class="macro">format!</span>(<span class="string">&quot;The checker crashed with: {:?}&quot;</span>, res.status))
+                            .with_help_attachment(stderr);
                         sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                         <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                     }
@@ -312,13 +327,18 @@
                     <span class="kw">let </span>score: f64 = <span class="kw">match </span>score.trim().parse() {
                         <span class="prelude-val">Ok</span>(score) =&gt; score,
                         <span class="prelude-val">Err</span>(e) =&gt; {
-                            <span class="kw">let </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                                <span class="string">&quot;Checker returned an invalid score ({:?}) for testcase {}&quot;</span>,
-                                score, testcase_id
-                            ))
-                            .with_note(description)
-                            .with_help(<span class="macro">format!</span>(<span class="string">&quot;The parse error is: {:?}&quot;</span>, e))
-                            .with_help_attachment(stdout);
+                            <span class="kw">let </span>message = <span class="kw">if let </span><span class="prelude-val">Some</span>(testcase_id) = testcase_id {
+                                <span class="macro">format!</span>(
+                                    <span class="string">&quot;Checker returned an invalid score ({:?}) for testcase {}&quot;</span>,
+                                    score, testcase_id
+                                )
+                            } <span class="kw">else </span>{
+                                <span class="macro">format!</span>(<span class="string">&quot;Checker returned an invalid score ({:?})&quot;</span>, score)
+                            };
+                            <span class="kw">let </span>diagnostic = Diagnostic::error(message)
+                                .with_note(description)
+                                .with_help(<span class="macro">format!</span>(<span class="string">&quot;The parse error is: {:?}&quot;</span>, e))
+                                .with_help_attachment(stdout);
                             sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                         }
@@ -350,7 +370,7 @@
         <span class="kw">let </span>solution = solution.into();
         <span class="kw">let </span>exec = <span class="self">self</span>.check(
             eval,
-            testcase_id,
+            <span class="prelude-val">Some</span>(testcase_id),
             <span class="macro">format!</span>(
                 <span class="string">&quot;Checking output of {:?} of testcase {}, subtask {}&quot;</span>,
                 solution.file_name().unwrap(),

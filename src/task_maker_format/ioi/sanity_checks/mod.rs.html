@@ -112,6 +112,8 @@
 <span id="112">112</span>
 <span id="113">113</span>
 <span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
 </span><span class="kw">use </span>std::path::Path;
@@ -127,6 +129,7 @@
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
 <span class="kw">mod </span>att;
+<span class="kw">mod </span>checker;
 <span class="kw">mod </span>io;
 <span class="kw">mod </span>sol;
 <span class="kw">mod </span>statement;
@@ -161,6 +164,7 @@
         Box::new(subtasks::SolutionsWithNoChecks::default()),
         Box::new(subtasks::InvalidSubtaskName::default()),
         Box::new(io::IOEndWithNewLine::default()),
+        Box::new(checker::FuzzCheckerWithJunkOutput::default()),
     ];
     all.into_iter()
         .filter(|s| !skip.contains(<span class="kw-2">&amp;</span>s.name().into()))
