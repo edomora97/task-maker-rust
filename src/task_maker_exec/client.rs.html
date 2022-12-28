@@ -448,11 +448,14 @@
 <span id="448">448</span>
 <span id="449">449</span>
 <span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::io::Write;
 <span class="kw">use </span>std::os::unix::fs::PermissionsExt;
 <span class="kw">use </span>std::path::Path;
-<span class="kw">use </span>std::sync::atomic::{AtomicBool, Ordering};
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 <span class="kw">use </span>std::thread;
 <span class="kw">use </span>std::thread::JoinHandle;
@@ -468,7 +471,7 @@
 <span class="kw">use </span><span class="kw">crate</span>::proto::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// Interval between each Status message is sent asking for server status updates.
-</span><span class="kw">const </span>STATUS_POLL_INTERVAL_MS: u64 = <span class="number">1000</span>;
+</span><span class="kw">const </span>STATUS_POLL_INTERVAL: Duration = Duration::from_millis(<span class="number">1000</span>);
 
 <span class="doccomment">/// This is a client of the `Executor`, the client is who sends a DAG for an evaluation, provides
 /// some files and receives the callbacks from the server. When the server notifies a callback
@@ -534,14 +537,14 @@
 
         <span class="comment">// setup the status poller that will send to the server a Status message every
         // STATUS_POLL_INTERVAL_MS milliseconds.
-        </span><span class="kw">let </span>done = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
+        </span><span class="kw">let </span>(done_sender, done_receiver) = crossbeam_channel::bounded(<span class="number">1</span>);
         <span class="kw">let </span>file_mode = Arc::new(Mutex::new(()));
         <span class="kw">let </span>status_poller =
-            ExecutorClient::spawn_status_poller(done.clone(), file_mode.clone(), sender.clone());
+            ExecutorClient::spawn_status_poller(done_receiver, file_mode.clone(), sender.clone());
 
         <span class="macro">defer! </span>{{
             <span class="macro">info!</span>(<span class="string">&quot;Client has done, exiting&quot;</span>);
-            done.store(<span class="bool-val">true</span>, Ordering::Relaxed);
+            done_sender.send(()).context(<span class="string">&quot;Failed to send done signal to status poller&quot;</span>).unwrap();
             status_poller
                 .join()
                 .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to join status poller: {:?}&quot;</span>, e)).unwrap();
@@ -718,23 +721,28 @@
     <span class="doccomment">/// Spawn a thread that will ask the server status every `STATUS_POLL_INTERVAL_MS`, making sure
     /// that the messages are not sent while being in the middle of sending a file.
     </span><span class="kw">fn </span>spawn_status_poller(
-        done: Arc&lt;AtomicBool&gt;,
+        done: crossbeam_channel::Receiver&lt;()&gt;,
         file_mode: Arc&lt;Mutex&lt;()&gt;&gt;,
         sender: ChannelSender&lt;ExecutorClientMessage&gt;,
     ) -&gt; JoinHandle&lt;()&gt; {
         thread::Builder::new()
             .name(<span class="string">&quot;Client status poller&quot;</span>.into())
             .spawn(<span class="kw">move </span>|| {
-                <span class="kw">while </span>!done.load(Ordering::Relaxed) {
-                    {
-                        <span class="comment">// make sure to not interfere with the file sending protocol.
-                        </span><span class="kw">let </span>_lock = file_mode.lock().unwrap();
-                        <span class="comment">// this may fail if the server is gone
-                        </span><span class="kw">if </span>sender.send(ExecutorClientMessage::Status).is_err() {
+                <span class="kw">let </span>clock = crossbeam_channel::tick(STATUS_POLL_INTERVAL);
+                <span class="kw">loop </span>{
+                    <span class="macro">crossbeam_channel::select! </span>{
+                        recv(clock) -&gt; _msg =&gt; {
+                            <span class="comment">// Make sure to not interfere with the file sending protocol.
+                            </span><span class="kw">let </span>_lock = file_mode.lock().unwrap();
+                            <span class="comment">// This may fail if the server is gone.
+                            </span><span class="kw">if </span>sender.send(ExecutorClientMessage::Status).is_err() {
+                                <span class="kw">break</span>;
+                            }
+                        }
+                        recv(done) -&gt; _msg =&gt; {
                             <span class="kw">break</span>;
                         }
                     }
-                    thread::sleep(Duration::from_millis(STATUS_POLL_INTERVAL_MS));
                 }
             })
             .expect(<span class="string">&quot;Failed to start client status poller thread&quot;</span>)
