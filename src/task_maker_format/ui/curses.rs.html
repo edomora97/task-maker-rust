@@ -429,6 +429,9 @@
 <span id="429">429</span>
 <span id="430">430</span>
 <span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Utilities for writing UIs with Curses.
 
 </span><span class="kw">use </span>std::io;
@@ -827,20 +830,23 @@
         .iter()
         .map(|worker| {
             <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">&quot;- {:&lt;max_len$} &quot;</span>, worker.name, max_len = max_len);
-            <span class="kw">let </span>worker_name_len = worker_name.len();
+            <span class="kw">let </span>worker_name_len = worker_name.chars().count();
             <span class="kw">let </span><span class="kw-2">mut </span>spans = <span class="macro">vec!</span>[Span::raw(worker_name)];
 
             <span class="kw">if let </span><span class="prelude-val">Some</span>(job) = <span class="kw-2">&amp;</span>worker.current_job {
-                <span class="kw">let </span>duration =
-                    (job.duration.elapsed().map(|d| d.as_millis()).unwrap_or(<span class="number">0</span>) <span class="kw">as </span>f64) / <span class="number">1000.0</span>;
+                <span class="kw">let </span>duration = job.duration.elapsed().unwrap_or_default().as_secs_f32();
                 <span class="kw">let </span><span class="kw-2">mut </span>line = <span class="macro">format!</span>(<span class="string">&quot;{} {} ({:.2}s)&quot;</span>, loading, job.job, duration);
-                <span class="kw">if </span>worker_name_len + line.len() &gt; rect.width <span class="kw">as </span>usize {
-                    <span class="kw">let </span>extra_len = worker_name_len + line.len() - rect.width <span class="kw">as </span>usize;
-                    <span class="comment">// there is not enough space for the job name, even with the ellipsis
+                <span class="kw">let </span>line_len = line.chars().count();
+                <span class="comment">// Line is too long.
+                </span><span class="kw">if </span>worker_name_len + line_len &gt; rect.width <span class="kw">as </span>usize {
+                    <span class="comment">// We need to remove &quot;extra_len&quot; characters.
+                    </span><span class="kw">let </span>extra_len = worker_name_len + line_len - rect.width <span class="kw">as </span>usize;
+                    <span class="comment">// There is not enough space for the job name, even with the ellipsis.
                     </span><span class="kw">if </span>extra_len + <span class="number">3 </span>&gt; job.job.len() {
-                        line = (<span class="kw-2">&amp;</span>line[<span class="number">0</span>..rect.width <span class="kw">as </span>usize]).into();
+                        line = line.chars().take(rect.width <span class="kw">as </span>usize).collect();
                     } <span class="kw">else </span>{
-                        <span class="kw">let </span>job_name = <span class="kw-2">&amp;</span>job.job[<span class="number">0</span>..job.job.len() - extra_len - <span class="number">3</span>];
+                        <span class="kw">let </span>job_name: String =
+                            line.chars().take(job.job.len() - extra_len - <span class="number">3</span>).collect();
                         line = <span class="macro">format!</span>(<span class="string">&quot;{} {}... ({:.2}s)&quot;</span>, loading, job_name, duration);
                     }
                 }

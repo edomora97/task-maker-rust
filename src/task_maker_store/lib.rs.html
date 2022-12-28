@@ -801,6 +801,8 @@
 <span id="801">801</span>
 <span id="802">802</span>
 <span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
 </pre><pre class="rust"><code><span class="doccomment">//! This crate manages the file store on disk, a folder with many files indexed by their hash.
 //!
 //! The files are stored in a read-only manner (removing the write bit permission) and their access
@@ -1206,8 +1208,10 @@
     </span><span class="kw">fn </span>suffix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PathBuf {
         <span class="kw">let </span>hash_hex = <span class="self">self</span>.hash.to_hex();
         <span class="kw">let </span>full = hash_hex.as_str();
-        <span class="kw">let </span>first = <span class="kw-2">&amp;</span>full[<span class="number">0</span>..<span class="number">2</span>];
-        <span class="kw">let </span>second = <span class="kw-2">&amp;</span>full[<span class="number">2</span>..<span class="number">4</span>];
+        <span class="attribute">#[allow(clippy::string_slice)]
+        </span><span class="kw">let </span>first = <span class="kw-2">&amp;</span>full[<span class="number">0</span>..<span class="number">2</span>];
+        <span class="attribute">#[allow(clippy::string_slice)]
+        </span><span class="kw">let </span>second = <span class="kw-2">&amp;</span>full[<span class="number">2</span>..<span class="number">4</span>];
         PathBuf::from(first).join(second).join(full)
     }
 

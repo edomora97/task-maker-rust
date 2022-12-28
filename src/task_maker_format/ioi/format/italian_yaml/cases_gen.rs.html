@@ -1648,6 +1648,9 @@
 <span id="1648">1648</span>
 <span id="1649">1649</span>
 <span id="1650">1650</span>
+<span id="1651">1651</span>
+<span id="1652">1652</span>
+<span id="1653">1653</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fmt::Debug;
 <span class="kw">use </span>std::fmt::Formatter;
@@ -2111,9 +2114,12 @@
                     ));
                 }
                 parser::Rule::variable =&gt; {
-                    constraint
-                        .operands
-                        .push(ConstraintOperand::Variable(item.as_str()[<span class="number">1</span>..].to_string()));
+                    constraint.operands.push(ConstraintOperand::Variable(
+                        item.as_str()
+                            .strip_prefix(<span class="string">&#39;$&#39;</span>)
+                            .expect(<span class="string">&quot;Invalid parser&quot;</span>)
+                            .into(),
+                    ));
                 }
                 parser::Rule::comp_operator =&gt; {
                     <span class="kw">let </span>operator = ConstraintOperator::from_str(item.as_str())
@@ -2236,7 +2242,7 @@
                         </span><span class="kw">let </span>arg = <span class="kw">if let </span><span class="prelude-val">Some</span>(rest) = arg.strip_prefix(<span class="string">&#39;$&#39;</span>) {
                             rest
                         } <span class="kw">else </span>{
-                            <span class="kw-2">&amp;</span>arg[..]
+                            arg.as_str()
                         };
                         <span class="kw">if let </span><span class="prelude-val">Some</span>(value) = variables.get(arg) {
                             args.push(value.clone());

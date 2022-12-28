@@ -375,6 +375,8 @@
 <span id="375">375</span>
 <span id="376">376</span>
 <span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashSet;
 <span class="kw">use </span>std::path::{Path, PathBuf};
 <span class="kw">use </span>std::sync::{Arc, Mutex};
@@ -624,7 +626,9 @@
         <span class="comment">// latexmk sometimes emit the same warning more than once
         </span><span class="kw">let </span><span class="kw-2">mut </span>errors = HashSet::new();
         <span class="kw">for </span>cap <span class="kw">in </span>FIND_ERRORS.captures_iter(<span class="kw-2">&amp;</span>String::from_utf8_lossy(content)) {
-            <span class="kw">let </span>line = cap[<span class="number">2</span>][<span class="number">2</span>..].parse::&lt;i32&gt;().ok();
+            <span class="kw">let </span>line = cap[<span class="number">2</span>]
+                .strip_prefix(<span class="string">&quot;l.&quot;</span>)
+                .and_then(|line| line.parse::&lt;i32&gt;().ok());
             errors.insert((line, cap[<span class="number">1</span>].to_string()));
         }
         <span class="kw">if </span>!errors.is_empty() {

@@ -193,6 +193,7 @@
 <span id="193">193</span>
 <span id="194">194</span>
 <span id="195">195</span>
+<span id="196">196</span>
 </pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>std::fmt::Write;
 <span class="kw">use </span>std::num::NonZeroUsize;
@@ -261,7 +262,8 @@
 
     <span class="doccomment">/// Get the content of the span as a `&amp;str`.
     </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.line[<span class="self">self</span>.line_offset..<span class="self">self</span>.line_offset + <span class="self">self</span>.len]
+        <span class="attribute">#[allow(clippy::string_slice)] </span><span class="comment">// All the offsets are byte-related
+        </span><span class="kw-2">&amp;</span><span class="self">self</span>.line[<span class="self">self</span>.line_offset..<span class="self">self</span>.line_offset + <span class="self">self</span>.len]
     }
 
     <span class="doccomment">/// Obtain a string (with colors) of this span.

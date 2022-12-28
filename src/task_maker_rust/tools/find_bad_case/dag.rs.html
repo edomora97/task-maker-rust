@@ -223,6 +223,8 @@
 <span id="223">223</span>
 <span id="224">224</span>
 <span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::path::{Path, PathBuf};
 
@@ -355,7 +357,8 @@
         <span class="kw">let </span>file_name = file_name.to_string_lossy().to_string();
         <span class="kw">let </span>put = file_name.rfind(<span class="string">&quot;put&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>dot = file_name.rfind(<span class="string">&#39;.&#39;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let </span>number = <span class="kw-2">&amp;</span>file_name[put + <span class="number">3</span>..dot];
+        <span class="attribute">#[allow(clippy::string_slice)] </span><span class="comment">// The indexes come from char-aligned functions.
+        </span><span class="kw">let </span>number = <span class="kw-2">&amp;</span>file_name[put + <span class="number">3</span>..dot];
         number.parse::&lt;TestcaseId&gt;().ok()
     };
 
@@ -399,7 +402,8 @@
     <span class="kw">let </span>get_testcase_id = |description: <span class="kw-2">&amp;</span>str| -&gt; <span class="prelude-ty">Option</span>&lt;TestcaseId&gt; {
         <span class="kw">let </span>start = description.rfind(<span class="string">&quot;testcase &quot;</span>)<span class="question-mark">? </span>+ <span class="string">&quot;testcase &quot;</span>.len();
         <span class="kw">let </span>end = description.rfind(<span class="string">&quot;, &quot;</span>)<span class="question-mark">?</span>;
-        description[start..end].parse::&lt;TestcaseId&gt;().ok()
+        <span class="attribute">#[allow(clippy::string_slice)] </span><span class="comment">// The indexes come from char-aligned functions.
+        </span>description[start..end].parse::&lt;TestcaseId&gt;().ok()
     };
 
     <span class="kw">let </span><span class="kw-2">mut </span>new_file_callbacks = <span class="macro">vec!</span>[];
