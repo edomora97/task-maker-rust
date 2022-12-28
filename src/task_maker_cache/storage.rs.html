@@ -132,9 +132,13 @@
 <span id="132">132</span>
 <span id="133">133</span>
 <span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::hash_map::Entry;
 <span class="kw">use </span>std::collections::HashMap;
-<span class="kw">use </span>std::io::{Read, Write};
+<span class="kw">use </span>std::io::{BufReader, BufWriter, Read, Write};
 <span class="kw">use </span>std::path::PathBuf;
 
 <span class="kw">use </span>anyhow::{Context, Error};
@@ -174,11 +178,13 @@
                 dirty: <span class="bool-val">false</span>,
             });
         }
-        <span class="kw">let </span><span class="kw-2">mut </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>path)
+
+        <span class="kw">let </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>path)
             .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot open cache file at {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>reader = BufReader::new(file);
         <span class="kw">let </span><span class="kw-2">mut </span>magic = [<span class="number">0u8</span>; MAGIC.len()];
 
-        <span class="kw">if </span>file
+        <span class="kw">if </span>reader
             .read_exact(<span class="kw-2">&amp;mut </span>magic)
             .map_or(<span class="bool-val">false</span>, |<span class="kw">_</span>| magic != MAGIC)
         {
@@ -193,7 +199,7 @@
             });
         }
 
-        <span class="kw">let </span>entries = bincode::deserialize_from::&lt;<span class="kw">_</span>, HashMap&lt;CacheKey, Vec&lt;CacheEntry&gt;&gt;&gt;(file)
+        <span class="kw">let </span>entries = bincode::deserialize_from::&lt;<span class="kw">_</span>, HashMap&lt;CacheKey, Vec&lt;CacheEntry&gt;&gt;&gt;(reader)
             .context(<span class="string">&quot;Failed to deserialize cache content&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
@@ -214,12 +220,14 @@
         std::fs::create_dir_all(path.parent().context(<span class="string">&quot;Invalid cache file&quot;</span>)<span class="question-mark">?</span>)
             .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to create cache directory for {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
         <span class="kw">let </span>tmp = path.with_extension(<span class="string">&quot;tmp&quot;</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>file = std::fs::File::create(<span class="kw-2">&amp;</span>tmp).context(<span class="string">&quot;Failed to create cache file&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>file = std::fs::File::create(<span class="kw-2">&amp;</span>tmp).context(<span class="string">&quot;Failed to create cache file&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>writer = BufWriter::new(file);
 
-        file.write_all(MAGIC)
+        writer
+            .write_all(MAGIC)
             .context(<span class="string">&quot;Failed to write cache magic number&quot;</span>)<span class="question-mark">?</span>;
 
-        bincode::serialize_into(file, <span class="kw-2">&amp;</span><span class="self">self</span>.entries.iter().collect_vec())
+        bincode::serialize_into(writer, <span class="kw-2">&amp;</span><span class="self">self</span>.entries.iter().collect_vec())
             .context(<span class="string">&quot;Failed to write cache content&quot;</span>)<span class="question-mark">?</span>;
         std::fs::rename(<span class="kw-2">&amp;</span>tmp, <span class="kw-2">&amp;</span><span class="self">self</span>.path).with_context(|| {
             <span class="macro">format!</span>(
