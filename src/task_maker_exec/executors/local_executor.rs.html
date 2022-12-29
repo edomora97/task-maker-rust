@@ -120,10 +120,13 @@
 <span id="120">120</span>
 <span id="121">121</span>
 <span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
-<span class="kw">use </span>std::sync::mpsc::channel;
+<span class="kw">use </span>std::sync::mpsc::{channel, Sender};
 <span class="kw">use </span>std::sync::Arc;
-<span class="kw">use </span>std::thread;
+<span class="kw">use </span>std::thread::{<span class="self">self</span>, JoinHandle};
 
 <span class="kw">use </span>anyhow::{anyhow, Context, Error};
 <span class="kw">use </span>ductile::{ChannelReceiver, ChannelSender};
@@ -140,64 +143,49 @@
 
 <span class="doccomment">/// An Executor that runs locally by spawning a number of threads with the workers inside.
 </span><span class="kw">pub struct </span>LocalExecutor {
-    <span class="doccomment">/// A reference to the [`FileStore`](../../task_maker_store/struct.FileStore.html).
-    </span>file_store: Arc&lt;FileStore&gt;,
-    <span class="doccomment">/// Where to store the sandboxes of the workers.
-    </span>sandbox_path: PathBuf,
     <span class="doccomment">/// The number of local workers to spawn.
     </span><span class="kw">pub </span>num_workers: usize,
+    <span class="doccomment">/// The internal executor.
+    </span>executor: Executor,
+    <span class="doccomment">/// Channel sending messages to the executor.
+    </span>executor_tx: Sender&lt;ExecutorInMessage&gt;,
+    <span class="doccomment">/// Join handle of the spawned workers.
+    </span>workers: Vec&lt;JoinHandle&lt;<span class="prelude-ty">Result</span>&lt;(), Error&gt;&gt;&gt;,
 }
 
 <span class="kw">impl </span>LocalExecutor {
-    <span class="doccomment">/// Make a new [`LocalExecutor`](struct.LocalExecutor.html) based on a
-    /// [`FileStore`](../../task_maker_store/struct.FileStore.html) and ready to spawn that number
-    /// of workers.
-    </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;&gt;(
+    <span class="doccomment">/// Make a new [`LocalExecutor`] based on a [`FileStore`] and ready to spawn that number of
+    /// workers using a [`Cache`].
+    </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;, R&gt;(
         file_store: Arc&lt;FileStore&gt;,
+        cache: Cache,
         num_workers: usize,
         sandbox_path: P,
-    ) -&gt; LocalExecutor {
-        LocalExecutor {
-            num_workers,
-            file_store,
-            sandbox_path: sandbox_path.into(),
-        }
-    }
-
-    <span class="doccomment">/// Starts the Executor spawning the workers on new threads and blocking on the `Executor`
-    /// thread.
-    ///
-    /// * `sender` - Channel that sends messages to the client.
-    /// * `receiver` - Channel that receives messages from the client.
-    /// * `cache` - The cache the executor has to use.
-    /// * `sandbox_runner` - The function to call for running a process in a sandbox.
-    </span><span class="kw">pub fn </span>evaluate&lt;R&gt;(
-        <span class="self">self</span>,
-        sender: ChannelSender&lt;ExecutorServerMessage&gt;,
-        receiver: ChannelReceiver&lt;ExecutorClientMessage&gt;,
-        cache: Cache,
         sandbox_runner: R,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;LocalExecutor, Error&gt;
     <span class="kw">where
         </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
     {
+        <span class="kw">let </span>sandbox_path = sandbox_path.into();
         <span class="kw">let </span>(executor_tx, executor_rx) = channel();
-        <span class="kw">let </span>executor = Executor::new(<span class="self">self</span>.file_store.clone(), cache, executor_rx, <span class="bool-val">false</span>);
+        <span class="kw">let </span>executor = Executor::new(file_store.clone(), cache, executor_rx, <span class="bool-val">false</span>);
 
         <span class="comment">// share the runner for all the workers
         </span><span class="kw">let </span>sandbox_runner = Arc::new(sandbox_runner);
 
-        <span class="macro">info!</span>(<span class="string">&quot;Spawning {} workers&quot;</span>, <span class="self">self</span>.num_workers);
+        <span class="macro">info!</span>(<span class="string">&quot;Spawning {} workers&quot;</span>, num_workers);
         <span class="kw">let </span><span class="kw-2">mut </span>workers = <span class="macro">vec!</span>[];
         <span class="comment">// spawn the workers and connect them to the executor
-        </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.num_workers {
+        </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..num_workers {
             <span class="kw">let </span>runner = sandbox_runner.clone();
             <span class="kw">let </span>(worker, conn) = Worker::new(
                 <span class="macro">format!</span>(<span class="string">&quot;Local worker {}&quot;</span>, i),
-                <span class="self">self</span>.file_store.clone(),
-                <span class="self">self</span>.sandbox_path.clone(),
+                file_store.clone(),
+                <span class="attribute">#[allow(clippy::needless_borrow)]
+                </span><span class="kw-2">&amp;</span>sandbox_path,
                 runner,
-            );
+            )
+            .context(<span class="string">&quot;Failed to start local worker&quot;</span>)<span class="question-mark">?</span>;
             executor_tx
                 .send(ExecutorInMessage::WorkerConnected { worker: conn })
                 .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send WorkerConnected: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
@@ -212,9 +200,27 @@
             );
         }
 
+        <span class="prelude-val">Ok</span>(LocalExecutor {
+            num_workers,
+            executor,
+            executor_tx,
+            workers,
+        })
+    }
+
+    <span class="doccomment">/// Starts the Executor spawning the workers on new threads and blocking on the `Executor`
+    /// thread.
+    ///
+    /// * `sender` - Channel that sends messages to the client.
+    /// * `receiver` - Channel that receives messages from the client.
+    </span><span class="kw">pub fn </span>evaluate(
+        <span class="self">self</span>,
+        sender: ChannelSender&lt;ExecutorServerMessage&gt;,
+        receiver: ChannelReceiver&lt;ExecutorClientMessage&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="comment">// tell the executor that it has a new (local) client. Since the executor is not in
         // long_running mode, after this client is done the executor will exit.
-        </span>executor_tx
+        </span><span class="self">self</span>.executor_tx
             .send(ExecutorInMessage::ClientConnected {
                 client: ClientInfo {
                     uuid: Uuid::new_v4(),
@@ -226,14 +232,14 @@
             .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send ClientConnected: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
 
         <span class="comment">// no new client/worker can connect, make the executor stop accepting connections
-        </span>drop(executor_tx);
+        </span>drop(<span class="self">self</span>.executor_tx);
         <span class="comment">// this method will block until all the operations are done
-        </span>executor
+        </span><span class="self">self</span>.executor
             .run()
             .context(<span class="string">&quot;Local executor failed to evaluate&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="comment">// since the executor is going down the worker are disconnecting
-        </span><span class="kw">for </span>worker <span class="kw">in </span>workers.into_iter() {
+        </span><span class="kw">for </span>worker <span class="kw">in </span><span class="self">self</span>.workers.into_iter() {
             worker
                 .join()
                 .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Worker panicked: {:?}&quot;</span>, e))<span class="question-mark">?

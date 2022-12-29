@@ -55,7 +55,7 @@
 //! # use std::thread;
 //! # use tempfile::TempDir;
 //! use task_maker_cache::Cache;
-//! use task_maker_exec::ErrorSandboxRunner;
+//! use task_maker_exec::SuccessSandboxRunner;
 //! use ductile::new_local_channel;
 //!
 //! # let tmpdir = TempDir::new().unwrap();
@@ -63,14 +63,14 @@
 //! let store = FileStore::new(path, 1000, 1000).unwrap();
 //! let cache = Cache::new(path).unwrap();
 //! let num_cores = 4;
-//! let mut executor = LocalExecutor::new(Arc::new(store), num_cores, path);
+//! # let sandbox_runner = Arc::new(SuccessSandboxRunner::default());
+//! let mut executor = LocalExecutor::new(Arc::new(store), cache, num_cores, path, sandbox_runner).expect(&quot;failed to start executor&quot;);
 //! // the communication channels for the client
 //! let (tx, rx_remote) = new_local_channel();
 //! let (tx_remote, rx) = new_local_channel();
 //!
 //! # let server = thread::spawn(move || {
-//! # let sandbox_runner = ErrorSandboxRunner::default();
-//! executor.evaluate(tx_remote, rx_remote, cache, sandbox_runner).unwrap();  // this will block!!
+//! executor.evaluate(tx_remote, rx_remote).unwrap();  // this will block!!
 //! # });
 //! # drop(tx);
 //! # drop(rx);

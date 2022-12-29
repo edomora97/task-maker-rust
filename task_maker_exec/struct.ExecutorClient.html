@@ -12,7 +12,7 @@ the files from the server.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>task_maker_dag::ExecutionDAG;
 <span class="kw">use </span>task_maker_store::FileStore;
-<span class="kw">use </span>task_maker_exec::{executors::LocalExecutor, ExecutorClient, ErrorSandboxRunner};
+<span class="kw">use </span>task_maker_exec::{executors::LocalExecutor, ExecutorClient, SuccessSandboxRunner};
 <span class="kw">use </span>std::sync::mpsc::channel;
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 <span class="kw">use </span>std::thread;
@@ -30,8 +30,8 @@ the files from the server.</p>
 <span class="comment">// make a new local executor in a second thread
 </span><span class="kw">let </span>server = thread::spawn(<span class="kw">move </span>|| {
     <span class="kw">let </span>cache = Cache::new(<span class="kw-2">&amp;</span>path).expect(<span class="string">&quot;Cannot create the cache&quot;</span>);
-    <span class="kw">let </span><span class="kw-2">mut </span>executor = LocalExecutor::new(server_file_store, <span class="number">4</span>, path);
-    executor.evaluate(tx_remote, rx_remote, cache, sandbox_runner).unwrap();
+    <span class="kw">let </span><span class="kw-2">mut </span>executor = LocalExecutor::new(server_file_store, cache, <span class="number">4</span>, path, sandbox_runner).expect(<span class="string">&quot;Failed to create local executor&quot;</span>);
+    executor.evaluate(tx_remote, rx_remote).unwrap();
 });
 
 ExecutorClient::evaluate(dag, tx, <span class="kw-2">&amp;</span>rx, file_store, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(())).unwrap(); <span class="comment">// this will block!

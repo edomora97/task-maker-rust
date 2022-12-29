@@ -678,6 +678,34 @@
 <span id="678">678</span>
 <span id="679">679</span>
 <span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
+<span id="708">708</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fs::Permissions;
 <span class="kw">use </span>std::io::Read;
@@ -777,49 +805,49 @@
         name: S,
         file_store: Arc&lt;FileStore&gt;,
         sandbox_path: P,
-        runner: R,
-    ) -&gt; (Worker, WorkerConn)
+        sandbox_runner: R,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(Worker, WorkerConn), Error&gt;
     <span class="kw">where
         </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
     {
+        <span class="kw">let </span>sandbox_path = sandbox_path.into();
+        <span class="kw">let </span>sandbox_runner = Arc::new(sandbox_runner);
         <span class="kw">let </span>(tx, rx_worker) = new_local_channel();
         <span class="kw">let </span>(tx_worker, rx) = new_local_channel();
         <span class="kw">let </span>uuid = Uuid::new_v4();
         <span class="kw">let </span>name = name.into();
-        (
+        <span class="prelude-val">Ok</span>((
             Worker::new_with_channel(
                 name.clone(),
                 file_store,
-                sandbox_path.into(),
+                sandbox_path,
                 tx_worker,
                 rx_worker,
-                runner,
-            ),
+                sandbox_runner,
+            )<span class="question-mark">?</span>,
             WorkerConn {
                 uuid,
                 name,
                 sender: tx,
                 receiver: rx,
             },
-        )
+        ))
     }
 
     <span class="doccomment">/// Make a new worker with an already connected channel.
-    </span><span class="kw">pub fn </span>new_with_channel&lt;S: Into&lt;String&gt;, P: Into&lt;PathBuf&gt;, R&gt;(
+    </span><span class="kw">pub fn </span>new_with_channel&lt;S: Into&lt;String&gt;, P: Into&lt;PathBuf&gt;&gt;(
         name: S,
         file_store: Arc&lt;FileStore&gt;,
         sandbox_path: P,
         sender: ChannelSender&lt;WorkerClientMessage&gt;,
         receiver: ChannelReceiver&lt;WorkerServerMessage&gt;,
-        runner: R,
-    ) -&gt; Worker
-    <span class="kw">where
-        </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
-    {
+        sandbox_runner: Arc&lt;<span class="kw">dyn </span>SandboxRunner&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Worker, Error&gt; {
+        <span class="kw">let </span>sandbox_path = sandbox_path.into();
+        check_sandbox_is_supported(<span class="kw-2">&amp;</span>sandbox_path, sandbox_runner.clone())<span class="question-mark">?</span>;
         <span class="kw">let </span>uuid = Uuid::new_v4();
         <span class="kw">let </span>name = name.into();
-        <span class="kw">let </span>sandbox_path = sandbox_path.into();
-        Worker {
+        <span class="prelude-val">Ok</span>(Worker {
             uuid,
             name,
             sender,
@@ -827,9 +855,9 @@
             file_store,
             current_job: Arc::new(Mutex::new(WorkerCurrentJob::new())),
             sandbox_path,
-            sandbox_runner: Arc::new(runner),
+            sandbox_runner,
             current_sandbox_thread: <span class="prelude-val">None</span>,
-        }
+        })
     }
 
     <span class="doccomment">/// Start the sandbox thread for the current job.
@@ -1357,6 +1385,34 @@
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
         <span class="macro">write!</span>(f, <span class="string">&quot;&#39;{}&#39; ({})&quot;</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid)
     }
+}
+
+<span class="kw">fn </span>check_sandbox_is_supported(
+    sandbox_path: <span class="kw-2">&amp;</span>Path,
+    runner: Arc&lt;<span class="kw">dyn </span>SandboxRunner&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span>execution = Execution::new(
+        <span class="string">&quot;Execution to check if sandbox is supported&quot;</span>,
+        ExecutionCommand::system(<span class="string">&quot;true&quot;</span>),
+    );
+    <span class="kw">let </span>sandbox = Sandbox::new(sandbox_path, <span class="kw-2">&amp;</span>execution, <span class="kw-2">&amp;</span>Default::default(), <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>result = sandbox.run(runner.as_ref())<span class="question-mark">?</span>;
+    <span class="kw">match </span>result {
+        SandboxResult::Failed { error } =&gt; <span class="macro">bail!</span>(<span class="string">&quot;Sandbox failed: {}&quot;</span>, error),
+        SandboxResult::Success {
+            exit_status,
+            signal,
+            ..
+        } =&gt; {
+            <span class="kw">if </span>exit_status != <span class="number">0 </span>{
+                <span class="macro">bail!</span>(<span class="string">&quot;Sandbox failed: exited with {}&quot;</span>, exit_status);
+            }
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((signal, name)) = signal {
+                <span class="macro">bail!</span>(<span class="string">&quot;Sandbox failed: exited with signal {} ({})&quot;</span>, signal, name);
+            }
+        }
+    }
+    <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_exec" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>

@@ -309,6 +309,11 @@
 <span id="309">309</span>
 <span id="310">310</span>
 <span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
 </pre><pre class="rust"><code><span class="doccomment">//! This mod exposes an interface for setting up and running an execution.
 //!
 //! The structs here follow a multi-step builder pattern, moving from a struct to the next adding
@@ -482,11 +487,16 @@
             <span class="comment">// setup the local executor
             </span><span class="kw">let </span>num_cores = opt.num_cores.unwrap_or_else(num_cpus::get);
             <span class="kw">let </span>sandbox_path = storage_opt.store_dir().join(<span class="string">&quot;sandboxes&quot;</span>);
-            <span class="kw">let </span>executor = LocalExecutor::new(file_store.clone(), num_cores, sandbox_path);
-            <span class="kw">let </span>sandbox_runner = <span class="self">self</span>.sandbox_runner;
+            <span class="kw">let </span>executor = LocalExecutor::new(
+                file_store.clone(),
+                cache,
+                num_cores,
+                sandbox_path,
+                <span class="self">self</span>.sandbox_runner,
+            )<span class="question-mark">?</span>;
             <span class="kw">let </span>local_executor = std::thread::Builder::new()
                 .name(<span class="string">&quot;Executor thread&quot;</span>.into())
-                .spawn(<span class="kw">move </span>|| executor.evaluate(tx_remote, rx_remote, cache, sandbox_runner))
+                .spawn(<span class="kw">move </span>|| executor.evaluate(tx_remote, rx_remote))
                 .context(<span class="string">&quot;Failed to spawn the executor thread&quot;</span>)<span class="question-mark">?</span>;
             (tx, rx, <span class="prelude-val">Some</span>(local_executor))
         };

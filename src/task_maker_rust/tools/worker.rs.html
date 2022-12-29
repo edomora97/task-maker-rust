@@ -77,6 +77,7 @@
 <span id="77">77</span>
 <span id="78">78</span>
 <span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>anyhow::{bail, Context, Error};
@@ -152,8 +153,9 @@
         sandbox_path,
         executor_tx.change_type(),
         executor_rx.change_type(),
-        ToolsSandboxRunner::default(),
-    );
+        Arc::new(ToolsSandboxRunner::default()),
+    )
+    .context(<span class="string">&quot;Failed to start worker&quot;</span>)<span class="question-mark">?</span>;
     worker.work()
 }
 </code></pre></div>
