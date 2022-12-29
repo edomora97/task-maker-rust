@@ -759,6 +759,12 @@
 <span id="759">759</span>
 <span id="760">760</span>
 <span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)
 //! and it&#39;s the most used format in the Italian Olympiads.
 //!
@@ -1268,7 +1274,13 @@
         booklets: Vec::new(),
         difficulty: yaml.difficulty,
         syllabus_level: yaml.syllabuslevel,
-        sanity_checks: Arc::new(get_sanity_checks(<span class="kw-2">&amp;</span>eval_config.disabled_sanity_checks)),
+        sanity_checks: Arc::new(get_sanity_checks(
+            <span class="kw-2">&amp;</span>eval_config
+                .disabled_sanity_checks
+                .iter()
+                .map(String::as_str)
+                .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
+        )),
         input_validator_generator: InputValidatorGenerator::new(
             detect_validator(task_dir.to_path_buf()).context(<span class="string">&quot;Failed to detect validator&quot;</span>)<span class="question-mark">?</span>,
         ),

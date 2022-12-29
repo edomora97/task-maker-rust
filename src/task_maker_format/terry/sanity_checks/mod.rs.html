@@ -19,16 +19,6 @@
 <span id="19">19</span>
 <span id="20">20</span>
 <span id="21">21</span>
-<span id="22">22</span>
-<span id="23">23</span>
-<span id="24">24</span>
-<span id="25">25</span>
-<span id="26">26</span>
-<span id="27">27</span>
-<span id="28">28</span>
-<span id="29">29</span>
-<span id="30">30</span>
-<span id="31">31</span>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{SanityCheck, SanityChecks};
 <span class="kw">use </span><span class="kw">crate</span>::terry::TerryTask;
 
@@ -36,28 +26,18 @@
 <span class="kw">mod </span>statement;
 <span class="kw">mod </span>task;
 
+<span class="macro">inventory::collect!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;);
+
 <span class="doccomment">/// Make a new `SanityChecks` for a IOI task skipping the checks with the provided names.
-</span><span class="kw">pub fn </span>get_sanity_checks(skip: <span class="kw-2">&amp;</span>[String]) -&gt; SanityChecks&lt;TerryTask&gt; {
+</span><span class="kw">pub fn </span>get_sanity_checks(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; SanityChecks&lt;TerryTask&gt; {
     SanityChecks::new(get_sanity_check_list(skip))
 }
 
 <span class="doccomment">/// Return the list of sanity checks excluding the ones with their name in the provided list.
-</span><span class="kw">fn </span>get_sanity_check_list(skip: <span class="kw-2">&amp;</span>[String]) -&gt; Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;&gt;&gt; {
-    <span class="kw">let </span>all: Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;<span class="kw">_</span>&gt;&gt;&gt; = <span class="macro">vec!</span>[
-        Box::&lt;task::ValidatorPresent&gt;::default(),
-        Box::&lt;statement::StatementPresent&gt;::default(),
-        Box::&lt;checker::FuzzChecker&gt;::default(),
-    ];
-    all.into_iter()
-        .filter(|s| !skip.contains(<span class="kw-2">&amp;</span>s.name().into()))
-        .collect()
-}
-
-<span class="doccomment">/// Return a comma separated list of the names of all the sanity checks.
-</span><span class="kw">pub fn </span>get_sanity_check_names() -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
-    get_sanity_check_list(<span class="kw-2">&amp;</span>[])
-        .iter()
-        .map(|s| s.name())
+</span><span class="kw">pub fn </span>get_sanity_check_list(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;&gt; {
+    inventory::iter::&lt;<span class="kw-2">&amp;</span><span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;&gt;()
+        .cloned()
+        .filter(|s| !skip.contains(<span class="kw-2">&amp;</span>s.name()) &amp;&amp; !skip.contains(<span class="kw-2">&amp;</span>s.category().as_str()))
         .collect()
 }
 </code></pre></div>

@@ -21,23 +21,33 @@
 <span id="21">21</span>
 <span id="22">22</span>
 <span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
 </pre><pre class="rust"><code><span class="kw">use </span>anyhow::Error;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{make_sanity_check, SanityCheck, SanityCheckCategory};
 <span class="kw">use </span><span class="kw">crate</span>::terry::TerryTask;
 <span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
 
 <span class="doccomment">/// Check that the validator is present.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>ValidatorPresent;
+<span class="macro">make_sanity_check!</span>(ValidatorPresent);
 
 <span class="kw">impl </span>SanityCheck&lt;TerryTask&gt; <span class="kw">for </span>ValidatorPresent {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;ValidatorPresent&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>TerryTask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Io
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>TerryTask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">if </span>task.validator.is_none() {
             eval.add_diagnostic(Diagnostic::warning(<span class="string">&quot;Validator not present&quot;</span>))<span class="question-mark">?</span>;
         }

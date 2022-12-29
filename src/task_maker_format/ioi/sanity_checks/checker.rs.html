@@ -97,11 +97,16 @@
 <span id="97">97</span>
 <span id="98">98</span>
 <span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
 </pre><pre class="rust"><code><span class="kw">use </span>anyhow::{Context, Error};
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::IOITask;
-<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{make_sanity_check, SanityCheck, SanityCheckCategory};
 <span class="kw">use </span><span class="kw">crate</span>::UISender;
 <span class="kw">use </span>task_maker_dag::File;
 
@@ -109,6 +114,7 @@
 /// score 0 points.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>FuzzCheckerWithJunkOutput;
+<span class="macro">make_sanity_check!</span>(FuzzCheckerWithJunkOutput);
 
 <span class="macro">lazy_static! </span>{
     <span class="kw">static </span><span class="kw-2">ref </span>JUNK_OUTPUTS: [(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, Vec&lt;u8&gt;); <span class="number">4</span>] = [
@@ -124,7 +130,11 @@
         <span class="string">&quot;FuzzCheckerWithJunkOutput&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Checker
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="comment">// Only tasks with a custom checker are supported.
         </span><span class="kw">let </span>checker = <span class="kw">match </span><span class="kw-2">&amp;</span>task.task_type {
             <span class="kw">crate</span>::ioi::TaskType::Batch(batch) =&gt; <span class="kw">match </span><span class="kw-2">&amp;</span>batch.checker {

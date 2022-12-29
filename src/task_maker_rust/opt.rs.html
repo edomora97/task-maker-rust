@@ -290,7 +290,22 @@
 <span id="290">290</span>
 <span id="291">291</span>
 <span id="292">292</span>
-</pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::PathBuf;
 
 <span class="kw">use </span>anyhow::{Context, Error};
 <span class="kw">use </span>clap::{ArgAction, Parser};
@@ -298,7 +313,7 @@
 
 <span class="kw">use </span>task_maker_dag::DagPriority;
 <span class="kw">use </span>task_maker_format::terry::Seed;
-<span class="kw">use </span>task_maker_format::{find_task, get_sanity_check_names, TaskFormat};
+<span class="kw">use </span>task_maker_format::{find_task, get_sanity_check_list, TaskFormat};
 <span class="kw">use </span>task_maker_format::{EvaluationConfig, VALID_TAGS};
 
 <span class="attribute">#[derive(Parser, Debug)]
@@ -332,8 +347,8 @@
     <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;BOOKLET&quot;</span>))]
     </span><span class="kw">pub </span>booklet: BookletOpt,
 
-    <span class="doccomment">/// List of sanity checks to skip.
-    </span><span class="attribute">#[clap(short = <span class="string">&#39;W&#39;</span>, long_help = skip_sanity_checks_long_help())]
+    <span class="doccomment">/// List of sanity checks to skip (--help for the list).
+    </span><span class="attribute">#[clap(short = <span class="string">&#39;W&#39;</span>, long = <span class="string">&quot;skip-checks&quot;</span>, long_help = skip_sanity_checks_long_help())]
     </span><span class="kw">pub </span>skip_sanity_checks: Vec&lt;String&gt;,
 
     <span class="attribute">#[clap(flatten, next_help_heading = <span class="prelude-val">Some</span>(<span class="string">&quot;STORAGE&quot;</span>))]
@@ -477,10 +492,23 @@
 <span class="doccomment">/// Returns the long-help for the &quot;skip sanity checks&quot; option.
 </span><span class="kw">fn </span>skip_sanity_checks_long_help() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
     <span class="macro">lazy_static! </span>{
-        <span class="kw">pub static </span><span class="kw-2">ref </span>DOC: String = <span class="macro">format!</span>(
-            <span class="string">&quot;List of sanity checks to skip.\n\nThe available checks are: {}.&quot;</span>,
-            get_sanity_check_names()
-        );
+        <span class="kw">pub static </span><span class="kw-2">ref </span>DOC: String = {
+            <span class="kw">let </span><span class="kw-2">mut </span>message = <span class="string">&quot;List of sanity checks to skip.\n\n&quot;</span>.to_string();
+            message += <span class="string">&quot;The available checks are:\n&quot;</span>;
+
+            <span class="kw">let </span><span class="kw-2">mut </span>by_category: HashMap&lt;<span class="kw">_</span>, Vec&lt;<span class="kw">_</span>&gt;&gt; = Default::default();
+            <span class="kw">for </span>(name, category) <span class="kw">in </span>get_sanity_check_list() {
+                by_category.entry(category).or_default().push(name);
+            }
+
+            <span class="kw">for </span>(category, <span class="kw-2">mut </span>checks) <span class="kw">in </span>by_category.into_iter().sorted() {
+                checks.sort();
+                message += <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{} ({})\n&quot;</span>, category.as_str(), category.purpose());
+                message += <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;- {}\n\n&quot;</span>, checks.join(<span class="string">&quot;, &quot;</span>));
+            }
+
+            message.trim().into()
+        };
     }
     <span class="kw-2">&amp;</span>DOC
 }

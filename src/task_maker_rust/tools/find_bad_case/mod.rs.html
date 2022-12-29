@@ -345,6 +345,9 @@
 <span id="345">345</span>
 <span id="346">346</span>
 <span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 
@@ -404,7 +407,10 @@
         booklet_solutions: <span class="bool-val">false</span>,
         no_statement: <span class="bool-val">true</span>,
         solution_paths: <span class="macro">vec!</span>[opt.solution.clone()],
-        disabled_sanity_checks: get_sanity_check_list(),
+        disabled_sanity_checks: get_sanity_check_list()
+            .into_iter()
+            .map(|check| check.<span class="number">0</span>.into())
+            .collect(),
         seed: <span class="prelude-val">None</span>,
         dry_run: <span class="bool-val">false</span>,
     };

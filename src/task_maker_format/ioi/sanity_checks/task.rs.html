@@ -100,6 +100,21 @@
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::fs;
 
 <span class="kw">use </span>anyhow::Error;
@@ -107,7 +122,7 @@
 <span class="kw">use </span>task_maker_diagnostics::{CodeSpan, Diagnostic};
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::IOITask;
-<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{make_sanity_check, SanityCheck, SanityCheckCategory};
 <span class="kw">use crate</span>::{list_files, EvaluationData};
 
 <span class="doccomment">/// The default maximum score of a task.
@@ -116,13 +131,18 @@
 <span class="doccomment">/// Check that the task has the usual maximum score.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>TaskMaxScore;
+<span class="macro">make_sanity_check!</span>(TaskMaxScore);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>TaskMaxScore {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;TaskMaxScore&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Task
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>task_score: f64 = task.subtasks.values().map(|st| st.max_score).sum();
         <span class="kw">if </span><span class="macro">approx::abs_diff_ne!</span>(task_score, DEFAULT_TASK_MAX_SCORE) {
             eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
@@ -137,13 +157,18 @@
 <span class="doccomment">/// Check that there are no broken links.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>BrokenSymlinks;
+<span class="macro">make_sanity_check!</span>(BrokenSymlinks);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>BrokenSymlinks {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;BrokenSymlinks&quot;
     </span>}
 
-    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Task
+    }
+
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">for </span>file <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;**/*&quot;</span>]) {
             <span class="kw">if </span>!file.exists() {
                 <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>file);
@@ -166,13 +191,18 @@
 <span class="doccomment">/// Check that cpp source files don&#39;t contain #include &lt;bits/stdc++.h&gt; (or whitespace variants of it)
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>NoBitsStdCpp;
+<span class="macro">make_sanity_check!</span>(NoBitsStdCpp);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>NoBitsStdCpp {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;NoBitsStdCpp&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Task
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="macro">lazy_static! </span>{
             <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex =
                 Regex::new(<span class="string">r###&quot;(?m)^#\s*include\s*(?:&lt;|&quot;)bits/stdc\+\+\.h(?:&gt;|&quot;).*$&quot;###</span>)

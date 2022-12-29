@@ -108,50 +108,175 @@
 <span id="108">108</span>
 <span id="109">109</span>
 <span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
 </span><span class="kw">use </span>std::sync::Mutex;
 
 <span class="kw">use </span>anyhow::Error;
-<span class="kw">use </span>itertools::Itertools;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
 <span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
+
+<span class="doccomment">/// Category of a sanity check.
+</span><span class="attribute">#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+</span><span class="kw">pub enum </span>SanityCheckCategory {
+    <span class="doccomment">/// The sanity check verifies the attachments.
+    </span>Attachments,
+    <span class="doccomment">/// The sanity check verifies the checker.
+    </span>Checker,
+    <span class="doccomment">/// The sanity check verifies the input/output files.
+    </span>Io,
+    <span class="doccomment">/// The sanity check verifies the solutions.
+    </span>Solutions,
+    <span class="doccomment">/// The sanity check verifies the statement files.
+    </span>Statement,
+    <span class="doccomment">/// The sanity check verifies general properties of the task.
+    </span>Task,
+}
+
+<span class="kw">impl </span>SanityCheckCategory {
+    <span class="doccomment">/// What this category is about.
+    </span><span class="kw">pub fn </span>purpose(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="kw">match </span><span class="self">self </span>{
+            SanityCheckCategory::Attachments =&gt; <span class="string">&quot;verifies the attachments&quot;</span>,
+            SanityCheckCategory::Checker =&gt; <span class="string">&quot;verifies the checker&quot;</span>,
+            SanityCheckCategory::Io =&gt; <span class="string">&quot;verifies the input/output files&quot;</span>,
+            SanityCheckCategory::Solutions =&gt; <span class="string">&quot;verifies the solutions&quot;</span>,
+            SanityCheckCategory::Statement =&gt; <span class="string">&quot;verifies the statement files&quot;</span>,
+            SanityCheckCategory::Task =&gt; <span class="string">&quot;verifies general properties of the task&quot;</span>,
+        }
+    }
+
+    <span class="doccomment">/// String version of this category.
+    </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        <span class="kw">match </span><span class="self">self </span>{
+            SanityCheckCategory::Attachments =&gt; <span class="string">&quot;Attachments&quot;</span>,
+            SanityCheckCategory::Checker =&gt; <span class="string">&quot;Checker&quot;</span>,
+            SanityCheckCategory::Io =&gt; <span class="string">&quot;Io&quot;</span>,
+            SanityCheckCategory::Solutions =&gt; <span class="string">&quot;Solutions&quot;</span>,
+            SanityCheckCategory::Statement =&gt; <span class="string">&quot;Statement&quot;</span>,
+            SanityCheckCategory::Task =&gt; <span class="string">&quot;Task&quot;</span>,
+        }
+    }
+}
 
 <span class="doccomment">/// Trait that describes the behavior of a sanity check.
 </span><span class="kw">pub trait </span>SanityCheck&lt;Task&gt;: Send + Sync + std::fmt::Debug {
     <span class="doccomment">/// The name of the sanity check.
     </span><span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str;
 
+    <span class="doccomment">/// The category of the sanity check.
+    </span><span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory;
+
     <span class="doccomment">/// This function will be called before the actual execution of the DAG. It can add new
     /// executions to the DAG.
-    </span><span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span>Task, _eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span>Task, _eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="prelude-val">Ok</span>(())
     }
 
     <span class="doccomment">/// This function will be called after the execution of the DAG completes.
-    </span><span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span>Task, _eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">fn </span>post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span>Task, _eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="prelude-val">Ok</span>(())
     }
 }
 
+<span class="doccomment">/// Register this struct as a sanity check.
+///
+/// ## Usage
+///
+/// ```no_run
+/// struct SanityCheckName;
+/// make_sanity_check!(SanityCheckName);
+/// ```
+</span><span class="macro">macro_rules! </span>make_sanity_check {
+    (<span class="macro-nonterminal">$name</span>:tt) =&gt; {
+        <span class="macro">paste::paste! </span>{
+            <span class="attribute">#[allow(non_upper_case_globals)]
+            </span><span class="kw">static </span>[&lt;__ <span class="macro-nonterminal">$name </span>_SANITY_CHECK&gt;]: <span class="macro-nonterminal">$name </span>= <span class="macro-nonterminal">$name</span>;
+            <span class="macro">::inventory::submit!</span>(<span class="kw-2">&amp;</span>[&lt;__ <span class="macro-nonterminal">$name </span>_SANITY_CHECK&gt;] <span class="kw">as </span><span class="kw-2">&amp;</span><span class="kw">dyn </span>SanityCheck&lt;<span class="kw">_</span>&gt;);
+        }
+    };
+}
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use </span>make_sanity_check;
+
 <span class="doccomment">/// Internal state of the sanity checks.
 </span><span class="attribute">#[derive(Debug, Default)]
-</span><span class="kw">struct </span>SanityChecksState&lt;Task&gt; {
+</span><span class="kw">struct </span>SanityChecksState&lt;Task: <span class="lifetime">&#39;static</span>&gt; {
     <span class="doccomment">/// The list of enabled sanity checks.
-    </span>sanity_checks: Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;Task&gt;&gt;&gt;,
+    </span>sanity_checks: Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;Task&gt;&gt;,
 }
 
 <span class="doccomment">/// Sanity checks for a IOI task.
 </span><span class="attribute">#[derive(Debug)]
-</span><span class="kw">pub struct </span>SanityChecks&lt;Task&gt; {
+</span><span class="kw">pub struct </span>SanityChecks&lt;Task: <span class="lifetime">&#39;static</span>&gt; {
     <span class="doccomment">/// The internal state of the sanity checks. Mutex to allow interior mutability and Send+Sync
     /// support.
     </span>state: Mutex&lt;SanityChecksState&lt;Task&gt;&gt;,
 }
 
 <span class="kw">impl</span>&lt;Task&gt; SanityChecks&lt;Task&gt; {
-    <span class="kw">pub fn </span>new(checks: Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;Task&gt;&gt;&gt;) -&gt; SanityChecks&lt;Task&gt; {
+    <span class="kw">pub fn </span>new(checks: Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;Task&gt;&gt;) -&gt; SanityChecks&lt;Task&gt; {
         SanityChecks {
             state: Mutex::new(SanityChecksState {
                 sanity_checks: checks,
@@ -205,18 +330,15 @@
     }
 }
 
-<span class="doccomment">/// Return a list of all the sanity check names.
-</span><span class="kw">pub fn </span>get_sanity_check_list() -&gt; Vec&lt;String&gt; {
-    <span class="kw">crate</span>::ioi::sanity_checks::get_sanity_check_names()
-        .iter()
-        .chain(<span class="kw">crate</span>::terry::sanity_checks::get_sanity_check_names().iter())
-        .map(ToString::to_string)
-        .collect()
-}
-
-<span class="doccomment">/// Return a comma separated list of the names of all the sanity checks.
-</span><span class="kw">pub fn </span>get_sanity_check_names() -&gt; String {
-    get_sanity_check_list().into_iter().join(<span class="string">&quot;, &quot;</span>)
+<span class="doccomment">/// Return a list of all the sanity check.
+</span><span class="kw">pub fn </span>get_sanity_check_list() -&gt; Vec&lt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, SanityCheckCategory)&gt; {
+    <span class="kw">let </span>ioi = <span class="kw">crate</span>::ioi::sanity_checks::get_sanity_check_list(<span class="kw-2">&amp;</span>[])
+        .into_iter()
+        .map(|check| (check.name(), check.category()));
+    <span class="kw">let </span>terry = <span class="kw">crate</span>::terry::sanity_checks::get_sanity_check_list(<span class="kw-2">&amp;</span>[])
+        .into_iter()
+        .map(|check| (check.name(), check.category()));
+    ioi.chain(terry).collect()
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="task_maker_format" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>

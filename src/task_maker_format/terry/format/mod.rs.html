@@ -78,6 +78,12 @@
 <span id="78">78</span>
 <span id="79">79</span>
 <span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::fs;
 <span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::sync::Arc;
@@ -133,7 +139,13 @@
         validator,
         checker,
         official_solution,
-        sanity_checks: Arc::new(get_sanity_checks(<span class="kw-2">&amp;</span>eval_config.disabled_sanity_checks)),
+        sanity_checks: Arc::new(get_sanity_checks(
+            <span class="kw-2">&amp;</span>eval_config
+                .disabled_sanity_checks
+                .iter()
+                .map(String::as_str)
+                .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
+        )),
     })
 }
 

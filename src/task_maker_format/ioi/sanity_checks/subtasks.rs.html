@@ -90,60 +90,28 @@
 <span id="90">90</span>
 <span id="91">91</span>
 <span id="92">92</span>
-<span id="93">93</span>
-<span id="94">94</span>
-<span id="95">95</span>
-<span id="96">96</span>
-<span id="97">97</span>
-<span id="98">98</span>
-<span id="99">99</span>
-<span id="100">100</span>
-<span id="101">101</span>
-<span id="102">102</span>
-<span id="103">103</span>
-<span id="104">104</span>
-<span id="105">105</span>
-<span id="106">106</span>
-<span id="107">107</span>
-<span id="108">108</span>
-<span id="109">109</span>
-<span id="110">110</span>
-<span id="111">111</span>
-<span id="112">112</span>
-<span id="113">113</span>
-<span id="114">114</span>
-<span id="115">115</span>
-<span id="116">116</span>
-<span id="117">117</span>
-<span id="118">118</span>
-<span id="119">119</span>
-<span id="120">120</span>
-<span id="121">121</span>
-<span id="122">122</span>
-<span id="123">123</span>
-<span id="124">124</span>
-<span id="125">125</span>
-<span id="126">126</span>
-<span id="127">127</span>
-<span id="128">128</span>
-<span id="129">129</span>
 </pre><pre class="rust"><code><span class="kw">use </span>anyhow::Error;
 <span class="kw">use </span>itertools::Itertools;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
-<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{make_sanity_check, SanityCheck, SanityCheckCategory};
 <span class="kw">use crate</span>::{EvaluationData, IOITask};
 
 <span class="doccomment">/// Check that all the subtasks have a name.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>MissingSubtaskNames;
+<span class="macro">make_sanity_check!</span>(MissingSubtaskNames);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>MissingSubtaskNames {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;MissingSubtaskNames&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Io
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>missing_name = <span class="macro">vec!</span>[];
         <span class="kw">for </span>subtask_id <span class="kw">in </span>task.subtasks.keys().sorted() {
             <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>task.subtasks[subtask_id];
@@ -175,63 +143,21 @@
     }
 }
 
-<span class="doccomment">/// Check that all the solutions (that are not symlinks) contain at least one check.
-</span><span class="attribute">#[derive(Debug, Default)]
-</span><span class="kw">pub struct </span>SolutionsWithNoChecks;
-
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>SolutionsWithNoChecks {
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;SolutionsWithNoChecks&quot;
-    </span>}
-
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">for </span>subtask <span class="kw">in </span>task.subtasks.values() {
-            <span class="kw">if </span>subtask.name.is_none() {
-                <span class="comment">// If not all the subtasks have a name, do not bother with the solutions, it&#39;s much
-                // more important to give everything a name before.
-                </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
-            }
-        }
-
-        <span class="kw">let </span><span class="kw-2">mut </span>solutions = <span class="macro">vec!</span>[];
-        <span class="kw">for </span>solution <span class="kw">in </span>eval.solutions.iter() {
-            <span class="kw">if </span>!solution.checks.is_empty() {
-                <span class="kw">continue</span>;
-            }
-            <span class="kw">let </span>path = <span class="kw-2">&amp;</span>solution.source_file.path;
-            <span class="comment">// Ignore the symlinks, since they may come from att/, in which we don&#39;t want to put the
-            // checks.
-            </span><span class="kw">if </span>path.is_symlink() {
-                <span class="kw">continue</span>;
-            }
-            solutions.push(<span class="macro">format!</span>(
-                <span class="string">&quot;{}&quot;</span>,
-                solution.source_file.relative_path().display()
-            ))
-        }
-        <span class="kw">if </span>!solutions.is_empty() {
-            eval.add_diagnostic(
-                Diagnostic::warning(<span class="macro">format!</span>(
-                    <span class="string">&quot;The following solutions are missing the subtask checks: {}&quot;</span>,
-                    solutions.join(<span class="string">&quot;, &quot;</span>)
-                ))
-                .with_help(<span class="string">&quot;Try running task-maker-tools add-solution-checks&quot;</span>),
-            )<span class="question-mark">?</span>;
-        }
-        <span class="prelude-val">Ok</span>(())
-    }
-}
-
 <span class="doccomment">/// Check that all the checks target at least one subtask.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>InvalidSubtaskName;
+<span class="macro">make_sanity_check!</span>(InvalidSubtaskName);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>InvalidSubtaskName {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;InvalidSubtaskName&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Io
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>subtask_names = task
             .subtasks
             .keys()

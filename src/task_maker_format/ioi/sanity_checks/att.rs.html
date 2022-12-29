@@ -522,6 +522,45 @@
 <span id="522">522</span>
 <span id="523">523</span>
 <span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeSet, HashMap};
 <span class="kw">use </span>std::io::{Read, Seek, SeekFrom};
 <span class="kw">use </span>std::path::PathBuf;
@@ -537,7 +576,7 @@
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::sanity_checks::check_missing_graders;
 <span class="kw">use </span><span class="kw">crate</span>::ioi::{IOITask, InputGenerator, TaskType, TestcaseId};
-<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::SanityCheck;
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{make_sanity_check, SanityCheck, SanityCheckCategory};
 <span class="kw">use crate</span>::{list_files, EvaluationData, SolutionCheck, SourceFile, UISender};
 
 <span class="kw">use </span><span class="kw">super</span>::io::CheckEndWithNewLine;
@@ -545,13 +584,18 @@
 <span class="doccomment">/// Check that all the graders are present inside att.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttGraders;
+<span class="macro">make_sanity_check!</span>(AttGraders);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttGraders {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;AttGraders&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         check_missing_graders(task, eval, <span class="string">&quot;att&quot;</span>)
     }
 }
@@ -559,13 +603,18 @@
 <span class="doccomment">/// Check that all the templates are present inside att.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttTemplates;
+<span class="macro">make_sanity_check!</span>(AttTemplates);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttTemplates {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;AttTemplates&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">for </span>grader <span class="kw">in </span>task.grader_map.all_paths() {
             <span class="kw">let </span>ext = grader
                 .extension()
@@ -588,6 +637,7 @@
 <span class="doccomment">/// Check that the sample cases inside att are valid symlinks.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttSampleFiles;
+<span class="macro">make_sanity_check!</span>(AttSampleFiles);
 
 <span class="kw">impl </span>AttSampleFiles {
     <span class="doccomment">/// Extract the list of sample input files from the task.
@@ -619,7 +669,11 @@
         <span class="string">&quot;AttSampleFiles&quot;
     </span>}
 
-    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>no_sample = <span class="bool-val">true</span>;
         <span class="kw">let </span>samples_from_task = <span class="self">Self</span>::extract_sample_files_from_task(task);
         <span class="kw">let </span><span class="kw-2">mut </span>samples_from_att = <span class="macro">vec!</span>[];
@@ -687,13 +741,18 @@
 /// and the sample output files score full score.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttSampleFilesValid;
+<span class="macro">make_sanity_check!</span>(AttSampleFilesValid);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttSampleFilesValid {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;AttSampleFilesValid&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>validator = <span class="kw-2">&amp;</span>task.input_validator_generator;
         <span class="kw">let </span>task_type = <span class="kw">if let </span>TaskType::Batch(data) = <span class="kw-2">&amp;</span>task.task_type {
             data
@@ -905,13 +964,18 @@
 <span class="doccomment">/// Check that the source files in att don&#39;t contain @check rules.
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttWithNoCheck;
+<span class="macro">make_sanity_check!</span>(AttWithNoCheck);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttWithNoCheck {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;AttWithNoCheck&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*&quot;</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(checks) = SolutionCheck::extract_check_list(<span class="kw-2">&amp;</span>att, eval) {
@@ -938,7 +1002,11 @@
         <span class="string">&quot;AttEndWithNewLine&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*&quot;</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
 
@@ -971,13 +1039,18 @@
 
 <span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttNoDirectory;
+<span class="macro">make_sanity_check!</span>(AttNoDirectory);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttNoDirectory {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;AttNoDirectory&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>dir =
             std::fs::read_dir(task.path.join(<span class="string">&quot;att&quot;</span>)).context(<span class="string">&quot;Failed to open att/ directory&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">for </span>entry <span class="kw">in </span>dir {
@@ -1000,13 +1073,18 @@
 <span class="doccomment">/// Check that the template and grader in att compile together
 </span><span class="attribute">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttTemplatesShouldCompile;
+<span class="macro">make_sanity_check!</span>(AttTemplatesShouldCompile);
 
 <span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>AttTemplatesShouldCompile {
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;AttTemplatesShouldCompile&quot;
     </span>}
 
-    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
+        SanityCheckCategory::Attachments
+    }
+
+    <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">for </span>grader <span class="kw">in </span>task.grader_map.all_paths() {
             <span class="kw">let </span>ext = grader
                 .extension()
