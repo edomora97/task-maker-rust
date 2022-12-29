@@ -67,9 +67,33 @@
 <span id="67">67</span>
 <span id="68">68</span>
 <span id="69">69</span>
-</pre><pre class="rust"><code><span class="kw">use </span>anyhow::{bail, Context, Error};
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+</pre><pre class="rust"><code><span class="kw">use </span>std::net::SocketAddr;
+<span class="kw">use </span>std::path::PathBuf;
+
+<span class="kw">use </span>anyhow::{bail, Context, Error};
 <span class="kw">use </span>task_maker_exec::ductile::{
-    connect_channel, connect_channel_with_enc, ChannelReceiver, ChannelSender,
+    connect_channel, connect_channel_with_enc, connect_unix_channel, ChannelReceiver, ChannelSender,
 };
 <span class="kw">use </span>url::{ParseError, Url};
 
@@ -87,50 +111,68 @@
         </span>}
         <span class="prelude-val">Err</span>(e) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(e.into()),
     };
-    <span class="kw">let </span>(server_addrs, password) = <span class="kw">match </span>url.scheme() {
+
+    <span class="kw">enum </span>Schema {
+        Tcp(Vec&lt;SocketAddr&gt;),
+        Unix(PathBuf),
+    }
+
+    <span class="kw">let </span>(schema, password) = <span class="kw">match </span>url.scheme() {
         <span class="string">&quot;tcp&quot; </span>=&gt; {
             <span class="kw">let </span>server_addr = url
                 .socket_addrs(|| <span class="prelude-val">Some</span>(default_port))
                 .context(<span class="string">&quot;Cannot resolve server address&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">if </span>server_addr.is_empty() {
+                <span class="macro">bail!</span>(<span class="string">&quot;Cannot resolve server address&quot;</span>);
+            }
+            <span class="kw">if </span>!url.path().is_empty() {
+                <span class="macro">bail!</span>(<span class="string">&quot;No path should be provided to the server address&quot;</span>);
+            }
             <span class="kw">let </span>password = url.password().map(String::from);
-            (server_addr, password)
+            (Schema::Tcp(server_addr), password)
         }
+        <span class="string">&quot;unix&quot; </span>=&gt; (Schema::Unix(url.path().into()), <span class="prelude-val">None</span>),
         <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(
-            <span class="string">&quot;Unsupported server address scheme: {}. The supported schemes are: tcp&quot;</span>,
+            <span class="string">&quot;Unsupported server address scheme: {}. The supported schemes are: tcp, unix&quot;</span>,
             url.scheme()
         ),
     };
-    <span class="kw">if </span>server_addrs.is_empty() {
-        <span class="macro">bail!</span>(<span class="string">&quot;Cannot resolve server address&quot;</span>);
-    }
-    <span class="kw">if </span>!url.path().is_empty() {
-        <span class="macro">bail!</span>(<span class="string">&quot;No path should be provided to the server address&quot;</span>);
-    }
     <span class="kw">let </span><span class="kw-2">mut </span>err = <span class="prelude-val">None</span>;
-    <span class="kw">for </span>server_addr <span class="kw">in </span>server_addrs {
-        <span class="macro">info!</span>(<span class="string">&quot;Connecting to remote server at {}&quot;</span>, server_addr);
-        <span class="kw">let </span>res = <span class="kw">match </span><span class="kw-2">&amp;</span>password {
-            <span class="prelude-val">Some</span>(password) =&gt; {
-                <span class="kw">let </span>key = derive_key_from_password(password);
-                connect_channel_with_enc(server_addr, <span class="kw-2">&amp;</span>key)
-            }
-            <span class="prelude-val">None </span>=&gt; connect_channel(server_addr),
-        };
-        <span class="kw">match </span>res {
-            <span class="prelude-val">Ok</span>(x) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(x),
-            <span class="prelude-val">Err</span>(e) =&gt; {
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(io_err) = e.downcast_ref::&lt;std::io::Error&gt;() {
-                    <span class="macro">debug!</span>(<span class="string">&quot;Connection to server failed: {:?}&quot;</span>, io_err);
-                    err = <span class="prelude-val">Some</span>(e);
-                } <span class="kw">else </span>{
-                    err = <span class="prelude-val">Some</span>(e);
-                    <span class="comment">// the error was not due to the network, something went wrong (i.e. wrong
-                    // password, wrong version, ...)
-                    </span><span class="kw">break</span>;
+    <span class="kw">match </span>schema {
+        Schema::Tcp(server_addrs) =&gt; {
+            <span class="kw">for </span>server_addr <span class="kw">in </span>server_addrs {
+                <span class="macro">info!</span>(<span class="string">&quot;Connecting to remote server at {}&quot;</span>, server_addr);
+                <span class="kw">let </span>res = <span class="kw">match </span><span class="kw-2">&amp;</span>password {
+                    <span class="prelude-val">Some</span>(password) =&gt; {
+                        <span class="kw">let </span>key = derive_key_from_password(password);
+                        connect_channel_with_enc(server_addr, <span class="kw-2">&amp;</span>key)
+                    }
+                    <span class="prelude-val">None </span>=&gt; connect_channel(server_addr),
+                };
+                <span class="kw">match </span>res {
+                    <span class="prelude-val">Ok</span>(x) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(x),
+                    <span class="prelude-val">Err</span>(e) =&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(io_err) = e.downcast_ref::&lt;std::io::Error&gt;() {
+                            <span class="macro">debug!</span>(<span class="string">&quot;Connection to server failed: {:?}&quot;</span>, io_err);
+                            err = <span class="prelude-val">Some</span>(e);
+                        } <span class="kw">else </span>{
+                            err = <span class="prelude-val">Some</span>(e);
+                            <span class="comment">// the error was not due to the network, something went wrong (i.e. wrong
+                            // password, wrong version, ...)
+                            </span><span class="kw">break</span>;
+                        }
+                    }
                 }
             }
         }
+        Schema::Unix(path) =&gt; {
+            <span class="kw">let </span>res = connect_unix_channel(<span class="kw-2">&amp;</span>path).with_context(|| {
+                <span class="macro">format!</span>(<span class="string">&quot;Failed to connect to unix channel at {}&quot;</span>, path.display())
+            })<span class="question-mark">?</span>;
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(res);
+        }
     }
+
     <span class="kw">if let </span><span class="prelude-val">Some</span>(err) = err {
         <span class="kw">return </span><span class="prelude-val">Err</span>(err.context(<span class="string">&quot;Failed to connect to the server&quot;</span>));
     }

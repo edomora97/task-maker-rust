@@ -210,8 +210,31 @@
 <span id="210">210</span>
 <span id="211">211</span>
 <span id="212">212</span>
-</pre><pre class="rust"><code><span class="kw">use </span>std::net::SocketAddr;
-<span class="kw">use </span>std::sync::mpsc::{channel, Sender};
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+</pre><pre class="rust"><code><span class="kw">use </span>std::sync::mpsc::{channel, Sender};
 <span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>ductile::{ChannelSender, ChannelServer};
@@ -307,27 +330,40 @@
         bind_client_addr: String,
         client_executor_tx: Sender&lt;ExecutorInMessage&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">let </span>server = <span class="kw">match </span>client_password {
-            <span class="prelude-val">Some</span>(password) =&gt; {
-                <span class="kw">let </span>key = derive_key_from_password(password);
-                ChannelServer::bind_with_enc(<span class="kw-2">&amp;</span>bind_client_addr, key)
-                    .context(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?
-            </span>}
-            <span class="prelude-val">None </span>=&gt; {
-                ChannelServer::bind(<span class="kw-2">&amp;</span>bind_client_addr).context(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?
-            </span>}
+        <span class="kw">let </span>server = <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = bind_client_addr.strip_prefix(<span class="string">&quot;unix://&quot;</span>) {
+            ChannelServer::bind_unix(path)
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to bind client unix socket at {}&quot;</span>, path))<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="kw">match </span>client_password {
+                <span class="prelude-val">Some</span>(password) =&gt; {
+                    <span class="kw">let </span>key = derive_key_from_password(password);
+                    ChannelServer::bind_with_enc(<span class="kw-2">&amp;</span>bind_client_addr, key)
+                        .context(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?
+                </span>}
+                <span class="prelude-val">None </span>=&gt; ChannelServer::bind(<span class="kw-2">&amp;</span>bind_client_addr)
+                    .context(<span class="string">&quot;Failed to bind client address&quot;</span>)<span class="question-mark">?</span>,
+            }
         };
+
+        <span class="kw">let </span>local_addr = server
+            .local_addr()
+            .context(<span class="string">&quot;Failed to get client address&quot;</span>)<span class="question-mark">?</span>;
         <span class="macro">info!</span>(
-            <span class="string">&quot;Accepting client connections at tcp://{}&quot;</span>,
-            server
-                .local_addr()
-                .context(<span class="string">&quot;Failed to get client address&quot;</span>)<span class="question-mark">?
-        </span>);
+            <span class="string">&quot;Accepting client connections at {}&quot;</span>,
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(addr) = local_addr {
+                <span class="macro">format!</span>(<span class="string">&quot;tcp://{}&quot;</span>, addr)
+            } <span class="kw">else </span>{
+                bind_client_addr
+            }
+        );
         <span class="kw">for </span>(sender, receiver, addr) <span class="kw">in </span>server {
+            <span class="kw">let </span>addr = addr
+                .map(|s| s.to_string())
+                .unwrap_or_else(|| <span class="string">&quot;(local)&quot;</span>.into());
             <span class="macro">info!</span>(<span class="string">&quot;Client connected from {}&quot;</span>, addr);
             <span class="kw">let </span>uuid = Uuid::new_v4();
             <span class="kw">let </span>name = <span class="kw">if let </span><span class="prelude-val">Ok</span>(RemoteEntityMessage::Welcome { name, version }) = receiver.recv() {
-                <span class="kw">if </span>!validate_welcome(addr, <span class="kw-2">&amp;</span>name, version, <span class="kw-2">&amp;</span>sender, <span class="string">&quot;Client&quot;</span>) {
+                <span class="kw">if </span>!validate_welcome(<span class="kw-2">&amp;</span>addr, <span class="kw-2">&amp;</span>name, version, <span class="kw-2">&amp;</span>sender, <span class="string">&quot;Client&quot;</span>) {
                     <span class="kw">continue</span>;
                 }
                 name
@@ -355,27 +391,39 @@
         bind_worker_addr: String,
         executor_tx: Sender&lt;ExecutorInMessage&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">let </span>server = <span class="kw">match </span>worker_password {
-            <span class="prelude-val">Some</span>(password) =&gt; {
-                <span class="kw">let </span>key = derive_key_from_password(password);
-                ChannelServer::bind_with_enc(<span class="kw-2">&amp;</span>bind_worker_addr, key)
-                    .context(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?
-            </span>}
-            <span class="prelude-val">None </span>=&gt; {
-                ChannelServer::bind(<span class="kw-2">&amp;</span>bind_worker_addr).context(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?
-            </span>}
+        <span class="kw">let </span>server = <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = bind_worker_addr.strip_prefix(<span class="string">&quot;unix://&quot;</span>) {
+            ChannelServer::bind_unix(path)
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to bind worker unix socket at {}&quot;</span>, path))<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="kw">match </span>worker_password {
+                <span class="prelude-val">Some</span>(password) =&gt; {
+                    <span class="kw">let </span>key = derive_key_from_password(password);
+                    ChannelServer::bind_with_enc(<span class="kw-2">&amp;</span>bind_worker_addr, key)
+                        .context(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?
+                </span>}
+                <span class="prelude-val">None </span>=&gt; ChannelServer::bind(<span class="kw-2">&amp;</span>bind_worker_addr)
+                    .context(<span class="string">&quot;Failed to bind worker address&quot;</span>)<span class="question-mark">?</span>,
+            }
         };
+        <span class="kw">let </span>local_addr = server
+            .local_addr()
+            .context(<span class="string">&quot;Failed to get worker address&quot;</span>)<span class="question-mark">?</span>;
         <span class="macro">info!</span>(
-            <span class="string">&quot;Accepting worker connections at tcp://{}&quot;</span>,
-            server
-                .local_addr()
-                .context(<span class="string">&quot;Failed to get worker remote address&quot;</span>)<span class="question-mark">?
-        </span>);
+            <span class="string">&quot;Accepting worker connections at {}&quot;</span>,
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(addr) = local_addr {
+                <span class="macro">format!</span>(<span class="string">&quot;tcp://{}&quot;</span>, addr)
+            } <span class="kw">else </span>{
+                bind_worker_addr
+            }
+        );
         <span class="kw">for </span>(sender, receiver, addr) <span class="kw">in </span>server {
+            <span class="kw">let </span>addr = addr
+                .map(|s| s.to_string())
+                .unwrap_or_else(|| <span class="string">&quot;(local)&quot;</span>.into());
             <span class="macro">info!</span>(<span class="string">&quot;Worker connected from {}&quot;</span>, addr);
             <span class="kw">let </span>uuid = Uuid::new_v4();
             <span class="kw">let </span>name = <span class="kw">if let </span><span class="prelude-val">Ok</span>(RemoteEntityMessage::Welcome { name, version }) = receiver.recv() {
-                <span class="kw">if </span>!validate_welcome(addr, <span class="kw-2">&amp;</span>name, version, <span class="kw-2">&amp;</span>sender, <span class="string">&quot;Worker&quot;</span>) {
+                <span class="kw">if </span>!validate_welcome(<span class="kw-2">&amp;</span>addr, <span class="kw-2">&amp;</span>name, version, <span class="kw-2">&amp;</span>sender, <span class="string">&quot;Worker&quot;</span>) {
                     <span class="kw">continue</span>;
                 }
                 name
@@ -401,7 +449,7 @@
 }
 
 <span class="kw">fn </span>validate_welcome(
-    addr: SocketAddr,
+    addr: <span class="kw-2">&amp;</span>str,
     name: <span class="kw-2">&amp;</span>str,
     version: String,
     sender: <span class="kw-2">&amp;</span>ChannelSender&lt;RemoteEntityMessageResponse&gt;,
