@@ -203,6 +203,8 @@
 <span id="203">203</span>
 <span id="204">204</span>
 <span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
 <span class="kw">use </span>std::sync::Arc;
 
@@ -255,6 +257,8 @@
             Checker::WhiteDiff =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(description, ExecutionCommand::system(<span class="string">&quot;diff&quot;</span>));
                 exec.args(<span class="macro">vec!</span>[
+                    <span class="string">&quot;--brief&quot;</span>,
+                    <span class="string">&quot;--speed-large-files&quot;</span>,
                     <span class="string">&quot;--ignore-blank-lines&quot;</span>,
                     <span class="string">&quot;--ignore-space-change&quot;</span>,
                     <span class="string">&quot;correct&quot;</span>,
