@@ -115,6 +115,12 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
 </pre><pre class="rust"><code><span class="kw">use </span>std::fs;
 
 <span class="kw">use </span>anyhow::Error;
@@ -133,7 +139,9 @@
 </span><span class="kw">pub struct </span>TaskMaxScore;
 <span class="macro">make_sanity_check!</span>(TaskMaxScore);
 
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>TaskMaxScore {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>TaskMaxScore {
+    <span class="kw">type </span>Task = IOITask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;TaskMaxScore&quot;
     </span>}
@@ -159,7 +167,9 @@
 </span><span class="kw">pub struct </span>BrokenSymlinks;
 <span class="macro">make_sanity_check!</span>(BrokenSymlinks);
 
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>BrokenSymlinks {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>BrokenSymlinks {
+    <span class="kw">type </span>Task = IOITask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;BrokenSymlinks&quot;
     </span>}
@@ -193,7 +203,9 @@
 </span><span class="kw">pub struct </span>NoBitsStdCpp;
 <span class="macro">make_sanity_check!</span>(NoBitsStdCpp);
 
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>NoBitsStdCpp {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>NoBitsStdCpp {
+    <span class="kw">type </span>Task = IOITask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;NoBitsStdCpp&quot;
     </span>}

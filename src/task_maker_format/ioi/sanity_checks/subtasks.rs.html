@@ -90,6 +90,10 @@
 <span id="90">90</span>
 <span id="91">91</span>
 <span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
 </pre><pre class="rust"><code><span class="kw">use </span>anyhow::Error;
 <span class="kw">use </span>itertools::Itertools;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
@@ -102,7 +106,9 @@
 </span><span class="kw">pub struct </span>MissingSubtaskNames;
 <span class="macro">make_sanity_check!</span>(MissingSubtaskNames);
 
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>MissingSubtaskNames {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>MissingSubtaskNames {
+    <span class="kw">type </span>Task = IOITask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;MissingSubtaskNames&quot;
     </span>}
@@ -148,7 +154,9 @@
 </span><span class="kw">pub struct </span>InvalidSubtaskName;
 <span class="macro">make_sanity_check!</span>(InvalidSubtaskName);
 
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>InvalidSubtaskName {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>InvalidSubtaskName {
+    <span class="kw">type </span>Task = IOITask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;InvalidSubtaskName&quot;
     </span>}

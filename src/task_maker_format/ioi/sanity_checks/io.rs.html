@@ -92,20 +92,60 @@
 <span id="92">92</span>
 <span id="93">93</span>
 <span id="94">94</span>
-</pre><pre class="rust"><code><span class="kw">use </span>std::fmt::Display;
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashSet;
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::IOITask;
 <span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{make_sanity_check, SanityCheck, SanityCheckCategory};
-<span class="kw">use </span><span class="kw">crate</span>::ui::UIMessageSender;
-<span class="kw">use crate</span>::{EvaluationData, UISender};
+<span class="kw">use </span><span class="kw">crate</span>::EvaluationData;
 <span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>itertools::Itertools;
 <span class="kw">use </span>task_maker_dag::FileUuid;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
 <span class="doccomment">/// Check that the input and output files end with `\n`.
 </span><span class="attribute">#[derive(Debug, Default)]
-</span><span class="kw">pub struct </span>IOEndWithNewLine;
+</span><span class="kw">pub struct </span>IOEndWithNewLine {
+    <span class="doccomment">/// The list of input files that triggered the warning.
+    </span>inputs: Arc&lt;Mutex&lt;Vec&lt;String&gt;&gt;&gt;,
+    <span class="doccomment">/// The list of output files that triggered the warning.
+    </span>outputs: Arc&lt;Mutex&lt;Vec&lt;String&gt;&gt;&gt;,
+}
 <span class="macro">make_sanity_check!</span>(IOEndWithNewLine);
 
 <span class="doccomment">/// Check that a file ends with `\n` and emit a warning if it doesn&#39;t. An empty file is considered
@@ -114,26 +154,28 @@
 </span><span class="kw">pub struct </span>CheckEndWithNewLine {
     <span class="doccomment">/// Whether the last chunk ends with a new line.
     </span>last_chunk_ends_with_new_line: bool,
-    <span class="doccomment">/// The sender used to emit the warning.
-    </span>sender: Arc&lt;Mutex&lt;UIMessageSender&gt;&gt;,
-    <span class="doccomment">/// The warning message to emit.
-    </span>diagnostic_message: String,
+    <span class="doccomment">/// The path of the file that is being checked.
+    </span>path: String,
+    <span class="doccomment">/// Where to insert the warning.
+    </span>list: Arc&lt;Mutex&lt;Vec&lt;String&gt;&gt;&gt;,
 }
 
 <span class="kw">impl </span>CheckEndWithNewLine {
-    <span class="kw">pub fn </span>new(eval: <span class="kw-2">&amp;mut </span>EvaluationData, file_type: <span class="kw-2">&amp;</span>str, path: <span class="kw">impl </span>Display) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub fn </span>new(path: String, list: Arc&lt;Mutex&lt;Vec&lt;String&gt;&gt;&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             last_chunk_ends_with_new_line: <span class="bool-val">true</span>,
-            sender: eval.sender.clone(),
-            diagnostic_message: <span class="macro">format!</span>(
-                <span class="string">&quot;{} file at {} does not end with a new-line&quot;</span>,
-                file_type, path
-            ),
+            path,
+            list,
         }
     }
 
-    <span class="kw">pub fn </span>bind(eval: <span class="kw-2">&amp;mut </span>EvaluationData, file: FileUuid, file_type: <span class="kw-2">&amp;</span>str, path: <span class="kw">impl </span>Display) {
-        <span class="kw">let </span><span class="kw-2">mut </span>checker = <span class="self">Self</span>::new(eval, file_type, path);
+    <span class="kw">pub fn </span>bind(
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        file: FileUuid,
+        path: String,
+        list: Arc&lt;Mutex&lt;Vec&lt;String&gt;&gt;&gt;,
+    ) {
+        <span class="kw">let </span><span class="kw-2">mut </span>checker = <span class="self">Self</span>::new(path, list);
         eval.dag
             .get_file_content_chunked(file, <span class="kw">move </span>|chunk| checker.add_chunk(chunk));
     }
@@ -141,19 +183,38 @@
     <span class="kw">pub fn </span>add_chunk(<span class="kw-2">&amp;mut </span><span class="self">self</span>, chunk: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">if </span>chunk.is_empty() {
             <span class="kw">if </span>!<span class="self">self</span>.last_chunk_ends_with_new_line {
-                <span class="self">self</span>.sender
-                    .add_diagnostic(Diagnostic::warning(<span class="kw-2">&amp;</span><span class="self">self</span>.diagnostic_message).with_note(
-                        <span class="string">&quot;It&#39;s bad practice to have files that do not end with new-line&quot;</span>,
-                    ))<span class="question-mark">?</span>;
+                <span class="self">self</span>.list.lock().unwrap().push(<span class="self">self</span>.path.clone());
             }
         } <span class="kw">else </span>{
             <span class="self">self</span>.last_chunk_ends_with_new_line = chunk.last().map(|<span class="kw-2">&amp;</span>c| c == <span class="string">b&#39;\n&#39;</span>).unwrap_or(<span class="bool-val">false</span>);
         }
         <span class="prelude-val">Ok</span>(())
     }
+
+    <span class="kw">pub fn </span>emit_warning(
+        eval: <span class="kw-2">&amp;mut </span>EvaluationData,
+        files: <span class="kw-2">&amp;</span>[String],
+        kind: <span class="kw-2">&amp;</span>str,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">if </span>!files.is_empty() {
+            <span class="kw">let </span>files: HashSet&lt;<span class="kw">_</span>&gt; = files.iter().collect();
+            <span class="kw">let </span>message = <span class="macro">format!</span>(
+                <span class="string">&quot;These {} files don&#39;t end with a new line: {}&quot;</span>,
+                kind,
+                files.iter().sorted().join(<span class="string">&quot;, &quot;</span>)
+            );
+            eval.add_diagnostic(
+                Diagnostic::warning(message)
+                    .with_note(<span class="string">&quot;It&#39;s bad practice to have files that do not end with new-line&quot;</span>),
+            )<span class="question-mark">?</span>;
+        }
+        <span class="prelude-val">Ok</span>(())
+    }
 }
 
-<span class="kw">impl </span>SanityCheck&lt;IOITask&gt; <span class="kw">for </span>IOEndWithNewLine {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>IOEndWithNewLine {
+    <span class="kw">type </span>Task = IOITask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;IOEndWithNewLine&quot;
     </span>}
@@ -169,20 +230,29 @@
                     CheckEndWithNewLine::bind(
                         eval,
                         input_file,
-                        <span class="string">&quot;Input&quot;</span>,
-                        <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;input/input{}.txt&quot;</span>, testcase_id),
+                        <span class="macro">format!</span>(<span class="string">&quot;input/input{}.txt&quot;</span>, testcase_id),
+                        <span class="self">self</span>.inputs.clone(),
                     );
                 }
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(output_file) = testcase.official_output_file {
                     CheckEndWithNewLine::bind(
                         eval,
                         output_file,
-                        <span class="string">&quot;Official output&quot;</span>,
-                        <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;output/output{}.txt&quot;</span>, testcase_id),
+                        <span class="macro">format!</span>(<span class="string">&quot;output/output{}.txt&quot;</span>, testcase_id),
+                        <span class="self">self</span>.outputs.clone(),
                     );
                 }
             }
         }
+        <span class="prelude-val">Ok</span>(())
+    }
+
+    <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, _task: <span class="kw-2">&amp;</span><span class="self">Self</span>::Task, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="kw">let </span>inputs = <span class="self">self</span>.inputs.lock().unwrap();
+        CheckEndWithNewLine::emit_warning(eval, <span class="kw-2">&amp;</span>inputs, <span class="string">&quot;input&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>outputs = <span class="self">self</span>.outputs.lock().unwrap();
+        CheckEndWithNewLine::emit_warning(eval, <span class="kw-2">&amp;</span>outputs, <span class="string">&quot;official output&quot;</span>)<span class="question-mark">?</span>;
+
         <span class="prelude-val">Ok</span>(())
     }
 }

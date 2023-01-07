@@ -19,14 +19,15 @@
 <span id="19">19</span>
 <span id="20">20</span>
 <span id="21">21</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{SanityCheck, SanityChecks};
+<span id="22">22</span>
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{SanityCheck, SanityCheckBuilder, SanityChecks};
 <span class="kw">use </span><span class="kw">crate</span>::terry::TerryTask;
 
 <span class="kw">mod </span>checker;
 <span class="kw">mod </span>statement;
 <span class="kw">mod </span>task;
 
-<span class="macro">inventory::collect!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;);
+<span class="macro">inventory::collect!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>SanityCheckBuilder&lt;TerryTask&gt;);
 
 <span class="doccomment">/// Make a new `SanityChecks` for a IOI task skipping the checks with the provided names.
 </span><span class="kw">pub fn </span>get_sanity_checks(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; SanityChecks&lt;TerryTask&gt; {
@@ -34,9 +35,10 @@
 }
 
 <span class="doccomment">/// Return the list of sanity checks excluding the ones with their name in the provided list.
-</span><span class="kw">pub fn </span>get_sanity_check_list(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;&gt; {
-    inventory::iter::&lt;<span class="kw-2">&amp;</span><span class="kw">dyn </span>SanityCheck&lt;TerryTask&gt;&gt;()
+</span><span class="kw">pub fn </span>get_sanity_check_list(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;Task = TerryTask&gt;&gt;&gt; {
+    inventory::iter::&lt;<span class="kw-2">&amp;</span>SanityCheckBuilder&lt;TerryTask&gt;&gt;()
         .cloned()
+        .map(|b| b.build())
         .filter(|s| !skip.contains(<span class="kw-2">&amp;</span>s.name()) &amp;&amp; !skip.contains(<span class="kw-2">&amp;</span>s.category().as_str()))
         .collect()
 }

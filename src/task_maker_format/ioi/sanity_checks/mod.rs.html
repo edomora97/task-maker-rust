@@ -86,6 +86,7 @@
 <span id="86">86</span>
 <span id="87">87</span>
 <span id="88">88</span>
+<span id="89">89</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sanity checks for IOI-like tasks.
 
 </span><span class="kw">use </span>std::path::Path;
@@ -95,7 +96,7 @@
 <span class="kw">use </span>task_maker_lang::LanguageManager;
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::IOITask;
-<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{SanityCheck, SanityChecks};
+<span class="kw">use </span><span class="kw">crate</span>::sanity_checks::{SanityCheck, SanityCheckBuilder, SanityChecks};
 <span class="kw">use crate</span>::{list_files, EvaluationData};
 <span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
@@ -108,7 +109,7 @@
 <span class="kw">mod </span>subtasks;
 <span class="kw">mod </span>task;
 
-<span class="macro">inventory::collect!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;IOITask&gt;);
+<span class="macro">inventory::collect!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>SanityCheckBuilder&lt;IOITask&gt;);
 
 <span class="doccomment">/// Make a new `SanityChecks` for a IOI task skipping the checks with the provided names.
 </span><span class="kw">pub fn </span>get_sanity_checks(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; SanityChecks&lt;IOITask&gt; {
@@ -116,9 +117,10 @@
 }
 
 <span class="doccomment">/// Return the list of sanity checks excluding the ones with their name in the provided list.
-</span><span class="kw">pub fn </span>get_sanity_check_list(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="kw">dyn </span>SanityCheck&lt;IOITask&gt;&gt; {
-    inventory::iter::&lt;<span class="kw-2">&amp;</span><span class="kw">dyn </span>SanityCheck&lt;IOITask&gt;&gt;()
+</span><span class="kw">pub fn </span>get_sanity_check_list(skip: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str]) -&gt; Vec&lt;Box&lt;<span class="kw">dyn </span>SanityCheck&lt;Task = IOITask&gt;&gt;&gt; {
+    inventory::iter::&lt;<span class="kw-2">&amp;</span>SanityCheckBuilder&lt;IOITask&gt;&gt;()
         .cloned()
+        .map(|b| b.build())
         .filter(|s| !skip.contains(<span class="kw-2">&amp;</span>s.name()) &amp;&amp; !skip.contains(<span class="kw-2">&amp;</span>s.category().as_str()))
         .collect()
 }

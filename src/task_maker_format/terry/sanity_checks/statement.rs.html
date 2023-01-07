@@ -26,6 +26,8 @@
 <span id="26">26</span>
 <span id="27">27</span>
 <span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
 </pre><pre class="rust"><code><span class="kw">use </span>anyhow::Error;
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
@@ -38,7 +40,9 @@
 </span><span class="kw">pub struct </span>StatementPresent;
 <span class="macro">make_sanity_check!</span>(StatementPresent);
 
-<span class="kw">impl </span>SanityCheck&lt;TerryTask&gt; <span class="kw">for </span>StatementPresent {
+<span class="kw">impl </span>SanityCheck <span class="kw">for </span>StatementPresent {
+    <span class="kw">type </span>Task = TerryTask;
+
     <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
         <span class="string">&quot;StatementPresent&quot;
     </span>}
