@@ -583,6 +583,7 @@
 <a href="#583" id="583">583</a>
 <a href="#584" id="584">584</a>
 <a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
 </pre><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>typescript_definitions::TypeScriptify;
 
@@ -701,6 +702,7 @@
             subtasks: Default::default(),
             input_validator_generator: Default::default(),
             testcase_score_aggregator: TestcaseScoreAggregator::Min,
+            score_precision: <span class="number">0</span>,
             grader_map: Arc::new(GraderMap::new(Vec::&lt;PathBuf&gt;::new())),
             booklets: <span class="macro">vec!</span>[],
             difficulty: <span class="prelude-val">None</span>,

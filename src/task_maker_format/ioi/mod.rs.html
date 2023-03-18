@@ -604,6 +604,10 @@
 <a href="#604" id="604">604</a>
 <a href="#605" id="605">605</a>
 <a href="#606" id="606">606</a>
+<a href="#607" id="607">607</a>
+<a href="#608" id="608">608</a>
+<a href="#609" id="609">609</a>
+<a href="#610" id="610">610</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The IOI task format.
 //!
 //! In IOI-like tasks there is the concept of _subtask_ and of _testcase_: a testcase is a single
@@ -734,6 +738,9 @@
     <span class="doccomment">/// The aggregator to use to compute the score of the subtask based on the score of the
     /// testcases.
     </span><span class="kw">pub </span>testcase_score_aggregator: TestcaseScoreAggregator,
+    <span class="doccomment">/// The number of decimal digits when displaying the scores.
+    </span><span class="attr">#[serde(default)]
+    </span><span class="kw">pub </span>score_precision: usize,
     <span class="doccomment">/// The graders registered for this task.
     </span><span class="kw">pub </span>grader_map: Arc&lt;GraderMap&gt;,
     <span class="doccomment">/// The booklets to compile for this task.
@@ -813,6 +820,7 @@
             subtasks: Default::default(),
             input_validator_generator: Default::default(),
             testcase_score_aggregator: TestcaseScoreAggregator::Min,
+            score_precision: <span class="number">0</span>,
             grader_map: Arc::new(GraderMap::new::&lt;<span class="kw-2">&amp;</span>Path&gt;(<span class="macro">vec!</span>[])),
             booklets: <span class="macro">vec!</span>[],
             difficulty: <span class="prelude-val">None</span>,

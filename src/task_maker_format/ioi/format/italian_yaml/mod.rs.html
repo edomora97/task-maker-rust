@@ -765,6 +765,10 @@
 <a href="#765" id="765">765</a>
 <a href="#766" id="766">766</a>
 <a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)
 //! and it&#39;s the most used format in the Italian Olympiads.
 //!
@@ -1093,6 +1097,9 @@
     </span><span class="kw">pub </span>title: String,
     <span class="doccomment">/// The score type to use for this task.
     </span><span class="kw">pub </span>score_type: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The number of decimal digits when displaying the scores.
+    </span><span class="attr">#[serde(default)]
+    </span><span class="kw">pub </span>score_precision: usize,
 
     <span class="doccomment">/// The time limit for the execution of the solutions, if not set it&#39;s unlimited.
     </span><span class="attr">#[serde(alias = <span class="string">&quot;timeout&quot;</span>)]
@@ -1269,6 +1276,7 @@
                     <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Min)
                 }
             })<span class="question-mark">?</span>,
+        score_precision: yaml.score_precision,
         subtasks,
         grader_map,
         booklets: Vec::new(),
