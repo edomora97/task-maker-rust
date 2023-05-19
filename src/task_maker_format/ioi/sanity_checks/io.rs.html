@@ -127,6 +127,10 @@
 <a href="#127" id="127">127</a>
 <a href="#128" id="128">128</a>
 <a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashSet;
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 
@@ -154,6 +158,8 @@
 </span><span class="kw">pub struct </span>CheckEndWithNewLine {
     <span class="doccomment">/// Whether the last chunk ends with a new line.
     </span>last_chunk_ends_with_new_line: bool,
+    <span class="doccomment">/// Whether the file is binary, if so, do not emit the warning.
+    </span>is_binary: bool,
     <span class="doccomment">/// The path of the file that is being checked.
     </span>path: String,
     <span class="doccomment">/// Where to insert the warning.
@@ -164,6 +170,7 @@
     <span class="kw">pub fn </span>new(path: String, list: Arc&lt;Mutex&lt;Vec&lt;String&gt;&gt;&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             last_chunk_ends_with_new_line: <span class="bool-val">true</span>,
+            is_binary: <span class="bool-val">false</span>,
             path,
             list,
         }
@@ -181,8 +188,9 @@
     }
 
     <span class="kw">pub fn </span>add_chunk(<span class="kw-2">&amp;mut </span><span class="self">self</span>, chunk: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">if </span>chunk.is_empty() {
-            <span class="kw">if </span>!<span class="self">self</span>.last_chunk_ends_with_new_line {
+        <span class="self">self</span>.is_binary |= chunk.contains(<span class="kw-2">&amp;</span><span class="number">0</span>); <span class="comment">// UTF-8 never contains NULL bytes.
+        </span><span class="kw">if </span>chunk.is_empty() {
+            <span class="kw">if </span>!<span class="self">self</span>.last_chunk_ends_with_new_line &amp;&amp; !<span class="self">self</span>.is_binary {
                 <span class="self">self</span>.list.lock().unwrap().push(<span class="self">self</span>.path.clone());
             }
         } <span class="kw">else </span>{
