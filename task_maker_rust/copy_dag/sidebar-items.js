@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["render_dag","Render to string the `ExecutionDAG` in DOT format."]]};
+window.SIDEBAR_ITEMS = {"fn":["render_dag"]};

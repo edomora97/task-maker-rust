@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":[["NiceError","Adds methods for failing without panic. Like `expect` but without panic."]]};
+window.SIDEBAR_ITEMS = {"trait":["NiceError"]};

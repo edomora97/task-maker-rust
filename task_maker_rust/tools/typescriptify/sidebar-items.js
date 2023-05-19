@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["main_typescriptify",""]]};
+window.SIDEBAR_ITEMS = {"fn":["main_typescriptify"]};

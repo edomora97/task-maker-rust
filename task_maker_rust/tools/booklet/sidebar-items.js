@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["main_booklet",""]],"struct":[["BookletOpt",""]]};
+window.SIDEBAR_ITEMS = {"fn":["main_booklet"],"struct":["BookletOpt"]};

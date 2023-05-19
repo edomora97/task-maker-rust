@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["DiagnosticLevel","The level of the message."]],"struct":[["CodeSpan","A [`CodeSpan`] represent a slice of code."],["Diagnostic","A [`Diagnostic`] is a message, with some extra information attached, such as the message level, additional information about what happened or some help on how to fix the issue."],["DiagnosticContext","The context that contains all the emitted diagnostic messages."]]};
+window.SIDEBAR_ITEMS = {"enum":["DiagnosticLevel"],"struct":["CodeSpan","Diagnostic","DiagnosticContext"]};

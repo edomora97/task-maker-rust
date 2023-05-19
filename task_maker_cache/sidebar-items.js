@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["CacheResult","The result of a cache query, can be either successful (`Hit`) or unsuccessful (`Miss`)."]],"struct":[["Cache","Handle the cached executions, loading and storing them to disk."]]};
+window.SIDEBAR_ITEMS = {"enum":["CacheResult"],"struct":["Cache"]};

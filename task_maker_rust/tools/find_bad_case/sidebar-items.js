@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["main_find_bad_case",""]],"struct":[["FindBadCaseOpt",""]]};
+window.SIDEBAR_ITEMS = {"fn":["main_find_bad_case"],"struct":["FindBadCaseOpt"]};

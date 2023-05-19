@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["connect_to_remote_server","Parse the server url address and try to connect to that host."]]};
+window.SIDEBAR_ITEMS = {"fn":["connect_to_remote_server"]};

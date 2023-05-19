@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["main_fuzz_checker",""]],"struct":[["FuzzCheckerOpt",""]]};
+window.SIDEBAR_ITEMS = {"fn":["main_fuzz_checker"],"struct":["FuzzCheckerOpt"]};

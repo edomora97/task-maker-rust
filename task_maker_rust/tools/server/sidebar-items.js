@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["main_server","Entry point for the server."]],"struct":[["ServerOpt",""]]};
+window.SIDEBAR_ITEMS = {"fn":["main_server"],"struct":["ServerOpt"]};

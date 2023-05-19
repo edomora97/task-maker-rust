@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["get_sanity_check_list","Return the list of sanity checks excluding the ones with their name in the provided list."],["get_sanity_checks","Make a new `SanityChecks` for a IOI task skipping the checks with the provided names."]]};
+window.SIDEBAR_ITEMS = {"fn":["get_sanity_check_list","get_sanity_checks"]};
