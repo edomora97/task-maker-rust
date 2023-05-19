@@ -10,7 +10,7 @@ this is still running, even in other processes.</li>
     base_path: P,
     max_store_size: <a class="primitive" href="https://doc.rust-lang.org/1.69.0/std/primitive.u64.html">u64</a>,
     min_store_size: <a class="primitive" href="https://doc.rust-lang.org/1.69.0/std/primitive.u64.html">u64</a>
-) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.FileStore.html" title="struct task_maker_store::FileStore">FileStore</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.69/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;</h4></section></summary><div class="docblock"><p>Make a new <code>FileStore</code> in the specified base directory, will lock if another instance of a
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.FileStore.html" title="struct task_maker_store::FileStore">FileStore</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.71/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;</h4></section></summary><div class="docblock"><p>Make a new <code>FileStore</code> in the specified base directory, will lock if another instance of a
 <code>FileStore</code> is locking the directory. The locking is implemented via platform-specific file
 locking. Having two instances of the file store running concurrently is not safe.</p>
 
@@ -24,7 +24,7 @@ locking. Having two instances of the file store running concurrently is not safe
     &amp;self,
     key: &amp;<a class="struct" href="struct.FileStoreKey.html" title="struct task_maker_store::FileStoreKey">FileStoreKey</a>,
     content: I
-) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.FileStoreHandle.html" title="struct task_maker_store::FileStoreHandle">FileStoreHandle</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.69/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;<span class="where fmt-newline">where
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.FileStoreHandle.html" title="struct task_maker_store::FileStoreHandle">FileStoreHandle</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.71/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;<span class="where fmt-newline">where
     I: <a class="trait" href="https://doc.rust-lang.org/1.69.0/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="struct" href="https://doc.rust-lang.org/1.69.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.69.0/std/primitive.u8.html">u8</a>&gt;&gt;,</span></h4></section></summary><div class="docblock"><p>Given an iterator of <code>Vec&lt;u8&gt;</code> consume all of it writing the content to the disk if the file
 is not already present on disk. The file is stored inside the base directory and <code>chmod -w</code>.</p>
 <p>If the file is already present it is not overwritten but the iterator is consumed

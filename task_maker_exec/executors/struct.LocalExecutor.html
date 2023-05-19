@@ -9,14 +9,14 @@
     num_workers: <a class="primitive" href="https://doc.rust-lang.org/1.69.0/std/primitive.usize.html">usize</a>,
     sandbox_path: P,
     sandbox_runner: R
-) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.LocalExecutor.html" title="struct task_maker_exec::executors::LocalExecutor">LocalExecutor</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.69/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;<span class="where fmt-newline">where
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="struct.LocalExecutor.html" title="struct task_maker_exec::executors::LocalExecutor">LocalExecutor</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.71/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;<span class="where fmt-newline">where
     R: <a class="trait" href="../trait.SandboxRunner.html" title="trait task_maker_exec::SandboxRunner">SandboxRunner</a> + 'static,</span></h4></section></summary><div class="docblock"><p>Make a new <a href="struct.LocalExecutor.html" title="struct task_maker_exec::executors::LocalExecutor"><code>LocalExecutor</code></a> based on a [<code>FileStore</code>] and ready to spawn that number of
 workers using a [<code>Cache</code>].</p>
 </div></details><details class="toggle method-toggle" open><summary><section id="method.evaluate" class="method"><a class="srclink rightside" href="../../src/task_maker_exec/executors/local_executor.rs.html#91-124">source</a><h4 class="code-header">pub fn <a href="#method.evaluate" class="fn">evaluate</a>(
     self,
     sender: ChannelSender&lt;<a class="enum" href="../proto/enum.ExecutorServerMessage.html" title="enum task_maker_exec::proto::ExecutorServerMessage">ExecutorServerMessage</a>&gt;,
     receiver: ChannelReceiver&lt;<a class="enum" href="../proto/enum.ExecutorClientMessage.html" title="enum task_maker_exec::proto::ExecutorClientMessage">ExecutorClientMessage</a>&gt;
-) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.69.0/std/primitive.unit.html">()</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.69/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;</h4></section></summary><div class="docblock"><p>Starts the Executor spawning the workers on new threads and blocking on the <code>Executor</code>
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.69.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.69.0/std/primitive.unit.html">()</a>, <a class="struct" href="https://docs.rs/anyhow/1.0.71/anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;</h4></section></summary><div class="docblock"><p>Starts the Executor spawning the workers on new threads and blocking on the <code>Executor</code>
 thread.</p>
 <ul>
 <li><code>sender</code> - Channel that sends messages to the client.</li>
