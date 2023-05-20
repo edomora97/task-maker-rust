@@ -144,6 +144,13 @@
 <a href="#144" id="144">144</a>
 <a href="#145" id="145">145</a>
 <a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
 </pre><pre class="rust"><code><span class="attr">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
 </span><span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::path::PathBuf;
@@ -186,6 +193,10 @@
     <span class="doccomment">/// Mount /tmp and /dev/null inside the sandbox
     </span><span class="attr">#[clap(long)]
     </span><span class="kw">pub </span>mount_tmpfs: bool,
+
+    <span class="doccomment">/// Mount /proc inside the sandbox
+    </span><span class="attr">#[clap(long)]
+    </span><span class="kw">pub </span>mount_proc: bool,
 
     <span class="doccomment">/// User id.
     </span><span class="attr">#[clap(long, default_value = <span class="string">&quot;1000&quot;</span>)]
@@ -250,6 +261,9 @@
 
         <span class="kw">if </span>opt.mount_tmpfs {
             config.mount_tmpfs(<span class="bool-val">true</span>);
+        }
+        <span class="kw">if </span>opt.mount_proc {
+            config.mount_proc(<span class="bool-val">true</span>);
         }
 
         tempdir
