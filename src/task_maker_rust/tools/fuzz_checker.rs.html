@@ -575,6 +575,51 @@
 <a href="#575" id="575">575</a>
 <a href="#576" id="576">576</a>
 <a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
+<a href="#587" id="587">587</a>
+<a href="#588" id="588">588</a>
+<a href="#589" id="589">589</a>
+<a href="#590" id="590">590</a>
+<a href="#591" id="591">591</a>
+<a href="#592" id="592">592</a>
+<a href="#593" id="593">593</a>
+<a href="#594" id="594">594</a>
+<a href="#595" id="595">595</a>
+<a href="#596" id="596">596</a>
+<a href="#597" id="597">597</a>
+<a href="#598" id="598">598</a>
+<a href="#599" id="599">599</a>
+<a href="#600" id="600">600</a>
+<a href="#601" id="601">601</a>
+<a href="#602" id="602">602</a>
+<a href="#603" id="603">603</a>
+<a href="#604" id="604">604</a>
+<a href="#605" id="605">605</a>
+<a href="#606" id="606">606</a>
+<a href="#607" id="607">607</a>
+<a href="#608" id="608">608</a>
+<a href="#609" id="609">609</a>
+<a href="#610" id="610">610</a>
+<a href="#611" id="611">611</a>
+<a href="#612" id="612">612</a>
+<a href="#613" id="613">613</a>
+<a href="#614" id="614">614</a>
+<a href="#615" id="615">615</a>
+<a href="#616" id="616">616</a>
+<a href="#617" id="617">617</a>
+<a href="#618" id="618">618</a>
+<a href="#619" id="619">619</a>
+<a href="#620" id="620">620</a>
+<a href="#621" id="621">621</a>
+<a href="#622" id="622">622</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::io::{Read, Write};
 <span class="kw">use </span>std::os::unix::io::{FromRawFd, IntoRawFd};
 <span class="kw">use </span>std::path::{Path, PathBuf};
@@ -748,8 +793,8 @@
     }
 
     write_initial_corpus(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data)<span class="question-mark">?</span>;
-    <span class="kw">let </span>checker_source = write_checker_source(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data)<span class="question-mark">?</span>;
-    <span class="kw">let </span>fuzz_binary = compile_fuzzer(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data, <span class="kw-2">&amp;</span>checker_source)<span class="question-mark">?</span>;
+    <span class="kw">let </span>(checker_source, fuzzer_source) = write_checker_source(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data)<span class="question-mark">?</span>;
+    <span class="kw">let </span>fuzz_binary = compile_fuzzer(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data, <span class="kw-2">&amp;</span>checker_source, <span class="kw-2">&amp;</span>fuzzer_source)<span class="question-mark">?</span>;
     <span class="kw">let </span>artifacts = run_fuzzer(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data, <span class="kw-2">&amp;</span>fuzz_binary)<span class="question-mark">?</span>;
     organize_failures(<span class="kw-2">&amp;</span>fuzz_dir, <span class="kw-2">&amp;</span>fuzz_data, <span class="kw-2">&amp;</span>artifacts, <span class="kw-2">&amp;</span>checker_bin_path)<span class="question-mark">?</span>;
 
@@ -800,7 +845,7 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn </span>write_checker_source(fuzz_dir: <span class="kw-2">&amp;</span>Path, data: <span class="kw-2">&amp;</span>FuzzData) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;PathBuf&gt;, Error&gt; {
+<span class="kw">fn </span>write_checker_source(fuzz_dir: <span class="kw-2">&amp;</span>Path, data: <span class="kw-2">&amp;</span>FuzzData) -&gt; <span class="prelude-ty">Result</span>&lt;(PathBuf, PathBuf), Error&gt; {
     <span class="kw">let </span>sources_dir = fuzz_dir.join(<span class="string">&quot;sources&quot;</span>);
     std::fs::create_dir_all(<span class="kw-2">&amp;</span>sources_dir)
         .with_context(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to create sources dir at {}&quot;</span>, sources_dir.display()))<span class="question-mark">?</span>;
@@ -846,7 +891,7 @@
             )
         })<span class="question-mark">?</span>;
 
-    <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[path, fuzzer])
+    <span class="prelude-val">Ok</span>((path, fuzzer))
 }
 
 <span class="kw">fn </span>checker_sanity_check(data: <span class="kw-2">&amp;</span>FuzzData, checker_content: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
@@ -909,9 +954,13 @@
         )
     }
 
-    <span class="kw">let </span>re = Regex::new(<span class="string">r&quot;\b(static\s[^=;]*)&quot;</span>).expect(<span class="string">&quot;bad regex&quot;</span>);
+    <span class="kw">let </span>re = Regex::new(<span class="string">r&quot;.*\bstatic\s[^=;]*=.*&quot;</span>).expect(<span class="string">&quot;bad regex&quot;</span>);
     <span class="kw">for </span>cap <span class="kw">in </span>re.captures_iter(checker_content) {
-        <span class="macro">error!</span>(<span class="string">&quot;Static variable found! &#39;{}&#39; looks like a static variable and it will probably interfere with the fuzzing process&quot;</span>, <span class="kw-2">&amp;</span>cap[<span class="number">1</span>]);
+        <span class="kw">let </span>definition = cap[<span class="number">0</span>].trim();
+        <span class="kw">if </span>definition.contains(<span class="string">&quot;const&quot;</span>) {
+            <span class="kw">continue</span>;
+        }
+        <span class="macro">error!</span>(<span class="string">&quot;Static variable found! &#39;{}&#39; looks like a static variable and it will probably interfere with the fuzzing process&quot;</span>, definition);
     }
 
     <span class="prelude-val">Ok</span>(())
@@ -923,17 +972,61 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn </span>compile_fuzzer(fuzz_dir: <span class="kw-2">&amp;</span>Path, data: <span class="kw-2">&amp;</span>FuzzData, sources: <span class="kw-2">&amp;</span>[PathBuf]) -&gt; <span class="prelude-ty">Result</span>&lt;PathBuf, Error&gt; {
+<span class="kw">fn </span>compile_fuzzer(
+    fuzz_dir: <span class="kw-2">&amp;</span>Path,
+    data: <span class="kw-2">&amp;</span>FuzzData,
+    checker_source_path: <span class="kw-2">&amp;</span>Path,
+    fuzzer_source_path: <span class="kw-2">&amp;</span>Path,
+) -&gt; <span class="prelude-ty">Result</span>&lt;PathBuf, Error&gt; {
     <span class="kw">let </span>fuzzer_dir = fuzz_dir.join(<span class="string">&quot;fuzzer&quot;</span>);
     std::fs::create_dir_all(<span class="kw-2">&amp;</span>fuzzer_dir)
         .with_context(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to create fuzzer dir at {}&quot;</span>, fuzzer_dir.display()))<span class="question-mark">?</span>;
-    <span class="kw">let </span>target = fuzzer_dir.join(<span class="string">&quot;fuzzer&quot;</span>);
-    <span class="macro">info!</span>(<span class="string">&quot;Compiling {} with clang++&quot;</span>, target.display());
+    <span class="kw">let </span>checker_shared_object_path = fuzzer_dir.join(<span class="string">&quot;checker.so&quot;</span>);
+    <span class="macro">info!</span>(
+        <span class="string">&quot;Compiling {} with clang++&quot;</span>,
+        checker_shared_object_path.display()
+    );
 
     <span class="kw">let </span><span class="kw-2">mut </span>command = std::process::Command::new(<span class="string">&quot;clang++&quot;</span>);
-    <span class="kw">for </span>source <span class="kw">in </span>sources {
-        command.arg(source);
+    command.arg(checker_source_path);
+    command.arg(<span class="string">&quot;-shared&quot;</span>);
+    command.arg(<span class="string">&quot;-fPIC&quot;</span>);
+    command.arg(<span class="string">&quot;-o&quot;</span>);
+    command.arg(<span class="kw-2">&amp;</span>checker_shared_object_path);
+
+    <span class="kw">let </span><span class="kw-2">mut </span>sanitizers = <span class="string">&quot;-fsanitize=fuzzer&quot;</span>.to_string();
+    <span class="kw">if </span>!data.opt.sanitizers.is_empty() {
+        sanitizers += <span class="string">&quot;,&quot;</span>;
+        sanitizers += <span class="kw-2">&amp;</span>data.opt.sanitizers;
     }
+    command.arg(sanitizers);
+
+    <span class="kw">let </span>std_version = std::env::var(<span class="string">&quot;TM_CXX_STD_VERSION&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;c++17&quot;</span>.into());
+    command.arg(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, std_version));
+
+    <span class="kw">if </span>data.opt.extra_args.is_empty() {
+        <span class="macro">debug!</span>(<span class="string">&quot;Adding -O2 and -g since no extra argument has been specified&quot;</span>);
+        command.arg(<span class="string">&quot;-O2&quot;</span>);
+        command.arg(<span class="string">&quot;-g&quot;</span>);
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>data.opt.extra_args {
+            command.arg(arg);
+        }
+    }
+
+    <span class="macro">info!</span>(<span class="string">&quot;Compiling with: {:?}&quot;</span>, command);
+    <span class="kw">let </span>status = command
+        .status()
+        .with_context(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to start the checker compilation with {:?}&quot;</span>, command))<span class="question-mark">?</span>;
+    <span class="kw">if </span>!status.success() {
+        <span class="macro">bail!</span>(<span class="string">&quot;Checker compilation failed (exit code {:?})&quot;</span>, status.code());
+    }
+
+    <span class="kw">let </span>target = fuzzer_dir.join(<span class="string">&quot;fuzzer&quot;</span>);
+    <span class="macro">info!</span>(<span class="string">&quot;Compiling {} with clang++&quot;</span>, target.display());
+    <span class="kw">let </span><span class="kw-2">mut </span>command = std::process::Command::new(<span class="string">&quot;clang++&quot;</span>);
+    command.arg(fuzzer_source_path);
+    command.arg(<span class="string">&quot;-std=c++17&quot;</span>);
     command.arg(<span class="string">&quot;-o&quot;</span>);
     command.arg(<span class="kw-2">&amp;</span>target);
 
@@ -947,9 +1040,6 @@
         sanitizers += <span class="kw-2">&amp;</span>data.opt.sanitizers;
     }
     command.arg(sanitizers);
-
-    <span class="kw">let </span>std_version = std::env::var(<span class="string">&quot;TM_CXX_STD_VERSION&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;c++17&quot;</span>.into());
-    command.arg(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, std_version));
 
     <span class="kw">if </span>data.opt.extra_args.is_empty() {
         <span class="macro">debug!</span>(<span class="string">&quot;Adding -O2 and -g since no extra argument has been specified&quot;</span>);
