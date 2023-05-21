@@ -608,6 +608,8 @@
 <a href="#608" id="608">608</a>
 <a href="#609" id="609">609</a>
 <a href="#610" id="610">610</a>
+<a href="#611" id="611">611</a>
+<a href="#612" id="612">612</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The IOI task format.
 //!
 //! In IOI-like tasks there is the concept of _subtask_ and of _testcase_: a testcase is a single
@@ -774,6 +776,8 @@
     </span><span class="kw">pub </span>testcases: HashMap&lt;TestcaseId, TestcaseInfo&gt;,
     <span class="doccomment">/// The span of the definition of this subtask.
     </span><span class="kw">pub </span>span: <span class="prelude-ty">Option</span>&lt;CodeSpan&gt;,
+    <span class="doccomment">/// Whether this subtask was created automatically since no subtask was present in gen/GEN.
+    </span><span class="kw">pub </span>is_default: bool,
 }
 
 <span class="doccomment">/// A testcase of a IOI task.

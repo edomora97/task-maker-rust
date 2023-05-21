@@ -1651,6 +1651,7 @@
 <a href="#1651" id="1651">1651</a>
 <a href="#1652" id="1652">1652</a>
 <a href="#1653" id="1653">1653</a>
+<a href="#1654" id="1654">1654</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fmt::Debug;
 <span class="kw">use </span>std::fmt::Formatter;
@@ -2194,6 +2195,7 @@
                 span.end() - span.start(),
             )
             .ok(),
+            is_default: <span class="bool-val">false</span>,
         }));
         <span class="self">self</span>.subtask_id += <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(())
