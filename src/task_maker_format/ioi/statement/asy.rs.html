@@ -227,9 +227,6 @@
 <a href="#227" id="227">227</a>
 <a href="#228" id="228">228</a>
 <a href="#229" id="229">229</a>
-<a href="#230" id="230">230</a>
-<a href="#231" id="231">231</a>
-<a href="#232" id="232">232</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
 <span class="kw">use </span>anyhow::{anyhow, Context, Error};
@@ -413,9 +410,6 @@
             </span>.filter_map(|p| p.ok())
             .filter(|p| p != source_path)
             .filter(|p| !p.is_dir())
-            .inspect(|p| {
-                <span class="macro">eprintln!</span>(<span class="string">&quot;{}&quot;</span>, p.display());
-            })
             .map(|p| AsyDependency {
                 sandbox_path: p.strip_prefix(source_dir).unwrap_or(<span class="kw-2">&amp;</span>p).into(),
                 local_path: p,
