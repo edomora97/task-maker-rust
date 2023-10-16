@@ -1,4 +1,4 @@
-var sourcesIndex = JSON.parse('{\
+var srcIndex = JSON.parse('{\
 "task_maker":["",[],["main.rs"]],\
 "task_maker_cache":["",[],["entry.rs","key.rs","lib.rs","storage.rs"]],\
 "task_maker_dag":["",[],["dag.rs","execution.rs","execution_group.rs","file.rs","lib.rs"]],\
@@ -10,4 +10,4 @@ var sourcesIndex = JSON.parse('{\
 "task_maker_store":["",[],["index.rs","lib.rs","read_file_iterator.rs"]],\
 "task_maker_tools":["",[],["main.rs"]]\
 }');
-createSourceSidebar();
+createSrcSidebar();
