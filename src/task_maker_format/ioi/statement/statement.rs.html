@@ -479,22 +479,22 @@
                 </span>.config
                 .time_limit
                 .map(|x| x.to_string())
-                .unwrap_or_else(String::new),
+                .unwrap_or_default(),
             memory_limit: <span class="self">self
                 </span>.config
                 .memory_limit
                 .map(|x| x.to_string())
-                .unwrap_or_else(String::new),
+                .unwrap_or_default(),
             difficulty: <span class="self">self
                 </span>.config
                 .difficulty
                 .map(|x| x.to_string())
-                .unwrap_or_else(String::new),
+                .unwrap_or_default(),
             syllabus_level: <span class="self">self
                 </span>.config
                 .syllabus_level
                 .map(|x| x.to_string())
-                .unwrap_or_else(String::new),
+                .unwrap_or_default(),
             content: USE_PACKAGE_REGEX
                 .replace_all(<span class="kw-2">&amp;</span><span class="self">self</span>.content, <span class="string">r&quot;% $0&quot;</span>)
                 .to_string(),
@@ -525,7 +525,7 @@
         <span class="kw">let </span>ext = path
             .extension()
             .map(|s| s.to_string_lossy().to_string())
-            .unwrap_or_else(String::new);
+            .unwrap_or_default();
         <span class="kw">if </span>ext.as_str() == <span class="string">&quot;asy&quot; </span>{
             <span class="kw">let </span>dest = suffix.with_extension(<span class="string">&quot;pdf&quot;</span>);
             <span class="kw">if </span><span class="self">self</span>.content.contains(dest.to_string_lossy().as_ref()) {
@@ -592,12 +592,12 @@
                 .infile
                 .as_ref()
                 .map(|p| p.to_string_lossy().to_string())
-                .unwrap_or_else(String::new),
+                .unwrap_or_default(),
             outfile: task
                 .outfile
                 .as_ref()
                 .map(|p| p.to_string_lossy().to_string())
-                .unwrap_or_else(String::new),
+                .unwrap_or_default(),
             time_limit: task.time_limit,
             memory_limit: task.memory_limit,
             difficulty: task.difficulty,

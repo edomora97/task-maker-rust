@@ -286,9 +286,6 @@
 <a href="#286" id="286">286</a>
 <a href="#287" id="287">287</a>
 <a href="#288" id="288">288</a>
-<a href="#289" id="289">289</a>
-<a href="#290" id="290">290</a>
-<a href="#291" id="291">291</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::executor::ExecutionDAGWatchSet;
 <span class="kw">use </span>std::collections::{HashMap, HashSet, VecDeque};
 <span class="kw">use </span>task_maker_dag::{ExecutionDAGData, ExecutionGroupUuid, ExecutionUuid, FifoUuid, FileUuid};
@@ -366,10 +363,7 @@
     <span class="kw">let </span><span class="kw-2">mut </span>ready_files: VecDeque&lt;FileUuid&gt; = VecDeque::new();
 
     <span class="kw">let </span><span class="kw-2">mut </span>add_dependency = |file: FileUuid, group: ExecutionGroupUuid| {
-        dependencies
-            .entry(file)
-            .or_insert_with(Vec::new)
-            .push(group);
+        dependencies.entry(file).or_default().push(group);
     };
 
     <span class="comment">// add the executions and check for duplicated UUIDs
