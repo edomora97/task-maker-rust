@@ -128,6 +128,11 @@
 <a href="#128" id="128">128</a>
 <a href="#129" id="129">129</a>
 <a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::path::PathBuf;
 <span class="kw">use </span>std::sync::Arc;
 
@@ -172,7 +177,12 @@
         validation_handle: <span class="prelude-ty">Option</span>&lt;FileUuid&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(<span class="prelude-ty">Option</span>&lt;FileUuid&gt;, <span class="prelude-ty">Option</span>&lt;Execution&gt;), Error&gt; {
         <span class="kw">match </span><span class="self">self </span>{
-            OutputGenerator::NotAvailable =&gt; <span class="prelude-val">Ok</span>((<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)),
+            OutputGenerator::NotAvailable =&gt; {
+                <span class="kw">let </span>file = File::new(<span class="string">&quot;Empty file&quot;</span>);
+                <span class="kw">let </span>uuid = file.uuid;
+                eval.dag.provide_content(file, <span class="macro">vec!</span>[]);
+                <span class="prelude-val">Ok</span>((<span class="prelude-val">Some</span>(uuid), <span class="prelude-val">None</span>))
+            }
             OutputGenerator::StaticFile(path) =&gt; {
                 <span class="kw">if </span>!path.exists() {
                     <span class="macro">bail!</span>(<span class="string">&quot;Static output file not found: {:?}&quot;</span>, path);
