@@ -147,7 +147,7 @@
 <span class="kw">use </span>anyhow::{bail, Context, Error};
 <span class="kw">use </span>clap::Parser;
 
-<span class="kw">use </span>task_maker_format::ioi::{make_context_booklets, Booklet, BookletConfig, IOITask};
+<span class="kw">use </span>task_maker_format::ioi::{make_contest_booklets, Booklet, BookletConfig, IOITask};
 <span class="kw">use </span>task_maker_format::{find_task, EvaluationConfig};
 
 <span class="kw">use </span><span class="kw">crate</span>::context::RuntimeContext;
@@ -263,7 +263,7 @@
         tasks.push(task);
     }
     <span class="kw">let </span>booklets =
-        make_context_booklets(<span class="kw-2">&amp;</span>tasks, eval_config).context(<span class="string">&quot;Failed to get booklet data&quot;</span>)<span class="question-mark">?</span>;
+        make_contest_booklets(<span class="kw-2">&amp;</span>tasks, eval_config).context(<span class="string">&quot;Failed to get booklet data&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">let </span><span class="kw-2">mut </span>task = IOITask::fake();
     task.title = <span class="string">&quot;Booklet compilation&quot;</span>.into();
     task.name = <span class="string">&quot;booklet&quot;</span>.into();
