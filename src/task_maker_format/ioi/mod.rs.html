@@ -610,6 +610,7 @@
 <a href="#610" id="610">610</a>
 <a href="#611" id="611">611</a>
 <a href="#612" id="612">612</a>
+<a href="#613" id="613">613</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! The IOI task format.
 //!
 //! In IOI-like tasks there is the concept of _subtask_ and of _testcase_: a testcase is a single
@@ -1133,8 +1134,9 @@
 
     <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         <span class="kw">match </span>s {
-            <span class="string">&quot;min&quot; </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Min),
-            <span class="string">&quot;sum&quot; </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Sum),
+            <span class="string">&quot;min&quot; </span>| <span class="string">&quot;GroupMin&quot; </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Min),
+            <span class="string">&quot;sum&quot; </span>| <span class="string">&quot;Sum&quot; </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Sum),
+            <span class="string">&quot;GroupMul&quot; </span>| <span class="string">&quot;GroupThreshold&quot; </span>=&gt; <span class="macro">bail!</span>(<span class="string">&quot;{s} is not supported yet&quot;</span>),
             <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">&quot;Invalid testcase score aggregator: {}&quot;</span>, s),
         }
     }
