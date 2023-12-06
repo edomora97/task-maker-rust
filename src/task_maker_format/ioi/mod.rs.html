@@ -611,6 +611,7 @@
 <a href="#611" id="611">611</a>
 <a href="#612" id="612">612</a>
 <a href="#613" id="613">613</a>
+<a href="#614" id="614">614</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! The IOI task format.
 //!
 //! In IOI-like tasks there is the concept of _subtask_ and of _testcase_: a testcase is a single
@@ -761,7 +762,7 @@
 }
 
 <span class="doccomment">/// A subtask of a IOI task.
-</span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify, Default)]
 </span><span class="kw">pub struct </span>SubtaskInfo {
     <span class="doccomment">/// The id of the subtask.
     </span><span class="kw">pub </span>id: SubtaskId,
@@ -769,7 +770,8 @@
     ///
     /// This is what is used for running the solutions&#39; checks.
     </span><span class="kw">pub </span>name: <span class="prelude-ty">Option</span>&lt;String&gt;,
-    <span class="doccomment">/// Textual description of the subtask.
+    <span class="doccomment">/// Textual description of the subtask. (deprecated)
+    </span><span class="attr">#[deprecated(note = <span class="string">&quot;Use the `name` field instead&quot;</span>)]
     </span><span class="kw">pub </span>description: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// The maximum score of the subtask, must be &gt;= 0.
     </span><span class="kw">pub </span>max_score: f64,

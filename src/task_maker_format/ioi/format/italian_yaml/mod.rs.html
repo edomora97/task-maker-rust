@@ -932,15 +932,15 @@
 //! Example: `:CONSTRAINT 0 &lt;= $N &lt; $M &lt;= 1000000` will check that the variables `$N` and `$M` are
 //! between 0 and 1000000 and `$N` is smaller than `$M`.
 //!
-//! ### `: SUBTASK score [description]`
+//! ### `: SUBTASK score [name]`
 //! This command marks the start of a new subtask, just like how `#ST` in `gen/GEN` did. The score
-//! can be a simple floating point number (either an integer or an integer.integer). The description
+//! can be a simple floating point number (either an integer or an integer.integer). The name
 //! that follows is optional and will be included in the subtask metadata.
 //!
 //! When a new subtask is started the generator and validator will be reset to the default ones.
 //!
-//! Example: `: SUBTASK 40 All the nodes are in a line` defines a new subtask worth 40 points, with
-//! the provided description.
+//! Example: `: SUBTASK 40 all-the-nodes-are-in-a-line` defines a new subtask worth 40 points, with
+//! the provided name.
 //!
 //! ### `: COPY path`
 //! This command creates a new testcase coping the input file from the specified path, relative to
@@ -971,7 +971,7 @@
 //! obtained from the parsing of the generator&#39;s arguments will be available. Also some automatic
 //! variables will be available:
 //! - `$ST_NUM`: the 0-based index of the subtask
-//! - `$ST_DESCRIPTION`: the description of the subtask
+//! - `$ST_NAME`: the name of the subtask
 //! - `$TC_NUM`: the 0-based index of the testcase
 //! - `$INPUT` _(only for validators)_: the name of the file to validate
 //!
@@ -987,11 +987,11 @@
 //! : CONSTRAINT 1 &lt;= $N &lt;= 1000
 //! : CONSTRAINT 1 &lt;= $M &lt;= 1000000
 //!
-//! : SUBTASK 0 Examples
+//! : SUBTASK 0 examples
 //! : COPY gen/example1.in
 //! : COPY gen/example2.in
 //!
-//! : SUBTASK 30 Nodes are in a line
+//! : SUBTASK 30 nodes-are-in-a-line
 //! : GEN line
 //! : VAL line
 //! : CONSTRAINT $N &lt;= 500
@@ -1025,7 +1025,7 @@
 //! which will use the `hard` one. Note that since the `hard` generator does not have the argument
 //! specification, its parameters won&#39;t be checked. Also note that the constraint `$N &lt;= 500` won&#39;t
 //! be checked because it was scoped only to the second subtask.
-//! The subtask also does not have a description, the default one (`Subtask 2`) will be used.
+//! The subtask also does not have a name, the default one (`subtask2`) will be used.
 
 </span><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fs;

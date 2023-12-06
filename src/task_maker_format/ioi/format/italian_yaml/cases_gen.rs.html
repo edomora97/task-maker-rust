@@ -1652,6 +1652,27 @@
 <a href="#1652" id="1652">1652</a>
 <a href="#1653" id="1653">1653</a>
 <a href="#1654" id="1654">1654</a>
+<a href="#1655" id="1655">1655</a>
+<a href="#1656" id="1656">1656</a>
+<a href="#1657" id="1657">1657</a>
+<a href="#1658" id="1658">1658</a>
+<a href="#1659" id="1659">1659</a>
+<a href="#1660" id="1660">1660</a>
+<a href="#1661" id="1661">1661</a>
+<a href="#1662" id="1662">1662</a>
+<a href="#1663" id="1663">1663</a>
+<a href="#1664" id="1664">1664</a>
+<a href="#1665" id="1665">1665</a>
+<a href="#1666" id="1666">1666</a>
+<a href="#1667" id="1667">1667</a>
+<a href="#1668" id="1668">1668</a>
+<a href="#1669" id="1669">1669</a>
+<a href="#1670" id="1670">1670</a>
+<a href="#1671" id="1671">1671</a>
+<a href="#1672" id="1672">1672</a>
+<a href="#1673" id="1673">1673</a>
+<a href="#1674" id="1674">1674</a>
+<a href="#1675" id="1675">1675</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fmt::Debug;
 <span class="kw">use </span>std::fmt::Formatter;
@@ -1778,8 +1799,8 @@
     </span>current_validator: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// The identifier of the next subtask to process.
     </span>subtask_id: SubtaskId,
-    <span class="doccomment">/// The description of the last subtask added, if any.
-    </span>subtask_description: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// The name of the last subtask added, if any.
+    </span>subtask_name: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// The identifier of the next testcase to process.
     </span>testcase_id: TestcaseId,
 }
@@ -1820,7 +1841,7 @@
             current_generator: <span class="prelude-val">None</span>,
             current_validator: <span class="prelude-val">None</span>,
             subtask_id: <span class="number">0</span>,
-            subtask_description: <span class="prelude-val">None</span>,
+            subtask_name: <span class="prelude-val">None</span>,
             testcase_id: <span class="number">0</span>,
         };
 
@@ -1881,12 +1902,11 @@
         <span class="kw">for </span>entry <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.result {
             <span class="kw">match </span>entry {
                 TaskInputEntry::Subtask(subtask) =&gt; {
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(descr) = <span class="kw-2">&amp;</span>subtask.description {
-                        <span class="kw">let _ </span>= <span class="macro">writeln!</span>(gen, <span class="string">&quot;\n# Subtask {}: {}&quot;</span>, subtask.id, descr);
-                    } <span class="kw">else </span>{
-                        <span class="kw">let _ </span>= <span class="macro">writeln!</span>(gen, <span class="string">&quot;\n# Subtask {}&quot;</span>, subtask.id);
-                    }
+                    <span class="kw">let _ </span>= <span class="macro">writeln!</span>(gen, <span class="string">&quot;\n# Subtask {}&quot;</span>, subtask.id);
                     <span class="kw">let _ </span>= <span class="macro">writeln!</span>(gen, <span class="string">&quot;#ST: {}&quot;</span>, subtask.max_score);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span>subtask.name {
+                        <span class="kw">let _ </span>= <span class="macro">writeln!</span>(gen, <span class="string">&quot;#STNAME: {}&quot;</span>, name);
+                    }
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(constraints) = <span class="self">self</span>.subtask_constraints.get(subtask.id <span class="kw">as </span>usize) {
                         <span class="kw">for </span>constr <span class="kw">in </span>constraints {
                             <span class="kw">let _ </span>= <span class="macro">writeln!</span>(gen, <span class="string">&quot;# {:?}&quot;</span>, constr);
@@ -2180,23 +2200,29 @@
         } <span class="kw">else </span>{
             <span class="prelude-val">None
         </span>};
-        <span class="self">self</span>.subtask_description = description.clone();
-        <span class="comment">// FIXME: the cases.gen format does not yet support giving the subtasks a name.
-        </span><span class="self">self</span>.result.push(TaskInputEntry::Subtask(SubtaskInfo {
-            id: <span class="self">self</span>.subtask_id,
-            name: <span class="prelude-val">None</span>,
-            description,
-            max_score: score,
-            testcases: HashMap::new(),
-            span: CodeSpan::from_str(
-                <span class="kw-2">&amp;</span><span class="self">self</span>.file_path,
-                <span class="kw-2">&amp;</span><span class="self">self</span>.file_content,
-                span.start(),
-                span.end() - span.start(),
-            )
-            .ok(),
-            is_default: <span class="bool-val">false</span>,
-        }));
+        <span class="comment">// Remove whitespaces for retrocompatibility with descriptions
+        </span><span class="kw">let </span>name = description
+            .as_deref()
+            .map(|s| s.chars().filter(|<span class="kw-2">&amp;</span>c| c != <span class="string">&#39; &#39; </span>&amp;&amp; c != <span class="string">&#39;\t&#39;</span>).collect());
+        <span class="self">self</span>.subtask_name = name.clone();
+        <span class="self">self</span>.result.push(TaskInputEntry::Subtask(
+            <span class="attr">#[allow(deprecated)]
+            </span>SubtaskInfo {
+                id: <span class="self">self</span>.subtask_id,
+                name,
+                description,
+                max_score: score,
+                span: CodeSpan::from_str(
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.file_path,
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.file_content,
+                    span.start(),
+                    span.end() - span.start(),
+                )
+                .ok(),
+                is_default: <span class="bool-val">false</span>,
+                ..Default::default()
+            },
+        ));
         <span class="self">self</span>.subtask_id += <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(())
     }
@@ -2291,8 +2317,8 @@
         vars.insert(<span class="string">&quot;INPUT&quot;</span>.to_string(), TM_VALIDATION_FILE_NAME.to_string());
         vars.insert(<span class="string">&quot;ST_NUM&quot;</span>.to_string(), (<span class="self">self</span>.subtask_id - <span class="number">1</span>).to_string());
         vars.insert(<span class="string">&quot;TC_NUM&quot;</span>.to_string(), <span class="self">self</span>.testcase_id.to_string());
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(descr) = <span class="kw-2">&amp;</span><span class="self">self</span>.subtask_description {
-            vars.insert(<span class="string">&quot;ST_DESCRIPTION&quot;</span>.to_string(), descr.clone());
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span><span class="self">self</span>.subtask_name {
+            vars.insert(<span class="string">&quot;ST_NAME&quot;</span>.to_string(), name.clone());
         }
         vars
     }
@@ -2487,11 +2513,12 @@
             .split(<span class="string">&#39;\n&#39;</span>)
             .filter(|s| !s.is_empty() &amp;&amp; !s.starts_with(<span class="string">&quot;# &quot;</span>) &amp;&amp; !s.starts_with(<span class="string">&quot;#COPY&quot;</span>))
             .collect();
-        <span class="macro">assert_eq!</span>(res.len(), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(res.len(), <span class="number">5</span>);
         <span class="macro">assert_eq!</span>(res[<span class="number">0</span>], <span class="string">&quot;#ST: 42&quot;</span>);
-        <span class="macro">assert!</span>(res[<span class="number">1</span>].contains(<span class="string">&quot;12 34&quot;</span>));
-        <span class="macro">assert_eq!</span>(res[<span class="number">2</span>], <span class="string">&quot;#ST: 24&quot;</span>);
-        <span class="macro">assert!</span>(res[<span class="number">3</span>].contains(<span class="string">&quot;21 21&quot;</span>));
+        <span class="macro">assert_eq!</span>(res[<span class="number">1</span>], <span class="string">&quot;#STNAME: lol&quot;</span>);
+        <span class="macro">assert!</span>(res[<span class="number">2</span>].contains(<span class="string">&quot;12 34&quot;</span>));
+        <span class="macro">assert_eq!</span>(res[<span class="number">3</span>], <span class="string">&quot;#ST: 24&quot;</span>);
+        <span class="macro">assert!</span>(res[<span class="number">4</span>].contains(<span class="string">&quot;21 21&quot;</span>));
     }
 
     <span class="attr">#[test]
@@ -2504,11 +2531,11 @@
         <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;INPUT&quot;</span>], TM_VALIDATION_FILE_NAME);
         <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;ST_NUM&quot;</span>], <span class="string">&quot;0&quot;</span>);
         <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;TC_NUM&quot;</span>], <span class="string">&quot;1&quot;</span>);
-        <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;ST_DESCRIPTION&quot;</span>], <span class="string">&quot;lol&quot;</span>);
+        <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;ST_NAME&quot;</span>], <span class="string">&quot;lol&quot;</span>);
     }
 
     <span class="attr">#[test]
-    </span><span class="kw">fn </span>test_auto_variables_no_descr() {
+    </span><span class="kw">fn </span>test_auto_variables_no_name() {
         <span class="kw">let </span>gen = TestHelper::new()
             .add_file(<span class="string">&quot;gen/generator.py&quot;</span>)
             .cases_gen(<span class="string">&quot;:GEN gen gen/generator.py\n:SUBTASK 42 lol\n12 34\n: SUBTASK 43&quot;</span>)
@@ -2517,7 +2544,7 @@
         <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;INPUT&quot;</span>], TM_VALIDATION_FILE_NAME);
         <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;ST_NUM&quot;</span>], <span class="string">&quot;1&quot;</span>);
         <span class="macro">assert_eq!</span>(vars[<span class="string">&quot;TC_NUM&quot;</span>], <span class="string">&quot;1&quot;</span>);
-        <span class="macro">assert!</span>(!vars.contains_key(<span class="string">&quot;ST_DESCRIPTION&quot;</span>));
+        <span class="macro">assert!</span>(!vars.contains_key(<span class="string">&quot;ST_NAME&quot;</span>));
     }
 
     <span class="attr">#[test]
@@ -2877,7 +2904,7 @@
         <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>gen.result[<span class="number">0</span>];
         <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = subtask {
             <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(subtask.description, <span class="prelude-val">None</span>);
+            <span class="macro">assert_eq!</span>(subtask.name, <span class="prelude-val">None</span>);
             <span class="macro">assert_abs_diff_eq!</span>(subtask.max_score, <span class="number">42.0</span>);
         } <span class="kw">else </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;Expecting a subtask, got: {:?}&quot;</span>, subtask);
@@ -2885,17 +2912,32 @@
     }
 
     <span class="attr">#[test]
-    </span><span class="kw">fn </span>test_add_subtask_description() {
+    </span><span class="kw">fn </span>test_add_subtask_name() {
+        <span class="kw">let </span>gen = TestHelper::new().cases_gen(<span class="string">&quot;:SUBTASK 42 the-name&quot;</span>).unwrap();
+        <span class="macro">assert_eq!</span>(gen.subtask_id, <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(gen.result.len(), <span class="number">1</span>);
+        <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>gen.result[<span class="number">0</span>];
+        <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = subtask {
+            <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
+            <span class="macro">assert_eq!</span>(subtask.name, <span class="prelude-val">Some</span>(<span class="string">&quot;the-name&quot;</span>.into()));
+            <span class="macro">assert_abs_diff_eq!</span>(subtask.max_score, <span class="number">42.0</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;Expecting a subtask, got: {:?}&quot;</span>, subtask);
+        }
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>test_add_subtask_space_in_name() {
         <span class="kw">let </span>gen = TestHelper::new()
-            .cases_gen(<span class="string">&quot;:SUBTASK 42 the description&quot;</span>)
+            .cases_gen(<span class="string">&quot;:SUBTASK 42.42 the name&quot;</span>)
             .unwrap();
         <span class="macro">assert_eq!</span>(gen.subtask_id, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(gen.result.len(), <span class="number">1</span>);
         <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>gen.result[<span class="number">0</span>];
         <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = subtask {
             <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(subtask.description, <span class="prelude-val">Some</span>(<span class="string">&quot;the description&quot;</span>.into()));
-            <span class="macro">assert_abs_diff_eq!</span>(subtask.max_score, <span class="number">42.0</span>);
+            <span class="macro">assert_eq!</span>(subtask.name, <span class="prelude-val">Some</span>(<span class="string">&quot;thename&quot;</span>.into()));
+            <span class="macro">assert_abs_diff_eq!</span>(subtask.max_score, <span class="number">42.42</span>);
         } <span class="kw">else </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;Expecting a subtask, got: {:?}&quot;</span>, subtask);
         }
@@ -2904,14 +2946,14 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_add_subtask_float_score() {
         <span class="kw">let </span>gen = TestHelper::new()
-            .cases_gen(<span class="string">&quot;:SUBTASK 42.42 the description&quot;</span>)
+            .cases_gen(<span class="string">&quot;:SUBTASK 42.42 the-name&quot;</span>)
             .unwrap();
         <span class="macro">assert_eq!</span>(gen.subtask_id, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(gen.result.len(), <span class="number">1</span>);
         <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>gen.result[<span class="number">0</span>];
         <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = subtask {
             <span class="macro">assert_eq!</span>(subtask.id, <span class="number">0</span>);
-            <span class="macro">assert_eq!</span>(subtask.description, <span class="prelude-val">Some</span>(<span class="string">&quot;the description&quot;</span>.into()));
+            <span class="macro">assert_eq!</span>(subtask.name, <span class="prelude-val">Some</span>(<span class="string">&quot;the-name&quot;</span>.into()));
             <span class="macro">assert_abs_diff_eq!</span>(subtask.max_score, <span class="number">42.42</span>);
         } <span class="kw">else </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;Expecting a subtask, got: {:?}&quot;</span>, subtask);

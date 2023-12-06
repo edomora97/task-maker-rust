@@ -543,14 +543,7 @@
 <a href="#543" id="543">543</a>
 <a href="#544" id="544">544</a>
 <a href="#545" id="545">545</a>
-<a href="#546" id="546">546</a>
-<a href="#547" id="547">547</a>
-<a href="#548" id="548">548</a>
-<a href="#549" id="549">549</a>
-<a href="#550" id="550">550</a>
-<a href="#551" id="551">551</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
-<span class="kw">use </span>std::path::Path;
+</pre></div><pre class="rust"><code><span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
@@ -602,12 +595,9 @@
 
     <span class="kw">let </span><span class="kw-2">mut </span>default_subtask = <span class="prelude-val">Some</span>(SubtaskInfo {
         id: <span class="number">0</span>,
-        name: <span class="prelude-val">None</span>,
-        description: <span class="prelude-val">None</span>,
         max_score: <span class="number">100.0</span>,
-        testcases: HashMap::new(),
-        span: <span class="prelude-val">None</span>,
         is_default: <span class="bool-val">true</span>,
+        ..Default::default()
     });
 
     <span class="kw">let </span><span class="kw-2">mut </span>generators = find_source_file(
@@ -651,10 +641,7 @@
                         <span class="kw">let </span>path = path.strip_prefix(task_dir).unwrap_or(path);
                         entries.push(TaskInputEntry::Subtask(SubtaskInfo {
                             id: subtask_id,
-                            name: <span class="prelude-val">None</span>,
-                            description: <span class="prelude-val">None</span>,
                             max_score: score.parse::&lt;f64&gt;().context(<span class="string">&quot;Invalid subtask score&quot;</span>)<span class="question-mark">?</span>,
-                            testcases: HashMap::new(),
                             span: CodeSpan::from_str(
                                 path,
                                 <span class="kw-2">&amp;</span>content,
@@ -663,6 +650,7 @@
                             )
                             .ok(),
                             is_default: <span class="bool-val">false</span>,
+                            ..Default::default()
                         }));
                         subtask_id += <span class="number">1</span>;
                     }

@@ -698,8 +698,8 @@
         <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Generations&quot;</span>);
         <span class="kw">for </span>(st_num, subtask) <span class="kw">in </span>state.generations.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
             <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Subtask {}&quot;</span>, st_num);
-            <span class="kw">if let </span><span class="prelude-val">Some</span>(description) = <span class="kw-2">&amp;</span>state.task.subtasks[st_num].description {
-                <span class="macro">print!</span>(<span class="string">&quot; [{}]&quot;</span>, description);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span>state.task.subtasks[st_num].name {
+                <span class="macro">print!</span>(<span class="string">&quot; [{}]&quot;</span>, name);
             }
             <span class="macro">println!</span>(<span class="string">&quot;: {} points&quot;</span>, state.task.subtasks[st_num].max_score);
             <span class="kw">for </span>(tc_num, testcase) <span class="kw">in </span>subtask.testcases.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
@@ -810,8 +810,8 @@
 
         <span class="kw">for </span>(st_num, subtask) <span class="kw">in </span>eval.subtasks.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
             <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Subtask #{}&quot;</span>, st_num);
-            <span class="kw">if let </span><span class="prelude-val">Some</span>(description) = <span class="kw-2">&amp;</span>state.task.subtasks[st_num].description {
-                <span class="macro">print!</span>(<span class="string">&quot; [{}]&quot;</span>, description);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span>state.task.subtasks[st_num].name {
+                <span class="macro">print!</span>(<span class="string">&quot; [{}]&quot;</span>, name);
             }
             <span class="macro">print!</span>(<span class="string">&quot;: &quot;</span>);
             <span class="kw">let </span>max_score = state.task.subtasks[st_num].max_score;
