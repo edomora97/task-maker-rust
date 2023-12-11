@@ -261,6 +261,13 @@
 <a href="#261" id="261">261</a>
 <a href="#262" id="262">262</a>
 <a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::{
     collections::{HashMap, HashSet},
     fs,
@@ -364,26 +371,33 @@
                     .expect(<span class="string">&quot;Invalid regex&quot;</span>);
         }
 
+        <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = <span class="prelude-val">None</span>;
+
         <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;**/*.cpp&quot;</span>, <span class="string">&quot;**/*.cc&quot;</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(content) = fs::read_to_string(path) {
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = RE.find(<span class="kw-2">&amp;</span>content) {
-                    eval.add_diagnostic(
-                        Diagnostic::warning(<span class="macro">format!</span>(
-                            <span class="string">&quot;bits/stdc++.h included from {}&quot;</span>,
-                            path.display()
-                        ))
-                        .with_note(<span class="string">&quot;This won&#39;t compile under Clang&quot;</span>)
-                        .with_code_span(CodeSpan::from_str(
-                            path,
-                            <span class="kw-2">&amp;</span>content,
-                            span.start(),
-                            span.end() - span.start(),
-                        )<span class="question-mark">?</span>),
-                    )<span class="question-mark">?</span>;
+                    diagnostic = <span class="prelude-val">Some</span>(
+                        diagnostic
+                            .unwrap_or_else(|| {
+                                Diagnostic::warning(<span class="string">r#&quot;Usage of &quot;bits/stdc++.h&quot; is discouraged&quot;#</span>)
+                                    .with_note(<span class="string">&quot;This won&#39;t compile under Clang&quot;</span>)
+                            })
+                            .with_code_span(CodeSpan::from_str(
+                                path,
+                                <span class="kw-2">&amp;</span>content,
+                                span.start(),
+                                span.end() - span.start(),
+                            )<span class="question-mark">?</span>),
+                    );
                 }
             }
         }
+
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(diagnostic) = diagnostic {
+            eval.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
+        }
+
         <span class="prelude-val">Ok</span>(())
     }
 }
