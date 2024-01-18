@@ -20,7 +20,7 @@ filesystem.</p>
     &amp;self,
     base_dir: &amp;<a class="struct" href="https://doc.rust-lang.org/1.75.0/std/path/struct.Path.html" title="struct std::path::Path">Path</a>,
     patterns: <a class="struct" href="https://doc.rust-lang.org/1.75.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/1.75.0/std/primitive.str.html">str</a>&gt;,
-    grader_map: <a class="enum" href="https://doc.rust-lang.org/1.75.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.75.0/alloc/sync/struct.Arc.html" title="struct alloc::sync::Arc">Arc</a>&lt;GraderMap&gt;&gt;,
+    grader_map: <a class="enum" href="https://doc.rust-lang.org/1.75.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.75.0/alloc/sync/struct.Arc.html" title="struct alloc::sync::Arc">Arc</a>&lt;<a class="struct" href="../task_maker_lang/grader_map/struct.GraderMap.html" title="struct task_maker_lang::grader_map::GraderMap">GraderMap</a>&gt;&gt;,
     eval: &amp;mut <a class="struct" href="struct.EvaluationData.html" title="struct task_maker_format::EvaluationData">EvaluationData</a>
 ) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.75.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="struct.Solution.html" title="struct task_maker_format::Solution">Solution</a>&gt;</h4></section></summary><div class="docblock"><p>Search all the solutions matching the provided pattern in the provided base directory,
 excluding all the graders in the grader_map, if provided.</p>
