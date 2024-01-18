@@ -1009,7 +1009,7 @@
         <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*&quot;</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(checks) = SolutionCheck::extract_check_list(<span class="kw-2">&amp;</span>att, eval) {
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(check) = checks.get(<span class="number">0</span>) {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(check) = checks.first() {
                     eval.add_diagnostic(
                         Diagnostic::error(<span class="macro">format!</span>(
                             <span class="string">&quot;@check rule found in an attachment: {}&quot;</span>,
