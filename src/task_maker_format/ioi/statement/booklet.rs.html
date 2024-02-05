@@ -391,6 +391,8 @@
 <a href="#391" id="391">391</a>
 <a href="#392" id="392">392</a>
 <a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashSet;
 <span class="kw">use </span>std::path::{Path, PathBuf};
 <span class="kw">use </span>std::sync::{Arc, Mutex};
@@ -406,6 +408,7 @@
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::statement::statement::Statement;
+<span class="kw">use </span><span class="kw">crate</span>::ioi::BOOKLET_PRIORITY;
 <span class="kw">use </span><span class="kw">crate</span>::ui::UIMessageSender;
 <span class="kw">use crate</span>::{bind_exec_callbacks, ui::UIMessage, EvaluationData, Tag, UISender, DATA_DIR};
 
@@ -523,6 +526,7 @@
             .add_extra_readable_dir(<span class="string">&quot;/etc&quot;</span>)
             .mount_tmpfs(<span class="bool-val">true</span>);
         exec.tag(Tag::Booklet.into());
+        exec.priority(BOOKLET_PRIORITY);
         <span class="kw">let </span>output = exec.output(<span class="string">&quot;booklet.pdf&quot;</span>);
 
         <span class="kw">let </span>source = File::new(<span class="string">&quot;Source of the booklet&quot;</span>);
