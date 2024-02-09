@@ -1,4 +1,3 @@
-use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 
 use anyhow::{anyhow, Context, Error};
@@ -41,8 +40,6 @@ struct ScoreSenderData {
     testcase_id: TestcaseId,
     /// The sender to use for with the `ScoreManager`.
     sender: Arc<Mutex<UIMessageSender>>,
-    /// The path of the current solution.
-    path: PathBuf,
     /// The score manager to use for sending the score.
     score_manager: Arc<Mutex<ScoreManager>>,
     /// The number of missing calls to `send` or to `skip`.
@@ -111,7 +108,6 @@ pub fn evaluate(
         subtask_id,
         testcase_id,
         eval.sender.clone(),
-        path.clone(),
         score_manager,
         num_processes + 1, // num_processes + the manager
     );
@@ -255,7 +251,6 @@ impl ScoreSender {
         subtask_id: SubtaskId,
         testcase_id: TestcaseId,
         sender: Arc<Mutex<UIMessageSender>>,
-        path: PathBuf,
         score_manager: Arc<Mutex<ScoreManager>>,
         num_answers: usize,
     ) -> ScoreSender {
@@ -264,7 +259,6 @@ impl ScoreSender {
                 subtask_id,
                 testcase_id,
                 sender,
-                path,
                 score_manager,
                 missing_answers: num_answers,
                 answer: None,
@@ -322,7 +316,6 @@ impl ScoreSender {
                     *score,
                     message.clone(),
                     data.sender.clone(),
-                    data.path.clone(),
                 )
                 .with_context(|| {
                     format!(

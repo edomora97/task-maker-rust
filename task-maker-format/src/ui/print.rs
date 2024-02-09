@@ -120,7 +120,7 @@ impl<State: UIStateT + Send> UI for PrintUI<State> {
                 for (st_num, subtask) in task.subtasks.iter().sorted_by_key(|x| x.0) {
                     println!("  {}: {} points", st_num, subtask.max_score);
                     print!("     testcases: [");
-                    for tc_num in subtask.testcases.keys().sorted() {
+                    for tc_num in subtask.testcases_owned.iter().sorted() {
                         print!(" {}", tc_num);
                     }
                     println!(" ]");

@@ -120,7 +120,7 @@ pub fn main_fuzz_checker(opt: FuzzCheckerOpt) -> Result<(), Error> {
         bail!("Only C++ checkers are supported");
     }
 
-    let num_testcases: usize = task.subtasks.values().map(|st| st.testcases.len()).sum();
+    let num_testcases: usize = task.testcases.len();
 
     let task_dir = task.path.clone();
     let fuzz_data = FuzzData {

@@ -31,6 +31,7 @@ pub fn new_task_with_context(path: &Path) -> IOITask {
         infile: None,
         outfile: None,
         subtasks: HashMap::new(),
+        testcases: HashMap::new(),
         input_validator_generator: Default::default(),
         testcase_score_aggregator: TestcaseScoreAggregator::Min,
         score_precision: 0,
@@ -40,42 +41,57 @@ pub fn new_task_with_context(path: &Path) -> IOITask {
         syllabus_level: None,
         sanity_checks: Arc::new(get_sanity_checks(&[])),
     };
-    let st0 = task.subtasks.entry(0).or_insert(SubtaskInfo {
-        id: 0,
-        max_score: 10.0,
-        is_default: false,
-        ..Default::default()
-    });
-    st0.testcases.entry(0).or_insert_with(|| {
+    task.testcases.insert(
+        0,
         TestcaseInfo::new(
             0,
             InputGenerator::StaticFile(p.clone()),
             InputValidator::AssumeValid,
             OutputGenerator::StaticFile(p.clone()),
-        )
-    });
-    let st1 = task.subtasks.entry(1).or_insert(SubtaskInfo {
-        id: 1,
-        max_score: 90.0,
-        is_default: false,
-        ..Default::default()
-    });
-    st1.testcases.entry(1).or_insert_with(|| {
+        ),
+    );
+    task.subtasks.insert(
+        0,
+        SubtaskInfo {
+            id: 0,
+            max_score: 10.0,
+            is_default: false,
+            testcases: vec![0],
+            testcases_owned: vec![0],
+            ..Default::default()
+        },
+    );
+
+    task.testcases.insert(
+        1,
         TestcaseInfo::new(
             1,
             InputGenerator::StaticFile(p.clone()),
             InputValidator::AssumeValid,
             OutputGenerator::StaticFile(p.clone()),
-        )
-    });
-    st1.testcases.entry(2).or_insert_with(|| {
+        ),
+    );
+    task.testcases.insert(
+        2,
         TestcaseInfo::new(
             2,
             InputGenerator::StaticFile(p.clone()),
             InputValidator::AssumeValid,
             OutputGenerator::StaticFile(p),
-        )
-    });
+        ),
+    );
+    task.subtasks.insert(
+        1,
+        SubtaskInfo {
+            id: 1,
+            max_score: 90.0,
+            is_default: false,
+            testcases: vec![1, 2],
+            testcases_owned: vec![1, 2],
+            ..Default::default()
+        },
+    );
+
     task
 }
 

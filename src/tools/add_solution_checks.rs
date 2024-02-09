@@ -170,13 +170,12 @@ fn process_solution(
 
     let mut checks: HashMap<_, Vec<_>> = HashMap::new();
     for st_num in solution_results.subtasks.keys().sorted() {
-        let st_info = &solution_results.subtasks[st_num];
         let subtask = &state.task.subtasks[st_num];
 
-        let testcase_results: Option<Vec<TestcaseEvaluationResult>> = st_info
+        let testcase_results: Option<Vec<TestcaseEvaluationResult>> = state.task.subtasks[st_num]
             .testcases
-            .values()
-            .map(|testcase| (&testcase.status).into())
+            .iter()
+            .map(|tc_num| (&solution_results.testcases[tc_num].status).into())
             .collect();
         let Some(testcase_results) = testcase_results else {
             println!(

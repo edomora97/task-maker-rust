@@ -2,6 +2,8 @@
 // It's line based, each line can be one of the following types:
 //  * comment: # followed by a space, followed by anything till end of line
 //  * subtask: #ST: XX where XX is a positive integer
+//  * subtask_name: #STNAME: XX where XX is a string
+//  * subtask_dep: #STDEP: XX where XX is a subtask name
 //  * copy: #COPY: XX where XX is a path
 //  * command: a list of arguments not starting with #
 
@@ -16,11 +18,12 @@ comment = { "#" ~ spaces ~ non_newline* | "#" }
 risky_comment = { "#" ~ non_newline* | "#" }
 subtask = { "#ST:" ~ whitespace* ~ number ~ whitespace* }
 subtask_name = { "#STNAME:" ~ whitespace* ~ word ~ whitespace* }
+subtask_dep = { "#STDEP:" ~ (whitespace* ~ word)* ~ whitespace* }
 copy = { "#COPY:" ~ whitespace* ~ word ~ whitespace* }
 command = { !"#" ~ whitespace* ~ word ~ (spaces ~ word)* ~ whitespace* }
 empty = { whitespace* }
 
-line = { (subtask | subtask_name | copy | comment | command | empty) ~ risky_comment? }
+line = { (subtask | subtask_name | subtask_dep | copy | comment | command | empty) ~ risky_comment? }
 
 // allow the last line to be without the NEWLINE
 file = { SOI ~ (line ~ NEWLINE)* ~ line ~ NEWLINE? ~ EOI }

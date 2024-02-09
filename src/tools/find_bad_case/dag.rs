@@ -44,9 +44,8 @@ pub fn patch_task_for_batch(
         TaskFormat::IOI(task) => {
             // A template testcase for selecting the generator and validator.
             let testcase_template = task
-                .subtasks
+                .testcases
                 .values()
-                .flat_map(|st| st.testcases.values())
                 .find(|tc| matches!(tc.input_generator, InputGenerator::Custom(_, _)))
                 .cloned()
                 // FIXME: in theory we can find the generator and the solution even without a testcase
@@ -95,11 +94,13 @@ pub fn patch_task_for_batch(
                 id: 0,
                 name: Some(format!("batch-{}", batch_index)),
                 max_score: 100.0,
-                testcases,
+                testcases: testcases.keys().cloned().collect(),
+                testcases_owned: testcases.keys().cloned().collect(),
                 is_default: false,
                 ..Default::default()
             };
             task.subtasks.insert(0, subtask);
+            task.testcases = testcases;
         }
         TaskFormat::Terry(_) => {
             bail!("Terry tasks are not currently supported")

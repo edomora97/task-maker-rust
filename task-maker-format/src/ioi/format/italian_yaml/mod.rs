@@ -257,12 +257,14 @@
 //! The subtask also does not have a name, the default one (`subtask2`) will be used.
 
 use std::collections::HashMap;
-use std::fs;
+use std::fs::{self, File};
+use std::io::{BufRead, BufReader, BufWriter, Write};
 use std::path::{Path, PathBuf};
 use std::str::FromStr;
 use std::sync::Arc;
 
 use anyhow::{anyhow, bail, Context, Error};
+use itertools::Itertools;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use unic::normal::StrNormalForm;
 use unic::ucd::category::GeneralCategory;
@@ -400,7 +402,7 @@ pub fn parse_task<P: AsRef<Path>>(
 ) -> Result<IOITask, Error> {
     let task_dir = task_dir.as_ref();
     let path = task_dir.join("task.yaml");
-    let file = fs::File::open(&path)
+    let file = File::open(&path)
         .with_context(|| format!("Cannot open task.yaml from {}", path.display()))?;
     let yaml: TaskYAML =
         serde_yaml::from_reader(file).context("Failed to deserialize task.yaml")?;
@@ -462,6 +464,7 @@ pub fn parse_task<P: AsRef<Path>>(
     };
 
     let mut subtasks = HashMap::new();
+    let mut testcases = HashMap::new();
     let mut last_subtask: Option<SubtaskInfo> = None;
     for input in inputs {
         match input {
@@ -475,8 +478,14 @@ pub fn parse_task<P: AsRef<Path>>(
                 last_subtask
                     .as_mut()
                     .context("Testcase before Subtask")?
+                    .testcases_owned
+                    .push(testcase.id);
+                last_subtask
+                    .as_mut()
+                    .context("Testcase before Subtask")?
                     .testcases
-                    .insert(testcase.id, testcase);
+                    .push(testcase.id);
+                testcases.insert(testcase.id, testcase);
             }
         }
     }
@@ -484,6 +493,41 @@ pub fn parse_task<P: AsRef<Path>>(
     if let Some(subtask) = last_subtask.take() {
         subtasks.insert(subtask.id, subtask);
     }
+
+    loop {
+        let mut updated = false;
+        for st1_id in subtasks.keys().copied().collect_vec() {
+            let deps = subtasks.get(&st1_id).unwrap().dependencies.clone();
+            for st2_id in deps {
+                let ext = subtasks.get(&st2_id).unwrap().testcases.clone();
+                let into = subtasks.get_mut(&st1_id).unwrap();
+                let before = into.testcases.len();
+                into.testcases.extend(ext);
+                into.testcases.sort();
+                into.testcases.dedup();
+                let after = into.testcases.len();
+                if before != after {
+                    updated = true;
+                }
+            }
+        }
+        if !updated {
+            break;
+        }
+    }
+
+    let testcase_score_aggregator = yaml
+        .score_type
+        .as_ref()
+        .map(|s| TestcaseScoreAggregator::from_str(s))
+        .transpose()?
+        .unwrap_or(if subtasks.len() == 1 {
+            TestcaseScoreAggregator::Sum
+        } else {
+            TestcaseScoreAggregator::Min
+        });
+
+    write_score_type_parameters(&subtasks, task_dir, testcase_score_aggregator)?;
 
     let mut task = IOITask {
         path: task_dir.into(),
@@ -494,19 +538,10 @@ pub fn parse_task<P: AsRef<Path>>(
         memory_limit: yaml.memory_limit,
         infile,
         outfile,
-        testcase_score_aggregator: yaml
-            .score_type
-            .as_ref()
-            .map(|s| TestcaseScoreAggregator::from_str(s))
-            .unwrap_or_else(|| {
-                if subtasks.len() == 1 {
-                    Ok(TestcaseScoreAggregator::Sum)
-                } else {
-                    Ok(TestcaseScoreAggregator::Min)
-                }
-            })?,
+        testcase_score_aggregator,
         score_precision: yaml.score_precision,
         subtasks,
+        testcases,
         grader_map,
         booklets: Vec::new(),
         difficulty: yaml.difficulty,
@@ -528,6 +563,103 @@ pub fn parse_task<P: AsRef<Path>>(
             make_task_booklets(&task, eval_config).context("Failed to make booklets")?;
     }
     Ok(task)
+}
+
+/// Patch task.yaml with score_type and score_type_parameters.
+fn write_score_type_parameters(
+    subtasks: &HashMap<SubtaskId, SubtaskInfo>,
+    task_dir: &Path,
+    testcase_score_aggregator: TestcaseScoreAggregator,
+) -> Result<(), Error> {
+    // The file task.yaml is human written, we don't want to overwrite it.
+    // We can't use serde_yaml because it will lose the styling and the comments.
+    // We use a line based approach, we read the file line by line and we write it back with the
+    // new score_type and score_type_parameters.
+
+    let mut edit = if subtasks
+        .values()
+        .any(|st| st.testcases.len() != st.testcases_owned.len())
+    {
+        let aggregator_str = match testcase_score_aggregator {
+            TestcaseScoreAggregator::Min => "GroupMin",
+            TestcaseScoreAggregator::Sum => "Sum",
+        };
+        let score_type = format!("score_type: {}\n", aggregator_str);
+
+        let mut score_type_parameters = "score_type_parameters:\n".to_string();
+        for (_, st) in subtasks.iter().sorted_by_key(|(id, _)| *id) {
+            let testcases = st
+                .testcases
+                .iter()
+                .map(|tc_num| format!("{tc_num:03}"))
+                .join("|");
+            let score = st.max_score;
+            let x = format!("- - {score}\n  - {testcases:?}\n");
+            score_type_parameters.push_str(&x);
+        }
+
+        let mut map = HashMap::new();
+        map.insert("score_type".to_string(), score_type);
+        map.insert("score_type_parameters".to_string(), score_type_parameters);
+        map
+    } else {
+        let mut map = HashMap::new();
+        map.insert("score_type_parameters".to_string(), "".to_string());
+        map
+    };
+
+    let path = task_dir.join("task.yaml");
+    let file_in = File::open(&path)
+        .with_context(|| format!("Cannot open task.yaml from {}", path.display()))?;
+    let mut file_in = BufReader::new(file_in);
+
+    let path_new = task_dir.join("task.yaml.new");
+    let file_out = File::create(&path_new)
+        .with_context(|| format!("Cannot open task.yaml.new from {}", path_new.display()))?;
+    let mut file_out = BufWriter::new(file_out);
+
+    let mut echo = true;
+    let mut empty_lines = Vec::new();
+    loop {
+        let mut line = String::new();
+        let len = file_in.read_line(&mut line)?;
+        if len == 0 {
+            break;
+        }
+
+        if let Some(colon_pos) = line.find(':') {
+            let key = line.get(..colon_pos).unwrap();
+            if key.chars().all(|c| !c.is_control() && !c.is_whitespace()) {
+                for line in empty_lines.drain(..) {
+                    write!(file_out, "{}", line)?;
+                }
+                if let Some(value) = edit.get_mut(key) {
+                    write!(file_out, "{}", value)?;
+                    *value = "".to_string();
+                    echo = false;
+                } else {
+                    echo = true;
+                }
+            }
+        }
+        if echo {
+            write!(file_out, "{}", line)?;
+        } else {
+            let trimmed = line.trim();
+            if trimmed.starts_with('#') || trimmed.is_empty() {
+                empty_lines.push(line);
+            }
+        }
+    }
+    for line in empty_lines {
+        write!(file_out, "{}", line)?;
+    }
+    for val in edit.values() {
+        write!(file_out, "{}", val)?;
+    }
+
+    fs::rename(path_new, path)?;
+    Ok(())
 }
 
 /// Search for a valid input validator inside the task directory. Will return a function that, given

@@ -1,7 +1,8 @@
+use std::collections::HashMap;
 use std::path::Path;
 use std::sync::Arc;
 
-use anyhow::{anyhow, bail, Context, Error};
+use anyhow::{anyhow, bail, ensure, Context, Error};
 use pest::Parser;
 
 use task_maker_diagnostics::CodeSpan;
@@ -47,6 +48,8 @@ where
     let mut testcase_count = 0;
     let mut subtask_id: SubtaskId = 0;
     let mut entries = vec![];
+    let mut st_deps = Vec::new();
+    let mut stname_table = HashMap::new();
 
     let mut default_subtask = Some(SubtaskInfo {
         id: 0,
@@ -108,31 +111,46 @@ where
                             ..Default::default()
                         }));
                         subtask_id += 1;
+                        st_deps.push(Vec::new());
                     }
                     parser::Rule::subtask_name => {
-                        let last_entry = entries.last_mut().ok_or_else(|| {
-                            anyhow!("A #STNAME: rule must immediately follow a #ST: in gen/GEN")
-                        })?;
-                        if let TaskInputEntry::Subtask(subtask) = last_entry {
+                        if let Some(TaskInputEntry::Subtask(subtask)) = entries.last_mut() {
                             let name = line
                                 .into_inner()
                                 .next()
                                 .ok_or_else(|| anyhow!("Corrupted parser"))?
                                 .as_str();
-                            if subtask.name.is_some() {
-                                bail!("Cannot assign the name of a subtask twice");
-                            }
-                            subtask.name = Some(
-                                cleanup_subtask_name(name)
-                                    .with_context(|| format!("Invalid subtask name: {}", name))?,
+                            let name = cleanup_subtask_name(name)
+                                .with_context(|| format!("Invalid subtask name: {:?}", name))?;
+                            let old_id = stname_table.insert(name.clone(), subtask.id);
+                            ensure!(old_id.is_none(), "Subtask name {:?} already used", name);
+                            ensure!(
+                                subtask.name.is_none(),
+                                "Cannot assign the name of a subtask twice"
                             );
+                            subtask.name = Some(name);
                         } else {
-                            bail!("#STNAME: must immediately follow a #ST: in gen/GEN");
+                            bail!("#STNAME: rule must immediately follow a #ST: in gen/GEN");
+                        }
+                    }
+                    parser::Rule::subtask_dep => {
+                        if let Some(TaskInputEntry::Subtask(_)) = entries.last_mut() {
+                            for dependency in line.into_inner() {
+                                let dependency_str = dependency.as_str();
+                                st_deps.last_mut().unwrap().push(
+                                    cleanup_subtask_name(dependency_str).with_context(|| {
+                                        format!("Invalid subtask name: {}", dependency_str)
+                                    })?,
+                                );
+                            }
+                        } else {
+                            bail!("#STDEP: rule must immediately follow a #ST: in gen/GEN");
                         }
                     }
                     parser::Rule::copy => {
                         if let Some(default) = default_subtask.take() {
                             entries.push(TaskInputEntry::Subtask(default));
+                            st_deps.push(Vec::new());
                             subtask_id += 1;
                         }
                         let what = line
@@ -151,6 +169,7 @@ where
                     parser::Rule::command => {
                         if let Some(default) = default_subtask.take() {
                             entries.push(TaskInputEntry::Subtask(default));
+                            st_deps.push(Vec::new());
                             subtask_id += 1;
                         }
                         let cmd: Vec<String> =
@@ -176,6 +195,25 @@ where
             _ => unreachable!(),
         }
     }
+
+    for entry in &mut entries {
+        let TaskInputEntry::Subtask(SubtaskInfo {
+            id, dependencies, ..
+        }) = entry
+        else {
+            continue;
+        };
+        *dependencies = st_deps[*id as usize]
+            .iter()
+            .map(|dep| {
+                stname_table
+                    .get(dep)
+                    .copied()
+                    .ok_or_else(|| anyhow!("Unknown subtask name: {dep}"))
+            })
+            .collect::<Result<_, _>>()?;
+    }
+
     Ok(entries)
 }
 

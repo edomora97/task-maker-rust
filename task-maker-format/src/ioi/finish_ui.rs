@@ -221,9 +221,9 @@ impl FinishUI {
         println!();
 
         let results = eval
-            .subtasks
+            .testcases
             .values()
-            .flat_map(|st| st.testcases.values().flat_map(|tc| tc.results.iter()))
+            .flat_map(|tc| tc.results.iter())
             .filter_map(|e| e.as_ref())
             .map(|r| &r.resources);
         let (max_time, max_memory) = results.fold((0.0, 0), |(time, mem), r| {
@@ -240,7 +240,8 @@ impl FinishUI {
             let score = subtask.score.unwrap_or(0.0);
             self.print_score_frac(score, max_score, &state.task);
             println!();
-            for (tc_num, testcase) in subtask.testcases.iter().sorted_by_key(|(n, _)| *n) {
+            for tc_num in &state.task.subtasks[st_num].testcases_owned {
+                let testcase = &eval.testcases[tc_num];
                 self.print_testcase_outcome(&name, *tc_num, testcase, max_time, max_memory, state);
             }
         }
@@ -383,8 +384,8 @@ impl FinishUI {
                 let time_limit = state.task.time_limit;
                 let memory_limit = state.task.memory_limit;
                 let extra_time = state.config.extra_time;
-                for tc_num in subtask.testcases.keys().sorted() {
-                    let testcase = &subtask.testcases[tc_num];
+                for tc_num in &state.task.subtasks[st_num].testcases_owned {
+                    let testcase = &eval.testcases[tc_num];
                     let close_color = if testcase.is_close_to_limits(
                         time_limit,
                         extra_time,

@@ -273,11 +273,10 @@ fn evaluation_score<'a>(state: &'a UIState, solution: &Path, loading: char) -> S
             ScoreStatus::PartialScore => Span::styled(format!(" {:>3.0} ", score), *YELLOW),
         }
     } else {
-        let has_skipped = sol_state.subtasks.values().any(|st| {
-            st.testcases
-                .values()
-                .any(|tc| tc.status == TestcaseEvaluationStatus::Skipped)
-        });
+        let has_skipped = sol_state
+            .testcases
+            .values()
+            .any(|tc| tc.status == TestcaseEvaluationStatus::Skipped);
         if has_skipped {
             Span::raw("  X  ")
         } else {
@@ -302,15 +301,15 @@ fn evaluation_line<'a>(state: &'a UIState, solution: &Path, loading: char) -> Ve
 fn subtask_evaluation_status_text<'a>(
     state: &'a UIState,
     solution: &Path,
-    subtask: SubtaskId,
+    subtask_id: SubtaskId,
     loading: char,
 ) -> Vec<Span<'a>> {
     let mut texts = vec![];
     let solution = &state.evaluations[solution];
-    if !solution.subtasks.contains_key(&subtask) {
+    if !solution.subtasks.contains_key(&subtask_id) {
         return vec![Span::raw("[---]")];
     }
-    let subtask = &solution.subtasks[&subtask];
+    let subtask = &solution.subtasks[&subtask_id];
     let par_style = if let Some(normalized_score) = subtask.normalized_score {
         match ScoreStatus::from_score(normalized_score, 1.0) {
             ScoreStatus::Accepted => *GREEN,
@@ -321,7 +320,8 @@ fn subtask_evaluation_status_text<'a>(
         Style::default()
     };
     texts.push(Span::styled("[", par_style));
-    for (_, testcase) in subtask.testcases.iter().sorted_by_key(|(k, _)| *k) {
+    for testcase_id in &state.task.subtasks[&subtask_id].testcases_owned {
+        let testcase = &solution.testcases[testcase_id];
         texts.push(testcase_evaluation_status_text(testcase, loading, state));
     }
     texts.push(Span::styled("]", par_style));

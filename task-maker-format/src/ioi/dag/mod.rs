@@ -25,7 +25,7 @@ pub const BOOKLET_PRIORITY: Priority = 10_000;
 pub const STDERR_CONTENT_LENGTH: usize = 10 * 1024;
 
 /// The aggregator of testcase scores for computing the subtask score.
-#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+#[derive(Debug, Copy, Clone, Serialize, Deserialize, TypeScriptify)]
 pub enum TestcaseScoreAggregator {
     /// Take the minimum of all the testcases, formally:
     ///
@@ -116,6 +116,7 @@ mod tests {
             infile: None,
             outfile: None,
             subtasks: Default::default(),
+            testcases: Default::default(),
             input_validator_generator: Default::default(),
             testcase_score_aggregator: TestcaseScoreAggregator::Min,
             score_precision: 0,

@@ -99,24 +99,22 @@ impl SanityCheck for IOEndWithNewLine {
     }
 
     fn pre_hook(&self, task: &IOITask, eval: &mut EvaluationData) -> Result<(), Error> {
-        for subtask in task.subtasks.values() {
-            for (&testcase_id, testcase) in &subtask.testcases {
-                if let Some(input_file) = testcase.input_file {
-                    CheckEndWithNewLine::bind(
-                        eval,
-                        input_file,
-                        format!("input/input{}.txt", testcase_id),
-                        self.inputs.clone(),
-                    );
-                }
-                if let Some(output_file) = testcase.official_output_file {
-                    CheckEndWithNewLine::bind(
-                        eval,
-                        output_file,
-                        format!("output/output{}.txt", testcase_id),
-                        self.outputs.clone(),
-                    );
-                }
+        for (testcase_id, testcase) in task.testcases.iter() {
+            if let Some(input_file) = testcase.input_file {
+                CheckEndWithNewLine::bind(
+                    eval,
+                    input_file,
+                    format!("input/input{}.txt", testcase_id),
+                    self.inputs.clone(),
+                );
+            }
+            if let Some(output_file) = testcase.official_output_file {
+                CheckEndWithNewLine::bind(
+                    eval,
+                    output_file,
+                    format!("output/output{}.txt", testcase_id),
+                    self.outputs.clone(),
+                );
             }
         }
         Ok(())

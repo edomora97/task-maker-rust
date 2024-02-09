@@ -162,8 +162,6 @@ pub struct SolutionSubtaskEvaluationState {
     pub score: Option<f64>,
     /// Score of the subtask, normalized from 0.0 to 1.0.
     pub normalized_score: Option<f64>,
-    /// The state of the evaluation of the testcases.
-    pub testcases: HashMap<TestcaseId, SolutionTestcaseEvaluationState>,
 }
 
 /// State of the evaluation of a solution.
@@ -173,6 +171,8 @@ pub struct SolutionEvaluationState {
     pub score: Option<f64>,
     /// The state of the evaluation of the subtasks.
     pub subtasks: HashMap<SubtaskId, SolutionSubtaskEvaluationState>,
+    /// The state of the evaluation of the testcases.
+    pub testcases: HashMap<TestcaseId, SolutionTestcaseEvaluationState>,
 }
 
 impl SolutionEvaluationState {
@@ -189,21 +189,21 @@ impl SolutionEvaluationState {
                         SolutionSubtaskEvaluationState {
                             score: None,
                             normalized_score: None,
-                            testcases: subtask
-                                .testcases
-                                .values()
-                                .map(|testcase| {
-                                    (
-                                        testcase.id,
-                                        SolutionTestcaseEvaluationState {
-                                            score: None,
-                                            status: TestcaseEvaluationStatus::Pending,
-                                            results: Vec::new(),
-                                            checker: None,
-                                        },
-                                    )
-                                })
-                                .collect(),
+                        },
+                    )
+                })
+                .collect(),
+            testcases: task
+                .testcases
+                .values()
+                .map(|testcase| {
+                    (
+                        testcase.id,
+                        SolutionTestcaseEvaluationState {
+                            score: None,
+                            status: TestcaseEvaluationStatus::Pending,
+                            results: Vec::new(),
+                            checker: None,
                         },
                     )
                 })
@@ -338,8 +338,8 @@ impl UIState {
                     *st_num,
                     SubtaskGenerationState {
                         testcases: subtask
-                            .testcases
-                            .keys()
+                            .testcases_owned
+                            .iter()
                             .map(|tc_num| {
                                 (
                                     *tc_num,
@@ -383,17 +383,16 @@ impl UIState {
                 for subtask in subtasks {
                     let solution_result = self.evaluations.get(path);
                     // The solution was not run on this subtask.
-                    if solution_result.is_none() {
+                    let Some(solution_result) = solution_result else {
                         continue;
-                    }
-                    let solution_result = solution_result.unwrap();
-                    let subtask_result = &solution_result.subtasks[&subtask.id];
-                    let testcase_results: Vec<Option<TestcaseEvaluationResult>> = subtask_result
+                    };
+                    let testcase_results: Vec<Option<TestcaseEvaluationResult>> = self
+                        .task
+                        .subtasks[&subtask.id]
                         .testcases
-                        .values()
-                        .map(|testcase| (&testcase.status).into())
-                        .collect_vec();
-                    // Not all the testcase results are valid.
+                        .iter()
+                        .map(|testcase_id| (&solution_result.testcases[testcase_id].status).into())
+                        .collect();
                     if testcase_results.iter().any(Option::is_none) {
                         continue;
                     }
@@ -528,23 +527,19 @@ impl UIStateT for UIState {
                 }
             }
             UIMessage::IOIEvaluation {
-                subtask,
                 testcase,
                 solution,
                 status,
                 part,
                 num_parts,
+                ..
             } => {
                 let task = &self.task;
                 let eval = self
                     .evaluations
                     .entry(solution)
                     .or_insert_with(|| SolutionEvaluationState::new(task));
-                let subtask = eval.subtasks.get_mut(&subtask).expect("Missing subtask");
-                let testcase = subtask
-                    .testcases
-                    .get_mut(&testcase)
-                    .expect("Missing testcase");
+                let testcase = eval.testcases.get_mut(&testcase).expect("Missing testcase");
                 if testcase.results.len() != num_parts {
                     testcase.results = vec![None; num_parts];
                 }
@@ -588,21 +583,17 @@ impl UIStateT for UIState {
                 }
             }
             UIMessage::IOIChecker {
-                subtask,
                 testcase,
                 solution,
                 status,
+                ..
             } => {
                 let task = &self.task;
                 let eval = self
                     .evaluations
                     .entry(solution)
                     .or_insert_with(|| SolutionEvaluationState::new(task));
-                let subtask = eval.subtasks.get_mut(&subtask).expect("Missing subtask");
-                let testcase = subtask
-                    .testcases
-                    .get_mut(&testcase)
-                    .expect("Missing testcase");
+                let testcase = eval.testcases.get_mut(&testcase).expect("Missing testcase");
                 match status {
                     UIExecutionStatus::Started { .. } => {
                         testcase.status = TestcaseEvaluationStatus::Checking;
@@ -614,22 +605,18 @@ impl UIStateT for UIState {
                 }
             }
             UIMessage::IOITestcaseScore {
-                subtask,
                 testcase,
                 solution,
                 score,
                 message,
+                ..
             } => {
                 let task = &self.task;
                 let eval = self
                     .evaluations
                     .entry(solution)
                     .or_insert_with(|| SolutionEvaluationState::new(task));
-                let subtask = eval.subtasks.get_mut(&subtask).expect("Missing subtask");
-                let testcase = subtask
-                    .testcases
-                    .get_mut(&testcase)
-                    .expect("Missing testcase");
+                let testcase = eval.testcases.get_mut(&testcase).expect("Missing testcase");
                 testcase.score = Some(score);
                 if !testcase.status.has_completed() {
                     testcase.status = match ScoreStatus::from_score(score, 1.0) {

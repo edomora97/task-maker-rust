@@ -367,10 +367,9 @@ impl TestInterfaceSuccessful {
             .unwrap_or_else(|| panic!("Evaluation status missing for solution {:?}", solution));
         let mut id = 0;
         for st in actuals.subtasks.keys().sorted() {
-            let subtask = &actuals.subtasks[st];
-            for tc in subtask.testcases.keys().sorted() {
+            for tc in &self.state.task.subtasks[st].testcases {
                 let expected = &statuses[id];
-                let actual = &subtask.testcases[tc].status;
+                let actual = &actuals.testcases[tc].status;
                 assert_eq!(
                     actual, expected,
                     "Solution status mismatch of {:?} at subtask {}, testcase {}",

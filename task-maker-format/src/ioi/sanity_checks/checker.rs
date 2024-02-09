@@ -44,9 +44,8 @@ impl SanityCheck for FuzzCheckerWithJunkOutput {
 
         // Find a testcase to use for fuzzing.
         let testcase = task
-            .subtasks
+            .testcases
             .values()
-            .flat_map(|st| st.testcases.values())
             .find(|tc| tc.input_file.is_some() && tc.official_output_file.is_some());
         if testcase.is_none() {
             return Ok(());

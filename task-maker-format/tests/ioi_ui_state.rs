@@ -340,7 +340,7 @@ fn test_ui_state_evaluation_skipped() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Skipped
     );
 }
@@ -361,7 +361,7 @@ fn test_ui_state_evaluation_started() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Solving
     );
 }
@@ -382,7 +382,7 @@ fn test_ui_state_evaluation_solved() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Solved
     );
 }
@@ -403,7 +403,7 @@ fn test_ui_state_evaluation_return_code() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::RuntimeError
     );
 }
@@ -424,7 +424,7 @@ fn test_ui_state_evaluation_signal() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::RuntimeError
     );
 }
@@ -445,7 +445,7 @@ fn test_ui_state_evaluation_time_limit() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::TimeLimitExceeded
     );
 }
@@ -466,7 +466,7 @@ fn test_ui_state_evaluation_sys_limit() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::TimeLimitExceeded
     );
 }
@@ -487,7 +487,7 @@ fn test_ui_state_evaluation_wall_limit() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::WallTimeLimitExceeded
     );
 }
@@ -508,7 +508,7 @@ fn test_ui_state_evaluation_memory_limit() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::MemoryLimitExceeded
     );
 }
@@ -529,7 +529,7 @@ fn test_ui_state_evaluation_internal_error() {
         num_parts: 1,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Failed
     );
 }
@@ -556,7 +556,7 @@ fn test_ui_state_checker_skipped() {
         status: UIExecutionStatus::Skipped,
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Solving // !! not skipped !!
     );
 }
@@ -575,7 +575,7 @@ fn test_ui_state_checker_started() {
         },
     });
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Checking
     );
 }
@@ -594,10 +594,7 @@ fn test_ui_state_checker_done() {
             result: result.clone(),
         },
     });
-    assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].checker,
-        Some(result)
-    );
+    assert_eq!(ui.evaluations[&file].testcases[&0].checker, Some(result));
 }
 
 #[test]
@@ -612,12 +609,9 @@ fn test_ui_state_testcase_score_wrong_answer() {
         score: 0.0,
         message: "nope".to_string(),
     });
+    assert_eq!(ui.evaluations[&file].testcases[&0].score, Some(0.0));
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].score,
-        Some(0.0)
-    );
-    assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::WrongAnswer("nope".into())
     );
 }
@@ -634,12 +628,9 @@ fn test_ui_state_testcase_score_partial() {
         score: 0.5,
         message: "almost".to_string(),
     });
+    assert_eq!(ui.evaluations[&file].testcases[&0].score, Some(0.5));
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].score,
-        Some(0.5)
-    );
-    assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Partial("almost".into())
     );
 }
@@ -656,12 +647,9 @@ fn test_ui_state_testcase_score_accepted() {
         score: 1.0,
         message: "yep".to_string(),
     });
+    assert_eq!(ui.evaluations[&file].testcases[&0].score, Some(1.0));
     assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].score,
-        Some(1.0)
-    );
-    assert_eq!(
-        ui.evaluations[&file].subtasks[&0].testcases[&0].status,
+        ui.evaluations[&file].testcases[&0].status,
         TestcaseEvaluationStatus::Accepted("yep".into())
     );
 }

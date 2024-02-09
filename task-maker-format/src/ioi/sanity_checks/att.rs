@@ -91,7 +91,8 @@ impl AttSampleFiles {
         } else {
             return testcases;
         };
-        for (_, testcase) in subtask.testcases.iter() {
+        for testcase_id in &subtask.testcases {
+            let testcase = task.testcases.get(testcase_id).unwrap();
             match &testcase.input_generator {
                 InputGenerator::StaticFile(path) => {
                     let path = path.canonicalize().unwrap_or_else(|_| path.clone());

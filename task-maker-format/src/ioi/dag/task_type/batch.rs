@@ -76,7 +76,6 @@ pub fn evaluate(
         path
     )?;
     let sender = eval.sender.clone();
-    let path = source_file.path.clone();
     let score_manager_err = score_manager.clone();
     eval.dag
         .on_execution_done(&exec.uuid, move |result| match result.status {
@@ -87,13 +86,11 @@ pub fn evaluate(
                 0.0,
                 format!("{:?}", result.status),
                 sender,
-                path,
             ),
         });
     eval.dag.add_execution(exec);
 
     let sender = eval.sender.clone();
-    let path = source_file.path.clone();
     data.checker.check_and_bind(
         eval,
         subtask_id,
@@ -103,14 +100,10 @@ pub fn evaluate(
         correct_output,
         output.uuid,
         move |score, message| {
-            score_manager.lock().unwrap().score(
-                subtask_id,
-                testcase_id,
-                score,
-                message,
-                sender,
-                path,
-            )
+            score_manager
+                .lock()
+                .unwrap()
+                .score(subtask_id, testcase_id, score, message, sender)
         },
     )?;
     Ok(())

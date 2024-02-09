@@ -34,13 +34,8 @@ fn test_ioi_task_clean_skip_static() {
         std::fs::write(input.join(format!("input{}.txt", i)), "x").unwrap();
         std::fs::write(output.join(format!("output{}.txt", i)), "x").unwrap();
     }
-    task.subtasks
-        .get_mut(&0)
-        .unwrap()
-        .testcases
-        .get_mut(&0)
-        .unwrap()
-        .input_generator = InputGenerator::StaticFile(input.join("input0.txt"));
+    task.testcases.get_mut(&0).unwrap().input_generator =
+        InputGenerator::StaticFile(input.join("input0.txt"));
 
     task.clean().unwrap();
     assert!(input.exists());

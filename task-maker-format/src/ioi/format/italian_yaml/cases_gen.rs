@@ -7,12 +7,14 @@ use std::path::{Path, PathBuf};
 use std::str::FromStr;
 use std::sync::Arc;
 
+use anyhow::ensure;
 use anyhow::{anyhow, bail, Context, Error};
 use pest::Parser;
 
 use task_maker_diagnostics::CodeSpan;
 
 use crate::ioi::format::italian_yaml::TaskInputEntry;
+use crate::ioi::italian_yaml::cleanup_subtask_name;
 use crate::ioi::{
     InputGenerator, InputValidator, OutputGenerator, SubtaskId, SubtaskInfo, TestcaseId,
     TestcaseInfo, TM_VALIDATION_FILE_NAME,
@@ -128,6 +130,10 @@ where
     subtask_name: Option<String>,
     /// The identifier of the next testcase to process.
     testcase_id: TestcaseId,
+    /// The list of dependencies of each subtask.
+    st_deps: Vec<Vec<String>>,
+    /// The table of subtask names to subtask ids.
+    stname_table: HashMap<String, SubtaskId>,
 }
 
 impl<OutGen> CasesGen<OutGen>
@@ -168,6 +174,8 @@ where
             subtask_id: 0,
             subtask_name: None,
             testcase_id: 0,
+            st_deps: Vec::new(),
+            stname_table: HashMap::new(),
         };
 
         for line in file.into_inner() {
@@ -197,6 +205,11 @@ where
                 _ => unreachable!(),
             }
         }
+
+        cases
+            .resolve_dependencies()
+            .context("Failed to resolve subtask dependencies")?;
+
         Ok(cases)
     }
 
@@ -259,6 +272,28 @@ where
         Ok(())
     }
 
+    /// Resolve the dependencies names to the subtask ids.
+    fn resolve_dependencies(&mut self) -> Result<(), Error> {
+        for entry in &mut self.result {
+            let TaskInputEntry::Subtask(SubtaskInfo {
+                id, dependencies, ..
+            }) = entry
+            else {
+                continue;
+            };
+            *dependencies = self.st_deps[*id as usize]
+                .iter()
+                .map(|dep| {
+                    self.stname_table
+                        .get(dep)
+                        .copied()
+                        .ok_or_else(|| anyhow!("Unknown subtask name: {dep}"))
+                })
+                .collect::<Result<_, _>>()?;
+        }
+        Ok(())
+    }
+
     /// Parse a line with a command: one of the `:` prefixed actions.
     fn parse_command(&mut self, line: Pair) -> Result<(), Error> {
         match line.as_rule() {
@@ -277,6 +312,10 @@ where
             parser::Rule::SUBTASK => {
                 self.parse_subtask(line)
                     .context("Failed to parse SUBTASK command")?;
+            }
+            parser::Rule::DEP => {
+                self.parse_dep(line)
+                    .context("Failed to parse DEP command")?;
             }
             parser::Rule::COPY => {
                 self.parse_copy(line)
@@ -520,15 +559,21 @@ where
                 self.subtask_id, score
             )
         })?;
-        let description = if line.len() >= 2 {
-            Some(line[1].as_str().to_string())
+        let (description, name) = if line.len() >= 2 {
+            let desc = line[1].as_str().to_string();
+            let name = desc
+                // Remove whitespaces for retrocompatibility with descriptions
+                .chars()
+                .filter(|&c| c != ' ' && c != '\t')
+                .collect::<String>();
+            let name = cleanup_subtask_name(&name)?;
+            let old_id = self.stname_table.insert(name.clone(), self.subtask_id);
+            ensure!(old_id.is_none(), "Subtask name {:?} already used", name);
+
+            (Some(desc), Some(name))
         } else {
-            None
+            (None, None)
         };
-        // Remove whitespaces for retrocompatibility with descriptions
-        let name = description
-            .as_deref()
-            .map(|s| s.chars().filter(|&c| c != ' ' && c != '\t').collect());
         self.subtask_name = name.clone();
         self.result.push(TaskInputEntry::Subtask(
             #[allow(deprecated)]
@@ -548,7 +593,24 @@ where
                 ..Default::default()
             },
         ));
+        self.st_deps.push(Vec::new());
         self.subtask_id += 1;
+        Ok(())
+    }
+
+    /// Parse a `:DEP` command.
+    fn parse_dep(&mut self, line: Pair) -> Result<(), Error> {
+        if let Some(TaskInputEntry::Subtask(_)) = self.result.last_mut() {
+            for dependency in line.into_inner() {
+                let dependency_str = dependency.as_str();
+                self.st_deps.last_mut().unwrap().push(
+                    cleanup_subtask_name(dependency_str)
+                        .with_context(|| format!("Invalid subtask name: {}", dependency_str))?,
+                );
+            }
+        } else {
+            bail!("#STDEP: rule must immediately follow a #ST: in gen/GEN");
+        }
         Ok(())
     }
 

@@ -14,10 +14,11 @@ GEN = { "GEN" ~ whitespace+ ~ word ~ (whitespace+ ~ word ~ variables_list)? ~ wh
 VAL = { "VAL" ~ whitespace+ ~ word ~ (whitespace+ ~ word ~ variables_list)? ~ whitespace* }
 CONSTRAINT = { "CONSTRAINT" ~ whitespace+ ~ (number | variable) ~ (whitespace* ~ comp_operator ~ whitespace* ~ (number | variable))+ ~ whitespace* }
 SUBTASK = { "SUBTASK" ~ whitespace+ ~ float ~ (whitespace+ ~ rest)? ~ whitespace* }
+DEP = { "DEP" ~ (whitespace* ~ word)* ~ whitespace* }
 COPY = { "COPY" ~ whitespace+ ~ rest ~ whitespace* }
 RUN = { "RUN" ~ whitespace+ ~ word ~ whitespace+ ~ rest }
 
-command = { ":" ~ whitespace* ~ (GEN | VAL | CONSTRAINT | SUBTASK | COPY | RUN) }
+command = { ":" ~ whitespace* ~ (GEN | VAL | CONSTRAINT | SUBTASK | DEP | COPY | RUN) }
 testcase = { !("#"|":") ~ rest }
 empty = { whitespace* }
 
