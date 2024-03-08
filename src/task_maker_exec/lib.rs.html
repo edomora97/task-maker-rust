@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -283,7 +284,7 @@
 //!   the DAG, but also spawns local workers.
 //! - [`RemoteExecutor`](executors/struct.RemoteExecutor.html) the component to which the `Client`
 //!   connects to for executing a DAG remotely. This usually runs on a remote machine w.r.t the
-//!   client&#39;s one. It internally uses an `Executor` for running the DAG but doesn&#39;t spawn the
+//!   client's one. It internally uses an `Executor` for running the DAG but doesn't spawn the
 //!   workers since they are remote too. This component is also responsible for listening to the
 //!   sockets for the connections of the clients and the workers.
 //! - `Executor` the component that abstracts the connection of workers and clients and handles the
@@ -330,7 +331,7 @@
 <span class="kw">use </span>std::thread;
 
 <span class="kw">use </span>anyhow::Error;
-<span class="doccomment">/// Re-export `ductile` since it&#39;s sensible to any version change
+<span class="doccomment">/// Re-export `ductile` since it's sensible to any version change
 </span><span class="kw">pub use </span>ductile;
 <span class="kw">use </span>ductile::new_local_channel;
 
@@ -357,7 +358,7 @@
 <span class="kw">mod </span>worker;
 <span class="kw">mod </span>worker_manager;
 
-<span class="kw">const </span>KEY_MATERIAL: <span class="kw-2">&amp;</span>str = <span class="string">&quot;task-maker-rust 99e4e7117fbf4ed6f8f1850c6acb61b6&quot;</span>;
+<span class="kw">const </span>KEY_MATERIAL: <span class="kw-2">&amp;</span>str = <span class="string">"task-maker-rust 99e4e7117fbf4ed6f8f1850c6acb61b6"</span>;
 
 <span class="doccomment">/// Derive the encryption key from a password string.
 </span><span class="kw">pub fn </span>derive_key_from_password&lt;S: AsRef&lt;str&gt;&gt;(password: S) -&gt; [u8; <span class="number">32</span>] {
@@ -375,7 +376,7 @@
     min_cache: u64,
     sandbox_runner: R,
 ) <span class="kw">where
-    </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
+    </span>R: SandboxRunner + <span class="lifetime">'static</span>,
 {
     <span class="comment">// FIXME: this function may return Result&lt;(), Error&gt;
     </span><span class="kw">let </span>(tx, rx_remote) = new_local_channel();
@@ -383,13 +384,13 @@
     <span class="kw">let </span>store_dir = store_dir.into();
     <span class="kw">let </span>sandbox_path = sandbox_path.into();
     <span class="kw">let </span>file_store = Arc::new(
-        FileStore::new(<span class="kw-2">&amp;</span>store_dir, max_cache, min_cache).expect(<span class="string">&quot;Cannot create the file store&quot;</span>),
+        FileStore::new(<span class="kw-2">&amp;</span>store_dir, max_cache, min_cache).expect(<span class="string">"Cannot create the file store"</span>),
     );
     <span class="kw">let </span>server_file_store = file_store.clone();
     <span class="kw">let </span>server = thread::Builder::new()
-        .name(<span class="string">&quot;Local executor&quot;</span>.into())
+        .name(<span class="string">"Local executor"</span>.into())
         .spawn(<span class="kw">move </span>|| {
-            <span class="kw">let </span>cache = Cache::new(store_dir).expect(<span class="string">&quot;Cannot create the cache&quot;</span>);
+            <span class="kw">let </span>cache = Cache::new(store_dir).expect(<span class="string">"Cannot create the cache"</span>);
             <span class="kw">let </span>executor = executors::LocalExecutor::new(
                 server_file_store,
                 cache,
@@ -397,14 +398,14 @@
                 sandbox_path,
                 sandbox_runner,
             )
-            .expect(<span class="string">&quot;Failed to create local executor&quot;</span>);
+            .expect(<span class="string">"Failed to create local executor"</span>);
             executor
                 .evaluate(tx_remote, rx_remote)
-                .expect(<span class="string">&quot;Executor failed&quot;</span>);
+                .expect(<span class="string">"Executor failed"</span>);
         })
-        .expect(<span class="string">&quot;Failed to spawn local executor thread&quot;</span>);
-    ExecutorClient::evaluate(dag, tx, <span class="kw-2">&amp;</span>rx, file_store, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(())).expect(<span class="string">&quot;Client failed&quot;</span>);
-    server.join().expect(<span class="string">&quot;Server panicked&quot;</span>);
+        .expect(<span class="string">"Failed to spawn local executor thread"</span>);
+    ExecutorClient::evaluate(dag, tx, <span class="kw-2">&amp;</span>rx, file_store, |<span class="kw">_</span>| <span class="prelude-val">Ok</span>(())).expect(<span class="string">"Client failed"</span>);
+    server.join().expect(<span class="string">"Server panicked"</span>);
 }
 
 <span class="attr">#[cfg(test)]
@@ -428,19 +429,19 @@
         <span class="kw">let </span>cwd = TempDir::new().unwrap();
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
 
-        <span class="kw">let </span>file = File::new(<span class="string">&quot;Input file&quot;</span>);
+        <span class="kw">let </span>file = File::new(<span class="string">"Input file"</span>);
 
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;An execution&quot;</span>, ExecutionCommand::system(<span class="string">&quot;true&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"An execution"</span>, ExecutionCommand::system(<span class="string">"true"</span>));
         exec.stdin(<span class="kw-2">&amp;</span>file);
         <span class="kw">let </span>stdout = exec.stdout();
 
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;Nope!&quot;</span>, ExecutionCommand::system(<span class="string">&quot;false&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"Nope!"</span>, ExecutionCommand::system(<span class="string">"false"</span>));
         exec2.stdin(<span class="kw-2">&amp;</span>stdout);
         <span class="kw">let </span>stdout2 = exec2.stdout();
 
-        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;Skippp&quot;</span>, ExecutionCommand::system(<span class="string">&quot;true&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">"Skippp"</span>, ExecutionCommand::system(<span class="string">"true"</span>));
         exec3.stdin(<span class="kw-2">&amp;</span>stdout2);
-        <span class="kw">let </span>output3 = exec3.output(Path::new(<span class="string">&quot;test&quot;</span>));
+        <span class="kw">let </span>output3 = exec3.output(Path::new(<span class="string">"test"</span>));
 
         <span class="kw">let </span>exec_done = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
         <span class="kw">let </span>exec_done2 = exec_done.clone();
@@ -452,12 +453,12 @@
         <span class="kw">let </span>exec2_start2 = exec2_start.clone();
         <span class="kw">let </span>exec3_skipped = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
         <span class="kw">let </span>exec3_skipped2 = exec3_skipped.clone();
-        dag.provide_file(file, Path::new(<span class="string">&quot;/dev/null&quot;</span>)).unwrap();
+        dag.provide_file(file, Path::new(<span class="string">"/dev/null"</span>)).unwrap();
         dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|_res| {
             exec_done.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec.uuid, || <span class="macro">panic!</span>(<span class="string">&quot;exec has been skipped&quot;</span>));
+        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec.uuid, || <span class="macro">panic!</span>(<span class="string">"exec has been skipped"</span>));
         dag.on_execution_start(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|_w| {
             exec_start.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
@@ -467,22 +468,22 @@
             exec2_done.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec2.uuid, || <span class="macro">panic!</span>(<span class="string">&quot;exec2 has been skipped&quot;</span>));
+        dag.on_execution_skip(<span class="kw-2">&amp;</span>exec2.uuid, || <span class="macro">panic!</span>(<span class="string">"exec2 has been skipped"</span>));
         dag.on_execution_start(<span class="kw-2">&amp;</span>exec2.uuid, <span class="kw">move </span>|_w| {
             exec2_start.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
         dag.add_execution(exec2);
-        dag.on_execution_done(<span class="kw-2">&amp;</span>exec3.uuid, |_res| <span class="macro">panic!</span>(<span class="string">&quot;exec3 has not been skipped&quot;</span>));
+        dag.on_execution_done(<span class="kw-2">&amp;</span>exec3.uuid, |_res| <span class="macro">panic!</span>(<span class="string">"exec3 has not been skipped"</span>));
         dag.on_execution_skip(<span class="kw-2">&amp;</span>exec3.uuid, <span class="kw">move </span>|| {
             exec3_skipped.store(<span class="bool-val">true</span>, Ordering::Relaxed);
             <span class="prelude-val">Ok</span>(())
         });
-        dag.on_execution_start(<span class="kw-2">&amp;</span>exec3.uuid, |_w| <span class="macro">panic!</span>(<span class="string">&quot;exec3 has not been skipped&quot;</span>));
+        dag.on_execution_start(<span class="kw-2">&amp;</span>exec3.uuid, |_w| <span class="macro">panic!</span>(<span class="string">"exec3 has not been skipped"</span>));
         dag.add_execution(exec3);
-        dag.write_file_to(<span class="kw-2">&amp;</span>stdout, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;stdout&quot;</span>), <span class="bool-val">false</span>);
-        dag.write_file_to(<span class="kw-2">&amp;</span>stdout2, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;stdout2&quot;</span>), <span class="bool-val">false</span>);
-        dag.write_file_to(<span class="kw-2">&amp;</span>output3, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;output3&quot;</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>stdout, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"stdout"</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>stdout2, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"stdout2"</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>output3, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"output3"</span>), <span class="bool-val">false</span>);
 
         eval_dag_locally(
             dag,
@@ -499,9 +500,9 @@
         <span class="macro">assert!</span>(exec2_done2.load(Ordering::Relaxed));
         <span class="macro">assert!</span>(exec2_start2.load(Ordering::Relaxed));
         <span class="macro">assert!</span>(exec3_skipped2.load(Ordering::Relaxed));
-        <span class="macro">assert!</span>(cwd.path().join(<span class="string">&quot;stdout&quot;</span>).exists());
-        <span class="macro">assert!</span>(!cwd.path().join(<span class="string">&quot;stdout2&quot;</span>).exists());
-        <span class="macro">assert!</span>(!cwd.path().join(<span class="string">&quot;output3&quot;</span>).exists());
+        <span class="macro">assert!</span>(cwd.path().join(<span class="string">"stdout"</span>).exists());
+        <span class="macro">assert!</span>(!cwd.path().join(<span class="string">"stdout2"</span>).exists());
+        <span class="macro">assert!</span>(!cwd.path().join(<span class="string">"output3"</span>).exists());
     }
 }
 </code></pre></div></section></main></body></html>

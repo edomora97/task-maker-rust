@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/dag/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/dag/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -316,7 +317,7 @@
 <span class="kw">use </span><span class="kw">crate</span>::ui::UIMessage;
 <span class="kw">use crate</span>::{bind_exec_callbacks, EvaluationData, SourceFile, Tag};
 
-<span class="doccomment">/// Maximum number of bytes of the checker&#39;s standard output.
+<span class="doccomment">/// Maximum number of bytes of the checker's standard output.
 </span><span class="kw">const </span>OUTCOME_SIZE_LIMIT: usize = <span class="number">1024 </span>* <span class="number">1024</span>; <span class="comment">// 1MiB
 </span><span class="doccomment">/// Maximum number of bytes of the standard error of the executions.
 </span><span class="kw">const </span>STDERR_SIZE_LIMIT: usize = <span class="number">10 </span>* <span class="number">1024</span>;
@@ -354,7 +355,7 @@
         InputGenerator { source }
     }
 
-    <span class="doccomment">/// Build the execution for the generation of the input file, but don&#39;t bind the execution
+    <span class="doccomment">/// Build the execution for the generation of the input file, but don't bind the execution
     /// callbacks.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>generate(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
@@ -365,7 +366,7 @@
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(FileUuid, Execution), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>exec =
             <span class="self">self</span>.source
-                .execute(eval, description, <span class="macro">vec!</span>[seed.to_string(), <span class="string">&quot;0&quot;</span>.to_string()])<span class="question-mark">?</span>;
+                .execute(eval, description, <span class="macro">vec!</span>[seed.to_string(), <span class="string">"0"</span>.to_string()])<span class="question-mark">?</span>;
         include_official_solution(eval, <span class="kw-2">&amp;mut </span>exec, official_solution)<span class="question-mark">?</span>;
         exec.limits_mut().allow_multiprocess();
         exec.tag(Tag::Generation.into());
@@ -384,7 +385,7 @@
         <span class="kw">let </span>(input, <span class="kw-2">mut </span>gen) = <span class="self">self</span>.generate(
             eval,
             <span class="macro">format!</span>(
-                <span class="string">&quot;Generation of input file for {} with seed {}&quot;</span>,
+                <span class="string">"Generation of input file for {} with seed {}"</span>,
                 solution.name(),
                 seed
             ),
@@ -395,7 +396,7 @@
             eval.dag.write_file_to(
                 input,
                 eval.task_root
-                    .join(<span class="macro">format!</span>(<span class="string">&quot;bin/io/{}.in&quot;</span>, solution.name())),
+                    .join(<span class="macro">format!</span>(<span class="string">"bin/io/{}.in"</span>, solution.name())),
                 <span class="bool-val">false</span>,
             );
         }
@@ -423,7 +424,7 @@
         InputValidator { source }
     }
 
-    <span class="doccomment">/// Build the execution for the validation of the input file, but don&#39;t bind the execution
+    <span class="doccomment">/// Build the execution for the validation of the input file, but don't bind the execution
     /// callbacks.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>validate(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
@@ -450,7 +451,7 @@
     ) -&gt; <span class="prelude-ty">Result</span>&lt;FileUuid, Error&gt; {
         <span class="kw">let </span>(handle, <span class="kw-2">mut </span>val) = <span class="self">self</span>.validate(
             eval,
-            <span class="macro">format!</span>(<span class="string">&quot;Validation of input file for {}&quot;</span>, solution.name()),
+            <span class="macro">format!</span>(<span class="string">"Validation of input file for {}"</span>, solution.name()),
             input,
             official_solution,
         )<span class="question-mark">?</span>;
@@ -479,13 +480,13 @@
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(FileUuid, Execution), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>exec = solution.execute(
             eval,
-            <span class="macro">format!</span>(<span class="string">&quot;Evaluation of solution {}&quot;</span>, solution.name()),
+            <span class="macro">format!</span>(<span class="string">"Evaluation of solution {}"</span>, solution.name()),
             Vec::&lt;<span class="kw-2">&amp;</span>str&gt;::new(),
         )<span class="question-mark">?</span>;
         exec.stdin(input);
         exec.tag(Tag::Evaluation.into());
         <span class="kw">if let </span><span class="prelude-val">Some</span>(validation) = validation_handle {
-            exec.input(validation, <span class="string">&quot;wait_for_validation&quot;</span>, <span class="bool-val">false</span>);
+            exec.input(validation, <span class="string">"wait_for_validation"</span>, <span class="bool-val">false</span>);
         }
         <span class="kw">let </span>output = exec.stdout();
         exec.limits_mut()
@@ -506,7 +507,7 @@
             eval.dag.write_file_to(
                 output,
                 eval.task_root
-                    .join(<span class="macro">format!</span>(<span class="string">&quot;bin/io/{}.out&quot;</span>, solution.name())),
+                    .join(<span class="macro">format!</span>(<span class="string">"bin/io/{}.out"</span>, solution.name())),
                 <span class="bool-val">false</span>,
             );
         }
@@ -540,20 +541,20 @@
         callback: F,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;Execution, Error&gt;
     <span class="kw">where
-        </span>F: FnOnce(<span class="prelude-ty">Result</span>&lt;SolutionOutcome, Error&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>,
+        </span>F: FnOnce(<span class="prelude-ty">Result</span>&lt;SolutionOutcome, Error&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">'static</span>,
     {
         <span class="kw">let </span><span class="kw-2">mut </span>exec = <span class="self">self
             </span>.source
-            .execute(eval, <span class="kw-2">&amp;</span>description, <span class="macro">vec!</span>[<span class="string">&quot;input.txt&quot;</span>, <span class="string">&quot;output.txt&quot;</span>])<span class="question-mark">?</span>;
+            .execute(eval, <span class="kw-2">&amp;</span>description, <span class="macro">vec!</span>[<span class="string">"input.txt"</span>, <span class="string">"output.txt"</span>])<span class="question-mark">?</span>;
         include_official_solution(eval, <span class="kw-2">&amp;mut </span>exec, official_solution)<span class="question-mark">?</span>;
         <span class="kw-2">*</span>exec.limits_mut() = ExecutionLimits::unrestricted();
-        exec.input(input, <span class="string">&quot;input.txt&quot;</span>, <span class="bool-val">false</span>)
-            .input(output, <span class="string">&quot;output.txt&quot;</span>, <span class="bool-val">false</span>)
+        exec.input(input, <span class="string">"input.txt"</span>, <span class="bool-val">false</span>)
+            .input(output, <span class="string">"output.txt"</span>, <span class="bool-val">false</span>)
             .capture_stdout(OUTCOME_SIZE_LIMIT);
         eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|res| {
             <span class="kw">let </span>stdout = res
                 .stdout
-                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Checker stdout not captured"</span>))<span class="question-mark">?</span>;
             callback(serde_json::from_slice(<span class="kw-2">&amp;</span>stdout).map_err(|e| e.into()))
         });
         <span class="prelude-val">Ok</span>(exec)
@@ -570,11 +571,11 @@
         callback: F,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
     <span class="kw">where
-        </span>F: FnOnce(<span class="prelude-ty">Result</span>&lt;SolutionOutcome, Error&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>,
+        </span>F: FnOnce(<span class="prelude-ty">Result</span>&lt;SolutionOutcome, Error&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">'static</span>,
     {
         <span class="kw">let </span><span class="kw-2">mut </span>exec = <span class="self">self</span>.check(
             eval,
-            <span class="macro">format!</span>(<span class="string">&quot;Checking output of {}&quot;</span>, solution.name()),
+            <span class="macro">format!</span>(<span class="string">"Checking output of {}"</span>, solution.name()),
             input,
             output,
             official_solution,
@@ -604,9 +605,9 @@
             solution.executable(eval)<span class="question-mark">?</span>,
             solution
                 .write_bin_to()
-                .context(<span class="string">&quot;managers should always be copied&quot;</span>)<span class="question-mark">?
+                .context(<span class="string">"managers should always be copied"</span>)<span class="question-mark">?
                 </span>.file_name()
-                .context(<span class="string">&quot;Invalid solution path&quot;</span>)<span class="question-mark">?</span>,
+                .context(<span class="string">"Invalid solution path"</span>)<span class="question-mark">?</span>,
             <span class="bool-val">true</span>,
         );
     }

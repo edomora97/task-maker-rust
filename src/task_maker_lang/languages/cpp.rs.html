@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/cpp.rs`."><title>cpp.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/languages/cpp.rs`."><title>cpp.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -305,7 +306,7 @@
 <span class="doccomment">/// Configuration of the C++ language to use.
 </span><span class="attr">#[derive(Clone, Debug)]
 </span><span class="kw">pub struct </span>LanguageCppConfiguration {
-    <span class="doccomment">/// Compiler to use (e.g. ExecutionCommand::system(&quot;g++&quot;) ).
+    <span class="doccomment">/// Compiler to use (e.g. ExecutionCommand::system("g++") ).
     </span><span class="kw">pub </span>compiler: ExecutionCommand,
     <span class="doccomment">/// Version of the C++ standard library to use (e.g. c++11).
     </span><span class="kw">pub </span>std_version: String,
@@ -322,14 +323,14 @@
 <span class="kw">impl </span>LanguageCppConfiguration {
     <span class="doccomment">/// Get the configuration of C++ from the environment variables.
     </span><span class="kw">pub fn </span>from_env() -&gt; LanguageCppConfiguration {
-        <span class="kw">let </span>compiler = std::env::var_os(<span class="string">&quot;TM_CXX&quot;</span>)
-            .or_else(|| std::env::var_os(<span class="string">&quot;CXX&quot;</span>))
-            .unwrap_or_else(|| <span class="string">&quot;g++&quot;</span>.into());
-        <span class="kw">let </span>std_version = std::env::var(<span class="string">&quot;TM_CXX_STD_VERSION&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;c++17&quot;</span>.into());
-        <span class="kw">let </span>extra_flags = std::env::var(<span class="string">&quot;TM_CXXFLAGS&quot;</span>)
-            .or_else(|<span class="kw">_</span>| std::env::var(<span class="string">&quot;CXXFLAGS&quot;</span>))
+        <span class="kw">let </span>compiler = std::env::var_os(<span class="string">"TM_CXX"</span>)
+            .or_else(|| std::env::var_os(<span class="string">"CXX"</span>))
+            .unwrap_or_else(|| <span class="string">"g++"</span>.into());
+        <span class="kw">let </span>std_version = std::env::var(<span class="string">"TM_CXX_STD_VERSION"</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">"c++17"</span>.into());
+        <span class="kw">let </span>extra_flags = std::env::var(<span class="string">"TM_CXXFLAGS"</span>)
+            .or_else(|<span class="kw">_</span>| std::env::var(<span class="string">"CXXFLAGS"</span>))
             .unwrap_or_else(|<span class="kw">_</span>| String::new());
-        <span class="kw">let </span>extra_flags = shell_words::split(<span class="kw-2">&amp;</span>extra_flags).expect(<span class="string">&quot;Invalid $TM_CXXFLAGS&quot;</span>);
+        <span class="kw">let </span>extra_flags = shell_words::split(<span class="kw-2">&amp;</span>extra_flags).expect(<span class="string">"Invalid $TM_CXXFLAGS"</span>);
         LanguageCppConfiguration {
             compiler: ExecutionCommand::System(compiler.into()),
             std_version,
@@ -346,27 +347,27 @@
 }
 
 <span class="kw">impl </span>Language <span class="kw">for </span>LanguageCpp {
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;C++&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"C++"
     </span>}
 
-    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
-        <span class="macro">vec!</span>[<span class="string">&quot;cpp&quot;</span>, <span class="string">&quot;cc&quot;</span>, <span class="string">&quot;c++&quot;</span>]
+    <span class="kw">fn </span>extensions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">'static </span>str&gt; {
+        <span class="macro">vec!</span>[<span class="string">"cpp"</span>, <span class="string">"cc"</span>, <span class="string">"c++"</span>]
     }
 
     <span class="kw">fn </span>need_compilation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="bool-val">true
     </span>}
 
-    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; {
-        <span class="prelude-val">Some</span>(<span class="string">&quot;//&quot;</span>)
+    <span class="kw">fn </span>inline_comment_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'static </span>str&gt; {
+        <span class="prelude-val">Some</span>(<span class="string">"//"</span>)
     }
 
     <span class="kw">fn </span>compilation_builder(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         source: <span class="kw-2">&amp;</span>Path,
         settings: CompilationSettings,
-    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">&#39;_</span>&gt;&gt; {
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>CompiledLanguageBuilder + <span class="lifetime">'_</span>&gt;&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>metadata = SimpleCompiledLanguageBuilder::new(
             <span class="self">self</span>,
             source,
@@ -375,19 +376,19 @@
         );
         <span class="kw">let </span>binary_name = metadata.binary_name.clone();
         metadata
-            .add_arg(<span class="string">&quot;-O2&quot;</span>)
-            .add_arg(<span class="string">&quot;-Wall&quot;</span>)
-            .add_arg(<span class="string">&quot;-ggdb3&quot;</span>)
-            .add_arg(<span class="string">&quot;-DEVAL&quot;</span>)
-            .add_arg(<span class="string">&quot;-fdiagnostics-color=always&quot;</span>)
-            .add_arg(<span class="macro">format!</span>(<span class="string">&quot;-std={}&quot;</span>, <span class="self">self</span>.config.std_version))
-            .add_arg(<span class="string">&quot;-o&quot;</span>)
+            .add_arg(<span class="string">"-O2"</span>)
+            .add_arg(<span class="string">"-Wall"</span>)
+            .add_arg(<span class="string">"-ggdb3"</span>)
+            .add_arg(<span class="string">"-DEVAL"</span>)
+            .add_arg(<span class="string">"-fdiagnostics-color=always"</span>)
+            .add_arg(<span class="macro">format!</span>(<span class="string">"-std={}"</span>, <span class="self">self</span>.config.std_version))
+            .add_arg(<span class="string">"-o"</span>)
             .add_arg(binary_name);
         <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.config.extra_flags {
             metadata.add_arg(arg);
         }
         <span class="kw">if </span>metadata.settings.list_static {
-            metadata.add_arg(<span class="string">&quot;-static&quot;</span>);
+            metadata.add_arg(<span class="string">"-static"</span>);
         }
 
         find_cpp_deps(source)
@@ -404,7 +405,7 @@
 
 <span class="doccomment">/// Extracts all the #include in the file. The supported includes are the ones in the form:
 /// * `#include &lt;file&gt;`
-/// * `#include &quot;file&quot;`
+/// * `#include "file"`
 ///
 /// The space after `include` is optional.
 ///
@@ -412,7 +413,7 @@
 /// just the include itself.
 </span><span class="kw">fn </span>extract_includes(path: <span class="kw-2">&amp;</span>Path) -&gt; Vec&lt;(PathBuf, PathBuf)&gt; {
     <span class="macro">lazy_static! </span>{
-        <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex = Regex::new(<span class="string">r#&quot;#include\s*[&lt;&quot;]([^&quot;&gt;]+)[&gt;&quot;]&quot;#</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
+        <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex = Regex::new(<span class="string">r#"#include\s*[&lt;"]([^"&gt;]+)[&gt;"]"#</span>).expect(<span class="string">"Invalid regex"</span>);
     }
     <span class="kw">let </span>content = <span class="kw">match </span>std::fs::read_to_string(path) {
         <span class="prelude-val">Ok</span>(content) =&gt; content,
@@ -442,8 +443,8 @@
 
     <span class="kw">fn </span>setup() -&gt; TempDir {
         <span class="kw">let </span>tempdir = TempDir::new().unwrap();
-        <span class="kw">let </span>foo = tempdir.path().join(<span class="string">&quot;foo.cpp&quot;</span>);
-        std::fs::write(foo, <span class="string">&quot;int main() {}&quot;</span>).unwrap();
+        <span class="kw">let </span>foo = tempdir.path().join(<span class="string">"foo.cpp"</span>);
+        std::fs::write(foo, <span class="string">"int main() {}"</span>).unwrap();
         tempdir
     }
 
@@ -452,42 +453,42 @@
         <span class="kw">let </span>tmp = setup();
 
         <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration {
-            compiler: ExecutionCommand::System(<span class="string">&quot;g++&quot;</span>.into()),
-            std_version: <span class="string">&quot;c++14&quot;</span>.to_string(),
-            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
+            compiler: ExecutionCommand::System(<span class="string">"g++"</span>.into()),
+            std_version: <span class="string">"c++14"</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">"-lfoobar"</span>.into()],
         });
         <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
-            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.cpp&quot;</span>), CompilationSettings::default())
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">"foo.cpp"</span>), CompilationSettings::default())
             .unwrap();
         <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
         <span class="kw">let </span>args = comp.args;
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;foo.cpp&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c++14&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">&quot;-static&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"foo.cpp"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-std=c++14"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-lfoobar"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">"-static"</span>.to_string());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_compilation_args_starting_with_dash() {
         <span class="kw">let </span>tmp = setup();
-        std::fs::copy(tmp.path().join(<span class="string">&quot;foo.cpp&quot;</span>), tmp.path().join(<span class="string">&quot;-foo.cpp&quot;</span>)).unwrap();
+        std::fs::copy(tmp.path().join(<span class="string">"foo.cpp"</span>), tmp.path().join(<span class="string">"-foo.cpp"</span>)).unwrap();
 
         <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration {
-            compiler: ExecutionCommand::System(<span class="string">&quot;g++&quot;</span>.into()),
-            std_version: <span class="string">&quot;c++14&quot;</span>.to_string(),
-            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
+            compiler: ExecutionCommand::System(<span class="string">"g++"</span>.into()),
+            std_version: <span class="string">"c++14"</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">"-lfoobar"</span>.into()],
         });
         <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
-            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;-foo.cpp&quot;</span>), CompilationSettings::default())
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">"-foo.cpp"</span>), CompilationSettings::default())
             .unwrap();
         <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
         <span class="kw">let </span>args = comp.args;
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;./-foo.cpp&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c++14&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">&quot;-static&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"./-foo.cpp"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-std=c++14"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-lfoobar"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).does_not_contain(<span class="string">"-static"</span>.to_string());
     }
 
     <span class="attr">#[test]
@@ -495,37 +496,37 @@
         <span class="kw">let </span>tmp = setup();
 
         <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration {
-            compiler: ExecutionCommand::System(<span class="string">&quot;g++&quot;</span>.into()),
-            std_version: <span class="string">&quot;c++14&quot;</span>.to_string(),
-            extra_flags: <span class="macro">vec!</span>[<span class="string">&quot;-lfoobar&quot;</span>.into()],
+            compiler: ExecutionCommand::System(<span class="string">"g++"</span>.into()),
+            std_version: <span class="string">"c++14"</span>.to_string(),
+            extra_flags: <span class="macro">vec!</span>[<span class="string">"-lfoobar"</span>.into()],
         });
         <span class="kw">let </span>settings = CompilationSettings {
             list_static: <span class="bool-val">true</span>,
             ..Default::default()
         };
         <span class="kw">let </span><span class="kw-2">mut </span>builder = lang
-            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">&quot;foo.cpp&quot;</span>), settings)
+            .compilation_builder(<span class="kw-2">&amp;</span>tmp.path().join(<span class="string">"foo.cpp"</span>), settings)
             .unwrap();
         <span class="kw">let </span>(comp, _exec) = builder.finalize(<span class="kw-2">&amp;mut </span>ExecutionDAG::new()).unwrap();
 
         <span class="kw">let </span>args = comp.args;
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;foo.cpp&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-std=c++14&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-lfoobar&quot;</span>.to_string());
-        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">&quot;-static&quot;</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"foo.cpp"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-std=c++14"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-lfoobar"</span>.to_string());
+        assert_that(<span class="kw-2">&amp;</span>args).contains(<span class="string">"-static"</span>.to_string());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_extract_imports() {
         <span class="kw">let </span>tmpdir = setup();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"file.cpp"</span>);
         write(
             <span class="kw-2">&amp;</span>path,
-            <span class="string">r#&quot;blabla\n#include&lt;iostream&gt;\n#include &quot;test.hpp&quot;\nrandom&quot;#</span>,
+            <span class="string">r#"blabla\n#include&lt;iostream&gt;\n#include "test.hpp"\nrandom"#</span>,
         )
         .unwrap();
         <span class="kw">let </span>imports = extract_includes(<span class="kw-2">&amp;</span>path);
-        <span class="kw">for </span>(i, import) <span class="kw">in </span>[<span class="string">&quot;iostream&quot;</span>, <span class="string">&quot;test.hpp&quot;</span>].iter().enumerate() {
+        <span class="kw">for </span>(i, import) <span class="kw">in </span>[<span class="string">"iostream"</span>, <span class="string">"test.hpp"</span>].iter().enumerate() {
             <span class="kw">let </span>import = PathBuf::from(import);
             assert_that(<span class="kw-2">&amp;</span>imports[i].<span class="number">0</span>).is_equal_to(tmpdir.path().join(<span class="kw-2">&amp;</span>import));
             assert_that(<span class="kw-2">&amp;</span>imports[i].<span class="number">1</span>).is_equal_to(<span class="kw-2">&amp;</span>import);
@@ -535,51 +536,51 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_find_cpp_deps() {
         <span class="kw">let </span>tmpdir = setup();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">&quot;foo.hpp&quot;</span>);
-        <span class="kw">let </span>bar_path = tmpdir.path().join(<span class="string">&quot;bar.hpp&quot;</span>);
-        write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;#include &lt;foo.hpp&gt;&quot;</span>).unwrap();
-        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">&quot;#include &lt;bar.hpp&gt;&quot;</span>).unwrap();
-        write(<span class="kw-2">&amp;</span>bar_path, <span class="string">&quot;#include &lt;iostream&gt;&quot;</span>).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"file.cpp"</span>);
+        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">"foo.hpp"</span>);
+        <span class="kw">let </span>bar_path = tmpdir.path().join(<span class="string">"bar.hpp"</span>);
+        write(<span class="kw-2">&amp;</span>path, <span class="string">"#include &lt;foo.hpp&gt;"</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">"#include &lt;bar.hpp&gt;"</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>bar_path, <span class="string">"#include &lt;iostream&gt;"</span>).unwrap();
         <span class="kw">let </span>deps = find_cpp_deps(<span class="kw-2">&amp;</span>path);
         assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">2</span>);
         assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(foo_path);
-        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;foo.hpp&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">"foo.hpp"</span>));
         assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].local_path).is_equal_to(bar_path);
-        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;bar.hpp&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">1</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">"bar.hpp"</span>));
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_find_cpp_deps_symlink() {
         <span class="kw">let </span>tmpdir = setup();
-        std::fs::create_dir(tmpdir.path().join(<span class="string">&quot;utils&quot;</span>)).unwrap();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="kw">let </span>dep_path = tmpdir.path().join(<span class="string">&quot;dep.hpp&quot;</span>);
-        <span class="kw">let </span>inside_path = tmpdir.path().join(<span class="string">&quot;utils&quot;</span>).join(<span class="string">&quot;inside.hpp&quot;</span>);
-        <span class="kw">let </span>orig_path = tmpdir.path().join(<span class="string">&quot;utils&quot;</span>).join(<span class="string">&quot;orig.cpp&quot;</span>);
-        write(<span class="kw-2">&amp;</span>dep_path, <span class="string">&quot;#define 42 42&quot;</span>).unwrap();
-        write(inside_path, <span class="string">&quot;#define 42 41&quot;</span>).unwrap();
-        write(<span class="kw-2">&amp;</span>orig_path, <span class="string">&quot;#include&lt;dep.hpp&gt;\n#include&lt;inside.hpp&gt;&quot;</span>).unwrap();
+        std::fs::create_dir(tmpdir.path().join(<span class="string">"utils"</span>)).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"file.cpp"</span>);
+        <span class="kw">let </span>dep_path = tmpdir.path().join(<span class="string">"dep.hpp"</span>);
+        <span class="kw">let </span>inside_path = tmpdir.path().join(<span class="string">"utils"</span>).join(<span class="string">"inside.hpp"</span>);
+        <span class="kw">let </span>orig_path = tmpdir.path().join(<span class="string">"utils"</span>).join(<span class="string">"orig.cpp"</span>);
+        write(<span class="kw-2">&amp;</span>dep_path, <span class="string">"#define 42 42"</span>).unwrap();
+        write(inside_path, <span class="string">"#define 42 41"</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>orig_path, <span class="string">"#include&lt;dep.hpp&gt;\n#include&lt;inside.hpp&gt;"</span>).unwrap();
         std::os::unix::fs::symlink(<span class="kw-2">&amp;</span>orig_path, <span class="kw-2">&amp;</span>path).unwrap();
-        <span class="comment">// file.cpp includes ./dep.hpp and ./inside.hpp (so it shouldn&#39;t find ./utils/inside.hpp)
+        <span class="comment">// file.cpp includes ./dep.hpp and ./inside.hpp (so it shouldn't find ./utils/inside.hpp)
         </span><span class="kw">let </span>deps = find_cpp_deps(<span class="kw-2">&amp;</span>path);
         assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">1</span>);
         assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(dep_path);
-        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;dep.hpp&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">"dep.hpp"</span>));
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_find_cpp_deps_loop() {
         <span class="kw">let </span>tmpdir = setup();
-        <span class="kw">let </span>file_path = tmpdir.path().join(<span class="string">&quot;file.cpp&quot;</span>);
-        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">&quot;foo.hpp&quot;</span>);
+        <span class="kw">let </span>file_path = tmpdir.path().join(<span class="string">"file.cpp"</span>);
+        <span class="kw">let </span>foo_path = tmpdir.path().join(<span class="string">"foo.hpp"</span>);
         <span class="comment">// file imports itself and foo and file import each other
-        </span>write(<span class="kw-2">&amp;</span>file_path, <span class="string">&quot;#include &lt;file.cpp&gt;\n#include&lt;foo.hpp&gt;&quot;</span>).unwrap();
-        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">&quot;#include\&quot;file.cpp\&quot;&quot;</span>).unwrap();
+        </span>write(<span class="kw-2">&amp;</span>file_path, <span class="string">"#include &lt;file.cpp&gt;\n#include&lt;foo.hpp&gt;"</span>).unwrap();
+        write(<span class="kw-2">&amp;</span>foo_path, <span class="string">"#include\"file.cpp\""</span>).unwrap();
         <span class="kw">let </span>deps = find_cpp_deps(<span class="kw-2">&amp;</span>file_path);
         assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">1</span>);
         assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].local_path).is_equal_to(foo_path);
-        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;foo.hpp&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">"foo.hpp"</span>));
     }
 }
 </code></pre></div></section></main></body></html>

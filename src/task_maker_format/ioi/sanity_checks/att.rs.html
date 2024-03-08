@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/att.rs`."><title>att.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/att.rs`."><title>att.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -609,8 +610,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttGraders {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttGraders&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttGraders"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -618,7 +619,7 @@
     }
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        check_missing_graders(task, eval, <span class="string">&quot;att&quot;</span>)
+        check_missing_graders(task, eval, <span class="string">"att"</span>)
     }
 }
 
@@ -630,8 +631,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttTemplates {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttTemplates&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttTemplates"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -642,15 +643,15 @@
         <span class="kw">for </span>grader <span class="kw">in </span>task.grader_map.all_paths() {
             <span class="kw">let </span>ext = grader
                 .extension()
-                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Grader has no extension&quot;</span>))<span class="question-mark">?
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Grader has no extension"</span>))<span class="question-mark">?
                 </span>.to_string_lossy();
-            <span class="kw">let </span>att_name = <span class="macro">format!</span>(<span class="string">&quot;att/{}.{}&quot;</span>, task.name, ext);
+            <span class="kw">let </span>att_name = <span class="macro">format!</span>(<span class="string">"att/{}.{}"</span>, task.name, ext);
             <span class="kw">let </span>template = task.path.join(<span class="kw-2">&amp;</span>att_name);
             <span class="kw">if </span>!template.exists() {
                 <span class="kw">let </span>grader_name = task.path_of(grader);
                 eval.add_diagnostic(
-                    Diagnostic::warning(<span class="macro">format!</span>(<span class="string">&quot;Missing template at {}&quot;</span>, att_name))
-                        .with_note(<span class="macro">format!</span>(<span class="string">&quot;Because of {}&quot;</span>, grader_name.display())),
+                    Diagnostic::warning(<span class="macro">format!</span>(<span class="string">"Missing template at {}"</span>, att_name))
+                        .with_note(<span class="macro">format!</span>(<span class="string">"Because of {}"</span>, grader_name.display())),
                 )<span class="question-mark">?</span>;
             }
         }
@@ -691,8 +692,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttSampleFiles {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttSampleFiles&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttSampleFiles"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -703,7 +704,7 @@
         <span class="kw">let </span><span class="kw-2">mut </span>no_sample = <span class="bool-val">true</span>;
         <span class="kw">let </span>samples_from_task = <span class="self">Self</span>::extract_sample_files_from_task(task);
         <span class="kw">let </span><span class="kw-2">mut </span>samples_from_att = <span class="macro">vec!</span>[];
-        <span class="kw">for </span>sample <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*input*.txt&quot;</span>, <span class="string">&quot;att/*output*.txt&quot;</span>]) {
+        <span class="kw">for </span>sample <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"att/*input*.txt"</span>, <span class="string">"att/*output*.txt"</span>]) {
             no_sample = <span class="bool-val">false</span>;
             <span class="comment">// Check if the file is a symlink.
             </span><span class="kw">if let </span><span class="prelude-val">Ok</span>(content) = sample.read_link() {
@@ -711,21 +712,21 @@
                 </span><span class="kw">if </span>sample.canonicalize().is_err() {
                     eval.add_diagnostic(
                         Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;Sample case {} is a broken link&quot;</span>,
+                            <span class="string">"Sample case {} is a broken link"</span>,
                             task.path_of(<span class="kw-2">&amp;</span>sample).display()
                         ))
-                        .with_note(<span class="macro">format!</span>(<span class="string">&quot;It points to {}&quot;</span>, content.display())),
+                        .with_note(<span class="macro">format!</span>(<span class="string">"It points to {}"</span>, content.display())),
                     )<span class="question-mark">?</span>;
                 }
             } <span class="kw">else </span>{
                 eval.add_diagnostic(Diagnostic::warning(<span class="macro">format!</span>(
-                    <span class="string">&quot;Sample case {} is not a symlink&quot;</span>,
+                    <span class="string">"Sample case {} is not a symlink"</span>,
                     task.path_of(<span class="kw-2">&amp;</span>sample).display()
-                )).with_help(<span class="string">&quot;Move this file in the statement folder and symlink it here. This way the sample file can be included in the compiled statement.&quot;</span>))<span class="question-mark">?</span>;
+                )).with_help(<span class="string">"Move this file in the statement folder and symlink it here. This way the sample file can be included in the compiled statement."</span>))<span class="question-mark">?</span>;
             }
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(path) = sample.canonicalize() {
                 <span class="kw">let </span>file_name = path.file_name().unwrap_or_default().to_string_lossy();
-                <span class="kw">if </span>file_name.contains(<span class="string">&quot;input&quot;</span>) {
+                <span class="kw">if </span>file_name.contains(<span class="string">"input"</span>) {
                     samples_from_att.push(path);
                 }
             }
@@ -739,31 +740,31 @@
                 <span class="kw">let </span>paths = missing_in_att
                     .into_iter()
                     .map(|p| task.path_of(p).to_string_lossy())
-                    .join(<span class="string">&quot;, &quot;</span>);
+                    .join(<span class="string">", "</span>);
                 eval.add_diagnostic(
-                    Diagnostic::error(<span class="string">&quot;Missing samples in att/&quot;</span>)
-                        .with_note(<span class="macro">format!</span>(<span class="string">&quot;Samples in the task, but not in att/: {}&quot;</span>, paths)),
+                    Diagnostic::error(<span class="string">"Missing samples in att/"</span>)
+                        .with_note(<span class="macro">format!</span>(<span class="string">"Samples in the task, but not in att/: {}"</span>, paths)),
                 )<span class="question-mark">?</span>;
             }
             <span class="kw">if </span>!missing_in_task.is_empty() {
                 <span class="kw">let </span>paths = missing_in_task
                     .into_iter()
                     .map(|p| task.path_of(p).to_string_lossy())
-                    .join(<span class="string">&quot;, &quot;</span>);
+                    .join(<span class="string">", "</span>);
                 eval.add_diagnostic(
-                    Diagnostic::error(<span class="string">&quot;Missing samples in the task&quot;</span>)
-                        .with_note(<span class="macro">format!</span>(<span class="string">&quot;Samples in att/, but not in the task: {}&quot;</span>, paths)),
+                    Diagnostic::error(<span class="string">"Missing samples in the task"</span>)
+                        .with_note(<span class="macro">format!</span>(<span class="string">"Samples in att/, but not in the task: {}"</span>, paths)),
                 )<span class="question-mark">?</span>;
             }
         }
         <span class="kw">if </span>no_sample {
-            eval.add_diagnostic(Diagnostic::warning(<span class="string">&quot;No sample file in att/&quot;</span>))<span class="question-mark">?</span>;
+            eval.add_diagnostic(Diagnostic::warning(<span class="string">"No sample file in att/"</span>))<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="doccomment">/// Check that the input files inside the att folder are valid, the solution doesn&#39;t crash with them
+<span class="doccomment">/// Check that the input files inside the att folder are valid, the solution doesn't crash with them
 /// and the sample output files score full score.
 </span><span class="attr">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttSampleFilesValid;
@@ -772,8 +773,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttSampleFilesValid {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttSampleFilesValid&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttSampleFilesValid"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -788,27 +789,27 @@
             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
         <span class="kw">let </span>official_solution = <span class="kw-2">&amp;</span>task_type.output_generator;
-        <span class="kw">let </span>samples = get_sample_files(task, eval).context(<span class="string">&quot;Failed to get sample files&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>samples = get_sample_files(task, eval).context(<span class="string">"Failed to get sample files"</span>)<span class="question-mark">?</span>;
         <span class="kw">for </span>(input, output) <span class="kw">in </span>samples {
             <span class="kw">let </span>input_name = task.path_of(<span class="kw-2">&amp;</span>input).to_owned();
-            <span class="kw">let </span>input_handle = File::new(<span class="macro">format!</span>(<span class="string">&quot;Sample input file at {}&quot;</span>, input_name.display()));
+            <span class="kw">let </span>input_handle = File::new(<span class="macro">format!</span>(<span class="string">"Sample input file at {}"</span>, input_name.display()));
             <span class="kw">let </span>input_uuid = input_handle.uuid;
             eval.dag
                 .provide_file(input_handle, input)
-                .context(<span class="string">&quot;Failed to provide sample input file&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide sample input file"</span>)<span class="question-mark">?</span>;
 
             <span class="comment">// validate the input file
             </span><span class="kw">let </span>(val_handle, val) = validator
                 .generate(<span class="prelude-val">None</span>)
                 .validate(
                     eval,
-                    <span class="macro">format!</span>(<span class="string">&quot;Validation of sample case {}&quot;</span>, input_name.display()),
+                    <span class="macro">format!</span>(<span class="string">"Validation of sample case {}"</span>, input_name.display()),
                     <span class="number">0</span>,
-                    <span class="prelude-val">Some</span>(<span class="string">&quot;att&quot;</span>),
+                    <span class="prelude-val">Some</span>(<span class="string">"att"</span>),
                     <span class="number">0</span>,
                     input_uuid,
                 )
-                .context(<span class="string">&quot;Failed to validate sample input file&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to validate sample input file"</span>)<span class="question-mark">?</span>;
             <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>val) = val {
                 <span class="kw">let </span>input_name = input_name.clone();
                 <span class="kw">let </span>sender = eval.sender.clone();
@@ -816,13 +817,13 @@
                 eval.dag.on_execution_done(<span class="kw-2">&amp;</span>val.uuid, <span class="kw">move </span>|res| {
                     <span class="kw">if </span>!res.status.is_success() {
                         <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;Sample input file {} is not valid&quot;</span>,
+                            <span class="string">"Sample input file {} is not valid"</span>,
                             input_name.display()
                         ))
-                        .with_note(<span class="macro">format!</span>(<span class="string">&quot;The validator failed with: {:?}&quot;</span>, res.status));
+                        .with_note(<span class="macro">format!</span>(<span class="string">"The validator failed with: {:?}"</span>, res.status));
                         <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = res.stderr {
                             diagnostic = diagnostic
-                                .with_help(<span class="string">&quot;The validator stderr is:&quot;</span>)
+                                .with_help(<span class="string">"The validator stderr is:"</span>)
                                 .with_help_attachment(stderr);
                         }
                         sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
@@ -835,11 +836,11 @@
             <span class="kw">if let </span><span class="prelude-val">Some</span>(solution) = <span class="kw-2">&amp;</span>official_solution {
                 <span class="kw">let </span>output_name = task.path_of(<span class="kw-2">&amp;</span>output).to_owned();
                 <span class="kw">let </span>output_handle =
-                    File::new(<span class="macro">format!</span>(<span class="string">&quot;Sample output file at {}&quot;</span>, output_name.display()));
+                    File::new(<span class="macro">format!</span>(<span class="string">"Sample output file at {}"</span>, output_name.display()));
                 <span class="kw">let </span>output_uuid = output_handle.uuid;
                 eval.dag
                     .provide_file(output_handle, output)
-                    .context(<span class="string">&quot;Failed to provide sample output file&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to provide sample output file"</span>)<span class="question-mark">?</span>;
 
                 <span class="comment">// generate the output file
                 </span><span class="kw">let </span>(correct_output, sol) = solution
@@ -847,7 +848,7 @@
                         task,
                         eval,
                         <span class="macro">format!</span>(
-                            <span class="string">&quot;Generation of output file relative to {}&quot;</span>,
+                            <span class="string">"Generation of output file relative to {}"</span>,
                             input_name.display()
                         ),
                         <span class="number">0</span>,
@@ -855,22 +856,22 @@
                         input_uuid,
                         val_handle,
                     )
-                    .context(<span class="string">&quot;Failed to generate correct sample output file&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to generate correct sample output file"</span>)<span class="question-mark">?</span>;
                 <span class="kw">let </span>correct_output =
-                    correct_output.ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Missing official solution&quot;</span>))<span class="question-mark">?</span>;
+                    correct_output.ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Missing official solution"</span>))<span class="question-mark">?</span>;
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>sol) = sol {
                     sol.capture_stderr(<span class="number">1024</span>);
                     <span class="kw">let </span>sender = eval.sender.clone();
                     eval.dag.on_execution_done(<span class="kw-2">&amp;</span>sol.uuid, <span class="kw">move </span>|res| {
                         <span class="kw">if </span>!res.status.is_success() {
                             <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                                <span class="string">&quot;Solution failed on sample input file {}&quot;</span>,
+                                <span class="string">"Solution failed on sample input file {}"</span>,
                                 input_name.display()
                             ))
-                            .with_note(<span class="macro">format!</span>(<span class="string">&quot;The solution failed with: {:?}&quot;</span>, res.status));
+                            .with_note(<span class="macro">format!</span>(<span class="string">"The solution failed with: {:?}"</span>, res.status));
                             <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = res.stderr {
                                 diagnostic = diagnostic
-                                    .with_help(<span class="string">&quot;The solution stderr is:&quot;</span>)
+                                    .with_help(<span class="string">"The solution stderr is:"</span>)
                                     .with_help_attachment(stderr);
                             }
                             sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
@@ -887,14 +888,14 @@
                     .check(
                         eval,
                         <span class="prelude-val">None</span>,
-                        <span class="macro">format!</span>(<span class="string">&quot;Checking sample output {}&quot;</span>, output_name.display()),
+                        <span class="macro">format!</span>(<span class="string">"Checking sample output {}"</span>, output_name.display()),
                         input_uuid,
                         correct_output,
                         output_uuid,
                         <span class="kw">move </span>|score, message| {
                             <span class="kw">if </span><span class="macro">abs_diff_ne!</span>(score, <span class="number">1.0</span>) {
                                 sender.add_diagnostic(Diagnostic::warning(<span class="macro">format!</span>(
-                                    <span class="string">&quot;Sample output file {} scores {}: {}&quot;</span>,
+                                    <span class="string">"Sample output file {} scores {}: {}"</span>,
                                     output_name.display(),
                                     score,
                                     message
@@ -903,7 +904,7 @@
                             <span class="prelude-val">Ok</span>(())
                         },
                     )
-                    .context(<span class="string">&quot;Failed to check sample files&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to check sample files"</span>)<span class="question-mark">?</span>;
                 eval.dag.add_execution(chk);
             }
         }
@@ -917,7 +918,7 @@
     task: <span class="kw-2">&amp;</span>IOITask,
     eval: <span class="kw-2">&amp;mut </span>EvaluationData,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;(PathBuf, PathBuf)&gt;, Error&gt; {
-    <span class="kw">let </span>regex = Regex::new(<span class="string">r&quot;(in|out)put(\d+)\.txt$&quot;</span>).unwrap();
+    <span class="kw">let </span>regex = Regex::new(<span class="string">r"(in|out)put(\d+)\.txt$"</span>).unwrap();
     <span class="kw">let </span>extract_num = |path: <span class="kw-2">&amp;</span>PathBuf| {
         <span class="kw">let </span>path_str = path.to_string_lossy();
         <span class="kw">let </span>caps = regex.captures(path_str.as_ref());
@@ -930,7 +931,7 @@
         <span class="prelude-val">None
     </span>};
     <span class="kw">let </span><span class="kw-2">mut </span>inputs: HashMap&lt;<span class="kw">_</span>, Vec&lt;<span class="kw">_</span>&gt;&gt; = HashMap::new();
-    <span class="kw">for </span>input <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*input*.txt&quot;</span>]) {
+    <span class="kw">for </span>input <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"att/*input*.txt"</span>]) {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(num) = extract_num(<span class="kw-2">&amp;</span>input) {
             inputs.entry(num).or_default().push(input);
         }
@@ -942,14 +943,14 @@
         <span class="kw">let </span>paths = files
             .iter()
             .map(|p| task.path_of(p).to_string_lossy())
-            .join(<span class="string">&quot;, &quot;</span>);
+            .join(<span class="string">", "</span>);
         eval.add_diagnostic(
-            Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;Sample input {} is present more than once&quot;</span>, num))
-                .with_note(<span class="macro">format!</span>(<span class="string">&quot;Found at: {}&quot;</span>, paths)),
+            Diagnostic::error(<span class="macro">format!</span>(<span class="string">"Sample input {} is present more than once"</span>, num))
+                .with_note(<span class="macro">format!</span>(<span class="string">"Found at: {}"</span>, paths)),
         )<span class="question-mark">?</span>;
     }
     <span class="kw">let </span><span class="kw-2">mut </span>outputs: HashMap&lt;<span class="kw">_</span>, Vec&lt;<span class="kw">_</span>&gt;&gt; = HashMap::new();
-    <span class="kw">for </span>output <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*output*.txt&quot;</span>]) {
+    <span class="kw">for </span>output <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"att/*output*.txt"</span>]) {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(num) = extract_num(<span class="kw-2">&amp;</span>output) {
             outputs.entry(num).or_default().push(output);
         }
@@ -961,10 +962,10 @@
         <span class="kw">let </span>paths = files
             .iter()
             .map(|p| task.path_of(p).to_string_lossy())
-            .join(<span class="string">&quot;, &quot;</span>);
+            .join(<span class="string">", "</span>);
         eval.add_diagnostic(
-            Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;Sample output {} is present more than once&quot;</span>, num))
-                .with_note(<span class="macro">format!</span>(<span class="string">&quot;Found at: {}&quot;</span>, paths)),
+            Diagnostic::error(<span class="macro">format!</span>(<span class="string">"Sample output {} is present more than once"</span>, num))
+                .with_note(<span class="macro">format!</span>(<span class="string">"Found at: {}"</span>, paths)),
         )<span class="question-mark">?</span>;
     }
     <span class="kw">let </span><span class="kw-2">mut </span>samples = Vec::new();
@@ -973,7 +974,7 @@
             output[<span class="number">0</span>].clone()
         } <span class="kw">else </span>{
             eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
-                <span class="string">&quot;Sample input file {} does not have its output file&quot;</span>,
+                <span class="string">"Sample input file {} does not have its output file"</span>,
                 task.path_of(<span class="kw-2">&amp;</span>inputs[<span class="number">0</span>]).display()
             )))<span class="question-mark">?</span>;
             <span class="kw">continue</span>;
@@ -982,14 +983,14 @@
     }
     <span class="kw">for </span>(<span class="kw">_</span>, outputs) <span class="kw">in </span>outputs {
         eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
-            <span class="string">&quot;Sample output file {} does not have its input file&quot;</span>,
+            <span class="string">"Sample output file {} does not have its input file"</span>,
             task.path_of(<span class="kw-2">&amp;</span>outputs[<span class="number">0</span>]).display()
         )))<span class="question-mark">?</span>;
     }
     <span class="prelude-val">Ok</span>(samples)
 }
 
-<span class="doccomment">/// Check that the source files in att don&#39;t contain @check rules.
+<span class="doccomment">/// Check that the source files in att don't contain @check rules.
 </span><span class="attr">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>AttWithNoCheck;
 <span class="macro">make_sanity_check!</span>(AttWithNoCheck);
@@ -997,8 +998,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttWithNoCheck {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttWithNoCheck&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttWithNoCheck"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -1006,13 +1007,13 @@
     }
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*&quot;</span>]) {
+        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"att/*"</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(checks) = SolutionCheck::extract_check_list(<span class="kw-2">&amp;</span>att, eval) {
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(check) = checks.first() {
                     eval.add_diagnostic(
                         Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;@check rule found in an attachment: {}&quot;</span>,
+                            <span class="string">"@check rule found in an attachment: {}"</span>,
                             path.display()
                         ))
                         .with_code_span(check.code_span.clone()),
@@ -1031,8 +1032,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttEndWithNewLine {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttEndWithNewLine&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttEndWithNewLine"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -1041,25 +1042,25 @@
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>list = Arc::new(Mutex::new(Vec::new()));
-        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;att/*&quot;</span>]) {
+        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"att/*"</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
 
             <span class="kw">let </span><span class="kw-2">mut </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>att)
-                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to open attachment {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to open attachment {}"</span>, path.display()))<span class="question-mark">?</span>;
             <span class="comment">// Check the file size to avoid seeking to end-1 if the file is empty (which is not
             // allowed).
             </span><span class="kw">let </span>metadata = file
                 .metadata()
-                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read file size at {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to read file size at {}"</span>, path.display()))<span class="question-mark">?</span>;
 
             <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">1</span>];
             <span class="kw">let </span>chunk = <span class="kw">if </span>metadata.len() == <span class="number">0 </span>{
                 <span class="kw-2">&amp;</span>[]
             } <span class="kw">else </span>{
                 file.seek(SeekFrom::End(-<span class="number">1</span>))
-                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to seek to the end of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to seek to the end of {}"</span>, path.display()))<span class="question-mark">?</span>;
                 file.read_exact(<span class="kw-2">&amp;mut </span>buf)
-                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read last byte of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to read last byte of {}"</span>, path.display()))<span class="question-mark">?</span>;
                 <span class="kw-2">&amp;</span>buf[..]
             };
 
@@ -1068,7 +1069,7 @@
             checker.add_chunk(chunk)<span class="question-mark">?</span>;
             checker.add_chunk(<span class="kw-2">&amp;</span>[])<span class="question-mark">?</span>;
         }
-        CheckEndWithNewLine::emit_warning(eval, <span class="kw-2">&amp;</span>list.lock().unwrap(), <span class="string">&quot;attached&quot;</span>)<span class="question-mark">?</span>;
+        CheckEndWithNewLine::emit_warning(eval, <span class="kw-2">&amp;</span>list.lock().unwrap(), <span class="string">"attached"</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
@@ -1080,8 +1081,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttNoDirectory {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttNoDirectory&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttNoDirectory"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -1090,16 +1091,16 @@
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>dir =
-            std::fs::read_dir(task.path.join(<span class="string">&quot;att&quot;</span>)).context(<span class="string">&quot;Failed to open att/ directory&quot;</span>)<span class="question-mark">?</span>;
+            std::fs::read_dir(task.path.join(<span class="string">"att"</span>)).context(<span class="string">"Failed to open att/ directory"</span>)<span class="question-mark">?</span>;
         <span class="kw">for </span>entry <span class="kw">in </span>dir {
-            <span class="kw">let </span>entry = entry.context(<span class="string">&quot;Error while reading att/ content&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>entry = entry.context(<span class="string">"Error while reading att/ content"</span>)<span class="question-mark">?</span>;
             <span class="kw">let </span>path = entry.path();
             <span class="kw">let </span>canonical_path = path
                 .canonicalize()
-                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to find canonical path of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to find canonical path of {}"</span>, path.display()))<span class="question-mark">?</span>;
             <span class="kw">if </span>canonical_path.is_dir() {
                 eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
-                    <span class="string">&quot;Only file attachments are supported: {} is a directory&quot;</span>,
+                    <span class="string">"Only file attachments are supported: {} is a directory"</span>,
                     task.path_of(<span class="kw-2">&amp;</span>path).display()
                 )))<span class="question-mark">?</span>;
             }
@@ -1116,8 +1117,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AttTemplatesShouldCompile {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AttTemplatesShouldCompile&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AttTemplatesShouldCompile"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -1128,16 +1129,16 @@
         <span class="kw">for </span>grader <span class="kw">in </span>task.grader_map.all_paths() {
             <span class="kw">let </span>ext = grader
                 .extension()
-                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Grader has no extension&quot;</span>))<span class="question-mark">?
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Grader has no extension"</span>))<span class="question-mark">?
                 </span>.to_string_lossy();
-            <span class="kw">let </span>att_name = <span class="macro">format!</span>(<span class="string">&quot;att/{}.{}&quot;</span>, task.name, ext);
+            <span class="kw">let </span>att_name = <span class="macro">format!</span>(<span class="string">"att/{}.{}"</span>, task.name, ext);
             <span class="kw">let </span>template = task.path.join(<span class="kw-2">&amp;</span>att_name);
 
             <span class="kw">let </span>grader_name = grader
                 .file_name()
-                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Grader has no file name&quot;</span>))<span class="question-mark">?
+                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Grader has no file name"</span>))<span class="question-mark">?
                 </span>.to_string_lossy();
-            <span class="kw">let </span>att_grader_name = <span class="macro">format!</span>(<span class="string">&quot;att/{}&quot;</span>, grader_name);
+            <span class="kw">let </span>att_grader_name = <span class="macro">format!</span>(<span class="string">"att/{}"</span>, grader_name);
             <span class="kw">let </span>att_grader = task.path.join(<span class="kw-2">&amp;</span>att_grader_name);
 
             <span class="comment">// Only run the check if the grader is not a symlink, as otherwise we are already
@@ -1151,7 +1152,7 @@
                 template,
                 <span class="kw-2">&amp;</span>task.path,
                 <span class="macro">format!</span>(
-                    <span class="string">&quot;Template {} compiled with attached grader {}&quot;</span>,
+                    <span class="string">"Template {} compiled with attached grader {}"</span>,
                     att_name, att_grader_name
                 ),
                 <span class="prelude-val">Some</span>(Arc::new(grader_map)),

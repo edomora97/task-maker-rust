@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/context.rs`."><title>context.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/context.rs`."><title>context.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -337,7 +338,7 @@
 <span class="kw">use crate</span>::{render_dag, ExecutionOpt, StorageOpt, ToolsSandboxRunner};
 
 <span class="doccomment">/// Version of task-maker.
-</span><span class="kw">const </span>VERSION: <span class="kw-2">&amp;</span>str = <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
+</span><span class="kw">const </span>VERSION: <span class="kw-2">&amp;</span>str = <span class="macro">env!</span>(<span class="string">"CARGO_PKG_VERSION"</span>);
 
 <span class="doccomment">/// First step of the execution: take a task and build the Execution DAG. This needs setting the
 /// first configurations of the environment.
@@ -398,14 +399,14 @@
             .keep_sandboxes(opt.keep_sandboxes)
             .dry_run(opt.dry_run)
             .cache_mode(
-                CacheMode::try_from(<span class="kw-2">&amp;</span>opt.no_cache, <span class="kw-2">&amp;</span>VALID_TAGS).context(<span class="string">&quot;Invalid cache mode&quot;</span>)<span class="question-mark">?</span>,
+                CacheMode::try_from(<span class="kw-2">&amp;</span>opt.no_cache, <span class="kw-2">&amp;</span>VALID_TAGS).context(<span class="string">"Invalid cache mode"</span>)<span class="question-mark">?</span>,
             )
             .copy_exe(opt.copy_exe)
             .copy_logs(opt.copy_logs)
             .priority(opt.priority);
         <span class="kw">if let </span><span class="prelude-val">Some</span>(extra_time) = opt.extra_time {
             <span class="kw">if </span>extra_time &lt; <span class="number">0.0 </span>{
-                <span class="macro">bail!</span>(<span class="string">&quot;The extra time ({}) cannot be negative!&quot;</span>, extra_time);
+                <span class="macro">bail!</span>(<span class="string">"The extra time ({}) cannot be negative!"</span>, extra_time);
             }
             config.extra_time(extra_time);
         }
@@ -416,12 +417,12 @@
         <span class="comment">// build the execution dag
         </span>build_dag(<span class="kw-2">&amp;mut </span>task, <span class="kw-2">&amp;mut </span>eval)<span class="question-mark">?</span>;
 
-        <span class="macro">trace!</span>(<span class="string">&quot;The DAG is: {:#?}&quot;</span>, eval.dag);
+        <span class="macro">trace!</span>(<span class="string">"The DAG is: {:#?}"</span>, eval.dag);
         <span class="kw">if </span>opt.copy_dag {
             <span class="kw">let </span>dot = render_dag(<span class="kw-2">&amp;</span>eval.dag);
-            <span class="kw">let </span>bin = task.path().join(<span class="string">&quot;bin&quot;</span>);
-            std::fs::create_dir_all(<span class="kw-2">&amp;</span>bin).context(<span class="string">&quot;Failed to create bin/ directory&quot;</span>)<span class="question-mark">?</span>;
-            std::fs::write(bin.join(<span class="string">&quot;DAG.dot&quot;</span>), dot).context(<span class="string">&quot;Failed to write bin/DAG.dot&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>bin = task.path().join(<span class="string">"bin"</span>);
+            std::fs::create_dir_all(<span class="kw-2">&amp;</span>bin).context(<span class="string">"Failed to create bin/ directory"</span>)<span class="question-mark">?</span>;
+            std::fs::write(bin.join(<span class="string">"DAG.dot"</span>), dot).context(<span class="string">"Failed to write bin/DAG.dot"</span>)<span class="question-mark">?</span>;
         }
 
         <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
@@ -447,32 +448,32 @@
         </span><span class="kw">let </span>store_path = storage_opt.store_dir();
         <span class="kw">let </span>file_store = Arc::new(
             FileStore::new(
-                store_path.join(<span class="string">&quot;store&quot;</span>),
+                store_path.join(<span class="string">"store"</span>),
                 storage_opt.max_cache * <span class="number">1024 </span>* <span class="number">1024</span>,
                 storage_opt.min_cache * <span class="number">1024 </span>* <span class="number">1024</span>,
             )
             .context(
-                <span class="string">&quot;Cannot create the file store (You can try wiping it with task-maker-tools reset)&quot;</span>,
+                <span class="string">"Cannot create the file store (You can try wiping it with task-maker-tools reset)"</span>,
             )<span class="question-mark">?</span>,
         );
 
         <span class="comment">// connect either to the remote executor or spawn a local one
         </span><span class="kw">let </span>(tx, rx, local_executor) = <span class="kw">if let </span><span class="prelude-val">Some</span>(evaluate_on) = <span class="kw-2">&amp;</span>opt.evaluate_on {
             <span class="kw">let </span>(tx, rx) = connect_to_remote_server(evaluate_on, <span class="number">27182</span>)
-                .context(<span class="string">&quot;Cannot connect to the remote server&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Cannot connect to the remote server"</span>)<span class="question-mark">?</span>;
             <span class="kw">let </span>name = opt
                 .name
                 .clone()
-                .unwrap_or_else(|| <span class="macro">format!</span>(<span class="string">&quot;{}@{}&quot;</span>, whoami::username(), whoami::hostname()));
+                .unwrap_or_else(|| <span class="macro">format!</span>(<span class="string">"{}@{}"</span>, whoami::username(), whoami::hostname()));
             tx.send(RemoteEntityMessage::Welcome {
                 name,
                 version: VERSION.into(),
             })
-            .context(<span class="string">&quot;Cannot send welcome to the server&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Cannot send welcome to the server"</span>)<span class="question-mark">?</span>;
             <span class="kw">if let </span>RemoteEntityMessageResponse::Rejected(err) =
-                rx.recv().context(<span class="string">&quot;Failed to receive welcome response&quot;</span>)<span class="question-mark">?
+                rx.recv().context(<span class="string">"Failed to receive welcome response"</span>)<span class="question-mark">?
             </span>{
-                <span class="macro">bail!</span>(<span class="string">&quot;The server rejected the client connection: {}&quot;</span>, err);
+                <span class="macro">bail!</span>(<span class="string">"The server rejected the client connection: {}"</span>, err);
             }
             (tx.change_type(), rx.change_type(), <span class="prelude-val">None</span>)
         } <span class="kw">else </span>{
@@ -481,12 +482,12 @@
             <span class="kw">let </span>(tx_remote, rx) = new_local_channel();
 
             <span class="comment">// setup the local cache
-            </span><span class="kw">let </span>cache_path = store_path.join(<span class="string">&quot;cache&quot;</span>);
-            <span class="kw">let </span>cache = Cache::new(cache_path).context(<span class="string">&quot;Cannot create the cache&quot;</span>)<span class="question-mark">?</span>;
+            </span><span class="kw">let </span>cache_path = store_path.join(<span class="string">"cache"</span>);
+            <span class="kw">let </span>cache = Cache::new(cache_path).context(<span class="string">"Cannot create the cache"</span>)<span class="question-mark">?</span>;
 
             <span class="comment">// setup the local executor
             </span><span class="kw">let </span>num_cores = opt.num_cores.unwrap_or_else(num_cpus::get);
-            <span class="kw">let </span>sandbox_path = storage_opt.store_dir().join(<span class="string">&quot;sandboxes&quot;</span>);
+            <span class="kw">let </span>sandbox_path = storage_opt.store_dir().join(<span class="string">"sandboxes"</span>);
             <span class="kw">let </span>executor = LocalExecutor::new(
                 file_store.clone(),
                 cache,
@@ -495,9 +496,9 @@
                 <span class="self">self</span>.sandbox_runner,
             )<span class="question-mark">?</span>;
             <span class="kw">let </span>local_executor = std::thread::Builder::new()
-                .name(<span class="string">&quot;Executor thread&quot;</span>.into())
+                .name(<span class="string">"Executor thread"</span>.into())
                 .spawn(<span class="kw">move </span>|| executor.evaluate(tx_remote, rx_remote))
-                .context(<span class="string">&quot;Failed to spawn the executor thread&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to spawn the executor thread"</span>)<span class="question-mark">?</span>;
             (tx, rx, <span class="prelude-val">Some</span>(local_executor))
         };
 
@@ -525,17 +526,17 @@
         <span class="kw-2">mut </span>on_message: OnMessage,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;ConnectedExecutorWithUI, Error&gt;
     <span class="kw">where
-        </span>OnMessage: FnMut(<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>UI, UIMessage) + Send + <span class="lifetime">&#39;static</span>,
+        </span>OnMessage: FnMut(<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>UI, UIMessage) + Send + <span class="lifetime">'static</span>,
     {
         <span class="kw">let </span>config = <span class="self">self</span>.eval.dag.config_mut().clone();
         <span class="comment">// setup the UI thread
         </span><span class="kw">let </span><span class="kw-2">mut </span>ui = <span class="self">self
             </span>.task
             .ui(ui_type, config)
-            .context(<span class="string">&quot;This UI is not supported on this task type&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"This UI is not supported on this task type"</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>ui_receiver = <span class="self">self</span>.ui_receiver;
         <span class="kw">let </span>ui_thread = std::thread::Builder::new()
-            .name(<span class="string">&quot;UI&quot;</span>.to_owned())
+            .name(<span class="string">"UI"</span>.to_owned())
             .spawn(<span class="kw">move </span>|| {
                 <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = ui_receiver.recv() {
                     <span class="kw">if let </span>UIMessage::StopUI = message {
@@ -545,12 +546,12 @@
                 }
                 ui.finish();
             })
-            .context(<span class="string">&quot;Failed to spawn UI thread&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to spawn UI thread"</span>)<span class="question-mark">?</span>;
 
         <span class="comment">// a shared sender for the ctrl-c handler, it has to be wrapped in Arc-Mutex-Option to be freed
         // at the end of the computation to allow the client to exit.
         </span><span class="kw">let </span>client_sender = Arc::new(Mutex::new(<span class="prelude-val">Some</span>(<span class="self">self</span>.tx.clone())));
-        <span class="comment">// `ctrlc` crate doesn&#39;t allow multiple calls of set_handler, and the tests may call this
+        <span class="comment">// `ctrlc` crate doesn't allow multiple calls of set_handler, and the tests may call this
         // function multiple times, so in the tests ^C handler is disabled.
         </span><span class="attr">#[cfg(not(test))]
         </span>{
@@ -559,11 +560,11 @@
                 <span class="kw">let </span>sender = client_sender.lock().unwrap();
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = sender.as_ref() {
                     <span class="kw">if </span>sender.send(ExecutorClientMessage::Stop).is_err() {
-                        <span class="macro">error!</span>(<span class="string">&quot;Cannot tell the server to stop&quot;</span>);
+                        <span class="macro">error!</span>(<span class="string">"Cannot tell the server to stop"</span>);
                     }
                 }
             }) {
-                <span class="macro">warn!</span>(<span class="string">&quot;Cannot bind control-C handler: {:?}&quot;</span>, e);
+                <span class="macro">warn!</span>(<span class="string">"Cannot bind control-C handler: {:?}"</span>, e);
             }
         }
 
@@ -586,7 +587,7 @@
     </span><span class="kw">pub fn </span>execute(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>ui_sender = <span class="self">self</span>.eval.sender.clone();
         <span class="comment">// Create a copy of the DAG, keeping the cloned object inside the EvaluationData, while the
-        // original is stored in `dag`. This because after cloning a ExecutionDAG the copies don&#39;t
+        // original is stored in `dag`. This because after cloning a ExecutionDAG the copies don't
         // have access to the callbacks.
         </span><span class="kw">let </span><span class="kw-2">mut </span>dag = <span class="self">self</span>.eval.dag.clone();
         std::mem::swap(<span class="kw-2">&amp;mut </span>dag, <span class="kw-2">&amp;mut </span><span class="self">self</span>.eval.dag);
@@ -599,14 +600,14 @@
             </span><span class="kw">if let </span><span class="prelude-val">Some</span>(local_executor) = local_executor {
                 local_executor
                     .join()
-                    .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Executor panicked: {:?}&quot;</span>, e))
+                    .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Executor panicked: {:?}"</span>, e))
                     .unwrap()
-                    .expect(<span class="string">&quot;Local executor failed&quot;</span>);
+                    .expect(<span class="string">"Local executor failed"</span>);
             }
             <span class="kw">let _ </span>= sender.send(UIMessage::StopUI);
             ui_thread
                 .join()
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;UI panicked: {:?}&quot;</span>, e))
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"UI panicked: {:?}"</span>, e))
                 .unwrap();
         }
 
@@ -619,14 +620,14 @@
             <span class="kw">if let </span><span class="prelude-val">Some</span>(tx) = client_sender.lock().unwrap().as_ref() {
                 <span class="kw">let _ </span>= tx.send(ExecutorClientMessage::Stop);
             }
-            <span class="string">&quot;Client failed&quot;
+            <span class="string">"Client failed"
         </span>})<span class="question-mark">?</span>;
         <span class="comment">// disable the ctrl-c handler dropping the owned clone of the sender, letting the client exit
         </span>client_sender.lock().unwrap().take();
 
         <span class="self">self</span>.task
             .sanity_check_post_hook(<span class="kw-2">&amp;mut </span><span class="self">self</span>.eval)
-            .context(<span class="string">&quot;Sanity checks failed&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Sanity checks failed"</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }

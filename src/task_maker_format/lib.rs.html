@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -496,13 +497,13 @@
     <span class="doccomment">/// Directory where the data files are stored. It is taken from the `TM_DATA_DIR` environment
     /// variable if present, otherwise it will be defaulted to the path of the source tree.
     </span><span class="kw">pub static </span><span class="kw-2">ref </span>DATA_DIR: PathBuf = {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(dir) = <span class="macro">option_env!</span>(<span class="string">&quot;TM_DATA_DIR&quot;</span>) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(dir) = <span class="macro">option_env!</span>(<span class="string">"TM_DATA_DIR"</span>) {
             dir.into()
         } <span class="kw">else </span>{
-            PathBuf::from(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>))
+            PathBuf::from(<span class="macro">env!</span>(<span class="string">"CARGO_MANIFEST_DIR"</span>))
                 .parent()
-                .expect(<span class="string">&quot;Invalid CARGO_MANIFEST_DIR&quot;</span>)
-                .join(<span class="string">&quot;data&quot;</span>)
+                .expect(<span class="string">"Invalid CARGO_MANIFEST_DIR"</span>)
+                .join(<span class="string">"data"</span>)
         }
     };
 }
@@ -596,11 +597,11 @@
         <span class="self">self</span>.solution_filter
             .iter()
             .map(|filter| {
-                <span class="comment">// unfortunate lossy cast to String because currently OsString doesn&#39;t
+                <span class="comment">// unfortunate lossy cast to String because currently OsString doesn't
                 // support .starts_with
                 </span>PathBuf::from(filter)
                     .file_name()
-                    .expect(<span class="string">&quot;Invalid filter provided&quot;</span>)
+                    .expect(<span class="string">"Invalid filter provided"</span>)
                     .to_string_lossy()
                     .to_string()
             })
@@ -662,7 +663,7 @@
     <span class="kw">for </span>pattern <span class="kw">in </span>patterns.into_iter() {
         <span class="kw">let </span>pattern = cwd.as_ref().join(pattern.as_ref());
         <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>pattern.to_string_lossy())
-            .expect(<span class="string">&quot;Invalid pattern for list_files&quot;</span>)
+            .expect(<span class="string">"Invalid pattern for list_files"</span>)
             .flatten()
         {
             results.push(path);
@@ -711,7 +712,7 @@
         <span class="kw">if </span>path.exists() &amp;&amp; LanguageManager::detect_language(<span class="kw-2">&amp;</span>path).is_some() {
             <span class="kw">let </span>write_bin_to = <span class="kw">match </span><span class="kw-2">&amp;</span>write_bin_to {
                 WriteBinTo::None =&gt; <span class="prelude-val">None</span>,
-                WriteBinTo::WithoutExtension =&gt; <span class="prelude-val">Some</span>(path.with_extension(<span class="string">&quot;&quot;</span>)),
+                WriteBinTo::WithoutExtension =&gt; <span class="prelude-val">Some</span>(path.with_extension(<span class="string">""</span>)),
                 WriteBinTo::Path(path) =&gt; <span class="prelude-val">Some</span>(base_path.join(path)),
             };
             <span class="kw">let </span>name = path.strip_prefix(<span class="kw-2">&amp;</span>base_path).unwrap_or(<span class="kw-2">&amp;</span>path);
@@ -720,7 +721,7 @@
                 SourceFile::new(
                     <span class="kw-2">&amp;</span>path,
                     <span class="kw-2">&amp;</span>base_path,
-                    <span class="macro">format!</span>(<span class="string">&quot;{} {}&quot;</span>, description_prefix.as_ref(), name.display()),
+                    <span class="macro">format!</span>(<span class="string">"{} {}"</span>, description_prefix.as_ref(), name.display()),
                     grader_map.clone(),
                     write_bin_to,
                 )
@@ -734,7 +735,7 @@
 <span class="doccomment">/// Bind the start/done/skip callbacks of an execution to a ui message sender which sends to the UI
 /// messages with the correct status field.
 ///
-/// It&#39;s also sent to the UI the message with status `UIExecutionStatus::Pending`.
+/// It's also sent to the UI the message with status `UIExecutionStatus::Pending`.
 ///
 /// It works by first cloning the `extra` arguments for each callback. This is required because each
 /// callback has to move inside the needed data. For the same reason also the `UIMessageSender` is
@@ -800,52 +801,52 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_list_files() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
-        std::fs::create_dir_all(tmpdir.path().join(<span class="string">&quot;foo/bar&quot;</span>)).unwrap();
-        std::fs::create_dir_all(tmpdir.path().join(<span class="string">&quot;foo/baz&quot;</span>)).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/yyy.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/yyy.aaa&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/bar/zzz.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;uuu.bbb&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/baz/uuu.bbb&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        <span class="kw">let </span>files = list_files(tmpdir.path(), <span class="macro">vec!</span>[<span class="string">&quot;**/*.py&quot;</span>, <span class="string">&quot;foo/baz/*.bbb&quot;</span>]);
+        std::fs::create_dir_all(tmpdir.path().join(<span class="string">"foo/bar"</span>)).unwrap();
+        std::fs::create_dir_all(tmpdir.path().join(<span class="string">"foo/baz"</span>)).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/xxx.py"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/yyy.py"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/yyy.aaa"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/bar/zzz.py"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"uuu.bbb"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/baz/uuu.bbb"</span>), <span class="string">"x"</span>).unwrap();
+        <span class="kw">let </span>files = list_files(tmpdir.path(), <span class="macro">vec!</span>[<span class="string">"**/*.py"</span>, <span class="string">"foo/baz/*.bbb"</span>]);
         <span class="macro">assert_eq!</span>(files.len(), <span class="number">4</span>);
-        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">&quot;foo/xxx.py&quot;</span>)));
-        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">&quot;foo/yyy.py&quot;</span>)));
-        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">&quot;foo/bar/zzz.py&quot;</span>)));
-        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">&quot;foo/baz/uuu.bbb&quot;</span>)));
+        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">"foo/xxx.py"</span>)));
+        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">"foo/yyy.py"</span>)));
+        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">"foo/bar/zzz.py"</span>)));
+        <span class="macro">assert!</span>(files.contains(<span class="kw-2">&amp;</span>tmpdir.path().join(<span class="string">"foo/baz/uuu.bbb"</span>)));
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_find_source_file() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
-        std::fs::create_dir_all(tmpdir.path().join(<span class="string">&quot;foo/bar&quot;</span>)).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/bar/zzz.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
+        std::fs::create_dir_all(tmpdir.path().join(<span class="string">"foo/bar"</span>)).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/xxx.py"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/bar/zzz.py"</span>), <span class="string">"x"</span>).unwrap();
         <span class="kw">let </span><span class="kw-2">mut </span>source = find_source_file(
             tmpdir.path(),
-            <span class="macro">vec!</span>[<span class="string">&quot;foo/bar/*.py&quot;</span>],
-            <span class="string">&quot;&quot;</span>,
-            <span class="string">&quot;&quot;</span>,
+            <span class="macro">vec!</span>[<span class="string">"foo/bar/*.py"</span>],
+            <span class="string">""</span>,
+            <span class="string">""</span>,
             <span class="prelude-val">None</span>,
             WriteBinTo::None,
         );
         <span class="macro">assert_eq!</span>(source.len(), <span class="number">1</span>);
         <span class="kw">let </span>source = source.pop().unwrap();
-        <span class="macro">assert_eq!</span>(source.path, tmpdir.path().join(<span class="string">&quot;foo/bar/zzz.py&quot;</span>));
+        <span class="macro">assert_eq!</span>(source.path, tmpdir.path().join(<span class="string">"foo/bar/zzz.py"</span>));
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_find_source_file_multiple() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
-        std::fs::create_dir_all(tmpdir.path().join(<span class="string">&quot;foo&quot;</span>)).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/zzz.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
+        std::fs::create_dir_all(tmpdir.path().join(<span class="string">"foo"</span>)).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/xxx.py"</span>), <span class="string">"x"</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/zzz.py"</span>), <span class="string">"x"</span>).unwrap();
         <span class="kw">let </span>source = find_source_file(
             tmpdir.path(),
-            <span class="macro">vec!</span>[<span class="string">&quot;foo/*.py&quot;</span>],
-            <span class="string">&quot;&quot;</span>,
-            <span class="string">&quot;&quot;</span>,
+            <span class="macro">vec!</span>[<span class="string">"foo/*.py"</span>],
+            <span class="string">""</span>,
+            <span class="string">""</span>,
             <span class="prelude-val">None</span>,
             WriteBinTo::None,
         );
@@ -855,13 +856,13 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_find_source_file_not_found() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
-        std::fs::create_dir_all(tmpdir.path().join(<span class="string">&quot;foo/bar&quot;</span>)).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;foo/xxx.py&quot;</span>), <span class="string">&quot;x&quot;</span>).unwrap();
+        std::fs::create_dir_all(tmpdir.path().join(<span class="string">"foo/bar"</span>)).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"foo/xxx.py"</span>), <span class="string">"x"</span>).unwrap();
         <span class="kw">let </span>source = find_source_file(
             tmpdir.path(),
-            <span class="macro">vec!</span>[<span class="string">&quot;foo/bar/*.py&quot;</span>],
-            <span class="string">&quot;&quot;</span>,
-            <span class="string">&quot;&quot;</span>,
+            <span class="macro">vec!</span>[<span class="string">"foo/bar/*.py"</span>],
+            <span class="string">""</span>,
+            <span class="string">""</span>,
             <span class="prelude-val">None</span>,
             WriteBinTo::None,
         );

@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/statement.rs`."><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/statement.rs`."><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -357,7 +358,7 @@
 
 <span class="macro">lazy_static! </span>{
     <span class="doccomment">/// This regex will match all the `\usepackage` inside a latex file.
-    </span><span class="kw">static </span><span class="kw-2">ref </span>USE_PACKAGE_REGEX: Regex = Regex::new(<span class="string">r&quot;\\usepackage.+&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
+    </span><span class="kw">static </span><span class="kw-2">ref </span>USE_PACKAGE_REGEX: Regex = Regex::new(<span class="string">r"\\usepackage.+"</span>).expect(<span class="string">"Invalid regex"</span>);
 }
 
 <span class="doccomment">/// The configuration of a `Statement`.
@@ -394,7 +395,7 @@
 
 <span class="doccomment">/// Template to use to render the `statement.tex` file.
 </span><span class="attr">#[derive(Template)]
-#[template(path = <span class="string">&quot;task.tex&quot;</span>, escape = <span class="string">&quot;none&quot;</span>, syntax = <span class="string">&quot;tex&quot;</span>)]
+#[template(path = <span class="string">"task.tex"</span>, escape = <span class="string">"none"</span>, syntax = <span class="string">"tex"</span>)]
 </span><span class="kw">struct </span>TaskTemplate {
     name: String,
     title: String,
@@ -412,7 +413,7 @@
     </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;&gt;(path: P, config: StatementConfig) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
         <span class="kw">let </span>path = path.into();
         <span class="kw">let </span>content = std::fs::read_to_string(<span class="kw-2">&amp;</span>path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to read statement file from {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to read statement file from {}"</span>, path.display()))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(Statement {
             config,
             path,
@@ -433,36 +434,36 @@
         booklet_name: <span class="kw-2">&amp;</span>str,
         booklet_config: <span class="kw-2">&amp;</span>BookletConfig,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;(PathBuf, File)&gt;, Error&gt; {
-        <span class="kw">let </span>base_dir = <span class="self">self</span>.path.parent().context(<span class="string">&quot;Invalid statement path&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let </span>glob_pattern = base_dir.to_string_lossy().to_string() + <span class="string">&quot;/**/*&quot;</span>;
+        <span class="kw">let </span>base_dir = <span class="self">self</span>.path.parent().context(<span class="string">"Invalid statement path"</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>glob_pattern = base_dir.to_string_lossy().to_string() + <span class="string">"/**/*"</span>;
         <span class="kw">let </span>logo = booklet_config
             .logo
             .as_ref()
             .and_then(|p| Path::new(p).file_name())
             .map(PathBuf::from);
         <span class="kw">let </span><span class="kw-2">mut </span>deps = <span class="macro">vec!</span>[];
-        <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>glob_pattern).context(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">? </span>{
-            <span class="kw">let </span>path = path.context(<span class="string">&quot;Failed to iterate statement files&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>glob_pattern).context(<span class="string">"Invalid glob pattern"</span>)<span class="question-mark">? </span>{
+            <span class="kw">let </span>path = path.context(<span class="string">"Failed to iterate statement files"</span>)<span class="question-mark">?</span>;
             <span class="kw">if </span>!path.is_file() {
                 <span class="kw">continue</span>;
             }
             <span class="self">self</span>.process_possible_dependency(base_dir, <span class="kw-2">&amp;</span>path, <span class="kw-2">&amp;mut </span>deps, eval, booklet_name, <span class="kw-2">&amp;</span>logo)
                 .with_context(|| {
                     <span class="macro">format!</span>(
-                        <span class="string">&quot;Failed to process possible dependency at {}&quot;</span>,
+                        <span class="string">"Failed to process possible dependency at {}"</span>,
                         path.display()
                     )
                 })<span class="question-mark">?</span>;
         }
-        <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[Path::new(<span class="string">&quot;../gen/limiti.py&quot;</span>), Path::new(<span class="string">&quot;../gen/GEN&quot;</span>)] {
+        <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[Path::new(<span class="string">"../gen/limiti.py"</span>), Path::new(<span class="string">"../gen/GEN"</span>)] {
             <span class="kw">let </span>full_path = base_dir.join(path);
             <span class="kw">if </span>!full_path.is_file() {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Dependency of {} at {:?}&quot;</span>, <span class="self">self</span>.config.name, path));
+            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">"Dependency of {} at {:?}"</span>, <span class="self">self</span>.config.name, path));
             eval.dag
                 .provide_file(file.clone(), <span class="kw-2">&amp;</span>full_path)
-                .context(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide statement dependency"</span>)<span class="question-mark">?</span>;
             deps.push((path.file_name().unwrap().into(), file));
         }
         <span class="prelude-val">Ok</span>(deps)
@@ -496,7 +497,7 @@
                 .map(|x| x.to_string())
                 .unwrap_or_default(),
             content: USE_PACKAGE_REGEX
-                .replace_all(<span class="kw-2">&amp;</span><span class="self">self</span>.content, <span class="string">r&quot;% $0&quot;</span>)
+                .replace_all(<span class="kw-2">&amp;</span><span class="self">self</span>.content, <span class="string">r"% $0"</span>)
                 .to_string(),
         };
         template.to_string()
@@ -526,33 +527,33 @@
             .extension()
             .map(|s| s.to_string_lossy().to_string())
             .unwrap_or_default();
-        <span class="kw">if </span>ext.as_str() == <span class="string">&quot;asy&quot; </span>{
-            <span class="kw">let </span>dest = suffix.with_extension(<span class="string">&quot;pdf&quot;</span>);
+        <span class="kw">if </span>ext.as_str() == <span class="string">"asy" </span>{
+            <span class="kw">let </span>dest = suffix.with_extension(<span class="string">"pdf"</span>);
             <span class="kw">if </span><span class="self">self</span>.content.contains(dest.to_string_lossy().as_ref()) {
                 <span class="kw">let </span>file = AsyFile::compile(path, eval, booklet_name)
-                    .context(<span class="string">&quot;Failed to compile asy file&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to compile asy file"</span>)<span class="question-mark">?</span>;
                 deps.push((dest, file));
             }
         } <span class="kw">else </span>{
-            <span class="kw">if </span>ext == <span class="string">&quot;pdf&quot; </span>{
-                <span class="comment">// the .pdf file can be the logo of the contest (is present). If it&#39;s the logo it is
+            <span class="kw">if </span>ext == <span class="string">"pdf" </span>{
+                <span class="comment">// the .pdf file can be the logo of the contest (is present). If it's the logo it is
                 // always added.
                 </span><span class="kw">let </span>is_logo = <span class="kw">match </span>(path.file_name(), <span class="kw-2">&amp;</span>logo) {
                     (<span class="prelude-val">Some</span>(name), <span class="prelude-val">Some</span>(logo)) =&gt; name == logo,
                     <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
                 };
-                <span class="comment">// skip this file if it&#39;s not the logo and it&#39;s not a valid pdf dependency.
+                <span class="comment">// skip this file if it's not the logo and it's not a valid pdf dependency.
                 </span><span class="kw">if </span>!is_logo &amp;&amp; !Statement::is_valid_pdf_dependency(path)<span class="question-mark">? </span>{
                     <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 }
             }
             <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(
-                <span class="string">&quot;Dependency of {} at {:?}&quot;</span>,
+                <span class="string">"Dependency of {} at {:?}"</span>,
                 <span class="self">self</span>.config.name, suffix
             ));
             eval.dag
                 .provide_file(file.clone(), path)
-                .context(<span class="string">&quot;Failed to provide statement dependency&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide statement dependency"</span>)<span class="question-mark">?</span>;
             deps.push((suffix.into(), file));
         }
         <span class="prelude-val">Ok</span>(())
@@ -569,13 +570,13 @@
         <span class="comment">// resolve the symlinks
         </span><span class="kw">let </span>path = path
             .canonicalize()
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to get real path of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to get real path of {}"</span>, path.display()))<span class="question-mark">?</span>;
         <span class="comment">// ignore .pdf files that have the .asy source
-        </span><span class="kw">if </span>path.with_extension(<span class="string">&quot;asy&quot;</span>).exists() {
+        </span><span class="kw">if </span>path.with_extension(<span class="string">"asy"</span>).exists() {
             <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
         }
         <span class="comment">// ignore .pdf files that have the .tex source
-        </span><span class="kw">if </span>path.with_extension(<span class="string">&quot;tex&quot;</span>).exists() {
+        </span><span class="kw">if </span>path.with_extension(<span class="string">"tex"</span>).exists() {
             <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
         }
         <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
@@ -618,61 +619,61 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_is_valid_pdf_dependency_valid() {
         <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.pdf&quot;</span>);
-        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"test.pdf"</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">""</span>).unwrap();
         <span class="macro">assert!</span>(Statement::is_valid_pdf_dependency(<span class="kw-2">&amp;</span>path).unwrap());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_is_valid_pdf_dependency_asy() {
         <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.pdf&quot;</span>);
-        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
-        std::fs::write(path.with_extension(<span class="string">&quot;asy&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"test.pdf"</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">""</span>).unwrap();
+        std::fs::write(path.with_extension(<span class="string">"asy"</span>), <span class="string">""</span>).unwrap();
         <span class="macro">assert!</span>(!Statement::is_valid_pdf_dependency(<span class="kw-2">&amp;</span>path).unwrap());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_is_valid_pdf_dependency_tex() {
         <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.pdf&quot;</span>);
-        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
-        std::fs::write(path.with_extension(<span class="string">&quot;tex&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"test.pdf"</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">""</span>).unwrap();
+        std::fs::write(path.with_extension(<span class="string">"tex"</span>), <span class="string">""</span>).unwrap();
         <span class="macro">assert!</span>(!Statement::is_valid_pdf_dependency(<span class="kw-2">&amp;</span>path).unwrap());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_is_valid_pdf_dependency_invalid() {
-        <span class="macro">assert!</span>(Statement::is_valid_pdf_dependency(Path::new(<span class="string">&quot;/do/not/exists&quot;</span>)).is_err());
+        <span class="macro">assert!</span>(Statement::is_valid_pdf_dependency(Path::new(<span class="string">"/do/not/exists"</span>)).is_err());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_process_possible_dependency() {
         <span class="kw">let </span>tmpdir = TempDir::new().unwrap();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;test.tex&quot;</span>);
-        <span class="kw">let </span>logo = tmpdir.path().join(<span class="string">&quot;logo.pdf&quot;</span>);
-        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;lol&quot;</span>).unwrap();
-        std::fs::write(<span class="kw-2">&amp;</span>logo, <span class="string">&quot;lol&quot;</span>).unwrap();
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"test.tex"</span>);
+        <span class="kw">let </span>logo = tmpdir.path().join(<span class="string">"logo.pdf"</span>);
+        std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">"lol"</span>).unwrap();
+        std::fs::write(<span class="kw-2">&amp;</span>logo, <span class="string">"lol"</span>).unwrap();
         <span class="kw">let </span>statement = Statement::new(<span class="kw-2">&amp;</span>path, StatementConfig::default()).unwrap();
         <span class="kw">let </span>logo2 = <span class="prelude-val">Some</span>(logo);
 
         <span class="kw">let </span><span class="kw-2">mut </span>eval = EvaluationData::new(tmpdir.path()).<span class="number">0</span>;
-        <span class="kw">let </span>in_files = [<span class="string">&quot;logo.pdf&quot;</span>, <span class="string">&quot;test.png&quot;</span>, <span class="string">&quot;asset.pdf&quot;</span>];
-        <span class="kw">let </span>not_in_files = [<span class="string">&quot;asy_image.pdf&quot;</span>, <span class="string">&quot;tex_file.pdf&quot;</span>];
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;asy_image.asy&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
-        std::fs::write(tmpdir.path().join(<span class="string">&quot;tex_file.tex&quot;</span>), <span class="string">&quot;&quot;</span>).unwrap();
+        <span class="kw">let </span>in_files = [<span class="string">"logo.pdf"</span>, <span class="string">"test.png"</span>, <span class="string">"asset.pdf"</span>];
+        <span class="kw">let </span>not_in_files = [<span class="string">"asy_image.pdf"</span>, <span class="string">"tex_file.pdf"</span>];
+        std::fs::write(tmpdir.path().join(<span class="string">"asy_image.asy"</span>), <span class="string">""</span>).unwrap();
+        std::fs::write(tmpdir.path().join(<span class="string">"tex_file.tex"</span>), <span class="string">""</span>).unwrap();
 
         <span class="kw">let </span><span class="kw-2">mut </span>deps = <span class="macro">vec!</span>[];
         <span class="kw">for </span>file <span class="kw">in </span>in_files.iter().chain(not_in_files.iter()) {
             <span class="kw">let </span>path = tmpdir.path().join(file);
-            std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">&quot;&quot;</span>).unwrap();
+            std::fs::write(<span class="kw-2">&amp;</span>path, <span class="string">""</span>).unwrap();
             statement
                 .process_possible_dependency(
                     tmpdir.path(),
                     <span class="kw-2">&amp;</span>path,
                     <span class="kw-2">&amp;mut </span>deps,
                     <span class="kw-2">&amp;mut </span>eval,
-                    <span class="string">&quot;name&quot;</span>,
+                    <span class="string">"name"</span>,
                     <span class="kw-2">&amp;</span>logo2,
                 )
                 .unwrap();

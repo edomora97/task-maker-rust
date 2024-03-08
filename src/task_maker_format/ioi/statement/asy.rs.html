@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/asy.rs`."><title>asy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/asy.rs`."><title>asy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -256,36 +257,36 @@
         <span class="kw">let </span>booklet = booklet_name.to_string();
         <span class="kw">let </span>name = source_path
             .file_name()
-            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid path of asy file: {:?}&quot;</span>, source_path))<span class="question-mark">?
+            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Invalid path of asy file: {:?}"</span>, source_path))<span class="question-mark">?
             </span>.to_string_lossy()
             .to_string();
-        <span class="kw">let </span>source_file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Source of {}&quot;</span>, name));
+        <span class="kw">let </span>source_file = File::new(<span class="macro">format!</span>(<span class="string">"Source of {}"</span>, name));
 
         <span class="kw">let </span><span class="kw-2">mut </span>comp = Execution::new(
-            <span class="macro">format!</span>(<span class="string">&quot;Compilation of {}&quot;</span>, name),
-            ExecutionCommand::system(<span class="string">&quot;asy&quot;</span>),
+            <span class="macro">format!</span>(<span class="string">"Compilation of {}"</span>, name),
+            ExecutionCommand::system(<span class="string">"asy"</span>),
         );
         comp.args(<span class="macro">vec!</span>[
-            <span class="string">&quot;-f&quot;</span>,
-            <span class="string">&quot;pdf&quot;</span>,
-            <span class="string">&quot;-o&quot;</span>,
-            <span class="string">&quot;output.pdf&quot;</span>,
-            <span class="string">&quot;-localhistory&quot;</span>, <span class="comment">// This prevents &quot;failed to create directory /.asy.&quot;
-            </span><span class="string">&quot;source.asy&quot;</span>,
+            <span class="string">"-f"</span>,
+            <span class="string">"pdf"</span>,
+            <span class="string">"-o"</span>,
+            <span class="string">"output.pdf"</span>,
+            <span class="string">"-localhistory"</span>, <span class="comment">// This prevents "failed to create directory /.asy."
+            </span><span class="string">"source.asy"</span>,
         ]);
         comp.limits_mut()
             .read_only(<span class="bool-val">false</span>)
             .wall_time(<span class="number">10.0</span>) <span class="comment">// asy tends to deadlock on failure
             </span>.stack(<span class="number">8192 </span>* <span class="number">1024</span>) <span class="comment">// due to a libgc bug, asy may crash with unlimited stack
             </span>.allow_multiprocess()
-            .add_extra_readable_dir(<span class="string">&quot;/etc&quot;</span>)
+            .add_extra_readable_dir(<span class="string">"/etc"</span>)
             .mount_tmpfs(<span class="bool-val">true</span>)
             .mount_proc(<span class="bool-val">true</span>);
         comp.tag(Tag::Booklet.into());
-        comp.input(<span class="kw-2">&amp;</span>source_file, <span class="string">&quot;source.asy&quot;</span>, <span class="bool-val">false</span>);
+        comp.input(<span class="kw-2">&amp;</span>source_file, <span class="string">"source.asy"</span>, <span class="bool-val">false</span>);
         eval.dag
             .provide_file(source_file, <span class="kw-2">&amp;</span>source_path)
-            .context(<span class="string">&quot;Failed to provide any source file&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to provide any source file"</span>)<span class="question-mark">?</span>;
         <span class="macro">bind_exec_callbacks!</span>(
             eval,
             comp.uuid,
@@ -301,26 +302,26 @@
         )<span class="question-mark">?</span>;
         <span class="kw">let </span>deps = AsyFile::find_asy_deps(<span class="kw-2">&amp;</span>source_path).with_context(|| {
             <span class="macro">format!</span>(
-                <span class="string">&quot;Failed to find asy dependencies of {}&quot;</span>,
+                <span class="string">"Failed to find asy dependencies of {}"</span>,
                 source_path.display()
             )
         })<span class="question-mark">?</span>;
         <span class="kw">for </span>dep <span class="kw">in </span>deps {
             <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(
-                <span class="string">&quot;Dependency {} of {}&quot;</span>,
+                <span class="string">"Dependency {} of {}"</span>,
                 dep.sandbox_path.display(),
                 name
             ));
             comp.input(<span class="kw-2">&amp;</span>file, <span class="kw-2">&amp;</span>dep.sandbox_path, <span class="bool-val">false</span>);
             eval.dag
                 .provide_file(file, <span class="kw-2">&amp;</span>dep.local_path)
-                .context(<span class="string">&quot;Failed to provide asy dependency&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide asy dependency"</span>)<span class="question-mark">?</span>;
         }
-        <span class="kw">let </span>compiled = comp.output(<span class="string">&quot;output.pdf&quot;</span>);
+        <span class="kw">let </span>compiled = comp.output(<span class="string">"output.pdf"</span>);
         <span class="kw">if </span>eval.dag.data.config.copy_logs {
-            <span class="kw">let </span>log_dir = eval.task_root.join(<span class="string">&quot;bin/logs/asy&quot;</span>);
-            <span class="kw">let </span>stderr_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">&quot;{}.stderr.log&quot;</span>, name));
-            <span class="kw">let </span>stdout_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">&quot;{}.stdout.log&quot;</span>, name));
+            <span class="kw">let </span>log_dir = eval.task_root.join(<span class="string">"bin/logs/asy"</span>);
+            <span class="kw">let </span>stderr_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">"{}.stderr.log"</span>, name));
+            <span class="kw">let </span>stdout_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">"{}.stdout.log"</span>, name));
             eval.dag
                 .write_file_to_allow_fail(comp.stderr(), stderr_dest, <span class="bool-val">false</span>);
             eval.dag
@@ -333,9 +334,9 @@
             <span class="kw">let </span>name = name.clone();
             <span class="kw">move </span>|result| {
                 <span class="kw">if </span>!result.status.is_success() {
-                    <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;Failed to compile {}&quot;</span>, name));
+                    <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(<span class="string">"Failed to compile {}"</span>, name));
                     <span class="kw">if </span>result.status.is_internal_error() {
-                        diagnostic = diagnostic.with_help(<span class="string">&quot;Is &#39;asymptote&#39; installed?&quot;</span>);
+                        diagnostic = diagnostic.with_help(<span class="string">"Is 'asymptote' installed?"</span>);
                     }
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
                         diagnostic = diagnostic.with_help_attachment(stderr);
@@ -348,18 +349,18 @@
         eval.dag.add_execution(comp);
 
         <span class="kw">let </span><span class="kw-2">mut </span>crop = Execution::new(
-            <span class="macro">format!</span>(<span class="string">&quot;Crop of {}&quot;</span>, name),
-            ExecutionCommand::system(<span class="string">&quot;pdfcrop&quot;</span>),
+            <span class="macro">format!</span>(<span class="string">"Crop of {}"</span>, name),
+            ExecutionCommand::system(<span class="string">"pdfcrop"</span>),
         );
         crop.limits_mut()
             .read_only(<span class="bool-val">false</span>)
             .wall_time(<span class="number">10.0</span>) <span class="comment">// asy tends to deadlock on failure
             </span>.allow_multiprocess()
-            .add_extra_readable_dir(<span class="string">&quot;/etc&quot;</span>)
+            .add_extra_readable_dir(<span class="string">"/etc"</span>)
             .mount_tmpfs(<span class="bool-val">true</span>);
         crop.tag(Tag::Booklet.into());
-        crop.args(<span class="macro">vec!</span>[<span class="string">&quot;source.pdf&quot;</span>]);
-        crop.input(compiled, <span class="string">&quot;source.pdf&quot;</span>, <span class="bool-val">false</span>);
+        crop.args(<span class="macro">vec!</span>[<span class="string">"source.pdf"</span>]);
+        crop.input(compiled, <span class="string">"source.pdf"</span>, <span class="bool-val">false</span>);
         <span class="macro">bind_exec_callbacks!</span>(
             eval,
             crop.uuid,
@@ -373,16 +374,16 @@
             booklet,
             name
         )<span class="question-mark">?</span>;
-        <span class="kw">let </span>cropped = crop.output(<span class="string">&quot;source-crop.pdf&quot;</span>);
+        <span class="kw">let </span>cropped = crop.output(<span class="string">"source-crop.pdf"</span>);
         crop.capture_stderr(<span class="number">1024</span>);
         eval.dag.on_execution_done(<span class="kw-2">&amp;</span>crop.uuid, {
             <span class="kw">let </span>sender = eval.sender.clone();
             <span class="kw">move </span>|result| {
                 <span class="kw">if </span>!result.status.is_success() {
                     <span class="kw">let </span><span class="kw-2">mut </span>diagnostic =
-                        Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;Failed to crop pdf of {}&quot;</span>, name));
+                        Diagnostic::error(<span class="macro">format!</span>(<span class="string">"Failed to crop pdf of {}"</span>, name));
                     <span class="kw">if </span>result.status.is_internal_error() {
-                        diagnostic = diagnostic.with_help(<span class="string">&quot;Is &#39;pdfcrop&#39; installed?&quot;</span>);
+                        diagnostic = diagnostic.with_help(<span class="string">"Is 'pdfcrop' installed?"</span>);
                     }
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = result.stderr {
                         diagnostic = diagnostic.with_help_attachment(stderr);
@@ -399,14 +400,14 @@
 
     <span class="doccomment">/// Search for all the dependencies of an Asymptote source file.
     ///
-    /// This includes all the files in the source&#39;s directory.
+    /// This includes all the files in the source's directory.
     </span><span class="kw">fn </span>find_asy_deps(source_path: <span class="kw-2">&amp;</span>Path) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;AsyDependency&gt;, Error&gt; {
         <span class="kw">let </span>source_dir = source_path
             .parent()
-            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;File {:?} does not have a parent&quot;</span>, source_path))<span class="question-mark">?</span>;
+            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"File {:?} does not have a parent"</span>, source_path))<span class="question-mark">?</span>;
 
-        <span class="prelude-val">Ok</span>(glob::glob(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}/**/*&quot;</span>, source_dir.display()))
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;failed to glob {}/**/*&quot;</span>, source_dir.display()))<span class="question-mark">?
+        <span class="prelude-val">Ok</span>(glob::glob(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">"{}/**/*"</span>, source_dir.display()))
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"failed to glob {}/**/*"</span>, source_dir.display()))<span class="question-mark">?
             </span>.filter_map(|p| p.ok())
             .filter(|p| p != source_path)
             .filter(|p| !p.is_dir())
@@ -430,30 +431,30 @@
     </span><span class="kw">fn </span>test_find_asy_deps() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>path = tmpdir.path();
-        write(path.join(<span class="string">&quot;source.asy&quot;</span>), <span class="string">&quot;contents&quot;</span>).unwrap();
-        write(path.join(<span class="string">&quot;util.asy&quot;</span>), <span class="string">&quot;contents&quot;</span>).unwrap();
-        write(path.join(<span class="string">&quot;image.png&quot;</span>), <span class="string">&quot;contents&quot;</span>).unwrap();
-        std::fs::create_dir_all(path.join(<span class="string">&quot;assets&quot;</span>)).unwrap();
-        write(path.join(<span class="string">&quot;assets/wow.txt&quot;</span>), <span class="string">&quot;contents&quot;</span>).unwrap();
+        write(path.join(<span class="string">"source.asy"</span>), <span class="string">"contents"</span>).unwrap();
+        write(path.join(<span class="string">"util.asy"</span>), <span class="string">"contents"</span>).unwrap();
+        write(path.join(<span class="string">"image.png"</span>), <span class="string">"contents"</span>).unwrap();
+        std::fs::create_dir_all(path.join(<span class="string">"assets"</span>)).unwrap();
+        write(path.join(<span class="string">"assets/wow.txt"</span>), <span class="string">"contents"</span>).unwrap();
 
-        <span class="kw">let </span>deps = AsyFile::find_asy_deps(<span class="kw-2">&amp;</span>path.join(<span class="string">&quot;source.asy&quot;</span>)).unwrap();
+        <span class="kw">let </span>deps = AsyFile::find_asy_deps(<span class="kw-2">&amp;</span>path.join(<span class="string">"source.asy"</span>)).unwrap();
 
         assert_that(<span class="kw-2">&amp;</span>deps.len()).is_equal_to(<span class="number">3</span>);
         <span class="kw">let </span>dep = AsyDependency {
-            local_path: path.join(<span class="string">&quot;util.asy&quot;</span>),
-            sandbox_path: PathBuf::from(<span class="string">&quot;util.asy&quot;</span>),
+            local_path: path.join(<span class="string">"util.asy"</span>),
+            sandbox_path: PathBuf::from(<span class="string">"util.asy"</span>),
         };
-        <span class="macro">assert!</span>(deps.contains(<span class="kw-2">&amp;</span>dep), <span class="string">&quot;{:#?} vs {:#?}&quot;</span>, deps, dep);
+        <span class="macro">assert!</span>(deps.contains(<span class="kw-2">&amp;</span>dep), <span class="string">"{:#?} vs {:#?}"</span>, deps, dep);
         <span class="kw">let </span>dep = AsyDependency {
-            local_path: path.join(<span class="string">&quot;image.png&quot;</span>),
-            sandbox_path: PathBuf::from(<span class="string">&quot;image.png&quot;</span>),
+            local_path: path.join(<span class="string">"image.png"</span>),
+            sandbox_path: PathBuf::from(<span class="string">"image.png"</span>),
         };
-        <span class="macro">assert!</span>(deps.contains(<span class="kw-2">&amp;</span>dep), <span class="string">&quot;{:#?} vs {:#?}&quot;</span>, deps, dep);
+        <span class="macro">assert!</span>(deps.contains(<span class="kw-2">&amp;</span>dep), <span class="string">"{:#?} vs {:#?}"</span>, deps, dep);
         <span class="kw">let </span>dep = AsyDependency {
-            local_path: path.join(<span class="string">&quot;assets/wow.txt&quot;</span>),
-            sandbox_path: PathBuf::from(<span class="string">&quot;assets/wow.txt&quot;</span>),
+            local_path: path.join(<span class="string">"assets/wow.txt"</span>),
+            sandbox_path: PathBuf::from(<span class="string">"assets/wow.txt"</span>),
         };
-        <span class="macro">assert!</span>(deps.contains(<span class="kw-2">&amp;</span>dep), <span class="string">&quot;{:#?} vs {:#?}&quot;</span>, deps, dep);
+        <span class="macro">assert!</span>(deps.contains(<span class="kw-2">&amp;</span>dep), <span class="string">"{:#?} vs {:#?}"</span>, deps, dep);
     }
 }
 </code></pre></div></section></main></body></html>

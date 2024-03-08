@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/worker.rs`."><title>worker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/worker.rs`."><title>worker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -781,7 +782,7 @@
 </span><span class="attr">#[derive(Debug, thiserror::Error)]
 </span><span class="kw">enum </span>WorkerError {
     <span class="doccomment">/// A dependency key is missing from the list of file dependencies.
-    </span><span class="attr">#[error(<span class="string">&quot;missing key for dependency {uuid}&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"missing key for dependency {uuid}"</span>)]
     </span>MissingDependencyKey { uuid: Uuid },
 }
 
@@ -808,7 +809,7 @@
         sandbox_runner: R,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(Worker, WorkerConn), Error&gt;
     <span class="kw">where
-        </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
+        </span>R: SandboxRunner + <span class="lifetime">'static</span>,
     {
         <span class="kw">let </span>sandbox_path = sandbox_path.into();
         <span class="kw">let </span>sandbox_runner = Arc::new(sandbox_runner);
@@ -876,8 +877,8 @@
         <span class="kw">if let </span><span class="prelude-val">Some</span>(join_handle) = <span class="self">self</span>.current_sandbox_thread.take() {
             join_handle
                 .join()
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Sandbox thread panicked: {:?}&quot;</span>, e))
-                .context(<span class="string">&quot;Sandbox thread failed&quot;</span>)<span class="question-mark">?</span>;
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Sandbox thread panicked: {:?}"</span>, e))
+                .context(<span class="string">"Sandbox thread failed"</span>)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -885,15 +886,15 @@
     <span class="doccomment">/// The worker body, this function will block until the worker disconnects.
     </span><span class="attr">#[allow(clippy::cognitive_complexity)]
     </span><span class="kw">pub fn </span>work(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">trace!</span>(<span class="string">&quot;Worker {} ready, asking for work&quot;</span>, <span class="self">self</span>);
+        <span class="macro">trace!</span>(<span class="string">"Worker {} ready, asking for work"</span>, <span class="self">self</span>);
         <span class="self">self</span>.sender
             .send(WorkerClientMessage::GetWork)
-            .context(<span class="string">&quot;Failed to send GetWork&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to send GetWork"</span>)<span class="question-mark">?</span>;
 
         <span class="kw">loop </span>{
             <span class="kw">match </span><span class="self">self</span>.receiver.recv() {
                 <span class="prelude-val">Ok</span>(WorkerServerMessage::Work(job)) =&gt; {
-                    <span class="macro">trace!</span>(<span class="string">&quot;Worker {} got job: {:?}&quot;</span>, <span class="self">self</span>, job);
+                    <span class="macro">trace!</span>(<span class="string">"Worker {} got job: {:?}"</span>, <span class="self">self</span>, job);
                     <span class="macro">assert!</span>(<span class="self">self</span>.current_job.lock().unwrap().current_job.is_none());
                     <span class="self">self</span>.wait_sandbox()<span class="question-mark">?</span>;
                     <span class="kw">let </span><span class="kw-2">mut </span>missing_deps: HashMap&lt;FileStoreKey, Vec&lt;FileUuid&gt;&gt; = HashMap::new();
@@ -910,7 +911,7 @@
                                     </span><span class="kw">if </span>!missing_deps.contains_key(key) {
                                         <span class="self">self</span>.sender
                                             .send(WorkerClientMessage::AskFile(key.clone()))
-                                            .context(<span class="string">&quot;Failed to send AskFile to server&quot;</span>)<span class="question-mark">?</span>;
+                                            .context(<span class="string">"Failed to send AskFile to server"</span>)<span class="question-mark">?</span>;
                                     }
                                     missing_deps.entry(key.clone()).or_default().push(<span class="kw-2">*</span>input);
                                 }
@@ -931,22 +932,22 @@
                     }
                 }
                 <span class="prelude-val">Ok</span>(WorkerServerMessage::ProvideFile(key)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server sent file {:?}&quot;</span>, key);
+                    <span class="macro">info!</span>(<span class="string">"Server sent file {:?}"</span>, key);
                     <span class="kw">let </span>reader = ChannelFileIterator::new(<span class="kw-2">&amp;</span><span class="self">self</span>.receiver);
                     <span class="kw">let </span>handle = <span class="self">self
                         </span>.file_store
                         .store(<span class="kw-2">&amp;</span>key, reader)
-                        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to store server-provided file {}&quot;</span>, key))<span class="question-mark">?</span>;
+                        .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to store server-provided file {}"</span>, key))<span class="question-mark">?</span>;
                     <span class="kw">let </span>should_start = {
                         <span class="kw">let </span><span class="kw-2">mut </span>job = <span class="self">self</span>.current_job.lock().unwrap();
                         <span class="kw">let </span>uuids = job
                             .missing_deps
                             .remove(<span class="kw-2">&amp;</span>key)
-                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Server sent a not required dependency&quot;</span>))<span class="question-mark">?</span>;
+                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Server sent a not required dependency"</span>))<span class="question-mark">?</span>;
                         <span class="kw">for </span>uuid <span class="kw">in </span>uuids {
                             job.current_job
                                 .as_mut()
-                                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Received file while doing nothing&quot;</span>))<span class="question-mark">?
+                                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Received file while doing nothing"</span>))<span class="question-mark">?
                                 </span>.<span class="number">1
                                 </span>.insert(uuid, handle.clone());
                         }
@@ -957,7 +958,7 @@
                     }
                 }
                 <span class="prelude-val">Ok</span>(WorkerServerMessage::Exit) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Worker {} ({}) is asked to exit&quot;</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid);
+                    <span class="macro">info!</span>(<span class="string">"Worker {} ({}) is asked to exit"</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid);
                     <span class="kw">break</span>;
                 }
                 <span class="prelude-val">Ok</span>(WorkerServerMessage::KillJob(job)) =&gt; {
@@ -978,18 +979,18 @@
                     <span class="kw">let </span><span class="kw-2">mut </span>current_job = <span class="self">self</span>.current_job.lock().unwrap();
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(sender) = current_job.server_asked_files.take() {
                         <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = sender.send(files) {
-                            <span class="macro">error!</span>(<span class="string">&quot;Cannot send the list of files from the server to the worker manager: {:?}&quot;</span>, e);
+                            <span class="macro">error!</span>(<span class="string">"Cannot send the list of files from the server to the worker manager: {:?}"</span>, e);
                         }
                     } <span class="kw">else </span>{
-                        <span class="macro">error!</span>(<span class="string">&quot;Unexpected WorkerServerMessage::AskFiles&quot;</span>);
+                        <span class="macro">error!</span>(<span class="string">"Unexpected WorkerServerMessage::AskFiles"</span>);
                     }
                 }
                 <span class="prelude-val">Err</span>(e) =&gt; {
                     <span class="kw">let </span>cause = e.root_cause().to_string();
-                    <span class="kw">if </span>cause == <span class="string">&quot;receiving on an empty and disconnected channel&quot; </span>{
-                        <span class="macro">trace!</span>(<span class="string">&quot;Connection closed: {}&quot;</span>, cause);
+                    <span class="kw">if </span>cause == <span class="string">"receiving on an empty and disconnected channel" </span>{
+                        <span class="macro">trace!</span>(<span class="string">"Connection closed: {}"</span>, cause);
                     } <span class="kw">else </span>{
-                        <span class="macro">error!</span>(<span class="string">&quot;Connection error: {}&quot;</span>, cause);
+                        <span class="macro">error!</span>(<span class="string">"Connection error: {}"</span>, cause);
                     }
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(sandboxes) =
                         <span class="self">self</span>.current_job.lock().unwrap().current_sandboxes.as_ref()
@@ -1003,7 +1004,7 @@
             }
         }
         {
-            <span class="comment">// make sure that the worker doesn&#39;t wait for the server&#39;s response
+            <span class="comment">// make sure that the worker doesn't wait for the server's response
             </span><span class="kw">let </span><span class="kw-2">mut </span>current_job = <span class="self">self</span>.current_job.lock().unwrap();
             current_job.server_asked_files.take();
         }
@@ -1024,7 +1025,7 @@
         <span class="kw">let </span>job = current_job
             .current_job
             .as_ref()
-            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Worker job is gone&quot;</span>))<span class="question-mark">?</span>;
+            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Worker job is gone"</span>))<span class="question-mark">?</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>boxes = Vec::new();
         <span class="kw">let </span>group = <span class="kw-2">&amp;</span>job.<span class="number">0</span>.group;
         <span class="kw">let </span>fifo_dir = <span class="kw">if </span>group.fifo.is_empty() {
@@ -1032,7 +1033,7 @@
         </span>} <span class="kw">else </span>{
             <span class="kw">let </span>fifo_dir = TempDir::new_in(sandbox_path).with_context(|| {
                 <span class="macro">format!</span>(
-                    <span class="string">&quot;Failed to create temporary directory in {}&quot;</span>,
+                    <span class="string">"Failed to create temporary directory in {}"</span>,
                     sandbox_path.display()
                 )
             })<span class="question-mark">?</span>;
@@ -1041,7 +1042,7 @@
                     .path()
                     .join(fifo.sandbox_path().file_name().unwrap());
                 nix::unistd::mkfifo(<span class="kw-2">&amp;</span>path, nix::sys::stat::Mode::S_IRWXU)
-                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to create FIFO at {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to create FIFO at {}"</span>, path.display()))<span class="question-mark">?</span>;
             }
             <span class="prelude-val">Some</span>(fifo_dir)
         };
@@ -1067,7 +1068,7 @@
     <span class="kw">let </span>sender = sender.clone();
     <span class="kw">let </span>description = job.group.description.clone();
     <span class="kw">let </span>join_handle = std::thread::Builder::new()
-        .name(<span class="macro">format!</span>(<span class="string">&quot;Sandbox group manager for {}&quot;</span>, description))
+        .name(<span class="macro">format!</span>(<span class="string">"Sandbox group manager for {}"</span>, description))
         .spawn(<span class="kw">move </span>|| {
             sandbox_group_manager(
                 current_job,
@@ -1078,7 +1079,7 @@
                 runner,
                 fifo_dir,
             )
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Sandbox group for {} failed&quot;</span>, description))
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Sandbox group for {} failed"</span>, description))
             <span class="comment">// FIXME: find a better way to propagate the error to the server
             </span>.unwrap();
         })<span class="question-mark">?</span>;
@@ -1105,7 +1106,7 @@
     <span class="kw">let </span><span class="kw-2">mut </span>outputs = HashMap::new();
     <span class="kw">let </span><span class="kw-2">mut </span>output_paths = HashMap::new();
 
-    <span class="comment">// in case of simple executions there&#39;s no need to spawn the sandbox in a different thread and
+    <span class="comment">// in case of simple executions there's no need to spawn the sandbox in a different thread and
     // then join from here
     </span><span class="kw">if </span>job.group.executions.len() == <span class="number">1 </span>{
         <span class="kw">let </span>sandbox = sandboxes.pop().unwrap();
@@ -1143,7 +1144,7 @@
                     index,
                     group_sender.clone(),
                 )
-                .context(<span class="string">&quot;Failed to spawn sandbox thread&quot;</span>)<span class="question-mark">?</span>,
+                .context(<span class="string">"Failed to spawn sandbox thread"</span>)<span class="question-mark">?</span>,
             );
         }
 
@@ -1156,7 +1157,7 @@
                     <span class="kw">let </span>sandbox = <span class="kw-2">&amp;</span>sandboxes[index];
 
                     <span class="kw">let </span><span class="kw-2">mut </span>result = compute_execution_result(exec, result, sandbox);
-                    <span class="comment">// if the process didn&#39;t exit successfully, kill the remaining sandboxes
+                    <span class="comment">// if the process didn't exit successfully, kill the remaining sandboxes
                     </span><span class="kw">if </span>!result.status.is_success() {
                         <span class="kw">for </span>(i, (res, sandbox)) <span class="kw">in </span>results.iter().zip(sandboxes.iter()).enumerate()
                         {
@@ -1178,14 +1179,14 @@
                     results[index] = <span class="prelude-val">Some</span>(result);
                     missing -= <span class="number">1</span>;
                 }
-                <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">&quot;The sandboxes didn&#39;t exit well&quot;</span>),
+                <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">"The sandboxes didn't exit well"</span>),
             }
         }
         <span class="kw">for </span>handle <span class="kw">in </span>handles {
             handle
                 .join()
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Sandbox thread panicked: {:?}&quot;</span>, e))<span class="question-mark">?
-                </span>.context(<span class="string">&quot;Sandbox thread failed&quot;</span>)<span class="question-mark">?</span>;
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Sandbox thread panicked: {:?}"</span>, e))<span class="question-mark">?
+                </span>.context(<span class="string">"Sandbox thread failed"</span>)<span class="question-mark">?</span>;
         }
     }
     <span class="comment">// tell the server the results and the list of produced files
@@ -1194,7 +1195,7 @@
             results.into_iter().map(Option::unwrap).collect(),
             outputs.clone(),
         ))
-        .context(<span class="string">&quot;Failed to send WorkerDone&quot;</span>)<span class="question-mark">?</span>;
+        .context(<span class="string">"Failed to send WorkerDone"</span>)<span class="question-mark">?</span>;
     <span class="comment">// wait for the list of files to send
     </span><span class="kw">match </span>server_asked_files_receiver.recv() {
         <span class="prelude-val">Ok</span>(missing_files) =&gt; {
@@ -1202,12 +1203,12 @@
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(key) = outputs.get(<span class="kw-2">&amp;</span>uuid) {
                     sender
                         .send(WorkerClientMessage::ProvideFile(uuid, key.clone()))
-                        .context(<span class="string">&quot;Failed to send ProvideFile&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to send ProvideFile"</span>)<span class="question-mark">?</span>;
                     ChannelFileSender::send(<span class="kw-2">&amp;</span>output_paths[<span class="kw-2">&amp;</span>uuid], <span class="kw-2">&amp;</span>sender)
-                        .context(<span class="string">&quot;Failed to send missing file&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to send missing file"</span>)<span class="question-mark">?</span>;
                 } <span class="kw">else </span>{
                     <span class="macro">error!</span>(
-                        <span class="string">&quot;Server asked for file {}, which is not known to the worker&quot;</span>,
+                        <span class="string">"Server asked for file {}, which is not known to the worker"</span>,
                         uuid
                     );
                 }
@@ -1218,7 +1219,7 @@
             // not bother of responding, letting the worker crash will crash the local executor.
             // So just cleanup and exit without asking for more jobs.
             </span><span class="macro">warn!</span>(
-                <span class="string">&quot;List of missing files not received from the server: {:?}&quot;</span>,
+                <span class="string">"List of missing files not received from the server: {:?}"</span>,
                 e
             );
             <span class="kw">let </span><span class="kw-2">mut </span>job = current_job.lock().unwrap();
@@ -1249,7 +1250,7 @@
     group_sender: Sender&lt;(usize, SandboxResult)&gt;,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;JoinHandle&lt;<span class="prelude-ty">Result</span>&lt;(), Error&gt;&gt;, Error&gt; {
     <span class="prelude-val">Ok</span>(thread::Builder::new()
-        .name(<span class="macro">format!</span>(<span class="string">&quot;Sandbox of {}&quot;</span>, description))
+        .name(<span class="macro">format!</span>(<span class="string">"Sandbox of {}"</span>, description))
         .spawn(<span class="kw">move </span>|| {
             <span class="kw">let </span>res = <span class="kw">match </span>sandbox.run(runner.as_ref()) {
                 <span class="prelude-val">Ok</span>(res) =&gt; res,
@@ -1281,11 +1282,11 @@
             <span class="kw">let </span>status = <span class="kw">match </span>(<span class="kw-2">&amp;</span>stdout, <span class="kw-2">&amp;</span>stderr) {
                 (<span class="prelude-val">Ok</span>(<span class="kw">_</span>), <span class="prelude-val">Ok</span>(<span class="kw">_</span>)) =&gt; execution.status(exit_status, signal, <span class="kw-2">&amp;</span>resources),
                 (<span class="prelude-val">Err</span>(err), <span class="kw">_</span>) =&gt; ExecutionStatus::internal_error(<span class="macro">format!</span>(
-                    <span class="string">&quot;Failed to read stdout file: {:?}&quot;</span>,
+                    <span class="string">"Failed to read stdout file: {:?}"</span>,
                     err
                 )),
                 (<span class="kw">_</span>, <span class="prelude-val">Err</span>(err)) =&gt; ExecutionStatus::internal_error(<span class="macro">format!</span>(
-                    <span class="string">&quot;Failed to read stderr file: {:?}&quot;</span>,
+                    <span class="string">"Failed to read stderr file: {:?}"</span>,
                     err
                 )),
             };
@@ -1327,7 +1328,7 @@
                 }
                 <span class="prelude-val">Err</span>(e) =&gt; {
                     <span class="kw-2">*</span>status = ExecutionStatus::internal_error(<span class="macro">format!</span>(
-                        <span class="string">&quot;Failed to get store key for {} at {}: {:?}&quot;</span>,
+                        <span class="string">"Failed to get store key for {} at {}: {:?}"</span>,
                         file,
                         path.display(),
                         e
@@ -1336,7 +1337,7 @@
             }
         } <span class="kw">else </span>{
             outputs.insert(file, FileStoreKey::from_content(<span class="kw-2">&amp;</span>[]));
-            output_paths.insert(file, <span class="string">&quot;/dev/null&quot;</span>.into());
+            output_paths.insert(file, <span class="string">"/dev/null"</span>.into());
         }
     };
 
@@ -1377,13 +1378,13 @@
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>WorkerConn {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">&quot;&#39;{}&#39; ({})&quot;</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid)
+        <span class="macro">write!</span>(f, <span class="string">"'{}' ({})"</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid)
     }
 }
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>Worker {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">&quot;&#39;{}&#39; ({})&quot;</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid)
+        <span class="macro">write!</span>(f, <span class="string">"'{}' ({})"</span>, <span class="self">self</span>.name, <span class="self">self</span>.uuid)
     }
 }
 
@@ -1392,23 +1393,23 @@
     runner: Arc&lt;<span class="kw">dyn </span>SandboxRunner&gt;,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
     <span class="kw">let </span>execution = Execution::new(
-        <span class="string">&quot;Execution to check if sandbox is supported&quot;</span>,
-        ExecutionCommand::system(<span class="string">&quot;true&quot;</span>),
+        <span class="string">"Execution to check if sandbox is supported"</span>,
+        ExecutionCommand::system(<span class="string">"true"</span>),
     );
     <span class="kw">let </span>sandbox = Sandbox::new(sandbox_path, <span class="kw-2">&amp;</span>execution, <span class="kw-2">&amp;</span>Default::default(), <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
     <span class="kw">let </span>result = sandbox.run(runner.as_ref())<span class="question-mark">?</span>;
     <span class="kw">match </span>result {
-        SandboxResult::Failed { error } =&gt; <span class="macro">bail!</span>(<span class="string">&quot;Sandbox failed: {}&quot;</span>, error),
+        SandboxResult::Failed { error } =&gt; <span class="macro">bail!</span>(<span class="string">"Sandbox failed: {}"</span>, error),
         SandboxResult::Success {
             exit_status,
             signal,
             ..
         } =&gt; {
             <span class="kw">if </span>exit_status != <span class="number">0 </span>{
-                <span class="macro">bail!</span>(<span class="string">&quot;Sandbox failed: exited with {}&quot;</span>, exit_status);
+                <span class="macro">bail!</span>(<span class="string">"Sandbox failed: exited with {}"</span>, exit_status);
             }
             <span class="kw">if let </span><span class="prelude-val">Some</span>((signal, name)) = signal {
-                <span class="macro">bail!</span>(<span class="string">&quot;Sandbox failed: exited with signal {} ({})&quot;</span>, signal, name);
+                <span class="macro">bail!</span>(<span class="string">"Sandbox failed: exited with signal {} ({})"</span>, signal, name);
             }
         }
     }

@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/check_dag.rs`."><title>check_dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/check_dag.rs`."><title>check_dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -294,9 +295,9 @@
 <span class="doccomment">/// An error in the DAG structure.
 </span><span class="attr">#[derive(Debug, Error)]
 </span><span class="kw">pub enum </span>DAGError {
-    <span class="doccomment">/// A file is used as input in an execution but it&#39;s missing, or a callback is registered on a
-    /// file but it&#39;s missing.
-    </span><span class="attr">#[error(<span class="string">&quot;missing file {description} ({uuid})&quot;</span>)]
+    <span class="doccomment">/// A file is used as input in an execution but it's missing, or a callback is registered on a
+    /// file but it's missing.
+    </span><span class="attr">#[error(<span class="string">"missing file {description} ({uuid})"</span>)]
     </span>MissingFile {
         <span class="doccomment">/// The UUID of the missing file.
         </span>uuid: FileUuid,
@@ -304,47 +305,47 @@
         </span>description: String,
     },
     <span class="doccomment">/// Stdout/Stderr capture is requested, but a UUID for them is missing.
-    </span><span class="attr">#[error(<span class="string">&quot;missing UUID for captured {stream} on execution {uuid} ({description})&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"missing UUID for captured {stream} on execution {uuid} ({description})"</span>)]
     </span>InvalidCapture {
-        <span class="doccomment">/// Either &quot;stdout&quot; or &quot;stderr&quot;.
+        <span class="doccomment">/// Either "stdout" or "stderr".
         </span>stream: String,
         <span class="doccomment">/// The UUID of the missing file.
         </span>uuid: ExecutionUuid,
         <span class="doccomment">/// The description of the missing file.
         </span>description: String,
     },
-    <span class="doccomment">/// A callback is registered on an execution but it&#39;s missing.
-    </span><span class="attr">#[error(<span class="string">&quot;missing execution {uuid}&quot;</span>)]
+    <span class="doccomment">/// A callback is registered on an execution but it's missing.
+    </span><span class="attr">#[error(<span class="string">"missing execution {uuid}"</span>)]
     </span>MissingExecution {
         <span class="doccomment">/// The UUID of the missing execution.
         </span>uuid: ExecutionUuid,
     },
     <span class="doccomment">/// There is a dependency cycle in the DAG.
-    </span><span class="attr">#[error(<span class="string">&quot;detected dependency cycle, &#39;{description}&#39; is in the cycle&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"detected dependency cycle, '{description}' is in the cycle"</span>)]
     </span>CycleDetected {
         <span class="doccomment">/// The description of an execution inside the cycle.
         </span>description: String,
     },
     <span class="doccomment">/// There is a duplicate file UUID.
-    </span><span class="attr">#[error(<span class="string">&quot;duplicate file UUID {uuid}&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"duplicate file UUID {uuid}"</span>)]
     </span>DuplicateFileUUID {
         <span class="doccomment">/// The duplicated UUID.
         </span>uuid: FileUuid,
     },
     <span class="doccomment">/// There is a duplicate Fifo UUID.
-    </span><span class="attr">#[error(<span class="string">&quot;duplicate FIFO UUID {uuid}&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"duplicate FIFO UUID {uuid}"</span>)]
     </span>DuplicateFifoUUID {
         <span class="doccomment">/// The duplicated UUID.
         </span>uuid: FifoUuid,
     },
     <span class="doccomment">/// There is a duplicate execution UUID.
-    </span><span class="attr">#[error(<span class="string">&quot;duplicate execution UUID {uuid}&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"duplicate execution UUID {uuid}"</span>)]
     </span>DuplicateExecutionUUID {
         <span class="doccomment">/// The duplicated UUID.
         </span>uuid: FileUuid,
     },
     <span class="doccomment">/// There is an invalid execution group.
-    </span><span class="attr">#[error(<span class="string">&quot;empty execution group {uuid}&quot;</span>)]
+    </span><span class="attr">#[error(<span class="string">"empty execution group {uuid}"</span>)]
     </span>EmptyGroup {
         <span class="doccomment">/// The UUID of the execution group.
         </span>uuid: ExecutionGroupUuid,
@@ -352,7 +353,7 @@
 }
 
 <span class="doccomment">/// Validate the DAG checking if all the required pieces are present and they actually make a DAG.
-/// It&#39;s checked that no duplicated UUID are present, no files are missing, all the executions are
+/// It's checked that no duplicated UUID are present, no files are missing, all the executions are
 /// reachable and no cycles are present.
 </span><span class="kw">pub fn </span>check_dag(dag: <span class="kw-2">&amp;</span>ExecutionDAGData, callbacks: <span class="kw-2">&amp;</span>ExecutionDAGWatchSet) -&gt; <span class="prelude-ty">Result</span>&lt;(), DAGError&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>dependencies: HashMap&lt;FileUuid, Vec&lt;ExecutionGroupUuid&gt;&gt; = HashMap::new();
@@ -389,14 +390,14 @@
             }
             <span class="kw">if </span>exec.capture_stdout.is_some() &amp;&amp; exec.stdout.is_none() {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(DAGError::InvalidCapture {
-                    stream: <span class="string">&quot;stdout&quot;</span>.to_string(),
+                    stream: <span class="string">"stdout"</span>.to_string(),
                     uuid: exec.uuid,
                     description: exec.description.clone(),
                 });
             }
             <span class="kw">if </span>exec.capture_stderr.is_some() &amp;&amp; exec.stderr.is_none() {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(DAGError::InvalidCapture {
-                    stream: <span class="string">&quot;stderr&quot;</span>.to_string(),
+                    stream: <span class="string">"stderr"</span>.to_string(),
                     uuid: exec.uuid,
                     description: exec.description.clone(),
                 });
@@ -428,10 +429,10 @@
             <span class="kw">for </span>group_uuid <span class="kw">in </span>dependencies[<span class="kw-2">&amp;</span>file].iter() {
                 <span class="kw">let </span>num_deps = num_dependencies
                     .get_mut(group_uuid)
-                    .expect(<span class="string">&quot;num_dependencies of an unknown execution group&quot;</span>);
+                    .expect(<span class="string">"num_dependencies of an unknown execution group"</span>);
                 <span class="macro">assert_ne!</span>(
                     <span class="kw-2">*</span>num_deps, <span class="number">0</span>,
-                    <span class="string">&quot;num_dependencies is going to be negative for {}&quot;</span>,
+                    <span class="string">"num_dependencies is going to be negative for {}"</span>,
                     group_uuid
                 );
                 <span class="kw-2">*</span>num_deps -= <span class="number">1</span>;
@@ -444,7 +445,7 @@
             <span class="kw">let </span>group = dag
                 .execution_groups
                 .get(<span class="kw-2">&amp;</span>group_uuid)
-                .expect(<span class="string">&quot;No such exec group&quot;</span>);
+                .expect(<span class="string">"No such exec group"</span>);
             <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
                 <span class="kw">for </span>file <span class="kw">in </span>exec.outputs().into_iter() {
                     ready_files.push_back(file);
@@ -463,7 +464,7 @@
                 <span class="kw">if </span>!known_files.contains(dep) {
                     <span class="kw">return </span><span class="prelude-val">Err</span>(DAGError::MissingFile {
                         uuid: <span class="kw-2">*</span>dep,
-                        description: <span class="macro">format!</span>(<span class="string">&quot;Dependency of &#39;{}&#39;&quot;</span>, exec.description),
+                        description: <span class="macro">format!</span>(<span class="string">"Dependency of '{}'"</span>, exec.description),
                     });
                 }
             }
@@ -477,7 +478,7 @@
         <span class="kw">if </span>!known_files.contains(file) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(DAGError::MissingFile {
                 uuid: <span class="kw-2">*</span>file,
-                description: <span class="string">&quot;File required by a callback&quot;</span>.to_owned(),
+                description: <span class="string">"File required by a callback"</span>.to_owned(),
             });
         }
     }
@@ -498,8 +499,8 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_missing_file() {
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        <span class="kw">let </span>file = File::new(<span class="string">"file"</span>);
         exec.stdin(file);
         dag.add_execution(exec);
         <span class="macro">assert!</span>(check_dag(<span class="kw-2">&amp;</span>dag.data, <span class="kw-2">&amp;</span>ExecutionDAGWatchSet::default()).is_err());
@@ -508,7 +509,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_missing_file_callback() {
         <span class="kw">let </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        <span class="kw">let </span>file = File::new(<span class="string">"file"</span>);
         <span class="kw">let </span>watch = ExecutionDAGWatchSet {
             executions: Default::default(),
             files: [file.uuid].iter().cloned().collect(),
@@ -520,7 +521,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_missing_execution_callback() {
         <span class="kw">let </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>watch = ExecutionDAGWatchSet {
             executions: [exec.uuid].iter().cloned().collect(),
             files: Default::default(),
@@ -532,7 +533,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_cycle_self() {
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>stdout = exec.stdout();
         exec.stdin(stdout);
         dag.add_execution(exec);
@@ -542,8 +543,8 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_cycle_double() {
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec1.stdin(exec2.stdout());
         exec2.stdin(exec1.stdout());
         dag.add_execution(exec1);
@@ -554,9 +555,9 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_duplicate_file() {
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let </span>file = File::new(<span class="string">&quot;file&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        <span class="kw">let </span>file = File::new(<span class="string">"file"</span>);
         exec1.stdout = <span class="prelude-val">Some</span>(file.clone());
         exec2.stdout = <span class="prelude-val">Some</span>(file);
         dag.add_execution(exec1);
@@ -567,10 +568,10 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_duplicate_file_provided() {
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;exec&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"exec"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>file = exec.stdout();
         dag.add_execution(exec);
-        dag.provide_file(file, <span class="string">&quot;/dev/null&quot;</span>).unwrap();
+        dag.provide_file(file, <span class="string">"/dev/null"</span>).unwrap();
         <span class="macro">assert!</span>(check_dag(<span class="kw-2">&amp;</span>dag.data, <span class="kw-2">&amp;</span>ExecutionDAGWatchSet::default()).is_err());
     }
 }

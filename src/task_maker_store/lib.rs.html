@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-store/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-store/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -824,9 +825,9 @@
 //! # use tempfile::TempDir;
 //! # fn main() -&gt; Result&lt;(), Error&gt; {
 //! # let tmp = TempDir::new().unwrap();
-//! # let store_dir = tmp.path().join(&quot;store&quot;);
-//! # let path = tmp.path().join(&quot;file.txt&quot;);
-//! # fs::write(&amp;path, &quot;hello world&quot;)?;
+//! # let store_dir = tmp.path().join("store");
+//! # let path = tmp.path().join("file.txt");
+//! # fs::write(&amp;path, "hello world")?;
 //! // make a new store based on a directory, this will lock if the store is already in use
 //! let store = FileStore::new(store_dir, 1000, 1000)?;
 //! // compute the key of a file and make an iterator over its content
@@ -868,9 +869,9 @@
 <span class="doccomment">/// Whether to check the file integrity on the store before getting it.
 </span><span class="kw">const </span>INTEGRITY_CHECKS_ENABLED: bool = <span class="bool-val">false</span>;
 <span class="doccomment">/// The name of the lock of the file store.
-</span><span class="kw">const </span>STORE_LOCK_FILE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;exclusive.lock&quot;</span>;
+</span><span class="kw">const </span>STORE_LOCK_FILE: <span class="kw-2">&amp;</span>str = <span class="string">"exclusive.lock"</span>;
 <span class="doccomment">/// The name of the index of the file store.
-</span><span class="kw">const </span>STORE_INDEX_FILE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;index.bin&quot;</span>;
+</span><span class="kw">const </span>STORE_INDEX_FILE: <span class="kw-2">&amp;</span>str = <span class="string">"index.bin"</span>;
 
 <span class="doccomment">/// Container with the ref counts of all the handles still alive.
 </span><span class="attr">#[derive(Debug)]
@@ -950,28 +951,28 @@
         min_store_size: u64,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;FileStore, Error&gt; {
         <span class="kw">let </span>base_path = base_path.into();
-        <span class="macro">debug!</span>(<span class="string">&quot;Opening file store at {}&quot;</span>, base_path.display());
+        <span class="macro">debug!</span>(<span class="string">"Opening file store at {}"</span>, base_path.display());
         std::fs::create_dir_all(<span class="kw-2">&amp;</span>base_path).with_context(|| {
             <span class="macro">format!</span>(
-                <span class="string">&quot;Failed to create storage directory at {}&quot;</span>,
+                <span class="string">"Failed to create storage directory at {}"</span>,
                 base_path.display()
             )
         })<span class="question-mark">?</span>;
         <span class="kw">let </span>lock_path = base_path.join(STORE_LOCK_FILE);
         <span class="kw">let </span><span class="kw-2">mut </span>lock = LockFile::open(<span class="kw-2">&amp;</span>lock_path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to create lock file at {}&quot;</span>, lock_path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to create lock file at {}"</span>, lock_path.display()))<span class="question-mark">?</span>;
 
         <span class="kw">if </span>!lock
             .try_lock()
-            .context(<span class="string">&quot;Failed to obtain exclusive lock on storage&quot;</span>)<span class="question-mark">?
+            .context(<span class="string">"Failed to obtain exclusive lock on storage"</span>)<span class="question-mark">?
         </span>{
-            <span class="macro">warn!</span>(<span class="string">&quot;Store locked... waiting&quot;</span>);
+            <span class="macro">warn!</span>(<span class="string">"Store locked... waiting"</span>);
             lock.lock()
-                .context(<span class="string">&quot;Failed to obtain exclusive lock on storage&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to obtain exclusive lock on storage"</span>)<span class="question-mark">?</span>;
         }
 
         <span class="kw">let </span>index = FileStoreIndex::load(base_path.join(STORE_INDEX_FILE))
-            .context(<span class="string">&quot;Failed to load storage index&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to load storage index"</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(FileStore {
             base_path,
             _lock: lock,
@@ -998,19 +999,19 @@
     /// # use tempfile::TempDir;
     /// # fn main() -&gt; Result&lt;(), Error&gt; {
     /// # let tmp = TempDir::new().unwrap();
-    /// # let store_dir = tmp.path().join(&quot;store&quot;);
-    /// # let path = tmp.path().join(&quot;file.txt&quot;);
-    /// # fs::write(&amp;path, &quot;hello world&quot;)?;
+    /// # let store_dir = tmp.path().join("store");
+    /// # let path = tmp.path().join("file.txt");
+    /// # fs::write(&amp;path, "hello world")?;
     /// let store = FileStore::new(store_dir, 1000, 1000)?;
     /// // compute the key of a file and make an iterator over its content
     /// let key = FileStoreKey::from_file(&amp;path)?;
     /// let iter = ReadFileIterator::new(&amp;path)?;
     /// // store the file inside the file store. The file will be kept at least until handle is alive
     /// let handle = store.store(&amp;key, iter)?;
-    /// // here it&#39;s guaranteed that the file won&#39;t be flushed away
+    /// // here it's guaranteed that the file won't be flushed away
     /// assert!(handle.path().exists());
     /// drop(handle);
-    /// // here it&#39;s not guaranteed
+    /// // here it's not guaranteed
     /// # Ok(())
     /// # }
     /// ```
@@ -1019,53 +1020,53 @@
         </span>I: IntoIterator&lt;Item = Vec&lt;u8&gt;&gt;,
     {
         <span class="kw">let </span>path = <span class="self">self</span>.key_to_path(key);
-        <span class="macro">trace!</span>(<span class="string">&quot;Storing {:?}&quot;</span>, path);
+        <span class="macro">trace!</span>(<span class="string">"Storing {:?}"</span>, path);
         <span class="comment">// make the key to avoid racing while writing
         </span><span class="kw">let </span>handle = FileStoreHandle::new(<span class="self">self</span>, key);
         <span class="kw">if </span>path.exists() {
-            <span class="macro">trace!</span>(<span class="string">&quot;File {:?} already exists&quot;</span>, path);
+            <span class="macro">trace!</span>(<span class="string">"File {:?} already exists"</span>, path);
             content.into_iter().last(); <span class="comment">// consume all the iterator
         </span>} <span class="kw">else </span>{
             <span class="comment">// assuming moving files is atomic this should be MT-safe
             </span><span class="kw">let </span>dir = path.parent().unwrap();
             std::fs::create_dir_all(dir)
-                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot create directory at {}&quot;</span>, dir.display()))<span class="question-mark">?</span>;
+                .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot create directory at {}"</span>, dir.display()))<span class="question-mark">?</span>;
             <span class="kw">let </span>tmpdir = tempfile::TempDir::new_in(path.parent().unwrap())
-                .context(<span class="string">&quot;Failed to create temporary directory for storing the file&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let </span>tmpfile_path = tmpdir.path().join(<span class="string">&quot;file&quot;</span>);
+                .context(<span class="string">"Failed to create temporary directory for storing the file"</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>tmpfile_path = tmpdir.path().join(<span class="string">"file"</span>);
             <span class="kw">let </span><span class="kw-2">mut </span>tmpfile =
-                std::fs::File::create(<span class="kw-2">&amp;</span>tmpfile_path).context(<span class="string">&quot;Failed to create temporary file&quot;</span>)<span class="question-mark">?</span>;
+                std::fs::File::create(<span class="kw-2">&amp;</span>tmpfile_path).context(<span class="string">"Failed to create temporary file"</span>)<span class="question-mark">?</span>;
             <span class="kw">if </span>!content
                 .into_iter()
                 .map(|data| tmpfile.write_all(<span class="kw-2">&amp;</span>data))
                 .all(|r| r.is_ok())
             {
-                <span class="macro">bail!</span>(<span class="string">&quot;Failed to store file&quot;</span>);
+                <span class="macro">bail!</span>(<span class="string">"Failed to store file"</span>);
             }
             std::fs::rename(<span class="kw-2">&amp;</span>tmpfile_path, <span class="kw-2">&amp;</span>path).with_context(|| {
                 <span class="macro">format!</span>(
-                    <span class="string">&quot;Failed to rename {} -&gt; {}&quot;</span>,
+                    <span class="string">"Failed to rename {} -&gt; {}"</span>,
                     tmpfile_path.display(),
                     path.display()
                 )
             })<span class="question-mark">?</span>;
-            FileStore::mark_readonly(<span class="kw-2">&amp;</span>path).context(<span class="string">&quot;Failed to mark file as readonly&quot;</span>)<span class="question-mark">?</span>;
+            FileStore::mark_readonly(<span class="kw-2">&amp;</span>path).context(<span class="string">"Failed to mark file as readonly"</span>)<span class="question-mark">?</span>;
             {
                 <span class="kw">let </span><span class="kw-2">mut </span>index = <span class="self">self</span>.index.lock().unwrap();
                 index
                     .add(key.clone(), path)
-                    .context(<span class="string">&quot;Failed to add file to index&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to add file to index"</span>)<span class="question-mark">?</span>;
                 <span class="self">self</span>.maybe_flush(<span class="kw-2">&amp;mut </span>index)<span class="question-mark">?</span>;
                 <span class="comment">// FIXME: maybe this can be done less frequently
                 </span>index
                     .store(<span class="self">self</span>.base_path.join(STORE_INDEX_FILE))
-                    .context(<span class="string">&quot;Failed to store the index to file&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to store the index to file"</span>)<span class="question-mark">?</span>;
             }
         }
         <span class="prelude-val">Ok</span>(handle)
     }
 
-    <span class="doccomment">/// Returns an handle to the file with that key or `None` if it&#39;s not in the
+    <span class="doccomment">/// Returns an handle to the file with that key or `None` if it's not in the
     /// [`FileStore`](struct.FileStore.html).
     ///
     /// This requires mutability because it will actively fix any corrupted or missing files in the
@@ -1081,16 +1082,16 @@
     /// # use tempfile::TempDir;
     /// # fn main() -&gt; Result&lt;(), Error&gt; {
     /// # let tmp = TempDir::new().unwrap();
-    /// # let store_dir = tmp.path().join(&quot;store&quot;);
-    /// # let path = tmp.path().join(&quot;file.txt&quot;);
-    /// # fs::write(&amp;path, &quot;hello world&quot;)?;
+    /// # let store_dir = tmp.path().join("store");
+    /// # let path = tmp.path().join("file.txt");
+    /// # fs::write(&amp;path, "hello world")?;
     /// let store = FileStore::new(store_dir, 1000, 1000)?;
     /// let key = FileStoreKey::from_file(&amp;path)?;
     /// # let iter = ReadFileIterator::new(&amp;path)?;
     /// # let handle = store.store(&amp;key, iter)?;
     /// let handle = store.get(&amp;key);
     /// match handle {
-    ///     None =&gt; panic!(&quot;The file is gone!&quot;),
+    ///     None =&gt; panic!("The file is gone!"),
     ///     Some(handle) =&gt; assert!(handle.path().exists())
     /// }
     /// # Ok(())
@@ -1102,9 +1103,9 @@
             <span class="kw">return </span><span class="prelude-val">None</span>;
         }
         <span class="kw">if </span>INTEGRITY_CHECKS_ENABLED &amp;&amp; !<span class="self">self</span>.check_integrity(key) {
-            <span class="macro">warn!</span>(<span class="string">&quot;File {:?} failed the integrity check&quot;</span>, path);
+            <span class="macro">warn!</span>(<span class="string">"File {:?} failed the integrity check"</span>, path);
             <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = FileStore::remove_file(<span class="kw-2">&amp;</span>path) {
-                <span class="macro">warn!</span>(<span class="string">&quot;Cannot remove corrupted file: {:?}&quot;</span>, e);
+                <span class="macro">warn!</span>(<span class="string">"Cannot remove corrupted file: {:?}"</span>, e);
             }
             <span class="kw">return </span><span class="prelude-val">None</span>;
         }
@@ -1123,24 +1124,24 @@
     <span class="doccomment">/// Mark a file as readonly.
     </span><span class="kw">fn </span>mark_readonly(path: <span class="kw-2">&amp;</span>Path) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>perms = std::fs::metadata(path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to get file metadata of {}&quot;</span>, path.display()))<span class="question-mark">?
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to get file metadata of {}"</span>, path.display()))<span class="question-mark">?
             </span>.permissions();
         perms.set_readonly(<span class="bool-val">true</span>);
         std::fs::set_permissions(path, perms)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to set permission of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to set permission of {}"</span>, path.display()))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
     <span class="doccomment">/// Remove a file from disk.
     </span><span class="kw">fn </span>remove_file(path: <span class="kw-2">&amp;</span>Path) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>perms = std::fs::metadata(path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to get file metadata of {}&quot;</span>, path.display()))<span class="question-mark">?
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to get file metadata of {}"</span>, path.display()))<span class="question-mark">?
             </span>.permissions();
         perms.set_mode(<span class="number">0o600</span>);
         std::fs::set_permissions(path, perms)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to set permission of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to set permission of {}"</span>, path.display()))<span class="question-mark">?</span>;
         std::fs::remove_file(path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to remove {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to remove {}"</span>, path.display()))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -1148,7 +1149,7 @@
     </span><span class="kw">fn </span>check_integrity(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>FileStoreKey) -&gt; bool {
         <span class="kw">let </span>path = <span class="self">self</span>.key_to_path(key);
         <span class="kw">let </span>metadata = std::fs::metadata(<span class="kw-2">&amp;</span>path);
-        <span class="comment">// if the last modified time is the same of creation time assume it&#39;s
+        <span class="comment">// if the last modified time is the same of creation time assume it's
         // not corrupted
         </span><span class="kw">if let </span><span class="prelude-val">Ok</span>(metadata) = metadata {
             <span class="kw">let </span>created = metadata.created();
@@ -1171,7 +1172,7 @@
             <span class="kw">let </span>locked = <span class="self">self</span>.locked_files.lock().unwrap();
             index
                 .flush(<span class="self">self</span>, <span class="kw-2">&amp;</span>locked, <span class="self">self</span>.min_store_size)
-                .context(<span class="string">&quot;Failed to flush index&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to flush index"</span>)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -1184,21 +1185,21 @@
                 <span class="kw">let </span>locked = <span class="kw">match </span><span class="self">self</span>.locked_files.lock() {
                     <span class="prelude-val">Ok</span>(l) =&gt; l,
                     <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot lock locked_files due to poison&quot;</span>);
+                        <span class="macro">warn!</span>(<span class="string">"Cannot lock locked_files due to poison"</span>);
                         <span class="kw">return</span>;
                     }
                 };
                 <span class="kw">if </span>index.need_flush(<span class="self">self</span>.max_store_size) {
                     <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = index.flush(<span class="self">self</span>, <span class="kw-2">&amp;</span>locked, <span class="self">self</span>.min_store_size) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot flush the index: {}&quot;</span>, e.to_string());
+                        <span class="macro">warn!</span>(<span class="string">"Cannot flush the index: {}"</span>, e.to_string());
                     }
                 }
                 <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = index.store(<span class="self">self</span>.base_path.join(STORE_INDEX_FILE)) {
-                    <span class="macro">warn!</span>(<span class="string">&quot;Cannot store the index: {}&quot;</span>, e.to_string());
+                    <span class="macro">warn!</span>(<span class="string">"Cannot store the index: {}"</span>, e.to_string());
                 }
             }
             <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
-                <span class="macro">warn!</span>(<span class="string">&quot;Cannot store the index due to poisoned lock&quot;</span>);
+                <span class="macro">warn!</span>(<span class="string">"Cannot store the index due to poisoned lock"</span>);
             }
         }
     }
@@ -1222,10 +1223,10 @@
         <span class="kw">let </span>path = path.as_ref();
         <span class="kw">let </span><span class="kw-2">mut </span>hasher = Hasher::new();
         <span class="kw">if </span>!path.exists() {
-            <span class="macro">bail!</span>(<span class="string">&quot;Cannot read {}, maybe broken symlink?&quot;</span>, path.display())
+            <span class="macro">bail!</span>(<span class="string">"Cannot read {}, maybe broken symlink?"</span>, path.display())
         }
         <span class="kw">let </span>file_reader = ReadFileIterator::new(path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot make file iterator of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot make file iterator of {}"</span>, path.display()))<span class="question-mark">?</span>;
         file_reader
             .map(|buf| {
                 hasher.update(<span class="kw-2">&amp;</span>buf);
@@ -1245,14 +1246,14 @@
 }
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>FileStoreKey {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.hash.to_hex())
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="macro">write!</span>(f, <span class="string">"{}"</span>, <span class="self">self</span>.hash.to_hex())
     }
 }
 
 <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span>FileStoreKey {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; <span class="prelude-ty">Result</span>&lt;(), std::fmt::Error&gt; {
-        <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.hash.to_hex())
+        <span class="macro">write!</span>(f, <span class="string">"{}"</span>, <span class="self">self</span>.hash.to_hex())
     }
 }
 
@@ -1277,10 +1278,10 @@
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>FileStoreKey {
-    <span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, &lt;D <span class="kw">as </span>Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;&gt;::Error&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">'de</span>&gt; Deserialize&lt;<span class="lifetime">'de</span>&gt; <span class="kw">for </span>FileStoreKey {
+    <span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, &lt;D <span class="kw">as </span>Deserializer&lt;<span class="lifetime">'de</span>&gt;&gt;::Error&gt;
     <span class="kw">where
-        </span>D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
+        </span>D: Deserializer&lt;<span class="lifetime">'de</span>&gt;,
     {
         <span class="kw">let </span>raw_hash: [u8; blake3::OUT_LEN] = Deserialize::deserialize(deserializer)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(FileStoreKey {
@@ -1333,7 +1334,7 @@
 }
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>FileStoreHandle {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         std::fmt::Display::fmt(<span class="kw-2">&amp;</span><span class="self">self</span>.path.display(), f)
     }
 }
@@ -1347,7 +1348,7 @@
         <span class="kw-2">*</span>locked_files
             .ref_counts
             .get_mut(<span class="kw-2">&amp;</span><span class="self">self</span>.key)
-            .expect(<span class="string">&quot;Ref counts are broken&quot;</span>) -= <span class="number">1</span>;
+            .expect(<span class="string">"Ref counts are broken"</span>) -= <span class="number">1</span>;
         <span class="kw">if </span>locked_files.ref_counts[<span class="kw-2">&amp;</span><span class="self">self</span>.key] == <span class="number">0 </span>{
             locked_files.ref_counts.remove(<span class="kw-2">&amp;</span><span class="self">self</span>.key);
         }
@@ -1403,7 +1404,7 @@
             .write(<span class="bool-val">true</span>)
             .open(path)
             .unwrap()
-            .write_all(<span class="string">b&quot;lol&quot;</span>)
+            .write_all(<span class="string">b"lol"</span>)
             .unwrap();
     }
 
@@ -1436,7 +1437,7 @@
     </span><span class="kw">fn </span>test_store() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;test&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"test"</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>path_in_store = store.key_to_path(<span class="kw-2">&amp;</span>handle.key);
         <span class="macro">assert!</span>(path_in_store.exists());
         <span class="kw">let </span><span class="kw-2">mut </span>content = String::new();
@@ -1444,7 +1445,7 @@
             .unwrap()
             .read_to_string(<span class="kw-2">&amp;mut </span>content)
             .unwrap();
-        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>content, <span class="string">&quot;test&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>content, <span class="string">"test"</span>);
         <span class="macro">assert!</span>(File::open(<span class="kw-2">&amp;</span>path_in_store)
             .unwrap()
             .metadata()
@@ -1457,7 +1458,7 @@
     </span><span class="kw">fn </span>test_get() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciao"</span>, <span class="kw-2">&amp;</span>store);
 
         <span class="kw">let </span>handle = store.get(<span class="kw-2">&amp;</span>handle.key).unwrap();
         <span class="kw">let </span>path = handle.path();
@@ -1469,7 +1470,7 @@
     </span><span class="kw">fn </span>test_get_removed() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciao"</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>path_in_store = store.key_to_path(<span class="kw-2">&amp;</span>handle.key);
 
         remove_file(path_in_store).unwrap();
@@ -1482,7 +1483,7 @@
     </span><span class="kw">fn </span>test_get_not_known() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>key = fake_file(cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>);
+        <span class="kw">let </span>key = fake_file(cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciao"</span>);
         <span class="kw">let </span>handle = store.get(<span class="kw-2">&amp;</span>key);
         <span class="macro">assert!</span>(handle.is_none());
     }
@@ -1494,7 +1495,7 @@
         }
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciao"</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>path_in_store = store.key_to_path(<span class="kw-2">&amp;</span>handle.key);
         corrupt_file(<span class="kw-2">&amp;</span>path_in_store);
         <span class="kw">let </span>handle = store.get(<span class="kw-2">&amp;</span>handle.key);
@@ -1505,7 +1506,7 @@
     </span><span class="kw">fn </span>test_key_to_path() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>key = fake_file(cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>);
+        <span class="kw">let </span>key = fake_file(cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciao"</span>);
         <span class="kw">let </span>path = store.key_to_path(<span class="kw-2">&amp;</span>key);
         <span class="macro">assert!</span>(path.starts_with(<span class="kw-2">&amp;</span>store.base_path));
         <span class="macro">assert!</span>(path.ends_with(key.to_string()));
@@ -1514,7 +1515,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_mark_readonly() {
         <span class="kw">let </span>cwd = get_cwd();
-        <span class="kw">let </span>path = cwd.path().join(<span class="string">&quot;test.txt&quot;</span>);
+        <span class="kw">let </span>path = cwd.path().join(<span class="string">"test.txt"</span>);
         File::create(<span class="kw-2">&amp;</span>path).unwrap();
         FileStore::mark_readonly(<span class="kw-2">&amp;</span>path).unwrap();
         <span class="macro">assert!</span>(File::open(<span class="kw-2">&amp;</span>path)
@@ -1528,7 +1529,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_remove_file() {
         <span class="kw">let </span>cwd = get_cwd();
-        <span class="kw">let </span>path = cwd.path().join(<span class="string">&quot;test.txt&quot;</span>);
+        <span class="kw">let </span>path = cwd.path().join(<span class="string">"test.txt"</span>);
         File::create(<span class="kw-2">&amp;</span>path).unwrap();
         FileStore::mark_readonly(<span class="kw-2">&amp;</span>path).unwrap();
         FileStore::remove_file(<span class="kw-2">&amp;</span>path).unwrap();
@@ -1537,14 +1538,14 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_check_integrity() {
-        <span class="kw">if </span>std::env::var(<span class="string">&quot;GITHUB_WORKFLOW&quot;</span>).is_ok() || std::env::var(<span class="string">&quot;CI&quot;</span>).is_ok() {
+        <span class="kw">if </span>std::env::var(<span class="string">"GITHUB_WORKFLOW"</span>).is_ok() || std::env::var(<span class="string">"CI"</span>).is_ok() {
             <span class="comment">// skip this test CI because the runner does not support the last modified time, so the
             // fast integrity check skips the actual sanity check.
             </span><span class="kw">return</span>;
         }
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciaone"</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>path = store.key_to_path(<span class="kw-2">&amp;</span>handle.key);
         corrupt_file(<span class="kw-2">&amp;</span>path);
         <span class="macro">assert!</span>(!store.check_integrity(<span class="kw-2">&amp;</span>handle.key));
@@ -1554,7 +1555,7 @@
     </span><span class="kw">fn </span>test_locked_files() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciaone"</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>key = handle.key.clone();
         <span class="macro">assert_eq!</span>(store.locked_files.lock().unwrap().ref_counts[<span class="kw-2">&amp;</span>key], <span class="number">1</span>);
         <span class="kw">let </span>handle2 = handle.clone();
@@ -1574,7 +1575,7 @@
     </span><span class="kw">fn </span>test_locked_files_different_means() {
         <span class="kw">let </span>cwd = get_cwd();
         <span class="kw">let </span>store = FileStore::new(cwd.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">&quot;test.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle = add_file_to_store(<span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"test.txt"</span>), <span class="string">"ciaone"</span>, <span class="kw-2">&amp;</span>store);
         <span class="kw">let </span>key = handle.key.clone();
         <span class="macro">assert_eq!</span>(store.locked_files.lock().unwrap().ref_counts[<span class="kw-2">&amp;</span>key], <span class="number">1</span>);
         <span class="kw">let </span>handle2 = handle.clone();
@@ -1597,13 +1598,13 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_file_store_key_from_file() {
         <span class="kw">let </span>cwd = get_cwd();
-        fake_file(cwd.path().join(<span class="string">&quot;file1a.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>);
-        fake_file(cwd.path().join(<span class="string">&quot;file1b.txt&quot;</span>), <span class="string">&quot;ciao&quot;</span>);
-        fake_file(cwd.path().join(<span class="string">&quot;file2.txt&quot;</span>), <span class="string">&quot;ciaone&quot;</span>);
+        fake_file(cwd.path().join(<span class="string">"file1a.txt"</span>), <span class="string">"ciao"</span>);
+        fake_file(cwd.path().join(<span class="string">"file1b.txt"</span>), <span class="string">"ciao"</span>);
+        fake_file(cwd.path().join(<span class="string">"file2.txt"</span>), <span class="string">"ciaone"</span>);
 
-        <span class="kw">let </span>key1a = FileStoreKey::from_file(cwd.path().join(<span class="string">&quot;file1a.txt&quot;</span>)).unwrap();
-        <span class="kw">let </span>key1b = FileStoreKey::from_file(cwd.path().join(<span class="string">&quot;file1b.txt&quot;</span>)).unwrap();
-        <span class="kw">let </span>key2 = FileStoreKey::from_file(cwd.path().join(<span class="string">&quot;file2.txt&quot;</span>)).unwrap();
+        <span class="kw">let </span>key1a = FileStoreKey::from_file(cwd.path().join(<span class="string">"file1a.txt"</span>)).unwrap();
+        <span class="kw">let </span>key1b = FileStoreKey::from_file(cwd.path().join(<span class="string">"file1b.txt"</span>)).unwrap();
+        <span class="kw">let </span>key2 = FileStoreKey::from_file(cwd.path().join(<span class="string">"file2.txt"</span>)).unwrap();
 
         <span class="macro">assert_eq!</span>(key1a, key1b);
         <span class="macro">assert_ne!</span>(key1a, key2);

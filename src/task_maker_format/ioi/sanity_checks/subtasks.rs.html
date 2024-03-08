@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/subtasks.rs`."><title>subtasks.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/subtasks.rs`."><title>subtasks.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -291,8 +292,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>MissingSubtaskNames {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;MissingSubtaskNames&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"MissingSubtaskNames"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -300,7 +301,7 @@
     }
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="comment">// Ignore the default subtask if it&#39;s missing the name.
+        <span class="comment">// Ignore the default subtask if it's missing the name.
         </span><span class="kw">if </span>task.subtasks.values().all(|st| st.is_default) {
             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
@@ -310,20 +311,20 @@
             <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>task.subtasks[subtask_id];
             <span class="kw">if </span>subtask.name.is_none() {
                 missing_name.push((
-                    <span class="macro">format!</span>(<span class="string">&quot;Subtask {} ({} points)&quot;</span>, subtask.id, subtask.max_score),
+                    <span class="macro">format!</span>(<span class="string">"Subtask {} ({} points)"</span>, subtask.id, subtask.max_score),
                     subtask.span.clone(),
                 ));
             }
         }
         <span class="kw">if </span>!missing_name.is_empty() {
             <span class="kw">let </span>message = <span class="macro">format!</span>(
-                <span class="string">&quot;These subtasks are missing a name: {}&quot;</span>,
-                missing_name.iter().map(|(name, <span class="kw">_</span>)| name).join(<span class="string">&quot;, &quot;</span>)
+                <span class="string">"These subtasks are missing a name: {}"</span>,
+                missing_name.iter().map(|(name, <span class="kw">_</span>)| name).join(<span class="string">", "</span>)
             );
             <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::warning(message);
             <span class="kw">if </span>missing_name.iter().any(|(<span class="kw">_</span>, span)| span.is_some()) {
                 diagnostic = diagnostic
-                    .with_help(<span class="string">&quot;Add &#39;#STNAME: name&#39; in gen/GEN after each subtask definition:&quot;</span>);
+                    .with_help(<span class="string">"Add '#STNAME: name' in gen/GEN after each subtask definition:"</span>);
             }
             <span class="kw">for </span>(<span class="kw">_</span>, span) <span class="kw">in </span>missing_name {
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = span {
@@ -344,8 +345,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>InvalidSubtaskName {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;InvalidSubtaskName&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"InvalidSubtaskName"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -358,18 +359,18 @@
             .keys()
             .sorted()
             .filter_map(|st| task.subtasks[st].name.as_ref())
-            .join(<span class="string">&quot;, &quot;</span>);
+            .join(<span class="string">", "</span>);
         <span class="kw">for </span>solution <span class="kw">in </span><span class="kw-2">&amp;</span>eval.solutions {
             <span class="kw">for </span>check <span class="kw">in </span><span class="kw-2">&amp;</span>solution.checks {
                 <span class="kw">let </span>subtasks = task.find_subtasks_by_pattern_name(<span class="kw-2">&amp;</span>check.subtask_name_pattern);
                 <span class="kw">if </span>subtasks.is_empty() {
                     eval.add_diagnostic(
                         Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;Invalid subtask name &#39;{}&#39; in solution &#39;{}&#39;&quot;</span>,
+                            <span class="string">"Invalid subtask name '{}' in solution '{}'"</span>,
                             check.subtask_name_pattern,
                             solution.source_file.relative_path().display()
                         ))
-                        .with_note(<span class="macro">format!</span>(<span class="string">&quot;The valid names are: {}&quot;</span>, subtask_names)),
+                        .with_note(<span class="macro">format!</span>(<span class="string">"The valid names are: {}"</span>, subtask_names)),
                     )<span class="question-mark">?</span>;
                 }
             }
@@ -445,8 +446,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>AllOutputsEqual {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;AllOutputsEqual&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"AllOutputsEqual"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -487,14 +488,14 @@
                 <span class="kw">let </span>name = subtask
                     .name
                     .as_ref()
-                    .map(|name| <span class="macro">format!</span>(<span class="string">&quot; ({})&quot;</span>, name))
+                    .map(|name| <span class="macro">format!</span>(<span class="string">" ({})"</span>, name))
                     .unwrap_or_default();
-                <span class="kw">let </span>message = <span class="macro">format!</span>(<span class="string">&quot;All outputs for subtask {id}{name} are identical&quot;</span>);
+                <span class="kw">let </span>message = <span class="macro">format!</span>(<span class="string">"All outputs for subtask {id}{name} are identical"</span>);
 
                 <span class="kw">let </span><span class="kw-2">mut </span>diag = Diagnostic::warning(message);
                 <span class="kw">if let </span><span class="prelude-val">Ok</span>(contents) = std::str::from_utf8(first.first_chunk.as_ref().unwrap()) {
-                    <span class="kw">let </span>contents = contents.chars().take(<span class="number">20</span>).join(<span class="string">&quot;&quot;</span>);
-                    diag = diag.with_note(<span class="macro">format!</span>(<span class="string">&quot;They all start with: {contents}&quot;</span>));
+                    <span class="kw">let </span>contents = contents.chars().take(<span class="number">20</span>).join(<span class="string">""</span>);
+                    diag = diag.with_note(<span class="macro">format!</span>(<span class="string">"They all start with: {contents}"</span>));
                 }
                 eval.add_diagnostic(diag)<span class="question-mark">?</span>;
             }
@@ -512,8 +513,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>DeprecatedDescriptionInSubtask {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;DeprecatedDescriptionInSubtask&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"DeprecatedDescriptionInSubtask"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -527,7 +528,7 @@
             <span class="kw">match </span>(subtask.name.as_deref(), description) {
                 (<span class="prelude-val">Some</span>(a), <span class="prelude-val">Some</span>(b)) <span class="kw">if </span>a != b =&gt; {
                     <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::warning(<span class="macro">format!</span>(
-                        <span class="string">&quot;Subtask {} uses spaces and/or tabs in its name, which are now deprecated&quot;</span>,
+                        <span class="string">"Subtask {} uses spaces and/or tabs in its name, which are now deprecated"</span>,
                         subtask.id
                     ));
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = subtask.span.clone() {

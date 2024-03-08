@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/scheduler.rs`."><title>scheduler.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/scheduler.rs`."><title>scheduler.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1027,13 +1028,13 @@
     /// become ready.
     </span>input_of: HashMap&lt;FileUuid, HashSet&lt;ExecutionGroupUuid&gt;&gt;,
     <span class="doccomment">/// The set of executions that are ready to be executed. Note that this is not the same as
-    /// `Scheduler::ready_execs`, it&#39;s just a fast lookup for known if there is still something to
+    /// `Scheduler::ready_execs`, it's just a fast lookup for known if there is still something to
     /// do for this client.
     </span>ready_groups: HashSet&lt;ExecutionGroupUuid&gt;,
     <span class="doccomment">/// The set of executions that are currently running in a worker.
     </span>running_groups: HashSet&lt;ExecutionGroupUuid&gt;,
     <span class="doccomment">/// The list of tasks waiting for some dependencies, each with the list of missing files, when a
-    /// task is ready it&#39;s removed from the map.
+    /// task is ready it's removed from the map.
     </span>missing_deps: HashMap&lt;ExecutionGroupUuid, HashSet&lt;FileUuid&gt;&gt;,
     <span class="doccomment">/// The list of known [`FileStoreHandle`](../task_maker_store/struct.FileStoreHandle.html)s.
     /// Storing them here prevents the `FileStore` from flushing them away.
@@ -1129,7 +1130,7 @@
         <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = <span class="self">self</span>.receiver.recv() {
             <span class="kw">match </span>message {
                 SchedulerInMessage::Exit =&gt; {
-                    <span class="macro">debug!</span>(<span class="string">&quot;Scheduler asked to exit&quot;</span>);
+                    <span class="macro">debug!</span>(<span class="string">"Scheduler asked to exit"</span>);
                     <span class="kw">break</span>;
                 }
                 SchedulerInMessage::EvaluateDAG {
@@ -1138,7 +1139,7 @@
                     callbacks,
                 } =&gt; {
                     <span class="self">self</span>.handle_evaluate_dag(client, <span class="kw-2">*</span>dag, <span class="kw-2">*</span>callbacks)
-                        .context(<span class="string">&quot;Failed to handle EvaluateDAG&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle EvaluateDAG"</span>)<span class="question-mark">?</span>;
                 }
                 SchedulerInMessage::FileReady {
                     client,
@@ -1146,7 +1147,7 @@
                     handle,
                 } =&gt; {
                     <span class="self">self</span>.handle_file_ready(client, uuid, handle)
-                        .context(<span class="string">&quot;Failed to handle FileReady&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle FileReady"</span>)<span class="question-mark">?</span>;
                 }
                 SchedulerInMessage::WorkerResult {
                     worker,
@@ -1154,30 +1155,30 @@
                     outputs,
                 } =&gt; {
                     <span class="self">self</span>.handle_worker_result(worker, result, outputs)
-                        .context(<span class="string">&quot;Failed to handle WorkerResult&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle WorkerResult"</span>)<span class="question-mark">?</span>;
                 }
                 SchedulerInMessage::WorkerConnected { uuid, name } =&gt; {
                     <span class="self">self</span>.handle_worker_connected(uuid, name)
-                        .context(<span class="string">&quot;Failed to handle WorkerConnected&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle WorkerConnected"</span>)<span class="question-mark">?</span>;
                 }
                 SchedulerInMessage::WorkerDisconnected { uuid } =&gt; {
                     <span class="self">self</span>.handle_worker_disconnected(uuid)
-                        .context(<span class="string">&quot;Failed to handle WorkerDisconnected&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle WorkerDisconnected"</span>)<span class="question-mark">?</span>;
                 }
                 SchedulerInMessage::ClientDisconnected { client } =&gt; {
                     <span class="self">self</span>.handle_client_disconnected(client)
-                        .context(<span class="string">&quot;Failed to handle ClientDisconnected&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle ClientDisconnected"</span>)<span class="question-mark">?</span>;
                 }
                 SchedulerInMessage::Status { client } =&gt; {
                     <span class="self">self</span>.handle_status_request(client)
-                        .context(<span class="string">&quot;Failed to handle Status&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to handle Status"</span>)<span class="question-mark">?</span>;
                 }
             }
         }
-        <span class="macro">debug!</span>(<span class="string">&quot;Scheduler exiting&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">"Scheduler exiting"</span>);
         <span class="self">self</span>.worker_manager
             .send(WorkerManagerInMessage::Exit)
-            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot tell the worker manager to exit: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Cannot tell the worker manager to exit: {:?}"</span>, e))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -1188,7 +1189,7 @@
         dag: ExecutionDAGData,
         callbacks: ExecutionDAGWatchSet,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">info!</span>(<span class="string">&quot;Client &#39;{}&#39; asked to evaluate a new DAG&quot;</span>, client.name);
+        <span class="macro">info!</span>(<span class="string">"Client '{}' asked to evaluate a new DAG"</span>, client.name);
         <span class="comment">// build the scheduler structures, insert the client in the list of working
         // clients and schedule all the already cached executions.
         </span><span class="kw">let </span>dag_priority = dag.config.priority;
@@ -1233,7 +1234,7 @@
             <span class="self">self</span>.file_success(client_uuid, uuid)<span class="question-mark">?</span>;
             <span class="self">self</span>.check_completion(client_uuid)<span class="question-mark">?</span>;
         } <span class="kw">else </span>{
-            <span class="macro">warn!</span>(<span class="string">&quot;Client is gone&quot;</span>);
+            <span class="macro">warn!</span>(<span class="string">"Client is gone"</span>);
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -1248,7 +1249,7 @@
         <span class="kw">let </span>worker = <span class="kw">match </span><span class="self">self</span>.connected_workers.remove(<span class="kw-2">&amp;</span>worker) {
             <span class="prelude-val">Some</span>(worker) =&gt; worker,
             <span class="prelude-val">None </span>=&gt; {
-                <span class="macro">warn!</span>(<span class="string">&quot;Unknown worker {} completed a job&quot;</span>, worker);
+                <span class="macro">warn!</span>(<span class="string">"Unknown worker {} completed a job"</span>, worker);
                 <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
         };
@@ -1256,7 +1257,7 @@
             <span class="prelude-val">Some</span>((client, exec, <span class="kw">_</span>)) =&gt; (client, exec),
             <span class="prelude-val">None </span>=&gt; {
                 <span class="macro">warn!</span>(
-                    <span class="string">&quot;Worker {} ({}) completed a job that wasn&#39;t doing&quot;</span>,
+                    <span class="string">"Worker {} ({}) completed a job that wasn't doing"</span>,
                     worker.name, worker.uuid
                 );
                 <span class="kw">return </span><span class="prelude-val">Ok</span>(());
@@ -1265,21 +1266,21 @@
         <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
             client
         } <span class="kw">else </span>{
-            <span class="macro">warn!</span>(<span class="string">&quot;Worker completed execution but client is gone&quot;</span>);
+            <span class="macro">warn!</span>(<span class="string">"Worker completed execution but client is gone"</span>);
             <span class="self">self</span>.assign_jobs()<span class="question-mark">?</span>;
             <span class="self">self</span>.check_completion(client_uuid)<span class="question-mark">?</span>;
             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
         <span class="kw">let </span>group = client.dag.execution_groups[<span class="kw-2">&amp;</span>group_uuid].clone();
         <span class="macro">info!</span>(
-            <span class="string">&quot;Worker {:?} completed execution group {}&quot;</span>,
+            <span class="string">"Worker {:?} completed execution group {}"</span>,
             worker, group.uuid
         );
         <span class="kw">if </span>group.executions.len() != result.len() {
             <span class="comment">// FIXME: this is a pretty bad way to handle this error, it should never happen but if
             //        the workers are not trusted it can cause a DoS of the server. Maybe just
             //        rescheduling the job or disconnecting the client is a better choice.
-            </span><span class="macro">bail!</span>(<span class="string">&quot;Invalid worker result: the number of results ({}) does not match the number of executions ({})&quot;</span>, result.len(), group.executions.len());
+            </span><span class="macro">bail!</span>(<span class="string">"Invalid worker result: the number of results ({}) does not match the number of executions ({})"</span>, result.len(), group.executions.len());
         }
         client.running_groups.remove(<span class="kw-2">&amp;</span>group_uuid);
         <span class="self">self</span>.exec_completed(client_uuid, <span class="kw-2">&amp;</span>group, result, outputs, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
@@ -1290,7 +1291,7 @@
 
     <span class="doccomment">/// Handle the connection of a worker.
     </span><span class="kw">fn </span>handle_worker_connected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, uuid: WorkerUuid, name: String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">info!</span>(<span class="string">&quot;Worker {} ({}) connected&quot;</span>, name, uuid);
+        <span class="macro">info!</span>(<span class="string">"Worker {} ({}) connected"</span>, name, uuid);
         <span class="self">self</span>.connected_workers.insert(
             uuid,
             ConnectedWorker {
@@ -1305,14 +1306,14 @@
 
     <span class="doccomment">/// Handle the disconnection of a worker.
     </span><span class="kw">fn </span>handle_worker_disconnected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, uuid: WorkerUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">info!</span>(<span class="string">&quot;Worker {} disconnected&quot;</span>, uuid);
+        <span class="macro">info!</span>(<span class="string">"Worker {} disconnected"</span>, uuid);
         <span class="kw">if let </span><span class="prelude-val">Some</span>(worker) = <span class="self">self</span>.connected_workers.remove(<span class="kw-2">&amp;</span>uuid) {
             <span class="comment">// reschedule the job if the worker failed
             </span><span class="kw">if let </span><span class="prelude-val">Some</span>((client_uuid, job, <span class="kw">_</span>)) = worker.current_job {
                 <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
                     client
                 } <span class="kw">else </span>{
-                    <span class="macro">warn!</span>(<span class="string">&quot;Worker was doing something for a gone client&quot;</span>);
+                    <span class="macro">warn!</span>(<span class="string">"Worker was doing something for a gone client"</span>);
                     <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 };
                 <span class="kw">let </span>priority = client.dag.execution_groups[<span class="kw-2">&amp;</span>job].priority();
@@ -1327,15 +1328,15 @@
 
     <span class="doccomment">/// Handle the disconnection of a client.
     </span><span class="kw">fn </span>handle_client_disconnected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">info!</span>(<span class="string">&quot;Client {} disconnected&quot;</span>, client_uuid);
+        <span class="macro">info!</span>(<span class="string">"Client {} disconnected"</span>, client_uuid);
         <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get(<span class="kw-2">&amp;</span>client_uuid) {
             <span class="kw">if </span>!client.is_done() {
-                <span class="macro">warn!</span>(<span class="string">&quot;The client&#39;s evaluation wasn&#39;t completed yet&quot;</span>);
+                <span class="macro">warn!</span>(<span class="string">"The client's evaluation wasn't completed yet"</span>);
                 <span class="comment">// Even if the computation has not been completed, send the EvaluationDone so that
                 // the executor can exit cleanly.
                 </span><span class="self">self</span>.executor
                     .send((client_uuid, SchedulerExecutorMessageData::EvaluationDone))
-                    .context(<span class="string">&quot;Failed to send EvaluationDone to the executor&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to send EvaluationDone to the executor"</span>)<span class="question-mark">?</span>;
             }
         }
         <span class="self">self</span>.clients.remove(<span class="kw-2">&amp;</span>client_uuid);
@@ -1351,7 +1352,7 @@
             <span class="kw">if let </span><span class="prelude-val">Some</span>((owner, exec, <span class="kw">_</span>)) = worker.current_job {
                 <span class="kw">if </span>owner == client_uuid {
                     <span class="macro">warn!</span>(
-                        <span class="string">&quot;Worker {} is doing {} owned by disconnected client, killing&quot;</span>,
+                        <span class="string">"Worker {} is doing {} owned by disconnected client, killing"</span>,
                         uuid, exec
                     );
                     <span class="self">self</span>.worker_manager
@@ -1359,7 +1360,7 @@
                             worker: <span class="kw-2">*</span>uuid,
                             job: exec,
                         })
-                        .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send StopWorkerJob to worker: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+                        .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Failed to send StopWorkerJob to worker: {:?}"</span>, e))<span class="question-mark">?</span>;
                 }
             }
         }
@@ -1405,7 +1406,7 @@
             </span>.executor
             .send((client_uuid, SchedulerExecutorMessageData::Status { status }))
         {
-            <span class="macro">warn!</span>(<span class="string">&quot;Cannot send the status to the client: {:?}&quot;</span>, e);
+            <span class="macro">warn!</span>(<span class="string">"Cannot send the status to the client: {:?}"</span>, e);
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -1419,10 +1420,10 @@
             </span><span class="kw">return </span><span class="prelude-val">Ok</span>(());
         };
         <span class="kw">if </span>client.is_done() {
-            <span class="macro">debug!</span>(<span class="string">&quot;Computation completed for client: {}&quot;</span>, client_uuid);
+            <span class="macro">debug!</span>(<span class="string">"Computation completed for client: {}"</span>, client_uuid);
             <span class="self">self</span>.executor
                 .send((client_uuid, SchedulerExecutorMessageData::EvaluationDone))
-                .context(<span class="string">&quot;Failed to send EvaluationDone to the executor&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to send EvaluationDone to the executor"</span>)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -1432,7 +1433,7 @@
     </span><span class="kw">fn </span>file_failed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid, file: FileUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="self">self</span>.send_file(client_uuid, file, <span class="bool-val">false</span>).with_context(|| {
             <span class="macro">format!</span>(
-                <span class="string">&quot;Failed sending failed file {} to client {}&quot;</span>,
+                <span class="string">"Failed sending failed file {} to client {}"</span>,
                 file, client_uuid
             )
         })<span class="question-mark">?</span>;
@@ -1462,7 +1463,7 @@
                             execution: exec.uuid,
                         },
                     )) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution was skipped: {:?}&quot;</span>, e);
+                        <span class="macro">warn!</span>(<span class="string">"Cannot tell the client the execution was skipped: {:?}"</span>, e);
                     }
                 }
                 <span class="kw">for </span>output <span class="kw">in </span>exec.outputs() {
@@ -1481,7 +1482,7 @@
     </span><span class="kw">fn </span>file_success(<span class="kw-2">&amp;mut </span><span class="self">self</span>, client_uuid: ClientUuid, file: FileUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="self">self</span>.send_file(client_uuid, file, <span class="bool-val">true</span>).with_context(|| {
             <span class="macro">format!</span>(
-                <span class="string">&quot;Failed sending succeeded file {} to client {}&quot;</span>,
+                <span class="string">"Failed sending succeeded file {} to client {}"</span>,
                 file, client_uuid
             )
         })<span class="question-mark">?</span>;
@@ -1541,7 +1542,7 @@
             urgent: client.callbacks.urgent_files.contains(<span class="kw-2">&amp;</span>file),
         };
         <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((client_uuid, mex)) {
-            <span class="macro">warn!</span>(<span class="string">&quot;Cannot send the file to the client: {:?}&quot;</span>, e);
+            <span class="macro">warn!</span>(<span class="string">"Cannot send the file to the client: {:?}"</span>, e);
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -1570,7 +1571,7 @@
                     result: res.clone(),
                 };
                 <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((client_uuid, mex)) {
-                    <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution is done: {:?}&quot;</span>, e);
+                    <span class="macro">warn!</span>(<span class="string">"Cannot tell the client the execution is done: {:?}"</span>, e);
                 }
             }
         }
@@ -1587,7 +1588,7 @@
             <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
                 <span class="kw">for </span>output <span class="kw">in </span>exec.outputs() {
                     <span class="self">self</span>.file_success(client_uuid, output).with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to mark execution group {} as completed&quot;</span>, group.uuid)
+                        <span class="macro">format!</span>(<span class="string">"Failed to mark execution group {} as completed"</span>, group.uuid)
                     })<span class="question-mark">?</span>;
                 }
             }
@@ -1595,7 +1596,7 @@
             <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
                 <span class="kw">for </span>output <span class="kw">in </span>exec.outputs() {
                     <span class="self">self</span>.file_failed(client_uuid, output).with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to mark execution group {} as failed&quot;</span>, group.uuid)
+                        <span class="macro">format!</span>(<span class="string">"Failed to mark execution group {} as failed"</span>, group.uuid)
                     })<span class="question-mark">?</span>;
                 }
             }
@@ -1660,7 +1661,7 @@
                 .get(<span class="kw-2">&amp;</span>group, <span class="kw-2">&amp;</span>client.file_handles, <span class="self">self</span>.file_store.as_ref());
             <span class="kw">match </span>result {
                 CacheResult::Hit { result, outputs } =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} is a cache hit!&quot;</span>, group.uuid);
+                    <span class="macro">info!</span>(<span class="string">"Execution {} is a cache hit!"</span>, group.uuid);
                     client.ready_groups.remove(<span class="kw-2">&amp;</span>group.uuid);
                     cached.push((<span class="kw-2">*</span>client_uuid, group, result, outputs));
                 }
@@ -1698,7 +1699,7 @@
                 <span class="prelude-val">Some</span>(exec) =&gt; exec,
                 <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
             };
-            <span class="macro">trace!</span>(<span class="string">&quot;Assigning {} to worker {}&quot;</span>, group_uuid, worker_uuid);
+            <span class="macro">trace!</span>(<span class="string">"Assigning {} to worker {}"</span>, group_uuid, worker_uuid);
             worker.current_job = <span class="prelude-val">Some</span>((client_uuid, group_uuid, Instant::now()));
             <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Some</span>(client) = <span class="self">self</span>.clients.get_mut(<span class="kw-2">&amp;</span>client_uuid) {
                 client
@@ -1715,7 +1716,7 @@
                     <span class="kw">let </span>handle = client
                         .file_handles
                         .get(<span class="kw-2">&amp;</span>file)
-                        .unwrap_or_else(|| <span class="macro">panic!</span>(<span class="string">&quot;Unknown file key of {}&quot;</span>, file))
+                        .unwrap_or_else(|| <span class="macro">panic!</span>(<span class="string">"Unknown file key of {}"</span>, file))
                         .key()
                         .clone();
                     dep_keys.insert(file, handle);
@@ -1730,7 +1731,7 @@
                     worker: <span class="kw-2">*</span>worker_uuid,
                     job,
                 })
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send WorkerJob to worker: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Failed to send WorkerJob to worker: {:?}"</span>, e))<span class="question-mark">?</span>;
             <span class="kw">for </span>exec <span class="kw">in </span><span class="kw-2">&amp;</span>group.executions {
                 <span class="kw">if </span>client.callbacks.executions.contains(<span class="kw-2">&amp;</span>exec.uuid) {
                     <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = <span class="self">self</span>.executor.send((
@@ -1740,7 +1741,7 @@
                             worker: <span class="kw-2">*</span>worker_uuid,
                         },
                     )) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Cannot tell the client the execution started: {:?}&quot;</span>, e);
+                        <span class="macro">warn!</span>(<span class="string">"Cannot tell the client the execution started: {:?}"</span>, e);
                     }
                 }
             }

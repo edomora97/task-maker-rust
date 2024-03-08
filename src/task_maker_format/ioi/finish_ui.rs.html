@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/finish_ui.rs`."><title>finish_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/finish_ui.rs`."><title>finish_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -576,6 +577,31 @@
 <a href="#576" id="576">576</a>
 <a href="#577" id="577">577</a>
 <a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
+<a href="#587" id="587">587</a>
+<a href="#588" id="588">588</a>
+<a href="#589" id="589">589</a>
+<a href="#590" id="590">590</a>
+<a href="#591" id="591">591</a>
+<a href="#592" id="592">592</a>
+<a href="#593" id="593">593</a>
+<a href="#594" id="594">594</a>
+<a href="#595" id="595">595</a>
+<a href="#596" id="596">596</a>
+<a href="#597" id="597">597</a>
+<a href="#598" id="598">598</a>
+<a href="#599" id="599">599</a>
+<a href="#600" id="600">600</a>
+<a href="#601" id="601">601</a>
+<a href="#602" id="602">602</a>
+<a href="#603" id="603">603</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::path::{Path, PathBuf};
 
@@ -642,49 +668,49 @@
 <span class="kw">impl </span>FinishUI {
     <span class="doccomment">/// Print the basic task info.
     </span><span class="kw">fn </span>print_task_info(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Task:         &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{} ({})&quot;</span>, state.task.title, state.task.name);
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Path:         &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, state.task.path.display());
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Max score:    &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, state.max_score);
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Time limit:   &quot;</span>);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Task:         "</span>);
+        <span class="macro">println!</span>(<span class="string">"{} ({})"</span>, state.task.title, state.task.name);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Path:         "</span>);
+        <span class="macro">println!</span>(<span class="string">"{}"</span>, state.task.path.display());
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Max score:    "</span>);
+        <span class="macro">println!</span>(<span class="string">"{}"</span>, state.max_score);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Time limit:   "</span>);
         <span class="macro">println!</span>(
-            <span class="string">&quot;{}&quot;</span>,
+            <span class="string">"{}"</span>,
             state
                 .task
                 .time_limit
-                .map(|t| <span class="macro">format!</span>(<span class="string">&quot;{}s&quot;</span>, t))
-                .unwrap_or_else(|| <span class="string">&quot;unlimited&quot;</span>.to_string())
+                .map(|t| <span class="macro">format!</span>(<span class="string">"{}s"</span>, t))
+                .unwrap_or_else(|| <span class="string">"unlimited"</span>.to_string())
         );
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Memory limit: &quot;</span>);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Memory limit: "</span>);
         <span class="macro">println!</span>(
-            <span class="string">&quot;{}&quot;</span>,
+            <span class="string">"{}"</span>,
             state
                 .task
                 .memory_limit
-                .map(|t| <span class="macro">format!</span>(<span class="string">&quot;{}MiB&quot;</span>, t))
-                .unwrap_or_else(|| <span class="string">&quot;unlimited&quot;</span>.to_string())
+                .map(|t| <span class="macro">format!</span>(<span class="string">"{}MiB"</span>, t))
+                .unwrap_or_else(|| <span class="string">"unlimited"</span>.to_string())
         );
     }
 
     <span class="doccomment">/// Print all the booklet states.
     </span><span class="kw">fn </span>print_booklets(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Statements&quot;</span>);
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Statements"</span>);
         <span class="kw">for </span>name <span class="kw">in </span>state.booklets.keys().sorted() {
             <span class="kw">let </span>booklet = <span class="kw-2">&amp;</span>state.booklets[name];
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;{:&lt;20}  &quot;</span>, name);
+            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"{:&lt;20}  "</span>, name);
             <span class="self">self</span>.print_execution_status(<span class="kw-2">&amp;</span>booklet.status);
             <span class="macro">println!</span>();
             <span class="kw">for </span>name <span class="kw">in </span>booklet.dependencies.keys().sorted() {
                 <span class="kw">let </span>dep = <span class="kw-2">&amp;</span>booklet.dependencies[name];
-                <span class="macro">print!</span>(<span class="string">&quot;  {:&lt;18}  &quot;</span>, name);
+                <span class="macro">print!</span>(<span class="string">"  {:&lt;18}  "</span>, name);
                 <span class="kw">let </span><span class="kw-2">mut </span>first = <span class="bool-val">true</span>;
                 <span class="kw">for </span>step <span class="kw">in </span>dep.iter() {
                     <span class="kw">if </span>first {
                         first = <span class="bool-val">false</span>;
                     } <span class="kw">else </span>{
-                        <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">" | "</span>);
                     }
                     <span class="self">self</span>.print_execution_status(<span class="kw-2">&amp;</span>step.status);
                 }
@@ -695,48 +721,48 @@
 
     <span class="doccomment">/// Print all the generation states.
     </span><span class="kw">fn </span>print_generations(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Generations&quot;</span>);
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Generations"</span>);
         <span class="kw">for </span>(st_num, subtask) <span class="kw">in </span>state.generations.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Subtask {}&quot;</span>, st_num);
+            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Subtask {}"</span>, st_num);
             <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span>state.task.subtasks[st_num].name {
-                <span class="macro">print!</span>(<span class="string">&quot; [{}]&quot;</span>, name);
+                <span class="macro">print!</span>(<span class="string">" [{}]"</span>, name);
             }
-            <span class="macro">println!</span>(<span class="string">&quot;: {} points&quot;</span>, state.task.subtasks[st_num].max_score);
+            <span class="macro">println!</span>(<span class="string">": {} points"</span>, state.task.subtasks[st_num].max_score);
             <span class="kw">for </span>(tc_num, testcase) <span class="kw">in </span>subtask.testcases.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
-                <span class="macro">print!</span>(<span class="string">&quot;#{:&lt;3} &quot;</span>, tc_num);
+                <span class="macro">print!</span>(<span class="string">"#{:&lt;3} "</span>, tc_num);
 
                 <span class="kw">let </span><span class="kw-2">mut </span>first = <span class="bool-val">true</span>;
                 <span class="kw">let </span><span class="kw-2">mut </span>gen_failed = <span class="bool-val">false</span>;
                 <span class="kw">let </span><span class="kw-2">mut </span>val_failed = <span class="bool-val">false</span>;
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(gen) = <span class="kw-2">&amp;</span>testcase.generation {
                     <span class="kw">if let </span>ExecutionStatus::Success = gen.status {
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;Generated&quot;</span>);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"Generated"</span>);
                     } <span class="kw">else </span>{
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;Generation failed: {:?}&quot;</span>, gen.status);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"Generation failed: {:?}"</span>, gen.status);
                         gen_failed = <span class="bool-val">true</span>;
                     }
                     first = <span class="bool-val">false</span>;
                 }
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(val) = <span class="kw-2">&amp;</span>testcase.validation {
                     <span class="kw">if </span>!first {
-                        <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">" | "</span>);
                     }
                     <span class="kw">if let </span>ExecutionStatus::Success = val.status {
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;Validated&quot;</span>);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"Validated"</span>);
                     } <span class="kw">else </span>{
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;Validation failed: {:?}&quot;</span>, val.status);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"Validation failed: {:?}"</span>, val.status);
                         val_failed = <span class="bool-val">true</span>;
                     }
                     first = <span class="bool-val">false</span>;
                 }
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(sol) = <span class="kw-2">&amp;</span>testcase.solution {
                     <span class="kw">if </span>!first {
-                        <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">" | "</span>);
                     }
                     <span class="kw">if let </span>ExecutionStatus::Success = sol.status {
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;Solved&quot;</span>);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"Solved"</span>);
                     } <span class="kw">else </span>{
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;Solution failed: {:?}&quot;</span>, sol.status);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"Solution failed: {:?}"</span>, sol.status);
                     }
                 }
                 <span class="macro">println!</span>();
@@ -745,8 +771,8 @@
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = stderr {
                         <span class="kw">let </span>stderr = String::from_utf8_lossy(stderr);
                         <span class="kw">if </span>!stderr.trim().is_empty() {
-                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Generation stderr:&quot;</span>);
-                            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, stderr.trim());
+                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, BOLD, <span class="string">"Generation stderr:"</span>);
+                            <span class="macro">println!</span>(<span class="string">"{}"</span>, stderr.trim());
                         }
                     }
                 }
@@ -755,8 +781,8 @@
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(stderr) = stderr {
                         <span class="kw">let </span>stderr = String::from_utf8_lossy(stderr);
                         <span class="kw">if </span>!stderr.trim().is_empty() {
-                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Validation stderr:&quot;</span>);
-                            <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, stderr.trim());
+                            <span class="macro">cwriteln!</span>(<span class="self">self</span>, BOLD, <span class="string">"Validation stderr:"</span>);
+                            <span class="macro">println!</span>(<span class="string">"{}"</span>, stderr.trim());
                         }
                     }
                 }
@@ -766,16 +792,10 @@
 
     <span class="doccomment">/// Print all the evaluation states.
     </span><span class="kw">fn </span>print_evaluations(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Evaluations&quot;</span>);
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Evaluations"</span>);
         <span class="kw">for </span>path <span class="kw">in </span>state.evaluations.keys().sorted() {
             <span class="kw">let </span>eval = <span class="kw-2">&amp;</span>state.evaluations[path];
-            <span class="self">self</span>.print_evaluation(
-                path,
-                eval.score.unwrap_or(<span class="number">0.0</span>),
-                state.max_score,
-                eval,
-                state,
-            );
+            <span class="self">self</span>.print_evaluation(path, state.max_score, eval, state);
             <span class="macro">println!</span>();
         }
     }
@@ -784,18 +804,20 @@
     </span><span class="kw">fn </span>print_evaluation(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         path: <span class="kw-2">&amp;</span>Path,
-        score: f64,
         max_score: f64,
         eval: <span class="kw-2">&amp;</span>SolutionEvaluationState,
         state: <span class="kw-2">&amp;</span>UIState,
     ) {
         <span class="kw">let </span>name = path
             .file_name()
-            .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+            .expect(<span class="string">"Invalid file name"</span>)
             .to_string_lossy();
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;{}&quot;</span>, name);
-        <span class="macro">print!</span>(<span class="string">&quot;: &quot;</span>);
-        <span class="self">self</span>.print_score_frac(score, max_score, <span class="kw-2">&amp;</span>state.task);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"{}"</span>, name);
+        <span class="macro">print!</span>(<span class="string">": "</span>);
+
+        <span class="kw">let </span>score = eval.score;
+        <span class="kw">let </span>normalized_score = score.map(|s| s / max_score);
+        <span class="self">self</span>.print_score_frac(normalized_score, score, max_score, <span class="kw-2">&amp;</span>state.task);
         <span class="macro">println!</span>();
 
         <span class="kw">let </span>results = eval
@@ -809,15 +831,17 @@
         });
 
         <span class="kw">for </span>(st_num, subtask) <span class="kw">in </span>eval.subtasks.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Subtask #{}&quot;</span>, st_num);
+            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Subtask #{}"</span>, st_num);
             <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span>state.task.subtasks[st_num].name {
-                <span class="macro">print!</span>(<span class="string">&quot; [{}]&quot;</span>, name);
+                <span class="macro">print!</span>(<span class="string">" [{}]"</span>, name);
             }
-            <span class="macro">print!</span>(<span class="string">&quot;: &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">": "</span>);
             <span class="kw">let </span>max_score = state.task.subtasks[st_num].max_score;
-            <span class="kw">let </span>score = subtask.score.unwrap_or(<span class="number">0.0</span>);
-            <span class="self">self</span>.print_score_frac(score, max_score, <span class="kw-2">&amp;</span>state.task);
+            <span class="kw">let </span>score = subtask.score;
+            <span class="kw">let </span>normalized_score = subtask.normalized_score;
+            <span class="self">self</span>.print_score_frac(normalized_score, score, max_score, <span class="kw-2">&amp;</span>state.task);
             <span class="macro">println!</span>();
+
             <span class="kw">for </span>(tc_num, testcase) <span class="kw">in </span>subtask.testcases.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
                 <span class="self">self</span>.print_testcase_outcome(<span class="kw-2">&amp;</span>name, <span class="kw-2">*</span>tc_num, testcase, max_time, max_memory, state);
             }
@@ -834,20 +858,23 @@
         max_memory: u64,
         state: <span class="kw-2">&amp;</span>UIState,
     ) {
-        <span class="macro">print!</span>(<span class="string">&quot;{:3}) &quot;</span>, tc_num);
-        <span class="kw">let </span>score = testcase.score.unwrap_or(<span class="number">0.0</span>);
+        <span class="macro">print!</span>(<span class="string">"{:3}) "</span>, tc_num);
         <span class="kw">let </span>score_precision = <span class="self">Self</span>::score_precision(<span class="kw-2">&amp;</span>state.task);
-        <span class="kw">if </span><span class="macro">abs_diff_eq!</span>(score, <span class="number">1.0</span>) {
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;[{:.prec$}]&quot;</span>, score, prec = score_precision);
-        } <span class="kw">else if </span><span class="macro">abs_diff_eq!</span>(score, <span class="number">0.0</span>) {
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;[{:.prec$}]&quot;</span>, score, prec = score_precision);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(score) = testcase.score {
+            <span class="kw">if </span><span class="macro">abs_diff_eq!</span>(score, <span class="number">1.0</span>) {
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"[{:.prec$}]"</span>, score, prec = score_precision);
+            } <span class="kw">else if </span><span class="macro">abs_diff_eq!</span>(score, <span class="number">0.0</span>) {
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"[{:.prec$}]"</span>, score, prec = score_precision);
+            } <span class="kw">else </span>{
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"[{:.prec$}]"</span>, score, prec = score_precision);
+            }
         } <span class="kw">else </span>{
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;[{:.prec$}]&quot;</span>, score, prec = score_precision);
+            <span class="macro">print!</span>(<span class="string">"[X.{:X&lt;prec$}]"</span>, <span class="string">""</span>, prec = score_precision);
         }
         <span class="comment">// print the time and memory info
         </span><span class="kw">for </span>result <span class="kw">in </span><span class="kw-2">&amp;</span>testcase.results {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(result) = result {
-                <span class="macro">print!</span>(<span class="string">&quot; [&quot;</span>);
+                <span class="macro">print!</span>(<span class="string">" ["</span>);
                 <span class="kw">let </span>time_color = FinishUI::resource_color(
                     result.resources.cpu_time,
                     max_time * BOLD_RESOURCE_THRESHOLD,
@@ -860,20 +887,20 @@
                         * <span class="number">1024.0
                         </span>* YELLOW_RESOURCE_THRESHOLD,
                 );
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, time_color, <span class="string">&quot;{:2.3}s&quot;</span>, result.resources.cpu_time);
-                <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, time_color, <span class="string">"{:2.3}s"</span>, result.resources.cpu_time);
+                <span class="macro">print!</span>(<span class="string">" | "</span>);
                 <span class="macro">cwrite!</span>(
                     <span class="self">self</span>,
                     memory_color,
-                    <span class="string">&quot;{:3.1}MiB&quot;</span>,
+                    <span class="string">"{:3.1}MiB"</span>,
                     (result.resources.memory <span class="kw">as </span>f64) / <span class="number">1024.0
                 </span>);
-                <span class="macro">print!</span>(<span class="string">&quot;]&quot;</span>);
+                <span class="macro">print!</span>(<span class="string">"]"</span>);
             } <span class="kw">else </span>{
-                <span class="macro">print!</span>(<span class="string">&quot; [???]&quot;</span>)
+                <span class="macro">print!</span>(<span class="string">" [???]"</span>)
             }
         }
-        <span class="macro">print!</span>(<span class="string">&quot; {}&quot;</span>, testcase.status.message());
+        <span class="macro">print!</span>(<span class="string">" {}"</span>, testcase.status.message());
         <span class="kw">let </span><span class="kw-2">mut </span>was_killed = <span class="bool-val">false</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>was_cached = <span class="bool-val">true</span>;
         <span class="kw">for </span>res <span class="kw">in </span>testcase.results.iter().flatten() {
@@ -882,20 +909,20 @@
         }
         <span class="kw">for </span>result <span class="kw">in </span>testcase.results.iter().flatten() {
             <span class="kw">match </span><span class="kw-2">&amp;</span>result.status {
-                ExecutionStatus::ReturnCode(code) =&gt; <span class="macro">print!</span>(<span class="string">&quot;: Exited with {}&quot;</span>, code),
-                ExecutionStatus::Signal(sig, name) =&gt; <span class="macro">print!</span>(<span class="string">&quot;: Signal {} ({})&quot;</span>, sig, name),
-                ExecutionStatus::InternalError(err) =&gt; <span class="macro">print!</span>(<span class="string">&quot;: Internal error: {}&quot;</span>, err),
+                ExecutionStatus::ReturnCode(code) =&gt; <span class="macro">print!</span>(<span class="string">": Exited with {}"</span>, code),
+                ExecutionStatus::Signal(sig, name) =&gt; <span class="macro">print!</span>(<span class="string">": Signal {} ({})"</span>, sig, name),
+                ExecutionStatus::InternalError(err) =&gt; <span class="macro">print!</span>(<span class="string">": Internal error: {}"</span>, err),
                 <span class="kw">_ </span>=&gt; {}
             }
         }
         <span class="kw">if </span>was_killed {
-            <span class="macro">print!</span>(<span class="string">&quot; (killed)&quot;</span>);
+            <span class="macro">print!</span>(<span class="string">" (killed)"</span>);
         }
         <span class="kw">if </span>was_cached {
-            <span class="macro">print!</span>(<span class="string">&quot; (from cache)&quot;</span>);
+            <span class="macro">print!</span>(<span class="string">" (from cache)"</span>);
         }
         <span class="kw">if </span>FinishUI::is_ansi() {
-            <span class="self">self</span>.print_right(<span class="macro">format!</span>(<span class="string">&quot;[{}]&quot;</span>, name));
+            <span class="self">self</span>.print_right(<span class="macro">format!</span>(<span class="string">"[{}]"</span>, name));
         }
         <span class="macro">println!</span>();
     }
@@ -914,50 +941,66 @@
     <span class="kw">fn </span>print_summary(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
         <span class="kw">let </span>score_precision = state.task.score_precision;
         <span class="kw">let </span>column_width = score_precision + <span class="number">4</span>;
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Summary&quot;</span>);
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Summary"</span>);
         <span class="kw">let </span>max_len = FinishUIUtils::get_max_len(<span class="kw-2">&amp;</span>state.evaluations);
-        <span class="macro">print!</span>(<span class="string">&quot;{:width$} &quot;</span>, <span class="string">&quot;&quot;</span>, width = max_len);
+        <span class="macro">print!</span>(<span class="string">"{:width$} "</span>, <span class="string">""</span>, width = max_len);
         <span class="macro">cwrite!</span>(
             <span class="self">self</span>,
             BOLD,
-            <span class="string">&quot;{:&gt;width$.prec$} | &quot;</span>,
+            <span class="string">"{:&gt;width$.prec$} | "</span>,
             state.max_score,
             width = column_width,
             prec = score_precision
         );
         <span class="kw">for </span>st_num <span class="kw">in </span>state.task.subtasks.keys().sorted() {
             <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>state.task.subtasks[st_num];
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot; {:^3.0} &quot;</span>, subtask.max_score);
+            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">" {:^3.0} "</span>, subtask.max_score);
         }
         <span class="macro">println!</span>();
         <span class="kw">for </span>path <span class="kw">in </span>state.evaluations.keys().sorted() {
             <span class="kw">let </span>eval = <span class="kw-2">&amp;</span>state.evaluations[path];
             <span class="macro">print!</span>(
-                <span class="string">&quot;{:&gt;width$} &quot;</span>,
+                <span class="string">"{:&gt;width$} "</span>,
                 path.file_name()
-                    .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+                    .expect(<span class="string">"Invalid file name"</span>)
                     .to_string_lossy(),
                 width = max_len
             );
-            <span class="macro">print!</span>(
-                <span class="string">&quot;{:&gt;width$.prec$} | &quot;</span>,
-                eval.score.unwrap_or(<span class="number">0.0</span>),
-                width = column_width,
-                prec = score_precision
-            );
-            <span class="kw">for </span>st_num <span class="kw">in </span>eval.subtasks.keys().sorted() {
-                <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>eval.subtasks[st_num];
-                <span class="kw">let </span>score = subtask.score.unwrap_or(<span class="number">0.0</span>);
-                <span class="kw">let </span>normalized_score = subtask.normalized_score.unwrap_or(<span class="number">0.0</span>);
-                <span class="kw">let </span>color = <span class="self">self</span>.score_color(normalized_score);
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">&quot; {:^3.0} &quot;</span>, score);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(score) = eval.score {
+                <span class="macro">print!</span>(
+                    <span class="string">"{:&gt;width$.prec$} | "</span>,
+                    score,
+                    width = column_width,
+                    prec = score_precision
+                );
+            } <span class="kw">else if </span>score_precision == <span class="number">0 </span>{
+                <span class="macro">print!</span>(<span class="string">"{:&gt;width$} | "</span>, <span class="string">"X"</span>, width = column_width);
+            } <span class="kw">else </span>{
+                <span class="macro">print!</span>(
+                    <span class="string">"{:&gt;width$}{:X&gt;prec$} | "</span>,
+                    <span class="string">"X."</span>,
+                    <span class="string">""</span>,
+                    width = column_width - score_precision,
+                    prec = score_precision
+                );
             }
-            <span class="macro">print!</span>(<span class="string">&quot;  &quot;</span>);
+            <span class="kw">for </span>st_num <span class="kw">in </span>eval.subtasks.keys().sorted() {
+                <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>eval.subtasks[st_num];
+                <span class="kw">let </span>score = subtask.score;
+                <span class="kw">let </span>normalized_score = subtask.normalized_score;
+                <span class="kw">if let </span>(<span class="prelude-val">Some</span>(score), <span class="prelude-val">Some</span>(normalized_score)) = (score, normalized_score) {
+                    <span class="kw">let </span>color = <span class="self">self</span>.score_color(normalized_score);
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">" {:^3.0} "</span>, score);
+                } <span class="kw">else </span>{
+                    <span class="macro">print!</span>(<span class="string">" {:^3} "</span>, <span class="string">"X"</span>);
+                }
+            }
+            <span class="macro">print!</span>(<span class="string">"  "</span>);
             <span class="kw">for </span>st_num <span class="kw">in </span>eval.subtasks.keys().sorted() {
                 <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>eval.subtasks[st_num];
                 <span class="kw">let </span>normalized_score = subtask.normalized_score.unwrap_or(<span class="number">0.0</span>);
                 <span class="kw">let </span>color = <span class="self">self</span>.score_color(normalized_score);
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">&quot;[&quot;</span>);
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">"["</span>);
                 <span class="kw">let </span>time_limit = state.task.time_limit;
                 <span class="kw">let </span>memory_limit = state.task.memory_limit;
                 <span class="kw">let </span>extra_time = state.config.extra_time;
@@ -975,19 +1018,19 @@
                     </span>};
                     <span class="kw">use </span>TestcaseEvaluationStatus::<span class="kw-2">*</span>;
                     <span class="kw">match </span>testcase.status {
-                        Accepted(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>GREEN), <span class="string">&quot;A&quot;</span>),
-                        WrongAnswer(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;W&quot;</span>),
-                        Partial(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>YELLOW), <span class="string">&quot;P&quot;</span>),
-                        TimeLimitExceeded =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>RED), <span class="string">&quot;T&quot;</span>),
-                        WallTimeLimitExceeded =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;T&quot;</span>),
-                        MemoryLimitExceeded =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>RED), <span class="string">&quot;M&quot;</span>),
-                        RuntimeError =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;R&quot;</span>),
-                        Failed =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;F&quot;</span>),
-                        Skipped =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;S&quot;</span>),
-                        <span class="kw">_ </span>=&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;X&quot;</span>),
+                        Accepted(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>GREEN), <span class="string">"A"</span>),
+                        WrongAnswer(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"W"</span>),
+                        Partial(<span class="kw">_</span>) =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>YELLOW), <span class="string">"P"</span>),
+                        TimeLimitExceeded =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>RED), <span class="string">"T"</span>),
+                        WallTimeLimitExceeded =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"T"</span>),
+                        MemoryLimitExceeded =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, close_color.unwrap_or(<span class="kw-2">&amp;*</span>RED), <span class="string">"M"</span>),
+                        RuntimeError =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"R"</span>),
+                        Failed =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"F"</span>),
+                        Skipped =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"S"</span>),
+                        <span class="kw">_ </span>=&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"X"</span>),
                     }
                 }
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">&quot;]&quot;</span>);
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">"]"</span>);
             }
             <span class="macro">println!</span>();
         }
@@ -995,21 +1038,29 @@
     }
 
     <span class="doccomment">/// Print the score fraction of a solution using colors.
-    </span><span class="kw">fn </span>print_score_frac(<span class="kw-2">&amp;mut </span><span class="self">self</span>, score: f64, max_score: f64, task: <span class="kw-2">&amp;</span>IOITask) {
-        <span class="kw">if </span>max_score == <span class="number">0.0 </span>{
-            <span class="macro">print!</span>(
-                <span class="string">&quot;{:.prec$} / {:.prec$}&quot;</span>,
+    </span><span class="kw">fn </span>print_score_frac(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        normalized_score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+        score: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+        max_score: f64,
+        task: <span class="kw-2">&amp;</span>IOITask,
+    ) {
+        <span class="kw">if let </span>(<span class="prelude-val">Some</span>(normalized_score), <span class="prelude-val">Some</span>(score)) = (normalized_score, score) {
+            <span class="kw">let </span>color = <span class="self">self</span>.score_color(normalized_score);
+            <span class="macro">cwrite!</span>(
+                <span class="self">self</span>,
+                color,
+                <span class="string">"{:.prec$} / {:.prec$}"</span>,
                 score,
                 max_score,
                 prec = task.score_precision
             );
+        } <span class="kw">else if </span>task.score_precision == <span class="number">0 </span>{
+            <span class="macro">print!</span>(<span class="string">"X / {:.0}"</span>, max_score,);
         } <span class="kw">else </span>{
-            <span class="kw">let </span>color = <span class="self">self</span>.score_color(score / max_score);
-            <span class="macro">cwrite!</span>(
-                <span class="self">self</span>,
-                color,
-                <span class="string">&quot;{:.prec$} / {:.prec$}&quot;</span>,
-                score,
+            <span class="macro">print!</span>(
+                <span class="string">"X.{:X&lt;prec$} / {:.prec$}"</span>,
+                <span class="string">""</span>,
                 max_score,
                 prec = task.score_precision
             );
@@ -1017,7 +1068,7 @@
     }
 
     <span class="doccomment">/// Color to use for displaying a score.
-    </span><span class="kw">fn </span>score_color(<span class="kw-2">&amp;mut </span><span class="self">self</span>, normalized_score: f64) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>ColorSpec {
+    </span><span class="kw">fn </span>score_color(<span class="kw-2">&amp;mut </span><span class="self">self</span>, normalized_score: f64) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>ColorSpec {
         <span class="kw">match </span>ScoreStatus::from_score(normalized_score, <span class="number">1.0</span>) {
             ScoreStatus::Accepted =&gt; <span class="kw-2">&amp;</span>GREEN,
             ScoreStatus::WrongAnswer =&gt; <span class="kw-2">&amp;</span>RED,
@@ -1042,23 +1093,23 @@
     </span><span class="kw">fn </span>print_right(<span class="kw-2">&amp;mut </span><span class="self">self</span>, what: String) {
         <span class="comment">// \x1b[1000C  move the cursor to the right margin
         // \x1b[{}D    move the cursor left by {} characters
-        </span><span class="macro">print!</span>(<span class="string">&quot;\x1b[1000C\x1b[{}D{}&quot;</span>, what.len() - <span class="number">1</span>, what);
+        </span><span class="macro">print!</span>(<span class="string">"\x1b[1000C\x1b[{}D{}"</span>, what.len() - <span class="number">1</span>, what);
     }
 
-    <span class="doccomment">/// Check if ANSI is supported: if not in windows and not in a &quot;dumb&quot; terminal.
+    <span class="doccomment">/// Check if ANSI is supported: if not in windows and not in a "dumb" terminal.
     </span><span class="kw">fn </span>is_ansi() -&gt; bool {
-        !<span class="macro">cfg!</span>(windows) &amp;&amp; std::env::var(<span class="string">&quot;TERM&quot;</span>).map(|v| v != <span class="string">&quot;dumb&quot;</span>).unwrap_or(<span class="bool-val">false</span>)
+        !<span class="macro">cfg!</span>(windows) &amp;&amp; std::env::var(<span class="string">"TERM"</span>).map(|v| v != <span class="string">"dumb"</span>).unwrap_or(<span class="bool-val">false</span>)
     }
 
     <span class="doccomment">/// Print the status of an `UIExecutionStatus` using colors.
     </span><span class="kw">fn </span>print_execution_status(<span class="kw-2">&amp;mut </span><span class="self">self</span>, status: <span class="kw-2">&amp;</span>UIExecutionStatus) {
         <span class="kw">match </span>status {
-            UIExecutionStatus::Pending =&gt; <span class="macro">print!</span>(<span class="string">&quot;...&quot;</span>),
-            UIExecutionStatus::Skipped =&gt; <span class="macro">print!</span>(<span class="string">&quot;skipped&quot;</span>),
-            UIExecutionStatus::Started { .. } =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;started&quot;</span>),
+            UIExecutionStatus::Pending =&gt; <span class="macro">print!</span>(<span class="string">"..."</span>),
+            UIExecutionStatus::Skipped =&gt; <span class="macro">print!</span>(<span class="string">"skipped"</span>),
+            UIExecutionStatus::Started { .. } =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"started"</span>),
             UIExecutionStatus::Done { result } =&gt; <span class="kw">match </span><span class="kw-2">&amp;</span>result.status {
-                ExecutionStatus::Success =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;Success&quot;</span>),
-                <span class="kw">_ </span>=&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;{:?}&quot;</span>, result.status),
+                ExecutionStatus::Success =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"Success"</span>),
+                <span class="kw">_ </span>=&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"{:?}"</span>, result.status),
             },
         }
     }
@@ -1098,23 +1149,23 @@
                 <span class="kw">let </span>cell = subtask_results
                     .iter()
                     .map(|outcome| outcome.check.result.as_compact_str())
-                    .join(<span class="string">&quot; &quot;</span>);
+                    .join(<span class="string">" "</span>);
                 <span class="kw">let </span>column_index = <span class="kw-2">*</span>st_num <span class="kw">as </span>usize + <span class="number">1</span>;
                 column_widths[column_index] = column_widths[column_index].max(cell.len());
             }
         }
 
         <span class="comment">// Print the header.
-        </span><span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Subtask results&quot;</span>);
-        <span class="macro">print!</span>(<span class="string">&quot;{:width$}&quot;</span>, <span class="string">&quot;&quot;</span>, width = column_widths[<span class="number">0</span>]);
+        </span><span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Subtask results"</span>);
+        <span class="macro">print!</span>(<span class="string">"{:width$}"</span>, <span class="string">""</span>, width = column_widths[<span class="number">0</span>]);
         <span class="kw">for </span>st_num <span class="kw">in </span>state.task.subtasks.keys().sorted() {
             <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>state.task.subtasks[st_num];
             <span class="kw">let </span>width = column_widths[<span class="kw-2">*</span>st_num <span class="kw">as </span>usize + <span class="number">1</span>];
-            <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">" | "</span>);
             <span class="macro">cwrite!</span>(
                 <span class="self">self</span>,
                 BOLD,
-                <span class="string">&quot;{:width$}&quot;</span>,
+                <span class="string">"{:width$}"</span>,
                 subtask.name.as_ref().unwrap(),
                 width = width
             );
@@ -1124,29 +1175,29 @@
         <span class="comment">// Print the solution lines
         </span><span class="kw">for </span>solution_name <span class="kw">in </span>solutions {
             <span class="kw">let </span>solution = <span class="kw-2">&amp;</span>state.solutions[solution_name];
-            <span class="macro">print!</span>(<span class="string">&quot;{:&gt;width$}&quot;</span>, solution.name, width = column_widths[<span class="number">0</span>]);
+            <span class="macro">print!</span>(<span class="string">"{:&gt;width$}"</span>, solution.name, width = column_widths[<span class="number">0</span>]);
             <span class="kw">let </span>solution_results = <span class="kw-2">&amp;</span>results[solution_name];
             <span class="kw">for </span>st_num <span class="kw">in </span>state.task.subtasks.keys().sorted() {
-                <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+                <span class="macro">print!</span>(<span class="string">" | "</span>);
                 <span class="kw">let </span>width = column_widths[<span class="kw-2">*</span>st_num <span class="kw">as </span>usize + <span class="number">1</span>];
                 <span class="kw">let </span>subtask_results = <span class="kw-2">&amp;</span>solution_results[st_num];
                 <span class="kw">if </span>subtask_results.is_empty() {
-                    <span class="macro">print!</span>(<span class="string">&quot;{:width$}&quot;</span>, <span class="string">&quot;?&quot;</span>, width = width);
+                    <span class="macro">print!</span>(<span class="string">"{:width$}"</span>, <span class="string">"?"</span>, width = width);
                 } <span class="kw">else </span>{
                     <span class="kw">let </span><span class="kw-2">mut </span>printed = <span class="number">0</span>;
                     <span class="kw">for </span>result <span class="kw">in </span>subtask_results {
                         <span class="kw">if </span>printed &gt; <span class="number">0 </span>{
-                            <span class="macro">print!</span>(<span class="string">&quot; &quot;</span>);
+                            <span class="macro">print!</span>(<span class="string">" "</span>);
                             printed += <span class="number">1</span>;
                         }
                         <span class="kw">let </span>as_str = result.check.result.as_compact_str();
                         <span class="kw">let </span>color = <span class="kw">if </span>result.success { <span class="kw-2">&amp;*</span>GREEN } <span class="kw">else </span>{ <span class="kw-2">&amp;*</span>RED };
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">&quot;{}&quot;</span>, as_str);
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, color, <span class="string">"{}"</span>, as_str);
                         printed += as_str.len();
                     }
                     <span class="kw">let </span>column_index = <span class="kw-2">*</span>st_num <span class="kw">as </span>usize + <span class="number">1</span>;
                     <span class="kw">let </span>remaining = column_widths[column_index] - printed;
-                    <span class="macro">print!</span>(<span class="string">&quot;{:remaining$}&quot;</span>, <span class="string">&quot;&quot;</span>, remaining = remaining);
+                    <span class="macro">print!</span>(<span class="string">"{:remaining$}"</span>, <span class="string">""</span>, remaining = remaining);
                 }
             }
             <span class="macro">println!</span>();

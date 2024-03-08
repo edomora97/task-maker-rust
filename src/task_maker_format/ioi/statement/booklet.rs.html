@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/booklet.rs`."><title>booklet.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/statement/booklet.rs`."><title>booklet.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -415,7 +416,7 @@
 <span class="doccomment">/// Configuration of a `Booklet`, including the setting from the contest configuration.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, Default, TypeScriptify)]
 </span><span class="kw">pub struct </span>BookletConfig {
-    <span class="doccomment">/// The language to use for this booklet, e.g. `&quot;english&quot;`.
+    <span class="doccomment">/// The language to use for this booklet, e.g. `"english"`.
     </span><span class="kw">pub </span>language: String,
     <span class="doccomment">/// Whether to show the solutions in the booklet.
     </span><span class="kw">pub </span>show_solutions: bool,
@@ -439,7 +440,7 @@
 
 <span class="doccomment">/// Template to use to render the `booklet.tex` file.
 </span><span class="attr">#[derive(Template)]
-#[template(path = <span class="string">&quot;booklet.tex&quot;</span>, escape = <span class="string">&quot;none&quot;</span>, syntax = <span class="string">&quot;tex&quot;</span>)]
+#[template(path = <span class="string">"booklet.tex"</span>, escape = <span class="string">"none"</span>, syntax = <span class="string">"tex"</span>)]
 </span><span class="kw">pub struct </span>BookletTemplate {
     language: String,
     show_solutions: String,
@@ -478,7 +479,7 @@
     </span><span class="kw">pub </span>date: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// The logo of the contest.
     </span><span class="kw">pub </span>logo: <span class="prelude-ty">Option</span>&lt;String&gt;,
-    <span class="doccomment">/// `Some(&quot;True&quot;)` if the time and memory limits should be put in the booklet.
+    <span class="doccomment">/// `Some("True")` if the time and memory limits should be put in the booklet.
     </span><span class="kw">pub </span>show_summary: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// Some(relative_path) for a front page for the booklet.
     </span><span class="kw">pub </span>booklet_intro_path: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
@@ -506,63 +507,63 @@
         <span class="kw">let </span>booklet_name = <span class="self">self
             </span>.dest
             .file_name()
-            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid destination file {}&quot;</span>, <span class="self">self</span>.dest.display()))<span class="question-mark">?
+            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Invalid destination file {}"</span>, <span class="self">self</span>.dest.display()))<span class="question-mark">?
             </span>.to_string_lossy()
             .to_string();
         <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(
-            <span class="string">&quot;Compilation of the booklet&quot;</span>,
-            ExecutionCommand::system(<span class="string">&quot;latexmk&quot;</span>),
+            <span class="string">"Compilation of the booklet"</span>,
+            ExecutionCommand::system(<span class="string">"latexmk"</span>),
         );
         exec.args(<span class="macro">vec!</span>[
-            <span class="string">&quot;-shell-escape&quot;</span>,
-            <span class="string">&quot;-f&quot;</span>,
-            <span class="string">&quot;-interaction=nonstopmode&quot;</span>,
-            <span class="string">&quot;-pdf&quot;</span>,
-            <span class="string">&quot;booklet.tex&quot;</span>,
+            <span class="string">"-shell-escape"</span>,
+            <span class="string">"-f"</span>,
+            <span class="string">"-interaction=nonstopmode"</span>,
+            <span class="string">"-pdf"</span>,
+            <span class="string">"booklet.tex"</span>,
         ]);
         exec.limits_mut()
             .read_only(<span class="bool-val">false</span>)
             .allow_multiprocess()
-            .add_extra_readable_dir(<span class="string">&quot;/etc&quot;</span>)
+            .add_extra_readable_dir(<span class="string">"/etc"</span>)
             .mount_tmpfs(<span class="bool-val">true</span>);
         exec.tag(Tag::Booklet.into());
         exec.priority(BOOKLET_PRIORITY);
-        <span class="kw">let </span>output = exec.output(<span class="string">&quot;booklet.pdf&quot;</span>);
+        <span class="kw">let </span>output = exec.output(<span class="string">"booklet.pdf"</span>);
 
-        <span class="kw">let </span>source = File::new(<span class="string">&quot;Source of the booklet&quot;</span>);
+        <span class="kw">let </span>source = File::new(<span class="string">"Source of the booklet"</span>);
         <span class="kw">let </span>tex = <span class="self">self</span>.make_tex();
-        exec.input(<span class="kw-2">&amp;</span>source, <span class="string">&quot;booklet.tex&quot;</span>, <span class="bool-val">false</span>);
+        exec.input(<span class="kw-2">&amp;</span>source, <span class="string">"booklet.tex"</span>, <span class="bool-val">false</span>);
         eval.dag.provide_content(source, tex.into_bytes());
 
         <span class="kw">for </span>statement <span class="kw">in </span><span class="self">self</span>.statements.iter() {
             <span class="kw">let </span>name = <span class="kw-2">&amp;</span>statement.config().name;
-            <span class="kw">let </span>tex = File::new(<span class="macro">format!</span>(<span class="string">&quot;Source of statement of {}&quot;</span>, name));
-            exec.input(<span class="kw-2">&amp;</span>tex, Path::new(<span class="kw-2">&amp;</span>name).join(<span class="string">&quot;statement.tex&quot;</span>), <span class="bool-val">false</span>);
+            <span class="kw">let </span>tex = File::new(<span class="macro">format!</span>(<span class="string">"Source of statement of {}"</span>, name));
+            exec.input(<span class="kw-2">&amp;</span>tex, Path::new(<span class="kw-2">&amp;</span>name).join(<span class="string">"statement.tex"</span>), <span class="bool-val">false</span>);
             eval.dag.provide_content(tex, statement.tex().into_bytes());
             <span class="kw">let </span>base_dir = PathBuf::from(<span class="kw-2">&amp;</span>name);
             <span class="kw">let </span>deps = statement
                 .build_deps(eval, <span class="kw-2">&amp;</span>booklet_name, <span class="kw-2">&amp;</span><span class="self">self</span>.config)
-                .context(<span class="string">&quot;Failed to build booklet dependencies&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to build booklet dependencies"</span>)<span class="question-mark">?</span>;
             <span class="kw">for </span>(path, file) <span class="kw">in </span>deps {
                 exec.input(file, base_dir.join(path), <span class="bool-val">false</span>);
             }
         }
 
         <span class="comment">// copy all the files from the data/statements directory
-        </span><span class="kw">let </span>data_dir = DATA_DIR.join(<span class="string">&quot;statements&quot;</span>);
-        <span class="kw">let </span>glob_pattern = data_dir.to_string_lossy().to_string() + <span class="string">&quot;/**/*&quot;</span>;
-        <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>glob_pattern).context(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">? </span>{
-            <span class="kw">let </span>path = path.context(<span class="string">&quot;Failed to iterate with glob&quot;</span>)<span class="question-mark">?</span>;
+        </span><span class="kw">let </span>data_dir = DATA_DIR.join(<span class="string">"statements"</span>);
+        <span class="kw">let </span>glob_pattern = data_dir.to_string_lossy().to_string() + <span class="string">"/**/*"</span>;
+        <span class="kw">for </span>path <span class="kw">in </span>glob::glob(<span class="kw-2">&amp;</span>glob_pattern).context(<span class="string">"Invalid glob pattern"</span>)<span class="question-mark">? </span>{
+            <span class="kw">let </span>path = path.context(<span class="string">"Failed to iterate with glob"</span>)<span class="question-mark">?</span>;
             <span class="kw">if </span>!path.is_file() {
                 <span class="kw">continue</span>;
             }
             <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(
-                <span class="string">&quot;Booklet template file {:?}&quot;</span>,
-                path.file_name().context(<span class="string">&quot;Invalid template file&quot;</span>)<span class="question-mark">?
+                <span class="string">"Booklet template file {:?}"</span>,
+                path.file_name().context(<span class="string">"Invalid template file"</span>)<span class="question-mark">?
             </span>));
             eval.dag
                 .provide_file(file.clone(), <span class="kw-2">&amp;</span>path)
-                .context(<span class="string">&quot;Failed to provide statement file&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide statement file"</span>)<span class="question-mark">?</span>;
             exec.input(file, path.strip_prefix(<span class="kw-2">&amp;</span>data_dir)<span class="question-mark">?</span>, <span class="bool-val">false</span>);
         }
 
@@ -573,9 +574,9 @@
             booklet_name
         )<span class="question-mark">?</span>;
         <span class="kw">if </span>eval.dag.data.config.copy_logs {
-            <span class="kw">let </span>log_dir = eval.task_root.join(<span class="string">&quot;bin/logs/booklets&quot;</span>);
-            <span class="kw">let </span>stderr_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">&quot;{}.stderr.log&quot;</span>, booklet_name));
-            <span class="kw">let </span>stdout_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">&quot;{}.stdout.log&quot;</span>, booklet_name));
+            <span class="kw">let </span>log_dir = eval.task_root.join(<span class="string">"bin/logs/booklets"</span>);
+            <span class="kw">let </span>stderr_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">"{}.stderr.log"</span>, booklet_name));
+            <span class="kw">let </span>stdout_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">"{}.stdout.log"</span>, booklet_name));
             eval.dag
                 .write_file_to_allow_fail(exec.stderr(), stderr_dest, <span class="bool-val">false</span>);
             eval.dag
@@ -607,7 +608,7 @@
                 packages.insert(package);
             }
             tasks.push(<span class="macro">format!</span>(
-                <span class="string">r&quot;\subimport{{./{}/}}{{statement.tex}}&quot;</span>,
+                <span class="string">r"\subimport{{./{}/}}{{statement.tex}}"</span>,
                 statement.config().name
             ));
         }
@@ -615,17 +616,17 @@
             language: <span class="self">self</span>.config.language.clone(),
             show_solutions: Booklet::bool_to_tpl_string(
                 <span class="self">self</span>.config.show_solutions,
-                <span class="string">&quot;showsolutions&quot;</span>,
+                <span class="string">"showsolutions"</span>,
             ),
-            show_summary: Booklet::bool_to_tpl_string(<span class="self">self</span>.config.show_summary, <span class="string">&quot;showsummary&quot;</span>),
+            show_summary: Booklet::bool_to_tpl_string(<span class="self">self</span>.config.show_summary, <span class="string">"showsummary"</span>),
             font_enc: <span class="self">self</span>.config.font_enc.clone(),
             input_enc: <span class="self">self</span>.config.input_enc.clone(),
             description: <span class="self">self</span>.config.description.clone().unwrap_or_default(),
             location: <span class="self">self</span>.config.location.clone().unwrap_or_default(),
             date: <span class="self">self</span>.config.date.clone().unwrap_or_default(),
             logo: <span class="self">self</span>.config.logo.clone().unwrap_or_default(),
-            packages: packages.iter().sorted().join(<span class="string">&quot;\n&quot;</span>),
-            tasks: tasks.join(<span class="string">&quot;\n&quot;</span>),
+            packages: packages.iter().sorted().join(<span class="string">"\n"</span>),
+            tasks: tasks.join(<span class="string">"\n"</span>),
             intro_page: <span class="self">self
                 </span>.config
                 .intro_page
@@ -639,7 +640,7 @@
 
     <span class="doccomment">/// Return a string which is `if_true` if `b` is true, otherwise an empty string.
     </span><span class="kw">fn </span>bool_to_tpl_string(b: bool, if_true: <span class="kw-2">&amp;</span>str) -&gt; String {
-        <span class="kw">if </span>b { if_true } <span class="kw">else </span>{ <span class="string">&quot;&quot; </span>}.to_string()
+        <span class="kw">if </span>b { if_true } <span class="kw">else </span>{ <span class="string">"" </span>}.to_string()
     }
 
     <span class="doccomment">/// Given the content of the log from latexmk, extract the errors and emit them as warnings.
@@ -650,14 +651,14 @@
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="macro">lazy_static! </span>{
             <span class="kw">static </span><span class="kw-2">ref </span>FIND_ERRORS: Regex =
-                Regex::new(<span class="string">r&quot;(?ms)^!(?: LaTeX Error:)? ([^\n]+).*?(^l\.\d+)&quot;</span>)
-                    .expect(<span class="string">&quot;Invalid regex&quot;</span>);
+                Regex::new(<span class="string">r"(?ms)^!(?: LaTeX Error:)? ([^\n]+).*?(^l\.\d+)"</span>)
+                    .expect(<span class="string">"Invalid regex"</span>);
         }
         <span class="comment">// latexmk sometimes emit the same warning more than once
         </span><span class="kw">let </span><span class="kw-2">mut </span>errors = HashSet::new();
         <span class="kw">for </span>cap <span class="kw">in </span>FIND_ERRORS.captures_iter(<span class="kw-2">&amp;</span>String::from_utf8_lossy(content)) {
             <span class="kw">let </span>line = cap[<span class="number">2</span>]
-                .strip_prefix(<span class="string">&quot;l.&quot;</span>)
+                .strip_prefix(<span class="string">"l."</span>)
                 .and_then(|line| line.parse::&lt;i32&gt;().ok());
             errors.insert((line, cap[<span class="number">1</span>].to_string()));
         }
@@ -667,15 +668,15 @@
                 .sorted()
                 .map(|(line, error)| {
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(line) = line {
-                        <span class="macro">format!</span>(<span class="string">&quot;Line {}: {}&quot;</span>, line, error)
+                        <span class="macro">format!</span>(<span class="string">"Line {}: {}"</span>, line, error)
                     } <span class="kw">else </span>{
                         error
                     }
                 })
-                .join(<span class="string">&quot;\n&quot;</span>);
+                .join(<span class="string">"\n"</span>);
             sender.add_diagnostic(
                 Diagnostic::warning(<span class="macro">format!</span>(
-                    <span class="string">&quot;Found Latex errors while compiling the booklet {}&quot;</span>,
+                    <span class="string">"Found Latex errors while compiling the booklet {}"</span>,
                     booklet_name.as_ref().display()
                 ))
                 .with_note(note),
@@ -697,9 +698,9 @@
             <span class="prelude-val">Ok</span>(BookletConfig {
                 language: language.into(),
                 show_solutions: booklet_solutions,
-                show_summary: contest_yaml.show_summary == <span class="prelude-val">Some</span>(<span class="string">&quot;True&quot;</span>.to_string()),
-                font_enc: <span class="string">&quot;T1&quot;</span>.into(),
-                input_enc: <span class="string">&quot;utf8&quot;</span>.into(),
+                show_summary: contest_yaml.show_summary == <span class="prelude-val">Some</span>(<span class="string">"True"</span>.to_string()),
+                font_enc: <span class="string">"T1"</span>.into(),
+                input_enc: <span class="string">"utf8"</span>.into(),
                 description: contest_yaml.description,
                 location: contest_yaml.location,
                 date: contest_yaml.date,
@@ -711,8 +712,8 @@
                 language: language.into(),
                 show_solutions: booklet_solutions,
                 show_summary: <span class="bool-val">false</span>,
-                font_enc: <span class="string">&quot;T1&quot;</span>.into(),
-                input_enc: <span class="string">&quot;utf8&quot;</span>.into(),
+                font_enc: <span class="string">"T1"</span>.into(),
+                input_enc: <span class="string">"utf8"</span>.into(),
                 description: <span class="prelude-val">None</span>,
                 location: <span class="prelude-val">None</span>,
                 date: <span class="prelude-val">None</span>,
@@ -724,16 +725,16 @@
 
     <span class="doccomment">/// Find and parse the contest.yaml in the provided contest root.
     </span><span class="kw">pub fn </span>contest_yaml&lt;P: Into&lt;PathBuf&gt;&gt;(contest_dir: P) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Result</span>&lt;ContestYAML, Error&gt;&gt; {
-        <span class="kw">let </span>contest_yaml_path = contest_dir.into().join(<span class="string">&quot;contest.yaml&quot;</span>);
+        <span class="kw">let </span>contest_yaml_path = contest_dir.into().join(<span class="string">"contest.yaml"</span>);
         <span class="kw">let </span>parse_yaml = || {
             <span class="kw">let </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>contest_yaml_path).with_context(|| {
                 <span class="macro">format!</span>(
-                    <span class="string">&quot;Failed to open contest.yaml at {}&quot;</span>,
+                    <span class="string">"Failed to open contest.yaml at {}"</span>,
                     contest_yaml_path.display()
                 )
             })<span class="question-mark">?</span>;
             <span class="kw">let </span>contest_yaml: ContestYAML =
-                serde_yaml::from_reader(file).context(<span class="string">&quot;Failed to deserialize contest.yaml&quot;</span>)<span class="question-mark">?</span>;
+                serde_yaml::from_reader(file).context(<span class="string">"Failed to deserialize contest.yaml"</span>)<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(contest_yaml)
         };
 
@@ -754,10 +755,10 @@
     <span class="kw">fn </span>get_outputs_with_logs(task_root: <span class="kw-2">&amp;</span>Path, copy_logs: bool) -&gt; Vec&lt;PathBuf&gt; {
         <span class="kw">let </span>(<span class="kw-2">mut </span>eval, _recv) = EvaluationData::new(task_root);
         eval.dag.data.config.copy_logs = copy_logs;
-        <span class="kw">let </span><span class="kw-2">mut </span>booklet = Booklet::new(BookletConfig::default(), task_root.join(<span class="string">&quot;dest.pdf&quot;</span>));
-        std::fs::write(task_root.join(<span class="string">&quot;text.tex&quot;</span>), <span class="string">&quot;loltex&quot;</span>).unwrap();
+        <span class="kw">let </span><span class="kw-2">mut </span>booklet = Booklet::new(BookletConfig::default(), task_root.join(<span class="string">"dest.pdf"</span>));
+        std::fs::write(task_root.join(<span class="string">"text.tex"</span>), <span class="string">"loltex"</span>).unwrap();
         <span class="kw">let </span>statement =
-            Statement::new(task_root.join(<span class="string">&quot;text.tex&quot;</span>), StatementConfig::default()).unwrap();
+            Statement::new(task_root.join(<span class="string">"text.tex"</span>), StatementConfig::default()).unwrap();
         booklet.add_statement(statement);
         booklet.build(<span class="kw-2">&amp;mut </span>eval).unwrap();
         eval.dag
@@ -772,8 +773,8 @@
     </span><span class="kw">fn </span>test_logs_emitted_with_copy_logs() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>outputs = get_outputs_with_logs(tmpdir.path(), <span class="bool-val">true</span>);
-        <span class="kw">let </span>stderr_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stderr.log&quot;</span>);
-        <span class="kw">let </span>stdout_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stdout.log&quot;</span>);
+        <span class="kw">let </span>stderr_path = tmpdir.path().join(<span class="string">"bin/logs/booklets/dest.pdf.stderr.log"</span>);
+        <span class="kw">let </span>stdout_path = tmpdir.path().join(<span class="string">"bin/logs/booklets/dest.pdf.stdout.log"</span>);
         <span class="macro">assert!</span>(outputs.contains(<span class="kw-2">&amp;</span>stderr_path));
         <span class="macro">assert!</span>(outputs.contains(<span class="kw-2">&amp;</span>stdout_path));
     }
@@ -782,8 +783,8 @@
     </span><span class="kw">fn </span>test_logs_not_emitted_by_default() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>outputs = get_outputs_with_logs(tmpdir.path(), <span class="bool-val">false</span>);
-        <span class="kw">let </span>stderr_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stderr.log&quot;</span>);
-        <span class="kw">let </span>stdout_path = tmpdir.path().join(<span class="string">&quot;bin/logs/booklets/dest.pdf.stdout.log&quot;</span>);
+        <span class="kw">let </span>stderr_path = tmpdir.path().join(<span class="string">"bin/logs/booklets/dest.pdf.stderr.log"</span>);
+        <span class="kw">let </span>stdout_path = tmpdir.path().join(<span class="string">"bin/logs/booklets/dest.pdf.stdout.log"</span>);
         <span class="macro">assert!</span>(!outputs.contains(<span class="kw-2">&amp;</span>stderr_path));
         <span class="macro">assert!</span>(!outputs.contains(<span class="kw-2">&amp;</span>stdout_path));
     }

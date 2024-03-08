@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/client.rs`."><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/client.rs`."><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -508,18 +509,18 @@
     /// # let tmpdir = TempDir::new().unwrap();
     /// # let path = tmpdir.path().to_owned();
     /// # let sandbox_runner = SuccessSandboxRunner::default();
-    /// let file_store = Arc::new(FileStore::new(&amp;path, 1000, 1000).expect(&quot;Cannot create the file store&quot;));
+    /// let file_store = Arc::new(FileStore::new(&amp;path, 1000, 1000).expect("Cannot create the file store"));
     /// let server_file_store = file_store.clone();
     /// // make a new local executor in a second thread
     /// let server = thread::spawn(move || {
-    ///     let cache = Cache::new(&amp;path).expect(&quot;Cannot create the cache&quot;);
-    ///     let mut executor = LocalExecutor::new(server_file_store, cache, 4, path, sandbox_runner).expect(&quot;Failed to create local executor&quot;);
+    ///     let cache = Cache::new(&amp;path).expect("Cannot create the cache");
+    ///     let mut executor = LocalExecutor::new(server_file_store, cache, 4, path, sandbox_runner).expect("Failed to create local executor");
     ///     executor.evaluate(tx_remote, rx_remote).unwrap();
     /// });
     ///
     /// ExecutorClient::evaluate(dag, tx, &amp;rx, file_store, |_| Ok(())).unwrap(); // this will block!
     ///
-    /// server.join().expect(&quot;Server paniced&quot;);
+    /// server.join().expect("Server paniced");
     /// ```
     </span><span class="attr">#[allow(clippy::cognitive_complexity)]
     </span><span class="kw">pub fn </span>evaluate&lt;F&gt;(
@@ -532,7 +533,7 @@
     <span class="kw">where
         </span>F: FnMut(ExecutorStatus&lt;SystemTime&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;,
     {
-        <span class="macro">trace!</span>(<span class="string">&quot;ExecutorClient started&quot;</span>);
+        <span class="macro">trace!</span>(<span class="string">"ExecutorClient started"</span>);
         ExecutorClient::start_evaluation(<span class="kw-2">&amp;mut </span>dag, <span class="kw-2">&amp;</span>sender)<span class="question-mark">?</span>;
 
         <span class="comment">// setup the status poller that will send to the server a Status message every
@@ -543,29 +544,29 @@
             ExecutorClient::spawn_status_poller(done_receiver, file_mode.clone(), sender.clone());
 
         <span class="macro">defer! </span>{{
-            <span class="macro">info!</span>(<span class="string">&quot;Client has done, exiting&quot;</span>);
-            done_sender.send(()).context(<span class="string">&quot;Failed to send done signal to status poller&quot;</span>).unwrap();
+            <span class="macro">info!</span>(<span class="string">"Client has done, exiting"</span>);
+            done_sender.send(()).context(<span class="string">"Failed to send done signal to status poller"</span>).unwrap();
             status_poller
                 .join()
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to join status poller: {:?}&quot;</span>, e)).unwrap();
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Failed to join status poller: {:?}"</span>, e)).unwrap();
         }}
 
         <span class="kw">let </span><span class="kw-2">mut </span>missing_files = <span class="prelude-val">None</span>;
         <span class="kw">while </span>missing_files.unwrap_or(<span class="number">1</span>) &gt; <span class="number">0 </span>{
             <span class="kw">match </span>receiver.recv() {
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::AskFile(uuid)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server is asking for {}&quot;</span>, uuid);
+                    <span class="macro">info!</span>(<span class="string">"Server is asking for {}"</span>, uuid);
                     <span class="comment">// prevent the status poller for sending messages while sending the file
                     </span><span class="kw">let </span>_lock = file_mode
                         .lock()
-                        .map_err(|<span class="kw">_</span>| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to obtain file_mode lock&quot;</span>))<span class="question-mark">?</span>;
+                        .map_err(|<span class="kw">_</span>| <span class="macro">anyhow!</span>(<span class="string">"Failed to obtain file_mode lock"</span>))<span class="question-mark">?</span>;
                     <span class="kw">let </span>provided_files = <span class="kw-2">&amp;</span>dag.data.provided_files;
                     handle_server_ask_file(uuid, provided_files, <span class="kw-2">&amp;</span>sender).with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to process AskFile({}) from the server&quot;</span>, uuid)
+                        <span class="macro">format!</span>(<span class="string">"Failed to process AskFile({}) from the server"</span>, uuid)
                     })<span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::ProvideFile(uuid, success)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server sent the file {}, success: {}&quot;</span>, uuid, success);
+                    <span class="macro">info!</span>(<span class="string">"Server sent the file {}, success: {}"</span>, uuid, success);
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(missing) = missing_files {
                         missing_files = <span class="prelude-val">Some</span>(missing - <span class="number">1</span>);
                     }
@@ -573,65 +574,65 @@
                     process_provided_file(dag.file_callbacks(), uuid, success, iterator, <span class="prelude-val">None</span>)
                         .with_context(|| {
                             <span class="macro">format!</span>(
-                                <span class="string">&quot;Failed to process ProvideFile({}, {}) from the server&quot;</span>,
+                                <span class="string">"Failed to process ProvideFile({}, {}) from the server"</span>,
                                 uuid, success
                             )
                         })<span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::NotifyStart(uuid, worker)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} started on {}&quot;</span>, uuid, worker);
+                    <span class="macro">info!</span>(<span class="string">"Execution {} started on {}"</span>, uuid, worker);
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = dag.execution_callbacks().get_mut(<span class="kw-2">&amp;</span>uuid) {
                         <span class="kw">for </span>callback <span class="kw">in </span>callbacks.on_start.drain(..) {
                             <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = callback(worker) {
-                                <span class="macro">warn!</span>(<span class="string">&quot;Start callback for {} failed: {:?}&quot;</span>, uuid, e);
+                                <span class="macro">warn!</span>(<span class="string">"Start callback for {} failed: {:?}"</span>, uuid, e);
                                 <span class="kw">return </span><span class="prelude-val">Err</span>(e);
                             }
                         }
                     }
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::NotifyDone(uuid, result)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} completed with {:?}&quot;</span>, uuid, result);
+                    <span class="macro">info!</span>(<span class="string">"Execution {} completed with {:?}"</span>, uuid, result);
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = dag.execution_callbacks().get_mut(<span class="kw-2">&amp;</span>uuid) {
                         <span class="kw">for </span>callback <span class="kw">in </span>callbacks.on_done.drain(..) {
                             <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = callback(result.clone()) {
-                                <span class="macro">warn!</span>(<span class="string">&quot;Done callback for {} failed: {:?}&quot;</span>, uuid, e);
+                                <span class="macro">warn!</span>(<span class="string">"Done callback for {} failed: {:?}"</span>, uuid, e);
                                 <span class="kw">return </span><span class="prelude-val">Err</span>(e);
                             }
                         }
                     }
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::NotifySkip(uuid)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution {} skipped&quot;</span>, uuid);
+                    <span class="macro">info!</span>(<span class="string">"Execution {} skipped"</span>, uuid);
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(callbacks) = dag.execution_callbacks().get_mut(<span class="kw-2">&amp;</span>uuid) {
                         <span class="kw">for </span>callback <span class="kw">in </span>callbacks.on_skip.drain(..) {
                             <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = callback() {
-                                <span class="macro">warn!</span>(<span class="string">&quot;Skip callback for {} failed: {:?}&quot;</span>, uuid, e);
+                                <span class="macro">warn!</span>(<span class="string">"Skip callback for {} failed: {:?}"</span>, uuid, e);
                                 <span class="kw">return </span><span class="prelude-val">Err</span>(e);
                             }
                         }
                     }
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::Error(error)) =&gt; {
-                    <span class="macro">error!</span>(<span class="string">&quot;Error occurred: {}&quot;</span>, error);
+                    <span class="macro">error!</span>(<span class="string">"Error occurred: {}"</span>, error);
                     sender
                         .send(ExecutorClientMessage::Stop)
-                        .context(<span class="string">&quot;Failed to send Stop message to the server after an error&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to send Stop message to the server after an error"</span>)<span class="question-mark">?</span>;
                     <span class="kw">break</span>;
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::Status(status)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Server status: {:#?}&quot;</span>, status);
+                    <span class="macro">info!</span>(<span class="string">"Server status: {:#?}"</span>, status);
                     handle_server_status(status, <span class="kw-2">&amp;mut </span>status_callback)
-                        .context(<span class="string">&quot;Failed to process Status() from the server&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to process Status() from the server"</span>)<span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(ExecutorServerMessage::Done(result)) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Execution completed producing {} files!&quot;</span>, result.len());
+                    <span class="macro">info!</span>(<span class="string">"Execution completed producing {} files!"</span>, result.len());
                     <span class="kw">let </span><span class="kw-2">mut </span>missing = <span class="number">0</span>;
                     <span class="kw">for </span>(uuid, key, success) <span class="kw">in </span>result {
                         <span class="kw">if let </span><span class="prelude-val">Some</span>(handle) = file_store.get(<span class="kw-2">&amp;</span>key) {
                             <span class="kw">let </span>iterator =
                                 ReadFileIterator::new(handle.path()).with_context(|| {
                                     <span class="macro">format!</span>(
-                                        <span class="string">&quot;Failed to read produced file ({}) from the local storage&quot;</span>,
+                                        <span class="string">"Failed to read produced file ({}) from the local storage"</span>,
                                         handle
                                     )
                                 })<span class="question-mark">?</span>;
@@ -644,7 +645,7 @@
                             )
                             .with_context(|| {
                                 <span class="macro">format!</span>(
-                                    <span class="string">&quot;Failed to process produced file ({}) from the local storage&quot;</span>,
+                                    <span class="string">"Failed to process produced file ({}) from the local storage"</span>,
                                     handle
                                 )
                             })<span class="question-mark">?</span>;
@@ -652,7 +653,7 @@
                             sender
                                 .send(ExecutorClientMessage::AskFile(uuid, key, success))
                                 .with_context(|| {
-                                    <span class="macro">format!</span>(<span class="string">&quot;Failed to ask for a completed file ({})&quot;</span>, uuid)
+                                    <span class="macro">format!</span>(<span class="string">"Failed to ask for a completed file ({})"</span>, uuid)
                                 })<span class="question-mark">?</span>;
                             missing += <span class="number">1</span>;
                         }
@@ -661,10 +662,10 @@
                 }
                 <span class="prelude-val">Err</span>(e) =&gt; {
                     <span class="kw">let </span>cause = e.root_cause().to_string();
-                    <span class="kw">if </span>cause == <span class="string">&quot;receiving on an empty and disconnected channel&quot; </span>{
-                        <span class="macro">trace!</span>(<span class="string">&quot;Connection closed: {}&quot;</span>, cause);
+                    <span class="kw">if </span>cause == <span class="string">"receiving on an empty and disconnected channel" </span>{
+                        <span class="macro">trace!</span>(<span class="string">"Connection closed: {}"</span>, cause);
                     } <span class="kw">else </span>{
-                        <span class="macro">error!</span>(<span class="string">&quot;Connection error: {}&quot;</span>, cause);
+                        <span class="macro">error!</span>(<span class="string">"Connection error: {}"</span>, cause);
                     }
                     <span class="kw">break</span>;
                 }
@@ -689,7 +690,7 @@
             <span class="kw">match </span>file {
                 ProvidedFile::LocalFile { local_path, .. } =&gt; {
                     <span class="kw">let </span>iterator = ReadFileIterator::new(local_path).with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to read local file: {}&quot;</span>, local_path.display())
+                        <span class="macro">format!</span>(<span class="string">"Failed to read local file: {}"</span>, local_path.display())
                     })<span class="question-mark">?</span>;
                     process_provided_file(
                         <span class="kw-2">&amp;mut </span>dag.callbacks.as_mut().unwrap().file_callbacks,
@@ -698,7 +699,7 @@
                         iterator,
                         <span class="prelude-val">Some</span>(local_path),
                     )
-                    .context(<span class="string">&quot;Failed to process local file&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to process local file"</span>)<span class="question-mark">?</span>;
                 }
                 ProvidedFile::Content { content, .. } =&gt; {
                     process_provided_file(
@@ -708,7 +709,7 @@
                         <span class="macro">vec!</span>[content.clone()],
                         <span class="prelude-val">None</span>,
                     )
-                    .context(<span class="string">&quot;Failed to process file content&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to process file content"</span>)<span class="question-mark">?</span>;
                 }
             }
         }
@@ -726,7 +727,7 @@
         sender: ChannelSender&lt;ExecutorClientMessage&gt;,
     ) -&gt; JoinHandle&lt;()&gt; {
         thread::Builder::new()
-            .name(<span class="string">&quot;Client status poller&quot;</span>.into())
+            .name(<span class="string">"Client status poller"</span>.into())
             .spawn(<span class="kw">move </span>|| {
                 <span class="kw">let </span>clock = crossbeam_channel::tick(STATUS_POLL_INTERVAL);
                 <span class="kw">loop </span>{
@@ -745,7 +746,7 @@
                     }
                 }
             })
-            .expect(<span class="string">&quot;Failed to start client status poller thread&quot;</span>)
+            .expect(<span class="string">"Failed to start client status poller thread"</span>)
     }
 }
 
@@ -763,17 +764,17 @@
         } =&gt; {
             sender
                 .send(ExecutorClientMessage::ProvideFile(uuid, key.clone()))
-                .context(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to send ExecutorClientMessage::ProvideFile"</span>)<span class="question-mark">?</span>;
             ChannelFileSender::send(local_path, sender).with_context(|| {
-                <span class="macro">format!</span>(<span class="string">&quot;Failed to send local file from {}&quot;</span>, local_path.display())
+                <span class="macro">format!</span>(<span class="string">"Failed to send local file from {}"</span>, local_path.display())
             })<span class="question-mark">?</span>;
         }
         ProvidedFile::Content { content, key, .. } =&gt; {
             sender
                 .send(ExecutorClientMessage::ProvideFile(uuid, key.clone()))
-                .context(<span class="string">&quot;Failed to send ExecutorClientMessage::ProvideFile&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to send ExecutorClientMessage::ProvideFile"</span>)<span class="question-mark">?</span>;
             ChannelFileSender::send_data(content.clone(), sender)
-                .context(<span class="string">&quot;Failed to send file content&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to send file content"</span>)<span class="question-mark">?</span>;
         }
     }
     <span class="prelude-val">Ok</span>(())
@@ -836,7 +837,7 @@
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(source) = source_path_hint {
                         <span class="kw">match </span>(source.canonicalize(), dest.canonicalize()) {
                             (<span class="prelude-val">Ok</span>(path), <span class="prelude-val">Ok</span>(path2)) <span class="kw">if </span>path == path2 =&gt; {
-                                <span class="macro">info!</span>(<span class="string">&quot;Not writing {} from itself&quot;</span>, path.display());
+                                <span class="macro">info!</span>(<span class="string">"Not writing {} from itself"</span>, path.display());
                                 skip = <span class="bool-val">true</span>;
                             }
                             <span class="kw">_ </span>=&gt; {}
@@ -845,19 +846,19 @@
                     <span class="kw">if </span>skip {
                         (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)
                     } <span class="kw">else </span>{
-                        <span class="macro">info!</span>(<span class="string">&quot;Writing file {} to {}&quot;</span>, uuid, dest.display());
+                        <span class="macro">info!</span>(<span class="string">"Writing file {} to {}"</span>, uuid, dest.display());
                         <span class="kw">let </span>parent = dest.parent().ok_or_else(|| {
-                            <span class="macro">anyhow!</span>(<span class="string">&quot;Invalid file destination path: {}&quot;</span>, dest.display())
+                            <span class="macro">anyhow!</span>(<span class="string">"Invalid file destination path: {}"</span>, dest.display())
                         })<span class="question-mark">?</span>;
                         std::fs::create_dir_all(parent).with_context(|| {
                             <span class="macro">format!</span>(
-                                <span class="string">&quot;Failed to create parent directory ({}) for {}&quot;</span>,
+                                <span class="string">"Failed to create parent directory ({}) for {}"</span>,
                                 parent.display(),
                                 dest.display()
                             )
                         })<span class="question-mark">?</span>;
                         <span class="kw">let </span>file = std::fs::File::create(dest).with_context(|| {
-                            <span class="macro">format!</span>(<span class="string">&quot;Failed to create file: {}&quot;</span>, dest.display())
+                            <span class="macro">format!</span>(<span class="string">"Failed to create file: {}"</span>, dest.display())
                         })<span class="question-mark">?</span>;
                         (<span class="prelude-val">Some</span>(file), <span class="prelude-val">Some</span>(dest.clone()))
                     }
@@ -868,10 +869,10 @@
         <span class="kw">for </span>chunk <span class="kw">in </span>iterator {
             <span class="kw">if let </span>(<span class="prelude-val">Some</span>(file), <span class="prelude-val">Some</span>(dest)) = (<span class="kw-2">&amp;mut </span>file, <span class="kw-2">&amp;</span>dest) {
                 file.write_all(<span class="kw-2">&amp;</span>chunk)
-                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to write chunk to {}&quot;</span>, dest.display()))<span class="question-mark">?</span>;
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to write chunk to {}"</span>, dest.display()))<span class="question-mark">?</span>;
             }
             <span class="kw">for </span>get_content_chunked <span class="kw">in </span><span class="kw-2">&amp;mut </span>callback.get_content_chunked {
-                get_content_chunked(<span class="kw-2">&amp;</span>chunk).context(<span class="string">&quot;Get content chunked callback failed&quot;</span>)<span class="question-mark">?</span>;
+                get_content_chunked(<span class="kw-2">&amp;</span>chunk).context(<span class="string">"Get content chunked callback failed"</span>)<span class="question-mark">?</span>;
             }
             <span class="kw">if </span>buffer.len() &lt; limit {
                 <span class="kw">let </span>len = std::cmp::min(chunk.len(), limit - buffer.len());
@@ -880,26 +881,26 @@
         }
         <span class="comment">// Tell the callbacks the file has ended.
         </span><span class="kw">for </span>get_content_chunked <span class="kw">in </span><span class="kw-2">&amp;mut </span>callback.get_content_chunked {
-            get_content_chunked(<span class="kw-2">&amp;</span>[]).context(<span class="string">&quot;Get content chunked callback failed&quot;</span>)<span class="question-mark">?</span>;
+            get_content_chunked(<span class="kw-2">&amp;</span>[]).context(<span class="string">"Get content chunked callback failed"</span>)<span class="question-mark">?</span>;
         }
         drop(file);
         <span class="kw">if let </span><span class="prelude-val">Some</span>(write_to) = <span class="kw-2">&amp;</span>callback.write_to {
             <span class="kw">if </span>write_to.executable &amp;&amp; write_to.dest.exists() {
                 <span class="kw">let </span><span class="kw-2">mut </span>perm = std::fs::metadata(<span class="kw-2">&amp;</span>write_to.dest)
                     .with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to get file metadata of {}&quot;</span>, write_to.dest.display())
+                        <span class="macro">format!</span>(<span class="string">"Failed to get file metadata of {}"</span>, write_to.dest.display())
                     })<span class="question-mark">?
                     </span>.permissions();
                 perm.set_mode(<span class="number">0o755</span>);
                 std::fs::set_permissions(<span class="kw-2">&amp;</span>write_to.dest, perm).with_context(|| {
-                    <span class="macro">format!</span>(<span class="string">&quot;Failed to make {} executable&quot;</span>, write_to.dest.display())
+                    <span class="macro">format!</span>(<span class="string">"Failed to make {} executable"</span>, write_to.dest.display())
                 })<span class="question-mark">?</span>;
             }
         }
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(get_content) = callback.get_content.take().map(|(<span class="kw">_</span>, f)| f) {
             get_content(buffer)
-                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;get_content callback for file {} failed&quot;</span>, uuid))<span class="question-mark">?</span>;
+                .with_context(|| <span class="macro">format!</span>(<span class="string">"get_content callback for file {} failed"</span>, uuid))<span class="question-mark">?</span>;
         }
     } <span class="kw">else </span>{
         iterator.into_iter().last();

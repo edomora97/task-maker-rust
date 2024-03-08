@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/grader_map.rs`."><title>grader_map.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/grader_map.rs`."><title>grader_map.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -194,7 +195,7 @@
     /// ```
     /// use task_maker_lang::GraderMap;
     ///
-    /// let map = GraderMap::new(vec![&quot;file.cpp&quot;, &quot;file.py&quot;]);
+    /// let map = GraderMap::new(vec!["file.cpp", "file.py"]);
     /// ```
     </span><span class="kw">pub fn </span>new&lt;P: Into&lt;PathBuf&gt;&gt;(graders: Vec&lt;P&gt;) -&gt; GraderMap {
         <span class="kw">let </span><span class="kw-2">mut </span>map = GraderMap {
@@ -204,13 +205,13 @@
             <span class="kw">let </span>grader = grader.into();
             <span class="kw">let </span>lang = LanguageManager::detect_language(<span class="kw-2">&amp;</span>grader);
             <span class="kw">if let </span><span class="prelude-val">Some</span>(lang) = lang {
-                <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Grader for {}&quot;</span>, lang.name()));
+                <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">"Grader for {}"</span>, lang.name()));
                 map.graders.insert(
                     lang.name().into(),
                     Dependency {
                         file,
                         local_path: grader.clone(),
-                        sandbox_path: PathBuf::from(grader.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>)),
+                        sandbox_path: PathBuf::from(grader.file_name().expect(<span class="string">"Invalid file name"</span>)),
                         executable: <span class="bool-val">false</span>,
                     },
                 );
@@ -225,9 +226,9 @@
     /// ```
     /// use task_maker_lang::{GraderMap, LanguageManager};
     ///
-    /// let map = GraderMap::new(vec![&quot;file.cpp&quot;, &quot;file.py&quot;]);
-    /// let cpp = LanguageManager::detect_language(&quot;source.cpp&quot;).unwrap();
-    /// let py = LanguageManager::detect_language(&quot;source.py&quot;).unwrap();
+    /// let map = GraderMap::new(vec!["file.cpp", "file.py"]);
+    /// let cpp = LanguageManager::detect_language("source.cpp").unwrap();
+    /// let py = LanguageManager::detect_language("source.py").unwrap();
     /// assert!(map.get_compilation_deps(cpp.as_ref()).is_some());
     /// assert!(map.get_compilation_deps(py.as_ref()).is_none());
     /// ```
@@ -245,9 +246,9 @@
     /// ```
     /// use task_maker_lang::{GraderMap, LanguageManager};
     ///
-    /// let map = GraderMap::new(vec![&quot;file.cpp&quot;, &quot;file.py&quot;]);
-    /// let cpp = LanguageManager::detect_language(&quot;source.cpp&quot;).unwrap();
-    /// let py = LanguageManager::detect_language(&quot;source.py&quot;).unwrap();
+    /// let map = GraderMap::new(vec!["file.cpp", "file.py"]);
+    /// let cpp = LanguageManager::detect_language("source.cpp").unwrap();
+    /// let py = LanguageManager::detect_language("source.py").unwrap();
     /// assert_eq!(map.get_runtime_deps(cpp.as_ref()).len(), 0);
     /// assert_eq!(map.get_runtime_deps(py.as_ref()).len(), 1);
     /// ```
@@ -265,8 +266,8 @@
     /// use task_maker_lang::{GraderMap, LanguageManager};
     /// use std::path::Path;
     ///
-    /// let map = GraderMap::new(vec![&quot;file.cpp&quot;]);
-    /// assert_eq!(map.all_paths().collect::&lt;Vec&lt;_&gt;&gt;(), vec![Path::new(&quot;file.cpp&quot;)]);
+    /// let map = GraderMap::new(vec!["file.cpp"]);
+    /// assert_eq!(map.all_paths().collect::&lt;Vec&lt;_&gt;&gt;(), vec![Path::new("file.cpp")]);
     /// ```
     </span><span class="kw">pub fn </span>all_paths(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item = <span class="kw-2">&amp;</span>Path&gt; {
         <span class="self">self</span>.graders.values().map(|dep| dep.local_path.as_ref())
@@ -285,18 +286,18 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_new() {
-        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">&quot;grader.c&quot;</span>, <span class="string">&quot;grader.cpp&quot;</span>, <span class="string">&quot;grader.foobar&quot;</span>]);
+        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">"grader.c"</span>, <span class="string">"grader.cpp"</span>, <span class="string">"grader.foobar"</span>]);
         assert_that(<span class="kw-2">&amp;</span>grader_map.graders).has_length(<span class="number">2</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_get_compilation_deps() {
-        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">&quot;grader.cpp&quot;</span>, <span class="string">&quot;grader.py&quot;</span>]);
+        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">"grader.cpp"</span>, <span class="string">"grader.py"</span>]);
 
         <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration::from_env());
         <span class="kw">let </span>deps = grader_map.get_compilation_deps(<span class="kw-2">&amp;</span>lang);
         assert_that(<span class="kw-2">&amp;</span>deps).is_some();
-        assert_that(<span class="kw-2">&amp;</span>deps.unwrap().sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;grader.cpp&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps.unwrap().sandbox_path).is_equal_to(PathBuf::from(<span class="string">"grader.cpp"</span>));
 
         <span class="kw">let </span>lang = LanguageC::new(LanguageCConfiguration::from_env());
         <span class="kw">let </span>deps = grader_map.get_compilation_deps(<span class="kw-2">&amp;</span>lang);
@@ -309,7 +310,7 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_get_runtime_deps() {
-        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">&quot;grader.cpp&quot;</span>, <span class="string">&quot;grader.py&quot;</span>]);
+        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">"grader.cpp"</span>, <span class="string">"grader.py"</span>]);
 
         <span class="kw">let </span>lang = LanguageCpp::new(LanguageCppConfiguration::from_env());
         <span class="kw">let </span>deps = grader_map.get_runtime_deps(<span class="kw-2">&amp;</span>lang);
@@ -322,16 +323,16 @@
         <span class="kw">let </span>lang = LanguagePython::new(LanguagePythonVersion::Autodetect);
         <span class="kw">let </span>deps = grader_map.get_runtime_deps(<span class="kw-2">&amp;</span>lang);
         assert_that(<span class="kw-2">&amp;</span>deps).has_length(<span class="number">1</span>);
-        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">&quot;grader.py&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>deps[<span class="number">0</span>].sandbox_path).is_equal_to(PathBuf::from(<span class="string">"grader.py"</span>));
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_all_paths() {
-        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">&quot;grader.cpp&quot;</span>, <span class="string">&quot;grader.py&quot;</span>]);
+        <span class="kw">let </span>grader_map = GraderMap::new(<span class="macro">vec!</span>[<span class="string">"grader.cpp"</span>, <span class="string">"grader.py"</span>]);
         <span class="kw">let </span>paths: Vec&lt;<span class="kw">_</span>&gt; = grader_map.all_paths().collect();
         assert_that(<span class="kw-2">&amp;</span>paths).has_length(<span class="number">2</span>);
-        assert_that(<span class="kw-2">&amp;</span>paths).contains(Path::new(<span class="string">&quot;grader.cpp&quot;</span>));
-        assert_that(<span class="kw-2">&amp;</span>paths).contains(Path::new(<span class="string">&quot;grader.py&quot;</span>));
+        assert_that(<span class="kw-2">&amp;</span>paths).contains(Path::new(<span class="string">"grader.cpp"</span>));
+        assert_that(<span class="kw-2">&amp;</span>paths).contains(Path::new(<span class="string">"grader.py"</span>));
     }
 }
 </code></pre></div></section></main></body></html>

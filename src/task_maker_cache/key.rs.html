@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-cache/src/key.rs`."><title>key.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_cache" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-cache/src/key.rs`."><title>key.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_cache" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -350,7 +351,7 @@
             <span class="kw">let </span><span class="kw-2">mut </span>fifos = HashMap::new();
             <span class="kw">for </span>(i, fifo) <span class="kw">in </span>group.fifo.iter().enumerate() {
                 <span class="kw">let </span>name = fifo.sandbox_path().to_string_lossy().to_string();
-                fifos.insert(name, <span class="macro">format!</span>(<span class="string">&quot;tm_fifo_{}&quot;</span>, i));
+                fifos.insert(name, <span class="macro">format!</span>(<span class="string">"tm_fifo_{}"</span>, i));
             }
             <span class="kw">let </span><span class="kw-2">mut </span>args = Vec::new();
             <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>execution.args {
@@ -420,10 +421,10 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_command() {
-        <span class="kw">let </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        <span class="kw">let </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;bar&quot;</span>));
-        <span class="kw">let </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::system(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec1 = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        <span class="kw">let </span>exec2 = Execution::new(<span class="string">"exec2"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        <span class="kw">let </span>exec3 = Execution::new(<span class="string">"exec3"</span>, ExecutionCommand::local(<span class="string">"bar"</span>));
+        <span class="kw">let </span>exec4 = Execution::new(<span class="string">"exec4"</span>, ExecutionCommand::system(<span class="string">"foo"</span>));
         <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
         <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
         <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
@@ -438,14 +439,14 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_args() {
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec1.args(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec2.args(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>]);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec3.args(<span class="macro">vec!</span>[<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;bar&quot;</span>]);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec4.args(<span class="macro">vec!</span>[<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;bar&quot;</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec1.args(<span class="macro">vec!</span>[<span class="string">"bar"</span>, <span class="string">"baz"</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec2"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec2.args(<span class="macro">vec!</span>[<span class="string">"bar"</span>, <span class="string">"baz"</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">"exec3"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec3.args(<span class="macro">vec!</span>[<span class="string">"baz"</span>, <span class="string">"bar"</span>]);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">"exec4"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec4.args(<span class="macro">vec!</span>[<span class="string">"bar"</span>, <span class="string">"bar"</span>]);
         <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
         <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
         <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
@@ -462,21 +463,21 @@
     </span><span class="kw">fn </span>test_stdin() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>store = FileStore::new(tmpdir.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle1 = fake_file(tmpdir.path().join(<span class="string">&quot;file1&quot;</span>), <span class="string">&quot;foo&quot;</span>, <span class="kw-2">&amp;</span>store);
-        <span class="kw">let </span>handle2 = fake_file(tmpdir.path().join(<span class="string">&quot;file2&quot;</span>), <span class="string">&quot;bar&quot;</span>, <span class="kw-2">&amp;</span>store);
-        <span class="kw">let </span>file1 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
-        <span class="kw">let </span>file2 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
+        <span class="kw">let </span>handle1 = fake_file(tmpdir.path().join(<span class="string">"file1"</span>), <span class="string">"foo"</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle2 = fake_file(tmpdir.path().join(<span class="string">"file2"</span>), <span class="string">"bar"</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>file1 = task_maker_dag::File::new(<span class="string">"file1"</span>);
+        <span class="kw">let </span>file2 = task_maker_dag::File::new(<span class="string">"file1"</span>);
         <span class="kw">let </span>map: HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; = [(file1.uuid, handle1), (file2.uuid, handle2)]
             .iter()
             .cloned()
             .collect();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec1.stdin(file1.uuid);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec2"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec2.stdin(file1.uuid);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">"exec3"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec3.stdin(file2.uuid);
-        <span class="kw">let </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec4 = Execution::new(<span class="string">"exec4"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
         <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
         <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
@@ -493,25 +494,25 @@
     </span><span class="kw">fn </span>test_inputs() {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
         <span class="kw">let </span>store = FileStore::new(tmpdir.path(), <span class="number">1000</span>, <span class="number">1000</span>).unwrap();
-        <span class="kw">let </span>handle1 = fake_file(tmpdir.path().join(<span class="string">&quot;file1&quot;</span>), <span class="string">&quot;foo&quot;</span>, <span class="kw-2">&amp;</span>store);
-        <span class="kw">let </span>handle2 = fake_file(tmpdir.path().join(<span class="string">&quot;file2&quot;</span>), <span class="string">&quot;bar&quot;</span>, <span class="kw-2">&amp;</span>store);
-        <span class="kw">let </span>file1 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
-        <span class="kw">let </span>file2 = task_maker_dag::File::new(<span class="string">&quot;file1&quot;</span>);
+        <span class="kw">let </span>handle1 = fake_file(tmpdir.path().join(<span class="string">"file1"</span>), <span class="string">"foo"</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>handle2 = fake_file(tmpdir.path().join(<span class="string">"file2"</span>), <span class="string">"bar"</span>, <span class="kw-2">&amp;</span>store);
+        <span class="kw">let </span>file1 = task_maker_dag::File::new(<span class="string">"file1"</span>);
+        <span class="kw">let </span>file2 = task_maker_dag::File::new(<span class="string">"file1"</span>);
         <span class="kw">let </span>map: HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; = [(file1.uuid, handle1), (file2.uuid, handle2)]
             .iter()
             .cloned()
             .collect();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec1.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
-        exec1.input(file2.uuid, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec2.input(file2.uuid, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
-        exec2.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec3.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">false</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec4.input(file1.uuid, <span class="string">&quot;file1&quot;</span>, <span class="bool-val">true</span>);
-        exec4.input(file2.uuid, <span class="string">&quot;file2&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec1.input(file1.uuid, <span class="string">"file1"</span>, <span class="bool-val">false</span>);
+        exec1.input(file2.uuid, <span class="string">"file2"</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec2"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec2.input(file2.uuid, <span class="string">"file2"</span>, <span class="bool-val">false</span>);
+        exec2.input(file1.uuid, <span class="string">"file1"</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">"exec3"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec3.input(file1.uuid, <span class="string">"file1"</span>, <span class="bool-val">false</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">"exec4"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec4.input(file1.uuid, <span class="string">"file1"</span>, <span class="bool-val">true</span>);
+        exec4.input(file2.uuid, <span class="string">"file2"</span>, <span class="bool-val">false</span>);
         <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
         <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
         <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>map, <span class="prelude-val">None</span>);
@@ -526,17 +527,17 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_env() {
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec1.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        exec1.env(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec2.env(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;biz&quot;</span>);
-        exec2.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">&quot;exec3&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec3.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
-        exec3.env(<span class="string">&quot;baz&quot;</span>, <span class="string">&quot;bizarre&quot;</span>);
-        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">&quot;exec4&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
-        exec4.env(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec1.env(<span class="string">"foo"</span>, <span class="string">"bar"</span>);
+        exec1.env(<span class="string">"baz"</span>, <span class="string">"biz"</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec2"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec2.env(<span class="string">"baz"</span>, <span class="string">"biz"</span>);
+        exec2.env(<span class="string">"foo"</span>, <span class="string">"bar"</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec3 = Execution::new(<span class="string">"exec3"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec3.env(<span class="string">"foo"</span>, <span class="string">"bar"</span>);
+        exec3.env(<span class="string">"baz"</span>, <span class="string">"bizarre"</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>exec4 = Execution::new(<span class="string">"exec4"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
+        exec4.env(<span class="string">"foo"</span>, <span class="string">"bar"</span>);
         <span class="kw">let </span>key1 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
         <span class="kw">let </span>key2 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec2, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
         <span class="kw">let </span>key3 = CacheKeyItem::from_execution(<span class="kw-2">&amp;</span>exec3, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">None</span>);
@@ -551,37 +552,37 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_fifo_arg_replace() {
-        <span class="kw">let </span><span class="kw-2">mut </span>group = ExecutionGroup::new(<span class="string">&quot;group&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>group = ExecutionGroup::new(<span class="string">"group"</span>);
         <span class="kw">let </span>fifo = group.new_fifo();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec.args(<span class="macro">vec!</span>[
             fifo.sandbox_path().to_string_lossy(),
-            Cow::from(<span class="string">&quot;lol&quot;</span>),
+            Cow::from(<span class="string">"lol"</span>),
         ]);
         group.add_execution(exec);
         <span class="kw">let </span>exec = <span class="kw-2">&amp;</span>group.executions[<span class="number">0</span>];
         <span class="kw">let </span>key = CacheKeyItem::from_execution(exec, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>group));
-        <span class="macro">assert_eq!</span>(key.args[<span class="number">0</span>], <span class="string">&quot;tm_fifo_0&quot;</span>);
-        <span class="macro">assert_eq!</span>(key.args[<span class="number">1</span>], <span class="string">&quot;lol&quot;</span>);
+        <span class="macro">assert_eq!</span>(key.args[<span class="number">0</span>], <span class="string">"tm_fifo_0"</span>);
+        <span class="macro">assert_eq!</span>(key.args[<span class="number">1</span>], <span class="string">"lol"</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_fifo() {
-        <span class="kw">let </span><span class="kw-2">mut </span>group1 = ExecutionGroup::new(<span class="string">&quot;group&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>group1 = ExecutionGroup::new(<span class="string">"group"</span>);
         <span class="kw">let </span>fifo1 = group1.new_fifo();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">&quot;exec1&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec1 = Execution::new(<span class="string">"exec1"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec1.args(<span class="macro">vec!</span>[fifo1.sandbox_path().to_string_lossy()]);
         group1.add_execution(exec1);
         <span class="kw">let </span>exec1 = <span class="kw-2">&amp;</span>group1.executions[<span class="number">0</span>];
         <span class="kw">let </span>key1 = CacheKeyItem::from_execution(exec1, <span class="kw-2">&amp;</span>HashMap::new(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>group1));
 
-        <span class="kw">let </span><span class="kw-2">mut </span>group2 = ExecutionGroup::new(<span class="string">&quot;group 2&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>group2 = ExecutionGroup::new(<span class="string">"group 2"</span>);
         <span class="kw">let </span>fifo2 = group2.new_fifo();
         <span class="comment">// extra unused fifo are ok
         </span>group2.new_fifo();
         group2.new_fifo();
         group2.new_fifo();
-        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">&quot;exec2&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec2 = Execution::new(<span class="string">"exec2"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec2.args(<span class="macro">vec!</span>[fifo2.sandbox_path().to_string_lossy()]);
         group2.add_execution(exec2);
         <span class="kw">let </span>exec2 = <span class="kw-2">&amp;</span>group2.executions[<span class="number">0</span>];

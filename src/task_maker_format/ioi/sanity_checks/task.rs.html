@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/task.rs`."><title>task.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/task.rs`."><title>task.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -316,8 +317,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>TaskMaxScore {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;TaskMaxScore&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"TaskMaxScore"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -328,7 +329,7 @@
         <span class="kw">let </span>task_score: f64 = task.subtasks.values().map(|st| st.max_score).sum();
         <span class="kw">if </span><span class="macro">approx::abs_diff_ne!</span>(task_score, DEFAULT_TASK_MAX_SCORE) {
             eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
-                <span class="string">&quot;The score of the task is {} (not {})&quot;</span>,
+                <span class="string">"The score of the task is {} (not {})"</span>,
                 task_score, DEFAULT_TASK_MAX_SCORE
             )))<span class="question-mark">?</span>;
         }
@@ -344,8 +345,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>BrokenSymlinks {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;BrokenSymlinks&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"BrokenSymlinks"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -353,17 +354,17 @@
     }
 
     <span class="kw">fn </span>post_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">for </span>file <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;**/*&quot;</span>]) {
+        <span class="kw">for </span>file <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"**/*"</span>]) {
             <span class="kw">if </span>!file.exists() {
                 <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>file);
                 <span class="comment">// Ignore the symlinks here as they are not interesting.
-                </span><span class="kw">if </span>path.starts_with(<span class="string">&quot;fuzz&quot;</span>) {
+                </span><span class="kw">if </span>path.starts_with(<span class="string">"fuzz"</span>) {
                     <span class="kw">continue</span>;
                 }
                 <span class="kw">if let </span><span class="prelude-val">Ok</span>(content) = file.read_link() {
                     eval.add_diagnostic(
-                        Diagnostic::warning(<span class="macro">format!</span>(<span class="string">&quot;{} is a broken symlink&quot;</span>, path.display()))
-                            .with_note(<span class="macro">format!</span>(<span class="string">&quot;It points to {}&quot;</span>, content.display())),
+                        Diagnostic::warning(<span class="macro">format!</span>(<span class="string">"{} is a broken symlink"</span>, path.display()))
+                            .with_note(<span class="macro">format!</span>(<span class="string">"It points to {}"</span>, content.display())),
                     )<span class="question-mark">?</span>;
                 }
             }
@@ -372,7 +373,7 @@
     }
 }
 
-<span class="doccomment">/// Check that cpp source files don&#39;t contain #include &lt;bits/stdc++.h&gt; (or whitespace variants of it)
+<span class="doccomment">/// Check that cpp source files don't contain #include &lt;bits/stdc++.h&gt; (or whitespace variants of it)
 </span><span class="attr">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>NoBitsStdCpp;
 <span class="macro">make_sanity_check!</span>(NoBitsStdCpp);
@@ -380,8 +381,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>NoBitsStdCpp {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;NoBitsStdCpp&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"NoBitsStdCpp"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -391,21 +392,21 @@
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="macro">lazy_static! </span>{
             <span class="kw">static </span><span class="kw-2">ref </span>RE: Regex =
-                Regex::new(<span class="string">r#&quot;(?m)^#\s*include\s*(?:&lt;|&quot;)bits/stdc\+\+\.h(?:&gt;|&quot;).*$&quot;#</span>)
-                    .expect(<span class="string">&quot;Invalid regex&quot;</span>);
+                Regex::new(<span class="string">r#"(?m)^#\s*include\s*(?:&lt;|")bits/stdc\+\+\.h(?:&gt;|").*$"#</span>)
+                    .expect(<span class="string">"Invalid regex"</span>);
         }
 
         <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = <span class="prelude-val">None</span>;
 
-        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">&quot;**/*.cpp&quot;</span>, <span class="string">&quot;**/*.cc&quot;</span>]) {
+        <span class="kw">for </span>att <span class="kw">in </span>list_files(<span class="kw-2">&amp;</span>task.path, <span class="macro">vec!</span>[<span class="string">"**/*.cpp"</span>, <span class="string">"**/*.cc"</span>]) {
             <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>att);
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(content) = fs::read_to_string(path) {
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = RE.find(<span class="kw-2">&amp;</span>content) {
                     diagnostic = <span class="prelude-val">Some</span>(
                         diagnostic
                             .unwrap_or_else(|| {
-                                Diagnostic::warning(<span class="string">r#&quot;Usage of &quot;bits/stdc++.h&quot; is discouraged&quot;#</span>)
-                                    .with_note(<span class="string">&quot;This won&#39;t compile under Clang&quot;</span>)
+                                Diagnostic::warning(<span class="string">r#"Usage of "bits/stdc++.h" is discouraged"#</span>)
+                                    .with_note(<span class="string">"This won't compile under Clang"</span>)
                             })
                             .with_code_span(CodeSpan::from_str(
                                 path,
@@ -426,7 +427,7 @@
     }
 }
 
-<span class="doccomment">/// Check that &quot;implied&quot; subtasks dependecies do not form cycles.
+<span class="doccomment">/// Check that "implied" subtasks dependecies do not form cycles.
 </span><span class="attr">#[derive(Debug, Default)]
 </span><span class="kw">pub struct </span>SubtaskDependencies;
 <span class="macro">make_sanity_check!</span>(SubtaskDependencies);
@@ -434,8 +435,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>SubtaskDependencies {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;SubtaskDependencies&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"SubtaskDependencies"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -491,14 +492,14 @@
             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
 
-        <span class="lifetime">&#39;outer</span>: <span class="kw">for </span><span class="kw-2">&amp;</span>st1 <span class="kw">in </span><span class="kw-2">&amp;</span>non_zero_sts {
+        <span class="lifetime">'outer</span>: <span class="kw">for </span><span class="kw-2">&amp;</span>st1 <span class="kw">in </span><span class="kw-2">&amp;</span>non_zero_sts {
             <span class="kw">let </span><span class="kw-2">mut </span>sts = <span class="macro">vec!</span>[st1];
             <span class="kw">for </span><span class="kw-2">&amp;</span>st2 <span class="kw">in </span><span class="kw-2">&amp;</span>non_zero_sts {
                 <span class="kw">if </span>st_dependencies.contains(<span class="kw-2">&amp;</span>(st1, st2)) &amp;&amp; st_dependencies.contains(<span class="kw-2">&amp;</span>(st2, st1)) {
                     <span class="kw">if </span>st1 &lt; st2 {
                         sts.push(st2);
                     } <span class="kw">else </span>{
-                        <span class="kw">continue </span><span class="lifetime">&#39;outer</span>;
+                        <span class="kw">continue </span><span class="lifetime">'outer</span>;
                     }
                 }
             }
@@ -516,9 +517,9 @@
                     .collect();
                 eval.add_diagnostic(
                     Diagnostic::warning(<span class="macro">format!</span>(
-                        <span class="string">&quot;Subtasks {st_names:?} are solved by the same set of solutions&quot;</span>,
+                        <span class="string">"Subtasks {st_names:?} are solved by the same set of solutions"</span>,
                     ))
-                    .with_note(<span class="string">&quot;Add a solution that solves only one of them&quot;</span>),
+                    .with_note(<span class="string">"Add a solution that solves only one of them"</span>),
                 )<span class="question-mark">?</span>;
             }
         }
@@ -553,8 +554,8 @@
                 })
                 .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
             eval.add_diagnostic(
-                Diagnostic::warning(<span class="string">&quot;Subtasks are not in order of difficulty&quot;</span>).with_note(<span class="macro">format!</span>(
-                    <span class="string">&quot;Based on the current solutions the following pairs of subtasks seems to be ordered incorrectly {to_swap_names:?}&quot;
+                Diagnostic::warning(<span class="string">"Subtasks are not in order of difficulty"</span>).with_note(<span class="macro">format!</span>(
+                    <span class="string">"Based on the current solutions the following pairs of subtasks seems to be ordered incorrectly {to_swap_names:?}"
                 </span>)),
             )<span class="question-mark">?</span>;
         }
@@ -571,8 +572,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>EmptyTitle {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;EmptyTitle&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"EmptyTitle"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -581,7 +582,7 @@
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">if </span>task.title.is_empty() {
-            eval.add_diagnostic(Diagnostic::error(<span class="string">&quot;Missing task title&quot;</span>))<span class="question-mark">?</span>;
+            eval.add_diagnostic(Diagnostic::error(<span class="string">"Missing task title"</span>))<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }

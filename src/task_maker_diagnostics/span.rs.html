@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-diagnostics/src/span.rs`."><title>span.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_diagnostics" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-diagnostics/src/span.rs`."><title>span.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_diagnostics" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -233,9 +234,9 @@
     ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>previous_lines_len = <span class="number">0</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>skipped_lines = <span class="number">0</span>;
-        <span class="kw">for </span>line <span class="kw">in </span>content.as_ref().split(<span class="string">&#39;\n&#39;</span>) {
+        <span class="kw">for </span>line <span class="kw">in </span>content.as_ref().split(<span class="string">'\n'</span>) {
             <span class="kw">if </span>previous_lines_len + line.len() == offset {
-                <span class="macro">bail!</span>(<span class="string">&quot;Offset cannot be on the newline character&quot;</span>);
+                <span class="macro">bail!</span>(<span class="string">"Offset cannot be on the newline character"</span>);
             }
             <span class="kw">if </span>previous_lines_len + line.len() &lt; offset {
                 previous_lines_len += line.len() + <span class="number">1</span>; <span class="comment">// Includes \n.
@@ -245,7 +246,7 @@
 
             <span class="kw">let </span>line_offset = offset - previous_lines_len;
             <span class="kw">if </span>line_offset + len &gt; line.len() {
-                <span class="macro">bail!</span>(<span class="string">&quot;Multiline spans are not supported&quot;</span>);
+                <span class="macro">bail!</span>(<span class="string">"Multiline spans are not supported"</span>);
             }
             <span class="macro">assert!</span>(line_offset + len &lt;= line.len());
             <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self </span>{
@@ -257,7 +258,7 @@
                 len,
             });
         }
-        <span class="macro">bail!</span>(<span class="string">&quot;The offset exceeds the length of the file&quot;</span>)
+        <span class="macro">bail!</span>(<span class="string">"The offset exceeds the length of the file"</span>)
     }
 
     <span class="doccomment">/// Get the content of the span as a `&amp;str`.
@@ -269,23 +270,23 @@
     <span class="doccomment">/// Obtain a string (with colors) of this span.
     </span><span class="kw">pub fn </span>to_string(<span class="kw-2">&amp;</span><span class="self">self</span>, level: DiagnosticLevel) -&gt; String {
         <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">format!</span>(
-            <span class="string">&quot;{}:{}:{}\n&quot;</span>,
+            <span class="string">"{}:{}:{}\n"</span>,
             <span class="self">self</span>.file_name.display(),
             <span class="self">self</span>.line_number,
             <span class="self">self</span>.line_offset
         );
 
         <span class="kw">let </span>line_number = <span class="self">self</span>.line_number.get().to_string();
-        <span class="kw">let _ </span>= <span class="macro">writeln!</span>(result, <span class="string">&quot;{} | {}&quot;</span>, line_number, <span class="self">self</span>.line);
+        <span class="kw">let _ </span>= <span class="macro">writeln!</span>(result, <span class="string">"{} | {}"</span>, line_number, <span class="self">self</span>.line);
 
         <span class="kw">let </span>pad = line_number.len() + <span class="number">3 </span>+ <span class="self">self</span>.line_offset;
-        result += <span class="kw-2">&amp;</span><span class="string">&quot; &quot;</span>.repeat(pad);
+        result += <span class="kw-2">&amp;</span><span class="string">" "</span>.repeat(pad);
 
         <span class="kw">let </span>color = level.color();
         <span class="kw">for _ in </span><span class="number">0</span>..(<span class="self">self</span>.len.max(<span class="number">1</span>)) {
-            <span class="kw">let _ </span>= <span class="macro">write!</span>(result, <span class="string">&quot;{}&quot;</span>, <span class="string">&quot;^&quot;</span>.color(color).bold());
+            <span class="kw">let _ </span>= <span class="macro">write!</span>(result, <span class="string">"{}"</span>, <span class="string">"^"</span>.color(color).bold());
         }
-        result += <span class="string">&quot;\n&quot;</span>;
+        result += <span class="string">"\n"</span>;
         result
     }
 
@@ -301,93 +302,93 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_empty() {
-        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="number">0</span>);
+        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">"file.txt"</span>, <span class="string">""</span>, <span class="number">0</span>, <span class="number">0</span>);
         <span class="macro">assert!</span>(span.is_err());
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_first_line_from_start() {
-        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;content&quot;</span>, <span class="number">0</span>, <span class="number">2</span>).unwrap();
+        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">"file.txt"</span>, <span class="string">"content"</span>, <span class="number">0</span>, <span class="number">2</span>).unwrap();
         <span class="macro">assert_eq!</span>(
             span,
             CodeSpan {
-                file_name: <span class="string">&quot;file.txt&quot;</span>.into(),
+                file_name: <span class="string">"file.txt"</span>.into(),
                 line_number: <span class="number">1</span>.try_into().unwrap(),
-                line: <span class="string">&quot;content&quot;</span>.to_string(),
+                line: <span class="string">"content"</span>.to_string(),
                 file_offset: <span class="number">0</span>,
                 line_offset: <span class="number">0</span>,
                 len: <span class="number">2
             </span>}
         );
-        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">&quot;co&quot;</span>);
+        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">"co"</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_first_line_till_end() {
-        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;content&quot;</span>, <span class="number">0</span>, <span class="number">7</span>).unwrap();
+        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">"file.txt"</span>, <span class="string">"content"</span>, <span class="number">0</span>, <span class="number">7</span>).unwrap();
         <span class="macro">assert_eq!</span>(
             span,
             CodeSpan {
-                file_name: <span class="string">&quot;file.txt&quot;</span>.into(),
+                file_name: <span class="string">"file.txt"</span>.into(),
                 line_number: <span class="number">1</span>.try_into().unwrap(),
-                line: <span class="string">&quot;content&quot;</span>.to_string(),
+                line: <span class="string">"content"</span>.to_string(),
                 file_offset: <span class="number">0</span>,
                 line_offset: <span class="number">0</span>,
                 len: <span class="number">7
             </span>}
         );
-        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">&quot;content&quot;</span>);
+        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">"content"</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_first_line_with_other_lines() {
-        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;content\nnope&quot;</span>, <span class="number">0</span>, <span class="number">7</span>).unwrap();
+        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">"file.txt"</span>, <span class="string">"content\nnope"</span>, <span class="number">0</span>, <span class="number">7</span>).unwrap();
         <span class="macro">assert_eq!</span>(
             span,
             CodeSpan {
-                file_name: <span class="string">&quot;file.txt&quot;</span>.into(),
+                file_name: <span class="string">"file.txt"</span>.into(),
                 line_number: <span class="number">1</span>.try_into().unwrap(),
-                line: <span class="string">&quot;content&quot;</span>.to_string(),
+                line: <span class="string">"content"</span>.to_string(),
                 file_offset: <span class="number">0</span>,
                 line_offset: <span class="number">0</span>,
                 len: <span class="number">7
             </span>}
         );
-        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">&quot;content&quot;</span>);
+        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">"content"</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_second_line() {
-        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;content\nnope&quot;</span>, <span class="number">9</span>, <span class="number">2</span>).unwrap();
+        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">"file.txt"</span>, <span class="string">"content\nnope"</span>, <span class="number">9</span>, <span class="number">2</span>).unwrap();
         <span class="macro">assert_eq!</span>(
             span,
             CodeSpan {
-                file_name: <span class="string">&quot;file.txt&quot;</span>.into(),
+                file_name: <span class="string">"file.txt"</span>.into(),
                 line_number: <span class="number">2</span>.try_into().unwrap(),
-                line: <span class="string">&quot;nope&quot;</span>.to_string(),
+                line: <span class="string">"nope"</span>.to_string(),
                 file_offset: <span class="number">9</span>,
                 line_offset: <span class="number">1</span>,
                 len: <span class="number">2
             </span>}
         );
-        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">&quot;op&quot;</span>);
+        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">"op"</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_second_line_with_newline() {
-        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;content\nnope\n&quot;</span>, <span class="number">9</span>, <span class="number">2</span>).unwrap();
+        <span class="kw">let </span>span = CodeSpan::from_str(<span class="string">"file.txt"</span>, <span class="string">"content\nnope\n"</span>, <span class="number">9</span>, <span class="number">2</span>).unwrap();
         <span class="macro">assert_eq!</span>(
             span,
             CodeSpan {
-                file_name: <span class="string">&quot;file.txt&quot;</span>.into(),
+                file_name: <span class="string">"file.txt"</span>.into(),
                 line_number: <span class="number">2</span>.try_into().unwrap(),
-                line: <span class="string">&quot;nope&quot;</span>.to_string(),
+                line: <span class="string">"nope"</span>.to_string(),
                 file_offset: <span class="number">9</span>,
                 line_offset: <span class="number">1</span>,
                 len: <span class="number">2
             </span>}
         );
-        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">&quot;op&quot;</span>);
+        <span class="macro">assert_eq!</span>(span.as_str(), <span class="string">"op"</span>);
     }
 }
 </code></pre></div></section></main></body></html>

@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/statement.rs`."><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/sanity_checks/statement.rs`."><title>statement.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -445,8 +446,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>StatementSubtasks {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;StatementSubtasks&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"StatementSubtasks"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -481,11 +482,11 @@
                 <span class="kw">let </span>expected_id = expected.id + one_based;
                 <span class="kw">if </span>expected_id != actual.id {
                     <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                        <span class="string">&quot;The subtasks in {} are not sequentially numbered&quot;</span>,
+                        <span class="string">"The subtasks in {} are not sequentially numbered"</span>,
                         statement_path.display()
                     ))
                     .with_note(<span class="macro">format!</span>(
-                        <span class="string">&quot;Expecting subtask {}, found subtask {}&quot;</span>,
+                        <span class="string">"Expecting subtask {}, found subtask {}"</span>,
                         expected_id, actual.id
                     ));
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(span) = <span class="kw-2">&amp;</span>actual.subtask_id_span {
@@ -497,12 +498,12 @@
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(actual_score) = actual.score {
                     <span class="kw">if </span><span class="macro">approx::abs_diff_ne!</span>(expected.score.unwrap(), actual_score) {
                         <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;The score of subtask {} in {} doesn&#39;t match the task&#39;s one&quot;</span>,
+                            <span class="string">"The score of subtask {} in {} doesn't match the task's one"</span>,
                             actual.id,
                             statement_path.display()
                         ))
                         .with_note(<span class="macro">format!</span>(
-                            <span class="string">&quot;Expecting {}, found {}&quot;</span>,
+                            <span class="string">"Expecting {}, found {}"</span>,
                             expected.score.unwrap(),
                             actual_score
                         ));
@@ -517,11 +518,11 @@
             <span class="kw">if </span>expected_subtasks.len() != subtasks.len() {
                 eval.add_diagnostic(
                     Diagnostic::error(<span class="macro">format!</span>(
-                        <span class="string">&quot;Wrong number of subtasks in {}&quot;</span>,
+                        <span class="string">"Wrong number of subtasks in {}"</span>,
                         statement_path.display()
                     ))
                     .with_note(<span class="macro">format!</span>(
-                        <span class="string">&quot;Expecting {} subtasks, found {}&quot;</span>,
+                        <span class="string">"Expecting {} subtasks, found {}"</span>,
                         expected_subtasks.len(),
                         subtasks.len()
                     )),
@@ -540,8 +541,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>StatementValid {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;StatementValid&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"StatementValid"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -552,14 +553,14 @@
         <span class="kw">match </span>find_statement_pdf(task) {
             <span class="prelude-val">None </span>=&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(
-                    <span class="string">&quot;Missing statement file (statement/statement.pdf or testo/testo.pdf)&quot;</span>,
+                    <span class="string">"Missing statement file (statement/statement.pdf or testo/testo.pdf)"</span>,
                 )
-                .with_note(<span class="string">&quot;Without that file cms will not be able to import the task&quot;</span>);
+                .with_note(<span class="string">"Without that file cms will not be able to import the task"</span>);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(booklet) = task.booklets.first() {
                     <span class="kw">let </span>name = booklet.dest.file_name().unwrap();
                     <span class="kw">let </span>name = Path::new(name);
                     diagnostic = diagnostic
-                        .with_help(<span class="macro">format!</span>(<span class="string">&quot;Try: ln -s {} testo/testo.pdf&quot;</span>, name.display()));
+                        .with_help(<span class="macro">format!</span>(<span class="string">"Try: ln -s {} testo/testo.pdf"</span>, name.display()));
                 };
                 eval.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
             }
@@ -567,20 +568,20 @@
                 <span class="comment">// normal file or valid symlink
                 </span><span class="kw">if </span>path.exists() {
                     <span class="kw">let </span><span class="kw-2">mut </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>path).with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to open statement file at {}&quot;</span>, path.display())
+                        <span class="macro">format!</span>(<span class="string">"Failed to open statement file at {}"</span>, path.display())
                     })<span class="question-mark">?</span>;
                     <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">4</span>];
                     <span class="kw">let </span>invalid = <span class="kw">match </span>file.read_exact(<span class="kw-2">&amp;mut </span>buf) {
                         <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
                         <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; {
                             <span class="comment">// check PDF magic number
-                            </span><span class="kw-2">&amp;</span>buf != <span class="string">b&quot;%PDF&quot;
+                            </span><span class="kw-2">&amp;</span>buf != <span class="string">b"%PDF"
                         </span>}
                     };
 
                     <span class="kw">if </span>invalid {
                         eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
-                            <span class="string">&quot;Invalid PDF file at {}&quot;</span>,
+                            <span class="string">"Invalid PDF file at {}"</span>,
                             task.path_of(<span class="kw-2">&amp;</span>path).display()
                         )))<span class="question-mark">?</span>;
                     }
@@ -589,7 +590,7 @@
                 <span class="comment">// broken symlink
                 </span><span class="kw">else if </span>path.read_link().is_ok() {
                     eval.add_diagnostic(Diagnostic::error(<span class="macro">format!</span>(
-                        <span class="string">&quot;Statement {} is a broken link&quot;</span>,
+                        <span class="string">"Statement {} is a broken link"</span>,
                         task.path_of(<span class="kw-2">&amp;</span>path).display()
                     )))<span class="question-mark">?</span>;
                 }
@@ -607,8 +608,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>StatementCompiled {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;StatementCompiled&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"StatementCompiled"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -628,7 +629,7 @@
             <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
         };
         <span class="comment">// The source of the actual statement pdf (symlinks resolved). If the symlink is broken,
-        // there&#39;s nothing we can do (another sanity check will warn this error).
+        // there's nothing we can do (another sanity check will warn this error).
         </span><span class="kw">let </span>target = <span class="kw">match </span>path.canonicalize() {
             <span class="prelude-val">Ok</span>(path) =&gt; path,
             <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
@@ -647,20 +648,20 @@
             booklet_dest.push(dest);
         }
 
-        <span class="comment">// We didn&#39;t find any compiled booklet referring to the official statement, this means that
-        // the statement that will be used isn&#39;t the one compiled by us.
+        <span class="comment">// We didn't find any compiled booklet referring to the official statement, this means that
+        // the statement that will be used isn't the one compiled by us.
         </span><span class="kw">let </span>booklet_dest = booklet_dest
             .iter()
             .map(|p| task.path_of(p))
             .map(|p| p.to_string_lossy())
-            .join(<span class="string">&quot;, &quot;</span>);
+            .join(<span class="string">", "</span>);
         eval.add_diagnostic(
             Diagnostic::warning(<span class="macro">format!</span>(
-                <span class="string">&quot;The official statement at {} is not the one compiled by task-maker&quot;</span>,
+                <span class="string">"The official statement at {} is not the one compiled by task-maker"</span>,
                 task.path_of(<span class="kw-2">&amp;</span>path).display()
             ))
             .with_help(<span class="macro">format!</span>(
-                <span class="string">&quot;Maybe it should be a symlink to one of the compiled PDF ({})&quot;</span>,
+                <span class="string">"Maybe it should be a symlink to one of the compiled PDF ({})"</span>,
                 booklet_dest
             )),
         )<span class="question-mark">?</span>;
@@ -676,8 +677,8 @@
 <span class="kw">impl </span>SanityCheck <span class="kw">for </span>StatementGit {
     <span class="kw">type </span>Task = IOITask;
 
-    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-        <span class="string">&quot;StatementGit&quot;
+    <span class="kw">fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
+        <span class="string">"StatementGit"
     </span>}
 
     <span class="kw">fn </span>category(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SanityCheckCategory {
@@ -691,8 +692,8 @@
         };
         <span class="kw">let </span>path = task.path_of(<span class="kw-2">&amp;</span>path);
         <span class="kw">let </span>raw_path = path.as_os_str().as_bytes();
-        <span class="kw">let </span><span class="kw-2">mut </span>command = Command::new(<span class="string">&quot;git&quot;</span>);
-        command.arg(<span class="string">&quot;ls-files&quot;</span>).arg(<span class="string">&quot;-z&quot;</span>).current_dir(<span class="kw-2">&amp;</span>task.path);
+        <span class="kw">let </span><span class="kw-2">mut </span>command = Command::new(<span class="string">"git"</span>);
+        command.arg(<span class="string">"ls-files"</span>).arg(<span class="string">"-z"</span>).current_dir(<span class="kw-2">&amp;</span>task.path);
         <span class="kw">let </span>output = <span class="kw">match </span>command.output() {
             <span class="comment">// git not available
             </span><span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
@@ -705,8 +706,8 @@
         <span class="comment">// file not know to git
         </span><span class="kw">if </span>!output.stdout.is_empty() &amp;&amp; !output.stdout.split(|<span class="kw-2">&amp;</span>b| b == <span class="number">0</span>).any(|p| p == raw_path) {
             eval.add_diagnostic(
-                Diagnostic::error(<span class="macro">format!</span>(<span class="string">&quot;File {} is not known to git&quot;</span>, path.display()))
-                    .with_help(<span class="macro">format!</span>(<span class="string">&quot;Try git add -f {}&quot;</span>, path.display())),
+                Diagnostic::error(<span class="macro">format!</span>(<span class="string">"File {} is not known to git"</span>, path.display()))
+                    .with_help(<span class="macro">format!</span>(<span class="string">"Try git add -f {}"</span>, path.display())),
             )<span class="question-mark">?</span>;
         }
 
@@ -726,7 +727,7 @@
     </span>subtask_score_span: <span class="prelude-ty">Option</span>&lt;CodeSpan&gt;,
 }
 
-<span class="doccomment">/// Extract from the OII&#39;s usual format the subtasks. They are for example:
+<span class="doccomment">/// Extract from the OII's usual format the subtasks. They are for example:
 ///
 /// `\item \textbf{\makebox[2cm][l]{Subtask 2} [20 punti]}: $L\leq 10$.`
 ///
@@ -734,8 +735,8 @@
 </span><span class="kw">fn </span>check_subtasks_oii(path: <span class="kw-2">&amp;</span>Path, text: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
     <span class="macro">lazy_static! </span>{
         <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex =
-            Regex::new(<span class="string">r&quot;.*\{(Subtask ([0-9]+))\} *\[((?:\\phantom\{[^\}]+\})?([0-9]+).*)\].*&quot;</span>)
-                .expect(<span class="string">&quot;Invalid regex&quot;</span>);
+            Regex::new(<span class="string">r".*\{(Subtask ([0-9]+))\} *\[((?:\\phantom\{[^\}]+\})?([0-9]+).*)\].*"</span>)
+                .expect(<span class="string">"Invalid regex"</span>);
     }
     <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
     <span class="kw">for </span>subtask <span class="kw">in </span>FIND_SUBTASKS.captures_iter(text) {
@@ -765,12 +766,12 @@
     }
 }
 
-<span class="doccomment">/// Extract from the OII&#39;s new format the subtasks. They are for example:
+<span class="doccomment">/// Extract from the OII's new format the subtasks. They are for example:
 ///
 /// `\item \subtask $L\leq 10$.`
 </span><span class="kw">fn </span>check_subtasks_oii_new(path: <span class="kw-2">&amp;</span>Path, text: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
     <span class="macro">lazy_static! </span>{
-        <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex = Regex::new(<span class="string">r&quot;(.*\\subtask.*)&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
+        <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex = Regex::new(<span class="string">r"(.*\\subtask.*)"</span>).expect(<span class="string">"Invalid regex"</span>);
     }
     <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
     <span class="kw">for </span>(index, captures) <span class="kw">in </span>FIND_SUBTASKS.captures_iter(text).enumerate() {
@@ -791,13 +792,13 @@
     }
 }
 
-<span class="doccomment">/// Extract from the OIS&#39;s usual format the subtasks. They are for example:
+<span class="doccomment">/// Extract from the OIS's usual format the subtasks. They are for example:
 ///
 /// `\OISubtask{10}{1}{$N \le 10$.}`
 </span><span class="kw">fn </span>check_subtasks_ois(path: <span class="kw-2">&amp;</span>Path, text: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;ExtractedSubtask&gt;&gt; {
     <span class="macro">lazy_static! </span>{
         <span class="kw">static </span><span class="kw-2">ref </span>FIND_SUBTASKS: Regex =
-            Regex::new(<span class="string">r&quot;.*\\OISubtask\{(\d+)\}\{\d+\}\{.+\}.*&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
+            Regex::new(<span class="string">r".*\\OISubtask\{(\d+)\}\{\d+\}\{.+\}.*"</span>).expect(<span class="string">"Invalid regex"</span>);
     }
     <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
     <span class="kw">for </span>(index, subtask) <span class="kw">in </span>FIND_SUBTASKS.captures_iter(text).enumerate() {
@@ -836,11 +837,11 @@
     <span class="prelude-val">Some</span>(subtasks)
 }
 
-<span class="doccomment">/// Search for the statement file, returning its path or None if it doesn&#39;t exists.
+<span class="doccomment">/// Search for the statement file, returning its path or None if it doesn't exists.
 ///
 /// Will return the path even in case of broken links.
 </span><span class="kw">fn </span>find_statement_pdf(task: <span class="kw-2">&amp;</span>IOITask) -&gt; <span class="prelude-ty">Option</span>&lt;PathBuf&gt; {
-    <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">&quot;statement/statement.pdf&quot;</span>, <span class="string">&quot;testo/testo.pdf&quot;</span>] {
+    <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">"statement/statement.pdf"</span>, <span class="string">"testo/testo.pdf"</span>] {
         <span class="kw">let </span>path = task.path.join(path);
         <span class="kw">if </span>path.exists() || path.read_link().is_ok() {
             <span class="kw">return </span><span class="prelude-val">Some</span>(path);

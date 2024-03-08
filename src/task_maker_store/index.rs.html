@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-store/src/index.rs`."><title>index.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-store/src/index.rs`."><title>index.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -370,10 +371,10 @@
 <span class="doccomment">/// Magic string that is prepended to the index file to avoid accidental loading of invalid index
 /// files.
 ///
-/// The newline at the end of the string is required. For example, let&#39;s say there are 2 versions:
+/// The newline at the end of the string is required. For example, let's say there are 2 versions:
 /// v0.1 and v0.11; running v0.11 first, and then v0.1, without the newline the magic of the old
 /// version is a prefix of the magic of the new version.
-</span><span class="kw">const </span>MAGIC: <span class="kw-2">&amp;</span>[u8] = <span class="macro">formatcp!</span>(<span class="string">&quot;task-maker-store v{}\n&quot;</span>, <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>)).as_bytes();
+</span><span class="kw">const </span>MAGIC: <span class="kw-2">&amp;</span>[u8] = <span class="macro">formatcp!</span>(<span class="string">"task-maker-store v{}\n"</span>, <span class="macro">env!</span>(<span class="string">"CARGO_PKG_VERSION"</span>)).as_bytes();
 
 <span class="doccomment">/// An entry of a file inside the file store.
 </span><span class="attr">#[derive(Clone, Debug, Serialize, Deserialize, Eq, PartialEq)]
@@ -409,16 +410,16 @@
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>load&lt;P: AsRef&lt;Path&gt;&gt;(path: P) -&gt; <span class="prelude-ty">Result</span>&lt;FileStoreIndex, Error&gt; {
         <span class="kw">let </span>path = path.as_ref();
         <span class="kw">if </span>!path.exists() {
-            <span class="macro">debug!</span>(<span class="string">&quot;Index at {:?} not found, creating new one&quot;</span>, path);
+            <span class="macro">debug!</span>(<span class="string">"Index at {:?} not found, creating new one"</span>, path);
             <span class="kw">return </span><span class="prelude-val">Ok</span>(FileStoreIndex {
                 total_size: <span class="number">0</span>,
                 known_files: HashMap::new(),
             });
         }
 
-        <span class="macro">debug!</span>(<span class="string">&quot;Loading index from {:?}&quot;</span>, path);
+        <span class="macro">debug!</span>(<span class="string">"Loading index from {:?}"</span>, path);
         <span class="kw">let </span>file = File::open(path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to open index file from {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to open index file from {}"</span>, path.display()))<span class="question-mark">?</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>reader = BufReader::new(file);
         <span class="kw">let </span><span class="kw-2">mut </span>magic = [<span class="number">0u8</span>; MAGIC.len()];
 
@@ -427,7 +428,7 @@
             .map_or(<span class="bool-val">false</span>, |<span class="kw">_</span>| magic != MAGIC)
         {
             <span class="macro">info!</span>(
-                <span class="string">&quot;FileStore version mismatch:\nExpected: {:?}\nFound: {:?}&quot;</span>,
+                <span class="string">"FileStore version mismatch:\nExpected: {:?}\nFound: {:?}"</span>,
                 MAGIC, magic
             );
             <span class="kw">return </span><span class="prelude-val">Ok</span>(FileStoreIndex {
@@ -436,29 +437,29 @@
             });
         }
 
-        bincode::deserialize_from(reader).context(<span class="string">&quot;Failed to deserialize index file&quot;</span>)
+        bincode::deserialize_from(reader).context(<span class="string">"Failed to deserialize index file"</span>)
     }
 
     <span class="doccomment">/// Store a dump of this index to the path provided.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>store&lt;P: AsRef&lt;Path&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, path: P) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>path = path.as_ref();
-        <span class="macro">debug!</span>(<span class="string">&quot;Saving index file at {}&quot;</span>, path.display());
+        <span class="macro">debug!</span>(<span class="string">"Saving index file at {}"</span>, path.display());
 
-        create_dir_all(path.parent().expect(<span class="string">&quot;Invalid store file path&quot;</span>))
-            .context(<span class="string">&quot;Failed to create store directory&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let </span>tmp = path.with_extension(<span class="string">&quot;tmp&quot;</span>);
+        create_dir_all(path.parent().expect(<span class="string">"Invalid store file path"</span>))
+            .context(<span class="string">"Failed to create store directory"</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>tmp = path.with_extension(<span class="string">"tmp"</span>);
 
         <span class="kw">let </span>file = File::create(<span class="kw-2">&amp;</span>tmp)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to create index file at {}&quot;</span>, tmp.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to create index file at {}"</span>, tmp.display()))<span class="question-mark">?</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>writer = BufWriter::new(file);
 
         writer
             .write_all(MAGIC)
-            .context(<span class="string">&quot;Failed to write cache magic number&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to write cache magic number"</span>)<span class="question-mark">?</span>;
 
-        bincode::serialize_into(writer, <span class="kw-2">&amp;</span><span class="self">self</span>).context(<span class="string">&quot;Failed to write index&quot;</span>)<span class="question-mark">?</span>;
+        bincode::serialize_into(writer, <span class="kw-2">&amp;</span><span class="self">self</span>).context(<span class="string">"Failed to write index"</span>)<span class="question-mark">?</span>;
         std::fs::rename(<span class="kw-2">&amp;</span>tmp, path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to move {} -&gt; {}&quot;</span>, tmp.display(), path.display()))<span class="question-mark">?</span>;
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to move {} -&gt; {}"</span>, tmp.display(), path.display()))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -478,7 +479,7 @@
             }
             Entry::Vacant(entry) =&gt; {
                 <span class="kw">let </span>metadata = std::fs::metadata(path)
-                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot get file metadata of {}&quot;</span>, path.display()))<span class="question-mark">?</span>;
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot get file metadata of {}"</span>, path.display()))<span class="question-mark">?</span>;
                 entry.insert(FileStoreIndexItem {
                     size: metadata.len(),
                     last_access: SystemTime::now(),
@@ -495,7 +496,7 @@
     }
 
     <span class="doccomment">/// Perform a flushing operation, cleaning some space on the disk by removing the Least Recently
-    /// Used files. This function won&#39;t remove the files currently locked.
+    /// Used files. This function won't remove the files currently locked.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>flush(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         file_store: <span class="kw-2">&amp;</span>FileStore,
@@ -503,7 +504,7 @@
         target_size: u64,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="macro">debug!</span>(
-            <span class="string">&quot;Starting flushing process from {}MiB to at most {}MiB&quot;</span>,
+            <span class="string">"Starting flushing process from {}MiB to at most {}MiB"</span>,
             <span class="self">self</span>.total_size / <span class="number">1024 </span>/ <span class="number">1024</span>,
             target_size / <span class="number">1024 </span>/ <span class="number">1024
         </span>);
@@ -529,13 +530,13 @@
                 removed += entry.size;
 
                 <span class="kw">let </span>path = file_store.key_to_path(<span class="kw-2">&amp;</span>key);
-                <span class="macro">debug!</span>(<span class="string">&quot;Removing file {:?} claiming {}KiB&quot;</span>, path, entry.size / <span class="number">1024</span>);
+                <span class="macro">debug!</span>(<span class="string">"Removing file {:?} claiming {}KiB"</span>, path, entry.size / <span class="number">1024</span>);
                 <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = FileStore::remove_file(<span class="kw-2">&amp;</span>path) {
-                    <span class="macro">warn!</span>(<span class="string">&quot;Cannot flush file {:?}: {}&quot;</span>, path, e.to_string());
+                    <span class="macro">warn!</span>(<span class="string">"Cannot flush file {:?}: {}"</span>, path, e.to_string());
                 }
                 <span class="kw">let </span>base_path = file_store.base_path.canonicalize().with_context(|| {
                     <span class="macro">format!</span>(
-                        <span class="string">&quot;Invalid file store base path: {}&quot;</span>,
+                        <span class="string">"Invalid file store base path: {}"</span>,
                         file_store.base_path.display()
                     )
                 })<span class="question-mark">?</span>;
@@ -545,16 +546,16 @@
                     <span class="kw">if </span>p == base_path {
                         <span class="kw">break</span>;
                     }
-                    <span class="macro">debug!</span>(<span class="string">&quot;Removing {:?}&quot;</span>, p);
+                    <span class="macro">debug!</span>(<span class="string">"Removing {:?}"</span>, p);
                     <span class="kw">if </span>remove_dir(p).is_err() {
-                        <span class="macro">debug!</span>(<span class="string">&quot;... it wasn&#39;t empty&quot;</span>);
+                        <span class="macro">debug!</span>(<span class="string">"... it wasn't empty"</span>);
                         <span class="kw">break</span>;
                     }
                     path = p.parent();
                 }
             }
         }
-        <span class="macro">debug!</span>(<span class="string">&quot;Claimed {}KiB&quot;</span>, removed / <span class="number">1024</span>);
+        <span class="macro">debug!</span>(<span class="string">"Claimed {}KiB"</span>, removed / <span class="number">1024</span>);
         <span class="comment">// the locked files that have been removed from the queue
         </span><span class="kw">for </span>(key, entry) <span class="kw">in </span>surviving {
             <span class="self">self</span>.known_files.insert(key, entry);
@@ -593,7 +594,7 @@
     }
 
     <span class="kw">fn </span>add_file_to_store(store: <span class="kw-2">&amp;</span>FileStore, len: usize) -&gt; FileStoreHandle {
-        <span class="kw">let </span>path = store.base_path.join(<span class="string">&quot;temp.txt&quot;</span>);
+        <span class="kw">let </span>path = store.base_path.join(<span class="string">"temp.txt"</span>);
         <span class="kw">let </span>key = fake_file(<span class="kw-2">&amp;</span>path, <span class="number">123</span>, len);
         <span class="kw">let </span>iter = ReadFileIterator::new(path).unwrap();
         store.store(<span class="kw-2">&amp;</span>key, iter).unwrap()

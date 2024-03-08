@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/curses.rs`."><title>curses.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ui/curses.rs`."><title>curses.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -463,12 +464,12 @@
 
 <span class="doccomment">/// The framerate of the UI.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>FPS: u64 = <span class="number">30</span>;
-<span class="doccomment">/// After how many seconds rotate the list of workers if they don&#39;t fit on the screen.
+<span class="doccomment">/// After how many seconds rotate the list of workers if they don't fit on the screen.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>ROTATION_DELAY: u64 = <span class="number">1</span>;
 
 <span class="doccomment">/// The type of the terminal with its backend.
-</span><span class="kw">pub type </span>FrameType&lt;<span class="lifetime">&#39;a</span>&gt; =
-    Frame&lt;<span class="lifetime">&#39;a</span>, TermionBackend&lt;AlternateScreen&lt;MouseTerminal&lt;RawTerminal&lt;io::Stdout&gt;&gt;&gt;&gt;&gt;;
+</span><span class="kw">pub type </span>FrameType&lt;<span class="lifetime">'a</span>&gt; =
+    Frame&lt;<span class="lifetime">'a</span>, TermionBackend&lt;AlternateScreen&lt;MouseTerminal&lt;RawTerminal&lt;io::Stdout&gt;&gt;&gt;&gt;&gt;;
 
 <span class="macro">macro_rules! </span>define_color_inner {
     (<span class="macro-nonterminal">$color</span>:expr,) =&gt; {
@@ -516,9 +517,9 @@
 /// - `FinishUI` is the UI that prints the final results.
 </span><span class="kw">pub struct </span>CursesUI&lt;State, Drawer, Finish&gt;
 <span class="kw">where
-    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">'static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
 {
     <span class="doccomment">/// The thread where the UI lives.
     </span>ui_thread: <span class="prelude-ty">Option</span>&lt;JoinHandle&lt;()&gt;&gt;,
@@ -540,9 +541,9 @@
 
 <span class="kw">impl</span>&lt;State, Drawer, Finish&gt; CursesUI&lt;State, Drawer, Finish&gt;
 <span class="kw">where
-    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">'static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
 {
     <span class="doccomment">/// Make a new generic `CursesUI`.
     </span><span class="kw">pub fn </span>new(state: State) -&gt; <span class="prelude-ty">Result</span>&lt;CursesUI&lt;State, Drawer, Finish&gt;, Error&gt; {
@@ -573,9 +574,9 @@
         <span class="kw">let </span><span class="kw-2">mut </span>terminal = Terminal::new(backend)<span class="question-mark">?</span>;
         terminal.hide_cursor()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(std::thread::Builder::new()
-            .name(<span class="string">&quot;CursesUI thread&quot;</span>.to_owned())
+            .name(<span class="string">"CursesUI thread"</span>.to_owned())
             .spawn(<span class="kw">move </span>|| {
-                <span class="kw">let </span>loading = [<span class="string">&#39;◐&#39;</span>, <span class="string">&#39;◓&#39;</span>, <span class="string">&#39;◑&#39;</span>, <span class="string">&#39;◒&#39;</span>];
+                <span class="kw">let </span>loading = [<span class="string">'◐'</span>, <span class="string">'◓'</span>, <span class="string">'◑'</span>, <span class="string">'◒'</span>];
                 <span class="kw">let </span><span class="kw-2">mut </span>loading_index = <span class="number">0</span>;
                 <span class="kw">let </span>stdin = termion::async_stdin();
                 <span class="kw">let </span><span class="kw-2">mut </span>events = stdin.events();
@@ -584,7 +585,7 @@
                     //        not be killed properly (locally and remotely).
                     </span><span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(event)) = events.next() {
                         <span class="kw">match </span>event {
-                            Event::Key(Key::Ctrl(<span class="string">&#39;c&#39;</span>)) | Event::Key(Key::Ctrl(<span class="string">&#39;\\&#39;</span>)) =&gt; {
+                            Event::Key(Key::Ctrl(<span class="string">'c'</span>)) | Event::Key(Key::Ctrl(<span class="string">'\\'</span>)) =&gt; {
                                 drop(terminal);
                                 send_ctrl_c();
                                 <span class="kw">return</span>;
@@ -595,10 +596,10 @@
                     <span class="kw">let </span>loading = loading[loading_index % loading.len()];
                     terminal
                         .draw(|f| {
-                            <span class="kw">let </span>state = state.read().expect(<span class="string">&quot;UI state lock is poisoned&quot;</span>);
+                            <span class="kw">let </span>state = state.read().expect(<span class="string">"UI state lock is poisoned"</span>);
                             Drawer::draw(<span class="kw-2">&amp;</span>state, f, loading, loading_index);
                         })
-                        .expect(<span class="string">&quot;Failed to draw to the screen&quot;</span>);
+                        .expect(<span class="string">"Failed to draw to the screen"</span>);
                     <span class="comment">// reduce the framerate to at most `FPS`
                     </span>std::thread::sleep(std::time::Duration::from_micros(<span class="number">1_000_000 </span>/ FPS));
                     loading_index += <span class="number">1</span>;
@@ -609,14 +610,14 @@
 
 <span class="kw">impl</span>&lt;State, Drawer, Finish&gt; UI <span class="kw">for </span>CursesUI&lt;State, Drawer, Finish&gt;
 <span class="kw">where
-    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">'static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
 {
     <span class="kw">fn </span>on_message(<span class="kw-2">&amp;mut </span><span class="self">self</span>, message: UIMessage) {
         <span class="self">self</span>.state
             .write()
-            .expect(<span class="string">&quot;UI state lock is poisoned&quot;</span>)
+            .expect(<span class="string">"UI state lock is poisoned"</span>)
             .apply(message);
     }
 
@@ -624,20 +625,20 @@
         <span class="self">self</span>.stop.store(<span class="bool-val">true</span>, Ordering::Relaxed);
         <span class="self">self</span>.ui_thread
             .take()
-            .expect(<span class="string">&quot;UI finished more than once&quot;</span>)
+            .expect(<span class="string">"UI finished more than once"</span>)
             .join()
-            .expect(<span class="string">&quot;UI thread failed&quot;</span>);
+            .expect(<span class="string">"UI thread failed"</span>);
         <span class="comment">// at this point the terminal should be restored
-        </span><span class="kw">let </span>state = <span class="self">self</span>.state.read().expect(<span class="string">&quot;State lock is poisoned&quot;</span>);
+        </span><span class="kw">let </span>state = <span class="self">self</span>.state.read().expect(<span class="string">"State lock is poisoned"</span>);
         Finish::print(<span class="kw-2">&amp;</span>state);
     }
 }
 
 <span class="kw">impl</span>&lt;State, Drawer, Finish&gt; Drop <span class="kw">for </span>CursesUI&lt;State, Drawer, Finish&gt;
 <span class="kw">where
-    </span>State: UIStateT + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
-    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+    </span>State: UIStateT + Send + Sync + <span class="lifetime">'static</span>,
+    Drawer: CursesDrawer&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
+    Finish: FinishUI&lt;State&gt; + Send + Sync + <span class="lifetime">'static</span>,
 {
     <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="comment">// tell the ui to stop and wait for it, the terminal will be released.
@@ -658,18 +659,18 @@
 }
 
 <span class="doccomment">/// Draw the compilation block.
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>draw_compilations&lt;<span class="lifetime">&#39;a</span>, I&gt;(
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>draw_compilations&lt;<span class="lifetime">'a</span>, I&gt;(
     frame: <span class="kw-2">&amp;mut </span>FrameType,
     rect: Rect,
     compilations: I,
     loading: char,
 ) <span class="kw">where
-    </span>I: Iterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>PathBuf, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>CompilationStatus)&gt;,
+    </span>I: Iterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">'a </span>PathBuf, <span class="kw-2">&amp;</span><span class="lifetime">'a </span>CompilationStatus)&gt;,
 {
     <span class="kw">let </span>compilations: Vec&lt;<span class="kw">_</span>&gt; = compilations.collect();
     <span class="kw">let </span>max_len = compilations
         .iter()
-        .map(|(k, <span class="kw">_</span>)| k.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>).len())
+        .map(|(k, <span class="kw">_</span>)| k.file_name().expect(<span class="string">"Invalid file name"</span>).len())
         .max()
         .unwrap_or(<span class="number">0</span>)
         + <span class="number">4</span>;
@@ -679,9 +680,9 @@
         .map(|(file, status)| {
             <span class="macro">vec!</span>[
                 Span::raw(<span class="macro">format!</span>(
-                    <span class="string">&quot;{:&lt;max_len$}&quot;</span>,
+                    <span class="string">"{:&lt;max_len$}"</span>,
                     file.file_name()
-                        .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+                        .expect(<span class="string">"Invalid file name"</span>)
                         .to_string_lossy(),
                     max_len = max_len
                 )),
@@ -695,13 +696,13 @@
 }
 
 <span class="doccomment">/// Get the `Text` relative to the compilation status of a file.
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>compilation_status_text(status: <span class="kw-2">&amp;</span>CompilationStatus, loading: char) -&gt; Span&lt;<span class="lifetime">&#39;static</span>&gt; {
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>compilation_status_text(status: <span class="kw-2">&amp;</span>CompilationStatus, loading: char) -&gt; Span&lt;<span class="lifetime">'static</span>&gt; {
     <span class="kw">match </span>status {
-        CompilationStatus::Pending =&gt; Span::raw(<span class="string">&quot;... &quot;</span>),
-        CompilationStatus::Running =&gt; Span::raw(<span class="macro">format!</span>(<span class="string">&quot;{}   &quot;</span>, loading)),
-        CompilationStatus::Done { .. } =&gt; Span::styled(<span class="string">&quot;OK  &quot;</span>, <span class="kw-2">*</span>GREEN),
-        CompilationStatus::Failed { .. } =&gt; Span::styled(<span class="string">&quot;FAIL&quot;</span>, <span class="kw-2">*</span>RED),
-        CompilationStatus::Skipped =&gt; Span::styled(<span class="string">&quot;skip&quot;</span>, <span class="kw-2">*</span>YELLOW),
+        CompilationStatus::Pending =&gt; Span::raw(<span class="string">"... "</span>),
+        CompilationStatus::Running =&gt; Span::raw(<span class="macro">format!</span>(<span class="string">"{}   "</span>, loading)),
+        CompilationStatus::Done { .. } =&gt; Span::styled(<span class="string">"OK  "</span>, <span class="kw-2">*</span>GREEN),
+        CompilationStatus::Failed { .. } =&gt; Span::styled(<span class="string">"FAIL"</span>, <span class="kw-2">*</span>RED),
+        CompilationStatus::Skipped =&gt; Span::styled(<span class="string">"skip"</span>, <span class="kw-2">*</span>YELLOW),
     }
 }
 
@@ -721,7 +722,7 @@
     loading: char,
     frame_index: usize,
 ) {
-    <span class="kw">let </span>title = <span class="string">&quot; Server status &quot;</span>;
+    <span class="kw">let </span>title = <span class="string">" Server status "</span>;
     render_block(frame, rect, title);
     draw_server_status_summary(
         frame,
@@ -754,16 +755,16 @@
         <span class="kw">return</span>;
     };
     <span class="kw">let </span>paragraph = Paragraph::new(Spans(<span class="macro">vec!</span>[
-        Span::styled(<span class="string">&quot; Ready &quot;</span>, Style::default().add_modifier(Modifier::BOLD)),
-        Span::raw(<span class="macro">format!</span>(<span class="string">&quot;{} ─&quot;</span>, status.ready_execs)),
-        Span::styled(<span class="string">&quot; Waiting &quot;</span>, Style::default().add_modifier(Modifier::BOLD)),
-        Span::raw(<span class="macro">format!</span>(<span class="string">&quot;{} &quot;</span>, status.waiting_execs)),
+        Span::styled(<span class="string">" Ready "</span>, Style::default().add_modifier(Modifier::BOLD)),
+        Span::raw(<span class="macro">format!</span>(<span class="string">"{} ─"</span>, status.ready_execs)),
+        Span::styled(<span class="string">" Waiting "</span>, Style::default().add_modifier(Modifier::BOLD)),
+        Span::raw(<span class="macro">format!</span>(<span class="string">"{} "</span>, status.waiting_execs)),
     ]));
     frame.render_widget(paragraph, rect);
 }
 
-<span class="doccomment">/// Draw the content of the server status box, splitting the workers in 2 groups if they don&#39;t fit,
-/// and rotating them if they still don&#39;t fit.
+<span class="doccomment">/// Draw the content of the server status box, splitting the workers in 2 groups if they don't fit,
+/// and rotating them if they still don't fit.
 </span><span class="kw">fn </span>draw_server_status(
     frame: <span class="kw-2">&amp;mut </span>FrameType,
     rect: Rect,
@@ -829,17 +830,17 @@
     <span class="kw">let </span>text: Vec&lt;Spans&gt; = workers
         .iter()
         .map(|worker| {
-            <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">&quot;- {:&lt;max_len$} &quot;</span>, worker.name, max_len = max_len);
+            <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">"- {:&lt;max_len$} "</span>, worker.name, max_len = max_len);
             <span class="kw">let </span>worker_name_len = worker_name.chars().count();
             <span class="kw">let </span><span class="kw-2">mut </span>spans = <span class="macro">vec!</span>[Span::raw(worker_name)];
 
             <span class="kw">if let </span><span class="prelude-val">Some</span>(job) = <span class="kw-2">&amp;</span>worker.current_job {
                 <span class="kw">let </span>duration = job.duration.elapsed().unwrap_or_default().as_secs_f32();
-                <span class="kw">let </span><span class="kw-2">mut </span>line = <span class="macro">format!</span>(<span class="string">&quot;{} {} ({:.2}s)&quot;</span>, loading, job.job, duration);
+                <span class="kw">let </span><span class="kw-2">mut </span>line = <span class="macro">format!</span>(<span class="string">"{} {} ({:.2}s)"</span>, loading, job.job, duration);
                 <span class="kw">let </span>line_len = line.chars().count();
                 <span class="comment">// Line is too long.
                 </span><span class="kw">if </span>worker_name_len + line_len &gt; rect.width <span class="kw">as </span>usize {
-                    <span class="comment">// We need to remove &quot;extra_len&quot; characters.
+                    <span class="comment">// We need to remove "extra_len" characters.
                     </span><span class="kw">let </span>extra_len = worker_name_len + line_len - rect.width <span class="kw">as </span>usize;
                     <span class="comment">// There is not enough space for the job name, even with the ellipsis.
                     </span><span class="kw">if </span>extra_len + <span class="number">3 </span>&gt; job.job.len() {
@@ -847,7 +848,7 @@
                     } <span class="kw">else </span>{
                         <span class="kw">let </span>job_name: String =
                             line.chars().take(job.job.len() - extra_len - <span class="number">3</span>).collect();
-                        line = <span class="macro">format!</span>(<span class="string">&quot;{} {}... ({:.2}s)&quot;</span>, loading, job_name, duration);
+                        line = <span class="macro">format!</span>(<span class="string">"{} {}... ({:.2}s)"</span>, loading, job_name, duration);
                     }
                 }
                 spans.push(Span::raw(line));
@@ -863,7 +864,7 @@
 </span><span class="kw">fn </span>send_ctrl_c() {
     <span class="kw">let </span>pid = std::process::id();
     <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = signal::kill(Pid::from_raw(pid <span class="kw">as </span>i32), Signal::SIGINT) {
-        <span class="macro">error!</span>(<span class="string">&quot;Failed to send SIGINT to {}: {}&quot;</span>, pid, e);
+        <span class="macro">error!</span>(<span class="string">"Failed to send SIGINT to {}: {}"</span>, pid, e);
     }
 }
 </code></pre></div></section></main></body></html>

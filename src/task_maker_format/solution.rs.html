@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/solution.rs`."><title>solution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/solution.rs`."><title>solution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -503,13 +504,13 @@
         eval: <span class="kw-2">&amp;mut </span>EvaluationData,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>write_to = base_dir
-            .join(<span class="string">&quot;bin&quot;</span>)
-            .join(<span class="string">&quot;sol&quot;</span>)
+            .join(<span class="string">"bin"</span>)
+            .join(<span class="string">"sol"</span>)
             .join(path.file_name().unwrap());
         <span class="kw">let </span>source_file = SourceFile::new(
             path,
             base_dir,
-            <span class="macro">format!</span>(<span class="string">&quot;Solution at {}&quot;</span>, path.display()),
+            <span class="macro">format!</span>(<span class="string">"Solution at {}"</span>, path.display()),
             grader_map,
             <span class="prelude-val">Some</span>(write_to),
         )<span class="question-mark">?</span>;
@@ -628,22 +629,22 @@
 /// exists a minimal element `min` of `outcomes` such that `min` is contained in `sol_check.minimals()`.
 </span><span class="attr">#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 </span><span class="kw">pub enum </span>SolutionCheckResult {
-    <span class="doccomment">/// The solution should get &quot;Accepted&quot; on all the testcases of the subtask.
+    <span class="doccomment">/// The solution should get "Accepted" on all the testcases of the subtask.
     </span>Accepted,
-    <span class="doccomment">/// The solution should get &quot;Partial Score&quot; on at least one testcase and &quot;Accepted&quot; on the others.
+    <span class="doccomment">/// The solution should get "Partial Score" on at least one testcase and "Accepted" on the others.
     </span>PartialScore,
-    <span class="doccomment">/// The solution should get &quot;Wrong Answer&quot; on at least one testcase of the subtask.
+    <span class="doccomment">/// The solution should get "Wrong Answer" on at least one testcase of the subtask.
     </span>WrongAnswer,
-    <span class="doccomment">/// The solution should get &quot;Time Limit Exceeded&quot; on at least one testcase of the subtask.
+    <span class="doccomment">/// The solution should get "Time Limit Exceeded" on at least one testcase of the subtask.
     </span>TimeLimitExceeded,
-    <span class="doccomment">/// The solution should get &quot;Wallclock Time Limit Exceeded&quot; on at least one testcase of the subtask.
+    <span class="doccomment">/// The solution should get "Wallclock Time Limit Exceeded" on at least one testcase of the subtask.
     </span>WallTimeLimitExceeded,
-    <span class="doccomment">/// The solution should get &quot;Memory Limit Exceeded&quot; on at least one testcase of the subtask.
+    <span class="doccomment">/// The solution should get "Memory Limit Exceeded" on at least one testcase of the subtask.
     </span>MemoryLimitExceeded,
-    <span class="doccomment">/// The solution should get &quot;Runtime Error&quot; on at least one testcase of the subtask.
+    <span class="doccomment">/// The solution should get "Runtime Error" on at least one testcase of the subtask.
     </span>RuntimeError,
-    <span class="doccomment">/// The solution should get &quot;WrongAnswer&quot;, &quot;TimeLimitExceeded&quot;, &quot;WallTimeLimitExceeded&quot;,
-    /// &quot;MemoryLimitExceeded&quot; or &quot;RuntimeError&quot; on at least one testcase of the subtask.
+    <span class="doccomment">/// The solution should get "WrongAnswer", "TimeLimitExceeded", "WallTimeLimitExceeded",
+    /// "MemoryLimitExceeded" or "RuntimeError" on at least one testcase of the subtask.
     </span>Zero,
 }
 
@@ -652,22 +653,22 @@
 
     <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         <span class="kw">match </span>s {
-            <span class="string">&quot;accepted&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Accepted),
-            <span class="string">&quot;partial-score&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::PartialScore),
-            <span class="string">&quot;wrong-answer&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::WrongAnswer),
-            <span class="string">&quot;time-limit-exceeded&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::TimeLimitExceeded),
-            <span class="string">&quot;wall-time-limit-exceeded&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::WallTimeLimitExceeded),
-            <span class="string">&quot;memory-limit-exceeded&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::MemoryLimitExceeded),
-            <span class="string">&quot;runtime-error&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::RuntimeError),
-            <span class="string">&quot;zero&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Zero),
-            <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">&quot;Invalid check name: @check-{}&quot;</span>, s),
+            <span class="string">"accepted" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Accepted),
+            <span class="string">"partial-score" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::PartialScore),
+            <span class="string">"wrong-answer" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::WrongAnswer),
+            <span class="string">"time-limit-exceeded" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::TimeLimitExceeded),
+            <span class="string">"wall-time-limit-exceeded" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::WallTimeLimitExceeded),
+            <span class="string">"memory-limit-exceeded" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::MemoryLimitExceeded),
+            <span class="string">"runtime-error" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::RuntimeError),
+            <span class="string">"zero" </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Zero),
+            <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">"Invalid check name: @check-{}"</span>, s),
         }
     }
 }
 
 <span class="kw">impl </span>SolutionCheckResult {
     <span class="doccomment">/// List all [`SolutionCheckResult`] sorted by self.minimals().len().
-    </span><span class="kw">pub fn </span>sorted_all() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="self">Self</span>] {
+    </span><span class="kw">pub fn </span>sorted_all() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>[<span class="self">Self</span>] {
         <span class="kw-2">&amp;</span>[
             <span class="self">Self</span>::Accepted,
             <span class="self">Self</span>::PartialScore,
@@ -681,32 +682,32 @@
     }
 
     <span class="doccomment">/// Get the string representation of this [`SolutionCheckResult`], as used in @check rules.
-    </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
         <span class="kw">match </span><span class="self">self </span>{
-            SolutionCheckResult::Accepted =&gt; <span class="string">&quot;accepted&quot;</span>,
-            SolutionCheckResult::PartialScore =&gt; <span class="string">&quot;partial-score&quot;</span>,
-            SolutionCheckResult::WrongAnswer =&gt; <span class="string">&quot;wrong-answer&quot;</span>,
-            SolutionCheckResult::TimeLimitExceeded =&gt; <span class="string">&quot;time-limit-exceeded&quot;</span>,
-            SolutionCheckResult::WallTimeLimitExceeded =&gt; <span class="string">&quot;wall-time-limit-exceeded&quot;</span>,
-            SolutionCheckResult::MemoryLimitExceeded =&gt; <span class="string">&quot;memory-limit-exceeded&quot;</span>,
-            SolutionCheckResult::RuntimeError =&gt; <span class="string">&quot;runtime-error&quot;</span>,
-            SolutionCheckResult::Zero =&gt; <span class="string">&quot;zero&quot;</span>,
+            SolutionCheckResult::Accepted =&gt; <span class="string">"accepted"</span>,
+            SolutionCheckResult::PartialScore =&gt; <span class="string">"partial-score"</span>,
+            SolutionCheckResult::WrongAnswer =&gt; <span class="string">"wrong-answer"</span>,
+            SolutionCheckResult::TimeLimitExceeded =&gt; <span class="string">"time-limit-exceeded"</span>,
+            SolutionCheckResult::WallTimeLimitExceeded =&gt; <span class="string">"wall-time-limit-exceeded"</span>,
+            SolutionCheckResult::MemoryLimitExceeded =&gt; <span class="string">"memory-limit-exceeded"</span>,
+            SolutionCheckResult::RuntimeError =&gt; <span class="string">"runtime-error"</span>,
+            SolutionCheckResult::Zero =&gt; <span class="string">"zero"</span>,
         }
     }
 
     <span class="doccomment">/// Get a compact representation of this result.
     ///
-    /// For example `SolutionCheckResult::Accepted` is `&quot;AC&quot;`.
-    </span><span class="kw">pub fn </span>as_compact_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    /// For example `SolutionCheckResult::Accepted` is `"AC"`.
+    </span><span class="kw">pub fn </span>as_compact_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
         <span class="kw">match </span><span class="self">self </span>{
-            SolutionCheckResult::Accepted =&gt; <span class="string">&quot;AC&quot;</span>,
-            SolutionCheckResult::PartialScore =&gt; <span class="string">&quot;PS&quot;</span>,
-            SolutionCheckResult::WrongAnswer =&gt; <span class="string">&quot;WA&quot;</span>,
-            SolutionCheckResult::TimeLimitExceeded =&gt; <span class="string">&quot;TLE&quot;</span>,
-            SolutionCheckResult::WallTimeLimitExceeded =&gt; <span class="string">&quot;WTLE&quot;</span>,
-            SolutionCheckResult::MemoryLimitExceeded =&gt; <span class="string">&quot;MLE&quot;</span>,
-            SolutionCheckResult::RuntimeError =&gt; <span class="string">&quot;RE&quot;</span>,
-            SolutionCheckResult::Zero =&gt; <span class="string">&quot;ZR&quot;</span>,
+            SolutionCheckResult::Accepted =&gt; <span class="string">"AC"</span>,
+            SolutionCheckResult::PartialScore =&gt; <span class="string">"PS"</span>,
+            SolutionCheckResult::WrongAnswer =&gt; <span class="string">"WA"</span>,
+            SolutionCheckResult::TimeLimitExceeded =&gt; <span class="string">"TLE"</span>,
+            SolutionCheckResult::WallTimeLimitExceeded =&gt; <span class="string">"WTLE"</span>,
+            SolutionCheckResult::MemoryLimitExceeded =&gt; <span class="string">"MLE"</span>,
+            SolutionCheckResult::RuntimeError =&gt; <span class="string">"RE"</span>,
+            SolutionCheckResult::Zero =&gt; <span class="string">"ZR"</span>,
         }
     }
 
@@ -726,7 +727,7 @@
     </span>}
 
     <span class="doccomment">/// Return the set of matching minimal results.
-    </span><span class="kw">pub fn </span>minimals(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[TestcaseEvaluationResult] {
+    </span><span class="kw">pub fn </span>minimals(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>[TestcaseEvaluationResult] {
         <span class="kw">use </span>TestcaseEvaluationResult <span class="kw">as </span>TER;
         <span class="kw">match </span><span class="self">self </span>{
             <span class="self">Self</span>::Accepted =&gt; <span class="kw-2">&amp;</span>[TER::Accepted],
@@ -754,9 +755,9 @@
         eval: <span class="kw-2">&amp;mut </span>EvaluationData,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;<span class="self">Self</span>&gt;, Error&gt; {
         <span class="macro">lazy_static! </span>{
-            <span class="kw">static </span><span class="kw-2">ref </span>FIND_CHECKS: Regex = Regex::new(<span class="string">r&quot;.*(@check-.*)&quot;</span>).expect(<span class="string">&quot;Invalid regex&quot;</span>);
+            <span class="kw">static </span><span class="kw-2">ref </span>FIND_CHECKS: Regex = Regex::new(<span class="string">r".*(@check-.*)"</span>).expect(<span class="string">"Invalid regex"</span>);
             <span class="kw">static </span><span class="kw-2">ref </span>EXTRACT_CHECKS: Regex = Regex::new(
-                <span class="string">r&quot;(?x)
+                <span class="string">r"(?x)
             @check-     # signal the start of a check
             (?P&lt;result&gt;accepted|partial-score|wrong-answer|time-limit-exceeded|memory-limit-exceeded|runtime-error|zero)
             :
@@ -767,8 +768,8 @@
               )*        # allow a check without any subtask listed
             )
             \s*         # ignore spaces after the last subtask
-        &quot;</span>)
-            .expect(<span class="string">&quot;Invalid regex&quot;</span>);
+        "</span>)
+            .expect(<span class="string">"Invalid regex"</span>);
         }
 
         <span class="kw">let </span>path = path.as_ref();
@@ -778,7 +779,7 @@
 
         <span class="kw">let </span><span class="kw-2">mut </span>checks = <span class="macro">vec!</span>[];
         <span class="kw">let </span><span class="kw-2">mut </span>file_offset = <span class="number">0</span>;
-        <span class="kw">for </span>line <span class="kw">in </span>content.split(<span class="string">&#39;\n&#39;</span>) {
+        <span class="kw">for </span>line <span class="kw">in </span>content.split(<span class="string">'\n'</span>) {
             file_offset += line.len() + <span class="number">1</span>; <span class="comment">// Includes the \n.
             </span><span class="kw">let </span>found = <span class="kw">match </span>FIND_CHECKS.captures(line).and_then(|c| c.get(<span class="number">1</span>)) {
                 <span class="prelude-val">None </span>=&gt; <span class="kw">continue</span>,
@@ -793,17 +794,17 @@
                 <span class="kw">let </span>capture = captures.get(<span class="number">0</span>).unwrap();
                 <span class="kw">let </span>len = capture.end() - capture.start();
                 <span class="kw">let </span>code_span = CodeSpan::from_str(path, <span class="kw-2">&amp;</span>content, offset, len)
-                    .context(<span class="string">&quot;Failed to build CodeSpan for check rule&quot;</span>)<span class="question-mark">?</span>;
-                <span class="kw">let </span>result = <span class="kw-2">&amp;</span>captures[<span class="string">&quot;result&quot;</span>];
+                    .context(<span class="string">"Failed to build CodeSpan for check rule"</span>)<span class="question-mark">?</span>;
+                <span class="kw">let </span>result = <span class="kw-2">&amp;</span>captures[<span class="string">"result"</span>];
                 <span class="kw">let </span>result = SolutionCheckResult::from_str(result)<span class="question-mark">?</span>;
-                <span class="kw">let </span>patterns = <span class="kw-2">&amp;</span>captures[<span class="string">&quot;subtasks&quot;</span>];
+                <span class="kw">let </span>patterns = <span class="kw-2">&amp;</span>captures[<span class="string">"subtasks"</span>];
                 <span class="kw">for </span>pattern <span class="kw">in </span>split_patterns(patterns) {
                     checks.push(<span class="self">Self</span>::new(result, pattern, code_span.clone()));
                 }
             } <span class="kw">else </span>{
                 <span class="kw">let </span>len = found.end() - found.start();
                 <span class="kw">let </span><span class="kw-2">mut </span>diagnostic = Diagnostic::error(<span class="macro">format!</span>(
-                    <span class="string">&quot;In &#39;{}&#39; the check &#39;{}&#39; is not valid&quot;</span>,
+                    <span class="string">"In '{}' the check '{}' is not valid"</span>,
                     path.display(),
                     line
                 ));
@@ -837,7 +838,7 @@
 
     <span class="kw">fn </span>get_checks(source: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;SolutionCheck&gt;, Error&gt; {
         <span class="kw">let </span>tmpdir = tempfile::TempDir::new().unwrap();
-        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">&quot;source.txt&quot;</span>);
+        <span class="kw">let </span>path = tmpdir.path().join(<span class="string">"source.txt"</span>);
         std::fs::write(<span class="kw-2">&amp;</span>path, source).unwrap();
         <span class="kw">let </span><span class="kw-2">mut </span>eval = EvaluationData::new(tmpdir.path()).<span class="number">0</span>;
         SolutionCheck::extract_check_list(path, <span class="kw-2">&amp;mut </span>eval)
@@ -846,7 +847,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_extract_check_list() {
         <span class="kw">let </span>checks = get_checks(
-            <span class="string">r&quot;
+            <span class="string">r"
            /*
             * @check-accepted: st1 st2 st3*
             * @check-partial-score: asd
@@ -857,62 +858,62 @@
             * @check-runtime-error: asd
             * @check-zero: asd
             */
-        &quot;</span>,
+        "</span>,
         )
         .unwrap();
         <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].result, SolutionCheckResult::Accepted);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].subtask_name_pattern, <span class="string">&quot;st1&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].subtask_name_pattern, <span class="string">"st1"</span>);
         <span class="macro">assert_eq!</span>(
             checks[<span class="number">0</span>].code_span.as_str(),
-            <span class="string">&quot;@check-accepted: st1 st2 st3*&quot;
+            <span class="string">"@check-accepted: st1 st2 st3*"
         </span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].result, SolutionCheckResult::Accepted);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].subtask_name_pattern, <span class="string">&quot;st2&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].subtask_name_pattern, <span class="string">"st2"</span>);
         <span class="macro">assert_eq!</span>(
             checks[<span class="number">1</span>].code_span.as_str(),
-            <span class="string">&quot;@check-accepted: st1 st2 st3*&quot;
+            <span class="string">"@check-accepted: st1 st2 st3*"
         </span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">2</span>].result, SolutionCheckResult::Accepted);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">2</span>].subtask_name_pattern, <span class="string">&quot;st3*&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">2</span>].subtask_name_pattern, <span class="string">"st3*"</span>);
         <span class="macro">assert_eq!</span>(
             checks[<span class="number">2</span>].code_span.as_str(),
-            <span class="string">&quot;@check-accepted: st1 st2 st3*&quot;
+            <span class="string">"@check-accepted: st1 st2 st3*"
         </span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">3</span>].result, SolutionCheckResult::PartialScore);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">3</span>].subtask_name_pattern, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">3</span>].code_span.as_str(), <span class="string">&quot;@check-partial-score: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">3</span>].subtask_name_pattern, <span class="string">"asd"</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">3</span>].code_span.as_str(), <span class="string">"@check-partial-score: asd"</span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">4</span>].result, SolutionCheckResult::WrongAnswer);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">4</span>].subtask_name_pattern, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">4</span>].code_span.as_str(), <span class="string">&quot;@check-wrong-answer: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">4</span>].subtask_name_pattern, <span class="string">"asd"</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">4</span>].code_span.as_str(), <span class="string">"@check-wrong-answer: asd"</span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">5</span>].result, SolutionCheckResult::TimeLimitExceeded);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">5</span>].subtask_name_pattern, <span class="string">&quot;asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">5</span>].subtask_name_pattern, <span class="string">"asd"</span>);
         <span class="macro">assert_eq!</span>(
             checks[<span class="number">5</span>].code_span.as_str(),
-            <span class="string">&quot;@check-time-limit-exceeded: asd&quot;
+            <span class="string">"@check-time-limit-exceeded: asd"
         </span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">6</span>].result, SolutionCheckResult::MemoryLimitExceeded);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">6</span>].subtask_name_pattern, <span class="string">&quot;asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">6</span>].subtask_name_pattern, <span class="string">"asd"</span>);
         <span class="macro">assert_eq!</span>(
             checks[<span class="number">6</span>].code_span.as_str(),
-            <span class="string">&quot;@check-memory-limit-exceeded: asd&quot;
+            <span class="string">"@check-memory-limit-exceeded: asd"
         </span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">7</span>].result, SolutionCheckResult::RuntimeError);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">7</span>].subtask_name_pattern, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">7</span>].code_span.as_str(), <span class="string">&quot;@check-runtime-error: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">7</span>].subtask_name_pattern, <span class="string">"asd"</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">7</span>].code_span.as_str(), <span class="string">"@check-runtime-error: asd"</span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">8</span>].result, SolutionCheckResult::Zero);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">8</span>].subtask_name_pattern, <span class="string">&quot;asd&quot;</span>);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">8</span>].code_span.as_str(), <span class="string">&quot;@check-zero: asd&quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">8</span>].subtask_name_pattern, <span class="string">"asd"</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">8</span>].code_span.as_str(), <span class="string">"@check-zero: asd"</span>);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_extract_check_list_invalid_name() {
         <span class="kw">let </span>checks = get_checks(
-            <span class="string">r&quot;
+            <span class="string">r"
            /*
             * @check-lolnope: st1
             * @check
             */
-        &quot;</span>,
+        "</span>,
         )
         .unwrap();
         <span class="macro">assert!</span>(checks.is_empty());
@@ -921,19 +922,19 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_extract_check_list_spaces() {
         <span class="kw">let </span>checks = get_checks(
-            <span class="kw-2">&amp;</span><span class="string">&quot;
+            <span class="kw-2">&amp;</span><span class="string">"
            /*
             * @check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t&lt;space&gt;&lt;space&gt;&lt;space&gt;
             */
-        &quot;</span>.replace(<span class="string">&quot;&lt;space&gt;&quot;</span>, <span class="string">&quot; &quot;</span>),
+        "</span>.replace(<span class="string">"&lt;space&gt;"</span>, <span class="string">" "</span>),
         )
         .unwrap();
         <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].result, SolutionCheckResult::Accepted);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].subtask_name_pattern, <span class="string">&quot;st1&quot;</span>);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].code_span.as_str(), <span class="string">&quot;@check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t   &quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].subtask_name_pattern, <span class="string">"st1"</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">0</span>].code_span.as_str(), <span class="string">"@check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t   "</span>);
         <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].result, SolutionCheckResult::Accepted);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].subtask_name_pattern, <span class="string">&quot;st2&quot;</span>);
-        <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].code_span.as_str(), <span class="string">&quot;@check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t   &quot;</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].subtask_name_pattern, <span class="string">"st2"</span>);
+        <span class="macro">assert_eq!</span>(checks[<span class="number">1</span>].code_span.as_str(), <span class="string">"@check-accepted: \tst1 \t\u{000B}\u{000C}\u{00A0}\u{1680}\u{2000}\u{2001}\u{2002}\u{2003}\u{2004}\u{2005}\u{2006}\u{200A} st2\t  \t   "</span>);
     }
 }
 </code></pre></div></section></main></body></html>

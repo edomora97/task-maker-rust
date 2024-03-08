@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/dag.rs`."><title>dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/dag.rs`."><title>dag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -277,7 +278,7 @@
                 .find(|tc| <span class="macro">matches!</span>(tc.input_generator, InputGenerator::Custom(<span class="kw">_</span>, <span class="kw">_</span>)))
                 .cloned()
                 <span class="comment">// FIXME: in theory we can find the generator and the solution even without a testcase
-                </span>.ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to find a base testcase&quot;</span>))<span class="question-mark">?</span>;
+                </span>.ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Failed to find a base testcase"</span>))<span class="question-mark">?</span>;
             <span class="comment">// Remove all the original testcases.
             </span>task.subtasks.clear();
             <span class="comment">// Create a single subtask with all the testcases of this batch.
@@ -292,7 +293,7 @@
                 <span class="kw">let </span><span class="kw-2">mut </span>input_generator = testcase_template.input_generator.clone();
                 <span class="kw">match </span><span class="kw-2">&amp;mut </span>input_generator {
                     InputGenerator::StaticFile(<span class="kw">_</span>) =&gt; {
-                        <span class="macro">unreachable!</span>(<span class="string">&quot;The generator cannot be StaticFile&quot;</span>)
+                        <span class="macro">unreachable!</span>(<span class="string">"The generator cannot be StaticFile"</span>)
                     }
                     InputGenerator::Custom(<span class="kw">_</span>, args) =&gt; {
                         <span class="kw-2">*</span>args = generator_args.clone();
@@ -309,10 +310,10 @@
                 <span class="kw">let </span>data = TestcaseData {
                     generator_args,
                     seed,
-                    input_path: working_directory.join(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/input.txt&quot;</span>, seed)),
-                    output_path: working_directory.join(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/output.txt&quot;</span>, seed)),
+                    input_path: working_directory.join(<span class="macro">format!</span>(<span class="string">"testcase-{}/input.txt"</span>, seed)),
+                    output_path: working_directory.join(<span class="macro">format!</span>(<span class="string">"testcase-{}/output.txt"</span>, seed)),
                     correct_output_path: working_directory
-                        .join(<span class="macro">format!</span>(<span class="string">&quot;testcase-{}/correct_output.txt&quot;</span>, seed)),
+                        .join(<span class="macro">format!</span>(<span class="string">"testcase-{}/correct_output.txt"</span>, seed)),
                 };
 
                 testcases.insert(testcase_id, testcase);
@@ -320,7 +321,7 @@
             }
             <span class="kw">let </span>subtask = SubtaskInfo {
                 id: <span class="number">0</span>,
-                name: <span class="prelude-val">Some</span>(<span class="macro">format!</span>(<span class="string">&quot;batch-{}&quot;</span>, batch_index)),
+                name: <span class="prelude-val">Some</span>(<span class="macro">format!</span>(<span class="string">"batch-{}"</span>, batch_index)),
                 max_score: <span class="number">100.0</span>,
                 testcases,
                 is_default: <span class="bool-val">false</span>,
@@ -329,17 +330,17 @@
             task.subtasks.insert(<span class="number">0</span>, subtask);
         }
         TaskFormat::Terry(<span class="kw">_</span>) =&gt; {
-            <span class="macro">bail!</span>(<span class="string">&quot;Terry tasks are not currently supported&quot;</span>)
+            <span class="macro">bail!</span>(<span class="string">"Terry tasks are not currently supported"</span>)
         }
     }
     <span class="prelude-val">Ok</span>(batch)
 }
 
-<span class="doccomment">/// Produce the set of arguments of the generator replacing &#39;{}&#39; with the seed.
+<span class="doccomment">/// Produce the set of arguments of the generator replacing '{}' with the seed.
 </span><span class="kw">fn </span>generator_args_for_testcase(args: <span class="kw-2">&amp;</span>[String], seed: i32) -&gt; Vec&lt;String&gt; {
     args.iter()
         .map(|arg| <span class="kw">match </span>arg.as_str() {
-            <span class="string">&quot;{}&quot; </span>=&gt; seed.to_string(),
+            <span class="string">"{}" </span>=&gt; seed.to_string(),
             <span class="kw">_ </span>=&gt; arg.into(),
         })
         .collect()
@@ -349,14 +350,14 @@
 /// stored into a temporary path, and copy them to the task directory only if needed. Furthermore
 /// we want to save also the output produced by the solution to test. Additionally, we want to
 /// change the priorities of the executions, making generations as important as executions (so that
-/// we don&#39;t have to wait for all the generations before starting evaluating).
+/// we don't have to wait for all the generations before starting evaluating).
 </span><span class="kw">pub fn </span>patch_dag(eval: <span class="kw-2">&amp;mut </span>EvaluationData, batch_size: usize, batch: <span class="kw-2">&amp;</span>Batch) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>processed = <span class="number">0</span>;
     <span class="kw">let </span>get_testcase_id = |path: <span class="kw-2">&amp;</span>Path| -&gt; <span class="prelude-ty">Option</span>&lt;TestcaseId&gt; {
-        <span class="kw">let </span>file_name = path.file_name().expect(<span class="string">&quot;Path without a file name&quot;</span>);
+        <span class="kw">let </span>file_name = path.file_name().expect(<span class="string">"Path without a file name"</span>);
         <span class="kw">let </span>file_name = file_name.to_string_lossy().to_string();
-        <span class="kw">let </span>put = file_name.rfind(<span class="string">&quot;put&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">let </span>dot = file_name.rfind(<span class="string">&#39;.&#39;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>put = file_name.rfind(<span class="string">"put"</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>dot = file_name.rfind(<span class="string">'.'</span>)<span class="question-mark">?</span>;
         <span class="attr">#[allow(clippy::string_slice)] </span><span class="comment">// The indexes come from char-aligned functions.
         </span><span class="kw">let </span>number = <span class="kw-2">&amp;</span>file_name[put + <span class="number">3</span>..dot];
         number.parse::&lt;TestcaseId&gt;().ok()
@@ -371,26 +372,26 @@
                     .strip_prefix(<span class="kw-2">&amp;</span>eval.task_root)
                     .with_context(|| {
                         <span class="macro">format!</span>(
-                            <span class="string">&quot;Found output file outside the task: {}&quot;</span>,
+                            <span class="string">"Found output file outside the task: {}"</span>,
                             write_to.dest.display()
                         )
                     })<span class="question-mark">?</span>;
                 <span class="comment">// This file is neither an input nor an output.
-                </span><span class="kw">if </span>!dest.starts_with(<span class="string">&quot;input&quot;</span>) &amp;&amp; !dest.starts_with(<span class="string">&quot;output&quot;</span>) {
+                </span><span class="kw">if </span>!dest.starts_with(<span class="string">"input"</span>) &amp;&amp; !dest.starts_with(<span class="string">"output"</span>) {
                     <span class="kw">continue</span>;
                 }
                 <span class="kw">let </span>testcase_id = get_testcase_id(dest)
-                    .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot find the testcase id of {}&quot;</span>, dest.display()))<span class="question-mark">?</span>;
+                    .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Cannot find the testcase id of {}"</span>, dest.display()))<span class="question-mark">?</span>;
                 <span class="kw">let </span>testcase = batch.testcases.get(<span class="kw-2">&amp;</span>testcase_id).ok_or_else(|| {
                     <span class="macro">anyhow!</span>(
-                        <span class="string">&quot;Testcase {} is not present in the batch (from {})&quot;</span>,
+                        <span class="string">"Testcase {} is not present in the batch (from {})"</span>,
                         testcase_id,
                         dest.display()
                     )
                 })<span class="question-mark">?</span>;
-                <span class="kw">if </span>dest.starts_with(<span class="string">&quot;input&quot;</span>) {
+                <span class="kw">if </span>dest.starts_with(<span class="string">"input"</span>) {
                     write_to.dest = testcase.input_path.clone();
-                } <span class="kw">else if </span>dest.starts_with(<span class="string">&quot;output&quot;</span>) {
+                } <span class="kw">else if </span>dest.starts_with(<span class="string">"output"</span>) {
                     write_to.dest = testcase.correct_output_path.clone();
                 }
                 <span class="comment">// Always write the file.
@@ -400,8 +401,8 @@
     }
 
     <span class="kw">let </span>get_testcase_id = |description: <span class="kw-2">&amp;</span>str| -&gt; <span class="prelude-ty">Option</span>&lt;TestcaseId&gt; {
-        <span class="kw">let </span>start = description.rfind(<span class="string">&quot;testcase &quot;</span>)<span class="question-mark">? </span>+ <span class="string">&quot;testcase &quot;</span>.len();
-        <span class="kw">let </span>end = description.rfind(<span class="string">&quot;, &quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>start = description.rfind(<span class="string">"testcase "</span>)<span class="question-mark">? </span>+ <span class="string">"testcase "</span>.len();
+        <span class="kw">let </span>end = description.rfind(<span class="string">", "</span>)<span class="question-mark">?</span>;
         <span class="attr">#[allow(clippy::string_slice)] </span><span class="comment">// The indexes come from char-aligned functions.
         </span>description[start..end].parse::&lt;TestcaseId&gt;().ok()
     };
@@ -410,28 +411,28 @@
     <span class="kw">for </span>group <span class="kw">in </span>eval.dag.data.execution_groups.values_mut() {
         <span class="kw">for </span>exec <span class="kw">in </span>group.executions.iter_mut() {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(tag) = <span class="kw-2">&amp;mut </span>exec.tag {
-                <span class="kw">if </span>tag.name == <span class="string">&quot;evaluation&quot; </span>{
+                <span class="kw">if </span>tag.name == <span class="string">"evaluation" </span>{
                     <span class="comment">// The priority of generation is GENERATION_PRIORITY - testcase id.
                     </span>exec.priority = GENERATION_PRIORITY + <span class="number">1</span>;
                     processed += <span class="number">1</span>;
                     <span class="kw">let </span>stdout = exec.stdout.as_ref();
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(stdout) = stdout {
                         <span class="kw">let </span>testcase_id = get_testcase_id(<span class="kw-2">&amp;</span>exec.description).ok_or_else(|| {
-                            <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to find testcase id from &#39;{}&#39;&quot;</span>, exec.description)
+                            <span class="macro">anyhow!</span>(<span class="string">"Failed to find testcase id from '{}'"</span>, exec.description)
                         })<span class="question-mark">?</span>;
                         <span class="kw">let </span>testcase = batch.testcases.get(<span class="kw-2">&amp;</span>testcase_id).ok_or_else(|| {
                             <span class="macro">anyhow!</span>(
-                                <span class="string">&quot;Testcase {} is not present in the batch (from {})&quot;</span>,
+                                <span class="string">"Testcase {} is not present in the batch (from {})"</span>,
                                 testcase_id,
                                 exec.description
                             )
                         })<span class="question-mark">?</span>;
                         new_file_callbacks.push((stdout.uuid, <span class="kw-2">&amp;</span>testcase.output_path));
                     } <span class="kw">else </span>{
-                        <span class="macro">warn!</span>(<span class="string">&quot;Execution &#39;{}&#39; doesn&#39;t capture stdout&quot;</span>, exec.description);
+                        <span class="macro">warn!</span>(<span class="string">"Execution '{}' doesn't capture stdout"</span>, exec.description);
                     }
                 }
-                <span class="kw">if </span>tag.name == <span class="string">&quot;checking&quot; </span>{
+                <span class="kw">if </span>tag.name == <span class="string">"checking" </span>{
                     <span class="comment">// The priority of the checker is GENERATION_PRIORITY - testcase id.
                     </span>exec.priority = GENERATION_PRIORITY + <span class="number">1</span>;
                     processed += <span class="number">1</span>;
@@ -445,7 +446,7 @@
 
     <span class="kw">if </span>processed != batch_size * <span class="number">2 </span>{
         <span class="macro">bail!</span>(
-            <span class="string">&quot;Failed to find the {} executions: {} found&quot;</span>,
+            <span class="string">"Failed to find the {} executions: {} found"</span>,
             batch_size * <span class="number">2</span>,
             processed
         );

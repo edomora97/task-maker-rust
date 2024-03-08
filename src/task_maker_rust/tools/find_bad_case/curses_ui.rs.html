@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/curses_ui.rs`."><title>curses_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/find_bad_case/curses_ui.rs`."><title>curses_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -211,47 +212,47 @@
 
         <span class="kw">let </span>text = <span class="macro">vec!</span>[
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;Solution:        &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"Solution:        "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.solution.to_string_lossy().to_string()),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;Generator args:  &quot;</span>, <span class="kw-2">*</span>BOLD),
-                Span::raw(state.generator_args.iter().join(<span class="string">&quot; &quot;</span>)),
+                Span::styled(<span class="string">"Generator args:  "</span>, <span class="kw-2">*</span>BOLD),
+                Span::raw(state.generator_args.iter().join(<span class="string">" "</span>)),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;Batch size:      &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"Batch size:      "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.batch_size.to_string()),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;Batch index:     &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"Batch index:     "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(shared.batch_index.to_string()),
             ]),
-            Spans(<span class="macro">vec!</span>[Span::styled(<span class="string">&quot;Progress:&quot;</span>, <span class="kw-2">*</span>BLUE)]),
+            Spans(<span class="macro">vec!</span>[Span::styled(<span class="string">"Progress:"</span>, <span class="kw-2">*</span>BLUE)]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;    Generated:   &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"    Generated:   "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.progress.inputs_generated.to_string()),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;    Solved:      &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"    Solved:      "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.progress.inputs_solved.to_string()),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;    Average gen: &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"    Average gen: "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(<span class="macro">format!</span>(
-                    <span class="string">&quot;{:.3}s\n&quot;</span>,
+                    <span class="string">"{:.3}s\n"</span>,
                     state.progress.generator_time_sum
                         / (state.progress.inputs_generated.max(<span class="number">1</span>) <span class="kw">as </span>f64)
                 )),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;    Average sol: &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"    Average sol: "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(<span class="macro">format!</span>(
-                    <span class="string">&quot;{:.3}s&quot;</span>,
+                    <span class="string">"{:.3}s"</span>,
                     state.progress.solution_time_sum / (state.progress.inputs_solved.max(<span class="number">1</span>) <span class="kw">as </span>f64)
                 )),
             ]),
             Spans(<span class="macro">vec!</span>[
-                Span::styled(<span class="string">&quot;    Errors:      &quot;</span>, <span class="kw-2">*</span>BOLD),
+                Span::styled(<span class="string">"    Errors:      "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(errors.to_string()),
             ]),
         ];
@@ -266,7 +267,7 @@
             <span class="kw">let </span><span class="kw-2">mut </span>line = Vec::new();
             <span class="kw">let </span>batch_index = state.batches.len() - <span class="number">1 </span>- i;
             <span class="kw">let </span>batch = <span class="kw-2">&amp;</span>state.batches[state.batches.len() - <span class="number">1 </span>- i];
-            line.push(Span::raw(<span class="macro">format!</span>(<span class="string">&quot;Batch {:&gt;3}: &quot;</span>, batch_index)));
+            line.push(Span::raw(<span class="macro">format!</span>(<span class="string">"Batch {:&gt;3}: "</span>, batch_index)));
             line.extend(
                 batch
                     .testcase_status
@@ -275,24 +276,24 @@
             );
             text.push(line.into());
         }
-        render_block(f, rect, <span class="string">&quot;Progress&quot;</span>);
+        render_block(f, rect, <span class="string">"Progress"</span>);
         <span class="kw">let </span>paragraph = Paragraph::new(text).wrap(Wrap { trim: <span class="bool-val">true </span>});
         f.render_widget(paragraph, inner_block(rect));
     }
 
     <span class="kw">fn </span>testcase_status_to_text(status: <span class="kw-2">&amp;</span>TestcaseStatus) -&gt; Span {
         <span class="kw">match </span>status {
-            TestcaseStatus::Pending =&gt; Span::raw(<span class="string">&quot;.&quot;</span>),
-            TestcaseStatus::Generating =&gt; Span::raw(<span class="string">&quot;g&quot;</span>),
-            TestcaseStatus::Generated =&gt; Span::raw(<span class="string">&quot;G&quot;</span>),
-            TestcaseStatus::Validating =&gt; Span::raw(<span class="string">&quot;v&quot;</span>),
-            TestcaseStatus::Validated =&gt; Span::raw(<span class="string">&quot;V&quot;</span>),
-            TestcaseStatus::Solving =&gt; Span::raw(<span class="string">&quot;s&quot;</span>),
-            TestcaseStatus::Solved =&gt; Span::raw(<span class="string">&quot;S&quot;</span>),
-            TestcaseStatus::Checking =&gt; Span::raw(<span class="string">&quot;c&quot;</span>),
-            TestcaseStatus::Success =&gt; Span::styled(<span class="string">&quot;✓&quot;</span>, <span class="kw-2">*</span>GREEN),
-            TestcaseStatus::Failed(<span class="kw">_</span>) =&gt; Span::styled(<span class="string">&quot;✕&quot;</span>, <span class="kw-2">*</span>RED),
-            TestcaseStatus::Error =&gt; Span::styled(<span class="string">&quot;!&quot;</span>, <span class="kw-2">*</span>RED),
+            TestcaseStatus::Pending =&gt; Span::raw(<span class="string">"."</span>),
+            TestcaseStatus::Generating =&gt; Span::raw(<span class="string">"g"</span>),
+            TestcaseStatus::Generated =&gt; Span::raw(<span class="string">"G"</span>),
+            TestcaseStatus::Validating =&gt; Span::raw(<span class="string">"v"</span>),
+            TestcaseStatus::Validated =&gt; Span::raw(<span class="string">"V"</span>),
+            TestcaseStatus::Solving =&gt; Span::raw(<span class="string">"s"</span>),
+            TestcaseStatus::Solved =&gt; Span::raw(<span class="string">"S"</span>),
+            TestcaseStatus::Checking =&gt; Span::raw(<span class="string">"c"</span>),
+            TestcaseStatus::Success =&gt; Span::styled(<span class="string">"✓"</span>, <span class="kw-2">*</span>GREEN),
+            TestcaseStatus::Failed(<span class="kw">_</span>) =&gt; Span::styled(<span class="string">"✕"</span>, <span class="kw-2">*</span>RED),
+            TestcaseStatus::Error =&gt; Span::styled(<span class="string">"!"</span>, <span class="kw-2">*</span>RED),
         }
     }
 }

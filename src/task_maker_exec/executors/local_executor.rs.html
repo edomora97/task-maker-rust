@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/executors/local_executor.rs`."><title>local_executor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/executors/local_executor.rs`."><title>local_executor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -164,7 +165,7 @@
         sandbox_runner: R,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;LocalExecutor, Error&gt;
     <span class="kw">where
-        </span>R: SandboxRunner + <span class="lifetime">&#39;static</span>,
+        </span>R: SandboxRunner + <span class="lifetime">'static</span>,
     {
         <span class="kw">let </span>sandbox_path = sandbox_path.into();
         <span class="kw">let </span>(executor_tx, executor_rx) = channel();
@@ -173,29 +174,29 @@
         <span class="comment">// share the runner for all the workers
         </span><span class="kw">let </span>sandbox_runner = Arc::new(sandbox_runner);
 
-        <span class="macro">info!</span>(<span class="string">&quot;Spawning {} workers&quot;</span>, num_workers);
+        <span class="macro">info!</span>(<span class="string">"Spawning {} workers"</span>, num_workers);
         <span class="kw">let </span><span class="kw-2">mut </span>workers = <span class="macro">vec!</span>[];
         <span class="comment">// spawn the workers and connect them to the executor
         </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..num_workers {
             <span class="kw">let </span>runner = sandbox_runner.clone();
             <span class="kw">let </span>(worker, conn) = Worker::new(
-                <span class="macro">format!</span>(<span class="string">&quot;Local worker {}&quot;</span>, i),
+                <span class="macro">format!</span>(<span class="string">"Local worker {}"</span>, i),
                 file_store.clone(),
                 <span class="attr">#[allow(clippy::needless_borrow)]
                 </span><span class="kw-2">&amp;</span>sandbox_path,
                 runner,
             )
-            .context(<span class="string">&quot;Failed to start local worker&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to start local worker"</span>)<span class="question-mark">?</span>;
             executor_tx
                 .send(ExecutorInMessage::WorkerConnected { worker: conn })
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send WorkerConnected: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
-            <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">&quot;Worker {}&quot;</span>, worker);
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Failed to send WorkerConnected: {:?}"</span>, e))<span class="question-mark">?</span>;
+            <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">"Worker {}"</span>, worker);
             workers.push(
                 thread::Builder::new()
                     .name(worker_name.clone())
                     .spawn(<span class="kw">move </span>|| worker.work())
                     .with_context(|| {
-                        <span class="macro">format!</span>(<span class="string">&quot;Failed to start worker thread named &#39;{}&#39;&quot;</span>, <span class="kw-2">&amp;</span>worker_name)
+                        <span class="macro">format!</span>(<span class="string">"Failed to start worker thread named '{}'"</span>, <span class="kw-2">&amp;</span>worker_name)
                     })<span class="question-mark">?</span>,
             );
         }
@@ -224,26 +225,26 @@
             .send(ExecutorInMessage::ClientConnected {
                 client: ClientInfo {
                     uuid: Uuid::new_v4(),
-                    name: <span class="string">&quot;Local client&quot;</span>.to_string(),
+                    name: <span class="string">"Local client"</span>.to_string(),
                 },
                 sender,
                 receiver,
             })
-            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Failed to send ClientConnected: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Failed to send ClientConnected: {:?}"</span>, e))<span class="question-mark">?</span>;
 
         <span class="comment">// no new client/worker can connect, make the executor stop accepting connections
         </span>drop(<span class="self">self</span>.executor_tx);
         <span class="comment">// this method will block until all the operations are done
         </span><span class="self">self</span>.executor
             .run()
-            .context(<span class="string">&quot;Local executor failed to evaluate&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Local executor failed to evaluate"</span>)<span class="question-mark">?</span>;
 
         <span class="comment">// since the executor is going down the worker are disconnecting
         </span><span class="kw">for </span>worker <span class="kw">in </span><span class="self">self</span>.workers.into_iter() {
             worker
                 .join()
-                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Worker panicked: {:?}&quot;</span>, e))<span class="question-mark">?
-                </span>.context(<span class="string">&quot;Worker failed&quot;</span>)<span class="question-mark">?</span>;
+                .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Worker panicked: {:?}"</span>, e))<span class="question-mark">?
+                </span>.context(<span class="string">"Worker failed"</span>)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }

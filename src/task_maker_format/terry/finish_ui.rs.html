@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/finish_ui.rs`."><title>finish_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/terry/finish_ui.rs`."><title>finish_ui.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -257,41 +258,41 @@
 
 <span class="kw">impl </span>FinishUI {
     <span class="kw">fn </span>print_task_info(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Task:      &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{} ({})&quot;</span>, state.task.description, state.task.name);
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Path:      &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, state.task.path.display());
-        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;Max score: &quot;</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, state.task.max_score);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Task:      "</span>);
+        <span class="macro">println!</span>(<span class="string">"{} ({})"</span>, state.task.description, state.task.name);
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Path:      "</span>);
+        <span class="macro">println!</span>(<span class="string">"{}"</span>, state.task.path.display());
+        <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"Max score: "</span>);
+        <span class="macro">println!</span>(<span class="string">"{}"</span>, state.task.max_score);
     }
 
     <span class="kw">fn </span>print_evaluations(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Evaluations&quot;</span>);
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Evaluations"</span>);
         <span class="kw">for </span>(path, solution) <span class="kw">in </span>state.solutions.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
-            <span class="kw">let </span>name = path.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>);
-            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">&quot;{} &quot;</span>, Path::new(name).display());
+            <span class="kw">let </span>name = path.file_name().expect(<span class="string">"Invalid file name"</span>);
+            <span class="macro">cwrite!</span>(<span class="self">self</span>, BOLD, <span class="string">"{} "</span>, Path::new(name).display());
             <span class="kw">match </span><span class="kw-2">&amp;</span>solution.outcome {
                 <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(outcome)) =&gt; {
                     <span class="kw">let </span>score = outcome.score * state.task.max_score;
                     <span class="kw">if </span><span class="macro">abs_diff_eq!</span>(outcome.score, <span class="number">0.0</span>) {
-                        <span class="macro">cwriteln!</span>(<span class="self">self</span>, RED, <span class="string">&quot;{:.2} / {:.2}&quot;</span>, score, state.task.max_score);
+                        <span class="macro">cwriteln!</span>(<span class="self">self</span>, RED, <span class="string">"{:.2} / {:.2}"</span>, score, state.task.max_score);
                     } <span class="kw">else if </span><span class="macro">abs_diff_eq!</span>(outcome.score, <span class="number">1.0</span>) {
-                        <span class="macro">cwriteln!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;{:.2} / {:.2}&quot;</span>, score, state.task.max_score);
+                        <span class="macro">cwriteln!</span>(<span class="self">self</span>, GREEN, <span class="string">"{:.2} / {:.2}"</span>, score, state.task.max_score);
                     } <span class="kw">else </span>{
-                        <span class="macro">cwriteln!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;{:.2} / {:.2}&quot;</span>, score, state.task.max_score);
+                        <span class="macro">cwriteln!</span>(<span class="self">self</span>, YELLOW, <span class="string">"{:.2} / {:.2}"</span>, score, state.task.max_score);
                     }
                 }
                 <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
                     <span class="macro">println!</span>();
-                    <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;Fail: &quot;</span>);
-                    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, e);
+                    <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"Fail: "</span>);
+                    <span class="macro">println!</span>(<span class="string">"{}"</span>, e);
                 }
                 <span class="prelude-val">None </span>=&gt; {
                     <span class="macro">println!</span>();
                 }
             }
             <span class="kw">if let </span><span class="prelude-val">Some</span>(seed) = solution.seed {
-                <span class="macro">println!</span>(<span class="string">&quot;      Seed: {}&quot;</span>, seed);
+                <span class="macro">println!</span>(<span class="string">"      Seed: {}"</span>, seed);
             }
 
             <span class="kw">let </span>print_result = |result: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;ExecutionResult&gt;| {
@@ -299,36 +300,36 @@
                     FinishUIUtils::print_time_memory(<span class="kw-2">&amp;</span>result.resources);
                     <span class="kw">if let </span>ExecutionStatus::Success = result.status {
                     } <span class="kw">else </span>{
-                        <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">" | "</span>);
                         FinishUIUtils::print_fail_execution_status(<span class="kw-2">&amp;</span>result.status);
                     }
                     <span class="kw">if </span>result.was_cached {
-                        <span class="macro">print!</span>(<span class="string">&quot; (cached)&quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">" (cached)"</span>);
                     }
                     <span class="kw">if </span>result.was_killed {
-                        <span class="macro">print!</span>(<span class="string">&quot; (killed)&quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">" (killed)"</span>);
                     }
                 } <span class="kw">else </span>{
-                    <span class="macro">print!</span>(<span class="string">&quot;unknown&quot;</span>);
+                    <span class="macro">print!</span>(<span class="string">"unknown"</span>);
                 }
             };
 
-            <span class="macro">print!</span>(<span class="string">&quot;Generation: &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">"Generation: "</span>);
             print_result(<span class="kw-2">&amp;</span>solution.generator_result);
             <span class="macro">println!</span>();
             <span class="self">self</span>.print_stderr(<span class="kw-2">&amp;</span>solution.generator_result);
 
-            <span class="macro">print!</span>(<span class="string">&quot;Validation: &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">"Validation: "</span>);
             print_result(<span class="kw-2">&amp;</span>solution.validator_result);
             <span class="macro">println!</span>();
             <span class="self">self</span>.print_stderr(<span class="kw-2">&amp;</span>solution.validator_result);
 
-            <span class="macro">print!</span>(<span class="string">&quot;Evaluation: &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">"Evaluation: "</span>);
             print_result(<span class="kw-2">&amp;</span>solution.solution_result);
             <span class="macro">println!</span>();
             <span class="self">self</span>.print_stderr(<span class="kw-2">&amp;</span>solution.solution_result);
 
-            <span class="macro">print!</span>(<span class="string">&quot;   Checker: &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">"   Checker: "</span>);
             print_result(<span class="kw-2">&amp;</span>solution.checker_result);
             <span class="macro">println!</span>();
             <span class="self">self</span>.print_stderr(<span class="kw-2">&amp;</span>solution.checker_result);
@@ -346,8 +347,8 @@
                 <span class="kw">let </span>content = String::from_utf8_lossy(content);
                 <span class="kw">let </span>content = content.trim();
                 <span class="kw">if </span>!content.is_empty() {
-                    <span class="macro">cwriteln!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;Stderr:&quot;</span>);
-                    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, content);
+                    <span class="macro">cwriteln!</span>(<span class="self">self</span>, YELLOW, <span class="string">"Stderr:"</span>);
+                    <span class="macro">println!</span>(<span class="string">"{}"</span>, content);
                 }
             }
         }
@@ -366,23 +367,23 @@
             .zip(outcome.feedback.cases.iter())
             .enumerate()
         {
-            <span class="macro">print!</span>(<span class="string">&quot;#{:&lt;3}  &quot;</span>, index);
+            <span class="macro">print!</span>(<span class="string">"#{:&lt;3}  "</span>, index);
             <span class="kw">match </span>val.status {
-                CaseStatus::Missing =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;Missing&quot;</span>),
-                CaseStatus::Parsed =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot; Valid &quot;</span>),
-                CaseStatus::Invalid =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;Invalid&quot;</span>),
+                CaseStatus::Missing =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"Missing"</span>),
+                CaseStatus::Parsed =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">" Valid "</span>),
+                CaseStatus::Invalid =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"Invalid"</span>),
             }
-            <span class="macro">print!</span>(<span class="string">&quot; | &quot;</span>);
+            <span class="macro">print!</span>(<span class="string">" | "</span>);
             <span class="kw">if </span>feedback.correct {
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;Correct&quot;</span>);
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"Correct"</span>);
             } <span class="kw">else </span>{
-                <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;Wrong  &quot;</span>);
+                <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"Wrong  "</span>);
             }
             <span class="kw">if let </span><span class="prelude-val">Some</span>(message) = <span class="kw-2">&amp;</span>val.message {
-                <span class="macro">print!</span>(<span class="string">&quot; | {}&quot;</span>, message);
+                <span class="macro">print!</span>(<span class="string">" | {}"</span>, message);
             }
             <span class="kw">if let </span><span class="prelude-val">Some</span>(message) = <span class="kw-2">&amp;</span>feedback.message {
-                <span class="macro">print!</span>(<span class="string">&quot; | {}&quot;</span>, message);
+                <span class="macro">print!</span>(<span class="string">" | {}"</span>, message);
             }
             <span class="macro">println!</span>();
         }
@@ -390,23 +391,23 @@
 
     <span class="doccomment">/// Print the summary of the solution results.
     </span><span class="kw">fn </span>print_summary(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;</span>UIState) {
-        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">&quot;Summary&quot;</span>);
+        <span class="macro">cwriteln!</span>(<span class="self">self</span>, BLUE, <span class="string">"Summary"</span>);
         <span class="kw">let </span>max_len = FinishUIUtils::get_max_len(<span class="kw-2">&amp;</span>state.solutions);
         <span class="kw">for </span>(path, solution) <span class="kw">in </span>state.solutions.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
             <span class="macro">print!</span>(
-                <span class="string">&quot;{:&gt;width$} &quot;</span>,
-                Path::new(path.file_name().expect(<span class="string">&quot;Invalid file name&quot;</span>)).display(),
+                <span class="string">"{:&gt;width$} "</span>,
+                Path::new(path.file_name().expect(<span class="string">"Invalid file name"</span>)).display(),
                 width = max_len
             );
             <span class="kw">match </span><span class="kw-2">&amp;</span>solution.outcome {
                 <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(outcome)) =&gt; {
                     <span class="kw">let </span>score = outcome.score * state.task.max_score;
                     <span class="kw">if </span><span class="macro">abs_diff_eq!</span>(outcome.score, <span class="number">1.0</span>) {
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot;{:&gt;3}&quot;</span>, score.floor());
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">"{:&gt;3}"</span>, score.floor());
                     } <span class="kw">else if </span><span class="macro">abs_diff_eq!</span>(outcome.score, <span class="number">0.0</span>) {
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot;{:&gt;3}&quot;</span>, score.floor());
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">"{:&gt;3}"</span>, score.floor());
                     } <span class="kw">else </span>{
-                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">&quot;{:&gt;3}&quot;</span>, score.floor());
+                        <span class="macro">cwrite!</span>(<span class="self">self</span>, YELLOW, <span class="string">"{:&gt;3}"</span>, score.floor());
                     }
                     <span class="kw">for </span>(val, feed) <span class="kw">in </span>outcome
                         .validation
@@ -415,26 +416,26 @@
                         .zip(outcome.feedback.cases.iter())
                     {
                         <span class="kw">match </span>val.status {
-                            CaseStatus::Missing =&gt; <span class="macro">print!</span>(<span class="string">&quot; m&quot;</span>),
+                            CaseStatus::Missing =&gt; <span class="macro">print!</span>(<span class="string">" m"</span>),
                             CaseStatus::Parsed =&gt; {
                                 <span class="kw">if </span>feed.correct {
-                                    <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">&quot; c&quot;</span>);
+                                    <span class="macro">cwrite!</span>(<span class="self">self</span>, GREEN, <span class="string">" c"</span>);
                                 } <span class="kw">else </span>{
-                                    <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot; w&quot;</span>);
+                                    <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">" w"</span>);
                                 }
                             }
-                            CaseStatus::Invalid =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">&quot; i&quot;</span>),
+                            CaseStatus::Invalid =&gt; <span class="macro">cwrite!</span>(<span class="self">self</span>, RED, <span class="string">" i"</span>),
                         }
                     }
                 }
                 <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
-                    <span class="macro">print!</span>(<span class="string">&quot;    {}&quot;</span>, e);
+                    <span class="macro">print!</span>(<span class="string">"    {}"</span>, e);
                 }
                 <span class="prelude-val">None </span>=&gt; {
                     <span class="kw">if let </span>SolutionStatus::Failed(e) = <span class="kw-2">&amp;</span>solution.status {
-                        <span class="macro">print!</span>(<span class="string">&quot;    {}&quot;</span>, e);
+                        <span class="macro">print!</span>(<span class="string">"    {}"</span>, e);
                     } <span class="kw">else </span>{
-                        <span class="macro">print!</span>(<span class="string">&quot;    Failed&quot;</span>);
+                        <span class="macro">print!</span>(<span class="string">"    Failed"</span>);
                     }
                 }
             }

@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/source_file.rs`."><title>source_file.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-lang/src/source_file.rs`."><title>source_file.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_lang" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -418,8 +419,8 @@
     /// dependencies from the command line args of the executable (in case of relative paths).
     </span><span class="kw">pub </span>base_path: PathBuf,
     <span class="doccomment">/// Language of the source file.
-    </span><span class="attr">#[serde(serialize_with = <span class="string">&quot;language_serializer&quot;</span>)]
-    #[serde(deserialize_with = <span class="string">&quot;language_deserializer&quot;</span>)]
+    </span><span class="attr">#[serde(serialize_with = <span class="string">"language_serializer"</span>)]
+    #[serde(deserialize_with = <span class="string">"language_deserializer"</span>)]
     </span><span class="kw">pub </span>language: Arc&lt;<span class="kw">dyn </span>Language&gt;,
     <span class="doccomment">/// Handle to the executable after the compilation/provided file.
     </span><span class="kw">pub </span>executable: Arc&lt;Mutex&lt;<span class="prelude-ty">Option</span>&lt;File&gt;&gt;&gt;,
@@ -493,17 +494,17 @@
     /// # use std::path::PathBuf;
     ///
     /// # let tempdir = TempDir::new().unwrap();
-    /// # std::fs::write(tempdir.path().join(&quot;test.cpp&quot;), &quot;foobar.cpp&quot;).unwrap();
-    /// # let path = tempdir.path().join(&quot;test.cpp&quot;);
+    /// # std::fs::write(tempdir.path().join("test.cpp"), "foobar.cpp").unwrap();
+    /// # let path = tempdir.path().join("test.cpp");
     /// let mut dag = ExecutionDAG::new();
-    /// let mut source = SourceFile::new(path /* test.cpp */, &quot;&quot;, None, None::&lt;PathBuf&gt;).unwrap();
+    /// let mut source = SourceFile::new(path /* test.cpp */, "", None, None::&lt;PathBuf&gt;).unwrap();
     ///
-    /// let (comp, exec) = source.execute(&amp;mut dag, &quot;Execution&quot;, vec![&quot;arg1&quot;.into()]).unwrap();
+    /// let (comp, exec) = source.execute(&amp;mut dag, "Execution", vec!["arg1".into()]).unwrap();
     /// assert!(comp.is_some());
     /// // customize the execution...
     /// dag.add_execution(exec);
     ///
-    /// let (comp, exec) = source.execute(&amp;mut dag, &quot;Execution 2&quot;, vec![&quot;arg1&quot;.into()]).unwrap();
+    /// let (comp, exec) = source.execute(&amp;mut dag, "Execution 2", vec!["arg1".into()]).unwrap();
     /// assert!(comp.is_none());
     /// dag.add_execution(exec);
     /// ```
@@ -517,12 +518,12 @@
     /// # use std::path::PathBuf;
     ///
     /// # let tempdir = TempDir::new().unwrap();
-    /// # std::fs::write(tempdir.path().join(&quot;test.py&quot;), &quot;foobar.cpp&quot;).unwrap();
-    /// # let path = tempdir.path().join(&quot;test.py&quot;);
+    /// # std::fs::write(tempdir.path().join("test.py"), "foobar.cpp").unwrap();
+    /// # let path = tempdir.path().join("test.py");
     /// let mut dag = ExecutionDAG::new();
-    /// let mut source = SourceFile::new(path /* test.py */, &quot;&quot;, None, None::&lt;PathBuf&gt;).unwrap();
+    /// let mut source = SourceFile::new(path /* test.py */, "", None, None::&lt;PathBuf&gt;).unwrap();
     ///
-    /// let (comp, exec) = source.execute(&amp;mut dag, &quot;Execution&quot;, vec![&quot;arg1&quot;.into()]).unwrap();
+    /// let (comp, exec) = source.execute(&amp;mut dag, "Execution", vec!["arg1".into()]).unwrap();
     /// assert!(comp.is_none());
     /// // customize the execution...
     /// dag.add_execution(exec);
@@ -533,7 +534,7 @@
         description: S,
         args: Vec&lt;String&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(<span class="prelude-ty">Option</span>&lt;ExecutionUuid&gt;, Execution), Error&gt; {
-        <span class="kw">let </span>comp = <span class="self">self</span>.prepare(dag).context(<span class="string">&quot;Failed to prepare source file&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>comp = <span class="self">self</span>.prepare(dag).context(<span class="string">"Failed to prepare source file"</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>write_to = <span class="self">self</span>.write_bin_to.as_deref();
         <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(
             description.as_ref(),
@@ -543,12 +544,12 @@
             <span class="kw">let </span>path = <span class="self">self</span>.base_path.join(arg);
             <span class="kw">if </span>path.exists() {
                 <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(
-                    <span class="string">&quot;Command line dependency {:?} of {:?}&quot;</span>,
+                    <span class="string">"Command line dependency {:?} of {:?}"</span>,
                     path, <span class="self">self</span>.path
                 ));
                 exec.input(<span class="kw-2">&amp;</span>file, arg, <span class="bool-val">false</span>);
                 dag.provide_file(file, path)
-                    .context(<span class="string">&quot;Failed to provide input file from arg&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to provide input file from arg"</span>)<span class="question-mark">?</span>;
             }
         }
         exec.args(<span class="self">self</span>.language.runtime_args(<span class="kw-2">&amp;</span><span class="self">self</span>.path, write_to, args));
@@ -560,20 +561,20 @@
         <span class="kw">for </span>dep <span class="kw">in </span><span class="self">self</span>.language.runtime_dependencies(<span class="kw-2">&amp;</span><span class="self">self</span>.path) {
             exec.input(<span class="kw-2">&amp;</span>dep.file, <span class="kw-2">&amp;</span>dep.sandbox_path, dep.executable);
             dag.provide_file(dep.file, <span class="kw-2">&amp;</span>dep.local_path)
-                .context(<span class="string">&quot;Failed to provide dependency&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide dependency"</span>)<span class="question-mark">?</span>;
         }
         <span class="kw">if let </span><span class="prelude-val">Some</span>(grader_map) = <span class="self">self</span>.grader_map.as_ref() {
             <span class="kw">for </span>dep <span class="kw">in </span>grader_map.get_runtime_deps(<span class="self">self</span>.language.as_ref()) {
                 exec.input(<span class="kw-2">&amp;</span>dep.file, <span class="kw-2">&amp;</span>dep.sandbox_path, dep.executable);
                 exec.args = <span class="self">self</span>.language.runtime_add_file(exec.args, <span class="kw-2">&amp;</span>dep.sandbox_path);
                 dag.provide_file(dep.file, <span class="kw-2">&amp;</span>dep.local_path)
-                    .context(<span class="string">&quot;Failed to provide grader dependency&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to provide grader dependency"</span>)<span class="question-mark">?</span>;
             }
         }
         <span class="self">self</span>.language.custom_limits(exec.limits_mut());
         <span class="comment">// some languages (e.g. Python) may behave strangely with LC_ALL=C
-        </span>exec.copy_env(<span class="string">&quot;LANG&quot;</span>);
-        exec.copy_env(<span class="string">&quot;LC_ALL&quot;</span>);
+        </span>exec.copy_env(<span class="string">"LANG"</span>);
+        exec.copy_env(<span class="string">"LC_ALL"</span>);
         <span class="prelude-val">Ok</span>((comp, exec))
     }
 
@@ -584,8 +585,8 @@
 
     <span class="doccomment">/// Compile the source file to a statically-linked binary.
     </span><span class="kw">pub fn </span>link_static(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="comment">// MacOS doesn&#39;t support statically linked binaries
-        </span><span class="kw">if </span><span class="macro">cfg!</span>(not(target_os = <span class="string">&quot;macos&quot;</span>)) {
+        <span class="comment">// MacOS doesn't support statically linked binaries
+        </span><span class="kw">if </span><span class="macro">cfg!</span>(not(target_os = <span class="string">"macos"</span>)) {
             <span class="self">self</span>.link_static = <span class="bool-val">true</span>;
         }
     }
@@ -596,7 +597,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         dag: <span class="kw-2">&amp;mut </span>ExecutionDAG,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(FileUuid, <span class="prelude-ty">Option</span>&lt;ExecutionUuid&gt;), Error&gt; {
-        <span class="kw">let </span>comp = <span class="self">self</span>.prepare(dag).context(<span class="string">&quot;Failed to prepare source file&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>comp = <span class="self">self</span>.prepare(dag).context(<span class="string">"Failed to prepare source file"</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>exe = <span class="self">self</span>.executable.lock().unwrap().as_ref().unwrap().uuid;
         <span class="prelude-val">Ok</span>((exe, comp))
     }
@@ -607,14 +608,14 @@
     /// use task_maker_lang::SourceFile;
     /// use std::path::PathBuf;
     ///
-    /// let source = SourceFile::new(&quot;path/to/sourcefile.cpp&quot;, &quot;&quot;, None, None::&lt;PathBuf&gt;).unwrap();
+    /// let source = SourceFile::new("path/to/sourcefile.cpp", "", None, None::&lt;PathBuf&gt;).unwrap();
     ///
-    /// assert_eq!(source.name(), &quot;sourcefile.cpp&quot;);
+    /// assert_eq!(source.name(), "sourcefile.cpp");
     /// ```
     </span><span class="kw">pub fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
         <span class="self">self</span>.path
             .file_name()
-            .expect(<span class="string">&quot;Invalid file name&quot;</span>)
+            .expect(<span class="string">"Invalid file name"</span>)
             .to_string_lossy()
             .to_string()
     }
@@ -634,9 +635,9 @@
     /// ```
     /// use task_maker_lang::SourceFile;
     ///
-    /// let source = SourceFile::new(&quot;path/to/sourcefile.cpp&quot;, &quot;&quot;, None, Some(&quot;exec&quot;)).unwrap();
+    /// let source = SourceFile::new("path/to/sourcefile.cpp", "", None, Some("exec")).unwrap();
     ///
-    /// assert_eq!(source.write_bin_to(), Some(&quot;exec&quot;.into()));
+    /// assert_eq!(source.write_bin_to(), Some("exec".into()));
     /// ```
     </span><span class="kw">pub fn </span>write_bin_to(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;PathBuf&gt; {
         <span class="self">self</span>.write_bin_to.clone()
@@ -658,7 +659,7 @@
                 metadata.use_grader(grader_map.as_ref());
             }
             <span class="kw">let </span>(<span class="kw-2">mut </span>comp, exec) = metadata.finalize(dag)<span class="question-mark">?</span>;
-            comp.tag(ExecutionTag::from(<span class="string">&quot;compilation&quot;</span>))
+            comp.tag(ExecutionTag::from(<span class="string">"compilation"</span>))
                 .priority(COMPILATION_PRIORITY)
                 .capture_stdout(COMPILATION_CONTENT_LENGTH)
                 .capture_stderr(COMPILATION_CONTENT_LENGTH);
@@ -674,7 +675,7 @@
             <span class="kw-2">*</span><span class="self">self</span>.executable.lock().unwrap() = <span class="prelude-val">Some</span>(exec);
             <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(comp_uuid))
         } <span class="kw">else </span>{
-            <span class="kw">let </span>executable = File::new(<span class="macro">format!</span>(<span class="string">&quot;Source file of {:?}&quot;</span>, <span class="self">self</span>.path));
+            <span class="kw">let </span>executable = File::new(<span class="macro">format!</span>(<span class="string">"Source file of {:?}"</span>, <span class="self">self</span>.path));
             <span class="kw">if </span>dag.config_mut().copy_exe || <span class="self">self</span>.copy_exe {
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(write_bin_to) = <span class="kw-2">&amp;</span><span class="self">self</span>.write_bin_to {
                     dag.write_file_to(<span class="kw-2">&amp;</span>executable, write_bin_to, <span class="bool-val">true</span>);
@@ -682,7 +683,7 @@
             }
             <span class="kw-2">*</span><span class="self">self</span>.executable.lock().unwrap() = <span class="prelude-val">Some</span>(executable.clone());
             dag.provide_file(executable, <span class="kw-2">&amp;</span><span class="self">self</span>.path)
-                .context(<span class="string">&quot;Failed to provide executable&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to provide executable"</span>)<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
         }
     }
@@ -704,13 +705,13 @@
 
 <span class="doccomment">/// Deserializer for `Arc&lt;dyn Language&gt;`. It expects a `String` to be deserialized, searching in the
 /// `LanguageManager` know languages the instance of that language.
-</span><span class="kw">fn </span>language_deserializer&lt;<span class="lifetime">&#39;de</span>, D&gt;(deser: D) -&gt; <span class="prelude-ty">Result</span>&lt;Arc&lt;<span class="kw">dyn </span>Language&gt;, D::Error&gt;
+</span><span class="kw">fn </span>language_deserializer&lt;<span class="lifetime">'de</span>, D&gt;(deser: D) -&gt; <span class="prelude-ty">Result</span>&lt;Arc&lt;<span class="kw">dyn </span>Language&gt;, D::Error&gt;
 <span class="kw">where
-    </span>D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
+    </span>D: Deserializer&lt;<span class="lifetime">'de</span>&gt;,
 {
     <span class="kw">use </span>serde::de::Error;
     <span class="kw">let </span>lang_name = String::deserialize(deser)<span class="question-mark">?</span>;
-    LanguageManager::from_name(lang_name).ok_or_else(|| D::Error::custom(<span class="string">&quot;unknown language&quot;</span>))
+    LanguageManager::from_name(lang_name).ok_or_else(|| D::Error::custom(<span class="string">"unknown language"</span>))
 }
 
 <span class="attr">#[cfg(test)]
@@ -732,14 +733,14 @@
         <span class="kw">let </span><span class="kw-2">mut </span>dag = ExecutionDAG::new();
         dag.config_mut().copy_exe(<span class="bool-val">true</span>);
 
-        <span class="kw">let </span>source = <span class="string">&quot;int main() {return 0;}&quot;</span>;
-        <span class="kw">let </span>source_path = cwd.path().join(<span class="string">&quot;source.cpp&quot;</span>);
+        <span class="kw">let </span>source = <span class="string">"int main() {return 0;}"</span>;
+        <span class="kw">let </span>source_path = cwd.path().join(<span class="string">"source.cpp"</span>);
         std::fs::File::create(<span class="kw-2">&amp;</span>source_path)
             .unwrap()
             .write_all(source.as_bytes())
             .unwrap();
-        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>source_path, <span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(cwd.path().join(<span class="string">&quot;bin&quot;</span>))).unwrap();
-        <span class="kw">let </span>(comp, exec) = source.execute(<span class="kw-2">&amp;mut </span>dag, <span class="string">&quot;Testing exec&quot;</span>, <span class="macro">vec!</span>[]).unwrap();
+        <span class="kw">let </span>source = SourceFile::new(<span class="kw-2">&amp;</span>source_path, <span class="string">""</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(cwd.path().join(<span class="string">"bin"</span>))).unwrap();
+        <span class="kw">let </span>(comp, exec) = source.execute(<span class="kw-2">&amp;mut </span>dag, <span class="string">"Testing exec"</span>, <span class="macro">vec!</span>[]).unwrap();
         <span class="macro">assert!</span>(comp.is_some());
 
         <span class="kw">let </span>exec_start = Arc::new(AtomicBool::new(<span class="bool-val">false</span>));
@@ -775,7 +776,7 @@
         <span class="macro">assert!</span>(exec_start.load(Ordering::Relaxed));
         <span class="macro">assert!</span>(exec_done.load(Ordering::Relaxed));
         <span class="macro">assert!</span>(!exec_skipped.load(Ordering::Relaxed));
-        <span class="macro">assert!</span>(cwd.path().join(<span class="string">&quot;bin&quot;</span>).exists());
+        <span class="macro">assert!</span>(cwd.path().join(<span class="string">"bin"</span>).exists());
     }
 }
 </code></pre></div></section></main></body></html>

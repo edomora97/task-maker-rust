@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/checker.rs`."><title>checker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/dag/checker.rs`."><title>checker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -237,7 +238,7 @@
 
 <span class="kw">impl </span>Checker {
     <span class="doccomment">/// Build the execution of the checker for the specified files, the callback will be called when
-    /// the result is ready. The execution does not send UI messages yet and it&#39;s not added to the
+    /// the result is ready. The execution does not send UI messages yet and it's not added to the
     /// DAG.
     </span><span class="attr">#[allow(clippy::too_many_arguments)]
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>check&lt;F&gt;(
@@ -251,35 +252,35 @@
         callback: F,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;Execution, Error&gt;
     <span class="kw">where
-        </span>F: FnOnce(f64, String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+        </span>F: FnOnce(f64, String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + Send + Sync + <span class="lifetime">'static</span>,
     {
         <span class="kw">match </span><span class="self">self </span>{
             Checker::WhiteDiff =&gt; {
-                <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(description, ExecutionCommand::system(<span class="string">&quot;diff&quot;</span>));
+                <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(description, ExecutionCommand::system(<span class="string">"diff"</span>));
                 exec.args(<span class="macro">vec!</span>[
-                    <span class="string">&quot;--brief&quot;</span>,
-                    <span class="string">&quot;--speed-large-files&quot;</span>,
-                    <span class="string">&quot;--ignore-blank-lines&quot;</span>,
-                    <span class="string">&quot;--ignore-space-change&quot;</span>,
-                    <span class="string">&quot;correct&quot;</span>,
-                    <span class="string">&quot;test&quot;</span>,
+                    <span class="string">"--brief"</span>,
+                    <span class="string">"--speed-large-files"</span>,
+                    <span class="string">"--ignore-blank-lines"</span>,
+                    <span class="string">"--ignore-space-change"</span>,
+                    <span class="string">"correct"</span>,
+                    <span class="string">"test"</span>,
                 ])
-                .input(correct_output, <span class="string">&quot;correct&quot;</span>, <span class="bool-val">false</span>)
-                .input(test_output, <span class="string">&quot;test&quot;</span>, <span class="bool-val">false</span>)
+                .input(correct_output, <span class="string">"correct"</span>, <span class="bool-val">false</span>)
+                .input(test_output, <span class="string">"test"</span>, <span class="bool-val">false</span>)
                 .tag(Tag::Checking.into())
                 .priority(EVALUATION_PRIORITY - testcase_id.unwrap_or_default() <span class="kw">as </span>Priority);
 
                 eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|result| {
                     <span class="kw">match </span>result.status {
                         <span class="comment">// diff exits with 0 if the files are equal
-                        </span>ExecutionStatus::Success =&gt; callback(<span class="number">1.0</span>, <span class="string">&quot;Output is correct&quot;</span>.into())
-                            .context(<span class="string">&quot;Checker callback failed&quot;</span>)<span class="question-mark">?</span>,
+                        </span>ExecutionStatus::Success =&gt; callback(<span class="number">1.0</span>, <span class="string">"Output is correct"</span>.into())
+                            .context(<span class="string">"Checker callback failed"</span>)<span class="question-mark">?</span>,
                         <span class="comment">// return code 1 means the files are different
                         </span>ExecutionStatus::ReturnCode(<span class="number">1</span>) =&gt; {
-                            callback(<span class="number">0.0</span>, <span class="string">&quot;Output is incorrect&quot;</span>.into())
-                                .context(<span class="string">&quot;Checker callback failed&quot;</span>)<span class="question-mark">?
+                            callback(<span class="number">0.0</span>, <span class="string">"Output is incorrect"</span>.into())
+                                .context(<span class="string">"Checker callback failed"</span>)<span class="question-mark">?
                         </span>}
-                        <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;diff died badly? {:?}&quot;</span>, result),
+                        <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(<span class="string">"diff died badly? {:?}"</span>, result),
                     };
                     <span class="prelude-val">Ok</span>(())
                 });
@@ -290,12 +291,12 @@
                     .execute(
                         eval,
                         <span class="kw-2">&amp;</span>description,
-                        <span class="macro">vec!</span>[<span class="string">&quot;input&quot;</span>, <span class="string">&quot;correct_output&quot;</span>, <span class="string">&quot;test_output&quot;</span>],
+                        <span class="macro">vec!</span>[<span class="string">"input"</span>, <span class="string">"correct_output"</span>, <span class="string">"test_output"</span>],
                     )
-                    .context(<span class="string">&quot;Failed to execute checker source file&quot;</span>)<span class="question-mark">?</span>;
-                exec.input(input, <span class="string">&quot;input&quot;</span>, <span class="bool-val">false</span>)
-                    .input(correct_output, <span class="string">&quot;correct_output&quot;</span>, <span class="bool-val">false</span>)
-                    .input(test_output, <span class="string">&quot;test_output&quot;</span>, <span class="bool-val">false</span>)
+                    .context(<span class="string">"Failed to execute checker source file"</span>)<span class="question-mark">?</span>;
+                exec.input(input, <span class="string">"input"</span>, <span class="bool-val">false</span>)
+                    .input(correct_output, <span class="string">"correct_output"</span>, <span class="bool-val">false</span>)
+                    .input(test_output, <span class="string">"test_output"</span>, <span class="bool-val">false</span>)
                     .tag(Tag::Checking.into())
                     .capture_stdout(<span class="number">128</span>)
                     .capture_stderr(STDERR_CONTENT_LENGTH)
@@ -305,24 +306,24 @@
                 eval.dag.on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|res| {
                     <span class="kw">let </span>stdout = res
                         .stdout
-                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stdout not captured&quot;</span>))<span class="question-mark">?</span>;
+                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Checker stdout not captured"</span>))<span class="question-mark">?</span>;
                     <span class="kw">let </span>stderr = res
                         .stderr
-                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Checker stderr not captured&quot;</span>))<span class="question-mark">?</span>;
+                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Checker stderr not captured"</span>))<span class="question-mark">?</span>;
                     <span class="kw">let </span>message = String::from_utf8_lossy(<span class="kw-2">&amp;</span>stderr).trim().to_string();
                     <span class="kw">let </span>message = <span class="self">Self</span>::translate_checker_message(message);
                     <span class="kw">if </span>!res.status.is_success() {
                         <span class="kw">let </span>message = <span class="kw">if let </span><span class="prelude-val">Some</span>(testcase_id) = testcase_id {
                             <span class="macro">format!</span>(
-                                <span class="string">&quot;Checker failed while computing a score for testcase {}&quot;</span>,
+                                <span class="string">"Checker failed while computing a score for testcase {}"</span>,
                                 testcase_id
                             )
                         } <span class="kw">else </span>{
-                            <span class="string">&quot;Checker failed while computing a score for a testcase&quot;</span>.into()
+                            <span class="string">"Checker failed while computing a score for a testcase"</span>.into()
                         };
                         <span class="kw">let </span>diagnostic = Diagnostic::error(message)
                             .with_note(description)
-                            .with_help(<span class="macro">format!</span>(<span class="string">&quot;The checker crashed with: {:?}&quot;</span>, res.status))
+                            .with_help(<span class="macro">format!</span>(<span class="string">"The checker crashed with: {:?}"</span>, res.status))
                             .with_help_attachment(stderr);
                         sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                         <span class="kw">return </span><span class="prelude-val">Ok</span>(());
@@ -333,15 +334,15 @@
                         <span class="prelude-val">Err</span>(e) =&gt; {
                             <span class="kw">let </span>message = <span class="kw">if let </span><span class="prelude-val">Some</span>(testcase_id) = testcase_id {
                                 <span class="macro">format!</span>(
-                                    <span class="string">&quot;Checker returned an invalid score ({:?}) for testcase {}&quot;</span>,
+                                    <span class="string">"Checker returned an invalid score ({:?}) for testcase {}"</span>,
                                     score, testcase_id
                                 )
                             } <span class="kw">else </span>{
-                                <span class="macro">format!</span>(<span class="string">&quot;Checker returned an invalid score ({:?})&quot;</span>, score)
+                                <span class="macro">format!</span>(<span class="string">"Checker returned an invalid score ({:?})"</span>, score)
                             };
                             <span class="kw">let </span>diagnostic = Diagnostic::error(message)
                                 .with_note(description)
-                                .with_help(<span class="macro">format!</span>(<span class="string">&quot;The parse error is: {:?}&quot;</span>, e))
+                                .with_help(<span class="macro">format!</span>(<span class="string">"The parse error is: {:?}"</span>, e))
                                 .with_help_attachment(stdout);
                             sender.add_diagnostic(diagnostic)<span class="question-mark">?</span>;
                             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
@@ -369,14 +370,14 @@
         callback: F,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
     <span class="kw">where
-        </span>F: FnOnce(f64, String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+        </span>F: FnOnce(f64, String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + Send + Sync + <span class="lifetime">'static</span>,
     {
         <span class="kw">let </span>solution = solution.into();
         <span class="kw">let </span>exec = <span class="self">self</span>.check(
             eval,
             <span class="prelude-val">Some</span>(testcase_id),
             <span class="macro">format!</span>(
-                <span class="string">&quot;Checking output of {:?} of testcase {}, subtask {}&quot;</span>,
+                <span class="string">"Checking output of {:?} of testcase {}, subtask {}"</span>,
                 solution.file_name().unwrap(),
                 testcase_id,
                 subtask_id
@@ -405,9 +406,9 @@
     /// placeholders to actual messages.
     </span><span class="kw">pub fn </span>translate_checker_message(message: String) -&gt; String {
         <span class="kw">match </span>message.as_str() {
-            <span class="string">&quot;translate:success&quot; </span>=&gt; <span class="string">&quot;Output is correct&quot;</span>.into(),
-            <span class="string">&quot;translate:partial&quot; </span>=&gt; <span class="string">&quot;Output is partially correct&quot;</span>.into(),
-            <span class="string">&quot;translate:wrong&quot; </span>=&gt; <span class="string">&quot;Output is incorrect&quot;</span>.into(),
+            <span class="string">"translate:success" </span>=&gt; <span class="string">"Output is correct"</span>.into(),
+            <span class="string">"translate:partial" </span>=&gt; <span class="string">"Output is partially correct"</span>.into(),
+            <span class="string">"translate:wrong" </span>=&gt; <span class="string">"Output is incorrect"</span>.into(),
             <span class="kw">_ </span>=&gt; message,
         }
     }

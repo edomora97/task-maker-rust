@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/executor.rs`."><title>executor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-exec/src/executor.rs`."><title>executor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_exec" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -601,7 +602,7 @@
 
 <span class="kw">impl </span>Executor {
     <span class="doccomment">/// Create a new `Executor` using the specified `FileStore` for the Scheduler and WorkerManager,
-    /// the receiver for communicating with this Executor and if it should be &quot;long running&quot;.
+    /// the receiver for communicating with this Executor and if it should be "long running".
     /// When this flag is set to false, after the first client is done the Scheduler, the
     /// WorkerManager and this Executor will exit.
     </span><span class="kw">pub fn </span>new(
@@ -641,18 +642,18 @@
             worker_manager_rx,
         );
         <span class="kw">let </span>scheduler_thread = thread::Builder::new()
-            .name(<span class="string">&quot;Scheduler thread&quot;</span>.to_string())
+            .name(<span class="string">"Scheduler thread"</span>.to_string())
             .spawn(<span class="kw">move </span>|| scheduler.run())
-            .expect(<span class="string">&quot;Failed to spawn scheduler&quot;</span>);
+            .expect(<span class="string">"Failed to spawn scheduler"</span>);
         <span class="kw">let </span>worker_manager_thread = thread::Builder::new()
-            .name(<span class="string">&quot;Worker Manager thread&quot;</span>.to_string())
+            .name(<span class="string">"Worker Manager thread"</span>.to_string())
             .spawn(<span class="kw">move </span>|| worker_manager.run())
-            .expect(<span class="string">&quot;Failed to spawn worker manager&quot;</span>);
+            .expect(<span class="string">"Failed to spawn worker manager"</span>);
         <span class="kw">let </span>clients2 = clients.clone();
         <span class="kw">let </span>scheduler_binder_thread = thread::Builder::new()
-            .name(<span class="string">&quot;Scheduler binder&quot;</span>.to_string())
+            .name(<span class="string">"Scheduler binder"</span>.to_string())
             .spawn(<span class="kw">move </span>|| Executor::handle_scheduler_messages(sched_executor_rx, clients2))
-            .expect(<span class="string">&quot;Failed to spawn scheduler binder&quot;</span>);
+            .expect(<span class="string">"Failed to spawn scheduler binder"</span>);
 
         <span class="kw">while let </span><span class="prelude-val">Ok</span>(message) = <span class="self">self</span>.receiver.recv() {
             <span class="kw">match </span>message {
@@ -668,11 +669,11 @@
                     <span class="kw">let </span>scheduler = scheduler_tx.clone();
                     <span class="kw">let </span>file_store = <span class="self">self</span>.file_store.clone();
                     <span class="kw">let </span>long_running = <span class="self">self</span>.long_running;
-                    <span class="comment">// handle the new client in a new thread called &quot;Client Manager&quot;
+                    <span class="comment">// handle the new client in a new thread called "Client Manager"
                     // FIXME: this thread is leaked, maybe we can join it as well
                     </span>thread::Builder::new()
                         .name(<span class="macro">format!</span>(
-                            <span class="string">&quot;Client manager for {} ({})&quot;</span>,
+                            <span class="string">"Client manager for {} ({})"</span>,
                             client.name, client.uuid
                         ))
                         .spawn(<span class="kw">move </span>|| -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
@@ -685,39 +686,39 @@
                             )
                             .unwrap();
                             <span class="comment">// if not in long running mode, the first client should tear down the
-                            // executor. To do so it&#39;s just required to tell the scheduler to exit,
+                            // executor. To do so it's just required to tell the scheduler to exit,
                             // it will bring down the WorkerManager and all should exit.
                             </span><span class="kw">if </span>!long_running {
                                 scheduler
                                     .send(SchedulerInMessage::Exit)
-                                    .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot stop the scheduler: {:?}&quot;</span>, e))
+                                    .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Cannot stop the scheduler: {:?}"</span>, e))
                                     .unwrap();
                             }
                             <span class="prelude-val">Ok</span>(())
                         })
-                        .expect(<span class="string">&quot;Failed to spawn client manager&quot;</span>);
+                        .expect(<span class="string">"Failed to spawn client manager"</span>);
                 }
                 ExecutorInMessage::WorkerConnected { worker } =&gt; {
                     worker_manager_tx
                         .send(WorkerManagerInMessage::WorkerConnected { worker })
-                        .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Cannot send WorkerConnected: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+                        .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Cannot send WorkerConnected: {:?}"</span>, e))<span class="question-mark">?</span>;
                 }
             }
         }
-        <span class="macro">debug!</span>(<span class="string">&quot;Executor no longer waits for clients/workers&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">"Executor no longer waits for clients/workers"</span>);
 
         scheduler_thread
             .join()
-            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Scheduler thread panicked: {:?}&quot;</span>, e))<span class="question-mark">?
-            </span>.context(<span class="string">&quot;Scheduler thread failed&quot;</span>)<span class="question-mark">?</span>;
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Scheduler thread panicked: {:?}"</span>, e))<span class="question-mark">?
+            </span>.context(<span class="string">"Scheduler thread failed"</span>)<span class="question-mark">?</span>;
         worker_manager_thread
             .join()
-            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Worker manager panicked: {:?}&quot;</span>, e))<span class="question-mark">?
-            </span>.context(<span class="string">&quot;Worker manager thread failed&quot;</span>)<span class="question-mark">?</span>;
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Worker manager panicked: {:?}"</span>, e))<span class="question-mark">?
+            </span>.context(<span class="string">"Worker manager thread failed"</span>)<span class="question-mark">?</span>;
         scheduler_binder_thread
             .join()
-            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">&quot;Scheduler binder panicked: {:?}&quot;</span>, e))<span class="question-mark">?
-            </span>.context(<span class="string">&quot;Scheduler binder thread failed&quot;</span>)<span class="question-mark">?</span>;
+            .map_err(|e| <span class="macro">anyhow!</span>(<span class="string">"Scheduler binder panicked: {:?}"</span>, e))<span class="question-mark">?
+            </span>.context(<span class="string">"Scheduler binder thread failed"</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -757,9 +758,9 @@
                         <span class="kw">if let </span><span class="prelude-val">Err</span>(e) =
                             client.send(ExecutorServerMessage::ProvideFile(file, successful))
                         {
-                            <span class="macro">warn!</span>(<span class="string">&quot;Failed to send urgent file: {:?}&quot;</span>, e);
+                            <span class="macro">warn!</span>(<span class="string">"Failed to send urgent file: {:?}"</span>, e);
                         } <span class="kw">else if let </span><span class="prelude-val">Err</span>(e) = ChannelFileSender::send(handle.path(), client) {
-                            <span class="macro">warn!</span>(<span class="string">&quot;Failed to send urgent file content: {:?}&quot;</span>, e);
+                            <span class="macro">warn!</span>(<span class="string">"Failed to send urgent file content: {:?}"</span>, e);
                         }
                     } <span class="kw">else </span>{
                         ready_files
@@ -783,10 +784,10 @@
                 }
             };
             <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = client.send(message) {
-                <span class="macro">warn!</span>(<span class="string">&quot;Failed to send message to the client: {:?}&quot;</span>, e);
+                <span class="macro">warn!</span>(<span class="string">"Failed to send message to the client: {:?}"</span>, e);
             }
         }
-        <span class="macro">debug!</span>(<span class="string">&quot;Scheduler binder exiting&quot;</span>);
+        <span class="macro">debug!</span>(<span class="string">"Scheduler binder exiting"</span>);
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -803,13 +804,13 @@
             <span class="kw">match </span>message {
                 ExecutorClientMessage::Evaluate { dag, callbacks } =&gt; {
                     <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = check_dag(<span class="kw-2">&amp;</span>dag, <span class="kw-2">&amp;</span>callbacks) {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Invalid DAG: {:?}&quot;</span>, e);
+                        <span class="macro">warn!</span>(<span class="string">"Invalid DAG: {:?}"</span>, e);
                         sender
                             .send(ExecutorServerMessage::Error(e.to_string()))
-                            .context(<span class="string">&quot;Failed to send Error message to client&quot;</span>)<span class="question-mark">?</span>;
+                            .context(<span class="string">"Failed to send Error message to client"</span>)<span class="question-mark">?</span>;
                         <span class="kw">break</span>;
                     } <span class="kw">else </span>{
-                        <span class="macro">trace!</span>(<span class="string">&quot;DAG looks valid!&quot;</span>);
+                        <span class="macro">trace!</span>(<span class="string">"DAG looks valid!"</span>);
                     }
                     <span class="comment">// for each file marked as provided check if a local copy is present, otherwise
                     // ask the client to send it.
@@ -825,74 +826,74 @@
                         } <span class="kw">else </span>{
                             sender
                                 .send(ExecutorServerMessage::AskFile(<span class="kw-2">*</span>uuid))
-                                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to send AskFile({})&quot;</span>, uuid))<span class="question-mark">?</span>;
+                                .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to send AskFile({})"</span>, uuid))<span class="question-mark">?</span>;
                         }
                     }
                     <span class="comment">// tell the scheduler that a new DAG is ready to be executed.
                     </span>scheduler
                         .as_ref()
-                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Stopped execution&quot;</span>))<span class="question-mark">?
+                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Stopped execution"</span>))<span class="question-mark">?
                         </span>.send(SchedulerInMessage::EvaluateDAG {
                             client: client.clone(),
                             dag,
                             callbacks,
                         })
-                        .context(<span class="string">&quot;Failed to send EvaluateDAG to the scheduler&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to send EvaluateDAG to the scheduler"</span>)<span class="question-mark">?</span>;
                     <span class="comment">// tell the scheduler the files that are already locally ready. The others will
                     // be ready when the client will send them.
                     </span><span class="kw">for </span>(uuid, handle) <span class="kw">in </span>ready_files.into_iter() {
                         scheduler
                             .as_ref()
-                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Stopped execution&quot;</span>))<span class="question-mark">?
+                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Stopped execution"</span>))<span class="question-mark">?
                             </span>.send(SchedulerInMessage::FileReady {
                                 client: client.uuid,
                                 uuid,
                                 handle,
                             })
-                            .context(<span class="string">&quot;Failed to send FileReady to the scheduler&quot;</span>)<span class="question-mark">?</span>;
+                            .context(<span class="string">"Failed to send FileReady to the scheduler"</span>)<span class="question-mark">?</span>;
                     }
                 }
                 ExecutorClientMessage::ProvideFile(uuid, key) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Client provided file {}&quot;</span>, uuid);
+                    <span class="macro">info!</span>(<span class="string">"Client provided file {}"</span>, uuid);
                     <span class="comment">// the client provided a file that was not present locally, store it and tell
-                    // the scheduler that it&#39;s now ready.
+                    // the scheduler that it's now ready.
                     </span><span class="kw">let </span>handle = file_store
                         .store(<span class="kw-2">&amp;</span>key, ChannelFileIterator::new(<span class="kw-2">&amp;</span>receiver))
                         .with_context(|| {
-                            <span class="macro">format!</span>(<span class="string">&quot;Failed to store client provided file {} ({})&quot;</span>, uuid, key)
+                            <span class="macro">format!</span>(<span class="string">"Failed to store client provided file {} ({})"</span>, uuid, key)
                         })<span class="question-mark">?</span>;
                     scheduler
                         .as_ref()
-                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Stopped execution&quot;</span>))<span class="question-mark">?
+                        .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Stopped execution"</span>))<span class="question-mark">?
                         </span>.send(SchedulerInMessage::FileReady {
                             client: client.uuid,
                             uuid,
                             handle,
                         })
-                        .context(<span class="string">&quot;Failed to send FileReady to the scheduler&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to send FileReady to the scheduler"</span>)<span class="question-mark">?</span>;
                 }
                 ExecutorClientMessage::AskFile(uuid, key, success) =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Client asking file {:?}&quot;</span>, key);
+                    <span class="macro">info!</span>(<span class="string">"Client asking file {:?}"</span>, key);
                     <span class="comment">// the client wants to know a file that was produced by the computation, send it
                     // if it exists.
                     </span><span class="kw">if let </span><span class="prelude-val">Some</span>(handle) = file_store.get(<span class="kw-2">&amp;</span>key) {
                         sender
                             .send(ExecutorServerMessage::ProvideFile(uuid, success))
-                            .context(<span class="string">&quot;Failed to send ProvideFile to the client&quot;</span>)<span class="question-mark">?</span>;
+                            .context(<span class="string">"Failed to send ProvideFile to the client"</span>)<span class="question-mark">?</span>;
                         ChannelFileSender::send(handle.path(), <span class="kw-2">&amp;</span>sender).with_context(|| {
-                            <span class="macro">format!</span>(<span class="string">&quot;Failed to send file {} to the client&quot;</span>, handle)
+                            <span class="macro">format!</span>(<span class="string">"Failed to send file {} to the client"</span>, handle)
                         })<span class="question-mark">?</span>;
                     } <span class="kw">else </span>{
                         sender
                             .send(ExecutorServerMessage::Error(<span class="macro">format!</span>(
-                                <span class="string">&quot;Unknown file {:?}&quot;</span>,
+                                <span class="string">"Unknown file {:?}"</span>,
                                 key
                             )))
-                            .context(<span class="string">&quot;Failed to send Error to the client&quot;</span>)<span class="question-mark">?</span>;
+                            .context(<span class="string">"Failed to send Error to the client"</span>)<span class="question-mark">?</span>;
                     }
                 }
                 ExecutorClientMessage::Status =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Client asking for the status&quot;</span>);
+                    <span class="macro">info!</span>(<span class="string">"Client asking for the status"</span>);
                     <span class="comment">// This may fail is the scheduler is gone.
                     </span><span class="kw">if let </span><span class="prelude-val">Some</span>(scheduler) = scheduler.as_ref() {
                         <span class="kw">let _ </span>= scheduler.send(SchedulerInMessage::Status {
@@ -901,13 +902,13 @@
                     }
                 }
                 ExecutorClientMessage::Stop =&gt; {
-                    <span class="macro">info!</span>(<span class="string">&quot;Client asking to stop&quot;</span>);
+                    <span class="macro">info!</span>(<span class="string">"Client asking to stop"</span>);
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(scheduler) = scheduler.take() {
                         scheduler
                             .send(SchedulerInMessage::ClientDisconnected {
                                 client: client.uuid,
                             })
-                            .context(<span class="string">&quot;Failed to send ClientDisconnected to the scheduler&quot;</span>)<span class="question-mark">?
+                            .context(<span class="string">"Failed to send ClientDisconnected to the scheduler"</span>)<span class="question-mark">?
                     </span>}
                 }
             }
@@ -917,7 +918,7 @@
                 .send(SchedulerInMessage::ClientDisconnected {
                     client: client.uuid,
                 })
-                .context(<span class="string">&quot;Failed to send ClientDisconnected to the scheduler&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to send ClientDisconnected to the scheduler"</span>)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }

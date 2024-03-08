@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/sandbox.rs`."><title>sandbox.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/tools/sandbox.rs`."><title>sandbox.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -151,7 +152,7 @@
 <a href="#151" id="151">151</a>
 <a href="#152" id="152">152</a>
 <a href="#153" id="153">153</a>
-</pre></div><pre class="rust"><code><span class="attr">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+</pre></div><pre class="rust"><code><span class="attr">#[cfg(not(target_os = <span class="string">"macos"</span>))]
 </span><span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::path::PathBuf;
 
@@ -160,10 +161,10 @@
 <span class="kw">use </span>tabox::configuration::SandboxConfiguration;
 <span class="kw">use </span>tabox::syscall_filter::SyscallFilter;
 <span class="kw">use </span>tabox::{Sandbox, SandboxImplementation};
-<span class="attr">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+<span class="attr">#[cfg(not(target_os = <span class="string">"macos"</span>))]
 </span><span class="kw">use </span>tempfile::TempDir;
 
-<span class="attr">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+<span class="attr">#[cfg(not(target_os = <span class="string">"macos"</span>))]
 </span><span class="kw">use </span>task_maker_exec::sandbox::READABLE_DIRS;
 
 <span class="attr">#[derive(Parser, Debug, Clone)]
@@ -199,11 +200,11 @@
     </span><span class="kw">pub </span>mount_proc: bool,
 
     <span class="doccomment">/// User id.
-    </span><span class="attr">#[clap(long, default_value = <span class="string">&quot;1000&quot;</span>)]
+    </span><span class="attr">#[clap(long, default_value = <span class="string">"1000"</span>)]
     </span><span class="kw">pub </span>uid: usize,
 
     <span class="doccomment">/// User id.
-    </span><span class="attr">#[clap(long, default_value = <span class="string">&quot;1000&quot;</span>)]
+    </span><span class="attr">#[clap(long, default_value = <span class="string">"1000"</span>)]
     </span><span class="kw">pub </span>gid: usize,
 
     <span class="doccomment">/// Command to execute inside the sandbox. If not specified, bash is executed.
@@ -213,38 +214,38 @@
 <span class="kw">pub fn </span>main_sandbox(opt: SandboxOpt) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>config = SandboxConfiguration::default();
 
-    <span class="attr">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+    <span class="attr">#[cfg(not(target_os = <span class="string">"macos"</span>))]
     </span><span class="kw">let </span>_tempdir = {
         <span class="kw">let </span>tempdir = TempDir::new()<span class="question-mark">?</span>;
         <span class="kw">let </span>etcdir = tempdir.path();
-        config.working_directory(<span class="string">&quot;/box&quot;</span>);
+        config.working_directory(<span class="string">"/box"</span>);
 
         <span class="kw">let </span>workdir = opt
             .workdir
             .or_else(|| std::env::current_dir().ok())
-            .unwrap_or_else(|| <span class="string">&quot;/&quot;</span>.into());
-        config.mount(<span class="kw-2">&amp;</span>workdir, <span class="string">&quot;/box&quot;</span>, <span class="bool-val">true</span>);
+            .unwrap_or_else(|| <span class="string">"/"</span>.into());
+        config.mount(<span class="kw-2">&amp;</span>workdir, <span class="string">"/box"</span>, <span class="bool-val">true</span>);
 
-        config.mount(etcdir, <span class="string">&quot;/etc&quot;</span>, <span class="bool-val">true</span>);
+        config.mount(etcdir, <span class="string">"/etc"</span>, <span class="bool-val">true</span>);
         std::fs::write(
-            etcdir.join(<span class="string">&quot;passwd&quot;</span>),
+            etcdir.join(<span class="string">"passwd"</span>),
             <span class="macro">format!</span>(
-                <span class="string">&quot;root::0:0::/:/bin/sh\n\
-                nobody::{uid}:{gid}::/:/bin/sh\n&quot;</span>,
+                <span class="string">"root::0:0::/:/bin/sh\n\
+                nobody::{uid}:{gid}::/:/bin/sh\n"</span>,
                 uid = opt.uid,
                 gid = opt.gid,
             ),
         )
-        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to write /etc/etcdir in {}&quot;</span>, etcdir.display()))<span class="question-mark">?</span>;
+        .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to write /etc/etcdir in {}"</span>, etcdir.display()))<span class="question-mark">?</span>;
         std::fs::write(
-            etcdir.join(<span class="string">&quot;group&quot;</span>),
+            etcdir.join(<span class="string">"group"</span>),
             <span class="macro">format!</span>(
-                <span class="string">&quot;root:x:0:root\n\
-                nobody:x:{gid}:nobody\n&quot;</span>,
+                <span class="string">"root:x:0:root\n\
+                nobody:x:{gid}:nobody\n"</span>,
                 gid = opt.gid,
             ),
         )
-        .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to write /etc/group in {}&quot;</span>, etcdir.display()))<span class="question-mark">?</span>;
+        .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to write /etc/group in {}"</span>, etcdir.display()))<span class="question-mark">?</span>;
 
         <span class="kw">for </span>dir <span class="kw">in </span>READABLE_DIRS {
             <span class="kw">if </span>Path::new(dir).is_dir() {
@@ -255,7 +256,7 @@
             <span class="kw">if </span>dir.is_dir() {
                 config.mount(dir, dir, <span class="bool-val">false</span>);
             } <span class="kw">else </span>{
-                <span class="macro">warn!</span>(<span class="string">&quot;Cannot mount directory {}&quot;</span>, dir.display());
+                <span class="macro">warn!</span>(<span class="string">"Cannot mount directory {}"</span>, dir.display());
             }
         }
 
@@ -269,9 +270,9 @@
         tempdir
     };
 
-    config.env(<span class="string">&quot;PATH&quot;</span>, std::env::var(<span class="string">&quot;PATH&quot;</span>).unwrap_or_default());
-    config.env(<span class="string">&quot;LANG&quot;</span>, std::env::var(<span class="string">&quot;LANG&quot;</span>).unwrap_or_default());
-    config.env(<span class="string">&quot;LC_ALL&quot;</span>, std::env::var(<span class="string">&quot;LC_ALL&quot;</span>).unwrap_or_default());
+    config.env(<span class="string">"PATH"</span>, std::env::var(<span class="string">"PATH"</span>).unwrap_or_default());
+    config.env(<span class="string">"LANG"</span>, std::env::var(<span class="string">"LANG"</span>).unwrap_or_default());
+    config.env(<span class="string">"LC_ALL"</span>, std::env::var(<span class="string">"LC_ALL"</span>).unwrap_or_default());
 
     <span class="kw">if let </span><span class="prelude-val">Some</span>(memory_limit) = opt.memory_limit {
         config.memory_limit(memory_limit * <span class="number">1024</span>);
@@ -284,7 +285,7 @@
     config.syscall_filter(SyscallFilter::build(multiproc, <span class="bool-val">true</span>));
 
     <span class="kw">if </span>opt.command.is_empty() {
-        config.executable(<span class="string">&quot;/bin/bash&quot;</span>);
+        config.executable(<span class="string">"/bin/bash"</span>);
     } <span class="kw">else </span>{
         config.executable(<span class="kw-2">&amp;</span>opt.command[<span class="number">0</span>]);
         <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>opt.command[<span class="number">1</span>..] {
@@ -295,12 +296,12 @@
     config.uid(opt.uid);
     config.gid(opt.gid);
 
-    <span class="macro">debug!</span>(<span class="string">&quot;Config: {:#?}&quot;</span>, config);
+    <span class="macro">debug!</span>(<span class="string">"Config: {:#?}"</span>, config);
 
-    <span class="kw">let </span>sandbox = SandboxImplementation::run(config).context(<span class="string">&quot;Failed to create sandbox&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let </span>res = sandbox.wait().context(<span class="string">&quot;Failed to wait sandbox&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>sandbox = SandboxImplementation::run(config).context(<span class="string">"Failed to create sandbox"</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>res = sandbox.wait().context(<span class="string">"Failed to wait sandbox"</span>)<span class="question-mark">?</span>;
 
-    <span class="macro">debug!</span>(<span class="string">&quot;Result: {:#?}&quot;</span>, res);
+    <span class="macro">debug!</span>(<span class="string">"Result: {:#?}"</span>, res);
 
     <span class="prelude-val">Ok</span>(())
 }

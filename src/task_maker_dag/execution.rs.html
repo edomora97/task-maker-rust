@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-dag/src/execution.rs`."><title>execution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_dag" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-dag/src/execution.rs`."><title>execution.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_dag" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -981,24 +982,24 @@
 <span class="kw">use </span><span class="kw">crate</span>::file::<span class="kw-2">*</span>;
 <span class="kw">use </span><span class="kw">crate</span>::ExecutionDAGConfig;
 
-<span class="doccomment">/// The identifier of an execution, it&#39;s globally unique and it identifies an execution only during
+<span class="doccomment">/// The identifier of an execution, it's globally unique and it identifies an execution only during
 /// a single evaluation.
 </span><span class="kw">pub type </span>ExecutionUuid = Uuid;
 
-<span class="doccomment">/// The identifier of a worker, it&#39;s globally unique and identifies the worker during a single
+<span class="doccomment">/// The identifier of a worker, it's globally unique and identifies the worker during a single
 /// connection. It is used to associate the jobs to the workers which runs the executions. The
 /// underlying executor may provide more information about a worker using this id.
 
 </span><span class="kw">pub type </span>WorkerUuid = Uuid;
 
 <span class="doccomment">/// Type of the callback called when an [`Execution`](struct.Execution.html) starts.
-</span><span class="kw">pub type </span>OnStartCallback = Box&lt;<span class="kw">dyn </span>FnOnce(WorkerUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>&gt;;
+</span><span class="kw">pub type </span>OnStartCallback = Box&lt;<span class="kw">dyn </span>FnOnce(WorkerUuid) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">'static</span>&gt;;
 
 <span class="doccomment">/// Type of the callback called when an [`Execution`](struct.Execution.html) ends.
-</span><span class="kw">pub type </span>OnDoneCallback = Box&lt;<span class="kw">dyn </span>FnOnce(ExecutionResult) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>&gt;;
+</span><span class="kw">pub type </span>OnDoneCallback = Box&lt;<span class="kw">dyn </span>FnOnce(ExecutionResult) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">'static</span>&gt;;
 
 <span class="doccomment">/// Type of the callback called when an [`Execution`](struct.Execution.html) is skipped.
-</span><span class="kw">pub type </span>OnSkipCallback = Box&lt;<span class="kw">dyn </span>FnOnce() -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">&#39;static</span>&gt;;
+</span><span class="kw">pub type </span>OnSkipCallback = Box&lt;<span class="kw">dyn </span>FnOnce() -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; + <span class="lifetime">'static</span>&gt;;
 
 <span class="doccomment">/// Type of the priority value of an `Execution`.
 </span><span class="kw">pub type </span>Priority = i64;
@@ -1026,13 +1027,13 @@
 /// ```
 /// use task_maker_dag::ExecutionCommand;
 ///
-/// let sys_cmd = ExecutionCommand::system(&quot;/usr/bin/env&quot;);
-/// let sys_cmd = ExecutionCommand::system(&quot;env&quot;); // looking at $PATH
-/// let local_cmd = ExecutionCommand::local(&quot;generator&quot;); // local to the cwd of the sandbox
+/// let sys_cmd = ExecutionCommand::system("/usr/bin/env");
+/// let sys_cmd = ExecutionCommand::system("env"); // looking at $PATH
+/// let local_cmd = ExecutionCommand::local("generator"); // local to the cwd of the sandbox
 /// ```
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 </span><span class="kw">pub enum </span>ExecutionCommand {
-    <span class="doccomment">/// A system command, the workers will search in their `$PATH` for the executable if it&#39;s not
+    <span class="doccomment">/// A system command, the workers will search in their `$PATH` for the executable if it's not
     /// absolute.
     </span>System(PathBuf),
     <span class="doccomment">/// A command relative to the sandbox directory, not to be searched in the `$PATH`.
@@ -1075,11 +1076,11 @@
 /// use task_maker_dag::{Execution, ExecutionCommand, File, ExecutionDAG, ExecutionLimits};
 ///
 /// // provide an input file
-/// let stdin = File::new(&quot;random file&quot;);
+/// let stdin = File::new("random file");
 ///
 /// // first execution reading stdin, outputting to stdout, with 2s cpu limit, 3s wall limit and
 /// // 1MiB of memory.
-/// let mut exec = Execution::new(&quot;some hard work&quot;, ExecutionCommand::local(&quot;worker&quot;));
+/// let mut exec = Execution::new("some hard work", ExecutionCommand::local("worker"));
 /// exec.stdin(&amp;stdin);
 /// let stdout = exec.stdout();
 /// exec.limits_mut().cpu_time(2.0).wall_time(3.0).memory(1024);
@@ -1087,15 +1088,15 @@
 /// // second execution, will run after the first because it depends on its output, only if the
 /// // first is successful. Will take the stdout of the first as a file input and will capture the
 /// // stdout.
-/// let mut exec2 = Execution::new(&quot;some other work&quot;, ExecutionCommand::local(&quot;worker2&quot;));
-/// exec2.input(&amp;stdout, &quot;data.txt&quot;, false); // put the stdout of exec inside data.txt of exec2
+/// let mut exec2 = Execution::new("some other work", ExecutionCommand::local("worker2"));
+/// exec2.input(&amp;stdout, "data.txt", false); // put the stdout of exec inside data.txt of exec2
 /// let result = exec2.stdout();
 ///
 /// // add the executions and files to the dag
 /// let mut dag = ExecutionDAG::new();
 /// dag.add_execution(exec);
 /// dag.add_execution(exec2);
-/// dag.provide_file(stdin, &quot;/dev/null&quot;); // point this to a real file!!
+/// dag.provide_file(stdin, "/dev/null"); // point this to a real file!!
 /// ```
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize)]
 </span><span class="kw">pub struct </span>Execution {
@@ -1126,7 +1127,7 @@
     /// sandbox root.
     ///
     /// This is incompatible with `stdin`. Dependencies can still be achieved by providing the file
-    /// as an &quot;input&quot;.
+    /// as an "input".
     </span><span class="kw">pub </span>stdin_redirect_path: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
     <span class="doccomment">/// When set, the standard output is redirected to this file. The path is relative to the
     /// sandbox root.
@@ -1198,11 +1199,11 @@
     </span>ReturnCode(u32),
     <span class="doccomment">/// The program stopped due to a signal, the number and the name of the signal are attached.
     </span>Signal(u32, String),
-    <span class="doccomment">/// The program hasn&#39;t exited within the time limit constraint.
+    <span class="doccomment">/// The program hasn't exited within the time limit constraint.
     </span>TimeLimitExceeded,
-    <span class="doccomment">/// The program hasn&#39;t exited within the sys time limit constraint.
+    <span class="doccomment">/// The program hasn't exited within the sys time limit constraint.
     </span>SysTimeLimitExceeded,
-    <span class="doccomment">/// The program hasn&#39;t exited within the wall time limit constraint.
+    <span class="doccomment">/// The program hasn't exited within the wall time limit constraint.
     </span>WallTimeLimitExceeded,
     <span class="doccomment">/// The program has exceeded the memory limit.
     </span>MemoryLimitExceeded,
@@ -1405,7 +1406,7 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// ```
     </span><span class="kw">pub fn </span>new&lt;S: Into&lt;String&gt;&gt;(description: S, command: ExecutionCommand) -&gt; Execution {
         Execution {
@@ -1443,8 +1444,8 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand, File};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// let file = File::new(&quot;random file&quot;);
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// let file = File::new("random file");
     /// let uuid = file.uuid;
     /// exec.stdin(file);
     /// assert_eq!(exec.dependencies(), vec![uuid]);
@@ -1466,7 +1467,7 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// let file = exec.stdout();
     /// let uuid = file.uuid;
     /// assert_eq!(exec.outputs(), vec![uuid]);
@@ -1491,8 +1492,8 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;test execution&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// exec.args(vec![&quot;test&quot;, &quot;args&quot;]);
+    /// let mut exec = Execution::new("test execution", ExecutionCommand::local("foo"));
+    /// exec.args(vec!["test", "args"]);
     /// ```
     </span><span class="kw">pub fn </span>args&lt;S: Into&lt;String&gt;, I: IntoIterator&lt;Item = S&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, args: I) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.args = args.into_iter().map(|s| s.into()).collect();
@@ -1505,8 +1506,8 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand, File};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// let file = File::new(&quot;random file&quot;);
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// let file = File::new("random file");
     /// let uuid = file.uuid;
     /// exec.stdin(file);
     /// assert_eq!(exec.stdin, Some(uuid));
@@ -1523,9 +1524,9 @@
     /// use task_maker_dag::{Execution, ExecutionCommand, File};
     /// use std::path::PathBuf;
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// exec.stdin_redirect_path(&quot;/dev/urandom&quot;);
-    /// assert_eq!(exec.stdin_redirect_path.unwrap(), PathBuf::from(&quot;/dev/urandom&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// exec.stdin_redirect_path("/dev/urandom");
+    /// assert_eq!(exec.stdin_redirect_path.unwrap(), PathBuf::from("/dev/urandom"));
     /// ```
     </span><span class="kw">pub fn </span>stdin_redirect_path&lt;P: Into&lt;PathBuf&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: P) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="macro">assert!</span>(<span class="self">self</span>.stdin.is_none());
@@ -1540,13 +1541,13 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// let file = exec.stdout();
     /// assert_eq!(exec.stdout, Some(file));
     /// ```
     </span><span class="kw">pub fn </span>stdout(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; File {
         <span class="kw">if </span><span class="self">self</span>.stdout.is_none() {
-            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Stdout of &#39;{}&#39;&quot;</span>, <span class="self">self</span>.description));
+            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">"Stdout of '{}'"</span>, <span class="self">self</span>.description));
             <span class="self">self</span>.stdout = <span class="prelude-val">Some</span>(file);
         }
         <span class="self">self</span>.stdout.clone().unwrap()
@@ -1558,9 +1559,9 @@
     /// use task_maker_dag::{Execution, ExecutionCommand, File};
     /// use std::path::PathBuf;
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// exec.stdout_redirect_path(&quot;output.txt&quot;);
-    /// assert_eq!(exec.stdout_redirect_path.unwrap(), PathBuf::from(&quot;output.txt&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// exec.stdout_redirect_path("output.txt");
+    /// assert_eq!(exec.stdout_redirect_path.unwrap(), PathBuf::from("output.txt"));
     /// ```
     </span><span class="kw">pub fn </span>stdout_redirect_path&lt;P: Into&lt;PathBuf&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: P) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.stdout_redirect_path = <span class="prelude-val">Some</span>(path.into());
@@ -1574,13 +1575,13 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// let file = exec.stderr();
     /// assert_eq!(exec.stderr, Some(file));
     /// ```
     </span><span class="kw">pub fn </span>stderr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; File {
         <span class="kw">if </span><span class="self">self</span>.stderr.is_none() {
-            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Stderr of &#39;{}&#39;&quot;</span>, <span class="self">self</span>.description));
+            <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">"Stderr of '{}'"</span>, <span class="self">self</span>.description));
             <span class="self">self</span>.stderr = <span class="prelude-val">Some</span>(file);
         }
         <span class="self">self</span>.stderr.clone().unwrap()
@@ -1592,9 +1593,9 @@
     /// use task_maker_dag::{Execution, ExecutionCommand, File};
     /// use std::path::PathBuf;
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// exec.stderr_redirect_path(&quot;error.txt&quot;);
-    /// assert_eq!(exec.stderr_redirect_path.unwrap(), PathBuf::from(&quot;error.txt&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// exec.stderr_redirect_path("error.txt");
+    /// assert_eq!(exec.stderr_redirect_path.unwrap(), PathBuf::from("error.txt"));
     /// ```
     </span><span class="kw">pub fn </span>stderr_redirect_path&lt;P: Into&lt;PathBuf&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: P) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.stderr_redirect_path = <span class="prelude-val">Some</span>(path.into());
@@ -1606,7 +1607,7 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// exec.capture_stdout(1234);
     /// assert_eq!(exec.capture_stdout, Some(1234));
     /// ```
@@ -1621,7 +1622,7 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// exec.capture_stderr(1234);
     /// assert_eq!(exec.capture_stderr, Some(1234));
     /// ```
@@ -1638,11 +1639,11 @@
     /// use task_maker_dag::{Execution, ExecutionCommand, File};
     /// use std::path::PathBuf;
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// let file = File::new(&quot;test file&quot;);
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// let file = File::new("test file");
     /// let uuid = file.uuid;
-    /// exec.input(file, &quot;test/file.txt&quot;, false);
-    /// assert_eq!(exec.inputs[&amp;PathBuf::from(&quot;test/file.txt&quot;)].file, uuid);
+    /// exec.input(file, "test/file.txt", false);
+    /// assert_eq!(exec.inputs[&amp;PathBuf::from("test/file.txt")].file, uuid);
     /// ```
     </span><span class="kw">pub fn </span>input&lt;F: Into&lt;FileUuid&gt;, P: Into&lt;PathBuf&gt;&gt;(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
@@ -1668,12 +1669,12 @@
     /// use task_maker_dag::{Execution, ExecutionCommand};
     /// use std::path::PathBuf;
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// let file = exec.output(&quot;foo/bar.txt&quot;);
-    /// assert_eq!(exec.outputs[&amp;PathBuf::from(&quot;foo/bar.txt&quot;)], file);
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
+    /// let file = exec.output("foo/bar.txt");
+    /// assert_eq!(exec.outputs[&amp;PathBuf::from("foo/bar.txt")], file);
     /// ```
     </span><span class="kw">pub fn </span>output&lt;P: Into&lt;PathBuf&gt; + std::fmt::Debug&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: P) -&gt; File {
-        <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">&quot;Output of &#39;{}&#39; at {:?}&quot;</span>, <span class="self">self</span>.description, path));
+        <span class="kw">let </span>file = File::new(<span class="macro">format!</span>(<span class="string">"Output of '{}' at {:?}"</span>, <span class="self">self</span>.description, path));
         <span class="self">self</span>.outputs.entry(path.into()).or_insert(file).clone()
     }
 
@@ -1682,9 +1683,9 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;random exec&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// exec.env(&quot;foo&quot;, &quot;bar&quot;);
-    /// assert_eq!(exec.env[&quot;foo&quot;], &quot;bar&quot;);
+    /// let mut exec = Execution::new("random exec", ExecutionCommand::local("foo"));
+    /// exec.env("foo", "bar");
+    /// assert_eq!(exec.env["foo"], "bar");
     /// ```
     </span><span class="kw">pub fn </span>env&lt;S1: Into&lt;String&gt;, S2: Into&lt;String&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: S1, value: S2) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.env.insert(key.into(), value.into());
@@ -1696,9 +1697,9 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand};
     ///
-    /// let mut exec = Execution::new(&quot;random exec&quot;, ExecutionCommand::local(&quot;foo&quot;));
-    /// exec.copy_env(&quot;PATH&quot;);
-    /// assert_eq!(&amp;exec.copy_env[0], &quot;PATH&quot;);
+    /// let mut exec = Execution::new("random exec", ExecutionCommand::local("foo"));
+    /// exec.copy_env("PATH");
+    /// assert_eq!(&amp;exec.copy_env[0], "PATH");
     /// ```
     </span><span class="kw">pub fn </span>copy_env&lt;S: Into&lt;String&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: S) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="self">self</span>.copy_env.push(key.into());
@@ -1710,7 +1711,7 @@
     /// ```
     /// use task_maker_dag::{Execution, ExecutionCommand, ExecutionLimits};
     ///
-    /// let mut exec = Execution::new(&quot;generator of prime numbers&quot;, ExecutionCommand::local(&quot;foo&quot;));
+    /// let mut exec = Execution::new("generator of prime numbers", ExecutionCommand::local("foo"));
     /// exec.limits_mut().cpu_time(2.0).sys_time(0.5).wall_time(3.0).memory(1024).allow_multiprocess();
     /// assert_eq!(exec.limits.cpu_time, Some(2.0));
     /// assert_eq!(exec.limits.sys_time, Some(0.5));
@@ -1747,7 +1748,7 @@
         signal: <span class="prelude-ty">Option</span>&lt;(u32, String)&gt;,
         resources: <span class="kw-2">&amp;</span>ExecutionResourcesUsage,
     ) -&gt; ExecutionStatus {
-        <span class="comment">// it&#39;s important to check those before the signals because exceeding those
+        <span class="comment">// it's important to check those before the signals because exceeding those
         // limits may trigger a SIGKILL from the sandbox
         </span><span class="kw">if let </span><span class="prelude-val">Some</span>(cpu_time_limit) = <span class="self">self</span>.limits.cpu_time {
             <span class="kw">if </span>resources.cpu_time &gt; cpu_time_limit {
@@ -1782,31 +1783,31 @@
 <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span>ExecutionCallbacks {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, formatter: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; <span class="prelude-ty">Result</span>&lt;(), std::fmt::Error&gt; {
         formatter
-            .debug_struct(<span class="string">&quot;ExecutionCallbacks&quot;</span>)
-            .field(<span class="string">&quot;on_start&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.on_start.len())
-            .field(<span class="string">&quot;on_done&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.on_done.len())
-            .field(<span class="string">&quot;on_skip&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.on_skip.len())
+            .debug_struct(<span class="string">"ExecutionCallbacks"</span>)
+            .field(<span class="string">"on_start"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.on_start.len())
+            .field(<span class="string">"on_done"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.on_done.len())
+            .field(<span class="string">"on_skip"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.on_skip.len())
             .finish()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
 
 <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span>ExecutionResult {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
-        f.debug_struct(<span class="string">&quot;ExecutionResult&quot;</span>)
-            .field(<span class="string">&quot;status&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.status)
-            .field(<span class="string">&quot;was_killed&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.was_killed)
-            .field(<span class="string">&quot;was_cached&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.was_cached)
-            .field(<span class="string">&quot;resources&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.resources)
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        f.debug_struct(<span class="string">"ExecutionResult"</span>)
+            .field(<span class="string">"status"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.status)
+            .field(<span class="string">"was_killed"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.was_killed)
+            .field(<span class="string">"was_cached"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.was_cached)
+            .field(<span class="string">"resources"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.resources)
             .field(
-                <span class="string">&quot;stdout&quot;</span>,
+                <span class="string">"stdout"</span>,
                 <span class="kw-2">&amp;</span><span class="self">self
                     </span>.stdout
                     .as_ref()
                     .map(|s| String::from_utf8_lossy(s).to_string()),
             )
             .field(
-                <span class="string">&quot;stderr&quot;</span>,
+                <span class="string">"stderr"</span>,
                 <span class="kw-2">&amp;</span><span class="self">self
                     </span>.stderr
                     .as_ref()
@@ -1828,7 +1829,7 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_success() {
-        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>status = exec.status(
             <span class="number">0</span>,
             <span class="prelude-val">None</span>,
@@ -1844,7 +1845,7 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_cpu_time() {
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec.limits_mut().cpu_time(<span class="number">1.0</span>);
         <span class="kw">let </span>status = exec.status(
             <span class="number">0</span>,
@@ -1861,7 +1862,7 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_sys_time() {
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec.limits_mut().sys_time(<span class="number">1.0</span>);
         <span class="kw">let </span>status = exec.status(
             <span class="number">0</span>,
@@ -1878,7 +1879,7 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_wall_time() {
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec.limits_mut().wall_time(<span class="number">1.0</span>);
         <span class="kw">let </span>status = exec.status(
             <span class="number">0</span>,
@@ -1895,7 +1896,7 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_memory() {
-        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         exec.limits_mut().memory(<span class="number">1234</span>);
         <span class="kw">let </span>status = exec.status(
             <span class="number">0</span>,
@@ -1912,10 +1913,10 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_signal() {
-        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>status = exec.status(
             <span class="number">0</span>,
-            <span class="prelude-val">Some</span>((<span class="number">11</span>, <span class="string">&quot;Killed&quot;</span>.into())),
+            <span class="prelude-val">Some</span>((<span class="number">11</span>, <span class="string">"Killed"</span>.into())),
             <span class="kw-2">&amp;</span>ExecutionResourcesUsage {
                 cpu_time: <span class="number">0.0</span>,
                 sys_time: <span class="number">0.0</span>,
@@ -1923,12 +1924,12 @@
                 memory: <span class="number">0</span>,
             },
         );
-        <span class="macro">assert_eq!</span>(ExecutionStatus::Signal(<span class="number">11</span>, <span class="string">&quot;Killed&quot;</span>.into()), status);
+        <span class="macro">assert_eq!</span>(ExecutionStatus::Signal(<span class="number">11</span>, <span class="string">"Killed"</span>.into()), status);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_status_return_code() {
-        <span class="kw">let </span>exec = Execution::new(<span class="string">&quot;foo&quot;</span>, ExecutionCommand::local(<span class="string">&quot;foo&quot;</span>));
+        <span class="kw">let </span>exec = Execution::new(<span class="string">"foo"</span>, ExecutionCommand::local(<span class="string">"foo"</span>));
         <span class="kw">let </span>status = exec.status(
             <span class="number">1</span>,
             <span class="prelude-val">None</span>,

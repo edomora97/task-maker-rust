@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-diagnostics/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_diagnostics" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-diagnostics/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="task_maker_diagnostics" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -232,10 +233,10 @@
 
 <span class="kw">impl </span>DiagnosticLevel {
     <span class="doccomment">/// Return a human-friendly version of this level.
-    </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str {
         <span class="kw">match </span><span class="self">self </span>{
-            DiagnosticLevel::Error =&gt; <span class="string">&quot;Error&quot;</span>,
-            DiagnosticLevel::Warning =&gt; <span class="string">&quot;Warning&quot;</span>,
+            DiagnosticLevel::Error =&gt; <span class="string">"Error"</span>,
+            DiagnosticLevel::Warning =&gt; <span class="string">"Warning"</span>,
         }
     }
 
@@ -249,7 +250,7 @@
 }
 
 <span class="kw">impl </span>Display <span class="kw">for </span>DiagnosticLevel {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         f.write_str(<span class="self">self</span>.as_str())
     }
 }
@@ -323,28 +324,28 @@
     </span>}
 
     <span class="doccomment">/// Print this diagnostic to the formatter. This is used by the [`std::fmt::Display`] trait.
-    </span><span class="kw">pub fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+    </span><span class="kw">pub fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="comment">// TODO: additional printing options (e.g. no colors, compact, ...)
         </span><span class="kw">let </span>level = <span class="self">self</span>.level.as_str();
         <span class="kw">let </span>pad = level.len();
         <span class="macro">writeln!</span>(
             f,
-            <span class="string">&quot;{}: {}&quot;</span>,
+            <span class="string">"{}: {}"</span>,
             level.color(<span class="self">self</span>.level.color()).bold(),
             <span class="self">self</span>.message
         )<span class="question-mark">?</span>;
         <span class="kw">if let </span><span class="prelude-val">Some</span>(note) = <span class="kw-2">&amp;</span><span class="self">self</span>.note {
-            <span class="macro">write!</span>(f, <span class="string">&quot;{:&gt;pad$}: &quot;</span>, <span class="string">&quot;Note&quot;</span>.bold(), pad = pad)<span class="question-mark">?</span>;
+            <span class="macro">write!</span>(f, <span class="string">"{:&gt;pad$}: "</span>, <span class="string">"Note"</span>.bold(), pad = pad)<span class="question-mark">?</span>;
             <span class="kw">let </span><span class="kw-2">mut </span>lines = note.lines();
             <span class="kw">if let </span><span class="prelude-val">Some</span>(line) = lines.next() {
-                <span class="macro">writeln!</span>(f, <span class="string">&quot;{}&quot;</span>, line)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(f, <span class="string">"{}"</span>, line)<span class="question-mark">?</span>;
             }
             <span class="kw">for </span>line <span class="kw">in </span>lines {
-                <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$}  {}&quot;</span>, <span class="string">&quot;&quot;</span>, line, pad = pad)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$}  {}"</span>, <span class="string">""</span>, line, pad = pad)<span class="question-mark">?</span>;
             }
         }
         <span class="kw">if let </span><span class="prelude-val">Some</span>(help) = <span class="kw-2">&amp;</span><span class="self">self</span>.help {
-            <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$}: {}&quot;</span>, <span class="string">&quot;Help&quot;</span>.bold(), help, pad = pad)<span class="question-mark">?</span>;
+            <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$}: {}"</span>, <span class="string">"Help"</span>.bold(), help, pad = pad)<span class="question-mark">?</span>;
         }
         <span class="kw">if let </span><span class="prelude-val">Some</span>(attachment) = <span class="kw-2">&amp;</span><span class="self">self</span>.help_attachment {
             <span class="kw">let </span>attachment = String::from_utf8_lossy(attachment);
@@ -352,21 +353,21 @@
             <span class="kw">let </span>context_lines = <span class="number">5</span>;
             <span class="kw">if </span>lines.len() &gt; context_lines + <span class="number">1 </span>+ context_lines {
                 <span class="kw">for </span>(index, line) <span class="kw">in </span>lines.iter().enumerate().take(context_lines) {
-                    <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$} | {}&quot;</span>, index + <span class="number">1</span>, line, pad = pad)<span class="question-mark">?</span>;
+                    <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$} | {}"</span>, index + <span class="number">1</span>, line, pad = pad)<span class="question-mark">?</span>;
                 }
-                <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$} |&quot;</span>, <span class="string">&quot;...&quot;</span>, pad = pad)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$} |"</span>, <span class="string">"..."</span>, pad = pad)<span class="question-mark">?</span>;
                 <span class="kw">for </span>(index, line) <span class="kw">in </span>lines.iter().enumerate().skip(lines.len() - context_lines) {
-                    <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$} | {}&quot;</span>, index + <span class="number">1</span>, line, pad = pad)<span class="question-mark">?</span>;
+                    <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$} | {}"</span>, index + <span class="number">1</span>, line, pad = pad)<span class="question-mark">?</span>;
                 }
             } <span class="kw">else </span>{
                 <span class="kw">for </span>(index, line) <span class="kw">in </span>lines.iter().enumerate() {
-                    <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$} | {}&quot;</span>, index + <span class="number">1</span>, line, pad = pad)<span class="question-mark">?</span>;
+                    <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$} | {}"</span>, index + <span class="number">1</span>, line, pad = pad)<span class="question-mark">?</span>;
                 }
             }
         }
         <span class="kw">for </span>code_span <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.code_spans {
             <span class="kw">for </span>line <span class="kw">in </span>code_span.to_string(<span class="self">self</span>.level).lines() {
-                <span class="macro">writeln!</span>(f, <span class="string">&quot;{:&gt;pad$} {}&quot;</span>, <span class="string">&quot;&quot;</span>, line, pad = pad + <span class="number">1</span>)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(f, <span class="string">"{:&gt;pad$} {}"</span>, <span class="string">""</span>, line, pad = pad + <span class="number">1</span>)<span class="question-mark">?</span>;
             }
         }
         <span class="prelude-val">Ok</span>(())
@@ -384,7 +385,7 @@
 }
 
 <span class="kw">impl </span>Display <span class="kw">for </span>Diagnostic {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
         <span class="self">self</span>.print(f)
     }
 }

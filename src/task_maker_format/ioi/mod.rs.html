@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../../../static.files/src-script-39ed315d46fb705f.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><div class="sidebar-resizer"></div>
+    <main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -692,8 +693,8 @@
 </span><span class="kw">pub struct </span>InputValidatorGenerator(Arc&lt;<span class="kw">dyn </span>Fn(<span class="prelude-ty">Option</span>&lt;SubtaskId&gt;) -&gt; InputValidator + Send + Sync&gt;);
 
 <span class="kw">impl </span>Debug <span class="kw">for </span>InputValidatorGenerator {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
-        f.debug_struct(<span class="string">&quot;InputValidatorGenerator&quot;</span>).finish()
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; std::fmt::Result {
+        f.debug_struct(<span class="string">"InputValidatorGenerator"</span>).finish()
     }
 }
 
@@ -705,7 +706,7 @@
 
 <span class="kw">impl </span>InputValidatorGenerator {
     <span class="doccomment">/// Build a generator based on a generating function.
-    </span><span class="kw">pub fn </span>new&lt;F: Fn(<span class="prelude-ty">Option</span>&lt;SubtaskId&gt;) -&gt; InputValidator + Send + Sync + <span class="lifetime">&#39;static</span>&gt;(f: F) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new&lt;F: Fn(<span class="prelude-ty">Option</span>&lt;SubtaskId&gt;) -&gt; InputValidator + Send + Sync + <span class="lifetime">'static</span>&gt;(f: F) -&gt; <span class="self">Self </span>{
         InputValidatorGenerator(Arc::new(f))
     }
 
@@ -726,13 +727,13 @@
     </span><span class="kw">pub </span>name: String,
     <span class="doccomment">/// The title of the task (the long one).
     </span><span class="kw">pub </span>title: String,
-    <span class="doccomment">/// The time limit for the execution of the solutions, if `None` it&#39;s unlimited.
+    <span class="doccomment">/// The time limit for the execution of the solutions, if `None` it's unlimited.
     </span><span class="kw">pub </span>time_limit: <span class="prelude-ty">Option</span>&lt;f64&gt;,
-    <span class="doccomment">/// The memory limit in MiB of the execution of the solution, if `None` it&#39;s unlimited.
+    <span class="doccomment">/// The memory limit in MiB of the execution of the solution, if `None` it's unlimited.
     </span><span class="kw">pub </span>memory_limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
-    <span class="doccomment">/// The input file for the solutions, usually `Some(&quot;input.txt&quot;)` or `None` (stdin).
+    <span class="doccomment">/// The input file for the solutions, usually `Some("input.txt")` or `None` (stdin).
     </span><span class="kw">pub </span>infile: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
-    <span class="doccomment">/// The output file for the solutions, usually `Some(&quot;output.txt&quot;)` or `None` (stdout).
+    <span class="doccomment">/// The output file for the solutions, usually `Some("output.txt")` or `None` (stdout).
     </span><span class="kw">pub </span>outfile: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
     <span class="doccomment">/// The list of the subtasks.
     </span><span class="kw">pub </span>subtasks: HashMap&lt;SubtaskId, SubtaskInfo&gt;,
@@ -755,7 +756,7 @@
     /// Teams). Used only in booklet compilations.
     </span><span class="kw">pub </span>syllabus_level: <span class="prelude-ty">Option</span>&lt;u8&gt;,
     <span class="doccomment">/// The sanity checks attached to this task. Wrapped in Arc since `SanityChecks` is not Clone.
-    /// It&#39;s also not `Serialize` nor `Deserialize`, all the sanity checks will be lost on
+    /// It's also not `Serialize` nor `Deserialize`, all the sanity checks will be lost on
     /// serialization.
     </span><span class="attr">#[serde(skip_serializing, skip_deserializing)]
     </span><span class="kw">pub </span>sanity_checks: Arc&lt;SanityChecks&lt;IOITask&gt;&gt;,
@@ -768,10 +769,10 @@
     </span><span class="kw">pub </span>id: SubtaskId,
     <span class="doccomment">/// The name of the subtask.
     ///
-    /// This is what is used for running the solutions&#39; checks.
+    /// This is what is used for running the solutions' checks.
     </span><span class="kw">pub </span>name: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// Textual description of the subtask. (deprecated)
-    </span><span class="attr">#[deprecated(note = <span class="string">&quot;Use the `name` field instead&quot;</span>)]
+    </span><span class="attr">#[deprecated(note = <span class="string">"Use the `name` field instead"</span>)]
     </span><span class="kw">pub </span>description: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// The maximum score of the subtask, must be &gt;= 0.
     </span><span class="kw">pub </span>max_score: f64,
@@ -786,7 +787,7 @@
 <span class="doccomment">/// A testcase of a IOI task.
 ///
 /// Every testcase has an input and an output that will be put in the input/ and output/ folders.
-/// The files are written there only if it&#39;s not a dry-run and if the files are not static.
+/// The files are written there only if it's not a dry-run and if the files are not static.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
 </span><span class="kw">pub struct </span>TestcaseInfo {
     <span class="doccomment">/// The id of the testcase.
@@ -810,7 +811,7 @@
         format::italian_yaml::parse_task(path, eval_config)
     }
 
-    <span class="doccomment">/// Create a &quot;fake&quot; `IOITask` that will not contain any data.
+    <span class="doccomment">/// Create a "fake" `IOITask` that will not contain any data.
     ///
     /// This can be used to setup executions that are not related to tasks (e.g. booklet
     /// compilations).
@@ -818,8 +819,8 @@
         IOITask {
             path: Default::default(),
             task_type: TaskType::None,
-            name: <span class="string">&quot;&quot;</span>.to_string(),
-            title: <span class="string">&quot;&quot;</span>.to_string(),
+            name: <span class="string">""</span>.to_string(),
+            title: <span class="string">""</span>.to_string(),
             time_limit: <span class="prelude-val">None</span>,
             memory_limit: <span class="prelude-val">None</span>,
             infile: <span class="prelude-val">None</span>,
@@ -838,7 +839,7 @@
 
     <span class="doccomment">/// Check if in the provided path there could be a IOI-like task.
     </span><span class="kw">pub fn </span>is_valid&lt;P: AsRef&lt;Path&gt;&gt;(path: P) -&gt; bool {
-        path.as_ref().join(<span class="string">&quot;task.yaml&quot;</span>).exists()
+        path.as_ref().join(<span class="string">"task.yaml"</span>).exists()
     }
 
     <span class="doccomment">/// Get the root directory of the task.
@@ -846,8 +847,8 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>.path
     }
 
-    <span class="doccomment">/// Get the path relative to the task&#39;s root.
-    </span><span class="kw">pub fn </span>path_of&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Path) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Path {
+    <span class="doccomment">/// Get the path relative to the task's root.
+    </span><span class="kw">pub fn </span>path_of&lt;<span class="lifetime">'a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>Path) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'a </span>Path {
         path.strip_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>.path).unwrap_or(path)
     }
 
@@ -857,7 +858,7 @@
             UIType::Raw =&gt; <span class="prelude-val">Ok</span>(Box::new(RawUI::new())),
             UIType::Print =&gt; <span class="prelude-val">Ok</span>(Box::new(PrintUI::new(UIState::new(<span class="self">self</span>, config)))),
             UIType::Curses =&gt; <span class="prelude-val">Ok</span>(Box::new(
-                CursesUI::new(UIState::new(<span class="self">self</span>, config)).context(<span class="string">&quot;Cannot build curses UI&quot;</span>)<span class="question-mark">?</span>,
+                CursesUI::new(UIState::new(<span class="self">self</span>, config)).context(<span class="string">"Cannot build curses UI"</span>)<span class="question-mark">?</span>,
             )),
             UIType::Json =&gt; <span class="prelude-val">Ok</span>(Box::new(JsonUI::new())),
             UIType::Silent =&gt; <span class="prelude-val">Ok</span>(Box::new(SilentUI::new())),
@@ -875,7 +876,7 @@
         })<span class="question-mark">?</span>;
         eval.solutions = config.find_solutions(
             <span class="kw-2">&amp;</span><span class="self">self</span>.path,
-            <span class="macro">vec!</span>[<span class="string">&quot;sol/*&quot;</span>],
+            <span class="macro">vec!</span>[<span class="string">"sol/*"</span>],
             <span class="prelude-val">Some</span>(<span class="self">self</span>.grader_map.clone()),
             eval,
         );
@@ -898,16 +899,16 @@
 
         <span class="self">self</span>.task_type
             .prepare_dag(eval)
-            .context(<span class="string">&quot;Failed to prepare DAG&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Failed to prepare DAG"</span>)<span class="question-mark">?</span>;
 
         <span class="kw">let </span><span class="kw-2">mut </span>generated_io: HashMap&lt;<span class="kw">_</span>, HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt; = HashMap::new();
 
         <span class="kw">for </span>subtask <span class="kw">in </span><span class="self">self</span>.subtasks.values() {
-            <span class="macro">trace!</span>(<span class="string">&quot;Executing the generation of subtask {}&quot;</span>, subtask.id);
+            <span class="macro">trace!</span>(<span class="string">"Executing the generation of subtask {}"</span>, subtask.id);
 
             <span class="kw">for </span>testcase <span class="kw">in </span>subtask.testcases.values() {
                 <span class="macro">trace!</span>(
-                    <span class="string">&quot;Executing the generation of testcase {} of subtask {}&quot;</span>,
+                    <span class="string">"Executing the generation of testcase {} of subtask {}"</span>,
                     testcase.id,
                     subtask.id
                 );
@@ -915,7 +916,7 @@
                 <span class="kw">let </span>input = testcase
                     .input_generator
                     .generate_and_bind(eval, subtask.id, testcase.id)
-                    .context(<span class="string">&quot;Failed to bind input generator&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to bind input generator"</span>)<span class="question-mark">?</span>;
                 <span class="kw">let </span>val_handle = testcase
                     .input_validator
                     .validate_and_bind(
@@ -925,11 +926,11 @@
                         testcase.id,
                         input,
                     )
-                    .context(<span class="string">&quot;Failed to bind validator&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to bind validator"</span>)<span class="question-mark">?</span>;
                 <span class="kw">let </span>output = testcase
                     .output_generator
                     .generate_and_bind(<span class="self">self</span>, eval, subtask.id, testcase.id, input, val_handle)
-                    .context(<span class="string">&quot;Failed to bind output generator&quot;</span>)<span class="question-mark">?</span>;
+                    .context(<span class="string">"Failed to bind output generator"</span>)<span class="question-mark">?</span>;
                 <span class="comment">// Store the generated input and output files for setting them into the task
                 // outside the loop.
                 </span>generated_io
@@ -939,7 +940,7 @@
 
                 <span class="kw">for </span>(solution, score_manager) <span class="kw">in </span>solutions.iter() {
                     <span class="macro">trace!</span>(
-                        <span class="string">&quot;Evaluation of the solution {:?} against subtask {} / testcase {}&quot;</span>,
+                        <span class="string">"Evaluation of the solution {:?} against subtask {} / testcase {}"</span>,
                         solution.source_file.name(),
                         subtask.id,
                         testcase.id
@@ -957,7 +958,7 @@
                             output,
                             score_manager.clone(),
                         )
-                        .context(<span class="string">&quot;Failed to bind evaluation&quot;</span>)<span class="question-mark">?</span>;
+                        .context(<span class="string">"Failed to bind evaluation"</span>)<span class="question-mark">?</span>;
                 }
             }
         }
@@ -979,11 +980,11 @@
         <span class="kw">for </span>booklet <span class="kw">in </span><span class="self">self</span>.booklets.iter() {
             booklet
                 .build(eval)
-                .context(<span class="string">&quot;Failed to bind booklet compilation&quot;</span>)<span class="question-mark">?</span>;
+                .context(<span class="string">"Failed to bind booklet compilation"</span>)<span class="question-mark">?</span>;
         }
         <span class="self">self</span>.sanity_checks
             .pre_hook(<span class="self">self</span>, eval)
-            .context(<span class="string">&quot;Sanity check pre-hooks failed&quot;</span>)<span class="question-mark">?</span>;
+            .context(<span class="string">"Sanity check pre-hooks failed"</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -995,18 +996,18 @@
 
     <span class="doccomment">/// Clean the task folder removing the files that can be generated automatically.
     </span><span class="kw">pub fn </span>clean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">for </span>dir <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">&quot;input&quot;</span>, <span class="string">&quot;output&quot;</span>] {
+        <span class="kw">for </span>dir <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">"input"</span>, <span class="string">"output"</span>] {
             <span class="kw">let </span>dir = <span class="self">self</span>.path.join(dir);
             <span class="kw">if </span>!dir.exists() {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">for </span>file <span class="kw">in </span>glob::glob(dir.join(<span class="string">&quot;*.txt&quot;</span>).to_string_lossy().as_ref())
-                .context(<span class="string">&quot;Invalid glob pattern&quot;</span>)<span class="question-mark">?
+            <span class="kw">for </span>file <span class="kw">in </span>glob::glob(dir.join(<span class="string">"*.txt"</span>).to_string_lossy().as_ref())
+                .context(<span class="string">"Invalid glob pattern"</span>)<span class="question-mark">?
             </span>{
                 <span class="kw">let </span>file = <span class="kw">match </span>file {
                     <span class="prelude-val">Ok</span>(file) =&gt; file,
                     <span class="prelude-val">Err</span>(e) =&gt; {
-                        <span class="macro">warn!</span>(<span class="string">&quot;Glob error: {:?}&quot;</span>, e);
+                        <span class="macro">warn!</span>(<span class="string">"Glob error: {:?}"</span>, e);
                         <span class="kw">continue</span>;
                     }
                 };
@@ -1023,55 +1024,55 @@
                 {
                     <span class="kw">continue</span>;
                 }
-                <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, file.display());
+                <span class="macro">info!</span>(<span class="string">"Removing {}"</span>, file.display());
                 std::fs::remove_file(<span class="kw-2">&amp;</span>file)
-                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Failed to clean file {}&quot;</span>, file.display()))<span class="question-mark">?</span>;
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">"Failed to clean file {}"</span>, file.display()))<span class="question-mark">?</span>;
             }
-            <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, dir.display());
+            <span class="macro">info!</span>(<span class="string">"Removing {}"</span>, dir.display());
             <span class="kw">if let </span><span class="prelude-val">Err</span>(e) = std::fs::remove_dir(<span class="kw-2">&amp;</span>dir) {
                 <span class="comment">// FIXME: this should be `e.kind() == ErrorKind::DirectoryNotEmpty`, but it is not
                 //        stable yet.
-                </span><span class="kw">if </span>e.to_string().contains(<span class="string">&quot;Directory not empty&quot;</span>) {
-                    <span class="macro">warn!</span>(<span class="string">&quot;Directory {} not empty!&quot;</span>, dir.display());
+                </span><span class="kw">if </span>e.to_string().contains(<span class="string">"Directory not empty"</span>) {
+                    <span class="macro">warn!</span>(<span class="string">"Directory {} not empty!"</span>, dir.display());
                 } <span class="kw">else </span>{
-                    <span class="prelude-val">Err</span>(e).with_context(|| <span class="macro">format!</span>(<span class="string">&quot;Cannot remove {}&quot;</span>, dir.display()))<span class="question-mark">?</span>;
+                    <span class="prelude-val">Err</span>(e).with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot remove {}"</span>, dir.display()))<span class="question-mark">?</span>;
                 }
             }
         }
         <span class="comment">// remove the bin/ folder
-        </span><span class="kw">let </span>bin_path = <span class="self">self</span>.path.join(<span class="string">&quot;bin&quot;</span>);
+        </span><span class="kw">let </span>bin_path = <span class="self">self</span>.path.join(<span class="string">"bin"</span>);
         <span class="kw">if </span>bin_path.exists() {
-            <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, bin_path.display());
+            <span class="macro">info!</span>(<span class="string">"Removing {}"</span>, bin_path.display());
             std::fs::remove_dir_all(<span class="kw-2">&amp;</span>bin_path).with_context(|| {
-                <span class="macro">format!</span>(<span class="string">&quot;Failed to remove bin/ directory at {}&quot;</span>, bin_path.display())
+                <span class="macro">format!</span>(<span class="string">"Failed to remove bin/ directory at {}"</span>, bin_path.display())
             })<span class="question-mark">?</span>;
         }
         <span class="comment">// remove the compiled checkers
         </span><span class="kw">if let </span>TaskType::Batch(data) = <span class="kw-2">&amp;</span><span class="self">self</span>.task_type {
             <span class="kw">if let </span>Checker::Custom(<span class="kw">_</span>) = data.checker {
-                <span class="kw">for </span>checker <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">&quot;check/checker&quot;</span>, <span class="string">&quot;cor/correttore&quot;</span>] {
+                <span class="kw">for </span>checker <span class="kw">in </span><span class="kw-2">&amp;</span>[<span class="string">"check/checker"</span>, <span class="string">"cor/correttore"</span>] {
                     <span class="kw">let </span>path = <span class="self">self</span>.path.join(checker);
                     <span class="kw">if </span>path.exists() {
-                        <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, path.display());
+                        <span class="macro">info!</span>(<span class="string">"Removing {}"</span>, path.display());
                         std::fs::remove_file(<span class="kw-2">&amp;</span>path).with_context(|| {
-                            <span class="macro">format!</span>(<span class="string">&quot;Failed to remove compiled checker at {}&quot;</span>, path.display())
+                            <span class="macro">format!</span>(<span class="string">"Failed to remove compiled checker at {}"</span>, path.display())
                         })<span class="question-mark">?</span>;
                     }
                 }
             }
         }
         <span class="comment">// remove the gen/GEN if there is cases.gen
-        </span><span class="kw">let </span>gen_gen_path = <span class="self">self</span>.path.join(<span class="string">&quot;gen/GEN&quot;</span>);
-        <span class="kw">let </span>cases_gen_path = <span class="self">self</span>.path.join(<span class="string">&quot;gen/cases.gen&quot;</span>);
+        </span><span class="kw">let </span>gen_gen_path = <span class="self">self</span>.path.join(<span class="string">"gen/GEN"</span>);
+        <span class="kw">let </span>cases_gen_path = <span class="self">self</span>.path.join(<span class="string">"gen/cases.gen"</span>);
         <span class="kw">if </span>cases_gen_path.exists() &amp;&amp; gen_gen_path.exists() {
             <span class="kw">if </span>is_gen_gen_deletable(<span class="kw-2">&amp;</span>gen_gen_path)<span class="question-mark">? </span>{
-                <span class="macro">info!</span>(<span class="string">&quot;Removing {}&quot;</span>, gen_gen_path.display());
+                <span class="macro">info!</span>(<span class="string">"Removing {}"</span>, gen_gen_path.display());
                 std::fs::remove_file(<span class="kw-2">&amp;</span>gen_gen_path).with_context(|| {
-                    <span class="macro">format!</span>(<span class="string">&quot;Failed to remove gen/GEN at {}&quot;</span>, gen_gen_path.display())
+                    <span class="macro">format!</span>(<span class="string">"Failed to remove gen/GEN at {}"</span>, gen_gen_path.display())
                 })<span class="question-mark">?</span>;
             } <span class="kw">else </span>{
                 <span class="macro">warn!</span>(
-                    <span class="string">&quot;Won&#39;t remove gen/GEN since it doesn&#39;t contain {}&quot;</span>,
+                    <span class="string">"Won't remove gen/GEN since it doesn't contain {}"</span>,
                     TM_ALLOW_DELETE_COOKIE
                 );
             }
@@ -1082,7 +1083,7 @@
     <span class="doccomment">/// Get the task information.
     </span><span class="kw">pub fn </span>task_info(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;TaskInfo, Error&gt; {
         <span class="prelude-val">Ok</span>(TaskInfo::IOI(
-            task_info::IOITaskInfo::new(<span class="self">self</span>).context(<span class="string">&quot;Cannot produce IOI task info&quot;</span>)<span class="question-mark">?</span>,
+            task_info::IOITaskInfo::new(<span class="self">self</span>).context(<span class="string">"Cannot produce IOI task info"</span>)<span class="question-mark">?</span>,
         ))
     }
 
@@ -1136,10 +1137,10 @@
 
     <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         <span class="kw">match </span>s {
-            <span class="string">&quot;min&quot; </span>| <span class="string">&quot;GroupMin&quot; </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Min),
-            <span class="string">&quot;sum&quot; </span>| <span class="string">&quot;Sum&quot; </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Sum),
-            <span class="string">&quot;GroupMul&quot; </span>| <span class="string">&quot;GroupThreshold&quot; </span>=&gt; <span class="macro">bail!</span>(<span class="string">&quot;{s} is not supported yet&quot;</span>),
-            <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">&quot;Invalid testcase score aggregator: {}&quot;</span>, s),
+            <span class="string">"min" </span>| <span class="string">"GroupMin" </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Min),
+            <span class="string">"sum" </span>| <span class="string">"Sum" </span>=&gt; <span class="prelude-val">Ok</span>(TestcaseScoreAggregator::Sum),
+            <span class="string">"GroupMul" </span>| <span class="string">"GroupThreshold" </span>=&gt; <span class="macro">bail!</span>(<span class="string">"{s} is not supported yet"</span>),
+            <span class="kw">_ </span>=&gt; <span class="macro">bail!</span>(<span class="string">"Invalid testcase score aggregator: {}"</span>, s),
         }
     }
 }
@@ -1185,7 +1186,7 @@
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="self">self</span>.testcase_scores
             .get_mut(<span class="kw-2">&amp;</span>subtask_id)
-            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">&quot;Unknown subtask {}&quot;</span>, subtask_id))<span class="question-mark">?
+            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Unknown subtask {}"</span>, subtask_id))<span class="question-mark">?
             </span>.insert(testcase_id, <span class="prelude-val">Some</span>(score));
         sender.send(UIMessage::IOITestcaseScore {
             subtask: subtask_id,
