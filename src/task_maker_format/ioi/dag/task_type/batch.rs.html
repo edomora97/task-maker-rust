@@ -109,13 +109,6 @@
 <a href="#108" id="108">108</a>
 <a href="#109" id="109">109</a>
 <a href="#110" id="110">110</a>
-<a href="#111" id="111">111</a>
-<a href="#112" id="112">112</a>
-<a href="#113" id="113">113</a>
-<a href="#114" id="114">114</a>
-<a href="#115" id="115">115</a>
-<a href="#116" id="116">116</a>
-<a href="#117" id="117">117</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::sync::{Arc, Mutex};
 
 <span class="kw">use </span>anyhow::{anyhow, Context, Error};
@@ -194,7 +187,6 @@
         path
     )<span class="question-mark">?</span>;
     <span class="kw">let </span>sender = eval.sender.clone();
-    <span class="kw">let </span>path = source_file.path.clone();
     <span class="kw">let </span>score_manager_err = score_manager.clone();
     eval.dag
         .on_execution_done(<span class="kw-2">&amp;</span>exec.uuid, <span class="kw">move </span>|result| <span class="kw">match </span>result.status {
@@ -205,13 +197,11 @@
                 <span class="number">0.0</span>,
                 <span class="macro">format!</span>(<span class="string">"{:?}"</span>, result.status),
                 sender,
-                path,
             ),
         });
     eval.dag.add_execution(exec);
 
     <span class="kw">let </span>sender = eval.sender.clone();
-    <span class="kw">let </span>path = source_file.path.clone();
     data.checker.check_and_bind(
         eval,
         subtask_id,
@@ -221,14 +211,10 @@
         correct_output,
         output.uuid,
         <span class="kw">move </span>|score, message| {
-            score_manager.lock().unwrap().score(
-                subtask_id,
-                testcase_id,
-                score,
-                message,
-                sender,
-                path,
-            )
+            score_manager
+                .lock()
+                .unwrap()
+                .score(subtask_id, testcase_id, score, message, sender)
         },
     )<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
