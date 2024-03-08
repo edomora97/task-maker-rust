@@ -486,7 +486,7 @@
             <span class="kw">let </span>cache = Cache::new(cache_path).context(<span class="string">"Cannot create the cache"</span>)<span class="question-mark">?</span>;
 
             <span class="comment">// setup the local executor
-            </span><span class="kw">let </span>num_cores = opt.num_cores.unwrap_or_else(num_cpus::get);
+            </span><span class="kw">let </span>num_cores = opt.num_cores.unwrap_or_else(num_cpus::get_physical);
             <span class="kw">let </span>sandbox_path = storage_opt.store_dir().join(<span class="string">"sandboxes"</span>);
             <span class="kw">let </span>executor = LocalExecutor::new(
                 file_store.clone(),
