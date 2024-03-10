@@ -226,8 +226,6 @@
 <a href="#225" id="225">225</a>
 <a href="#226" id="226">226</a>
 <a href="#227" id="227">227</a>
-<a href="#228" id="228">228</a>
-<a href="#229" id="229">229</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
 <span class="kw">use </span>anyhow::{anyhow, Context, Error};
@@ -269,10 +267,8 @@
         comp.args(<span class="macro">vec!</span>[
             <span class="string">"-f"</span>,
             <span class="string">"pdf"</span>,
-            <span class="string">"-o"</span>,
-            <span class="string">"output.pdf"</span>,
             <span class="string">"-localhistory"</span>, <span class="comment">// This prevents "failed to create directory /.asy."
-            </span><span class="string">"source.asy"</span>,
+            </span><span class="string">"tm-compilation.asy"</span>,
         ]);
         comp.limits_mut()
             .read_only(<span class="bool-val">false</span>)
@@ -283,7 +279,7 @@
             .mount_tmpfs(<span class="bool-val">true</span>)
             .mount_proc(<span class="bool-val">true</span>);
         comp.tag(Tag::Booklet.into());
-        comp.input(<span class="kw-2">&amp;</span>source_file, <span class="string">"source.asy"</span>, <span class="bool-val">false</span>);
+        comp.input(<span class="kw-2">&amp;</span>source_file, <span class="string">"tm-compilation.asy"</span>, <span class="bool-val">false</span>);
         eval.dag
             .provide_file(source_file, <span class="kw-2">&amp;</span>source_path)
             .context(<span class="string">"Failed to provide any source file"</span>)<span class="question-mark">?</span>;
@@ -317,7 +313,7 @@
                 .provide_file(file, <span class="kw-2">&amp;</span>dep.local_path)
                 .context(<span class="string">"Failed to provide asy dependency"</span>)<span class="question-mark">?</span>;
         }
-        <span class="kw">let </span>compiled = comp.output(<span class="string">"output.pdf"</span>);
+        <span class="kw">let </span>compiled = comp.output(<span class="string">"tm-compilation.pdf"</span>);
         <span class="kw">if </span>eval.dag.data.config.copy_logs {
             <span class="kw">let </span>log_dir = eval.task_root.join(<span class="string">"bin/logs/asy"</span>);
             <span class="kw">let </span>stderr_dest = log_dir.join(<span class="macro">format!</span>(<span class="string">"{}.stderr.log"</span>, name));
