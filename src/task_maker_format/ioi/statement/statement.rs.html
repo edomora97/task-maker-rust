@@ -342,6 +342,10 @@
 <a href="#341" id="341">341</a>
 <a href="#342" id="342">342</a>
 <a href="#343" id="343">343</a>
+<a href="#344" id="344">344</a>
+<a href="#345" id="345">345</a>
+<a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::path::{Path, PathBuf};
 
 <span class="kw">use </span>anyhow::{Context, Error};
@@ -455,7 +459,11 @@
                     )
                 })<span class="question-mark">?</span>;
         }
-        <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[Path::new(<span class="string">"../gen/limiti.py"</span>), Path::new(<span class="string">"../gen/GEN"</span>)] {
+        <span class="kw">for </span>path <span class="kw">in </span><span class="kw-2">&amp;</span>[
+            Path::new(<span class="string">"../gen/limiti.py"</span>),
+            Path::new(<span class="string">"../gen/constraints.py"</span>),
+            Path::new(<span class="string">"../gen/GEN"</span>),
+        ] {
             <span class="kw">let </span>full_path = base_dir.join(path);
             <span class="kw">if </span>!full_path.is_file() {
                 <span class="kw">continue</span>;
