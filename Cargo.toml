@@ -55,7 +55,7 @@ num_cpus = "1.10"
 # Better stacktraces for panics
 better-panic = "0.3"
 # Worker and client name
-whoami = "1.4"
+whoami = "1.5"
 # Cross-platform cache directory
 directories = "5.0"
 # Generic error utilities
