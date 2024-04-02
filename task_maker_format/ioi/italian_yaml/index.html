@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The `italian_yaml` format is defined by `cms` and it’s the most used format in the Italian Olympiads."><title>task_maker_format::ioi::italian_yaml - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../task_maker_format/index.html">task_maker_format</a><span class="version">0.5.15</span></h2></div><h2 class="location"><a href="#">Module italian_yaml</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#constants">Constants</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In task_maker_format::ioi</a></h2></div></nav><div class="sidebar-resizer"></div>
-    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../task_maker_format/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">task_maker_format</a>::<wbr><a href="../index.html">ioi</a>::<wbr><a class="mod" href="#">italian_yaml</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/task_maker_format/ioi/format/italian_yaml/mod.rs.html#1-771">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The <code>italian_yaml</code> format is defined by <a href="https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format"><code>cms</code></a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The `italian_yaml` format is defined by `cms` and it’s the most used format in the Italian Olympiads."><title>task_maker_format::ioi::italian_yaml - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-5bc39a1768837dd0.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.77.1 (7cf61ebde 2024-03-27)" data-channel="1.77.1" data-search-js="search-dd67cee4cfa65049.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-4c98445ec4002617.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-48f368f3872407c8.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-04d5337699b92874.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../task_maker_format/index.html">task_maker_format</a><span class="version">0.5.15</span></h2></div><h2 class="location"><a href="#">Module italian_yaml</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#constants">Constants</a></li><li><a href="#functions">Functions</a></li></ul></section><h2><a href="../index.html">In task_maker_format::ioi</a></h2></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../../../task_maker_format/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../../../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">task_maker_format</a>::<wbr><a href="../index.html">ioi</a>::<wbr><a class="mod" href="#">italian_yaml</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../../../src/task_maker_format/ioi/format/italian_yaml/mod.rs.html#1-770">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The <code>italian_yaml</code> format is defined by <a href="https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format"><code>cms</code></a>
 and it’s the most used format in the Italian Olympiads.</p>
-<h2 id="gengen-format"><a href="#gengen-format"><code>gen/GEN</code> format</a></h2>
+<h2 id="gengen-format"><a class="doc-anchor" href="#gengen-format">§</a><code>gen/GEN</code> format</h2>
 <p>Here it’s provided the definition of the format of the <code>gen/GEN</code> file, as interpreted by
 task-maker. The aim is to be as compatible as possible to the format accepted by <code>cmsMake</code> and
 <code>cmsImportTask</code>.</p>
@@ -29,7 +29,7 @@ passing the three arguments.</li>
 <p>If a line contains a <code>#</code>, all the characters following it (<code>#</code> included) will be ignored as they
 are considered comments. Example: <code>1 2 3 # inline comment</code>.</p>
 <p>If no <code>#ST</code> lines are present, a single subtask worth 100 points is automatically added.</p>
-<h3 id="full-example-of-gengen"><a href="#full-example-of-gengen">Full example of <code>gen/GEN</code></a></h3><div class="example-wrap"><pre class="language-text"><code># N     M       seed
+<h3 id="full-example-of-gengen"><a class="doc-anchor" href="#full-example-of-gengen">§</a>Full example of <code>gen/GEN</code></h3><div class="example-wrap"><pre class="language-text"><code># N     M       seed
 #ST: 0
 #COPY: gen/example1.txt
 #COPY: gen/example2.txt
@@ -49,7 +49,7 @@ sample cases in the text statement.</p>
 <p>Then a new subtask of 30 points starts, it’s composed of 3 testcases. Note that the comment on
 the third will be ignored and just the 3 numbers will be passed to the generator.</p>
 <p>Then there is a third subtask with 2 testcases.</p>
-<h2 id="gencasesgen-format"><a href="#gencasesgen-format"><code>gen/cases.gen</code> format</a></h2>
+<h2 id="gencasesgen-format"><a class="doc-anchor" href="#gencasesgen-format">§</a><code>gen/cases.gen</code> format</h2>
 <p>The <code>gen/GEN</code> format is pretty limited regarding some important aspects of task preparation. For
 example it allows you to use just a single generator and a single validator. A new format, not
 yet officially supported by <code>cms</code> (but workaround exists!), is here described.</p>
@@ -66,7 +66,7 @@ the overridden one in the current subtask.</li>
 </ul>
 <p>If a line contains a <code>#</code>, all the characters following it (<code>#</code> included) will be ignored as they
 are considered comments. Example: <code>1 2 3 # inline comment</code>.</p>
-<h3 id="backwards-compatibility-with-cms"><a href="#backwards-compatibility-with-cms">Backwards compatibility with cms</a></h3>
+<h3 id="backwards-compatibility-with-cms"><a class="doc-anchor" href="#backwards-compatibility-with-cms">§</a>Backwards compatibility with cms</h3>
 <p>Since the importers of cms do not yet support the <code>cases.gen</code> format, there is a workaround that
 works as follows: when the task is built task-maker will create a <em>fake</em> <code>gen/GEN</code> with just the
 metadata needed by <code>cmsImportTask</code> (like the number of testcases and subtasks).</p>
@@ -75,10 +75,10 @@ metadata needed by <code>cmsImportTask</code> (like the number of testcases and 
 with <code>--clean</code>. Note that you should not edit that file because it will be overwritten the next
 time task-maker will be launched. To keep that file you should remove the comment containing
 <code>tm-allow-delete</code>.</p>
-<h3 id="casesgen-commands"><a href="#casesgen-commands"><code>cases.gen</code> commands</a></h3>
+<h3 id="casesgen-commands"><a class="doc-anchor" href="#casesgen-commands">§</a><code>cases.gen</code> commands</h3>
 <p>The lines starting with a column <code>:</code> are commands. What follows the column is the actual command
 which can be of many types.</p>
-<h4 id="-gen-name-path-args"><a href="#-gen-name-path-args"><code>: GEN name path [args...]</code></a></h4>
+<h4 id="-gen-name-path-args"><a class="doc-anchor" href="#-gen-name-path-args">§</a><code>: GEN name path [args...]</code></h4>
 <p>This command registers a new generator for the task. The generator is referenced in the file
 with the specified <code>name</code>, a unique string without spaces. That generator’s source file will be
 found at the specified <code>path</code>. The optional following <code>args...</code> define the command line
@@ -91,7 +91,7 @@ accept 3 arguments named <code>N</code>, <code>M</code> and <code>seed</code>. W
 <code>$N</code>, <code>$M</code> and <code>$seed</code> will be set and available for the constraint evaluation.</p>
 <p>Example: <code>: GEN line gen/line.py</code> defines a new generator named <code>line</code> whose parameters are not
 known and won’t be validated.</p>
-<h4 id="-val-name-path-args"><a href="#-val-name-path-args"><code>: VAL name path [args...]</code></a></h4>
+<h4 id="-val-name-path-args"><a class="doc-anchor" href="#-val-name-path-args">§</a><code>: VAL name path [args...]</code></h4>
 <p>This command registers a new validator for the task. The semantics of the command are the same
 of <code>: GEN name path [args...]</code>, including the behaviour of the <code>default</code> name.</p>
 <p>If no arguments are specified for the validator the default behaviour is to pass the variables
@@ -104,17 +104,17 @@ a generator.</p>
 <p>Example: <code>: VAL default gen/validator.py</code> defines the <em>default</em> validator for the task.</p>
 <p>Example: <code>: VAL line gen/val_line.py $INPUT $ST_NUM</code> defines the <code>line</code> validator which takes 2
 arguments, the same as the default behaviour, but using the variables to specify them.</p>
-<h4 id="-gen-name"><a href="#-gen-name"><code>: GEN name</code></a></h4>
+<h4 id="-gen-name"><a class="doc-anchor" href="#-gen-name">§</a><code>: GEN name</code></h4>
 <p>This command overrides the default generator for the current subtask, meaning that all the
 testcases in the current subtask, following this command, will use the generator named <code>name</code> by
 default. A generator named <code>name</code> must have been previously defined.</p>
 <p>Example: <code>: GEN line</code> sets the current generator to <code>line</code>.</p>
-<h4 id="-val-name"><a href="#-val-name"><code>: VAL name</code></a></h4>
+<h4 id="-val-name"><a class="doc-anchor" href="#-val-name">§</a><code>: VAL name</code></h4>
 <p>This command overrides the default validator for the current subtask, meaning that all the
 testcases in the current subtask, following this command, will use the validator named <code>name</code>.
 A validator named <code>name</code> must have been previously defined.</p>
 <p>Example: <code>: VAL line</code> sets the current validator to <code>line</code>.</p>
-<h4 id="-constraint-operand-operator-operand"><a href="#-constraint-operand-operator-operand"><code>: CONSTRAINT operand (operator operand)+</code></a></h4>
+<h4 id="-constraint-operand-operator-operand"><a class="doc-anchor" href="#-constraint-operand-operator-operand">§</a><code>: CONSTRAINT operand (operator operand)+</code></h4>
 <p>This command adds a constraint that validates the parameters of the testcases. The arguments of
 <code>: CONSTRAINT</code> form an expression that is an inequality (with equalities allowed) between
 constants and variables. When a testcase is defined using a generator with the arguments known,
@@ -125,18 +125,18 @@ direction (cannot mix &lt; and &gt;).</p>
 defined inside a subtask will be used only for that subtask.</p>
 <p>Example: <code>:CONSTRAINT 0 &lt;= $N &lt; $M &lt;= 1000000</code> will check that the variables <code>$N</code> and <code>$M</code> are
 between 0 and 1000000 and <code>$N</code> is smaller than <code>$M</code>.</p>
-<h4 id="-subtask-score-name"><a href="#-subtask-score-name"><code>: SUBTASK score [name]</code></a></h4>
+<h4 id="-subtask-score-name"><a class="doc-anchor" href="#-subtask-score-name">§</a><code>: SUBTASK score [name]</code></h4>
 <p>This command marks the start of a new subtask, just like how <code>#ST</code> in <code>gen/GEN</code> did. The score
 can be a simple floating point number (either an integer or an integer.integer). The name
 that follows is optional and will be included in the subtask metadata.</p>
 <p>When a new subtask is started the generator and validator will be reset to the default ones.</p>
 <p>Example: <code>: SUBTASK 40 all-the-nodes-are-in-a-line</code> defines a new subtask worth 40 points, with
 the provided name.</p>
-<h4 id="-copy-path"><a href="#-copy-path"><code>: COPY path</code></a></h4>
+<h4 id="-copy-path"><a class="doc-anchor" href="#-copy-path">§</a><code>: COPY path</code></h4>
 <p>This command creates a new testcase coping the input file from the specified path, relative to
 the task root directory. The file will be validated using the current validator of the subtask.</p>
 <p>Example: <code>: COPY gen/hardcoded.in</code></p>
-<h4 id="-run-name-args"><a href="#-run-name-args"><code>: RUN name args...</code></a></h4>
+<h4 id="-run-name-args"><a class="doc-anchor" href="#-run-name-args">§</a><code>: RUN name args...</code></h4>
 <p>This command creates a new testcase using the generator named <code>name</code>, passing to it the
 following arguments. The generator must have been previously defined.</p>
 <p>If the generator has the definition of its parameters, they will be used for assigning the
@@ -146,20 +146,19 @@ value (the same as a shell). Unlike <code>gen/GEN</code> you can pass arguments 
 the quotes.</p>
 <p>Example: <code>: RUN line 1 2 3</code> will run the <code>line</code> generator passing the three integers as
 arguments.</p>
-<h3 id="testcase-definition"><a href="#testcase-definition">Testcase definition</a></h3>
+<h3 id="testcase-definition"><a class="doc-anchor" href="#testcase-definition">§</a>Testcase definition</h3>
 <p>Similarly to <code>gen/GEN</code> lines that are not commands nor comments are simple testcase definition.
 Their semantics is the same of <code>: RUN default args...</code>.</p>
-<h3 id="automatic-variables"><a href="#automatic-variables">Automatic variables</a></h3>
+<h3 id="automatic-variables"><a class="doc-anchor" href="#automatic-variables">§</a>Automatic variables</h3>
 <p>In the constraint evaluation and in the validator argument specification all the variables
 obtained from the parsing of the generator’s arguments will be available. Also some automatic
 variables will be available:</p>
 <ul>
 <li><code>$ST_NUM</code>: the 0-based index of the subtask</li>
 <li><code>$ST_NAME</code>: the name of the subtask</li>
-<li><code>$TC_NUM</code>: the 0-based index of the testcase</li>
 <li><code>$INPUT</code> <em>(only for validators)</em>: the name of the file to validate</li>
 </ul>
-<h3 id="full-example-of-casesgen"><a href="#full-example-of-casesgen">Full example of <code>cases.gen</code></a></h3><div class="example-wrap"><pre class="language-text"><code>: GEN default gen/generator.py N M seed
+<h3 id="full-example-of-casesgen"><a class="doc-anchor" href="#full-example-of-casesgen">§</a>Full example of <code>cases.gen</code></h3><div class="example-wrap"><pre class="language-text"><code>: GEN default gen/generator.py N M seed
 : GEN line gen/line.py N seed
 : GEN hard gen/hard.py
 
@@ -202,5 +201,5 @@ which will use the <code>hard</code> one. Note that since the <code>hard</code> 
 specification, its parameters won’t be checked. Also note that the constraint <code>$N &lt;= 500</code> won’t
 be checked because it was scoped only to the second subtask.
 The subtask also does not have a name, the default one (<code>subtask2</code>) will be used.</p>
-</div></details><h2 id="constants" class="section-header"><a href="#constants">Constants</a></h2><ul class="item-table"><li><div class="item-name"><a class="constant" href="constant.VALID_SUBTASK_NAME_CHARACTER_CATEGORIES.html" title="constant task_maker_format::ioi::italian_yaml::VALID_SUBTASK_NAME_CHARACTER_CATEGORIES">VALID_SUBTASK_NAME_CHARACTER_CATEGORIES</a></div><div class="desc docblock-short">The set of valid Unicode General Categories for the characters composing a subtask name.</div></li></ul><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.parse_task.html" title="fn task_maker_format::ioi::italian_yaml::parse_task">parse_task</a></div><div class="desc docblock-short">Given the path to the task directory, try to parse the task inside of it assuming the format is
+</div></details><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="constant" href="constant.VALID_SUBTASK_NAME_CHARACTER_CATEGORIES.html" title="constant task_maker_format::ioi::italian_yaml::VALID_SUBTASK_NAME_CHARACTER_CATEGORIES">VALID_SUBTASK_NAME_CHARACTER_CATEGORIES</a></div><div class="desc docblock-short">The set of valid Unicode General Categories for the characters composing a subtask name.</div></li></ul><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.parse_task.html" title="fn task_maker_format::ioi::italian_yaml::parse_task">parse_task</a></div><div class="desc docblock-short">Given the path to the task directory, try to parse the task inside of it assuming the format is
 <code>italian_yaml</code>.</div></li></ul></section></div></main></body></html>
