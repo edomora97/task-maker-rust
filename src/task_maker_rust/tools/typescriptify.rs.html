@@ -103,7 +103,6 @@
 <a href="#101" id="101">101</a>
 <a href="#102" id="102">102</a>
 <a href="#103" id="103">103</a>
-<a href="#104" id="104">104</a>
 </pre></div><pre class="rust"><code><span class="comment">// These warnings show up in release mode, but they are not important
 </span><span class="attr">#![cfg_attr(not(debug_assertions), allow(dead_code, unused_macros, unused_imports))]
 
@@ -118,7 +117,7 @@
 <span class="kw">use </span>task_maker_format::ioi::{
     BatchTypeData, Booklet, BookletConfig, Checker, CommunicationTypeData, IOITask, InputGenerator,
     InputValidator, OutputGenerator, Statement, StatementConfig, SubtaskInfo, TaskInfoScoring,
-    TaskInfoStatement, TaskType, TestcaseInfo, TestcaseScoreAggregator,
+    TaskInfoStatement, TaskType, TestcaseInfo,
 };
 <span class="kw">use </span>task_maker_format::ioi::{IOITaskInfo, TaskInfoAttachment, TaskInfoLimits, TaskInfoSubtask};
 <span class="kw">use </span>task_maker_format::terry::TerryTaskInfo;
@@ -170,7 +169,6 @@
     <span class="macro">export_ts!</span>(TaskType);
     <span class="macro">export_ts!</span>(SubtaskInfo);
     <span class="macro">export_ts!</span>(TestcaseInfo);
-    <span class="macro">export_ts!</span>(TestcaseScoreAggregator);
     <span class="macro">export_ts!</span>(GraderMap);
     <span class="macro">export_ts!</span>(Dependency);
     <span class="macro">export_ts!</span>(File);

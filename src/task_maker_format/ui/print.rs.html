@@ -473,7 +473,7 @@
                 <span class="kw">for </span>(st_num, subtask) <span class="kw">in </span>task.subtasks.iter().sorted_by_key(|x| x.<span class="number">0</span>) {
                     <span class="macro">println!</span>(<span class="string">"  {}: {} points"</span>, st_num, subtask.max_score);
                     <span class="macro">print!</span>(<span class="string">"     testcases: ["</span>);
-                    <span class="kw">for </span>tc_num <span class="kw">in </span>subtask.testcases.keys().sorted() {
+                    <span class="kw">for </span>tc_num <span class="kw">in </span>subtask.testcases_owned.iter().sorted() {
                         <span class="macro">print!</span>(<span class="string">" {}"</span>, tc_num);
                     }
                     <span class="macro">println!</span>(<span class="string">" ]"</span>);

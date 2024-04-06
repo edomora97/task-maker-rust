@@ -545,7 +545,25 @@
 <a href="#543" id="543">543</a>
 <a href="#544" id="544">544</a>
 <a href="#545" id="545">545</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span>std::path::Path;
+<a href="#546" id="546">546</a>
+<a href="#547" id="547">547</a>
+<a href="#548" id="548">548</a>
+<a href="#549" id="549">549</a>
+<a href="#550" id="550">550</a>
+<a href="#551" id="551">551</a>
+<a href="#552" id="552">552</a>
+<a href="#553" id="553">553</a>
+<a href="#554" id="554">554</a>
+<a href="#555" id="555">555</a>
+<a href="#556" id="556">556</a>
+<a href="#557" id="557">557</a>
+<a href="#558" id="558">558</a>
+<a href="#559" id="559">559</a>
+<a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
+<a href="#562" id="562">562</a>
+</pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
@@ -594,6 +612,7 @@
     </span><span class="kw">let </span><span class="kw-2">mut </span>testcase_count = <span class="number">0</span>;
     <span class="kw">let </span><span class="kw-2">mut </span>subtask_id: SubtaskId = <span class="number">0</span>;
     <span class="kw">let </span><span class="kw-2">mut </span>entries = <span class="macro">vec!</span>[];
+    <span class="kw">let </span><span class="kw-2">mut </span>st_name_to_id = HashMap::new();
 
     <span class="kw">let </span><span class="kw-2">mut </span>default_subtask = <span class="prelude-val">Some</span>(SubtaskInfo {
         id: <span class="number">0</span>,
@@ -675,8 +694,23 @@
                                 cleanup_subtask_name(name)
                                     .with_context(|| <span class="macro">format!</span>(<span class="string">"Invalid subtask name: {}"</span>, name))<span class="question-mark">?</span>,
                             );
+                            st_name_to_id.insert(subtask.name.clone().unwrap(), subtask.id);
                         } <span class="kw">else </span>{
                             <span class="macro">bail!</span>(<span class="string">"#STNAME: must immediately follow a #ST: in gen/GEN"</span>);
+                        }
+                    }
+                    parser::Rule::subtask_dep =&gt; {
+                        <span class="kw">let </span>last_entry = entries.last_mut().ok_or_else(|| {
+                            <span class="macro">anyhow!</span>(<span class="string">"A #STDEP: rule must immediately follow a #ST: in gen/GEN"</span>)
+                        })<span class="question-mark">?</span>;
+                        <span class="kw">let </span>TaskInputEntry::Subtask(subtask) = last_entry <span class="kw">else </span>{
+                            <span class="macro">bail!</span>(<span class="string">"#STNAME: must immediately follow a #ST: in gen/GEN"</span>);
+                        };
+                        <span class="kw">for </span>dependency <span class="kw">in </span>line.into_inner() {
+                            <span class="kw">let </span>dep_id = <span class="kw-2">*</span>st_name_to_id
+                                .get(dependency.as_str())
+                                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Unknown subtask name: {}"</span>, dependency))<span class="question-mark">?</span>;
+                            subtask.dependencies.push(dep_id);
                         }
                     }
                     parser::Rule::copy =&gt; {

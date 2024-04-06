@@ -273,9 +273,8 @@
         TaskFormat::IOI(task) =&gt; {
             <span class="comment">// A template testcase for selecting the generator and validator.
             </span><span class="kw">let </span>testcase_template = task
-                .subtasks
+                .testcases
                 .values()
-                .flat_map(|st| st.testcases.values())
                 .find(|tc| <span class="macro">matches!</span>(tc.input_generator, InputGenerator::Custom(<span class="kw">_</span>, <span class="kw">_</span>)))
                 .cloned()
                 <span class="comment">// FIXME: in theory we can find the generator and the solution even without a testcase
@@ -323,7 +322,8 @@
                 id: <span class="number">0</span>,
                 name: <span class="prelude-val">Some</span>(<span class="macro">format!</span>(<span class="string">"batch-{}"</span>, batch_index)),
                 max_score: <span class="number">100.0</span>,
-                testcases,
+                testcases: testcases.keys().cloned().collect(),
+                testcases_owned: testcases.keys().cloned().collect(),
                 is_default: <span class="bool-val">false</span>,
                 input_validator: task.input_validator_generator.generate(<span class="prelude-val">Some</span>(<span class="number">0</span>)),
                 ..Default::default()

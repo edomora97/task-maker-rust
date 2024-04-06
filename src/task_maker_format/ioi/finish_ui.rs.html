@@ -822,9 +822,9 @@
         <span class="macro">println!</span>();
 
         <span class="kw">let </span>results = eval
-            .subtasks
+            .testcases
             .values()
-            .flat_map(|st| st.testcases.values().flat_map(|tc| tc.results.iter()))
+            .flat_map(|tc| tc.results.iter())
             .filter_map(|e| e.as_ref())
             .map(|r| <span class="kw-2">&amp;</span>r.resources);
         <span class="kw">let </span>(max_time, max_memory) = results.fold((<span class="number">0.0</span>, <span class="number">0</span>), |(time, mem), r| {
@@ -842,8 +842,8 @@
             <span class="kw">let </span>normalized_score = subtask.normalized_score;
             <span class="self">self</span>.print_score_frac(normalized_score, score, max_score, <span class="kw-2">&amp;</span>state.task);
             <span class="macro">println!</span>();
-
-            <span class="kw">for </span>(tc_num, testcase) <span class="kw">in </span>subtask.testcases.iter().sorted_by_key(|(n, <span class="kw">_</span>)| <span class="kw-2">*</span>n) {
+            <span class="kw">for </span>tc_num <span class="kw">in </span><span class="kw-2">&amp;</span>state.task.subtasks[st_num].testcases_owned {
+                <span class="kw">let </span>testcase = <span class="kw-2">&amp;</span>eval.testcases[tc_num];
                 <span class="self">self</span>.print_testcase_outcome(<span class="kw-2">&amp;</span>name, <span class="kw-2">*</span>tc_num, testcase, max_time, max_memory, state);
             }
         }
@@ -1005,8 +1005,8 @@
                 <span class="kw">let </span>time_limit = state.task.time_limit;
                 <span class="kw">let </span>memory_limit = state.task.memory_limit;
                 <span class="kw">let </span>extra_time = state.config.extra_time;
-                <span class="kw">for </span>tc_num <span class="kw">in </span>subtask.testcases.keys().sorted() {
-                    <span class="kw">let </span>testcase = <span class="kw-2">&amp;</span>subtask.testcases[tc_num];
+                <span class="kw">for </span>tc_num <span class="kw">in </span><span class="kw-2">&amp;</span>state.task.subtasks[st_num].testcases_owned {
+                    <span class="kw">let </span>testcase = <span class="kw-2">&amp;</span>eval.testcases[tc_num];
                     <span class="kw">let </span>close_color = <span class="kw">if </span>testcase.is_close_to_limits(
                         time_limit,
                         extra_time,

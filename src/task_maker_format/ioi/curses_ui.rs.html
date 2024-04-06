@@ -650,11 +650,10 @@
             ScoreStatus::PartialScore =&gt; Span::styled(<span class="macro">format!</span>(<span class="string">" {:&gt;3.0} "</span>, score), <span class="kw-2">*</span>YELLOW),
         }
     } <span class="kw">else </span>{
-        <span class="kw">let </span>has_skipped = sol_state.subtasks.values().any(|st| {
-            st.testcases
-                .values()
-                .any(|tc| tc.status == TestcaseEvaluationStatus::Skipped)
-        });
+        <span class="kw">let </span>has_skipped = sol_state
+            .testcases
+            .values()
+            .any(|tc| tc.status == TestcaseEvaluationStatus::Skipped);
         <span class="kw">if </span>has_skipped {
             Span::raw(<span class="string">"  X  "</span>)
         } <span class="kw">else </span>{
@@ -679,15 +678,15 @@
 </span><span class="kw">fn </span>subtask_evaluation_status_text&lt;<span class="lifetime">'a</span>&gt;(
     state: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>UIState,
     solution: <span class="kw-2">&amp;</span>Path,
-    subtask: SubtaskId,
+    subtask_id: SubtaskId,
     loading: char,
 ) -&gt; Vec&lt;Span&lt;<span class="lifetime">'a</span>&gt;&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>texts = <span class="macro">vec!</span>[];
     <span class="kw">let </span>solution = <span class="kw-2">&amp;</span>state.evaluations[solution];
-    <span class="kw">if </span>!solution.subtasks.contains_key(<span class="kw-2">&amp;</span>subtask) {
+    <span class="kw">if </span>!solution.subtasks.contains_key(<span class="kw-2">&amp;</span>subtask_id) {
         <span class="kw">return </span><span class="macro">vec!</span>[Span::raw(<span class="string">"[---]"</span>)];
     }
-    <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>solution.subtasks[<span class="kw-2">&amp;</span>subtask];
+    <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>solution.subtasks[<span class="kw-2">&amp;</span>subtask_id];
     <span class="kw">let </span>par_style = <span class="kw">if let </span><span class="prelude-val">Some</span>(normalized_score) = subtask.normalized_score {
         <span class="kw">match </span>ScoreStatus::from_score(normalized_score, <span class="number">1.0</span>) {
             ScoreStatus::Accepted =&gt; <span class="kw-2">*</span>GREEN,
@@ -698,7 +697,8 @@
         Style::default()
     };
     texts.push(Span::styled(<span class="string">"["</span>, par_style));
-    <span class="kw">for </span>(<span class="kw">_</span>, testcase) <span class="kw">in </span>subtask.testcases.iter().sorted_by_key(|(k, <span class="kw">_</span>)| <span class="kw-2">*</span>k) {
+    <span class="kw">for </span>testcase_id <span class="kw">in </span><span class="kw-2">&amp;</span>state.task.subtasks[<span class="kw-2">&amp;</span>subtask_id].testcases_owned {
+        <span class="kw">let </span>testcase = <span class="kw-2">&amp;</span>solution.testcases[testcase_id];
         texts.push(testcase_evaluation_status_text(testcase, loading, state));
     }
     texts.push(Span::styled(<span class="string">"]"</span>, par_style));

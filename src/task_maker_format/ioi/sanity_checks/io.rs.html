@@ -131,8 +131,6 @@
 <a href="#129" id="129">129</a>
 <a href="#130" id="130">130</a>
 <a href="#131" id="131">131</a>
-<a href="#132" id="132">132</a>
-<a href="#133" id="133">133</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashSet;
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 
@@ -234,24 +232,22 @@
     }
 
     <span class="kw">fn </span>pre_hook(<span class="kw-2">&amp;</span><span class="self">self</span>, task: <span class="kw-2">&amp;</span>IOITask, eval: <span class="kw-2">&amp;mut </span>EvaluationData) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">for </span>subtask <span class="kw">in </span>task.subtasks.values() {
-            <span class="kw">for </span>(<span class="kw-2">&amp;</span>testcase_id, testcase) <span class="kw">in </span><span class="kw-2">&amp;</span>subtask.testcases {
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(input_file) = testcase.input_file {
-                    CheckEndWithNewLine::bind(
-                        eval,
-                        input_file,
-                        <span class="macro">format!</span>(<span class="string">"input/input{}.txt"</span>, testcase_id),
-                        <span class="self">self</span>.inputs.clone(),
-                    );
-                }
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(output_file) = testcase.official_output_file {
-                    CheckEndWithNewLine::bind(
-                        eval,
-                        output_file,
-                        <span class="macro">format!</span>(<span class="string">"output/output{}.txt"</span>, testcase_id),
-                        <span class="self">self</span>.outputs.clone(),
-                    );
-                }
+        <span class="kw">for </span>(<span class="kw-2">&amp;</span>testcase_id, testcase) <span class="kw">in </span><span class="kw-2">&amp;</span>task.testcases {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(input_file) = testcase.input_file {
+                CheckEndWithNewLine::bind(
+                    eval,
+                    input_file,
+                    <span class="macro">format!</span>(<span class="string">"input/input{}.txt"</span>, testcase_id),
+                    <span class="self">self</span>.inputs.clone(),
+                );
+            }
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(output_file) = testcase.official_output_file {
+                CheckEndWithNewLine::bind(
+                    eval,
+                    output_file,
+                    <span class="macro">format!</span>(<span class="string">"output/output{}.txt"</span>, testcase_id),
+                    <span class="self">self</span>.outputs.clone(),
+                );
             }
         }
         <span class="prelude-val">Ok</span>(())

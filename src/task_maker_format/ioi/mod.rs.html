@@ -635,6 +635,34 @@
 <a href="#633" id="633">633</a>
 <a href="#634" id="634">634</a>
 <a href="#635" id="635">635</a>
+<a href="#636" id="636">636</a>
+<a href="#637" id="637">637</a>
+<a href="#638" id="638">638</a>
+<a href="#639" id="639">639</a>
+<a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
+<a href="#642" id="642">642</a>
+<a href="#643" id="643">643</a>
+<a href="#644" id="644">644</a>
+<a href="#645" id="645">645</a>
+<a href="#646" id="646">646</a>
+<a href="#647" id="647">647</a>
+<a href="#648" id="648">648</a>
+<a href="#649" id="649">649</a>
+<a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! The IOI task format.
 //!
 //! In IOI-like tasks there is the concept of _subtask_ and of _testcase_: a testcase is a single
@@ -658,7 +686,7 @@
 <span class="kw">use </span>std::str::FromStr;
 <span class="kw">use </span>std::sync::{Arc, Mutex};
 
-<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
+<span class="kw">use </span>anyhow::{bail, Context, Error};
 <span class="kw">use </span>itertools::Itertools;
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>typescript_definitions::TypeScriptify;
@@ -707,7 +735,9 @@
     <span class="doccomment">/// The maximum score of each subtask.
     </span>max_subtask_scores: HashMap&lt;SubtaskId, f64&gt;,
     <span class="doccomment">/// The scores of each testcase.
-    </span>testcase_scores: HashMap&lt;SubtaskId, HashMap&lt;TestcaseId, <span class="prelude-ty">Option</span>&lt;f64&gt;&gt;&gt;,
+    </span>testcase_scores: HashMap&lt;TestcaseId, <span class="prelude-ty">Option</span>&lt;f64&gt;&gt;,
+    <span class="doccomment">/// The list of testcases of each subtask.
+    </span>subtask_testcases: HashMap&lt;SubtaskId, Vec&lt;TestcaseId&gt;&gt;,
     <span class="doccomment">/// The aggregator to use for computing the subtask scores.
     </span>aggregator: TestcaseScoreAggregator,
 }
@@ -761,6 +791,8 @@
     </span><span class="kw">pub </span>outfile: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;,
     <span class="doccomment">/// The list of the subtasks.
     </span><span class="kw">pub </span>subtasks: HashMap&lt;SubtaskId, SubtaskInfo&gt;,
+    <span class="doccomment">/// The list of the testcases.
+    </span><span class="kw">pub </span>testcases: HashMap&lt;TestcaseId, TestcaseInfo&gt;,
     <span class="doccomment">/// The generator of validators for the various subtasks.
     </span><span class="attr">#[serde(skip_serializing, skip_deserializing)]
     </span><span class="kw">pub </span>input_validator_generator: InputValidatorGenerator,
@@ -801,13 +833,17 @@
     <span class="doccomment">/// The maximum score of the subtask, must be &gt;= 0.
     </span><span class="kw">pub </span>max_score: f64,
     <span class="doccomment">/// The testcases inside this subtask.
-    </span><span class="kw">pub </span>testcases: HashMap&lt;TestcaseId, TestcaseInfo&gt;,
+    </span><span class="kw">pub </span>testcases: Vec&lt;TestcaseId&gt;,
+    <span class="doccomment">/// The original testcases inside this subtask.
+    </span><span class="kw">pub </span>testcases_owned: Vec&lt;TestcaseId&gt;,
     <span class="doccomment">/// The validator for the input files of this subtask.
     </span><span class="kw">pub </span>input_validator: InputValidator,
     <span class="doccomment">/// The span of the definition of this subtask.
     </span><span class="kw">pub </span>span: <span class="prelude-ty">Option</span>&lt;CodeSpan&gt;,
     <span class="doccomment">/// Whether this subtask was created automatically since no subtask was present in gen/GEN.
     </span><span class="kw">pub </span>is_default: bool,
+    <span class="doccomment">/// The list of the dependencies of this subtask.
+    </span><span class="kw">pub </span>dependencies: Vec&lt;SubtaskId&gt;,
 }
 
 <span class="doccomment">/// A testcase of a IOI task.
@@ -850,6 +886,7 @@
             infile: <span class="prelude-val">None</span>,
             outfile: <span class="prelude-val">None</span>,
             subtasks: Default::default(),
+            testcases: Default::default(),
             input_validator_generator: Default::default(),
             testcase_score_aggregator: TestcaseScoreAggregator::Min,
             score_precision: <span class="number">0</span>,
@@ -934,18 +971,22 @@
             .prepare_dag(eval)
             .context(<span class="string">"Failed to prepare DAG"</span>)<span class="question-mark">?</span>;
 
-        <span class="kw">let </span><span class="kw-2">mut </span>generated_io: HashMap&lt;<span class="kw">_</span>, HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt; = HashMap::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>generated_io: HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; = HashMap::new();
 
         <span class="kw">for </span>subtask <span class="kw">in </span><span class="self">self</span>.subtasks.values() {
             <span class="macro">trace!</span>(<span class="string">"Executing the generation of subtask {}"</span>, subtask.id);
 
-            <span class="kw">for </span>testcase <span class="kw">in </span>subtask.testcases.values() {
+            <span class="kw">for </span><span class="kw-2">&amp;</span>testcase_id <span class="kw">in </span>subtask.testcases_owned.iter() {
                 <span class="macro">trace!</span>(
                     <span class="string">"Executing the generation of testcase {} of subtask {}"</span>,
-                    testcase.id,
+                    testcase_id,
                     subtask.id
                 );
 
+                <span class="kw">let </span>testcase = <span class="self">self
+                    </span>.testcases
+                    .get(<span class="kw-2">&amp;</span>testcase_id)
+                    .expect(<span class="string">"Testcase not found in the task"</span>);
                 <span class="kw">let </span>input = testcase
                     .input_generator
                     .generate_and_bind(eval, subtask.id, testcase.id)
@@ -966,10 +1007,7 @@
                     .context(<span class="string">"Failed to bind output generator"</span>)<span class="question-mark">?</span>;
                 <span class="comment">// Store the generated input and output files for setting them into the task
                 // outside the loop.
-                </span>generated_io
-                    .entry(subtask.id)
-                    .or_default()
-                    .insert(testcase.id, (input, output));
+                </span>generated_io.insert(testcase.id, (input, output));
 
                 <span class="kw">for </span>(solution, score_manager) <span class="kw">in </span>solutions.iter() {
                     <span class="macro">trace!</span>(
@@ -997,17 +1035,31 @@
         }
         <span class="comment">// Store inside the task the FileUuid of the input and official output files. This cannot
         // be done while generating because task cannot be borrowed mutably in the loop.
-        </span><span class="kw">for </span>(subtask_id, subtask) <span class="kw">in </span>generated_io {
-            <span class="kw">for </span>(testcase_id, (input, output)) <span class="kw">in </span>subtask {
-                <span class="kw">let </span>testcase = <span class="self">self
-                    </span>.subtasks
-                    .get_mut(<span class="kw-2">&amp;</span>subtask_id)
-                    .unwrap()
-                    .testcases
-                    .get_mut(<span class="kw-2">&amp;</span>testcase_id)
-                    .unwrap();
-                testcase.input_file = <span class="prelude-val">Some</span>(input);
-                testcase.official_output_file = output;
+        </span><span class="kw">for </span>(testcase_id, (input, output)) <span class="kw">in </span>generated_io {
+            <span class="kw">let </span>testcase = <span class="self">self</span>.testcases.get_mut(<span class="kw-2">&amp;</span>testcase_id).unwrap();
+            testcase.input_file = <span class="prelude-val">Some</span>(input);
+            testcase.official_output_file = output;
+        }
+
+        <span class="kw">for </span>subtask <span class="kw">in </span><span class="self">self</span>.subtasks.values() {
+            <span class="kw">for </span><span class="kw-2">&amp;</span>testcase_id <span class="kw">in </span>subtask.testcases.iter() {
+                <span class="kw">if </span>!subtask.testcases_owned.contains(<span class="kw-2">&amp;</span>testcase_id) {
+                    <span class="kw">let </span>testcase = <span class="self">self
+                        </span>.testcases
+                        .get(<span class="kw-2">&amp;</span>testcase_id)
+                        .expect(<span class="string">"Testcase not found in the task"</span>);
+
+                    <span class="kw">let </span>_val_handle = subtask
+                        .input_validator
+                        .validate_and_bind(
+                            eval,
+                            subtask.id,
+                            subtask.name.as_deref(),
+                            testcase.id,
+                            testcase.input_file.unwrap(),
+                        )
+                        .context(<span class="string">"Failed to bind validator"</span>)<span class="question-mark">?</span>;
+                }
             }
         }
         <span class="kw">for </span>booklet <span class="kw">in </span><span class="self">self</span>.booklets.iter() {
@@ -1045,16 +1097,13 @@
                     }
                 };
                 <span class="comment">// check if the file is used by a static generator
-                </span><span class="kw">if </span><span class="self">self
-                    </span>.subtasks
-                    .values()
-                    .flat_map(|st| st.testcases.values())
-                    .any(|tc| <span class="kw">match </span>(<span class="kw-2">&amp;</span>tc.input_generator, <span class="kw-2">&amp;</span>tc.output_generator) {
+                </span><span class="kw">if </span><span class="self">self</span>.testcases.values().any(|tc| {
+                    <span class="kw">match </span>(<span class="kw-2">&amp;</span>tc.input_generator, <span class="kw-2">&amp;</span>tc.output_generator) {
                         (InputGenerator::StaticFile(path), <span class="kw">_</span>)
                         | (<span class="kw">_</span>, OutputGenerator::StaticFile(path)) =&gt; path == <span class="kw-2">&amp;</span>file,
                         <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
-                    })
-                {
+                    }
+                }) {
                     <span class="kw">continue</span>;
                 }
                 <span class="macro">info!</span>(<span class="string">"Removing {}"</span>, file.display());
@@ -1191,12 +1240,13 @@
                 .values()
                 .map(|st| (st.id, st.max_score))
                 .collect(),
-            testcase_scores: task
+            testcase_scores: task.testcases.keys().map(|tc| (<span class="kw-2">*</span>tc, <span class="prelude-val">None</span>)).collect(),
+            subtask_testcases: task
                 .subtasks
-                .values()
-                .map(|st| (st.id, st.testcases.keys().map(|tc| (<span class="kw-2">*</span>tc, <span class="prelude-val">None</span>)).collect()))
+                .iter()
+                .map(|(st_num, st)| (<span class="kw-2">*</span>st_num, st.testcases.clone()))
                 .collect(),
-            aggregator: task.testcase_score_aggregator.clone(),
+            aggregator: task.testcase_score_aggregator,
         };
 
         <span class="kw">for </span>(st_num, st) <span class="kw">in </span><span class="kw-2">&amp;</span>task.subtasks {
@@ -1217,10 +1267,7 @@
         message: String,
         sender: Arc&lt;Mutex&lt;UIMessageSender&gt;&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="self">self</span>.testcase_scores
-            .get_mut(<span class="kw-2">&amp;</span>subtask_id)
-            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Unknown subtask {}"</span>, subtask_id))<span class="question-mark">?
-            </span>.insert(testcase_id, <span class="prelude-val">Some</span>(score));
+        <span class="self">self</span>.testcase_scores.insert(testcase_id, <span class="prelude-val">Some</span>(score));
         sender.send(UIMessage::IOITestcaseScore {
             subtask: subtask_id,
             testcase: testcase_id,
@@ -1229,7 +1276,16 @@
             message,
         })<span class="question-mark">?</span>;
 
-        <span class="self">self</span>.score_subtask(subtask_id, sender)<span class="question-mark">?</span>;
+        <span class="kw">for </span>(subtask_id, subtask) <span class="kw">in </span><span class="self">self
+            </span>.subtask_scores
+            .iter()
+            .map(|(<span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b)| (a, b))
+            .collect_vec()
+        {
+            <span class="kw">if </span>subtask.is_none() {
+                <span class="self">self</span>.score_subtask(subtask_id, sender.clone())<span class="question-mark">?</span>;
+            }
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -1238,14 +1294,14 @@
         subtask_id: SubtaskId,
         sender: Arc&lt;Mutex&lt;UIMessageSender&gt;&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">if </span><span class="self">self</span>.testcase_scores[<span class="kw-2">&amp;</span>subtask_id]
-            .values()
-            .all(Option::is_some)
+        <span class="kw">if </span><span class="self">self</span>.subtask_testcases[<span class="kw-2">&amp;</span>subtask_id]
+            .iter()
+            .all(|tc| <span class="self">self</span>.testcase_scores[tc].is_some())
         {
             <span class="kw">let </span>normalized_score = <span class="self">self</span>.aggregator.aggregate(
-                <span class="self">self</span>.testcase_scores[<span class="kw-2">&amp;</span>subtask_id]
-                    .values()
-                    .map(|score| score.unwrap()),
+                <span class="self">self</span>.subtask_testcases[<span class="kw-2">&amp;</span>subtask_id]
+                    .iter()
+                    .map(|tc| <span class="self">self</span>.testcase_scores[tc].unwrap()),
             );
             <span class="kw">let </span>subtask_score = <span class="self">self</span>.max_subtask_scores[<span class="kw-2">&amp;</span>subtask_id] * normalized_score;
             <span class="self">self</span>.subtask_scores.insert(subtask_id, <span class="prelude-val">Some</span>(subtask_score));

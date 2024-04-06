@@ -105,7 +105,6 @@
 <a href="#103" id="103">103</a>
 <a href="#104" id="104">104</a>
 <a href="#105" id="105">105</a>
-<a href="#106" id="106">106</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>anyhow::{Context, Error};
 <span class="kw">use </span>task_maker_diagnostics::Diagnostic;
 
@@ -152,9 +151,8 @@
 
         <span class="comment">// Find a testcase to use for fuzzing.
         </span><span class="kw">let </span>testcase = task
-            .subtasks
+            .testcases
             .values()
-            .flat_map(|st| st.testcases.values())
             .find(|tc| tc.input_file.is_some() &amp;&amp; tc.official_output_file.is_some());
         <span class="kw">if </span>testcase.is_none() {
             <span class="kw">return </span><span class="prelude-val">Ok</span>(());

@@ -300,7 +300,6 @@
 <a href="#298" id="298">298</a>
 <a href="#299" id="299">299</a>
 <a href="#300" id="300">300</a>
-<a href="#301" id="301">301</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::cmp::Ordering;
 <span class="kw">use </span>std::collections::{HashMap, HashSet};
 <span class="kw">use </span>std::fs::File;
@@ -473,13 +472,12 @@
 
     <span class="kw">let </span><span class="kw-2">mut </span>checks: HashMap&lt;<span class="kw">_</span>, Vec&lt;<span class="kw">_</span>&gt;&gt; = HashMap::new();
     <span class="kw">for </span>st_num <span class="kw">in </span>solution_results.subtasks.keys().sorted() {
-        <span class="kw">let </span>st_info = <span class="kw-2">&amp;</span>solution_results.subtasks[st_num];
         <span class="kw">let </span>subtask = <span class="kw-2">&amp;</span>state.task.subtasks[st_num];
 
-        <span class="kw">let </span>testcase_results: <span class="prelude-ty">Option</span>&lt;Vec&lt;TestcaseEvaluationResult&gt;&gt; = st_info
+        <span class="kw">let </span>testcase_results: <span class="prelude-ty">Option</span>&lt;Vec&lt;TestcaseEvaluationResult&gt;&gt; = state.task.subtasks[st_num]
             .testcases
-            .values()
-            .map(|testcase| (<span class="kw-2">&amp;</span>testcase.status).into())
+            .iter()
+            .map(|tc_num| (<span class="kw-2">&amp;</span>solution_results.testcases[tc_num].status).into())
             .collect();
         <span class="kw">let </span><span class="prelude-val">Some</span>(testcase_results) = testcase_results <span class="kw">else </span>{
             <span class="macro">println!</span>(

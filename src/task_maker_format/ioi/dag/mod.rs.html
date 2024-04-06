@@ -588,8 +588,10 @@
 <a href="#586" id="586">586</a>
 <a href="#587" id="587">587</a>
 <a href="#588" id="588">588</a>
+<a href="#589" id="589">589</a>
+<a href="#590" id="590">590</a>
+<a href="#591" id="591">591</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>serde::{Deserialize, Serialize};
-<span class="kw">use </span>typescript_definitions::TypeScriptify;
 
 <span class="kw">pub use </span>checker::Checker;
 <span class="kw">pub use </span>input_generator::InputGenerator;
@@ -615,15 +617,18 @@
 </span><span class="kw">pub const </span>STDERR_CONTENT_LENGTH: usize = <span class="number">10 </span>* <span class="number">1024</span>;
 
 <span class="doccomment">/// The aggregator of testcase scores for computing the subtask score.
-</span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
+</span><span class="attr">#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
+#[serde(rename_all = <span class="string">"snake_case"</span>)]
 </span><span class="kw">pub enum </span>TestcaseScoreAggregator {
     <span class="doccomment">/// Take the minimum of all the testcases, formally:
     ///
     /// `st_score = st_max_score * min(*testcase_scores)`
+    </span><span class="attr">#[serde(alias = <span class="string">"GroupMin"</span>)]
     </span>Min,
     <span class="doccomment">/// Sum the score of all the testcases, formally:
     ///
     /// `st_score = st_max_score * sum(*testcase_scores) / len(*testcase_scores)`
+    </span><span class="attr">#[serde(alias = <span class="string">"Sum"</span>)]
     </span>Sum,
 }
 
@@ -706,6 +711,7 @@
             infile: <span class="prelude-val">None</span>,
             outfile: <span class="prelude-val">None</span>,
             subtasks: Default::default(),
+            testcases: Default::default(),
             input_validator_generator: Default::default(),
             testcase_score_aggregator: TestcaseScoreAggregator::Min,
             score_precision: <span class="number">0</span>,

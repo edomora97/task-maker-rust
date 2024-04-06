@@ -582,7 +582,6 @@
 <a href="#580" id="580">580</a>
 <a href="#581" id="581">581</a>
 <a href="#582" id="582">582</a>
-<a href="#583" id="583">583</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeSet, HashMap};
 <span class="kw">use </span>std::io::{Read, Seek, SeekFrom};
 <span class="kw">use </span>std::path::PathBuf;
@@ -671,12 +670,11 @@
     /// These files are the `#COPY` from the first subtask, if the first subtask only contains `#COPY`.
     </span><span class="kw">fn </span>extract_sample_files_from_task(task: <span class="kw-2">&amp;</span>IOITask) -&gt; Vec&lt;PathBuf&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>testcases = <span class="macro">vec!</span>[];
-        <span class="kw">let </span>subtask = <span class="kw">if let </span><span class="prelude-val">Some</span>(subtask) = task.subtasks.get(<span class="kw-2">&amp;</span><span class="number">0</span>) {
-            subtask
-        } <span class="kw">else </span>{
+        <span class="kw">let </span><span class="prelude-val">Some</span>(subtask) = task.subtasks.get(<span class="kw-2">&amp;</span><span class="number">0</span>) <span class="kw">else </span>{
             <span class="kw">return </span>testcases;
         };
-        <span class="kw">for </span>(<span class="kw">_</span>, testcase) <span class="kw">in </span>subtask.testcases.iter() {
+        <span class="kw">for </span>testcase_id <span class="kw">in </span>subtask.testcases.iter() {
+            <span class="kw">let </span>testcase = task.testcases.get(testcase_id).unwrap();
             <span class="kw">match </span><span class="kw-2">&amp;</span>testcase.input_generator {
                 InputGenerator::StaticFile(path) =&gt; {
                     <span class="kw">let </span>path = path.canonicalize().unwrap_or_else(|<span class="kw">_</span>| path.clone());
