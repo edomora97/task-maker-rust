@@ -892,26 +892,6 @@
 <a href="#890" id="890">890</a>
 <a href="#891" id="891">891</a>
 <a href="#892" id="892">892</a>
-<a href="#893" id="893">893</a>
-<a href="#894" id="894">894</a>
-<a href="#895" id="895">895</a>
-<a href="#896" id="896">896</a>
-<a href="#897" id="897">897</a>
-<a href="#898" id="898">898</a>
-<a href="#899" id="899">899</a>
-<a href="#900" id="900">900</a>
-<a href="#901" id="901">901</a>
-<a href="#902" id="902">902</a>
-<a href="#903" id="903">903</a>
-<a href="#904" id="904">904</a>
-<a href="#905" id="905">905</a>
-<a href="#906" id="906">906</a>
-<a href="#907" id="907">907</a>
-<a href="#908" id="908">908</a>
-<a href="#909" id="909">909</a>
-<a href="#910" id="910">910</a>
-<a href="#911" id="911">911</a>
-<a href="#912" id="912">912</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)
 //! and it's the most used format in the Italian Olympiads.
 //!
@@ -1177,7 +1157,7 @@
 
 <span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
 <span class="kw">use </span>itertools::Itertools;
-<span class="kw">use </span>serde::{Deserialize, Deserializer, Serialize, Serializer};
+<span class="kw">use </span>serde::{Deserialize, Serialize, Serializer};
 <span class="kw">use </span>unic::normal::StrNormalForm;
 <span class="kw">use </span>unic::ucd::category::GeneralCategory;
 
@@ -1229,6 +1209,21 @@
     GeneralCategory::OtherSymbol,
 ];
 
+<span class="attr">#[allow(clippy::trivially_copy_pass_by_ref)]
+</span><span class="kw">fn </span>cms_serialize_score_type&lt;S&gt;(
+    val: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;TestcaseScoreAggregator&gt;,
+    ser: S,
+) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt;
+<span class="kw">where
+    </span>S: Serializer,
+{
+    <span class="kw">match </span>val {
+        <span class="prelude-val">Some</span>(TestcaseScoreAggregator::Sum) =&gt; ser.serialize_str(<span class="string">"Sum"</span>),
+        <span class="prelude-val">Some</span>(TestcaseScoreAggregator::Min) =&gt; ser.serialize_str(<span class="string">"GroupMin"</span>),
+        <span class="prelude-val">None </span>=&gt; ser.serialize_none(),
+    }
+}
+
 <span class="doccomment">/// Deserialized data from the task.yaml of a IOI format task.
 </span><span class="attr">#[derive(Debug, Serialize, Deserialize)]
 </span><span class="kw">struct </span>TaskYAML {
@@ -1239,6 +1234,7 @@
     </span><span class="attr">#[serde(alias = <span class="string">"nome"</span>)]
     </span><span class="kw">pub </span>title: String,
     <span class="doccomment">/// The score type to use for this task.
+    </span><span class="attr">#[serde(serialize_with = <span class="string">"cms_serialize_score_type"</span>)]
     </span><span class="kw">pub </span>score_type: <span class="prelude-ty">Option</span>&lt;TestcaseScoreAggregator&gt;,
     <span class="doccomment">/// The parameters of the score type.
     </span><span class="attr">#[serde(skip_serializing_if = <span class="string">"Option::is_none"</span>)]
@@ -1255,9 +1251,7 @@
     </span><span class="kw">pub </span>memory_limit: <span class="prelude-ty">Option</span>&lt;u64&gt;,
 
     <span class="doccomment">/// Whether this is an output only task. Defaults to false.
-    </span><span class="attr">#[serde(default = <span class="string">"bool::default"</span>)]
-    #[serde(serialize_with = <span class="string">"python_bool_serializer"</span>)]
-    #[serde(deserialize_with = <span class="string">"python_bool_deserializer"</span>)]
+    </span><span class="attr">#[serde(default)]
     </span><span class="kw">pub </span>output_only: bool,
     <span class="doccomment">/// The input file for the solutions, usually 'input.txt' or '' (stdin). Defaults to `''`.
     </span><span class="attr">#[serde(default = <span class="string">"default_infile"</span>)]
@@ -1745,40 +1739,6 @@
         num_processes: yaml.num_processes.unwrap_or(<span class="number">1</span>),
         user_io,
     })))
-}
-
-<span class="doccomment">/// Serializer of a boolean using the python syntax:
-/// - `true` -&gt; `True`
-/// - `false` -&gt; `False`
-</span><span class="attr">#[allow(clippy::trivially_copy_pass_by_ref)]
-</span><span class="kw">fn </span>python_bool_serializer&lt;S&gt;(val: <span class="kw-2">&amp;</span>bool, ser: S) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt;
-<span class="kw">where
-    </span>S: Serializer,
-{
-    <span class="kw">if </span><span class="kw-2">*</span>val {
-        ser.serialize_str(<span class="string">"True"</span>)
-    } <span class="kw">else </span>{
-        ser.serialize_str(<span class="string">"False"</span>)
-    }
-}
-
-<span class="doccomment">/// Deserializer of a boolean using the python syntax:
-/// - `True` -&gt; `true`
-/// - `False` -&gt; `false`
-/// - other -&gt; error
-</span><span class="kw">fn </span>python_bool_deserializer&lt;<span class="lifetime">'de</span>, D&gt;(deser: D) -&gt; <span class="prelude-ty">Result</span>&lt;bool, D::Error&gt;
-<span class="kw">where
-    </span>D: Deserializer&lt;<span class="lifetime">'de</span>&gt;,
-{
-    <span class="kw">use </span>serde::de::Error;
-    <span class="kw">let </span>val = String::deserialize(deser)<span class="question-mark">?</span>;
-    <span class="kw">if </span>val == <span class="string">"True" </span>{
-        <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
-    } <span class="kw">else if </span>val == <span class="string">"False" </span>{
-        <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
-    } <span class="kw">else </span>{
-        <span class="prelude-val">Err</span>(Error::custom(<span class="string">"invalid bool, either True or False"</span>))
-    }
 }
 
 <span class="doccomment">/// The default value for the `infile` field of task.yaml.
