@@ -863,7 +863,7 @@
 
     <span class="doccomment">/// Check if in the provided path there could be a IOI-like task.
     </span><span class="kw">pub fn </span>is_valid&lt;P: AsRef&lt;Path&gt;&gt;(path: P) -&gt; bool {
-        path.as_ref().join(<span class="string">"task.yaml"</span>).exists()
+        path.as_ref().join(<span class="string">"task.yaml"</span>).exists() || path.as_ref().join(<span class="string">"task.yaml.orig"</span>).exists()
     }
 
     <span class="doccomment">/// Get the root directory of the task.
