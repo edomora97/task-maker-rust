@@ -562,11 +562,13 @@
 <a href="#560" id="560">560</a>
 <a href="#561" id="561">561</a>
 <a href="#562" id="562">562</a>
+<a href="#563" id="563">563</a>
+<a href="#564" id="564">564</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use </span>anyhow::{anyhow, bail, Context, Error};
+<span class="kw">use </span>anyhow::{anyhow, bail, ensure, Context, Error};
 <span class="kw">use </span>pest::Parser;
 
 <span class="kw">use </span>task_maker_diagnostics::CodeSpan;
@@ -694,7 +696,9 @@
                                 cleanup_subtask_name(name)
                                     .with_context(|| <span class="macro">format!</span>(<span class="string">"Invalid subtask name: {}"</span>, name))<span class="question-mark">?</span>,
                             );
-                            st_name_to_id.insert(subtask.name.clone().unwrap(), subtask.id);
+                            <span class="kw">let </span>old_id =
+                                st_name_to_id.insert(subtask.name.clone().unwrap(), subtask.id);
+                            <span class="macro">ensure!</span>(old_id.is_none(), <span class="string">"Duplicate subtask name: {}"</span>, name);
                         } <span class="kw">else </span>{
                             <span class="macro">bail!</span>(<span class="string">"#STNAME: must immediately follow a #ST: in gen/GEN"</span>);
                         }
@@ -704,7 +708,7 @@
                             <span class="macro">anyhow!</span>(<span class="string">"A #STDEP: rule must immediately follow a #ST: in gen/GEN"</span>)
                         })<span class="question-mark">?</span>;
                         <span class="kw">let </span>TaskInputEntry::Subtask(subtask) = last_entry <span class="kw">else </span>{
-                            <span class="macro">bail!</span>(<span class="string">"#STNAME: must immediately follow a #ST: in gen/GEN"</span>);
+                            <span class="macro">bail!</span>(<span class="string">"#STDEP: must immediately follow a #ST: in gen/GEN"</span>);
                         };
                         <span class="kw">for </span>dependency <span class="kw">in </span>line.into_inner() {
                             <span class="kw">let </span>dep_id = <span class="kw-2">*</span>st_name_to_id
