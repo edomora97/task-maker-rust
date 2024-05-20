@@ -70,7 +70,7 @@ ctrlc = "3.4"
 # Global constants
 lazy_static = "1.4"
 # General iterator utilities
-itertools = "0.12"
+itertools = "0.13"
 # Iterate recursively the files in a directory (used for `task-maker-tools reset`)
 walkdir = "2.5"
 # defer! macro
