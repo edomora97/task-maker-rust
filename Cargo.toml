@@ -68,7 +68,7 @@ tabox = "1"
 # Signal handler for ^C
 ctrlc = "3.4"
 # Global constants
-lazy_static = "1.4"
+lazy_static = "1.5"
 # General iterator utilities
 itertools = "0.12"
 # Iterate recursively the files in a directory (used for `task-maker-tools reset`)
