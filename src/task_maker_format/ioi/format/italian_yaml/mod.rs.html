@@ -890,6 +890,11 @@
 <a href="#890" id="890">890</a>
 <a href="#891" id="891">891</a>
 <a href="#892" id="892">892</a>
+<a href="#893" id="893">893</a>
+<a href="#894" id="894">894</a>
+<a href="#895" id="895">895</a>
+<a href="#896" id="896">896</a>
+<a href="#897" id="897">897</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)
 //! and it's the most used format in the Italian Olympiads.
 //!
@@ -1240,6 +1245,8 @@
     <span class="doccomment">/// The number of decimal digits when displaying the scores.
     </span><span class="attr">#[serde(default)]
     </span><span class="kw">pub </span>score_precision: usize,
+    <span class="doccomment">/// The primary language used when importing the task.
+    </span><span class="kw">pub </span>primary_language: <span class="prelude-ty">Option</span>&lt;String&gt;,
 
     <span class="doccomment">/// The time limit for the execution of the solutions, if not set it's unlimited.
     </span><span class="attr">#[serde(alias = <span class="string">"timeout"</span>)]
@@ -1295,6 +1302,8 @@
     <span class="doccomment">/// The number of decimal digits when displaying the scores.
     </span><span class="attr">#[serde(default)]
     </span><span class="kw">pub </span>score_precision: usize,
+    <span class="doccomment">/// The primary language used when importing the task.
+    </span><span class="kw">pub </span>primary_language: <span class="prelude-ty">Option</span>&lt;String&gt;,
 
     <span class="doccomment">/// The time limit for the execution of the solutions.
     </span><span class="kw">pub </span>time_limit: f64,
@@ -1334,6 +1343,7 @@
             score_type: <span class="self">self</span>.score_type,
             score_type_parameters: <span class="prelude-val">None</span>,
             score_precision: <span class="self">self</span>.score_precision,
+            primary_language: <span class="prelude-val">Some</span>(<span class="self">self</span>.primary_language.unwrap_or_else(|| <span class="string">"en"</span>.into())),
             time_limit: <span class="prelude-val">Some</span>(<span class="self">self</span>.time_limit),
             memory_limit: <span class="prelude-val">Some</span>(<span class="self">self</span>.memory_limit),
             output_only: <span class="self">self</span>.output_only,
