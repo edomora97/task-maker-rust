@@ -127,6 +127,8 @@ where
     subtask_name: Option<String>,
     /// The mapping from subtask name to subtask id.
     st_name_to_id: HashMap<String, SubtaskId>,
+    /// Mapping from subtask_id to the list of names of dependencies.
+    st_deps: HashMap<SubtaskId, Vec<String>>,
     /// The identifier of the next testcase to process.
     testcase_id: TestcaseId,
 }
@@ -168,6 +170,7 @@ where
             subtask_id: 0,
             subtask_name: None,
             st_name_to_id: HashMap::new(),
+            st_deps: HashMap::new(),
             testcase_id: 0,
         };
 
@@ -198,6 +201,28 @@ where
                 _ => unreachable!(),
             }
         }
+
+        for entry in &mut cases.result {
+            if let TaskInputEntry::Subtask(subtask) = entry {
+                if let Some(deps) = cases.st_deps.get(&subtask.id) {
+                    for dep in deps {
+                        if dep == "*" {
+                            subtask.dependencies = (0..cases.subtask_id).collect();
+                            eprintln!("ASDFASDFQWERQWER {}", cases.subtask_id);
+                        } else {
+                            let dep_id = *cases
+                                .st_name_to_id
+                                .get(dep)
+                                .ok_or_else(|| anyhow!("Unknown subtask name: {}", dep))?;
+                            subtask.dependencies.push(dep_id);
+                        }
+                    }
+                    subtask.dependencies.sort_unstable();
+                    subtask.dependencies.dedup();
+                }
+            }
+        }
+
         Ok(cases)
     }
 
@@ -561,14 +586,13 @@ where
     /// Parse a `:STDEP` command.
     fn parse_st_dep(&mut self, line: Pair) -> Result<(), Error> {
         for dep in line.into_inner() {
-            let id = *self
-                .st_name_to_id
-                .get(dep.as_str())
-                .context("Unknown subtask")?;
             let Some(TaskInputEntry::Subtask(subtask)) = self.result.last_mut() else {
                 bail!(":STDEP must immediately follow a #ST: in gen/GEN");
             };
-            subtask.dependencies.push(id);
+            self.st_deps
+                .entry(subtask.id)
+                .or_default()
+                .push(dep.as_str().to_owned());
         }
         Ok(())
     }

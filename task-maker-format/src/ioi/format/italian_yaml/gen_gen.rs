@@ -49,6 +49,7 @@ where
     let mut subtask_id: SubtaskId = 0;
     let mut entries = vec![];
     let mut st_name_to_id = HashMap::new();
+    let mut st_deps = HashMap::<SubtaskId, Vec<_>>::new();
 
     let mut default_subtask = Some(SubtaskInfo {
         id: 0,
@@ -145,10 +146,10 @@ where
                             bail!("#STDEP: must immediately follow a #ST: in gen/GEN");
                         };
                         for dependency in line.into_inner() {
-                            let dep_id = *st_name_to_id
-                                .get(dependency.as_str())
-                                .ok_or_else(|| anyhow!("Unknown subtask name: {}", dependency))?;
-                            subtask.dependencies.push(dep_id);
+                            st_deps
+                                .entry(subtask.id)
+                                .or_default()
+                                .push(dependency.as_str().to_owned());
                         }
                     }
                     parser::Rule::copy => {
@@ -195,6 +196,26 @@ where
             _ => unreachable!(),
         }
     }
+
+    for entry in &mut entries {
+        if let TaskInputEntry::Subtask(subtask) = entry {
+            if let Some(deps) = st_deps.get(&subtask.id) {
+                for dep in deps {
+                    if dep == "*" {
+                        subtask.dependencies = (0..subtask_id).collect();
+                    } else {
+                        let dep_id = *st_name_to_id
+                            .get(dep)
+                            .ok_or_else(|| anyhow!("Unknown subtask name: {}", dep))?;
+                        subtask.dependencies.push(dep_id);
+                    }
+                }
+                subtask.dependencies.sort_unstable();
+                subtask.dependencies.dedup();
+            }
+        }
+    }
+
     Ok(entries)
 }
 

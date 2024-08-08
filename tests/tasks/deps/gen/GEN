@@ -1,13 +1,13 @@
 #ST: 30
 #STNAME: st-0
+#STDEP: st-1
 0
 
 #ST: 30
 #STNAME: st-1
-#STDEP: st-0
 1
 
 #ST: 40
 #STNAME: st-2
-#STDEP: st-1
+#STDEP: *
 2

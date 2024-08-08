@@ -16,12 +16,12 @@ fn classic(test: TestInterface) {
         .must_compile("sol-12.cpp")
         .must_compile("sol-012.cpp")
         .solution_score("sol-.cpp", vec![0.0, 0.0, 0.0])
-        .solution_score("sol-0.cpp", vec![30.0, 0.0, 0.0])
-        .solution_score("sol-1.cpp", vec![0.0, 0.0, 0.0])
+        .solution_score("sol-0.cpp", vec![0.0, 0.0, 0.0])
+        .solution_score("sol-1.cpp", vec![0.0, 30.0, 0.0])
         .solution_score("sol-2.cpp", vec![0.0, 0.0, 0.0])
         .solution_score("sol-01.cpp", vec![30.0, 30.0, 0.0])
-        .solution_score("sol-02.cpp", vec![30.0, 0.0, 0.0])
-        .solution_score("sol-12.cpp", vec![0.0, 0.0, 0.0])
+        .solution_score("sol-02.cpp", vec![0.0, 0.0, 0.0])
+        .solution_score("sol-12.cpp", vec![0.0, 30.0, 0.0])
         .solution_score("sol-012.cpp", vec![30.0, 30.0, 40.0]);
 }
 
