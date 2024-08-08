@@ -554,7 +554,7 @@
         exec.args(<span class="self">self</span>.language.runtime_args(<span class="kw-2">&amp;</span><span class="self">self</span>.path, write_to, args));
         exec.input(
             <span class="self">self</span>.executable.lock().unwrap().as_ref().unwrap(),
-            <span class="kw-2">&amp;</span><span class="self">self</span>.language.executable_name(<span class="kw-2">&amp;</span><span class="self">self</span>.path, write_to),
+            <span class="self">self</span>.language.executable_name(<span class="kw-2">&amp;</span><span class="self">self</span>.path, write_to),
             <span class="bool-val">true</span>,
         );
         <span class="kw">for </span>dep <span class="kw">in </span><span class="self">self</span>.language.runtime_dependencies(<span class="kw-2">&amp;</span><span class="self">self</span>.path) {

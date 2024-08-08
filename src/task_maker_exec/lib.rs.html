@@ -480,9 +480,9 @@
         });
         dag.on_execution_start(<span class="kw-2">&amp;</span>exec3.uuid, |_w| <span class="macro">panic!</span>(<span class="string">"exec3 has not been skipped"</span>));
         dag.add_execution(exec3);
-        dag.write_file_to(<span class="kw-2">&amp;</span>stdout, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"stdout"</span>), <span class="bool-val">false</span>);
-        dag.write_file_to(<span class="kw-2">&amp;</span>stdout2, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"stdout2"</span>), <span class="bool-val">false</span>);
-        dag.write_file_to(<span class="kw-2">&amp;</span>output3, <span class="kw-2">&amp;</span>cwd.path().join(<span class="string">"output3"</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>stdout, cwd.path().join(<span class="string">"stdout"</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>stdout2, cwd.path().join(<span class="string">"stdout2"</span>), <span class="bool-val">false</span>);
+        dag.write_file_to(<span class="kw-2">&amp;</span>output3, cwd.path().join(<span class="string">"output3"</span>), <span class="bool-val">false</span>);
 
         eval_dag_locally(
             dag,
