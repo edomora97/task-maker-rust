@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/format/italian_yaml/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-dd39b87e5fcfba68.css"><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.80.1 (3f5fd8dd4 2024-08-06)" data-channel="1.80.1" data-search-js="search-d52510db62a78183.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../../src-files.js"></script><script defer src="../../../../../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `task-maker-format/src/ioi/format/italian_yaml/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="task_maker_format" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../../../src-files.js"></script><script defer src="../../../../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -895,6 +895,32 @@
 <a href="#895" id="895">895</a>
 <a href="#896" id="896">896</a>
 <a href="#897" id="897">897</a>
+<a href="#898" id="898">898</a>
+<a href="#899" id="899">899</a>
+<a href="#900" id="900">900</a>
+<a href="#901" id="901">901</a>
+<a href="#902" id="902">902</a>
+<a href="#903" id="903">903</a>
+<a href="#904" id="904">904</a>
+<a href="#905" id="905">905</a>
+<a href="#906" id="906">906</a>
+<a href="#907" id="907">907</a>
+<a href="#908" id="908">908</a>
+<a href="#909" id="909">909</a>
+<a href="#910" id="910">910</a>
+<a href="#911" id="911">911</a>
+<a href="#912" id="912">912</a>
+<a href="#913" id="913">913</a>
+<a href="#914" id="914">914</a>
+<a href="#915" id="915">915</a>
+<a href="#916" id="916">916</a>
+<a href="#917" id="917">917</a>
+<a href="#918" id="918">918</a>
+<a href="#919" id="919">919</a>
+<a href="#920" id="920">920</a>
+<a href="#921" id="921">921</a>
+<a href="#922" id="922">922</a>
+<a href="#923" id="923">923</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! The `italian_yaml` format is defined by [`cms`](https://cms.readthedocs.io/en/v1.4/External%20contest%20formats.html#italian-import-format)
 //! and it's the most used format in the Italian Olympiads.
 //!
@@ -1153,8 +1179,8 @@
 //! The subtask also does not have a name, the default one (`subtask2`) will be used.
 
 </span><span class="kw">use </span>std::collections::HashMap;
-<span class="kw">use </span>std::fs::File;
-<span class="kw">use </span>std::io::BufWriter;
+<span class="kw">use </span>std::fs::{<span class="self">self</span>, File};
+<span class="kw">use </span>std::io::{BufWriter, Write};
 <span class="kw">use </span>std::path::{Path, PathBuf};
 <span class="kw">use </span>std::sync::Arc;
 
@@ -1164,7 +1190,6 @@
 <span class="kw">use </span>unic::normal::StrNormalForm;
 <span class="kw">use </span>unic::ucd::category::GeneralCategory;
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use </span>cases_gen::{is_gen_gen_deletable, TM_ALLOW_DELETE_COOKIE};
 <span class="kw">use </span>task_maker_lang::GraderMap;
 
 <span class="kw">use </span><span class="kw">crate</span>::ioi::sanity_checks::get_sanity_checks;
@@ -1179,6 +1204,9 @@
 <span class="kw">mod </span>cases_gen;
 <span class="kw">mod </span>gen_gen;
 <span class="kw">mod </span>static_inputs;
+
+<span class="doccomment">/// String placed in the auto-generated files marking them as safely deletable.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>TM_ALLOW_DELETE_COOKIE: <span class="kw-2">&amp;</span>str = <span class="string">"tm-allow-delete"</span>;
 
 <span class="doccomment">/// The set of valid Unicode General Categories for the characters composing a subtask name.
 </span><span class="kw">pub const </span>VALID_SUBTASK_NAME_CHARACTER_CATEGORIES: <span class="kw-2">&amp;</span>[GeneralCategory] = <span class="kw-2">&amp;</span>[
@@ -1397,21 +1425,25 @@
 ) -&gt; <span class="prelude-ty">Result</span>&lt;IOITask, Error&gt; {
     <span class="kw">let </span>task_dir = task_dir.as_ref();
 
+    <span class="kw">let </span>task_yaml_path = task_dir.join(<span class="string">"task.yaml"</span>);
+    <span class="kw">let </span>task_yaml_orig_path = task_dir.join(<span class="string">"task.yaml.orig"</span>);
     <span class="kw">let </span>task_yaml_overwrite: bool;
     <span class="kw">let </span><span class="kw-2">mut </span>yaml: TaskYAML;
-    <span class="kw">if </span>task_dir.join(<span class="string">"task.yaml.orig"</span>).exists() {
+    <span class="kw">if </span>task_yaml_orig_path.exists() {
         task_yaml_overwrite = <span class="bool-val">true</span>;
-        <span class="kw">let </span>path = task_dir.join(task_dir.join(<span class="string">"task.yaml.orig"</span>));
-        <span class="kw">let </span>file = File::open(<span class="kw-2">&amp;</span>path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot open task.yaml.orig from {}"</span>, path.display()))<span class="question-mark">?</span>;
+        <span class="kw">let </span>file = File::open(<span class="kw-2">&amp;</span>task_yaml_orig_path).with_context(|| {
+            <span class="macro">format!</span>(
+                <span class="string">"Cannot open task.yaml.orig from {}"</span>,
+                task_yaml_orig_path.display()
+            )
+        })<span class="question-mark">?</span>;
         <span class="kw">let </span>yaml_orig: TaskYAMLOrig =
             serde_yaml::from_reader(file).context(<span class="string">"Failed to deserialize task.yaml.orig"</span>)<span class="question-mark">?</span>;
         yaml = yaml_orig.into_task_yaml(task_dir);
-    } <span class="kw">else if </span>task_dir.join(<span class="string">"task.yaml"</span>).exists() {
+    } <span class="kw">else if </span>task_yaml_path.exists() {
         task_yaml_overwrite = <span class="bool-val">false</span>;
-        <span class="kw">let </span>path = task_dir.join(task_dir.join(<span class="string">"task.yaml"</span>));
-        <span class="kw">let </span>file = File::open(<span class="kw-2">&amp;</span>path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot open task.yaml from {}"</span>, path.display()))<span class="question-mark">?</span>;
+        <span class="kw">let </span>file = File::open(<span class="kw-2">&amp;</span>task_yaml_path)
+            .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot open task.yaml from {}"</span>, task_yaml_path.display()))<span class="question-mark">?</span>;
         yaml = serde_yaml::from_reader(file).context(<span class="string">"Failed to deserialize task.yaml"</span>)<span class="question-mark">?</span>;
     } <span class="kw">else </span>{
         <span class="macro">bail!</span>(<span class="string">"No task.yaml found in {}"</span>, task_dir.display());
@@ -1527,26 +1559,38 @@
     yaml.score_type = <span class="prelude-val">Some</span>(testcase_score_aggregator);
 
     <span class="kw">if </span>task_yaml_overwrite {
-        yaml.score_type_parameters = <span class="prelude-val">Some</span>(
-            subtasks
-                .iter()
-                .sorted_by_key(|(id, <span class="kw">_</span>)| <span class="kw-2">*</span>id)
-                .map(|(<span class="kw">_</span>, st)| {
-                    <span class="kw">let </span>testcases = st
-                        .testcases
+        <span class="kw">if </span>!task_yaml_path.exists() || is_tm_deletable(<span class="kw-2">&amp;</span>task_yaml_path)<span class="question-mark">? </span>{
+            <span class="kw">if </span>!eval_config.dry_run {
+                yaml.score_type_parameters = <span class="prelude-val">Some</span>(
+                    subtasks
                         .iter()
-                        .map(|tc_num| <span class="macro">format!</span>(<span class="string">"{tc_num:03}"</span>))
-                        .join(<span class="string">"|"</span>);
-                    (st.max_score, testcases)
-                })
-                .collect(),
-        );
+                        .sorted_by_key(|(id, <span class="kw">_</span>)| <span class="kw-2">*</span>id)
+                        .map(|(<span class="kw">_</span>, st)| {
+                            <span class="kw">let </span>testcases = st
+                                .testcases
+                                .iter()
+                                .map(|tc_num| <span class="macro">format!</span>(<span class="string">"{tc_num:03}"</span>))
+                                .join(<span class="string">"|"</span>);
+                            (st.max_score, testcases)
+                        })
+                        .collect(),
+                );
 
-        <span class="kw">let </span>path = task_dir.join(<span class="string">"task.yaml"</span>);
-        <span class="kw">let </span>file = File::create(<span class="kw-2">&amp;</span>path)
-            .with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot open task.yaml from {}"</span>, path.display()))<span class="question-mark">?</span>;
-        serde_yaml::to_writer(BufWriter::new(file), <span class="kw-2">&amp;</span>yaml)
-            .context(<span class="string">"Failed to serialize task.yaml"</span>)<span class="question-mark">?</span>;
+                <span class="kw">let </span>file = File::create(<span class="kw-2">&amp;</span>task_yaml_path).with_context(|| {
+                    <span class="macro">format!</span>(<span class="string">"Cannot open task.yaml from {}"</span>, task_yaml_path.display())
+                })<span class="question-mark">?</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>buf_file = BufWriter::new(file);
+                <span class="macro">writeln!</span>(buf_file, <span class="string">"# Generated by task-maker. Do not edit!"</span>)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(buf_file, <span class="string">"# {}"</span>, TM_ALLOW_DELETE_COOKIE)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(buf_file, <span class="string">"# Removing or changing the line above will prevent task-maker from touching this file again."</span>)<span class="question-mark">?</span>;
+                serde_yaml::to_writer(buf_file, <span class="kw-2">&amp;</span>yaml).context(<span class="string">"Failed to serialize task.yaml"</span>)<span class="question-mark">?</span>;
+            }
+        } <span class="kw">else </span>{
+            <span class="macro">warn!</span>(
+                <span class="string">"The task.yaml file does not contain {}. Won't overwrite"</span>,
+                TM_ALLOW_DELETE_COOKIE
+            );
+        }
     } <span class="kw">else if </span>subtasks.values().any(|st| !st.dependencies.is_empty()) {
         <span class="macro">bail!</span>(<span class="string">"Use task.yaml.orig to use subtask dependencies"</span>);
     }
@@ -1585,6 +1629,14 @@
             make_task_booklets(<span class="kw-2">&amp;</span>task, eval_config).context(<span class="string">"Failed to make booklets"</span>)<span class="question-mark">?</span>;
     }
     <span class="prelude-val">Ok</span>(task)
+}
+
+<span class="doccomment">/// Check if the file is deletable, i.e. it contains the TM_ALLOW_DELETE_COOKIE
+/// Assumes the file exists.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>is_tm_deletable(path: <span class="kw-2">&amp;</span>Path) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+    <span class="kw">let </span>buffer = fs::read(path).with_context(|| <span class="macro">format!</span>(<span class="string">"Cannot read file {}"</span>, path.display()))<span class="question-mark">?</span>;
+    <span class="kw">let </span>content = String::from_utf8_lossy(<span class="kw-2">&amp;</span>buffer);
+    <span class="prelude-val">Ok</span>(content.contains(TM_ALLOW_DELETE_COOKIE))
 }
 
 <span class="doccomment">/// Search for a valid input validator inside the task directory. Will return a function that, given
