@@ -562,6 +562,27 @@
 <a href="#562" id="562">562</a>
 <a href="#563" id="563">563</a>
 <a href="#564" id="564">564</a>
+<a href="#565" id="565">565</a>
+<a href="#566" id="566">566</a>
+<a href="#567" id="567">567</a>
+<a href="#568" id="568">568</a>
+<a href="#569" id="569">569</a>
+<a href="#570" id="570">570</a>
+<a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::path::Path;
 <span class="kw">use </span>std::sync::Arc;
@@ -613,6 +634,7 @@
     <span class="kw">let </span><span class="kw-2">mut </span>subtask_id: SubtaskId = <span class="number">0</span>;
     <span class="kw">let </span><span class="kw-2">mut </span>entries = <span class="macro">vec!</span>[];
     <span class="kw">let </span><span class="kw-2">mut </span>st_name_to_id = HashMap::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>st_deps = HashMap::&lt;SubtaskId, Vec&lt;<span class="kw">_</span>&gt;&gt;::new();
 
     <span class="kw">let </span><span class="kw-2">mut </span>default_subtask = <span class="prelude-val">Some</span>(SubtaskInfo {
         id: <span class="number">0</span>,
@@ -709,10 +731,10 @@
                             <span class="macro">bail!</span>(<span class="string">"#STDEP: must immediately follow a #ST: in gen/GEN"</span>);
                         };
                         <span class="kw">for </span>dependency <span class="kw">in </span>line.into_inner() {
-                            <span class="kw">let </span>dep_id = <span class="kw-2">*</span>st_name_to_id
-                                .get(dependency.as_str())
-                                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Unknown subtask name: {}"</span>, dependency))<span class="question-mark">?</span>;
-                            subtask.dependencies.push(dep_id);
+                            st_deps
+                                .entry(subtask.id)
+                                .or_default()
+                                .push(dependency.as_str().to_owned());
                         }
                     }
                     parser::Rule::copy =&gt; {
@@ -759,6 +781,26 @@
             <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
         }
     }
+
+    <span class="kw">for </span>entry <span class="kw">in </span><span class="kw-2">&amp;mut </span>entries {
+        <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = entry {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(deps) = st_deps.get(<span class="kw-2">&amp;</span>subtask.id) {
+                <span class="kw">for </span>dep <span class="kw">in </span>deps {
+                    <span class="kw">if </span>dep == <span class="string">"*" </span>{
+                        subtask.dependencies = (<span class="number">0</span>..subtask_id).collect();
+                    } <span class="kw">else </span>{
+                        <span class="kw">let </span>dep_id = <span class="kw-2">*</span>st_name_to_id
+                            .get(dep)
+                            .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Unknown subtask name: {}"</span>, dep))<span class="question-mark">?</span>;
+                        subtask.dependencies.push(dep_id);
+                    }
+                }
+                subtask.dependencies.sort_unstable();
+                subtask.dependencies.dedup();
+            }
+        }
+    }
+
     <span class="prelude-val">Ok</span>(entries)
 }
 

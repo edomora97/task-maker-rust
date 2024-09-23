@@ -1596,6 +1596,30 @@
 <a href="#1596" id="1596">1596</a>
 <a href="#1597" id="1597">1597</a>
 <a href="#1598" id="1598">1598</a>
+<a href="#1599" id="1599">1599</a>
+<a href="#1600" id="1600">1600</a>
+<a href="#1601" id="1601">1601</a>
+<a href="#1602" id="1602">1602</a>
+<a href="#1603" id="1603">1603</a>
+<a href="#1604" id="1604">1604</a>
+<a href="#1605" id="1605">1605</a>
+<a href="#1606" id="1606">1606</a>
+<a href="#1607" id="1607">1607</a>
+<a href="#1608" id="1608">1608</a>
+<a href="#1609" id="1609">1609</a>
+<a href="#1610" id="1610">1610</a>
+<a href="#1611" id="1611">1611</a>
+<a href="#1612" id="1612">1612</a>
+<a href="#1613" id="1613">1613</a>
+<a href="#1614" id="1614">1614</a>
+<a href="#1615" id="1615">1615</a>
+<a href="#1616" id="1616">1616</a>
+<a href="#1617" id="1617">1617</a>
+<a href="#1618" id="1618">1618</a>
+<a href="#1619" id="1619">1619</a>
+<a href="#1620" id="1620">1620</a>
+<a href="#1621" id="1621">1621</a>
+<a href="#1622" id="1622">1622</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::collections::HashMap;
 <span class="kw">use </span>std::fmt::{Debug, Display, Formatter, Write};
 <span class="kw">use </span>std::fs;
@@ -1719,6 +1743,8 @@
     </span>subtask_name: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="doccomment">/// The mapping from subtask name to subtask id.
     </span>st_name_to_id: HashMap&lt;String, SubtaskId&gt;,
+    <span class="doccomment">/// Mapping from subtask_id to the list of names of dependencies.
+    </span>st_deps: HashMap&lt;SubtaskId, Vec&lt;String&gt;&gt;,
     <span class="doccomment">/// The identifier of the next testcase to process.
     </span>testcase_id: TestcaseId,
 }
@@ -1760,6 +1786,7 @@
             subtask_id: <span class="number">0</span>,
             subtask_name: <span class="prelude-val">None</span>,
             st_name_to_id: HashMap::new(),
+            st_deps: HashMap::new(),
             testcase_id: <span class="number">0</span>,
         };
 
@@ -1790,6 +1817,28 @@
                 <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
             }
         }
+
+        <span class="kw">for </span>entry <span class="kw">in </span><span class="kw-2">&amp;mut </span>cases.result {
+            <span class="kw">if let </span>TaskInputEntry::Subtask(subtask) = entry {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(deps) = cases.st_deps.get(<span class="kw-2">&amp;</span>subtask.id) {
+                    <span class="kw">for </span>dep <span class="kw">in </span>deps {
+                        <span class="kw">if </span>dep == <span class="string">"*" </span>{
+                            subtask.dependencies = (<span class="number">0</span>..cases.subtask_id).collect();
+                            <span class="macro">eprintln!</span>(<span class="string">"ASDFASDFQWERQWER {}"</span>, cases.subtask_id);
+                        } <span class="kw">else </span>{
+                            <span class="kw">let </span>dep_id = <span class="kw-2">*</span>cases
+                                .st_name_to_id
+                                .get(dep)
+                                .ok_or_else(|| <span class="macro">anyhow!</span>(<span class="string">"Unknown subtask name: {}"</span>, dep))<span class="question-mark">?</span>;
+                            subtask.dependencies.push(dep_id);
+                        }
+                    }
+                    subtask.dependencies.sort_unstable();
+                    subtask.dependencies.dedup();
+                }
+            }
+        }
+
         <span class="prelude-val">Ok</span>(cases)
     }
 
@@ -2153,14 +2202,13 @@
     <span class="doccomment">/// Parse a `:STDEP` command.
     </span><span class="kw">fn </span>parse_st_dep(<span class="kw-2">&amp;mut </span><span class="self">self</span>, line: Pair) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">for </span>dep <span class="kw">in </span>line.into_inner() {
-            <span class="kw">let </span>id = <span class="kw-2">*</span><span class="self">self
-                </span>.st_name_to_id
-                .get(dep.as_str())
-                .context(<span class="string">"Unknown subtask"</span>)<span class="question-mark">?</span>;
             <span class="kw">let </span><span class="prelude-val">Some</span>(TaskInputEntry::Subtask(subtask)) = <span class="self">self</span>.result.last_mut() <span class="kw">else </span>{
                 <span class="macro">bail!</span>(<span class="string">":STDEP must immediately follow a #ST: in gen/GEN"</span>);
             };
-            subtask.dependencies.push(id);
+            <span class="self">self</span>.st_deps
+                .entry(subtask.id)
+                .or_default()
+                .push(dep.as_str().to_owned());
         }
         <span class="prelude-val">Ok</span>(())
     }
