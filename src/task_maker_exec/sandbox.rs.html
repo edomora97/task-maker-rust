@@ -1351,7 +1351,7 @@
         <span class="kw">let </span>rules: HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; = filter.rules.into_iter().collect();
         <span class="macro">assert!</span>(!rules.contains_key(<span class="string">"fork"</span>));
         <span class="macro">assert!</span>(!rules.contains_key(<span class="string">"vfork"</span>));
-        <span class="macro">assert!</span>(config.env.contains(<span class="kw-2">&amp;</span>(<span class="string">"foo"</span>.to_string(), <span class="string">"bar"</span>.to_string())));
+        <span class="macro">assert!</span>(config.env.contains(<span class="kw-2">&amp;</span>(<span class="string">"foo"</span>.into(), <span class="string">"bar"</span>.into())));
         <span class="macro">assert_eq!</span>(config.stdin, <span class="prelude-val">Some</span>(<span class="string">"/dev/null"</span>.into()));
         <span class="macro">assert_eq!</span>(config.stdout, <span class="prelude-val">Some</span>(<span class="string">"/dev/null"</span>.into()));
         <span class="macro">assert_eq!</span>(config.stderr, <span class="prelude-val">Some</span>(<span class="string">"/dev/null"</span>.into()));
