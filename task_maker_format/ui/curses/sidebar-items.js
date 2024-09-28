@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["inner_block","render_block","render_server_status"],"struct":["BLUE","BOLD","CursesUI","GREEN","ORANGE","RED","YELLOW"],"trait":["CursesDrawer"],"type":["FrameType"]};
+window.SIDEBAR_ITEMS = {"fn":["inner_block","render_block","render_server_status"],"struct":["BLUE","BOLD","CursesUI","GREEN","ORANGE","RED","YELLOW"],"trait":["CursesDrawer"]};

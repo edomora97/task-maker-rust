@@ -214,18 +214,20 @@
 <a href="#214" id="214">214</a>
 <a href="#215" id="215">215</a>
 <a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>itertools::Itertools;
-<span class="kw">use </span>tui::layout::{Constraint, Direction, Layout, Rect};
-<span class="kw">use </span>tui::style::{Modifier, Style};
-<span class="kw">use </span>tui::text::{Span, Spans};
-<span class="kw">use </span>tui::widgets::{Block, Borders, Paragraph};
+<span class="kw">use </span>ratatui::layout::{Constraint, Direction, Layout, Rect};
+<span class="kw">use </span>ratatui::style::{Modifier, Style};
+<span class="kw">use </span>ratatui::text::{Line, Span};
+<span class="kw">use </span>ratatui::widgets::{Block, Borders, Paragraph};
+<span class="kw">use </span>ratatui::Frame;
 
 <span class="kw">use </span><span class="kw">crate</span>::terry::finish_ui::FinishUI;
 <span class="kw">use </span><span class="kw">crate</span>::terry::ui_state::{SolutionState, SolutionStatus, UIState};
 <span class="kw">use </span><span class="kw">crate</span>::terry::{CaseStatus, SolutionOutcome};
 <span class="kw">use </span><span class="kw">crate</span>::ui::curses::{
     compilation_status_text, draw_compilations, inner_block, render_block, render_server_status,
-    CursesDrawer, CursesUI <span class="kw">as </span>GenericCursesUI, FrameType, GREEN, RED, YELLOW,
+    CursesDrawer, CursesUI <span class="kw">as </span>GenericCursesUI, GREEN, RED, YELLOW,
 };
 <span class="kw">use </span><span class="kw">crate</span>::ui::FinishUIUtils;
 
@@ -236,14 +238,14 @@
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Drawer;
 
 <span class="kw">impl </span>CursesDrawer&lt;UIState&gt; <span class="kw">for </span>Drawer {
-    <span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>UIState, frame: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+    <span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>UIState, frame: <span class="kw-2">&amp;mut </span>Frame, loading: char, frame_index: usize) {
         draw_frame(state, frame, loading, frame_index);
     }
 }
 
 <span class="doccomment">/// Draw a frame of interface to the provided `Frame`.
-</span><span class="kw">fn </span>draw_frame(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
-    <span class="kw">let </span>header: Spans = <span class="macro">vec!</span>[
+</span><span class="kw">fn </span>draw_frame(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>Frame, loading: char, frame_index: usize) {
+    <span class="kw">let </span>header: Line = <span class="macro">vec!</span>[
         Span::styled(
             state.task.description.clone(),
             Style::default().add_modifier(Modifier::BOLD),
@@ -271,7 +273,7 @@
         .map(|s| s.connected_workers.len())
         .unwrap_or(<span class="number">0</span>) <span class="kw">as </span>u16
         + <span class="number">2</span>;
-    <span class="kw">let </span>total_height = f.size().height;
+    <span class="kw">let </span>total_height = f.area().height;
     <span class="comment">// fixed size section heights
     </span><span class="kw">let </span>top_height = header_len + compilations_len;
     <span class="comment">// if the sections don't just fit, reduce the size of the workers until they fit but
@@ -293,7 +295,7 @@
             ]
             .as_ref(),
         )
-        .split(f.size());
+        .split(f.area());
     <span class="kw">let </span>paragraph = Paragraph::new(header).block(Block::default().borders(Borders::NONE));
     f.render_widget(paragraph, chunks[<span class="number">0</span>]);
     <span class="kw">if </span>compilations_len &gt; <span class="number">0 </span>{
@@ -320,9 +322,9 @@
 }
 
 <span class="doccomment">/// Draw the evaluations of the solutions.
-</span><span class="kw">fn </span>draw_evaluations(frame: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect, state: <span class="kw-2">&amp;</span>UIState, loading: char) {
+</span><span class="kw">fn </span>draw_evaluations(frame: <span class="kw-2">&amp;mut </span>Frame, rect: Rect, state: <span class="kw-2">&amp;</span>UIState, loading: char) {
     <span class="kw">let </span>max_len = FinishUIUtils::get_max_len(<span class="kw-2">&amp;</span>state.solutions);
-    <span class="kw">let </span>text: Vec&lt;Spans&gt; = state
+    <span class="kw">let </span>text: Vec&lt;Line&gt; = state
         .solutions
         .keys()
         .sorted()

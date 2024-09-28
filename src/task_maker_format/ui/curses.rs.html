@@ -424,9 +424,6 @@
 <a href="#424" id="424">424</a>
 <a href="#425" id="425">425</a>
 <a href="#426" id="426">426</a>
-<a href="#427" id="427">427</a>
-<a href="#428" id="428">428</a>
-<a href="#429" id="429">429</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! Utilities for writing UIs with Curses.
 
 </span><span class="kw">use </span>std::io;
@@ -437,20 +434,20 @@
 <span class="kw">use </span>std::thread::JoinHandle;
 <span class="kw">use </span>std::time::SystemTime;
 
-<span class="kw">use </span>anyhow::Error;
+<span class="kw">use </span>anyhow::{Context, Error};
 <span class="kw">use </span>itertools::Itertools;
 <span class="kw">use </span>nix::sys::signal::{<span class="self">self</span>, Signal};
 <span class="kw">use </span>nix::unistd::Pid;
+<span class="kw">use </span>ratatui::backend::TermionBackend;
+<span class="kw">use </span>ratatui::layout::Rect;
+<span class="kw">use </span>ratatui::style::{Color, Modifier, Style};
+<span class="kw">use </span>ratatui::text::{Line, Span};
+<span class="kw">use </span>ratatui::widgets::{Block, Borders, Paragraph};
+<span class="kw">use </span>ratatui::{Frame, Terminal};
 <span class="kw">use </span>termion::event::{Event, Key};
 <span class="kw">use </span>termion::input::{MouseTerminal, TermRead};
-<span class="kw">use </span>termion::raw::{IntoRawMode, RawTerminal};
-<span class="kw">use </span>termion::screen::AlternateScreen;
-<span class="kw">use </span>tui::backend::TermionBackend;
-<span class="kw">use </span>tui::layout::Rect;
-<span class="kw">use </span>tui::style::{Color, Modifier, Style};
-<span class="kw">use </span>tui::text::{Span, Spans};
-<span class="kw">use </span>tui::widgets::{Block, Borders, Paragraph};
-<span class="kw">use </span>tui::{Frame, Terminal};
+<span class="kw">use </span>termion::raw::IntoRawMode;
+<span class="kw">use </span>termion::screen::IntoAlternateScreen;
 
 <span class="kw">use </span>task_maker_exec::{ExecutorStatus, ExecutorWorkerStatus};
 
@@ -460,10 +457,6 @@
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>FPS: u64 = <span class="number">30</span>;
 <span class="doccomment">/// After how many seconds rotate the list of workers if they don't fit on the screen.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>ROTATION_DELAY: u64 = <span class="number">1</span>;
-
-<span class="doccomment">/// The type of the terminal with its backend.
-</span><span class="kw">pub type </span>FrameType&lt;<span class="lifetime">'a</span>&gt; =
-    Frame&lt;<span class="lifetime">'a</span>, TermionBackend&lt;AlternateScreen&lt;MouseTerminal&lt;RawTerminal&lt;io::Stdout&gt;&gt;&gt;&gt;&gt;;
 
 <span class="macro">macro_rules!</span> define_color_inner {
     (<span class="macro-nonterminal">$color</span>:expr,) =&gt; {
@@ -530,7 +523,7 @@
 </span><span class="kw">pub trait </span>CursesDrawer&lt;State&gt; {
     <span class="doccomment">/// Draw a frame of the UI using the provided state, onto the frame, using the loading
     /// character. Frame index is a counter of the number of frames encountered so far.
-    </span><span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>State, frame: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize);
+    </span><span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>State, frame: <span class="kw-2">&amp;mut </span>Frame, loading: char, frame_index: usize);
 }
 
 <span class="kw">impl</span>&lt;State, Drawer, Finish&gt; CursesUI&lt;State, Drawer, Finish&gt;
@@ -562,8 +555,9 @@
         stop: Arc&lt;AtomicBool&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;JoinHandle&lt;()&gt;, Error&gt; {
         <span class="kw">let </span>stdout = io::stdout().into_raw_mode()<span class="question-mark">?</span>;
-        <span class="kw">let </span>stdout = MouseTerminal::from(stdout);
-        <span class="kw">let </span>stdout = AlternateScreen::from(stdout);
+        <span class="kw">let </span>stdout = MouseTerminal::from(stdout)
+            .into_alternate_screen()
+            .context(<span class="string">"Failed to enter alternate screen mode, the terminal may not support it"</span>)<span class="question-mark">?</span>;
         <span class="kw">let </span>backend = TermionBackend::new(stdout);
         <span class="kw">let </span><span class="kw-2">mut </span>terminal = Terminal::new(backend)<span class="question-mark">?</span>;
         terminal.hide_cursor()<span class="question-mark">?</span>;
@@ -649,7 +643,7 @@
 
 <span class="doccomment">/// Draw the compilation block.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>draw_compilations&lt;<span class="lifetime">'a</span>, I&gt;(
-    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    frame: <span class="kw-2">&amp;mut </span>Frame,
     rect: Rect,
     compilations: I,
     loading: char,
@@ -663,7 +657,7 @@
         .max()
         .unwrap_or(<span class="number">0</span>)
         + <span class="number">4</span>;
-    <span class="kw">let </span>text: Vec&lt;Spans&gt; = compilations
+    <span class="kw">let </span>text: Vec&lt;Line&gt; = compilations
         .iter()
         .sorted_by_key(|(k, <span class="kw">_</span>)| <span class="kw-2">*</span>k)
         .map(|(file, status)| {
@@ -696,7 +690,7 @@
 }
 
 <span class="doccomment">/// Render a block with the specified title.
-</span><span class="kw">pub fn </span>render_block&lt;S: AsRef&lt;str&gt;&gt;(frame: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect, title: S) {
+</span><span class="kw">pub fn </span>render_block&lt;S: AsRef&lt;str&gt;&gt;(frame: <span class="kw-2">&amp;mut </span>Frame, rect: Rect, title: S) {
     <span class="kw">let </span>block = Block::default()
         .title(Span::styled(title.as_ref(), <span class="kw-2">*</span>BLUE))
         .borders(Borders::ALL);
@@ -705,7 +699,7 @@
 
 <span class="doccomment">/// Draw the server status block.
 </span><span class="kw">pub fn </span>render_server_status(
-    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    frame: <span class="kw-2">&amp;mut </span>Frame,
     rect: Rect,
     status: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutorStatus&lt;SystemTime&gt;&gt;,
     loading: char,
@@ -734,7 +728,7 @@
 
 <span class="doccomment">/// Draw the summary of the server status on the border of the block.
 </span><span class="kw">fn </span>draw_server_status_summary(
-    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    frame: <span class="kw-2">&amp;mut </span>Frame,
     rect: Rect,
     status: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutorStatus&lt;SystemTime&gt;&gt;,
 ) {
@@ -743,7 +737,7 @@
     } <span class="kw">else </span>{
         <span class="kw">return</span>;
     };
-    <span class="kw">let </span>paragraph = Paragraph::new(Spans(<span class="macro">vec!</span>[
+    <span class="kw">let </span>paragraph = Paragraph::new(Line::from(<span class="macro">vec!</span>[
         Span::styled(<span class="string">" Ready "</span>, Style::default().add_modifier(Modifier::BOLD)),
         Span::raw(<span class="macro">format!</span>(<span class="string">"{} ─"</span>, status.ready_execs)),
         Span::styled(<span class="string">" Waiting "</span>, Style::default().add_modifier(Modifier::BOLD)),
@@ -755,7 +749,7 @@
 <span class="doccomment">/// Draw the content of the server status box, splitting the workers in 2 groups if they don't fit,
 /// and rotating them if they still don't fit.
 </span><span class="kw">fn </span>draw_server_status(
-    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    frame: <span class="kw-2">&amp;mut </span>Frame,
     rect: Rect,
     status: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ExecutorStatus&lt;SystemTime&gt;&gt;,
     loading: char,
@@ -806,7 +800,7 @@
 
 <span class="doccomment">/// Draw a chunk of workers in the specified rectangle.
 </span><span class="kw">fn </span>draw_workers_chunk(
-    frame: <span class="kw-2">&amp;mut </span>FrameType,
+    frame: <span class="kw-2">&amp;mut </span>Frame,
     rect: Rect,
     workers: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>ExecutorWorkerStatus&lt;SystemTime&gt;],
     loading: char,
@@ -816,7 +810,7 @@
         .map(|worker| worker.name.len())
         .max()
         .unwrap_or(<span class="number">0</span>);
-    <span class="kw">let </span>text: Vec&lt;Spans&gt; = workers
+    <span class="kw">let </span>text: Vec&lt;Line&gt; = workers
         .iter()
         .map(|worker| {
             <span class="kw">let </span>worker_name = <span class="macro">format!</span>(<span class="string">"- {:&lt;max_len$} "</span>, worker.name, max_len = max_len);

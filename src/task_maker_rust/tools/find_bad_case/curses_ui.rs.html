@@ -146,29 +146,27 @@
 <a href="#146" id="146">146</a>
 <a href="#147" id="147">147</a>
 <a href="#148" id="148">148</a>
-<a href="#149" id="149">149</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>itertools::Itertools;
-<span class="kw">use </span>tui::layout::{Constraint, Direction, Layout, Rect};
-<span class="kw">use </span>tui::text::{Span, Spans};
-<span class="kw">use </span>tui::widgets::{Paragraph, Wrap};
+<span class="kw">use </span>ratatui::layout::{Constraint, Direction, Layout, Rect};
+<span class="kw">use </span>ratatui::text::{Line, Span};
+<span class="kw">use </span>ratatui::widgets::{Paragraph, Wrap};
+<span class="kw">use </span>ratatui::Frame;
 
 <span class="kw">use </span>task_maker_format::ui::curses::{BLUE, BOLD, GREEN, RED};
-<span class="kw">use </span>task_maker_format::ui::{
-    inner_block, render_block, render_server_status, CursesDrawer, FrameType,
-};
+<span class="kw">use </span>task_maker_format::ui::{inner_block, render_block, render_server_status, CursesDrawer};
 
 <span class="kw">use </span><span class="kw">crate</span>::tools::find_bad_case::state::{SharedUIState, TestcaseStatus, UIState};
 
 <span class="kw">pub struct </span>CursesUI;
 
 <span class="kw">impl </span>CursesDrawer&lt;UIState&gt; <span class="kw">for </span>CursesUI {
-    <span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>UIState, frame: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+    <span class="kw">fn </span>draw(state: <span class="kw-2">&amp;</span>UIState, frame: <span class="kw-2">&amp;mut </span>Frame, loading: char, frame_index: usize) {
         CursesUI::draw_frame(state, frame, loading, frame_index);
     }
 }
 
 <span class="kw">impl </span>CursesUI {
-    <span class="kw">fn </span>draw_frame(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>FrameType, loading: char, frame_index: usize) {
+    <span class="kw">fn </span>draw_frame(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>Frame, loading: char, frame_index: usize) {
         <span class="kw">let </span>header_len = <span class="number">10</span>; <span class="comment">// Number of lines of the header.
         </span><span class="kw">let </span>workers_len = state
             .executor_status
@@ -187,7 +185,7 @@
                 ]
                 .as_ref(),
             )
-            .split(f.size());
+            .split(f.area());
 
         <span class="kw">let </span>shared = state.shared.read().unwrap();
         <span class="self">Self</span>::render_header(state, <span class="kw-2">&amp;</span>shared, f, chunks[<span class="number">0</span>]);
@@ -201,7 +199,7 @@
         );
     }
 
-    <span class="kw">fn </span>render_header(state: <span class="kw-2">&amp;</span>UIState, shared: <span class="kw-2">&amp;</span>SharedUIState, f: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect) {
+    <span class="kw">fn </span>render_header(state: <span class="kw-2">&amp;</span>UIState, shared: <span class="kw-2">&amp;</span>SharedUIState, f: <span class="kw-2">&amp;mut </span>Frame, rect: Rect) {
         <span class="kw">let </span>errors = state
             .batches
             .iter()
@@ -210,32 +208,32 @@
             .count();
 
         <span class="kw">let </span>text = <span class="macro">vec!</span>[
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"Solution:        "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.solution.to_string_lossy().to_string()),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"Generator args:  "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.generator_args.iter().join(<span class="string">" "</span>)),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"Batch size:      "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.batch_size.to_string()),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"Batch index:     "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(shared.batch_index.to_string()),
             ]),
-            Spans(<span class="macro">vec!</span>[Span::styled(<span class="string">"Progress:"</span>, <span class="kw-2">*</span>BLUE)]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[Span::styled(<span class="string">"Progress:"</span>, <span class="kw-2">*</span>BLUE)]),
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"    Generated:   "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.progress.inputs_generated.to_string()),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"    Solved:      "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(state.progress.inputs_solved.to_string()),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"    Average gen: "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(<span class="macro">format!</span>(
                     <span class="string">"{:.3}s\n"</span>,
@@ -243,14 +241,14 @@
                         / (state.progress.inputs_generated.max(<span class="number">1</span>) <span class="kw">as </span>f64)
                 )),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"    Average sol: "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(<span class="macro">format!</span>(
                     <span class="string">"{:.3}s"</span>,
                     state.progress.solution_time_sum / (state.progress.inputs_solved.max(<span class="number">1</span>) <span class="kw">as </span>f64)
                 )),
             ]),
-            Spans(<span class="macro">vec!</span>[
+            Line::from(<span class="macro">vec!</span>[
                 Span::styled(<span class="string">"    Errors:      "</span>, <span class="kw-2">*</span>BOLD),
                 Span::raw(errors.to_string()),
             ]),
@@ -260,7 +258,7 @@
         f.render_widget(paragraph, rect);
     }
 
-    <span class="kw">fn </span>render_generation_status(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>FrameType, rect: Rect) {
+    <span class="kw">fn </span>render_generation_status(state: <span class="kw-2">&amp;</span>UIState, f: <span class="kw-2">&amp;mut </span>Frame, rect: Rect) {
         <span class="kw">let </span><span class="kw-2">mut </span>text = <span class="macro">vec!</span>[];
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..state.batches.len().min(<span class="number">10</span>) {
             <span class="kw">let </span><span class="kw-2">mut </span>line = Vec::new();
