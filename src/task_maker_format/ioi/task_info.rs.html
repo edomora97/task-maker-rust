@@ -150,66 +150,66 @@
     <span class="doccomment">/// Version of this task-info structure.
     </span>version: u64,
     <span class="doccomment">/// Short name of the task.
-    </span>name: String,
+    </span><span class="kw">pub </span>name: String,
     <span class="doccomment">/// Title of the task.
-    </span>title: String,
+    </span><span class="kw">pub </span>title: String,
     <span class="doccomment">/// Scoring info.
-    </span>scoring: TaskInfoScoring,
+    </span><span class="kw">pub </span>scoring: TaskInfoScoring,
     <span class="doccomment">/// Limits of the task.
-    </span>limits: TaskInfoLimits,
+    </span><span class="kw">pub </span>limits: TaskInfoLimits,
     <span class="doccomment">/// Statements of the task.
-    </span>statements: Vec&lt;TaskInfoStatement&gt;,
+    </span><span class="kw">pub </span>statements: Vec&lt;TaskInfoStatement&gt;,
     <span class="doccomment">/// Attachments of the task.
-    </span>attachments: Vec&lt;TaskInfoAttachment&gt;,
+    </span><span class="kw">pub </span>attachments: Vec&lt;TaskInfoAttachment&gt;,
 }
 
 <span class="doccomment">/// Limits of the task.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
 </span><span class="kw">pub struct </span>TaskInfoLimits {
     <span class="doccomment">/// Time limit in seconds.
-    </span>time: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    </span><span class="kw">pub </span>time: <span class="prelude-ty">Option</span>&lt;f64&gt;,
     <span class="doccomment">/// Memory limit in megabytes.
-    </span>memory: <span class="prelude-ty">Option</span>&lt;u64&gt;,
+    </span><span class="kw">pub </span>memory: <span class="prelude-ty">Option</span>&lt;u64&gt;,
 }
 
 <span class="doccomment">/// Attachment of the task.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
 </span><span class="kw">pub struct </span>TaskInfoAttachment {
     <span class="doccomment">/// Name of this attachment.
-    </span>name: String,
+    </span><span class="kw">pub </span>name: String,
     <span class="doccomment">/// MIME type of this attachment.
-    </span>content_type: String,
+    </span><span class="kw">pub </span>content_type: String,
     <span class="doccomment">/// Path of this attachment relative to task directory.
-    </span>path: PathBuf,
+    </span><span class="kw">pub </span>path: PathBuf,
 }
 
 <span class="doccomment">/// Info of the subtasks.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
 </span><span class="kw">pub struct </span>TaskInfoSubtask {
     <span class="doccomment">/// Maximum score for this subtask.
-    </span>max_score: f64,
+    </span><span class="kw">pub </span>max_score: f64,
     <span class="doccomment">/// Number of testcases for this subtask.
-    </span>testcases: u64,
+    </span><span class="kw">pub </span>testcases: u64,
 }
 
 <span class="doccomment">/// Scoring for the task.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
 </span><span class="kw">pub struct </span>TaskInfoScoring {
     <span class="doccomment">/// Maximum score for the task.
-    </span>max_score: f64,
+    </span><span class="kw">pub </span>max_score: f64,
     <span class="doccomment">/// Subtasks of this task.
-    </span>subtasks: Vec&lt;TaskInfoSubtask&gt;,
+    </span><span class="kw">pub </span>subtasks: Vec&lt;TaskInfoSubtask&gt;,
 }
 
 <span class="doccomment">/// Statement of the task.
 </span><span class="attr">#[derive(Debug, Clone, Serialize, Deserialize, TypeScriptify)]
 </span><span class="kw">pub struct </span>TaskInfoStatement {
     <span class="doccomment">/// Language of the statement.
-    </span>language: String,
+    </span><span class="kw">pub </span>language: String,
     <span class="doccomment">/// Content type of the statement, as MIME type.
-    </span>content_type: String,
+    </span><span class="kw">pub </span>content_type: String,
     <span class="doccomment">/// Path of the task, relative to the task directory.
-    </span>path: PathBuf,
+    </span><span class="kw">pub </span>path: PathBuf,
 }
 
 <span class="kw">impl </span>IOITaskInfo {
@@ -254,7 +254,7 @@
                 .join(<span class="string">"att"</span>)
                 .read_dir()
                 .map(|dir| {
-                    dir.filter(|entry| entry.as_ref().unwrap().file_type().unwrap().is_file())
+                    dir.filter(|entry| entry.as_ref().unwrap().path().is_file())
                         .map(|entry| {
                             <span class="kw">let </span>entry = entry.unwrap();
                             <span class="kw">let </span>path = entry.path();

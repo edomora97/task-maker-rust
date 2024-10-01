@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["add_solution_checks","booklet","clear","find_bad_case","fuzz_checker","gen_autocompletion","opt","reset","sandbox","server","task_info","typescriptify","worker"]};
+window.SIDEBAR_ITEMS = {"mod":["add_solution_checks","booklet","clear","copy_competition_files","find_bad_case","fuzz_checker","gen_autocompletion","opt","reset","sandbox","server","task_info","typescriptify","worker"]};

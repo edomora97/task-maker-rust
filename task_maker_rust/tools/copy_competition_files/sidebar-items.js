@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["copy_competition_files_main"],"struct":["CopyCompetitionFilesOpt"]};

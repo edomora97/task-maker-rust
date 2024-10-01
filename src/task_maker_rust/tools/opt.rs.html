@@ -58,11 +58,15 @@
 <a href="#58" id="58">58</a>
 <a href="#59" id="59">59</a>
 <a href="#60" id="60">60</a>
+<a href="#61" id="61">61</a>
+<a href="#62" id="62">62</a>
+<a href="#63" id="63">63</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>clap::Parser;
 
 <span class="kw">use </span><span class="kw">crate</span>::tools::add_solution_checks::AddSolutionChecksOpt;
 <span class="kw">use </span><span class="kw">crate</span>::tools::booklet::BookletOpt;
 <span class="kw">use </span><span class="kw">crate</span>::tools::clear::ClearOpt;
+<span class="kw">use </span><span class="kw">crate</span>::tools::copy_competition_files::CopyCompetitionFilesOpt;
 <span class="kw">use </span><span class="kw">crate</span>::tools::find_bad_case::FindBadCaseOpt;
 <span class="kw">use </span><span class="kw">crate</span>::tools::fuzz_checker::FuzzCheckerOpt;
 <span class="kw">use </span><span class="kw">crate</span>::tools::gen_autocompletion::GenAutocompletionOpt;
@@ -106,6 +110,8 @@
     </span>TaskInfo(TaskInfoOpt),
     <span class="doccomment">/// Compile just the booklet for a task or a contest.
     </span>Booklet(BookletOpt),
+    <span class="doccomment">/// Copy statements and attachments of a contest in a separate directory
+    </span>CopyCompetitionFiles(CopyCompetitionFilesOpt),
     <span class="doccomment">/// Fuzz the checker of a task.
     </span>FuzzChecker(FuzzCheckerOpt),
     <span class="doccomment">/// Generate and search for an input file that make a solution fail.

@@ -36,12 +36,15 @@
 <a href="#36" id="36">36</a>
 <a href="#37" id="37">37</a>
 <a href="#38" id="38">38</a>
+<a href="#39" id="39">39</a>
+<a href="#40" id="40">40</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>clap::Parser;
 
 <span class="kw">use </span>task_maker_rust::error::NiceError;
 <span class="kw">use </span>task_maker_rust::tools::add_solution_checks::main_add_solution_checks;
 <span class="kw">use </span>task_maker_rust::tools::booklet::main_booklet;
 <span class="kw">use </span>task_maker_rust::tools::clear::main_clear;
+<span class="kw">use </span>task_maker_rust::tools::copy_competition_files::copy_competition_files_main;
 <span class="kw">use </span>task_maker_rust::tools::find_bad_case::main_find_bad_case;
 <span class="kw">use </span>task_maker_rust::tools::fuzz_checker::main_fuzz_checker;
 <span class="kw">use </span>task_maker_rust::tools::gen_autocompletion::main_get_autocompletion;
@@ -67,6 +70,7 @@
         Tool::Sandbox(opt) =&gt; main_sandbox(opt),
         Tool::TaskInfo(opt) =&gt; main_task_info(opt),
         Tool::Booklet(opt) =&gt; main_booklet(opt, base_opt.logger),
+        Tool::CopyCompetitionFiles(opt) =&gt; copy_competition_files_main(opt, base_opt.logger),
         Tool::FuzzChecker(opt) =&gt; main_fuzz_checker(opt),
         Tool::FindBadCase(opt) =&gt; main_find_bad_case(opt),
         Tool::AddSolutionChecks(opt) =&gt; main_add_solution_checks(opt, base_opt.logger),
