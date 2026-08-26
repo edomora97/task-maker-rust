@@ -150,12 +150,15 @@ impl CacheEntry {
     /// Checks whether a given execution is compatible with the limits stored in this entry. See the
     /// docs of the crate for the definition of _compatible_.
     pub fn is_compatible(&self, group: &ExecutionGroup) -> bool {
-        // makes sure that $left <= $right where None = inf
-        // if $left is less restrictive than $right, return false
+        // makes sure that $left + $left_extra <= $right + $right_extra, where None = inf.
+        // The two extra amounts are added separately (rather than pre-subtracted into a single
+        // delta) so this works for unsigned limits too: $left_extra and $right_extra can each
+        // legitimately be larger than the other, which would underflow a `u64` subtraction.
+        // If $left is less restrictive than $right, return false.
         macro_rules! check_limit {
-            ($left:expr, $right:expr, $extra_time:expr) => {
+            ($left:expr, $right:expr, $left_extra:expr, $right_extra:expr) => {
                 match ($left, $right) {
-                    (Some(left), Some(right)) if left + $extra_time > right => {
+                    (Some(left), Some(right)) if left + $left_extra > right + $right_extra => {
                         return false;
                     }
                     (None, Some(_)) => return false,
@@ -163,17 +166,37 @@ impl CacheEntry {
                 }
             };
         }
-        // will return false if $less is less restrictive of $right
+        // will return false if $left is less restrictive of $right
         macro_rules! check_limits {
-            ($left:expr, $right:expr, $extra_time:expr, $extra_memory:expr) => {
-                check_limit!($left.cpu_time, $right.cpu_time, $extra_time);
-                check_limit!($left.sys_time, $right.sys_time, $extra_time);
-                check_limit!($left.wall_time, $right.wall_time, $extra_time);
-                check_limit!($left.memory, $right.memory, $extra_memory);
-                check_limit!($left.nofile, $right.nofile, 0);
-                check_limit!($left.fsize, $right.fsize, 0);
-                check_limit!($left.memlock, $right.memlock, 0);
-                check_limit!($left.stack, $right.stack, 0);
+            ($left:expr, $right:expr, $left_extra_time:expr, $right_extra_time:expr, $left_extra_memory:expr, $right_extra_memory:expr) => {
+                check_limit!(
+                    $left.cpu_time,
+                    $right.cpu_time,
+                    $left_extra_time,
+                    $right_extra_time
+                );
+                check_limit!(
+                    $left.sys_time,
+                    $right.sys_time,
+                    $left_extra_time,
+                    $right_extra_time
+                );
+                check_limit!(
+                    $left.wall_time,
+                    $right.wall_time,
+                    $left_extra_time,
+                    $right_extra_time
+                );
+                check_limit!(
+                    $left.memory,
+                    $right.memory,
+                    $left_extra_memory,
+                    $right_extra_memory
+                );
+                check_limit!($left.nofile, $right.nofile, 0, 0);
+                check_limit!($left.fsize, $right.fsize, 0, 0);
+                check_limit!($left.memlock, $right.memlock, 0, 0);
+                check_limit!($left.stack, $right.stack, 0, 0);
                 if $left.allow_multiprocess > $right.allow_multiprocess {
                     return false;
                 }
@@ -187,9 +210,10 @@ impl CacheEntry {
                     $left.extra_readable_dirs.iter().cloned().collect();
                 let right_readable_dirs: HashSet<PathBuf> =
                     $right.extra_readable_dirs.iter().cloned().collect();
-                if left_readable_dirs != right_readable_dirs
-                    && left_readable_dirs.is_superset(&right_readable_dirs)
-                {
+                // Incompatible as soon as $left was granted access to anything $right doesn't
+                // grant, not just when $left is a strict superset of $right: two differing,
+                // non-nested sets (e.g. left={A,B}, right={B,C}) are just as incompatible.
+                if !left_readable_dirs.is_subset(&right_readable_dirs) {
                     return false;
                 }
             };
@@ -203,8 +227,10 @@ impl CacheEntry {
                     check_limits!(
                         item.limits,
                         exec.limits,
-                        self.extra_time - extra_time,
-                        self.extra_memory - extra_memory
+                        self.extra_time,
+                        extra_time,
+                        self.extra_memory,
+                        extra_memory
                     );
                 }
                 _ => {
@@ -212,8 +238,10 @@ impl CacheEntry {
                     check_limits!(
                         exec.limits,
                         item.limits,
-                        extra_time - self.extra_time,
-                        extra_memory - self.extra_memory
+                        extra_time,
+                        self.extra_time,
+                        extra_memory,
+                        self.extra_memory
                     );
                 }
             }
@@ -230,8 +258,8 @@ mod tests {
     use std::path::{Path, PathBuf};
 
     use task_maker_dag::{
-        Execution, ExecutionCommand, ExecutionDAGConfig, ExecutionResourcesUsage, ExecutionResult,
-        ExecutionStatus,
+        Execution, ExecutionCommand, ExecutionDAGConfig, ExecutionGroup, ExecutionResourcesUsage,
+        ExecutionResult, ExecutionStatus,
     };
     use task_maker_store::{FileStore, FileStoreHandle, FileStoreKey, ReadFileIterator};
 
@@ -467,5 +495,47 @@ mod tests {
         let mut exec2 = Execution::new("exec", ExecutionCommand::local("foo"));
         exec2.limits.read_only = true;
         assert!(entry.is_compatible(&exec2.into()));
+    }
+
+    #[test]
+    fn test_compatible_success_extra_memory_smaller_than_query_does_not_underflow() {
+        // Cached with no extra memory bonus at all, queried with the (larger) default one:
+        // `self.extra_memory - extra_memory` used to underflow the `u64` subtraction here.
+        let (mut entry, mut exec) = empty_entry();
+        entry.items[0].result.status = ExecutionStatus::Success;
+        entry.items[0].limits.memory = Some(1000);
+        entry.extra_memory = 0;
+        exec.limits.memory = Some(1000);
+        // exec keeps the default (larger) extra_memory from `ExecutionDAGConfig::new()`.
+        assert!(entry.is_compatible(&exec.into()));
+    }
+
+    #[test]
+    fn test_compatible_fail_extra_memory_larger_than_query_does_not_underflow() {
+        // Cached with the (larger) default extra memory bonus, queried with none: the fail-branch
+        // `extra_memory - self.extra_memory` used to underflow here.
+        let (mut entry, mut exec) = empty_entry();
+        entry.items[0].result.status = ExecutionStatus::ReturnCode(1);
+        entry.items[0].limits.memory = Some(1000);
+        exec.limits.memory = Some(1000);
+        let mut group: ExecutionGroup = exec.into();
+        group.config.extra_memory = 0;
+        assert!(entry.is_compatible(&group));
+    }
+
+    #[test]
+    fn test_compatible_extra_readable_dirs_incomparable_sets() {
+        // Neither a subset nor a superset of the other: `left` (cached) was granted `/a`, which
+        // `right` (queried) doesn't grant, even though `right` grants `/c` which `left` lacks.
+        let (mut entry, mut exec) = empty_entry();
+        entry.items[0].result.status = ExecutionStatus::Success;
+        entry.items[0]
+            .limits
+            .extra_readable_dirs
+            .extend([PathBuf::from("/a"), PathBuf::from("/b")]);
+        exec.limits
+            .extra_readable_dirs
+            .extend([PathBuf::from("/b"), PathBuf::from("/c")]);
+        assert!(!entry.is_compatible(&exec.into()));
     }
 }

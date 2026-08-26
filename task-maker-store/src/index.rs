@@ -1,4 +1,4 @@
-use std::cmp::Ordering;
+use std::cmp::{Ordering, Reverse};
 use std::collections::hash_map::Entry;
 use std::collections::{BinaryHeap, HashMap};
 use std::fs::{create_dir_all, remove_dir, File};
@@ -148,14 +148,19 @@ impl FileStoreIndex {
         );
         // list of entries that survive the flush
         let mut surviving = Vec::new();
-        let mut priority_queue: BinaryHeap<(FileStoreIndexItem, FileStoreKey)> =
-            self.known_files.drain().map(|(k, f)| (f, k)).collect();
+        // `BinaryHeap` is a max-heap, so wrap entries in `Reverse` to make `pop()` return the
+        // *least* recently used entry first, matching the "LRU eviction" contract below.
+        let mut priority_queue: BinaryHeap<Reverse<(FileStoreIndexItem, FileStoreKey)>> = self
+            .known_files
+            .drain()
+            .map(|(k, f)| Reverse((f, k)))
+            .collect();
         // number of removed bytes
         let mut removed = 0;
         // continue to remove until the space requirement is met
         while self.total_size > target_size {
             let (entry, key) = match priority_queue.pop() {
-                Some(e) => e,
+                Some(Reverse(e)) => e,
                 // the queue is emptied before reaching the space requirement (maybe because of
                 // locking)
                 None => break,
@@ -199,7 +204,7 @@ impl FileStoreIndex {
             self.known_files.insert(key, entry);
         }
         // the files that survived the flush because are at new enough
-        for (entry, key) in priority_queue {
+        for Reverse((entry, key)) in priority_queue {
             self.known_files.insert(key, entry);
         }
         Ok(())
@@ -330,6 +335,55 @@ mod tests {
         assert!(handle1.path.exists());
         assert!(!store.key_to_path(&key2).exists());
         assert!(!store.key_to_path(&key3).exists());
+    }
+
+    #[test]
+    fn test_flush_evicts_least_recently_used_first() {
+        // Regression test for `BinaryHeap` being a max-heap: `flush()` used to evict the *most*
+        // recently used entries first instead of the least recently used ones. Timestamps are
+        // set explicitly (rather than relying on the real clock across back-to-back calls) so
+        // the test isn't at the mercy of clock resolution.
+        let cwd = get_cwd();
+        let store = FileStore::new(cwd.path(), u64::MAX, u64::MAX).unwrap();
+        // distinct content (byte value) per file so each gets its own key: `add_file_to_store`
+        // always writes the same content/path and would alias them into a single entry.
+        let store_with_content = |content: u8| -> FileStoreKey {
+            let path = store.base_path.join(format!("temp_{content}.txt"));
+            let key = fake_file(&path, content, 50);
+            let iter = ReadFileIterator::new(path).unwrap();
+            store.store(&key, iter).unwrap().key.clone()
+        };
+        let key_old = store_with_content(1);
+        let key_mid = store_with_content(2);
+        let key_new = store_with_content(3);
+
+        {
+            let mut index = store.index.lock().unwrap();
+            let now = std::time::SystemTime::now();
+            index.known_files.get_mut(&key_old).unwrap().last_access =
+                now - Duration::from_secs(30);
+            index.known_files.get_mut(&key_mid).unwrap().last_access =
+                now - Duration::from_secs(20);
+            index.known_files.get_mut(&key_new).unwrap().last_access =
+                now - Duration::from_secs(10);
+        }
+
+        // Only enough room for one of the three files: the two oldest must go.
+        let mut index = store.index.lock().unwrap();
+        let locked = store.locked_files.lock().unwrap();
+        index.flush(&store, &locked, 50).unwrap();
+        drop(locked);
+
+        assert_eq!(index.known_files.len(), 1);
+        assert!(
+            !store.key_to_path(&key_old).exists(),
+            "the least recently used entry should have been evicted first"
+        );
+        assert!(!store.key_to_path(&key_mid).exists());
+        assert!(
+            store.key_to_path(&key_new).exists(),
+            "the most recently used entry should survive"
+        );
     }
 
     #[test]

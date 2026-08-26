@@ -467,6 +467,10 @@ pub(super) fn parse(
         }
 
         testcases.sort();
+        // A testcase can be reachable through more than one included group (e.g. its own
+        // group and a `group_name` override both ending up in the same subtask); without
+        // deduplicating it would be counted twice when averaging the subtask's score.
+        testcases.dedup();
         testcases_owned.sort();
 
         subtasks.insert(

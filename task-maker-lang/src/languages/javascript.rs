@@ -42,7 +42,9 @@ impl Language for LanguageJS {
         write_to: Option<&Path>,
         mut args: Vec<String>,
     ) -> Vec<String> {
-        args.push(
+        // will run for example: node script.js args...
+        args.insert(
+            0,
             self.executable_name(path, write_to)
                 .to_string_lossy()
                 .to_string(),
@@ -52,5 +54,23 @@ impl Language for LanguageJS {
 
     fn custom_limits(&self, limits: &mut ExecutionLimits) {
         limits.allow_multiprocess();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_runtime_args_executable_comes_first() {
+        // node requires the script to load to be the first non-option argument;
+        // regression test for it being appended after the program's own args instead.
+        let lang = LanguageJS::new();
+        let args = lang.runtime_args(
+            Path::new("solution.js"),
+            None,
+            vec!["input".into(), "output".into()],
+        );
+        assert_eq!(args, vec!["solution", "input", "output"]);
     }
 }

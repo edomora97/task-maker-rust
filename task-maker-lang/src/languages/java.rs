@@ -52,6 +52,11 @@ impl Language for LanguageJava {
             .to_string_lossy()
             .to_string();
 
+        // binary_name and main_class are interpolated into a shell command (needed for the
+        // `*.java`/`*.class` globs); quote them so a source filename with spaces or shell
+        // metacharacters can't break or inject into the compilation command.
+        let binary_name = shell_quote(&binary_name);
+        let main_class = shell_quote(&main_class);
         metadata.add_arg("-c").add_arg(format!(
             "javac -encoding UTF-8 -d . *.java && jar cfe {binary_name} {main_class} *.class"
         ));
@@ -90,5 +95,25 @@ impl Language for LanguageJava {
             .mount_proc(true)
             .allow_multiprocess()
             .add_extra_readable_dir("/etc");
+    }
+}
+
+/// Quotes a string for safe, literal inclusion inside single quotes in a POSIX shell command.
+fn shell_quote(s: &str) -> String {
+    format!("'{}'", s.replace('\'', r"'\''"))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_shell_quote_neutralizes_metacharacters() {
+        assert_eq!(shell_quote("solution"), "'solution'");
+        assert_eq!(
+            shell_quote("a$(touch /tmp/pwned).java"),
+            r"'a$(touch /tmp/pwned).java'"
+        );
+        assert_eq!(shell_quote("it's"), r"'it'\''s'");
     }
 }

@@ -213,10 +213,13 @@ impl FinishUI {
             print!(" | ");
 
             for &testcase in &subtask.testcases {
-                if evaluation_results[testcase].correct {
-                    cwrite!(self, GREEN, "{} ", testcase);
-                } else {
-                    cwrite!(self, RED, "{} ", testcase);
+                // `testcase` is a checker-reported index (from the solution's own JSON stdout),
+                // not something task-maker validated; a buggy checker can report an index past
+                // the end of `evaluation_results`, so don't let that panic the whole evaluation.
+                match evaluation_results.get(testcase) {
+                    Some(result) if result.correct => cwrite!(self, GREEN, "{} ", testcase),
+                    Some(_) => cwrite!(self, RED, "{} ", testcase),
+                    None => cwrite!(self, YELLOW, "{}? ", testcase),
                 }
             }
 

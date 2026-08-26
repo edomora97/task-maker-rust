@@ -164,6 +164,23 @@ impl OutputHasher {
     }
 }
 
+/// Describe, for a diagnostic note, what a group of identical outputs start with.
+///
+/// `first_chunk` is `None` when the (identical) outputs are all empty, e.g. a "print nothing"
+/// task or a broken generator producing empty output everywhere; that must not be treated the
+/// same as "the chunk wasn't valid UTF-8" (in which case there's simply nothing to show).
+fn describe_common_prefix(first_chunk: Option<&[u8]>) -> Option<String> {
+    match first_chunk {
+        None => Some("They are all empty".to_string()),
+        Some(chunk) => std::str::from_utf8(chunk).ok().map(|contents| {
+            format!(
+                "They all start with: {}",
+                contents.chars().take(20).join("")
+            )
+        }),
+    }
+}
+
 #[derive(Debug, Default)]
 pub struct AllOutputsEqual {
     outputs: Arc<Mutex<HashMap<SubtaskId, Vec<TestcaseOutput>>>>,
@@ -221,15 +238,42 @@ impl SanityCheck for AllOutputsEqual {
                 let message = format!("All outputs for subtask {id}{name} are identical");
 
                 let mut diag = Diagnostic::warning(message);
-                if let Ok(contents) = std::str::from_utf8(first.first_chunk.as_ref().unwrap()) {
-                    let contents = contents.chars().take(20).join("");
-                    diag = diag.with_note(format!("They all start with: {contents}"));
+                if let Some(note) = describe_common_prefix(first.first_chunk.as_deref()) {
+                    diag = diag.with_note(note);
                 }
                 eval.add_diagnostic(diag)?;
             }
         }
 
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_describe_common_prefix_empty_outputs_does_not_panic() {
+        // Regression test: used to `.unwrap()` a `None` here and panic instead of
+        // reporting that the (identical, empty) outputs are all empty.
+        assert_eq!(
+            describe_common_prefix(None),
+            Some("They are all empty".to_string())
+        );
+    }
+
+    #[test]
+    fn test_describe_common_prefix_text_content() {
+        assert_eq!(
+            describe_common_prefix(Some(b"hello world, this is long")),
+            Some("They all start with: hello world, this is".to_string())
+        );
+    }
+
+    #[test]
+    fn test_describe_common_prefix_non_utf8_content() {
+        assert_eq!(describe_common_prefix(Some(&[0xff, 0xfe])), None);
     }
 }
 
